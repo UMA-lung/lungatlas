@@ -287,6 +287,17 @@ input[type=range] {
   text-decoration: none; transition: background .15s;
 }
 .next-btn:hover { background: #cce8d4; }
+.detail-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; color: var(--text3);
+  background: var(--surface2); border: 0.5px solid var(--border);
+  padding: 6px 12px; border-radius: 6px; margin-top: 10px;
+  text-decoration: none; cursor: default;
+}
+.detail-link .soon {
+  font-size: 10px; font-weight: 500; background: var(--amber-light);
+  color: var(--amber-dark); padding: 1px 6px; border-radius: 4px;
+}
 
 /* FOOTER */
 .footer {
@@ -360,235 +371,450 @@ input[type=range] {
     </div>
 
     <!-- TABS -->
+    <div style="margin-bottom:8px;font-size:11px;color:var(--text3);font-weight:500;letter-spacing:.04em">組織型 / テーマで絞り込む</div>
     <div class="tabs">
-      <button class="tab active" onclick="sw('k024',this)">KEYNOTE-024</button>
-      <button class="tab" onclick="sw('k189',this)">KEYNOTE-189</button>
-      <button class="tab" onclick="sw('k407',this)">KEYNOTE-407</button>
-      <button class="tab" onclick="sw('cm9la',this)">CheckMate 9LA</button>
-      <button class="tab" onclick="sw('global',this)">国際GL比較</button>
+      <button class="tab active" onclick="sw('nonsq',this)">非扁平上皮癌</button>
+      <button class="tab" onclick="sw('sq',this)">扁平上皮癌</button>
+      <button class="tab" onclick="sw('mono',this)">PD-L1高発現（単剤）</button>
+      <button class="tab" onclick="sw('dual',this)">Dual ICI レジメン</button>
+      <button class="tab" onclick="sw('global',this)">OS比較 / 使い分け / GL序列</button>
     </div>
 
-    <!-- KEYNOTE-024 -->
-    <div id="p-k024" class="panel active">
+    <!-- 非扁平上皮癌 -->
+    <div id="p-nonsq" class="panel active">
+      <div class="note-box" style="margin-bottom:16px"><strong>対象：</strong>非扁平上皮NSCLC（腺癌・大細胞癌など）· EGFR/ALK/ROS1陰性確認後 · PD-L1 TPS問わず。ペメトレキセドが使用可能な組織型。</div>
       <div class="trial-card">
         <div class="tc-top">
           <div class="tc-meta">
-            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1606774" target="_blank" rel="noopener">
-              KEYNOTE-024 <span class="ext">↗</span>
-            </a>
-            <span class="jbadge j-nejm">NEJM 2016 / JCO 2019 / ESMO 2025（8年解析）</span>
-            <span class="ybadge">Phase III · n=305</span>
-          </div>
-          <div class="drug-title">ペムブロリズマブ単剤 vs 白金製剤ベース化学療法</div>
-          <div class="drug-sub">未治療 · PD-L1 TPS ≥50% · EGFR/ALK陰性 · 転移性NSCLC</div>
-          <div class="stat-row">
-            <div class="stat">
-              <div class="stat-val">31.9%</div>
-              <div class="stat-label">5年OS率（ペムブロ群）</div>
-              <div class="stat-vs">vs 16.3%（化学療法群）</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">26.3 mo</div>
-              <div class="stat-label">中央値 OS</div>
-              <div class="stat-vs">vs 13.4 mo（HR 0.65）</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">HR 0.50</div>
-              <div class="stat-label">PFS ハザード比</div>
-              <div class="stat-vs">p &lt; 0.001（一次エンドポイント）</div>
-            </div>
-          </div>
-        </div>
-        <div class="tc-body">
-          <p class="trial-desc">PD-L1高発現（TPS ≥ 50%）患者への免疫療法単剤を初めてPhase IIIで証明した試験。化学療法群からのクロスオーバーを考慮してもOSベネフィットは維持。2025年ESMO年次総会では8年フォローデータが発表され、長期生存者の蓄積が確認された。「化学療法なしで5年生存率約32%」というデータはStage IV肺癌の予後予測を根本から塗り替えた。</p>
-          <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（肺癌GL 2025年版）：</strong>TPS ≥ 50%の1次治療として推奨。保険適用あり。</span></div>
-            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN v7.2025 / ASCO Living GL：</strong>TPS ≥ 50%でCategory 1推奨。ASCO Living GLは2026年版まで継続更新中。</span></div>
-            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO 2025：</strong>グレードA推奨。PAGA版（中・日・韓・東南アジア対応）でも同等推奨。</span></div>
-          </div>
-          <div class="tox-row">
-            <span class="tox">irAE（免疫関連有害事象）</span>
-            <span class="tox">甲状腺機能異常</span>
-            <span class="tox">免疫性肺炎（Grade 3以上 約3%）</span>
-          </div>
-          <button class="expand-btn" onclick="tog(this)">
-            <span class="chev">▼</span> KEYNOTE-001 10年解析との連続性
-          </button>
-          <div class="extra">
-            2025年ESMO総会でKEYNOTE-001の10年フォローデータも発表。TPS ≥ 50%の患者では10年OS率が約24%という長期データが示された。Stage IVの肺癌に対して「化学療法なしで10年生存」が一定数存在することが明確になり、これはそれ以前の予後観を根本的に変えるデータである。
-          </div>
-        </div>
-      </div>
-      <div class="next-row">
-        <button class="next-btn" onclick="sw('k189',document.querySelectorAll('.tab')[1])">→ 非扁平上皮・低発現：KEYNOTE-189</button>
-      </div>
-    </div>
-
-    <!-- KEYNOTE-189 -->
-    <div id="p-k189" class="panel">
-      <div class="trial-card">
-        <div class="tc-top">
-          <div class="tc-meta">
-            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1801005" target="_blank" rel="noopener">
-              KEYNOTE-189 <span class="ext">↗</span>
-            </a>
-            <span class="jbadge j-nejm">NEJM 2018</span>
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1801005" target="_blank" rel="noopener">KEYNOTE-189 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2018 / JCO 2023（5年解析）</span>
             <span class="ybadge">Phase III · n=616 · 非扁平上皮</span>
           </div>
-          <div class="drug-title">ペムブロリズマブ + ペメトレキセド + 白金製剤 vs 化学療法単独</div>
+          <div class="drug-title">ペムブロリズマブ + ペメトレキセド + 白金製剤</div>
           <div class="drug-sub">未治療 · 転移性 非扁平上皮NSCLC · PD-L1 TPS問わず · EGFR/ALK陰性</div>
           <div class="stat-row">
-            <div class="stat">
-              <div class="stat-val">HR 0.49</div>
-              <div class="stat-label">OS ハザード比（初回解析）</div>
-              <div class="stat-vs">p &lt; 0.001</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">HR 0.52</div>
-              <div class="stat-label">PFS ハザード比</div>
-              <div class="stat-vs">p &lt; 0.001</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">全 TPS</div>
-              <div class="stat-label">対象PD-L1発現量</div>
-              <div class="stat-vs">TPS 0%でも有効性確認</div>
-            </div>
+            <div class="stat"><div class="stat-val">HR 0.60</div><div class="stat-label">OS ハザード比（5年解析）</div><div class="stat-vs">初回解析 HR 0.49（p&lt;0.001）</div></div>
+            <div class="stat"><div class="stat-val">19.4% vs 11.3%</div><div class="stat-label">5年OS率</div><div class="stat-vs">5年PFS率 7.5% vs 0.6%</div></div>
+            <div class="stat"><div class="stat-val">HR 0.50</div><div class="stat-label">PFS ハザード比（5年解析）</div><div class="stat-vs">中央値OS 未報告（長期追跡）</div></div>
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">PD-L1発現量によらず非扁平上皮の全患者に化学免疫療法が有効であることを示した試験。TPS 0%のサブグループでもOSベネフィットが示されたことで「PD-L1が低くても化学免疫療法は選択肢」という現在の実践が確立した。ペメトレキセド維持療法をバックボーンとする点が扁平上皮とのレジメン分岐点。</p>
+          <p class="trial-desc">非扁平上皮NSCLCの1次治療標準。5年OS率19.4%は化学療法群11.3%を大きく上回り、ペメトレキセド維持療法による持続的ベネフィットが確認された（Garassino et al., JCO 2023）。PD-L1 TPS 0%のサブグループでもOSベネフィットあり。国内処方実績が最も豊富で毒性管理の習熟度も高い。</p>
           <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>非扁平上皮・全TPS層で推奨。ペメトレキセド維持が可能な非扁平上皮に特に有用。</span></div>
-            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO Living GL：</strong>非扁平上皮全体にCategory 1。EGFR/ALK陰性の確認が前提として明記。</span></div>
-            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>同様に推奨。欧州では薬剤アクセス・保険事情の差異から各国で実施状況が異なる。</span></div>
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>非扁平上皮・全TPS層で推奨。国内1次治療の主流レジメン。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO Living GL：</strong>非扁平上皮にCategory 1。2026年版でも継続推奨。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>グレードA推奨。PAGA（アジア版）でも同等推奨。</span></div>
           </div>
-          <div class="tox-row">
-            <span class="tox">好中球減少</span><span class="tox">悪心・嘔吐</span>
-            <span class="tox">irAE</span><span class="tox">腎機能低下</span>
-          </div>
-          <button class="expand-btn" onclick="tog(this)">
-            <span class="chev">▼</span> IMpower150（アテゾリズマブ4剤）との比較
-          </button>
-          <div class="extra">
-            IMpower150（NEJM 2018, <a href="https://doi.org/10.1056/NEJMoa1716948" target="_blank" rel="noopener">DOI ↗</a>）ではアテゾリズマブ＋ベバシズマブ＋化学療法という4剤レジメンが検証された。EGFR/ALK変異陽性例にも有効な唯一の免疫療法レジメンとして注目されたが、毒性の複雑さと費用対効果から日本・欧州では普及が限定的。KEYNOTE-189ベースの3剤が標準的な位置づけを維持している。
-          </div>
+          <div class="tox-row"><span class="tox">好中球減少</span><span class="tox">悪心・嘔吐</span><span class="tox">irAE</span><span class="tox">腎機能低下（CDDP）</span></div>
+          <a class="detail-link">TPS別サブグループ・毒性管理の詳細ページ <span class="soon">Coming soon</span></a>
         </div>
       </div>
-      <div class="next-row">
-        <button class="next-btn" onclick="sw('k407',document.querySelectorAll('.tab')[2])">→ 扁平上皮：KEYNOTE-407</button>
-      </div>
-    </div>
-
-    <!-- KEYNOTE-407 -->
-    <div id="p-k407" class="panel">
       <div class="trial-card">
         <div class="tc-top">
           <div class="tc-meta">
-            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1812865" target="_blank" rel="noopener">
-              KEYNOTE-407 <span class="ext">↗</span>
-            </a>
+            <a class="trial-link" href="https://doi.org/10.1016/S1556-0864(21)02322-4" target="_blank" rel="noopener">IMpower150（最終OS） <span class="ext">↗</span></a>
+            <span class="jbadge j-jto">J Thorac Oncol 2021</span>
+            <span class="ybadge">Phase III · n=1,202 · 非扁平上皮</span>
+          </div>
+          <div class="drug-title">アテゾリズマブ + ベバシズマブ + カルボプラチン + パクリタキセル（ABCP）</div>
+          <div class="drug-sub">未治療 · 非扁平上皮NSCLC · EGFR/ALK変異陽性例にも有効な唯一の免疫療法</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">19.5 mo</div><div class="stat-label">中央値OS（ABCP群）</div><div class="stat-vs">vs 14.7 mo（BEV＋化療、HR 0.80）</div></div>
+            <div class="stat"><div class="stat-val">HR 0.80</div><div class="stat-label">OS ハザード比</div><div class="stat-vs">EGFR/ALK陽性サブグループでも効果</div></div>
+            <div class="stat"><div class="stat-val">4剤</div><div class="stat-label">同時投与の複雑度</div><div class="stat-vs">毒性管理が最も難しい</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">EGFR/ALK変異陽性例を含む全患者を対象とした唯一の免疫療法試験。ベバシズマブの血管新生阻害がTGF-βを介した免疫抑制を改善し、EGFR-TKI耐性後の患者にも効果を示す機序が提唱されている。ただしKEYNOTE-189との直接比較では4剤同時投与の毒性・費用対効果の問題から一般的な1次治療での選択は日本・欧州で限定的。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>承認あり。EGFR-TKI耐性後の特定例での使用が主な位置づけ。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>EGFR陽性のTKI耐性後の選択肢として記載。4剤毒性管理に習熟が必要。</span></div>
+          </div>
+          <div class="tox-row"><span class="tox">出血リスク（BEV）</span><span class="tox">高血圧（BEV）</span><span class="tox">irAE</span><span class="tox">末梢神経障害（PTX）</span></div>
+          <a class="detail-link">EGFR/ALK変異陽性サブグループ・TKI耐性後の詳細ページ <span class="soon">Coming soon</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 扁平上皮癌 -->
+    <div id="p-sq" class="panel">
+      <div class="note-box" style="margin-bottom:16px"><strong>対象：</strong>扁平上皮NSCLC · EGFR/ALK陰性確認後 · PD-L1 TPS問わず。ペメトレキセドは扁平上皮に非適応のため、KEYNOTE-189とは完全に別レジメンを使用する。</div>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1812865" target="_blank" rel="noopener">KEYNOTE-407 <span class="ext">↗</span></a>
             <span class="jbadge j-nejm">NEJM 2018 / JCO 2023（5年解析）</span>
             <span class="ybadge">Phase III · n=559 · 扁平上皮</span>
           </div>
-          <div class="drug-title">ペムブロリズマブ + カルボプラチン + パクリタキセル/nab-PTX</div>
+          <div class="drug-title">ペムブロリズマブ + カルボプラチン + パクリタキセル / nab-PTX</div>
           <div class="drug-sub">未治療 · 転移性 扁平上皮NSCLC · PD-L1 TPS問わず</div>
           <div class="stat-row">
-            <div class="stat">
-              <div class="stat-val">17.2 mo</div>
-              <div class="stat-label">中央値OS（5年解析）</div>
-              <div class="stat-vs">vs 11.6 mo（HR 0.71）</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">HR 0.71</div>
-              <div class="stat-label">OS ハザード比</div>
-              <div class="stat-vs">95%CI 0.59–0.85</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">全 TPS</div>
-              <div class="stat-label">対象PD-L1発現量</div>
-              <div class="stat-vs">扁平上皮専用レジメン</div>
-            </div>
+            <div class="stat"><div class="stat-val">HR 0.71</div><div class="stat-label">OS ハザード比（5年解析）</div><div class="stat-vs">17.2 mo vs 11.6 mo（中央値OS）</div></div>
+            <div class="stat"><div class="stat-val">18.4% vs 9.7%</div><div class="stat-label">5年OS率</div><div class="stat-vs">全TPS層でベネフィット確認</div></div>
+            <div class="stat"><div class="stat-val">HR 0.62</div><div class="stat-label">PFS ハザード比（5年解析）</div><div class="stat-vs">5年PFS率 10.8% vs 3.5%</div></div>
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">扁平上皮NSCLCには非扁平上皮と異なるレジメン（ペメトレキセド非適用）が必要。KEYNOTE-407が扁平上皮専用の化学免疫療法を確立した。5年解析（JCO 2023）でも生存ベネフィットの持続が確認。nab-パクリタキセルとパクリタキセルで奏効率に大きな差はなく、施設・患者状況で選択可能。</p>
-          <div class="info-box">
-            <strong>組織型で分かれる2つの骨格：</strong>非扁平上皮 → KEYNOTE-189（ペメトレキセド系）、扁平上皮 → KEYNOTE-407（タキサン系）。病理診断の精度が治療戦略の分岐点になる。
-          </div>
+          <p class="trial-desc">扁平上皮NSCLC専用の化学免疫療法として確立。5年OS率18.4%（Novello et al., JCO 2023）。35サイクルを完了した55例ではORR 90.9%・完了後3年OS率69.5%という長期データが示されており、「完走した患者の長期予後は非常に良好」というメッセージが際立つ。nab-PTXとPTXで奏効率に大差なく、施設環境・患者状況で選択可能。</p>
           <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>扁平上皮・全TPS層で推奨。KEYNOTE-189との使い分けは組織型で決定。</span></div>
-            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN v7.2025：</strong>扁平上皮にCategory 1。組織型分岐をガイドライン上で明確に明記。</span></div>
-            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>扁平上皮の標準治療として推奨。一部国でIMpower110との選択あり。</span></div>
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>扁平上皮・全TPS層で推奨。扁平上皮の1次治療標準。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO：</strong>扁平上皮にCategory 1。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>扁平上皮の標準治療として推奨。</span></div>
           </div>
-          <div class="tox-row">
-            <span class="tox">末梢神経障害（PTX）</span><span class="tox">脱毛</span>
-            <span class="tox">血液毒性</span><span class="tox">irAE</span>
-          </div>
+          <div class="tox-row"><span class="tox">末梢神経障害（PTX）</span><span class="tox">脱毛</span><span class="tox">血液毒性</span><span class="tox">irAE</span></div>
+          <a class="detail-link">TPS別サブグループ・PTX vs nab-PTX使い分けの詳細ページ <span class="soon">Coming soon</span></a>
         </div>
       </div>
-      <div class="next-row">
-        <button class="next-btn" onclick="sw('cm9la',document.querySelectorAll('.tab')[3])">→ Dual ICI：CheckMate 9LA</button>
+      <div class="info-box">
+        <strong>扁平上皮でのDual ICI選択について：</strong>CheckMate 9LAの6年データでは扁平上皮サブグループでもOS HR 0.69のベネフィットが示されており、PD-L1 &lt;1%の扁平上皮ではKEYNOTE-407よりCheckMate 9LAを選択する議論もある。
       </div>
     </div>
 
-    <!-- CheckMate 9LA -->
-    <div id="p-cm9la" class="panel">
+    <!-- PD-L1高発現単剤 -->
+    <div id="p-mono" class="panel">
+      <div class="note-box" style="margin-bottom:16px"><strong>対象：</strong>全組織型 · PD-L1 TPS ≥50%（22C3アッセイ）· 化学療法の毒性を避けたい場合。</div>
       <div class="trial-card">
         <div class="tc-top">
           <div class="tc-meta">
-            <a class="trial-link" href="https://doi.org/10.1016/j.jtho.2021.07.009" target="_blank" rel="noopener">
-              CheckMate 9LA <span class="ext">↗</span>
-            </a>
-            <span class="jbadge j-jto">J Thorac Oncol 2021</span>
-            <span class="ybadge">Phase III · n=719 · dual ICI</span>
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1606774" target="_blank" rel="noopener">KEYNOTE-024 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2016 / JCO 2021 / ESMO 2025（8年解析）</span>
+            <span class="ybadge">Phase III · n=305 · TPS ≥50%</span>
           </div>
-          <div class="drug-title">ニボルマブ + イピリムマブ + 短期化学療法（2サイクル）</div>
-          <div class="drug-sub">未治療 · 転移性NSCLC · 全組織型 · PD-L1 TPS問わず</div>
+          <div class="drug-title">ペムブロリズマブ単剤 200mg q3w（化学療法なし）</div>
+          <div class="drug-sub">未治療 · 転移性NSCLC · PD-L1 TPS ≥50% · EGFR/ALK陰性</div>
           <div class="stat-row">
-            <div class="stat">
-              <div class="stat-val">15.8 mo</div>
-              <div class="stat-label">中央値 OS</div>
-              <div class="stat-vs">vs 11.0 mo（HR 0.72）</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">HR 0.72</div>
-              <div class="stat-label">OS ハザード比</div>
-              <div class="stat-vs">95%CI 0.61–0.86</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">Dual ICI</div>
-              <div class="stat-label">PD-1 + CTLA-4同時阻害</div>
-              <div class="stat-vs">化学療法は2サイクルのみ</div>
-            </div>
+            <div class="stat"><div class="stat-val">HR 0.65</div><div class="stat-label">OS ハザード比</div><div class="stat-vs">26.3 mo vs 13.4 mo（中央値OS）</div></div>
+            <div class="stat"><div class="stat-val">31.9% vs 16.3%</div><div class="stat-label">5年OS率</div><div class="stat-vs">化学療法なしで約2倍の5年生存</div></div>
+            <div class="stat"><div class="stat-val">HR 0.50</div><div class="stat-label">PFS ハザード比</div><div class="stat-vs">p&lt;0.001（一次エンドポイント）</div></div>
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">ニボルマブ（PD-1阻害）＋イピリムマブ（CTLA-4阻害）の二重免疫療法に短期化学療法（2サイクル）を組み合わせた戦略。「化学療法の早期離脱」と「免疫活性化の持続」を両立する設計。TPS &lt; 1%のサブグループでもOSベネフィットが示された点がペムブロリズマブ単剤との差別化ポイント。</p>
+          <p class="trial-desc">化学療法なしで5年OS率31.9%。2025年ESMO総会での8年フォローデータでも長期生存者の蓄積が確認された。KEYNOTE-001の10年解析ではTPS ≥50%の10年OS率約24%という歴史的データも発表。腫瘍量が少ない・高齢・臓器機能低下・化学療法忌避例に特に有用。腫瘍量が多い（多発肝転移・骨転移など）場合は化学免疫療法の方が初期奏効率に優れる可能性あり。</p>
           <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>推奨あり。irAE管理の複雑さからペムブロリズマブ系と比較して処方実績は少ない。</span></div>
-            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>全組織型・全TPS層でCategory 1。特にTPS &lt; 1%でのOSベネフィットが強調される。</span></div>
-            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>推奨あり。英国（NICE）では費用対効果審査の影響で使用制限がある地域も。</span></div>
-            <div class="gl-item gl-asia"><span class="gl-flag">🌏</span><span><strong>アジア各国：</strong>irAEの人種差に注意。日本・韓国で使用実績が蓄積中。日本人では大腸炎・内分泌毒性の発現パターンが欧米と異なるとの報告あり。</span></div>
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>TPS ≥50%の1次治療として推奨。保険適用あり。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO：</strong>TPS ≥50%でCategory 1。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>グレードA推奨。</span></div>
           </div>
-          <div class="tox-row">
-            <span class="tox">大腸炎（CTLA-4由来）</span><span class="tox">下垂体炎</span>
-            <span class="tox">副腎機能不全</span><span class="tox">Grade 3+ irAE：単剤の約2倍</span>
-          </div>
-          <button class="expand-btn" onclick="tog(this)">
-            <span class="chev">▼</span> Dual ICIで生じる独自の毒性パターン
-          </button>
-          <div class="extra">
-            CTLA-4阻害薬（イピリムマブ）の追加により、PD-1単剤では稀な大腸炎・下垂体炎・副腎不全が増加する。これらは長期の内分泌フォローが必要になるケースが多い。ステロイドの早期介入が重要で、Grade 2以上の大腸炎では即座の対応が求められる。日本人患者でのirAE頻度・重症度の差異については、国内のreal-worldデータの蓄積が進んでいる。
-          </div>
+          <div class="tox-row"><span class="tox">irAE（化学療法毒性なし）</span><span class="tox">甲状腺機能異常</span><span class="tox">免疫性肺炎（Grade3+ 約3%）</span></div>
+          <button class="expand-btn" onclick="tog(this)"><span class="chev">▼</span> TPS ≥50%でも化学免疫療法を選ぶ場合</button>
+          <div class="extra">腫瘍量が多い（多発肝転移・骨転移・症状が強い）場合は、化学免疫療法の方が初期奏効率が高く腫瘍縮小による症状緩和が早い場合がある。エキスパートコンセンサスとして「症状が強い・急ぐ場合は化学免疫療法、余裕がある場合は単剤」という使い分けが実臨床で行われている。</div>
+          <a class="detail-link">8年フォローデータ・TPS別長期OS・irAE管理の詳細ページ <span class="soon">Coming soon</span></a>
         </div>
       </div>
-      <div class="next-row">
-        <button class="next-btn" onclick="sw('global',document.querySelectorAll('.tab')[4])">→ 国際ガイドライン比較へ</button>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1016/S1556-0864(21)02286-3" target="_blank" rel="noopener">IMpower110 <span class="ext">↗</span></a>
+            <span class="jbadge j-jto">J Thorac Oncol 2021</span>
+            <span class="ybadge">Phase III · n=554 · SP142アッセイ</span>
+          </div>
+          <div class="drug-title">アテゾリズマブ単剤</div>
+          <div class="drug-sub">未治療 · PD-L1高発現（SP142：TC ≥50% または IC ≥10%）· EGFR/ALK陰性</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">HR 0.59</div><div class="stat-label">OS ハザード比（高発現群）</div><div class="stat-vs">20.2 mo vs 13.1 mo（p=0.0106）</div></div>
+            <div class="stat"><div class="stat-val">SP142</div><div class="stat-label">使用アッセイ</div><div class="stat-vs">22C3（KEYNOTE）と別アッセイ</div></div>
+            <div class="stat"><div class="stat-val">高発現のみ</div><div class="stat-label">OS有意差の対象層</div><div class="stat-vs">中・低発現層は有意差なし</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">SP142アッセイでTC ≥50%またはIC ≥10%の高発現例に限りOSベネフィット。22C3（KEYNOTE用）と異なるアッセイ依存のため実臨床での同定に注意が必要。ペムブロリズマブのアレルギー歴がある場合の代替として位置づけられることが多い。</p>
+          <div class="info-box"><strong>アッセイの違いに注意：</strong>SP142と22C3の発現率は必ずしも一致しない。同じ患者でも片方で高発現、もう片方で低発現となりうる。</div>
+          <div class="tox-row"><span class="tox">irAE</span><span class="tox">疲労</span><span class="tox">食欲低下</span></div>
+        </div>
       </div>
     </div>
 
-    <!-- GLOBAL -->
+    <!-- Dual ICI -->
+    <div id="p-dual" class="panel">
+      <div class="note-box" style="margin-bottom:16px"><strong>対象：</strong>全組織型 · PD-L1 TPS問わず（特にTPS &lt;1%・STK11/KEAP1変異疑い例）· PS良好（0–1）· irAE管理が可能な環境。</div>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1016/j.jtho.2021.07.009" target="_blank" rel="noopener">CheckMate 9LA（6年データ）<span class="ext">↗</span></a>
+            <span class="jbadge j-jco">ESMO Open 2025</span>
+            <span class="ybadge">Phase III · n=719 · 6年追跡</span>
+          </div>
+          <div class="drug-title">ニボルマブ + イピリムマブ + 化学療法（2サイクルのみ）</div>
+          <div class="drug-sub">未治療 · 転移性NSCLC · 全組織型 · PD-L1 TPS問わず</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">HR 0.74</div><div class="stat-label">OS ハザード比（6年解析）</div><div class="stat-vs">15.8 mo vs 11.0 mo（中央値OS）</div></div>
+            <div class="stat"><div class="stat-val">20% vs 7%</div><div class="stat-label">6年OS率（PD-L1 &lt;1%）</div><div class="stat-vs">他レジメンを数値上上回る長期生存</div></div>
+            <div class="stat"><div class="stat-val">18% vs 7%</div><div class="stat-label">6年OS率（全患者）</div><div class="stat-vs">KEYNOTE系の5年OSと同等水準</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">6年フォローデータ（ESMO Open 2025）で長期OSベネフィットが持続。特にPD-L1 &lt;1%の患者での6年OS率20% vs 7%は、POSEIDON（5年OS 6% vs 4%）・KEYNOTE-189/407（5年OS 10–19% vs 5–11%）と比較して数値上最も高い。ただし試験間の患者背景・追跡期間の差から直接比較には慎重さが必要。化学療法を2サイクルで終了できる点が一部患者に有利。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>推奨あり。irAE管理の複雑さからKEYNOTE系と比較して処方実績は少ない。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>全組織型・全TPS層でCategory 1。PD-L1 &lt;1%での長期OSデータが特に強調される。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>推奨あり。英国（NICE）では費用対効果審査の影響で使用制限がある地域も。</span></div>
+          </div>
+          <div class="tox-row"><span class="tox">大腸炎（CTLA-4由来）</span><span class="tox">下垂体炎</span><span class="tox">副腎機能不全</span><span class="tox">Grade 3+ irAE：単剤の約2倍</span></div>
+          <a class="detail-link">PD-L1別・組織型別・STK11/KEAP1変異別の6年OSデータ詳細ページ <span class="soon">Coming soon</span></a>
+        </div>
+      </div>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1200/JCO.22.00975" target="_blank" rel="noopener">POSEIDON（5年OS） <span class="ext">↗</span></a>
+            <span class="jbadge j-jco">J Clin Oncol 2023 / J Thorac Oncol 2024</span>
+            <span class="ybadge">Phase III · n=1,013 · 3アーム</span>
+          </div>
+          <div class="drug-title">トレメリムマブ + デュルバルマブ + 化学療法（T+D+CT）</div>
+          <div class="drug-sub">未治療 · 転移性NSCLC · 全組織型 · EGFR/ALK陰性 · PD-L1 TPS問わず</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">HR 0.77</div><div class="stat-label">OS ハザード比（T+D+CT vs CT）</div><div class="stat-vs">p=0.0030（有意差あり）</div></div>
+            <div class="stat"><div class="stat-val">HR 0.72</div><div class="stat-label">PFS ハザード比</div><div class="stat-vs">p=0.0003</div></div>
+            <div class="stat"><div class="stat-val">6% vs 4%</div><div class="stat-label">5年OS率</div><div class="stat-vs">ESMO-IO 2023（5年追跡）</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">FDA承認2022年。5年フォロー（ESMO-IO 2023）でも長期OSベネフィットが持続。STK11・KEAP1・KRAS変異陽性のような免疫療法が効きにくいサブグループでも探索的解析でベネフィットが示されており注目されている。TRITON試験でKEYNOTE系との直接比較が進行中（2027〜2031年結果予定）。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>デュルバルマブ単独（D+CT）は保険適用あり。T+D+CTの国内承認状況は要確認。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>T+D+CTをCategory 1（FDA承認2022年11月）。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>推奨あり。TRITON試験の結果待ち。</span></div>
+          </div>
+          <div class="tox-row"><span class="tox">大腸炎</span><span class="tox">下垂体炎</span><span class="tox">irAE（dual ICIで増加）</span></div>
+          <button class="expand-btn" onclick="tog(this)"><span class="chev">▼</span> STK11/KEAP1変異陽性サブグループでの意義</button>
+          <div class="extra">STK11・KEAP1変異は腫瘍微小環境を「冷やし」PD-1単剤への反応性を低下させる。CTLA-4阻害薬の追加がこの耐性を一部克服しうる可能性がある。2025年ASCO発表のメタ解析ではSTK11/KEAP1/KRAS変異存在下でも化学免疫療法は化学療法単独に対してOSベネフィットを維持することが示された。ガイドラインへの正式組み込みはエビデンス不十分として留保中だが、実臨床での議論が盛んになっている。</div>
+          <a class="detail-link">STK11/KEAP1/KRAS変異別サブグループ・TRITON試験との連続性の詳細ページ <span class="soon">Coming soon</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- OS比較 / 使い分け / GL序列 -->
     <div id="p-global" class="panel">
+      <h2 class="sec-h2">全レジメン OS データ一覧</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:640px">
+            <thead>
+              <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
+                <th style="padding:9px 12px;text-align:left;font-weight:600;color:var(--text);border-right:1px solid var(--border)">試験</th>
+                <th style="padding:9px 12px;text-align:left;font-weight:600;color:var(--text);border-right:1px solid var(--border)">対象・組織型</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--text);border-right:1px solid var(--border)">OS HR</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--text);border-right:1px solid var(--border)">中央値 OS</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--text);border-right:1px solid var(--border)">5年（6年）OS率</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--text);border-right:1px solid var(--border)">PFS HR</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--text)">追跡期間</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:9px 12px;border-right:1px solid var(--border)"><a href="https://doi.org/10.1056/NEJMoa1801005" target="_blank" style="color:var(--green-dark);font-weight:600;text-decoration:none">KN-189 ↗</a></td>
+                <td style="padding:9px 12px;color:var(--text2);border-right:1px solid var(--border)">非扁平上皮 / 全TPS</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">0.60</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">未報告（長期追跡）</td>
+                <td style="padding:9px 10px;text-align:center;font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">19.4% vs 11.3%</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text2);border-right:1px solid var(--border)">0.50</td>
+                <td style="padding:9px 10px;text-align:center;font-size:11px;color:var(--text3)">64.6 mo中央値</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:9px 12px;border-right:1px solid var(--border)"><a href="https://doi.org/10.1056/NEJMoa1812865" target="_blank" style="color:var(--green-dark);font-weight:600;text-decoration:none">KN-407 ↗</a></td>
+                <td style="padding:9px 12px;color:var(--text2);border-right:1px solid var(--border)">扁平上皮 / 全TPS</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">0.71</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">17.2 mo vs 11.6 mo</td>
+                <td style="padding:9px 10px;text-align:center;font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">18.4% vs 9.7%</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text2);border-right:1px solid var(--border)">0.62</td>
+                <td style="padding:9px 10px;text-align:center;font-size:11px;color:var(--text3)">約5年</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:9px 12px;border-right:1px solid var(--border)"><a href="https://doi.org/10.1200/JCO.21.00174" target="_blank" style="color:var(--green-dark);font-weight:600;text-decoration:none">KN-024 ↗</a></td>
+                <td style="padding:9px 12px;color:var(--text2);border-right:1px solid var(--border)">全組織型 / TPS ≥50% <span style="font-size:10px;color:var(--text3)">（単剤）</span></td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">0.62</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">26.3 mo vs 13.4 mo</td>
+                <td style="padding:9px 10px;text-align:center;font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">31.9% vs 16.3%</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text2);border-right:1px solid var(--border)">0.50</td>
+                <td style="padding:9px 10px;text-align:center;font-size:11px;color:var(--text3)">59.9 mo中央値</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:9px 12px;border-right:1px solid var(--border)"><a href="https://doi.org/10.1016/j.esmoop.2025.105123" target="_blank" style="color:var(--blue-dark);font-weight:600;text-decoration:none">CM 9LA ↗</a></td>
+                <td style="padding:9px 12px;color:var(--text2);border-right:1px solid var(--border)">全組織型 / 全TPS</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--blue-dark);font-weight:600;border-right:1px solid var(--border)">0.74</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">15.8 mo vs 11.0 mo</td>
+                <td style="padding:9px 10px;text-align:center;border-right:1px solid var(--border)">
+                  <span style="font-weight:600;color:var(--blue-dark)">18% vs 11%</span><br>
+                  <span style="font-size:10px;color:var(--text3)">5年（PD-L1&lt;1%：20% vs 7%）</span><br>
+                  <span style="font-weight:600;color:var(--blue-dark)">16% vs 10%</span><br>
+                  <span style="font-size:10px;color:var(--text3)">6年（全患者）</span>
+                </td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text2);border-right:1px solid var(--border)">–</td>
+                <td style="padding:9px 10px;text-align:center;font-size:11px;color:var(--text3)">75.8 mo中央値<br>（6年解析）</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:9px 12px;border-right:1px solid var(--border)"><a href="https://doi.org/10.1016/j.jtho.2024.09.1381" target="_blank" style="color:var(--blue-dark);font-weight:600;text-decoration:none">POSEIDON ↗</a></td>
+                <td style="padding:9px 12px;color:var(--text2);border-right:1px solid var(--border)">全組織型 / 全TPS</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--blue-dark);font-weight:600;border-right:1px solid var(--border)">0.76</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">14.0 mo vs 11.6 mo</td>
+                <td style="padding:9px 10px;text-align:center;font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">15.7% vs 6.8%</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text2);border-right:1px solid var(--border)">0.72</td>
+                <td style="padding:9px 10px;text-align:center;font-size:11px;color:var(--text3)">63.4 mo中央値<br>（5年解析）</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:9px 12px;border-right:1px solid var(--border)"><a href="https://doi.org/10.1016/S1556-0864(21)02286-3" target="_blank" style="color:var(--text3);font-weight:600;text-decoration:none">IMpower110 ↗</a></td>
+                <td style="padding:9px 12px;color:var(--text2);border-right:1px solid var(--border)">全組織型 / SP142高発現のみ <span style="font-size:10px;color:var(--red-dark)">（アッセイ注意）</span></td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text3);font-weight:600;border-right:1px solid var(--border)">0.59</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">20.2 mo vs 13.1 mo</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text3);border-right:1px solid var(--border)">未報告</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text2);border-right:1px solid var(--border)">未報告</td>
+                <td style="padding:9px 10px;text-align:center;font-size:11px;color:var(--text3)">15.7 mo中央値</td>
+              </tr>
+              <tr>
+                <td style="padding:9px 12px;border-right:1px solid var(--border)"><a href="https://doi.org/10.1016/S1556-0864(21)02322-4" target="_blank" style="color:var(--text3);font-weight:600;text-decoration:none">IMpower150 ↗</a></td>
+                <td style="padding:9px 12px;color:var(--text2);border-right:1px solid var(--border)">非扁平上皮 / 全TPS <span style="font-size:10px;color:var(--green-dark)">（EGFR/ALK含む）</span></td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text3);font-weight:600;border-right:1px solid var(--border)">0.80</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">19.5 mo vs 14.7 mo</td>
+                <td style="padding:9px 10px;text-align:center;color:var(--text3);border-right:1px solid var(--border)">未報告</td>
+                <td style="padding:9px 10px;text-align:center;font-family:var(--mono);color:var(--text2);border-right:1px solid var(--border)">未報告</td>
+                <td style="padding:9px 10px;text-align:center;font-size:11px;color:var(--text3)">39.8 mo中央値</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:11px;color:var(--text3);line-height:1.7">
+            <strong style="color:var(--text2)">読み方の注意：</strong>試験間で患者背景・追跡期間・クロスオーバー率が異なるため直接比較は不可。KN-024は化学療法なしの単剤。CM 9LAは化学療法2サイクルのみ。POSEIDON OSは5年解析（JTO 2025）のHR 0.76で更新（初回解析 HR 0.77）。CheckMate 9LAは5年OS率18% vs 11%、6年OS率16% vs 10%（ESMO Open 2025）の両データあり。IMpower110・150の5年OSデータは現時点で未発表。
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-h2">どの患者にどのレジメンを？</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="background:var(--green-pale);border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:4px">非扁平上皮 · PD-L1問わず · PS良好</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ KEYNOTE-189</strong>　最大規模・最長フォロー・国内処方実績最多。ペメトレキセド維持療法による持続効果。</div></div>
+            <div style="background:var(--green-pale);border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:4px">扁平上皮 · PD-L1問わず · PS良好</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ KEYNOTE-407</strong>　扁平上皮専用。ペメトレキセドは非適応。5年OS率18.4%で持続的ベネフィット確認。</div></div>
+            <div style="background:#f6f4fb;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:4px">PD-L1 TPS ≥50% · 腫瘍量少 · 化学療法を避けたい</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ KEYNOTE-024単剤</strong>　化学療法なしで5年OS 31.9%。高齢・臓器機能低下・化学療法忌避例に有用。</div></div>
+            <div style="background:#f6f4fb;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:4px">PD-L1 TPS &lt;1% · 全組織型 · PS 0–1</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ CheckMate 9LA を考慮</strong>　PD-L1 &lt;1%での6年OS 20% vs 7%は他レジメンを数値上上回る。化学療法2サイクルで終了可。irAE管理が必要。</div></div>
+            <div style="background:#fdf4e7;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:4px">STK11 / KEAP1 変異陽性 · PD-1単剤が効きにくい状況</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ CheckMate 9LA または POSEIDON を考慮</strong>　CTLA-4阻害薬が「冷えた」腫瘍微小環境を改善しうる可能性。ガイドライン正式組み込みは留保中。</div></div>
+            <div style="background:#fdf4e7;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:4px">EGFR/ALK変異陽性 · TKI耐性後</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ IMpower150（ABCP）を考慮</strong>　EGFR/ALK変異陽性例を含む唯一の免疫療法試験。4剤毒性管理に習熟が必要。</div></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-h2">ガイドライン推奨序列 — COIを踏まえた客観的評価</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px">
+          <div class="info-box" style="margin-bottom:14px"><strong>COI（利益相反）について：</strong>KEYNOTE試験はMerck、CheckMate/POSEIDON/IMpower試験はBMS・AZ・Rocheがスポンサー。すべてCategory 1推奨だが、日本での保険適用・処方実績・毒性管理習熟度を含めた序列を以下に示す。</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--green-light);border-radius:10px;border-left:3px solid var(--green-mid)"><div style="font-size:11px;font-weight:600;color:var(--green-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">最推奨</div><div><div style="font-size:13px;font-weight:600;color:var(--green-dark)">KEYNOTE-189（非扁平） / KEYNOTE-407（扁平） / KEYNOTE-024（TPS ≥50%単剤）</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">エビデンス量最大・5年以上フォロー・全ガイドラインCategory 1・国内処方実績最多・毒性管理の習熟度最高。</div></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--blue-light);border-radius:10px;border-left:3px solid #2d6db5"><div style="font-size:11px;font-weight:600;color:var(--blue-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">特定患者に推奨</div><div><div style="font-size:13px;font-weight:600;color:var(--blue-dark)">CheckMate 9LA（PD-L1 &lt;1% / STK11・KEAP1変異疑い）</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">6年OS 20% vs 7%（PD-L1 &lt;1%）。化学療法2サイクルで終了可能。irAE管理に習熟した施設での選択肢。</div></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--purple-light);border-radius:10px;border-left:3px solid #6a5ec5"><div style="font-size:11px;font-weight:600;color:var(--purple-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">代替選択肢</div><div><div style="font-size:13px;font-weight:600;color:var(--purple-dark)">POSEIDON（STK11/KEAP1変異陽性 / CheckMate 9LA代替）</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">CheckMate 9LAと類似コンセプト。TRITON試験の結果次第で序列が変わる可能性あり。</div></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--border2)"><div style="font-size:11px;font-weight:600;color:var(--text3);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">限定的使用</div><div><div style="font-size:13px;font-weight:600;color:var(--text2)">IMpower110 / IMpower150</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">IMpower110はSP142アッセイ依存・高発現のみ有効で実臨床での使用機会は限定的。IMpower150はEGFR/ALK変異陽性TKI耐性後に一定の役割あり。</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-h2">主要ガイドライン比較（2025年）</h2>
+      <div class="gl-table-grid">
+    <div id="p-global" class="panel">
+
+      <!-- ① 患者プロファイル別 使い分けガイド -->
+      <h2 class="sec-h2">どの患者にどのレジメンを？ — 使い分けの根拠</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px">
+          <p class="trial-desc" style="margin-bottom:16px">直接比較試験（head-to-head）は存在しないため、患者プロファイルに応じた間接的な使い分けが現実的。以下は2025年時点の主要エキスパートコンセンサスと試験サブグループ解析に基づく。</p>
+
+          <div style="display:flex;flex-direction:column;gap:10px">
+
+            <div style="background:var(--green-pale);border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:6px">非扁平上皮 · PD-L1 TPS問わず · PS良好</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                <strong>第一選択：KEYNOTE-189</strong>（ペムブロリズマブ＋ペメトレキセド＋白金製剤）<br>
+                理由：最大規模・最長フォロー・最も豊富な実臨床データ。OS HR 0.49という強力なエビデンス。ペメトレキセド維持療法が持続的ベネフィットをもたらす。国内処方実績も最多。
+              </div>
+            </div>
+
+            <div style="background:var(--green-pale);border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:6px">扁平上皮 · PD-L1 TPS問わず · PS良好</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                <strong>第一選択：KEYNOTE-407</strong>（ペムブロリズマブ＋カルボプラチン＋パクリタキセル/nab-PTX）<br>
+                理由：扁平上皮専用の化学免疫療法として唯一の大規模PhaseIII。ペメトレキセドは扁平上皮に非適応。5年データでもベネフィット持続（OS HR 0.71）。
+              </div>
+            </div>
+
+            <div style="background:#eef4fb;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:6px">PD-L1 TPS &lt; 1% · 全組織型 · 免疫療法単剤が効きにくい状況</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                <strong>考慮：CheckMate 9LA または POSEIDON</strong>（dual ICI＋化学療法）<br>
+                理由：6年データでCheckMate 9LAはPD-L1 &lt;1%の患者でOS 20% vs 7%という他のレジメンを数値上上回る長期生存率を示している。PD-L1低発現で化学免疫療法の効果が限定的と予測される場合にdual ICIの上乗せを検討。ただしirAEが増加するためPS良好例に限る。
+              </div>
+            </div>
+
+            <div style="background:#eef4fb;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:6px">STK11 / KEAP1 変異陽性 · PD-L1問わず</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                <strong>考慮：CheckMate 9LA または POSEIDON</strong>（CTLA-4阻害薬追加）<br>
+                理由：STK11・KEAP1変異は腫瘍微小環境を「冷やし」、PD-1単剤への反応性を低下させる。CTLA-4阻害薬の追加が免疫炎症を誘導し、この耐性を一部克服しうる可能性が示唆されている。ただしガイドラインへの正式組み込みはエビデンス不十分として留保中。2025年ASCO発表のメタ解析では、STK11/KEAP1/KRAS変異存在下でも化学免疫療法は化学療法単独に対してOSベネフィットを維持することが示された。
+              </div>
+            </div>
+
+            <div style="background:#fdf4e7;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:6px">PD-L1 TPS ≥ 50% · 腫瘍量が少ない · 毒性を最小化したい</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                <strong>考慮：KEYNOTE-024</strong>（ペムブロリズマブ単剤）<br>
+                理由：化学療法なしで5年OS 31.9%。高齢・臓器機能低下・化学療法忌避例に特に有用。腫瘍量が多い場合（多発肝転移・骨転移など）は化学免疫療法の方が奏効率・速効性で優れる可能性。
+              </div>
+            </div>
+
+            <div style="background:#fdf4e7;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:6px">PD-L1高発現 · SP142アッセイ環境 · ペムブロ忌避</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                <strong>考慮：IMpower110</strong>（アテゾリズマブ単剤）<br>
+                理由：SP142アッセイでTC ≥50%またはIC ≥10%の高発現例に限りOS HR 0.59。ペムブロリズマブのアレルギー歴・忌避理由がある場合の代替。アッセイの違いに注意が必要。
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ② ガイドライン推奨序列（COI抜き） -->
+      <h2 class="sec-h2">ガイドライン推奨序列 — COIを踏まえた客観的評価</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px">
+          <div class="info-box" style="margin-bottom:16px">
+            <strong>COI（利益相反）について：</strong>KEYNOTE試験はMerck、CheckMate/POSEIDON/IMpower試験はBMS・AZ・Rocheがスポンサー。いずれもCategory 1推奨を得ているが、日本国内の処方実績・後発医薬品の有無・薬価も含めた実臨床上の序列を以下に示す。
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px">
+
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--green-light);border-radius:10px;border-left:3px solid var(--green-mid)">
+              <div style="font-size:11px;font-weight:600;color:var(--green-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0">最推奨</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--green-dark)">KEYNOTE-189 / 407（ペムブロリズマブ＋化学療法）</div>
+                <div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">エビデンス量が最大。5年以上のOS追跡。日本・米国・欧州すべてでCategory 1。国内処方実績・医師習熟度が最高。組織型による明確な使い分けが可能。副作用プロファイルが最も把握されている。</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--blue-light);border-radius:10px;border-left:3px solid #2d6db5">
+              <div style="font-size:11px;font-weight:600;color:var(--blue-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0">特定患者に推奨</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--blue-dark)">CheckMate 9LA（ニボルマブ＋イピリムマブ＋化学療法2サイクル）</div>
+                <div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">6年OS 20%というKEYNOTE系と同等の長期データ。PD-L1 &lt;1%・扁平上皮・STK11/KEAP1変異が疑われる例で特に検討価値あり。化学療法を2サイクルで終了できる点が一部患者に有利。irAE管理の習熟が必要。</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--purple-light);border-radius:10px;border-left:3px solid #6a5ec5">
+              <div style="font-size:11px;font-weight:600;color:var(--purple-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0">代替選択肢</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--purple-dark)">POSEIDON（デュルバルマブ＋トレメリムマブ＋化学療法）</div>
+                <div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">CheckMate 9LAと類似のコンセプトだが長期OS率は数値上やや低い（5年OS 比較で差あり）。STK11/KEAP1変異の探索的サブグループデータが注目。TRITON試験でKEYNOTE系との直接比較が進行中。</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--border2)">
+              <div style="font-size:11px;font-weight:600;color:var(--text3);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0">限定的使用</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--text2)">IMpower110（アテゾリズマブ単剤）/ IMpower150（4剤）</div>
+                <div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">IMpower110はSP142アッセイ依存・高発現のみに有効という制約があり実臨床での使用機会は限定的。IMpower150はEGFR/ALK変異陽性のTKI耐性後に一定の役割があるが、4剤同時投与の毒性と費用対効果から一般的な1次治療での選択は少ない。</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ③ 国際GL比較 -->
       <h2 class="sec-h2">主要ガイドライン比較：変異陰性NSCLC 1次治療（2025年）</h2>
       <div class="gl-table-grid">
         <div class="gl-box">
@@ -670,7 +896,7 @@ input[type=range] {
 
 <footer class="footer">
   <span class="footer-logo"><span>lung</span>atlas</span>
-  <span>呼吸器外科医が作るオープン教科書 — 論文データ基準 — 2026年6月更新</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
 </footer>
 
 <script>
@@ -696,17 +922,17 @@ function updatePDL1(v) {
     rec.style.background = '#e4f0e8';
     rec.style.color = '#0d5c3a';
     rec.textContent = '推奨：ペムブロリズマブ単剤（化学療法なし）または化学免疫療法';
-    trial.textContent = '根拠：KEYNOTE-024（NEJM 2016）— 5年OS 31.9% vs 16.3%';
+    trial.textContent = '根拠：KEYNOTE-024（NEJM 2016）— 5年OS 31.9% vs 16.3% → 「PD-L1高発現（単剤）」タブへ';
   } else if (v >= 1) {
     rec.style.background = '#e3edf8';
     rec.style.color = '#0c3d6e';
     rec.textContent = '推奨：化学療法＋ペムブロリズマブ（組織型で分岐）';
-    trial.textContent = '根拠：非扁平上皮 → KEYNOTE-189 / 扁平上皮 → KEYNOTE-407';
+    trial.textContent = '根拠：非扁平上皮 → 「非扁平上皮癌」タブ（KEYNOTE-189）/ 扁平上皮 → 「扁平上皮癌」タブ（KEYNOTE-407）';
   } else {
     rec.style.background = '#fdf0d8';
     rec.style.color = '#6b3d00';
     rec.textContent = '推奨：化学免疫療法（免疫療法単剤のベネフィットは限定的）';
-    trial.textContent = '根拠：KEYNOTE-189 / CheckMate 9LA — TPS < 1%でもOSベネフィットあり';
+    trial.textContent = '根拠：KEYNOTE-189 / CheckMate 9LA — TPS < 1%でもOSベネフィットあり → 「Dual ICIレジメン」タブへ';
   }
 }
 
