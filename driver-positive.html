@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IV期 NSCLC 1次治療：変異陽性 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f5f7f5;--surface:#fff;--surface2:#f0f4f1;--border:#d4e0d6;--border2:#b8cfbb;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --blue-dark:#0c3d6e;--blue-light:#e3edf8;--purple-dark:#3b2d7a;--purple-light:#eeebfb;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;--red-dark:#6b1c1c;--red-light:#fce8e8;
+  --teal-dark:#085041;--teal-light:#e1f5ee;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:10px;--radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* NAV */
+.nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:52px;position:sticky;top:0;z-index:100}
+.logo{font-size:15px;font-weight:600;color:var(--text);text-decoration:none}
+.logo span{color:var(--green-mid)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
+.nav-links a:hover{background:var(--surface2);color:var(--text)}
+.nav-links a.active{color:var(--green-dark);font-weight:500;background:var(--green-light)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.lang-switch{display:flex;gap:4px}
+.lang-btn{font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text3);cursor:pointer;font-family:var(--font);transition:all .15s;text-decoration:none}
+.lang-btn:hover{border-color:var(--border2);color:var(--text)}
+.lang-btn.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark)}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sb-head{font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--text3);padding:8px 18px 4px;text-transform:uppercase}
+.sb-item{display:block;padding:8px 18px;font-size:12.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;cursor:pointer;line-height:1.4}
+.sb-item:hover{background:var(--green-pale);color:var(--green-dark)}
+.sb-item.active{background:var(--green-light);color:var(--green-dark);font-weight:500;border-left-color:var(--green-mid)}
+.sb-sub{display:block;padding:5px 18px 5px 30px;font-size:11.5px;color:var(--text3);text-decoration:none;cursor:pointer;transition:color .15s}
+.sb-sub:hover,.sb-sub.active{color:var(--green-dark);font-weight:500}
+
+/* MAIN */
+.main{flex:1;padding:28px 36px 60px;max-width:860px}
+.crumb{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.crumb span{color:var(--green-mid)}
+.updated{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--green-dark);background:var(--green-light);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.updated::before{content:'↻';font-size:12px}
+.art-h1{font-size:22px;font-weight:600;line-height:1.2;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--text2);line-height:1.75;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.sec-h2{font-size:14px;font-weight:600;color:var(--text);margin:24px 0 12px;display:flex;align-items:center;gap:8px}
+.sec-h2::before{content:'';display:block;width:3px;height:15px;background:var(--green-mid);border-radius:2px;flex-shrink:0}
+
+/* TABS */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.tab{font-size:12.5px;padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.tab:hover{border-color:var(--border2);color:var(--green-dark)}
+.tab.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark);font-weight:500}
+.panel{display:none}.panel.active{display:block}
+
+/* TRIAL CARD */
+.trial-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden}
+.tc-top{padding:18px 20px 16px;border-bottom:1px solid var(--border)}
+.tc-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.trial-link{font-size:13.5px;font-weight:600;color:var(--green-dark);text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono)}
+.trial-link:hover{opacity:.7}
+.trial-link .ext{font-size:11px;opacity:.7}
+.jbadge{font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:8px;white-space:nowrap}
+.j-nejm{background:var(--blue-light);color:var(--blue-dark)}
+.j-jco{background:var(--purple-light);color:var(--purple-dark)}
+.j-jto{background:var(--teal-light);color:var(--teal-dark)}
+.j-lancet{background:var(--amber-light);color:var(--amber-dark)}
+.ybadge{font-size:10.5px;color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:8px}
+.new-badge{font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:8px;background:#fdf0d8;color:#6b3d00}
+.drug-title{font-size:15px;font-weight:600;margin-bottom:3px}
+.drug-sub{font-size:12.5px;color:var(--text2);margin-bottom:12px}
+
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat{background:var(--green-pale);border-radius:8px;padding:10px 13px}
+.stat-val{font-size:17px;font-weight:600;color:var(--green-dark);font-family:var(--mono)}
+.stat-label{font-size:10.5px;color:var(--text3);margin-top:2px;line-height:1.4}
+.stat-vs{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* BODY */
+.tc-body{padding:16px 20px}
+.trial-desc{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.gl-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.gl-item{display:flex;align-items:flex-start;gap:8px;border-radius:8px;padding:9px 13px;font-size:12px;line-height:1.65}
+.gl-jp{background:var(--green-light);color:var(--green-dark)}
+.gl-us{background:var(--blue-light);color:var(--blue-dark)}
+.gl-eu{background:var(--purple-light);color:var(--purple-dark)}
+.gl-flag{font-size:14px;flex-shrink:0;margin-top:1px}
+.tox-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tox{font-size:11px;background:var(--red-light);color:var(--red-dark);padding:3px 10px;border-radius:10px}
+
+/* EXPAND */
+.expand-btn{font-size:11.5px;color:var(--green-dark);background:none;border:none;cursor:pointer;margin-top:8px;padding:0;display:inline-flex;align-items:center;gap:4px;font-family:var(--font)}
+.expand-btn:hover{opacity:.7}
+.expand-btn .chev{transition:transform .2s;display:inline-block}
+.extra{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--text2);line-height:1.8}
+.extra a{color:var(--green-dark)}
+.extra.open{display:block}
+
+/* INFO */
+.info-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
+.note-box{background:var(--blue-light);border-left:3px solid #2d6db5;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--blue-dark);line-height:1.75;margin:14px 0}
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+/* NEXT */
+.next-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.next-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);font-weight:500;background:var(--green-light);border:none;cursor:pointer;padding:9px 16px;border-radius:8px;font-family:var(--font);text-decoration:none;transition:background .15s}
+.next-btn:hover{background:#cce8d4}
+.detail-link{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border);padding:6px 12px;border-radius:6px;margin-top:10px;text-decoration:none;cursor:default}
+.detail-link .soon{font-size:10px;font-weight:500;background:var(--amber-light);color:var(--amber-dark);padding:1px 6px;border-radius:4px}
+
+/* FOOTER */
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:20px 36px;font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-weight:600;color:var(--text)}
+.footer-logo span{color:var(--green-mid)}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main{padding:20px 18px 40px}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="index.html"><span>lung</span>atlas</a>
+  <div class="nav-links">
+    <a href="#">解剖学</a>
+    <a href="#" class="active">化学療法</a>
+    <a href="#">症例集</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <a class="lang-btn active" href="driver-positive.html">日本語</a>
+      <a class="lang-btn" href="driver-positive-en.html">English</a>
+    </div>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-head">化学療法</div>
+    <a class="sb-item active" href="#">IV期 NSCLC</a>
+    <a class="sb-sub active" href="driver-positive.html">1次治療：変異陽性</a>
+    <a class="sb-sub" href="index.html">1次治療：変異陰性</a>
+    <a class="sb-sub" href="#">耐性後の戦略</a>
+    <a class="sb-item" href="#">IV期 SCLC</a>
+    <a class="sb-item" href="#">周術期薬物療法</a>
+    <a class="sb-item" href="#">副作用管理</a>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">化学療法 › <span>IV期 NSCLC › 1次治療：ドライバー変異陽性</span></div>
+    <div class="updated">最終更新 2026年6月 — 原著論文データ基準 / 国際GL比較付き</div>
+    <h1 class="art-h1">IV期 NSCLC 1次治療<br>ドライバー遺伝子変異陽性例</h1>
+    <p class="lead">治療選択の根拠は原著論文にある。このページでは各レジメンの推奨を支える主要Phase III試験のデータを中心に提示し、ガイドライン推奨はその後に示す。変異の同定はCGP検査から始まる——検出した変異の種類が生存期間を直接左右する。</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="sw('egfr',this)">EGFR変異</button>
+      <button class="tab" onclick="sw('alk',this)">ALK融合</button>
+      <button class="tab" onclick="sw('ros1',this)">ROS1 / HER2</button>
+      <button class="tab" onclick="sw('others',this)">MET / RET / NTRK / BRAF</button>
+      <button class="tab" onclick="sw('kras',this)">KRAS G12C（2次治療〜）</button>
+      <button class="tab" onclick="sw('flow',this)">治療フロー</button>
+    </div>
+
+    <!-- EGFR -->
+    <div id="p-egfr" class="panel active">
+
+      <div class="note-box" style="margin-bottom:16px"><strong>使い分けの原則：</strong>第3世代オシメルチニブが現在の1次治療標準。アミバンタマブ＋ラゼルチニブはOS延長を示した最新レジメン。第1・2世代はT790M耐性後のオシメルチニブを温存するシーケンス戦略や非典型変異で一定の役割あり。</div>
+
+      <!-- 全薬剤一覧表 -->
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px;overflow-x:auto">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">EGFR変異陽性 — 使用可能薬剤 全一覧</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:600px">
+            <thead>
+              <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
+                <th style="padding:8px 12px;text-align:left;font-weight:600;border-right:1px solid var(--border)">世代</th>
+                <th style="padding:8px 12px;text-align:left;font-weight:600;border-right:1px solid var(--border)">一般名（商品名）</th>
+                <th style="padding:8px 10px;text-align:center;font-weight:600;border-right:1px solid var(--border)">対象変異</th>
+                <th style="padding:8px 10px;text-align:center;font-weight:600;border-right:1px solid var(--border)">用法</th>
+                <th style="padding:8px 10px;text-align:center;font-weight:600;border-right:1px solid var(--border)">根拠試験</th>
+                <th style="padding:8px 10px;text-align:left;font-weight:600">主な毒性</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)" rowspan="2">第1世代<br><span style="color:var(--text3)">可逆的</span></td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>ゲフィチニブ</strong><br><span style="font-size:11px;color:var(--text3)">イレッサ® 250mg/日</span></td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">exon19del<br>L858R</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">IPASS / NEJ002</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">皮疹、下痢、肝毒性</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>エルロチニブ</strong><br><span style="font-size:11px;color:var(--text3)">タルセバ® 150mg/日</span></td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">exon19del<br>L858R</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">EURTAC / ENSURE</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">皮疹、下痢</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)" rowspan="2">第2世代<br><span style="color:var(--text3)">不可逆的<br>汎ErbB</span></td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>アファチニブ</strong><br><span style="font-size:11px;color:var(--text3)">ジオトリフ® 40mg/日（開始）</span></td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">exon19del<br>L858R<br><span style="font-size:10px;color:var(--green-dark)">非典型変異も</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">LUX-Lung 3/6/7</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">下痢（強）、皮膚毒性（強）、口内炎</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>ダコミチニブ</strong><br><span style="font-size:11px;color:var(--text3)">ビジンプロ® 45mg/日</span></td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">exon19del<br>L858R</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">ARCHER-1050</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">皮膚毒性、下痢、口内炎</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">第3世代<br><span style="color:var(--green-dark);font-weight:600">★標準治療</span></td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong style="color:var(--green-dark)">オシメルチニブ</strong><br><span style="font-size:11px;color:var(--text3)">タグリッソ® 80mg/日</span></td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">exon19del<br>L858R<br><span style="font-size:10px;color:var(--green-dark)">T790Mも</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">FLAURA<br>FLAURA2（＋化療）<br>ADAURA（術後）</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">皮疹、下痢、QTc延長</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">EGFR-MET<br>二重特異性抗体<br>＋第3世代TKI<br><span style="color:var(--green-dark);font-weight:600">★2025年承認</span></td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)">
+                  <strong style="color:var(--green-dark)">アミバンタマブ（IV）＋ラゼルチニブ</strong><br>
+                  <span style="font-size:11px;color:var(--text3)">ライブリバント®点滴静注 ＋ ラズクルーズ®</span><br>
+                  <span style="font-size:10px;background:var(--amber-light);color:var(--amber-dark);padding:1px 6px;border-radius:4px;margin-top:3px;display:inline-block">皮下注（リブロファズ®）2026年3月発売</span>
+                </td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">exon19del<br>L858R</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">点滴または<br>皮下注＋経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">MARIPOSA<br>（NEJM 2024/2025）<br>PALOMA-3（SC）</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">infusion reaction<br>皮膚毒性、VTE<br><span style="color:var(--green-dark)">SC版：IRR大幅減・約5分投与</span></td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">EGFR-MET<br>二重特異性抗体<br>＋化学療法</td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>アミバンタマブ＋CBDCA/CDDP＋PEM</strong><br><span style="font-size:11px;color:var(--text3)">ライブリバント® / リブロファズ® ＋ 化療</span></td>
+                <td style="padding:8px 10px;text-align:center;border-right:1px solid var(--border)"><span style="font-size:11px;color:var(--green-dark);font-weight:600">exon20<br>挿入変異専用</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">点滴または<br>皮下注＋経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">PAPILLON<br>（NEJM 2023）</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">infusion reaction<br>血液毒性</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size:10.5px;color:var(--text3);margin-top:8px;line-height:1.7">
+            第1・2世代は現在では2次治療以降での使用が主。非典型変異（G719X・S768I・L861Q等）ではアファチニブが有用な場合あり。
+            リブロファズ®（アミバンタマブ皮下注）は2025年12月22日国内承認・2026年3月18日発売。約5分で投与完了、infusion reaction大幅減。
+          </p>
+        </div>
+      </div>
+
+      <!-- FLAURA / FLAURA2 並列 -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1810858" target="_blank" rel="noopener">FLAURA <span class="ext">↗</span></a>
+            <span style="margin:0 4px;color:var(--text3);font-size:12px">/</span>
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2304729" target="_blank" rel="noopener">FLAURA2 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2018 / 2020 / 2023</span>
+            <span class="ybadge">Phase III · 標準治療の根拠</span>
+          </div>
+          <div class="drug-title">オシメルチニブ単剤 vs オシメルチニブ＋化学療法</div>
+          <div class="drug-sub">未治療 EGFR exon19del / L858R · 第3世代EGFR-TKIの2つの試験を並べて理解する</div>
+          <div class="stat-row">
+            <div class="stat">
+              <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:3px">FLAURA（単剤）</div>
+              <div class="stat-val">18.9 mo</div>
+              <div class="stat-label">中央値 PFS</div>
+              <div class="stat-vs">vs 10.2 mo（HR 0.46）<br>中央値OS 38.6 mo vs 31.8 mo</div>
+            </div>
+            <div class="stat">
+              <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:3px">FLAURA2（化療併用）</div>
+              <div class="stat-val">25.5 mo</div>
+              <div class="stat-label">中央値 PFS</div>
+              <div class="stat-vs">vs 16.7 mo 単剤（HR 0.62）<br>OS最終解析待ち</div>
+            </div>
+            <div class="stat">
+              <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:3px">ADAURA（術後補助）</div>
+              <div class="stat-val">HR 0.17</div>
+              <div class="stat-label">DFS ハザード比</div>
+              <div class="stat-vs">Stage IB–IIIA術後・EGFR陽性</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">FLAURAは第3世代として初めて1次治療のOS延長を証明し、現在もすべての新規試験の比較対照。FLAURA2では化療上乗せでPFSがさらに9ヶ月延長するが、OS最終解析は追跡中。毒性増加（血液毒性・悪心）を考慮するとPS良好・脳転移高リスク例での選択が現実的。ADAURA試験では術後補助療法として DFS HR 0.17という強力なデータ。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>単剤・化療併用ともに推奨。補助療法（ADAURA）も保険適用。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO：</strong>Category 1（1次治療・補助療法）。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>標準治療として推奨。MARIPOSAとの選択は患者背景・医療体制で個別判断。</span></div>
+          </div>
+          <div class="tox-row"><span class="tox">皮疹</span><span class="tox">下痢</span><span class="tox">QTc延長</span><span class="tox">FLAURA2追加：好中球減少・悪心</span></div>
+        </div>
+      </div>
+
+      <!-- MARIPOSA -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2503001" target="_blank" rel="noopener">MARIPOSA（OS最終解析）<span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2024 / 2025年9月</span>
+            <span class="ybadge">Phase III · n=1,074</span>
+            <span class="new-badge">OS延長確認・2025年承認</span>
+          </div>
+          <div class="drug-title">アミバンタマブ＋ラゼルチニブ vs オシメルチニブ単剤</div>
+          <div class="drug-sub">未治療 EGFR exon19del / L858R · 化学療法なし · 点滴静注または皮下注（リブロファズ®）</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">23.7 mo</div><div class="stat-label">中央値 PFS</div><div class="stat-vs">vs 16.6 mo（HR 0.70, p&lt;0.001）</div></div>
+            <div class="stat"><div class="stat-val">HR 0.75</div><div class="stat-label">OS 最終解析（NEJM 2025）</div><div class="stat-vs">3年OS 60% vs 51%（p=0.005）</div></div>
+            <div class="stat"><div class="stat-val">25.8 mo</div><div class="stat-label">奏効持続期間</div><div class="stat-vs">vs 16.8 mo（オシメルチニブ）</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">オシメルチニブ単剤に対しPFSのみならずOSでも有意な延長を示した初の試験。皮下注製剤（リブロファズ®、PALOMA-3試験）の登場でinfusion reactionが大幅減・約5分投与が実現し、外来管理が大きく改善した。65歳以上サブグループではOSベネフィットが限定的との指摘あり。VTEリスクが高く抗凝固療法の併用が推奨される。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>1次治療として推奨。IV版承認2025年3月→SC版（リブロファズ®）2026年3月発売。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN v4.2026 / ASCO Living GL：</strong>Category 1。FDA承認 2024年。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO 2025：</strong>グレードA推奨。EMA承認 2025年初頭。</span></div>
+          </div>
+          <div class="tox-row"><span class="tox">Infusion reaction（IV）</span><span class="tox">皮膚毒性</span><span class="tox">静脈血栓塞栓症</span><span class="tox">SC版でIRR大幅減</span></div>
+        </div>
+      </div>
+
+      <!-- EGFR 1st line 選択ガイド予告 -->
+      <div class="trial-card" style="background:var(--surface2);border-style:dashed">
+        <div class="tc-body" style="padding:16px 20px">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="font-size:20px;flex-shrink:0">🧭</div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">EGFR 1次治療の選択ガイド（詳細ページ）</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.7">オシメルチニブ単剤 vs FLAURA2（化療併用）vs MARIPOSA（アミバンタマブ＋ラゼルチニブ）の使い分けを、患者背景（年齢・PS・脳転移・腫瘍量・L858R vs exon19del・co-mutation）別に整理した意思決定フローを準備中。</div>
+              <a class="detail-link" href="egfr-firstline.html" style="cursor:pointer;color:var(--green-dark);background:var(--green-light);border-color:var(--border2)">患者背景別の1次治療選択フロー →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <h2 class="sec-h2">exon20挿入変異 — 従来TKIは無効・完全に別カテゴリー</h2>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2220826" target="_blank" rel="noopener">PAPILLON <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2023</span>
+            <span class="ybadge">Phase III · n=308</span>
+            <span class="new-badge">GL 2025年版 新規推奨</span>
+          </div>
+          <div class="drug-title">アミバンタマブ＋化学療法（CBDCA/CDDP＋PEM）vs 化学療法単独</div>
+          <div class="drug-sub">EGFR exon20挿入変異 · 未治療 · CGP検査での正確な変異同定が必須</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">11.4 mo</div><div class="stat-label">中央値 PFS（併用群）</div><div class="stat-vs">vs 6.7 mo（HR 0.40, p&lt;0.001）</div></div>
+            <div class="stat"><div class="stat-val">57% vs 21%</div><div class="stat-label">ORR</div><div class="stat-vs">奏効率</div></div>
+            <div class="stat"><div class="stat-val">exon20</div><div class="stat-label">適応変異</div><div class="stat-vs">exon19del/L858Rとは全く別</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">exon20挿入変異は従来のEGFR-TKIがほぼ無効。PAPILLON試験が初めてPhase IIIでベネフィットを証明した。CGP検査での正確な変異同定が治療選択の出発点。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>exon20挿入変異の1次治療として新規推奨。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>Category 1。exon20挿入はexon19del/L858Rと別カテゴリーとして明記。</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('alk',document.querySelectorAll('.tab')[1])">→ ALK融合の試験データへ</button>
+        <button class="next-btn" onclick="sw('flow',document.querySelectorAll('.tab')[5])">→ 治療フローを確認</button>
+      </div>
+    </div>
+
+    <!-- ALK -->
+    <div id="p-alk" class="panel">
+
+      <div class="note-box" style="margin-bottom:16px"><strong>使い分けの原則：</strong>ロルラチニブが5年PFS未到達という固形腫瘍史上最長データを持つ。アレクチニブは国内処方実績最多・忍容性良好。「最初からロルラチニブ」vs「アレクチニブ先行→進行後ロルラチニブ」のシーケンス戦略は現在も議論継続中。</div>
+
+      <!-- 全薬剤一覧表 -->
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px;overflow-x:auto">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">ALK融合陽性 — 使用可能薬剤 全一覧</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:580px">
+            <thead>
+              <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
+                <th style="padding:8px 12px;text-align:left;font-weight:600;border-right:1px solid var(--border)">世代</th>
+                <th style="padding:8px 12px;text-align:left;font-weight:600;border-right:1px solid var(--border)">一般名（商品名）</th>
+                <th style="padding:8px 10px;text-align:center;font-weight:600;border-right:1px solid var(--border)">1次治療</th>
+                <th style="padding:8px 10px;text-align:center;font-weight:600;border-right:1px solid var(--border)">用法・用量</th>
+                <th style="padding:8px 10px;text-align:center;font-weight:600;border-right:1px solid var(--border)">根拠試験</th>
+                <th style="padding:8px 10px;text-align:left;font-weight:600">主な毒性</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">第1世代</td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>クリゾチニブ</strong><br><span style="font-size:11px;color:var(--text3)">ザーコリ® 250mg×2/日<br>（ROS1・METにも適応）</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">現在は非推奨<br>（上位世代に置換）</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">PROFILE 1014</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">視覚障害、浮腫、肝毒性</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)" rowspan="3">第2世代</td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)">
+                  <strong style="color:var(--green-dark)">アレクチニブ ★国内主流</strong><br>
+                  <span style="font-size:11px;color:var(--text3)">アレセンサ® 600mg×2/日（国内）/ 300mg×2/日（日本承認用量）</span>
+                </td>
+                <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">◎ 推奨</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">
+                  J-ALEX（Lancet 2017）<br>
+                  PFS HR 0.38, 25.9 vs 10.2 mo<br>
+                  ALEX（Lancet 2017）最終解析<br>
+                  PFS HR 0.43, 34.8 mo vs 10.9 mo<br>
+                  <span style="font-size:10px;color:var(--green-dark);font-weight:500">OS中央値 81.1 mo（ESMO 2025）</span>
+                </td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">筋肉痛、光線過敏、便秘、浮腫</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>セリチニブ</strong><br><span style="font-size:11px;color:var(--text3)">ジカディア® 450mg/日（食後）</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">適応あり<br>（クリゾ耐性後が主）</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">ASCEND-4</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">下痢・悪心（強）、肝毒性</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;border-right:1px solid var(--border)"><strong>ブリガチニブ</strong><br><span style="font-size:11px;color:var(--text3)">アルンブリグ® 180mg/日（90mgから漸増）</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">適応あり</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">ALTA-1L</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">早期肺毒性（開始初期）、高血圧</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">第3世代<br><span style="color:var(--green-dark);font-weight:600">★最推奨</span></td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)">
+                  <strong style="color:var(--green-dark)">ロルラチニブ ★固形腫瘍史上最長PFS</strong><br>
+                  <span style="font-size:11px;color:var(--text3)">ローブレナ® 100mg/日</span>
+                </td>
+                <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">◎◎ 最推奨</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">CROWN<br>（JCO 2024, 5年解析）</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">高脂血症（高頻度）、浮腫、認知・気分変化、体重増加</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size:10.5px;color:var(--text3);margin-top:8px;line-height:1.6">クリゾチニブは上位世代への置換により現在は使用機会が限定的。セリチニブ・ブリガチニブはクリゾチニブ耐性後や特定耐性変異の文脈での使用が主。</p>
+        </div>
+      </div>
+
+      <!-- CROWN主要試験カード -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1200/JCO.24.00581" target="_blank" rel="noopener">CROWN（5年解析）<span class="ext">↗</span></a>
+            <span class="jbadge j-jco">J Clin Oncol 2024</span>
+            <span class="ybadge">Phase III · n=296 · 60ヶ月追跡</span>
+            <span class="new-badge">固形腫瘍史上最長PFS</span>
+          </div>
+          <div class="drug-title">ロルラチニブ 100mg/日 vs クリゾチニブ</div>
+          <div class="drug-sub">未治療 ALK陽性 進行期NSCLC · 脳転移例25%含む</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">未到達</div><div class="stat-label">中央値 PFS（ロルラチニブ）</div><div class="stat-vs">vs 9.1 mo（クリゾチニブ）</div></div>
+            <div class="stat"><div class="stat-val">60% vs 8%</div><div class="stat-label">5年 PFS 率</div><div class="stat-vs">HR 0.19（95%CI 0.13–0.27）</div></div>
+            <div class="stat"><div class="stat-val">92%減</div><div class="stat-label">頭蓋内進行リスク低減</div><div class="stat-vs">脳転移制御に卓越した効果</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">2024年ASCO年次総会で発表（Solomon et al., JCO 2024）。5年時点でPFS中央値が未到達——固形腫瘍を含む全転移癌において単剤分子標的薬として史上最長のPFS。50%の患者が5年時点でも投与継続中。アジア人サブグループ（JTO 2025）でも5年PFS 63%と同様の結果。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>ALK融合陽性の1次治療として最も強い推奨。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>Category 1。5年データを受け1次治療での位置づけがより強化。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>グレードA推奨。脳転移リスクの高いALK陽性例で特に有用。</span></div>
+          </div>
+          <div class="tox-row"><span class="tox">高脂血症（高頻度・スタチン必須）</span><span class="tox">浮腫</span><span class="tox">認知・気分変化</span><span class="tox">体重増加</span></div>
+          <button class="expand-btn" onclick="tog(this)"><span class="chev">▼</span> アレクチニブ（J-ALEX）との位置づけとシーケンス戦略</button>
+          <div class="extra">J-ALEX試験（Lancet 2017）でアレクチニブが日本人ALK陽性NSCLCに有効性と忍容性を示し、国内では依然広く使用される。ロルラチニブは高脂血症（ほぼ全例で発現）・認知機能変化の管理が必要なため、リスク・ベネフィットの個別評価が重要。「アレクチニブ先行→進行後にロルラチニブ」vs「最初からロルラチニブ」のシーケンス戦略は議論継続中。脳転移リスクが高い場合は最初からロルラチニブを選択する傾向が強まっている。</div>
+          <a class="detail-link">ALK 1次治療の選択・シーケンス戦略の詳細ページ <span class="soon">Coming soon</span></a>
+        </div>
+      </div>
+
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('ros1',document.querySelectorAll('.tab')[2])">→ ROS1 / HER2へ</button>
+      </div>
+    </div>
+
+
+    <!-- ROS1 / HER2 -->
+    <div id="p-ros1" class="panel">
+      <h2 class="sec-h2">ROS1融合遺伝子陽性</h2>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1200/JCO.23.00319" target="_blank" rel="noopener">TRIDENT-1 <span class="ext">↗</span></a>
+            <span class="jbadge j-jco">J Clin Oncol 2023</span>
+            <span class="ybadge">Phase I/II · タレトレクチニブ</span>
+            <span class="new-badge">2025年国内承認</span>
+          </div>
+          <div class="drug-title">タレトレクチニブ（イブトロジー®）</div>
+          <div class="drug-sub">ROS1陽性NSCLC · 治療歴あり・なし含む · CNS毒性を大幅改善</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">高奏効率</div><div class="stat-label">ORR（未治療例）</div><div class="stat-vs">CNS転移例でも有効</div></div>
+            <div class="stat"><div class="stat-val">CNS毒性↓</div><div class="stat-label">慢性めまい・転倒リスク</div><div class="stat-vs">旧世代薬の課題を克服</div></div>
+            <div class="stat"><div class="stat-val">2025年</div><div class="stat-label">日本・FDA承認</div><div class="stat-vs">夏季に国内承認</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">クリゾチニブやエヌトレクチニブで問題となっていたCNS毒性（慢性めまい・平衡障害・転倒リスク）を大幅に改善しながら高い奏効率を維持。脳転移への頭蓋内奏効率も良好。QOL改善を主な訴求点とした新世代ROS1阻害薬。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>ROS1融合陽性の新規推奨薬として追加。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>2025年夏のFDA承認を受けガイドラインに追加。めまい副作用の少なさが患者QOL上の大きなメリット。</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <h2 class="sec-h2">HER2遺伝子変異陽性</h2>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2220506" target="_blank" rel="noopener">DESTINY-Lung02 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2023</span>
+            <span class="ybadge">Phase II · T-DXd · n=102</span>
+          </div>
+          <div class="drug-title">トラスツズマブ デルクステカン（T-DXd / エンハーツ®）</div>
+          <div class="drug-sub">HER2遺伝子変異陽性NSCLC · 既治療例 · ADC製剤</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">49%</div><div class="stat-label">ORR（6.4mg/kg群）</div><div class="stat-vs">HER2変異肺癌では最高水準</div></div>
+            <div class="stat"><div class="stat-val">ADC</div><div class="stat-label">抗体薬物複合体</div><div class="stat-vs">HER2標的 + トポI阻害</div></div>
+            <div class="stat"><div class="stat-val">ILD注意</div><div class="stat-label">最重要有害事象</div><div class="stat-vs">Grade 3以上 約5–12%</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">HER2変異肺癌の標準治療として現在最も強いエビデンスを持つADC製剤。間質性肺疾患（ILD）が重篤になりうる有害事象として定期的な画像モニタリングが不可欠。ゾンゲルチニブ（経口HER2-TKI、2025年8月国内承認）との使い分けは今後のデータ蓄積待ち。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>HER2変異陽性NSCLCに推奨。ゾンゲルチニブも新規追加。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>T-DXdをCategory 1。ILDの早期発見・管理プロトコルの整備が重要と明記。</span></div>
+          </div>
+          <div class="tox-row">
+            <span class="tox">間質性肺疾患（ILD）— 最重要</span><span class="tox">悪心</span><span class="tox">骨髄抑制</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('others',document.querySelectorAll('.tab')[3])">→ MET / RET / NTRK / BRAFへ</button>
+      </div>
+    </div>
+
+    <!-- OTHERS: MET / RET / NTRK / BRAF -->
+    <div id="p-others" class="panel">
+      <div class="note-box" style="margin-bottom:16px">このタブはいずれも<strong>1次治療から使用可能</strong>な変異。CGP検査（保険適用）での網羅的検索が前提。KRAS G12Cは1次治療承認なし → 別タブへ。</div>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1200/JCO.21.02395" target="_blank" rel="noopener">GEOMETRY mono-1 <span class="ext">↗</span></a>
+            <span class="jbadge j-jco">J Clin Oncol 2022</span>
+            <span class="ybadge">MET exon14 skipping · 1次治療〜</span>
+          </div>
+          <div class="drug-title">カプマチニブ（タブレクタ®）/ テポチニブ（オフタブ®）/ グマロンチニブ（ハイイータン®）</div>
+          <div class="drug-sub">MET exon14スキッピング変異陽性NSCLC · 高齢・喫煙者に多い · 肉腫様癌に注意 · 日本で3剤が承認</div>
+          <div class="stat-row">
+            <div class="stat">
+              <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:2px">カプマチニブ（GEOMETRY）</div>
+              <div class="stat-val">41–44%</div>
+              <div class="stat-label">ORR（未治療例）</div>
+              <div class="stat-vs">中央値PFS 12.4 mo</div>
+            </div>
+            <div class="stat">
+              <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:2px">テポチニブ（VISION）</div>
+              <div class="stat-val">51.4%</div>
+              <div class="stat-label">ORR（全患者）</div>
+              <div class="stat-vs">中央値PFS 11.2 mo</div>
+            </div>
+            <div class="stat">
+              <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:2px">グマロンチニブ（GLORY）</div>
+              <div class="stat-val">65.8%</div>
+              <div class="stat-label">ORR（BICR評価）</div>
+              <div class="stat-vs">未治療PFS 11.7 mo</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">MET exon14スキッピングは高齢・喫煙既往のある肺腺癌・肉腫様癌に多い。CGP検査での検出が必須。現在日本では3剤が承認：カプマチニブ（タブレクタ®）・テポチニブ（オフタブ®）・グマロンチニブ（ハイイータン®）。薬効はほぼ同等だが、減量のしやすさ・コンパニオン診断薬の種類・用量調整の柔軟性で使い分ける。グマロンチニブは50mgずつ3段階で減量可能という独自の特徴を持つ。いずれも主な有害事象は末梢性浮腫（Grade 2–3が多い）。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2024/2025年版）：</strong>3剤ともに保険適用・推奨。1次治療から使用可能。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>カプマチニブ・テポチニブはCategory 1。グマロンチニブは日本・中国承認だが米国未承認。</span></div>
+          </div>
+          <div class="trial-card" style="margin-top:10px;box-shadow:none;border:0.5px solid var(--border)">
+            <div class="tc-body" style="padding:12px 14px">
+              <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px">3剤の使い分けポイント</div>
+              <table style="width:100%;border-collapse:collapse;font-size:11px">
+                <thead>
+                  <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
+                    <th style="padding:6px 10px;text-align:left;border-right:1px solid var(--border)">薬剤</th>
+                    <th style="padding:6px 10px;text-align:left;border-right:1px solid var(--border)">用量</th>
+                    <th style="padding:6px 10px;text-align:left;border-right:1px solid var(--border)">コンパニオン診断薬</th>
+                    <th style="padding:6px 10px;text-align:left">特徴・使い分け</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--border)">
+                    <td style="padding:6px 10px;font-weight:600;border-right:1px solid var(--border)">カプマチニブ<br>（タブレクタ®）</td>
+                    <td style="padding:6px 10px;border-right:1px solid var(--border)">400mg×2/日<br>食後経口</td>
+                    <td style="padding:6px 10px;border-right:1px solid var(--border)">FoundationOne CDx<br>（F1測定患者に適）</td>
+                    <td style="padding:6px 10px;">F1測定が行われた症例で使用しやすい。脳転移データあり。</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                    <td style="padding:6px 10px;font-weight:600;border-right:1px solid var(--border)">テポチニブ<br>（オフタブ®）</td>
+                    <td style="padding:6px 10px;border-right:1px solid var(--border)">500mg/日<br>食後経口</td>
+                    <td style="padding:6px 10px;border-right:1px solid var(--border)">複数（ArcherFusion等）<br>液体生検（LBx）も可</td>
+                    <td style="padding:6px 10px;">液体生検での検出例にも対応。VISION試験でLBx・TBx両方の有効性示す。</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:6px 10px;font-weight:600;border-right:1px solid var(--border)">グマロンチニブ<br>（ハイイータン®）</td>
+                    <td style="padding:6px 10px;border-right:1px solid var(--border)">300mg/日<br>空腹時経口</td>
+                    <td style="padding:6px 10px;border-right:1px solid var(--border)">AmoyDx®<br>（現在は限定的）</td>
+                    <td style="padding:6px 10px;">唯一50mgずつ3段階で減量可能。細かい用量調整が必要な症例に。コンパニオン診断薬の整備が今後課題。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- アミバンタマブ MET exon14 -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1016/S1556-0864(25)00720-8" target="_blank" rel="noopener">CHRYSALIS（最終解析）<span class="ext">↗</span></a>
+            <span class="jbadge j-jto">J Thorac Oncol 2025</span>
+            <span class="ybadge">Phase I · MET exon14 skipping コホート</span>
+          </div>
+          <div class="drug-title">アミバンタマブ（ライブリバント®）単剤 — MET exon14 skipping</div>
+          <div class="drug-sub">MET exon14スキッピング変異陽性 · TKI既治療例でも有効 · EGFR-MET二重特異性抗体の特性を活用</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">68%</div><div class="stat-label">ORR（未治療例）</div><div class="stat-vs">カプマチニブ・テポチニブと同等</div></div>
+            <div class="stat"><div class="stat-val">44%</div><div class="stat-label">ORR（MET-TKI耐性後）</div><div class="stat-vs">TKI既治療でも奏効</div></div>
+            <div class="stat"><div class="stat-val">Phase I</div><div class="stat-label">試験デザイン</div><div class="stat-vs">承認適応外（現在試験中）</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">CHRYSALIS試験の最終解析（JTO 2025）でMET exon14スキッピング変異に対する有効性が示された。未治療例でORR 68%はテポチニブ・カプマチニブと同等水準。MET-TKI耐性後にもORR 44%と一定の奏効率を維持しており、TKI耐性機序に対してEGFR-MET二重阻害の機序が関与している可能性が示唆されている。現時点では日本・米国ともにMET exon14 skippingに対するアミバンタマブの正式承認はなく、テポチニブ・カプマチニブが標準治療。今後の正式承認試験に注目。</p>
+          <div class="info-box">現時点でアミバンタマブのMET exon14 skipping適応は日本・欧米ともに未承認（試験段階）。臨床使用はテポチニブ（オフタブ®）またはカプマチニブ（タブレクタ®）が標準。</div>
+        </div>
+      </div>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">その他の対応変異 — 各々に承認薬あり（1次治療から使用可）</div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <thead>
+              <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
+                <th style="padding:8px 12px;text-align:left;font-weight:600;border-right:1px solid var(--border)">変異</th>
+                <th style="padding:8px 12px;text-align:left;font-weight:600;border-right:1px solid var(--border)">対応薬（商品名）</th>
+                <th style="padding:8px 10px;text-align:center;font-weight:600;border-right:1px solid var(--border)">使用ライン</th>
+                <th style="padding:8px 10px;text-align:left;font-weight:600">特記事項</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:600;border-right:1px solid var(--border)">RET融合</td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)">セルペルカチニブ（レットブモ®）<br>プラルセチニブ（ガブレト®）</td>
+                <td style="padding:8px 10px;text-align:center;border-right:1px solid var(--border)">1次治療〜</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">肺腺癌の約1–2%。非喫煙者・若年に多い傾向</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:600;border-right:1px solid var(--border)">NTRK融合</td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)">エヌトレクチニブ（ロズリートレク®）<br>ラロトレクチニブ（ビトラクビ®）</td>
+                <td style="padding:8px 10px;text-align:center;border-right:1px solid var(--border)">1次治療〜</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">腫瘍種横断的承認。頻度は低い（&lt;1%）</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:600;border-right:1px solid var(--border)">BRAF V600E</td>
+                <td style="padding:8px 12px;border-right:1px solid var(--border)">ダブラフェニブ＋トラメチニブ<br>（タフィンラー® ＋ メキニスト®）</td>
+                <td style="padding:8px 10px;text-align:center;border-right:1px solid var(--border)">1次治療〜</td>
+                <td style="padding:8px 10px;font-size:11px;color:var(--text2)">肺癌の約1–2%。発熱が特徴的な有害事象</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('kras',document.querySelectorAll('.tab')[4])">→ KRAS G12C（2次治療〜）へ</button>
+        <button class="next-btn" onclick="sw('flow',document.querySelectorAll('.tab')[5])">→ 治療フローを確認</button>
+      </div>
+    </div>
+
+    <!-- KRAS G12C: 2次治療〜 -->
+    <div id="p-kras" class="panel">
+      <div class="info-box" style="margin-bottom:16px">
+        <strong>重要：KRAS G12Cは現時点で1次治療承認なし。</strong>1次治療は免疫療法＋化学療法（KEYNOTE-189/407等）が標準。2次治療以降にソトラシブ・アダグラシブを使用する。1次治療承認を目指した試験が進行中。
+      </div>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2204894" target="_blank" rel="noopener">CodeBreaK 200 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2022</span>
+            <span class="ybadge">Phase III · n=345 · 2次治療</span>
+          </div>
+          <div class="drug-title">ソトラシブ（ルマクラス®）vs ドセタキセル</div>
+          <div class="drug-sub">KRAS G12C変異陽性 · 既治療NSCLC · 肺腺癌の約12%に存在 · 喫煙者・男性に多い</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">5.6 mo</div><div class="stat-label">中央値 PFS</div><div class="stat-vs">vs 4.5 mo（HR 0.66）</div></div>
+            <div class="stat"><div class="stat-val">28% vs 13%</div><div class="stat-label">ORR</div><div class="stat-vs">奏効率</div></div>
+            <div class="stat"><div class="stat-val">HR 1.01</div><div class="stat-label">OS ハザード比</div><div class="stat-vs">OS有意差なし（大きな議論）</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">KRAS G12Cは長年「undruggable」とされてきたが、共有結合型阻害薬（ソトラシブ・アダグラシブ）が実用化した歴史的意義のある分野。OSに有意差なし（HR 1.01）という点が議論を呼んだが、PFSベネフィットと毒性プロファイルでドセタキセルを上回る。アダグラシブ（クラズブリ®）も同様の適応あり。</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>2次治療以降で保険適用。<strong>1次治療では使用しない</strong>（免疫療法＋化学療法が標準）。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>2次治療以降でCategory 1。1次治療での承認は現時点でなし。</span></div>
+          </div>
+          <div class="tox-row"><span class="tox">下痢</span><span class="tox">悪心</span><span class="tox">疲労</span><span class="tox">肝機能異常</span></div>
+        </div>
+      </div>
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('flow',document.querySelectorAll('.tab')[5])">→ 治療フローを確認</button>
+      </div>
+    </div>
+
+
+    <!-- FLOW -->
+    <div id="p-flow" class="panel">
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:18px">
+          <h2 class="sec-h2" style="margin-top:0">診断から1次治療開始までのフロー</h2>
+          <div style="display:flex;flex-direction:column;gap:0">
+            <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">1</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">病理診断 + 十分な組織量の確保</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">非扁平上皮癌 vs 扁平上皮癌の確認。CGP検査・PD-L1測定のための組織量確保が最初の鍵。</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">2</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">包括的ゲノムプロファイリング（CGP）+ PD-L1</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">EGFR・ALK・ROS1・HER2・KRAS G12C・MET exon14・RET・NTRK・BRAF V600Eを同時検索。PD-L1 TPSも並行測定。</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">3</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">変異陽性 → 対応する分子標的薬（このページ）</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">EGFR（MARIPOSA/FLAURA2/FLAURA）· ALK（CROWN）· ROS1（TRIDENT-1）· HER2（DESTINY-Lung02）· exon20（PAPILLON）</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding:12px 0">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">4</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">変異陰性 → PD-L1発現量に応じた免疫療法</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">PD-L1 ≥50%：KEYNOTE-024（ペムブロリズマブ単剤）/ 全TPS：KEYNOTE-189 / 407（化学免疫療法）</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-row">
+        <a class="next-btn" href="index.html">→ 変異陰性の免疫療法へ</a>
+        <a class="next-btn" href="#">→ SCLC編へ（近日公開）</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+function sw(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+function tog(btn){
+  const e=btn.nextElementSibling;
+  e.classList.toggle('open');
+  btn.querySelector('.chev').textContent=e.classList.contains('open')?'▲':'▼';
+}
+</script>
+</body>
+</html>
