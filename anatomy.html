@@ -238,7 +238,13 @@ body {
 <script>
 fetch('/lungatlas/nav.html')
   .then(function(r){ return r.text(); })
-  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    var navAnatomy = document.getElementById('nav-anatomy');
+    if (navAnatomy) navAnatomy.classList.add('active');
+    var navAnatomyPage = document.getElementById('nav-anatomy-page');
+    if (navAnatomyPage) navAnatomyPage.classList.add('active');
+  });
 </script>
 
 <div class="layout">
@@ -276,7 +282,7 @@ fetch('/lungatlas/nav.html')
     <div class="crumb">解剖学・画像診断 › <span>肺の解剖学</span></div>
     <div class="updated">初版 2026年6月 — 外科解剖学・気管支命名法・IASLC分類</div>
     <h1 class="art-h1">肺の解剖学</h1>
-    <p class="lead">外科手術・気管支鏡・画像診断に必要な肺の基本解剖。肺葉・肺区域・気管支分岐・肺門構造・リンパ節分類を臨床的視点から整理する。区域気管支の命名はJapanese Bronchological Society（JBS）準拠の国際命名法（B番号）を使用。<!-- 要確認：各命名法の版 --></p>
+    <p class="lead">外科手術・気管支鏡・画像診断に必要な肺の基本解剖。肺葉・肺区域・気管支分岐・肺門構造・リンパ節分類を整理する。リンパ節分類はIASLC Staging Cards 9th Edition 2024および肺がん取り扱い規約 第9版に準拠。</p>
 
     <!-- ===================== 1. 全体像 ===================== -->
     <section id="overview">
@@ -322,9 +328,6 @@ fetch('/lungatlas/nav.html')
           </div>
         </div>
 
-        <div class="info-box">
-          <strong>右肺が大きい理由：</strong>心臓が縦隔左側に偏位しているため、左肺は右肺より容積が小さい（右：左 ≈ 55：45）。左主気管支は右より長く（4–5 cm vs 1–2 cm）、分岐角度も急峻。誤嚥物は右肺に入りやすい（右主気管支が垂直に近い）。
-        </div>
       </div>
     </section>
 
@@ -345,91 +348,80 @@ fetch('/lungatlas/nav.html')
           <thead>
             <tr>
               <th style="width:60px">区域</th>
-              <th style="width:140px">区域名（英語）</th>
-              <th style="width:120px">区域名（日本語）</th><!-- 要確認：日本語訳の標準表記 -->
+              <th style="width:180px">区域名（英語）</th>
+              <th style="width:140px">区域名（日本語）</th>
               <th>対応気管支</th>
-              <th style="width:130px">臨床メモ</th>
             </tr>
           </thead>
           <tbody>
             <tr class="seg-lobe-row">
-              <td colspan="5">上葉（RUL — Right Upper Lobe）</td>
+              <td colspan="4">上葉（RUL — Right Upper Lobe）</td>
             </tr>
             <tr>
               <td><span class="seg-num">S1</span></td>
               <td>Apical</td>
               <td>肺尖区</td>
               <td><span class="seg-num">B1</span></td>
-              <td>右肺門最上部</td>
             </tr>
             <tr>
               <td><span class="seg-num">S2</span></td>
               <td>Posterior</td>
               <td>後上区</td>
               <td><span class="seg-num">B2</span></td>
-              <td>背側・後方に展開</td>
             </tr>
             <tr>
               <td><span class="seg-num">S3</span></td>
               <td>Anterior</td>
               <td>前上区</td>
               <td><span class="seg-num">B3</span></td>
-              <td>前胸壁に接する</td>
             </tr>
             <tr class="seg-lobe-row">
-              <td colspan="5">中葉（RML — Right Middle Lobe）</td>
+              <td colspan="4">中葉（RML — Right Middle Lobe）</td>
             </tr>
             <tr>
               <td><span class="seg-num">S4</span></td>
               <td>Lateral</td>
               <td>外側区</td>
               <td><span class="seg-num">B4</span></td>
-              <td>中葉外側</td>
             </tr>
             <tr>
               <td><span class="seg-num">S5</span></td>
               <td>Medial</td>
               <td>内側区</td>
               <td><span class="seg-num">B5</span></td>
-              <td>心臓に接する</td>
             </tr>
             <tr class="seg-lobe-row">
-              <td colspan="5">下葉（RLL — Right Lower Lobe）</td>
+              <td colspan="4">下葉（RLL — Right Lower Lobe）</td>
             </tr>
             <tr>
               <td><span class="seg-num">S6</span></td>
               <td>Superior（Apical）</td>
               <td>上区（背区）</td>
               <td><span class="seg-num">B6</span></td>
-              <td>下葉唯一の上方向区域；背臥位誤嚥の好発部位</td>
             </tr>
             <tr>
               <td><span class="seg-num">S7</span></td>
               <td>Medial basal</td>
               <td>内側底区</td>
               <td><span class="seg-num">B7</span></td>
-              <td>心臓後面に接する；<!-- 要確認：左肺ではS7+8として合流することが多い --></td>
             </tr>
             <tr>
               <td><span class="seg-num">S8</span></td>
               <td>Anterior basal</td>
               <td>前底区</td>
               <td><span class="seg-num">B8</span></td>
-              <td></td>
             </tr>
             <tr>
               <td><span class="seg-num">S9</span></td>
               <td>Lateral basal</td>
               <td>外側底区</td>
               <td><span class="seg-num">B9</span></td>
-              <td></td>
             </tr>
             <tr>
               <td><span class="seg-num">S10</span></td>
               <td>Posterior basal</td>
               <td>後底区</td>
               <td><span class="seg-num">B10</span></td>
-              <td>最後方；血行性転移の好発部位</td>
             </tr>
           </tbody>
         </table>
@@ -442,82 +434,70 @@ fetch('/lungatlas/nav.html')
           <thead>
             <tr>
               <th style="width:70px">区域</th>
-              <th style="width:170px">区域名（英語）</th>
-              <th style="width:120px">区域名（日本語）</th>
+              <th style="width:200px">区域名（英語）</th>
+              <th style="width:140px">区域名（日本語）</th>
               <th>対応気管支</th>
-              <th style="width:140px">右肺との対応・メモ</th>
             </tr>
           </thead>
           <tbody>
             <tr class="seg-lobe-row-blue">
-              <td colspan="5">上葉（LUL — Left Upper Lobe）</td>
+              <td colspan="4">上葉（LUL — Left Upper Lobe）</td>
             </tr>
             <tr>
               <td><span class="seg-num" style="color:var(--blue-dark)">S1+2</span></td>
               <td>Apicoposterior</td>
               <td>肺尖後区</td>
               <td><span class="seg-num" style="color:var(--blue-dark)">B1+2</span></td>
-              <td>右S1＋S2が合流。左上葉の上方全体</td>
             </tr>
             <tr>
               <td><span class="seg-num" style="color:var(--blue-dark)">S3</span></td>
               <td>Anterior</td>
               <td>前上区</td>
               <td><span class="seg-num" style="color:var(--blue-dark)">B3</span></td>
-              <td>右S3に対応</td>
             </tr>
             <tr>
               <td><span class="seg-num" style="color:var(--blue-dark)">S4</span></td>
               <td>Superior lingular</td>
               <td>上舌区</td>
               <td><span class="seg-num" style="color:var(--blue-dark)">B4</span></td>
-              <td>舌区（右中葉相当）の上半</td>
             </tr>
             <tr>
               <td><span class="seg-num" style="color:var(--blue-dark)">S5</span></td>
               <td>Inferior lingular</td>
               <td>下舌区</td>
               <td><span class="seg-num" style="color:var(--blue-dark)">B5</span></td>
-              <td>舌区の下半；心臓に接する</td>
             </tr>
             <tr class="seg-lobe-row-blue">
-              <td colspan="5">下葉（LLL — Left Lower Lobe）</td>
+              <td colspan="4">下葉（LLL — Left Lower Lobe）</td>
             </tr>
             <tr>
               <td><span class="seg-num" style="color:var(--blue-dark)">S6</span></td>
               <td>Superior（Apical）</td>
               <td>上区（背区）</td>
               <td><span class="seg-num" style="color:var(--blue-dark)">B6</span></td>
-              <td>右S6に対応</td>
             </tr>
             <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S7+8</span></td>
-              <td>Anteromedial basal</td>
-              <td>前内底区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B7+8</span></td>
-              <td>右S7＋S8が左では通常合流<!-- 要確認：変異例も多い --></td>
+              <td><span class="seg-num" style="color:var(--blue-dark)">S8</span></td>
+              <td>Anterior basal</td>
+              <td>前底区</td>
+              <td><span class="seg-num" style="color:var(--blue-dark)">B8</span></td>
             </tr>
             <tr>
               <td><span class="seg-num" style="color:var(--blue-dark)">S9</span></td>
               <td>Lateral basal</td>
               <td>外側底区</td>
               <td><span class="seg-num" style="color:var(--blue-dark)">B9</span></td>
-              <td>右S9に対応</td>
             </tr>
             <tr>
               <td><span class="seg-num" style="color:var(--blue-dark)">S10</span></td>
               <td>Posterior basal</td>
               <td>後底区</td>
               <td><span class="seg-num" style="color:var(--blue-dark)">B10</span></td>
-              <td>右S10に対応</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="clinical-box">
-        <strong>区域切除術の視点：</strong>左肺S1+2区域切除はB1+2（単幹または2本）・A1+2・V1+2の処理が必要。左S6は右と解剖が類似し、区域切除の難易度は低い。左S7+8の区域切除は最難関の一つ（心膜に接する深部）。<!-- 要確認：各施設の経験による -->
-      </div>
     </section>
 
     <div class="divider"></div>
@@ -527,7 +507,7 @@ fetch('/lungatlas/nav.html')
       <h2 class="sec-h2">気管支分岐</h2>
 
       <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
-        気管（trachea）は第4〜5胸椎レベルで左右の主気管支に分岐する（隆起：carina）。右主気管支は垂直に近い角度で分岐し、左主気管支は水平に近い。
+        気管（trachea）は隆起（carina）で左右の主気管支に分岐する。
       </p>
 
       <div class="two-col">
@@ -570,16 +550,13 @@ fetch('/lungatlas/nav.html')
             <div class="level2" style="padding-left:48px">└ <span class="b-num-blue">B5</span> 下舌区</div>
             <div class="level1">└ 左下葉気管支</div>
             <div class="level2" style="padding-left:32px">├ <span class="b-num-blue">B6</span> 上区（背区）</div>
-            <div class="level2" style="padding-left:32px">├ <span class="b-num-blue">B7+8</span> 前内底区</div>
+            <div class="level2" style="padding-left:32px">├ <span class="b-num-blue">B8</span> 前底区</div>
             <div class="level2" style="padding-left:32px">├ <span class="b-num-blue">B9</span> 外側底区</div>
             <div class="level2" style="padding-left:32px">└ <span class="b-num-blue">B10</span> 後底区</div>
           </div>
         </div>
       </div>
 
-      <div class="info-box">
-        <strong>気管支鏡でのランドマーク：</strong>右上葉気管支は主気管支から約1–2 cmで分岐（短い）。左主気管支は隆起から4–5 cmで左上葉気管支・下葉気管支に分かれる。B6は下葉気管支の最初の分岐として後壁に開口する。<!-- 要確認：各数値は個人差あり -->
-      </div>
     </section>
 
     <div class="divider"></div>
@@ -606,9 +583,6 @@ fetch('/lungatlas/nav.html')
               <li>中間幹気管支（Bronchus intermedius）</li>
               <li>下肺静脈（Inferior pulmonary vein）</li>
             </ol>
-            <div style="margin-top:10px;font-size:12px;color:var(--text3)">
-              ※ 肺動脈は気管支の前方・上方を走行<!-- 要確認：変異多い -->
-            </div>
           </div>
         </div>
         <div class="col-box left">
@@ -623,16 +597,10 @@ fetch('/lungatlas/nav.html')
               <li>左上葉・左下葉気管支</li>
               <li>下肺静脈（Inferior pulmonary vein）</li>
             </ol>
-            <div style="margin-top:10px;font-size:12px;color:var(--text3)">
-              ※ 左肺動脈は大動脈弓をくぐって下降し、気管支の上方に位置
-            </div>
           </div>
         </div>
       </div>
 
-      <div class="blue-box">
-        <strong>左肺動脈の特徴（外科的重要点）：</strong>左肺動脈は動脈管索（Botallo靱帯）によって大動脈弓に固定されている。左上葉切除時には動脈管索を切離しないと肺動脈を安全に処理できない場合がある。<!-- 要確認：術式依存 -->
-      </div>
     </section>
 
     <div class="divider"></div>
@@ -642,159 +610,171 @@ fetch('/lungatlas/nav.html')
       <h2 class="sec-h2">リンパ節分類</h2>
 
       <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
-        肺癌のリンパ節転移評価にはIASLC（国際肺癌研究学会）/山形分類が国際標準として使用される。N因子（N1/N2/N3）は手術適応・治療方針に直結する。
+        肺癌のリンパ節転移評価にはIASLC（国際肺癌研究学会）のリンパ節地図が国際標準として使用される。N因子（N1/N2/N3）は手術適応・治療方針に直結する。
       </p>
 
       <div id="iaslc">
-        <h3 class="sec-h3">リンパ節分類（肺がん取り扱い規約 第9版 CT読影基準）</h3>
+        <h3 class="sec-h3">リンパ節分類（IASLC Staging Cards 9th Edition 2024 / 肺がん取り扱い規約 第9版）</h3>
 
         <p style="font-size:12.5px;color:var(--text3);margin-bottom:12px">
-          以下の境界定義は「表1 リンパ節部位のCT読影基準」（第9版, p.○○）に準拠。<!-- 要確認：ページ番号 -->IASLC 2009年リンパ節地図（Rusch et al., JTO 2009）に対応。
+          以下の英語名称・境界定義はIASLC Staging Cards 9th Edition 2024に準拠。日本語名称は肺がん取り扱い規約 第9版（表1 CT読影基準）に対応。
         </p>
 
         <div class="ln-table-wrap">
           <table class="ln-table">
             <thead>
               <tr>
-                <th style="width:60px">#</th>
-                <th style="width:175px">正式名称（第9版）</th>
-                <th style="width:65px">N因子</th>
-                <th>CT読影基準（第9版）</th>
+                <th style="width:55px">#</th>
+                <th style="width:95px">IASLC 名称</th>
+                <th style="width:130px">日本語名称（第9版）</th>
+                <th style="width:60px">N因子</th>
+                <th>上縁 / 下縁（IASLC 9th Ed. 2024）</th>
               </tr>
             </thead>
             <tbody>
               <!-- #1 -->
               <tr class="ln-group-row">
-                <td colspan="4">鎖骨上窩リンパ節</td>
+                <td colspan="5">#1 — Low cervical, supraclavicular and sternal notch nodes</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#1R / #1L</span></td>
-                <td>鎖骨上窩リンパ節</td>
+                <td>Low cervical, supraclavicular &amp; sternal notch</td>
+                <td>低頸部・鎖骨上窩・胸骨切痕リンパ節</td>
                 <td>N3</td>
-                <td>輪状軟骨下縁から、正中では胸骨柄上縁・左右では鎖骨までの範囲。気管正中線で#1R（右）と#1L（左）を区別</td>
+                <td>上縁：輪状軟骨下縁 / 下縁：両側鎖骨・正中では胸骨柄上縁。気管正中線で#1R・#1Lを区別</td>
               </tr>
               <!-- 上部縦隔 -->
               <tr class="ln-group-row">
-                <td colspan="4">上部縦隔リンパ節 — #2〜#4</td>
+                <td colspan="5">上部縦隔 — #2〜#4</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#2R</span></td>
+                <td>Upper paratracheal (R)</td>
                 <td>右上部気管傍リンパ節</td>
                 <td>N2（右肺）/ N3（左肺）</td>
-                <td>右肺尖・胸膜頂より尾側。胸骨柄上縁〜気管と左腕頭静脈尾側の交差まで。気管左外側縁の右側</td>
+                <td>上縁：肺尖・胸膜頂（正中：胸骨柄上縁）/ 下縁：左腕頭静脈尾側縁と気管の交差部。気管左外側縁より右側</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#2L</span></td>
+                <td>Upper paratracheal (L)</td>
                 <td>左上部気管傍リンパ節</td>
                 <td>N2（左肺）/ N3（右肺）</td>
-                <td>左肺尖・胸膜頂より尾側。胸骨柄上縁〜大動脈弓上縁まで。気管左外側縁の左側</td>
+                <td>上縁：肺尖・胸膜頂（正中：胸骨柄上縁）/ 下縁：大動脈弓上縁。気管左外側縁より左側</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#3a</span></td>
-                <td>血管前リンパ節</td>
+                <td>Prevascular</td>
+                <td>前血管リンパ節</td>
                 <td>N2</td>
-                <td>胸膜頂〜気管分岐部レベル。胸骨より後方。右側：上大静脈前縁線より前、左側：左総頸動脈より前</td>
+                <td>上縁：胸膜頂 / 下縁：隆起レベル。胸骨後方・前縁：胸骨後面。後縁：右＝上大静脈前縁、左＝左総頸動脈</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#3p</span></td>
+                <td>Retrotracheal</td>
                 <td>気管後リンパ節</td>
                 <td>N2</td>
-                <td>胸膜頂〜気管分岐部レベル。気管後縁線より後方</td>
+                <td>上縁：胸膜頂 / 下縁：隆起レベル。気管後縁より後方</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#4R</span></td>
+                <td>Lower paratracheal (R)</td>
                 <td>右下部気管傍リンパ節</td>
                 <td>N2（右肺）/ N3（左肺）</td>
-                <td>気管と左腕頭静脈尾側の交差〜奇静脈下縁。右気管傍・気管前リンパ節を含む。気管左外側縁の右側</td>
+                <td>上縁：左腕頭静脈尾側縁と気管の交差部 / 下縁：奇静脈下縁。右気管傍・気管前リンパ節を含む。気管左外側縁より右側</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#4L</span></td>
+                <td>Lower paratracheal (L)</td>
                 <td>左下部気管傍リンパ節</td>
                 <td>N2（左肺）/ N3（右肺）</td>
-                <td>大動脈弓上縁〜左主肺動脈上縁。動脈管索内側のリンパ節を含む。気管左外側縁の左側</td>
+                <td>上縁：大動脈弓上縁 / 下縁：左主肺動脈上縁。動脈管索内側のリンパ節を含む。気管左外側縁より左側</td>
               </tr>
               <!-- 大動脈 -->
               <tr class="ln-group-row">
-                <td colspan="4">大動脈リンパ節 — #5〜#6（左側原発に関連）</td>
+                <td colspan="5">大動脈リンパ節 — #5〜#6（左肺原発に関連）</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#5</span></td>
-                <td>大動脈下リンパ節</td>
+                <td>Subaortic (AP window)</td>
+                <td>大動脈下リンパ節（大動脈肺動脈窓）</td>
                 <td>N2（左肺）/ N3（右肺）</td>
-                <td>大動脈弓下縁〜左主肺動脈の間。動脈管索に対して外側（横）に位置する大動脈下リンパ節</td>
+                <td>上縁：大動脈弓下縁 / 下縁：左主肺動脈上縁。動脈管索の外側（lateral）に位置</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#6</span></td>
-                <td>大動脈傍リンパ節</td>
+                <td>Para-aortic (ascending aorta or phrenic)</td>
+                <td>傍大動脈リンパ節</td>
                 <td>N2（左肺）/ N3（右肺）</td>
-                <td>大動脈弓上縁〜大動脈弓下縁の間。上行大動脈と大動脈弓の前方・外側</td>
+                <td>上縁：大動脈弓上縁に接する接線 / 下縁：大動脈弓下縁。上行大動脈・大動脈弓の前方・外側</td>
               </tr>
               <!-- 下部縦隔 -->
               <tr class="ln-group-row">
-                <td colspan="4">下部縦隔リンパ節 — #7〜#9</td>
+                <td colspan="5">下部縦隔 — #7〜#9</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#7</span></td>
+                <td>Subcarinal</td>
                 <td>気管分岐下リンパ節</td>
                 <td>N2（両側）</td>
-                <td>気管分岐部から、左側は下葉支上縁まで、右側は中間幹下縁まで</td>
+                <td>上縁：隆起 / 下縁：左＝下葉支上縁、右＝中間幹下縁</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#8</span></td>
-                <td>食道傍リンパ節（気管分岐下より下方）</td>
+                <td><span class="ln-num">#8R / #8L</span></td>
+                <td>Para-esophageal (below carina)</td>
+                <td>傍食道リンパ節（隆起下より下方）</td>
                 <td>N2（両側）</td>
-                <td>左側：下葉支上縁、右側：中間幹下縁〜横隔膜まで。#7を除く食道壁に接するリンパ節</td>
+                <td>上縁：左＝下葉支上縁、右＝中間幹下縁 / 下縁：横隔膜。食道壁に接し正中線の左右に存在（#7を除く）</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#9</span></td>
+                <td><span class="ln-num">#9R / #9L</span></td>
+                <td>Pulmonary ligament</td>
                 <td>肺靱帯リンパ節</td>
                 <td>N2（両側）</td>
-                <td>下肺静脈〜横隔膜までの肺靱帯内</td>
+                <td>上縁：下肺静脈 / 下縁：横隔膜。肺靱帯内に位置</td>
               </tr>
               <!-- N1 -->
               <tr class="ln-group-row">
-                <td colspan="4">N1リンパ節 — #10〜#14</td>
+                <td colspan="5">N1リンパ節 — #10〜#14</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#10</span></td>
-                <td>主気管支周囲リンパ節</td>
+                <td><span class="ln-num">#10R / #10L</span></td>
+                <td>Hilar</td>
+                <td>肺門リンパ節</td>
                 <td>N1</td>
-                <td>右側：奇静脈下縁〜肺門脈管領域、左側：肺動脈上縁〜肺門脈管領域。肺静脈・主肺動脈近位部を含む主気管支・肺門脈管群に直接接する</td>
+                <td>主気管支・肺門血管に隣接。肺静脈近位部・主肺動脈を含む。上縁：右＝奇静脈下縁、左＝肺動脈上縁 / 下縁：両側葉間領域</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#11s / #11i</span></td>
-                <td>葉気管支間リンパ節</td>
+                <td><span class="ln-num">#11（#11s / #11i）</span></td>
+                <td>Interlobar</td>
+                <td>葉間リンパ節</td>
                 <td>N1</td>
-                <td>葉気管支起点の間。右肺：上葉支〜中葉支間を#11s、中葉支〜下葉支間を#11i</td>
+                <td>葉気管支起点の間。右肺：#11s＝上葉支〜中間幹間、#11i＝中葉支〜下葉支間（任意のサブカテゴリ）</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#12</span></td>
+                <td>Lobar</td>
                 <td>葉気管支周囲リンパ節</td>
                 <td>N1</td>
-                <td>葉気管支に接して位置</td>
+                <td>葉気管支に隣接</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#13</span></td>
+                <td>Segmental</td>
                 <td>区域気管支周囲リンパ節</td>
                 <td>N1</td>
-                <td>区域気管支に接して位置</td>
+                <td>区域気管支に隣接</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#14</span></td>
+                <td>Sub-segmental</td>
                 <td>亜区域気管支周囲リンパ節</td>
                 <td>N1</td>
-                <td>亜区域気管支に接して位置</td>
+                <td>亜区域気管支に隣接</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="clinical-box">
-          <strong>系統的縦隔リンパ節郭清の標準範囲（第9版）：</strong>
-          右肺：#2R・#4R・#7・#8R・#9R（＋N1：#10〜#12）。
-          左肺：#4L・#5・#6・#7・#8L・#9L（＋N1：#10〜#12）。
-          #3a・#3pは施設・術式によって対応が異なる。<!-- 要確認：日本肺癌学会 外科療法GL最新版 -->
-        </div>
 
         <div class="info-box">
           <strong>N因子の要点：</strong>#1（鎖骨上窩）はN3。#2・#4は同側N2 / 対側N3。#5・#6は左側原発N2 / 右側原発N3相当。#7〜#9は両側ともN2。#10〜#14はN1（同側）/ N3（対側）。
@@ -815,14 +795,13 @@ fetch('/lungatlas/nav.html')
               <span style="font-size:11px;color:var(--text3)">— 表1「リンパ節部位のCT読影基準」（#1〜#14の境界定義・名称）を直接参照</span>
             </li>
             <li>
-              Rusch VW, Asamura H, Watanabe H, et al. The IASLC lung cancer staging project: a proposal for a new international lymph node map in the forthcoming seventh edition of the TNM classification for lung cancer.
-              <em>J Thorac Oncol.</em> 2009;4(5):568–577.
-              <span style="font-size:11px;color:var(--text3)">— IASLC 2009 リンパ節地図。第9版の基盤</span>
+              IASLC. <strong>Staging Cards 9th Edition 2024.</strong> International Association for the Study of Lung Cancer, 2024.
+              <span style="font-size:11px;color:var(--text3)">— #1〜#14 の英語名称・上縁/下縁の境界定義を直接参照</span>
             </li>
             <li>
               Goldstraw P, Chansky K, Crowley J, et al. The IASLC Lung Cancer Staging Project: Proposals for Revision of the TNM Stage Groupings in the Forthcoming (Eighth) Edition of the TNM Classification for Lung Cancer.
               <em>J Thorac Oncol.</em> 2016;11(1):39–51.
-              <span style="font-size:11px;color:var(--text3)">— 第8版TNM分類（第9版取り扱い規約が準拠）</span>
+              <span style="font-size:11px;color:var(--text3)">— 第8版TNM分類（N因子定義の基盤）</span>
             </li>
             <li>
               Netter FH. <strong>Atlas of Human Anatomy</strong>, 7th ed. Elsevier, 2019.
@@ -881,11 +860,6 @@ window.addEventListener('scroll', function() {
   });
 }, { passive: true });
 
-/* nav active */
-window.addEventListener('DOMContentLoaded', function(){
-  var navAnatomy = document.getElementById('nav-anatomy');
-  if (navAnatomy) navAnatomy.classList.add('active');
-});
 </script>
 
 </body>

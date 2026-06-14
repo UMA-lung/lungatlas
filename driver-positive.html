@@ -21,20 +21,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
 
-/* NAV */
-.nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:52px;position:sticky;top:0;z-index:100}
-.logo{font-size:15px;font-weight:600;color:var(--text);text-decoration:none}
-.logo span{color:var(--green-mid)}
-.nav-links{display:flex;gap:4px}
-.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
-.nav-links a:hover{background:var(--surface2);color:var(--text)}
-.nav-links a.active{color:var(--green-dark);font-weight:500;background:var(--green-light)}
-.nav-right{display:flex;align-items:center;gap:8px}
-.lang-switch{display:flex;gap:4px}
-.lang-btn{font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text3);cursor:pointer;font-family:var(--font);transition:all .15s;text-decoration:none}
-.lang-btn:hover{border-color:var(--border2);color:var(--text)}
-.lang-btn.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark)}
-
 /* LAYOUT */
 .layout{display:flex;min-height:calc(100vh - 52px)}
 .sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
@@ -279,7 +265,7 @@ fetch('/lungatlas/nav.html')
               <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:3px">FLAURA2（化療併用）</div>
               <div class="stat-val">25.5 mo</div>
               <div class="stat-label">中央値 PFS</div>
-              <div class="stat-vs">vs 16.7 mo 単剤（HR 0.62）<br>OS最終解析待ち</div>
+              <div class="stat-vs">vs 16.7 mo 単剤（HR 0.62）<br>中央値OS 47.5 mo vs 37.6 mo（HR 0.77）</div>
             </div>
             <div class="stat">
               <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:3px">ADAURA（術後補助）</div>
@@ -290,7 +276,7 @@ fetch('/lungatlas/nav.html')
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">FLAURAは第3世代として初めて1次治療のOS延長を証明し、現在もすべての新規試験の比較対照。FLAURA2では化療上乗せでPFSがさらに9ヶ月延長するが、OS最終解析は追跡中。毒性増加（血液毒性・悪心）を考慮するとPS良好・脳転移高リスク例での選択が現実的。ADAURA試験では術後補助療法として DFS HR 0.17という強力なデータ。</p>
+          <p class="trial-desc">FLAURAは第3世代として初めて1次治療のOS延長を証明し、現在もすべての新規試験の比較対照。FLAURA2では化療上乗せでPFSがさらに9ヶ月延長し、最終OS解析（NEJM 2026）でも47.5 mo vs 37.6 mo（HR 0.77, p=0.02）とOS延長が確認された。毒性増加（血液毒性・悪心）を考慮するとPS良好・脳転移高リスク例での選択が現実的。ADAURA試験では術後補助療法として DFS HR 0.17という強力なデータ。</p>
           <div class="gl-list">
             <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>単剤・化療併用ともに推奨。補助療法（ADAURA）も保険適用。</span></div>
             <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO：</strong>Category 1（1次治療・補助療法）。</span></div>

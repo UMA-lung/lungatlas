@@ -45,29 +45,6 @@ body {
   line-height: 1.6;
 }
 
-/* NAV */
-.nav {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  height: 52px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.logo { font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; }
-.logo span { color: var(--green-mid); }
-.nav-links { display: flex; gap: 4px; }
-.nav-links a {
-  font-size: 13px; color: var(--text3); text-decoration: none;
-  padding: 6px 12px; border-radius: 6px; transition: all .15s;
-}
-.nav-links a:hover { background: var(--surface2); color: var(--text); }
-.nav-links a.active { color: var(--green-dark); font-weight: 500; background: var(--green-light); }
-
 /* LAYOUT */
 .layout { display: flex; min-height: calc(100vh - 52px); }
 
@@ -147,6 +124,13 @@ body {
 .tab.active {
   background: var(--green-dark); color: #fff;
   border-color: var(--green-dark); font-weight: 500;
+}
+
+/* NOTE BOX */
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
 }
 
 /* PANELS */
@@ -672,37 +656,6 @@ fetch('/lungatlas/nav.html')
           </div>
         </div>
       </div>
-
-      <h2 class="sec-h2">どの患者にどのレジメンを？</h2>
-      <div class="trial-card">
-        <div class="tc-body" style="padding-top:16px">
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="background:var(--green-pale);border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:4px">非扁平上皮 · PD-L1問わず · PS良好</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ KEYNOTE-189</strong>　最大規模・最長フォロー・国内処方実績最多。ペメトレキセド維持療法による持続効果。</div></div>
-            <div style="background:var(--green-pale);border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:4px">扁平上皮 · PD-L1問わず · PS良好</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ KEYNOTE-407</strong>　扁平上皮専用。ペメトレキセドは非適応。5年OS率18.4%で持続的ベネフィット確認。</div></div>
-            <div style="background:#f6f4fb;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:4px">PD-L1 TPS ≥50% · 腫瘍量少 · 化学療法を避けたい</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ KEYNOTE-024単剤</strong>　化学療法なしで5年OS 31.9%。高齢・臓器機能低下・化学療法忌避例に有用。</div></div>
-            <div style="background:#f6f4fb;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:4px">PD-L1 TPS &lt;1% · 全組織型 · PS 0–1</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ CheckMate 9LA を考慮</strong>　PD-L1 &lt;1%での6年OS 20% vs 7%は他レジメンを数値上上回る。化学療法2サイクルで終了可。irAE管理が必要。</div></div>
-            <div style="background:#fdf4e7;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:4px">STK11 / KEAP1 変異陽性 · PD-1単剤が効きにくい状況</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ CheckMate 9LA または POSEIDON を考慮</strong>　CTLA-4阻害薬が「冷えた」腫瘍微小環境を改善しうる可能性。ガイドライン正式組み込みは留保中。</div></div>
-            <div style="background:#fdf4e7;border-radius:10px;padding:13px 15px"><div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:4px">EGFR/ALK変異陽性 · TKI耐性後</div><div style="font-size:12px;color:var(--text2);line-height:1.75"><strong>→ IMpower150（ABCP）を考慮</strong>　EGFR/ALK変異陽性例を含む唯一の免疫療法試験。4剤毒性管理に習熟が必要。</div></div>
-          </div>
-        </div>
-      </div>
-
-      <h2 class="sec-h2">ガイドライン推奨序列 — COIを踏まえた客観的評価</h2>
-      <div class="trial-card">
-        <div class="tc-body" style="padding-top:16px">
-          <div class="info-box" style="margin-bottom:14px"><strong>COI（利益相反）について：</strong>KEYNOTE試験はMerck、CheckMate/POSEIDON/IMpower試験はBMS・AZ・Rocheがスポンサー。すべてCategory 1推奨だが、日本での保険適用・処方実績・毒性管理習熟度を含めた序列を以下に示す。</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--green-light);border-radius:10px;border-left:3px solid var(--green-mid)"><div style="font-size:11px;font-weight:600;color:var(--green-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">最推奨</div><div><div style="font-size:13px;font-weight:600;color:var(--green-dark)">KEYNOTE-189（非扁平） / KEYNOTE-407（扁平） / KEYNOTE-024（TPS ≥50%単剤）</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">エビデンス量最大・5年以上フォロー・全ガイドラインCategory 1・国内処方実績最多・毒性管理の習熟度最高。</div></div></div>
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--blue-light);border-radius:10px;border-left:3px solid #2d6db5"><div style="font-size:11px;font-weight:600;color:var(--blue-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">特定患者に推奨</div><div><div style="font-size:13px;font-weight:600;color:var(--blue-dark)">CheckMate 9LA（PD-L1 &lt;1% / STK11・KEAP1変異疑い）</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">6年OS 20% vs 7%（PD-L1 &lt;1%）。化学療法2サイクルで終了可能。irAE管理に習熟した施設での選択肢。</div></div></div>
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--purple-light);border-radius:10px;border-left:3px solid #6a5ec5"><div style="font-size:11px;font-weight:600;color:var(--purple-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">代替選択肢</div><div><div style="font-size:13px;font-weight:600;color:var(--purple-dark)">POSEIDON（STK11/KEAP1変異陽性 / CheckMate 9LA代替）</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">CheckMate 9LAと類似コンセプト。TRITON試験の結果次第で序列が変わる可能性あり。</div></div></div>
-            <div style="display:flex;gap:12px;align-items:flex-start;padding:11px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--border2)"><div style="font-size:11px;font-weight:600;color:var(--text3);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:1px">限定的使用</div><div><div style="font-size:13px;font-weight:600;color:var(--text2)">IMpower110 / IMpower150</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">IMpower110はSP142アッセイ依存・高発現のみ有効で実臨床での使用機会は限定的。IMpower150はEGFR/ALK変異陽性TKI耐性後に一定の役割あり。</div></div></div>
-          </div>
-        </div>
-      </div>
-
-      <h2 class="sec-h2">主要ガイドライン比較（2025年）</h2>
-      <div class="gl-table-grid">
-    <div id="p-global" class="panel">
 
       <!-- ① 患者プロファイル別 使い分けガイド -->
       <h2 class="sec-h2">どの患者にどのレジメンを？ — 使い分けの根拠</h2>
