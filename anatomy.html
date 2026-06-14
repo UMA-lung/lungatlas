@@ -3,827 +3,712 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>肺の解剖学 — LungAtlas</title>
+<title>肺の解剖学・CT画像診断 — LungAtlas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #f5f7f5;
-  --surface: #ffffff;
-  --surface2: #f0f4f1;
-  --border: #d4e0d6;
-  --border2: #b8cfbb;
-  --green-dark: #0d5c3a;
-  --green-mid: #1a7a4e;
-  --green-light: #e4f0e8;
-  --green-pale: #f0f7f2;
-  --blue-dark: #0c3d6e;
-  --blue-light: #e3edf8;
-  --purple-dark: #3b2d7a;
-  --purple-light: #eeebfb;
-  --amber-dark: #6b3d00;
-  --amber-light: #fdf0d8;
-  --red-dark: #6b1c1c;
-  --red-light: #fce8e8;
-  --text: #111a14;
-  --text2: #3d5042;
-  --text3: #6b8070;
-  --font: 'Inter', sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-  --radius: 10px;
-  --radius-lg: 14px;
+:root{
+  --bg:#f5f7f5;--surface:#fff;--surface2:#f0f4f1;--border:#d4e0d6;--border2:#b8cfbb;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --blue-dark:#0c3d6e;--blue-light:#e3edf8;--purple-dark:#3b2d7a;--purple-light:#eeebfb;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;--red-dark:#6b1c1c;--red-light:#fce8e8;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:10px;--radius-lg:14px;
 }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.layout { display: flex; min-height: calc(100vh - 52px); }
-
-/* SIDEBAR */
-.sidebar {
-  width: 220px;
-  flex-shrink: 0;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  padding: 20px 0;
-  position: sticky;
-  top: 52px;
-  height: calc(100vh - 52px);
-  overflow-y: auto;
-}
-.sb-section { margin-bottom: 4px; }
-.sb-head {
-  font-size: 10px; font-weight: 600; letter-spacing: .07em;
-  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
-}
-.sb-item {
-  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
-  text-decoration: none; border-left: 2px solid transparent;
-  transition: all .15s; cursor: pointer; line-height: 1.4;
-}
-.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
-.sb-item.active {
-  background: var(--green-light); color: var(--green-dark);
-  font-weight: 500; border-left-color: var(--green-mid);
-}
-.sb-sub {
-  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
-  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
-}
-.sb-sub:hover, .sb-sub.active { color: var(--green-dark); font-weight: 500; }
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sb-head{font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--text3);padding:8px 18px 4px;text-transform:uppercase}
+.sb-item{display:block;padding:8px 18px;font-size:12.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;cursor:pointer;line-height:1.4}
+.sb-item:hover{background:var(--green-pale);color:var(--green-dark)}
+.sb-item.active{background:var(--green-light);color:var(--green-dark);font-weight:500;border-left-color:var(--green-mid)}
+.sb-sub{display:block;padding:5px 18px 5px 30px;font-size:11.5px;color:var(--text3);text-decoration:none;cursor:pointer;transition:color .15s}
+.sb-sub:hover,.sb-sub.active{color:var(--green-dark);font-weight:500}
 
 /* MAIN */
-.main { flex: 1; padding: 28px 36px 60px; max-width: 860px; }
+.main{flex:1;padding:28px 36px 60px;max-width:980px}
+.crumb{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.crumb span{color:var(--green-mid)}
+.updated{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--green-dark);background:var(--green-light);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.updated::before{content:'↻';font-size:12px}
+.art-h1{font-size:22px;font-weight:600;line-height:1.2;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--text2);line-height:1.75;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.sec-h2{font-size:15px;font-weight:600;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.sec-h2::before{content:'';display:block;width:3px;height:16px;background:var(--green-mid);border-radius:2px;flex-shrink:0}
 
-/* BREADCRUMB */
-.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
-.crumb span { color: var(--green-mid); }
+/* TABS */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.tab{font-size:12.5px;padding:7px 18px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.tab:hover{border-color:var(--border2);color:var(--green-dark)}
+.tab.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark);font-weight:500}
+.panel{display:none}
+.panel.active{display:block}
 
-/* UPDATE BADGE */
-.updated {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 500; color: var(--green-dark);
-  background: var(--green-light); padding: 4px 12px;
-  border-radius: 20px; margin-bottom: 14px;
-}
-.updated::before { content: '↻'; font-size: 12px; }
+/* NOTE / INFO / WARN BOX */
+.note-box{background:var(--green-light);border-left:3px solid var(--green-mid);border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--green-dark);line-height:1.75;margin:14px 0}
+.info-box{background:var(--blue-light);border-left:3px solid #2d6db5;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--blue-dark);line-height:1.75;margin:14px 0}
+.warn-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
 
-/* HEADINGS */
-.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
-.lead {
-  font-size: 13.5px; color: var(--text2); line-height: 1.75;
-  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 24px;
-}
-.sec-h2 {
-  font-size: 14px; font-weight: 600; color: var(--text);
-  margin: 32px 0 12px; display: flex; align-items: center; gap: 8px;
-}
-.sec-h2::before {
-  content: ''; display: block; width: 3px; height: 15px;
-  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
-}
-.sec-h3 {
-  font-size: 13px; font-weight: 600; color: var(--text2);
-  margin: 20px 0 8px;
-}
+/* SEGMENT MAP LAYOUT */
+.seg-layout{display:grid;grid-template-columns:1fr 1fr 300px;gap:16px;align-items:start}
+.svg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px}
+.svg-wrap h3{font-size:11px;font-weight:600;color:var(--text3);text-align:center;margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
+.seg-info-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;min-height:360px}
+.sip-empty{color:var(--text3);font-size:13px;text-align:center;padding:60px 10px}
+.sip-empty .sip-icon{font-size:32px;margin-bottom:8px}
+.sip-name{font-size:16px;font-weight:600;color:var(--text);margin-bottom:2px}
+.sip-en{font-size:11.5px;color:var(--text3);margin-bottom:14px;font-family:var(--mono);line-height:1.5}
+.sip-badge{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:10px}
+.badge-b{background:var(--blue-light);color:var(--blue-dark)}
+.badge-a{background:var(--green-light);color:var(--green-dark)}
+.badge-v{background:var(--purple-light);color:var(--purple-dark)}
+.sip-divider{height:1px;background:var(--border);margin:12px 0}
+.sip-label{font-size:10px;font-weight:600;letter-spacing:.06em;color:var(--text3);text-transform:uppercase;margin-bottom:5px}
+.sip-text{font-size:12px;color:var(--text2);line-height:1.8}
 
-/* CARDS */
-.anatomy-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
-}
-.anatomy-card-head {
-  padding: 14px 20px; border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: 10px;
-}
-.anatomy-card-title { font-size: 14px; font-weight: 600; }
-.anatomy-card-body { padding: 16px 20px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+/* SVG segments */
+.seg{cursor:pointer;transition:opacity .15s,filter .15s;stroke:#fff;stroke-width:1.2}
+.seg:hover{opacity:.82;filter:brightness(1.12)}
+.seg.selected{stroke:#111a14;stroke-width:2.5;filter:brightness(1.18)}
+.seg-label{font-size:9.5px;font-weight:700;fill:#fff;pointer-events:none;font-family:'Inter',sans-serif}
 
-/* SIDE-BY-SIDE GRID */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-.col-box {
-  border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 16px; font-size: 12.5px; color: var(--text2); line-height: 1.7;
-}
-.col-box-head {
-  font-size: 12px; font-weight: 600; color: var(--text);
-  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
-}
-.col-box.right { border-top: 3px solid var(--green-mid); }
-.col-box.left  { border-top: 3px solid #2d6db5; }
-
-/* SEGMENT TABLE */
-.seg-table-wrap { overflow-x: auto; margin-bottom: 16px; }
-.seg-table {
-  width: 100%; border-collapse: collapse; font-size: 12px; min-width: 540px;
-}
-.seg-table thead tr {
-  background: var(--surface2); border-bottom: 1px solid var(--border);
-}
-.seg-table th {
-  padding: 8px 12px; text-align: left; font-weight: 600; color: var(--text);
-  border-right: 1px solid var(--border);
-}
-.seg-table th:last-child { border-right: none; }
-.seg-table td {
-  padding: 8px 12px; border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border); color: var(--text2); line-height: 1.5;
-}
-.seg-table td:last-child { border-right: none; }
-.seg-table tr:last-child td { border-bottom: none; }
-.seg-table tr:nth-child(even) { background: #fafcfa; }
-.seg-num {
-  font-family: var(--mono); font-weight: 600; font-size: 12px; color: var(--green-dark);
-}
-.seg-lobe-row td { background: var(--green-pale) !important; font-weight: 600; color: var(--green-dark); }
-.seg-lobe-row-blue td { background: #eef4fb !important; font-weight: 600; color: var(--blue-dark); }
-
-/* BRONCHUS TREE */
-.b-tree { font-size: 12.5px; color: var(--text2); line-height: 2; }
-.b-tree .level0 { font-weight: 600; color: var(--text); }
-.b-tree .level1 { padding-left: 16px; }
-.b-tree .level2 { padding-left: 32px; color: var(--text3); }
-.b-tree .b-num { font-family: var(--mono); font-size: 11.5px; color: var(--green-dark); font-weight: 600; }
-.b-tree .b-num-blue { font-family: var(--mono); font-size: 11.5px; color: var(--blue-dark); font-weight: 600; }
+/* BRONCHUS SECTION */
+.bronchus-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.bronchus-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.bc-head{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 14px;font-size:12.5px;font-weight:600;color:var(--text)}
+.bc-body{padding:12px 14px}
+.bc-row{display:flex;gap:8px;align-items:baseline;padding:4px 0;border-bottom:1px solid #eef2ee;font-size:12px}
+.bc-row:last-child{border-bottom:none}
+.bc-code{font-family:var(--mono);font-weight:500;color:var(--green-dark);min-width:44px;font-size:11.5px;flex-shrink:0}
+.bc-name{color:var(--text2);flex:1}
 
 /* LYMPH NODE TABLE */
-.ln-table-wrap { overflow-x: auto; margin-bottom: 16px; }
-.ln-table {
-  width: 100%; border-collapse: collapse; font-size: 12px; min-width: 500px;
-}
-.ln-table thead tr { background: var(--surface2); border-bottom: 1px solid var(--border); }
-.ln-table th {
-  padding: 8px 12px; text-align: left; font-weight: 600; color: var(--text);
-  border-right: 1px solid var(--border);
-}
-.ln-table th:last-child { border-right: none; }
-.ln-table td {
-  padding: 8px 12px; border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border); color: var(--text2); line-height: 1.5;
-}
-.ln-table td:last-child { border-right: none; }
-.ln-table tr:last-child td { border-bottom: none; }
-.ln-table tr:nth-child(even) { background: #fafcfa; }
-.ln-num { font-family: var(--mono); font-weight: 600; color: var(--green-dark); }
-.ln-group-row td { background: var(--surface2) !important; font-weight: 600; color: var(--text); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.ln-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:20px}
+.ln-table th{padding:9px 12px;background:var(--surface2);font-weight:600;color:var(--text);border:1px solid var(--border);text-align:left}
+.ln-table td{padding:9px 12px;border:1px solid var(--border);color:var(--text2);line-height:1.5;vertical-align:top}
+.ln-table tr:nth-child(even) td{background:#f8fbf9}
+.ln-num{font-family:var(--mono);font-weight:500;color:var(--green-dark);white-space:nowrap}
+.n-badge{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:8px;white-space:nowrap}
+.n1{background:#e3edf8;color:#0c3d6e}
+.n2{background:#e4f0e8;color:#0d5c3a}
+.n3{background:#fce8e8;color:#6b1c1c}
+.ln-group-head td{background:var(--green-pale) !important;font-weight:600;color:var(--green-dark);border-top:2px solid var(--green-mid)}
 
-/* INFO BOX */
-.info-box {
-  background: var(--amber-light); border-left: 3px solid #d97a00;
-  border-radius: 0 8px 8px 0; padding: 11px 14px;
-  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
-}
-.clinical-box {
-  background: var(--green-pale); border-left: 3px solid var(--green-mid);
-  border-radius: 0 8px 8px 0; padding: 11px 14px;
-  font-size: 12.5px; color: var(--green-dark); line-height: 1.75; margin: 14px 0;
-}
-.blue-box {
-  background: var(--blue-light); border-left: 3px solid #2d6db5;
-  border-radius: 0 8px 8px 0; padding: 11px 14px;
-  font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0;
-}
-
-/* DIVIDER */
-.divider { height: 1px; background: var(--border); margin: 28px 0; }
+/* CT READING */
+.ct-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden}
+.ct-head{padding:14px 18px;border-bottom:1px solid var(--border);font-size:13.5px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:10px}
+.ct-num{width:26px;height:26px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ct-body{padding:14px 18px;font-size:12.5px;color:var(--text2);line-height:1.8}
+.ct-body ul{padding-left:18px}
+.ct-body ul li{margin-bottom:5px}
+.window-table{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0 14px}
+.window-table th{padding:7px 10px;background:var(--surface2);font-weight:600;color:var(--text);border:1px solid var(--border);text-align:left}
+.window-table td{padding:7px 10px;border:1px solid var(--border);color:var(--text2)}
+.wl-lung{background:#d8f0ff;color:#004d80;font-family:var(--mono);font-weight:500}
+.wl-med{background:#f0e8ff;color:#3b0080;font-family:var(--mono);font-weight:500}
+.wl-bone{background:#fff0d8;color:#805000;font-family:var(--mono);font-weight:500}
 
 /* FOOTER */
-.footer {
-  background: var(--surface); border-top: 1px solid var(--border);
-  padding: 20px 36px; font-size: 12px; color: var(--text3);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.footer-logo { font-weight: 600; color: var(--text); }
-.footer-logo span { color: var(--green-mid); }
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:18px 36px;font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-weight:600;color:var(--text)}
+.footer-logo span{color:var(--green-mid)}
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .sidebar { display: none; }
-  .main { padding: 20px 18px 40px; }
-  .two-col { grid-template-columns: 1fr; }
+@media(max-width:900px){
+  .seg-layout{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+  .seg-info-panel{grid-column:1/-1}
+}
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main{padding:20px 16px 40px}
+  .seg-layout{grid-template-columns:1fr}
+  .bronchus-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
 <div id="nav-placeholder"></div>
-<script>
-fetch('/lungatlas/nav.html')
-  .then(function(r){ return r.text(); })
-  .then(function(h){
-    document.getElementById('nav-placeholder').innerHTML = h;
-    var navAnatomy = document.getElementById('nav-anatomy');
-    if (navAnatomy) navAnatomy.classList.add('active');
-    var navAnatomyPage = document.getElementById('nav-anatomy-page');
-    if (navAnatomyPage) navAnatomyPage.classList.add('active');
-  });
-</script>
 
 <div class="layout">
-  <aside class="sidebar">
-    <div class="sb-section">
-      <div class="sb-head">解剖学</div>
-      <a class="sb-item active" href="#overview" onclick="activate(this)">肺の全体像</a>
-      <a class="sb-sub" href="#lobes">葉と葉間裂</a>
-      <a class="sb-sub" href="#size">右肺・左肺の違い</a>
-    </div>
-    <div class="sb-section">
-      <a class="sb-item" href="#segments" onclick="activate(this)">肺区域解剖</a>
-      <a class="sb-sub" href="#seg-right">右肺区域（S1〜S10）</a>
-      <a class="sb-sub" href="#seg-left">左肺区域（S1+2〜S10）</a>
-    </div>
-    <div class="sb-section">
-      <a class="sb-item" href="#bronchi" onclick="activate(this)">気管支分岐</a>
-      <a class="sb-sub" href="#bronchi-right">右側の気管支</a>
-      <a class="sb-sub" href="#bronchi-left">左側の気管支</a>
-    </div>
-    <div class="sb-section">
-      <a class="sb-item" href="#hilum" onclick="activate(this)">肺門構造</a>
-      <a class="sb-sub" href="#hilum-vessels">肺動静脈の配置</a>
-    </div>
-    <div class="sb-section">
-      <a class="sb-item" href="#lymph" onclick="activate(this)">リンパ節分類</a>
-      <a class="sb-sub" href="#iaslc">IASLC/山形分類</a>
-    </div>
-    <div class="sb-section">
-      <a class="sb-item" href="#references" onclick="activate(this)">参照文献</a>
-    </div>
-  </aside>
 
-  <main class="main">
-    <div class="crumb">解剖学・画像診断 › <span>肺の解剖学</span></div>
-    <div class="updated">初版 2026年6月 — 外科解剖学・気管支命名法・IASLC分類</div>
-    <h1 class="art-h1">肺の解剖学</h1>
-    <p class="lead">外科手術・気管支鏡・画像診断に必要な肺の基本解剖。肺葉・肺区域・気管支分岐・肺門構造・リンパ節分類を整理する。リンパ節分類はIASLC Staging Cards 9th Edition 2024および肺がん取り扱い規約 第9版に準拠。</p>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-section">
+    <div class="sb-head">解剖学</div>
+    <span class="sb-item active" id="sb-seg" onclick="sw('seg')">肺区域（S1〜S10）</span>
+    <span class="sb-item" id="sb-bronchus" onclick="sw('bronchus')">気管支樹</span>
+    <span class="sb-item" id="sb-lymph" onclick="sw('lymph')">リンパ節マップ</span>
+    <span class="sb-item" id="sb-ct" onclick="sw('ct')">CTでの読影ポイント</span>
+  </div>
+  <div class="sb-section" style="margin-top:16px">
+    <div class="sb-head">関連ページ</div>
+    <a class="sb-sub" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
+    <a class="sb-sub" href="/lungatlas/egfr-firstline.html">EGFR 1次治療ガイド</a>
+    <a class="sb-sub" href="/lungatlas/index.html">変異陰性 NSCLC</a>
+  </div>
+</aside>
 
-    <!-- ===================== 1. 全体像 ===================== -->
-    <section id="overview">
-      <h2 class="sec-h2">肺の全体像</h2>
+<!-- MAIN -->
+<main class="main">
+  <div class="crumb">LungAtlas &rsaquo; <span>肺の解剖学</span></div>
+  <div class="updated">2026年6月更新</div>
+  <h1 class="art-h1">肺の解剖学・CT画像診断</h1>
+  <p class="lead">肺区域・気管支分岐・縦隔リンパ節の解剖学的知識はCT読影と手術手技の基盤となる。区域をクリックすると気管支・血管・臨床ポイントを確認できる。</p>
 
-      <div id="lobes">
-        <div class="anatomy-card">
-          <div class="anatomy-card-head">
-            <div class="anatomy-card-title">葉と葉間裂</div>
-          </div>
-          <div class="anatomy-card-body">
-            <p>肺は左右に分かれ、右肺は3葉・左肺は2葉からなる。葉間裂により区分される。</p>
-          </div>
-        </div>
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" id="tab-seg" onclick="sw('seg')">肺区域 S1〜S10</button>
+    <button class="tab" id="tab-bronchus" onclick="sw('bronchus')">気管支樹</button>
+    <button class="tab" id="tab-lymph" onclick="sw('lymph')">リンパ節マップ</button>
+    <button class="tab" id="tab-ct" onclick="sw('ct')">CT読影ポイント</button>
+  </div>
 
-        <div class="two-col" id="size">
-          <div class="col-box right">
-            <div class="col-box-head">
-              <span style="font-family:var(--mono);font-weight:600;color:var(--green-dark)">右肺</span>
-              <span style="font-size:11px;color:var(--text3)">3葉</span>
-            </div>
-            <ul style="padding-left:15px;font-size:12.5px;line-height:1.9">
-              <li><strong>上葉（RUL）</strong>：水平裂の上方</li>
-              <li><strong>中葉（RML）</strong>：水平裂と斜裂の間</li>
-              <li><strong>下葉（RLL）</strong>：斜裂の後下方</li>
-            </ul>
-            <div style="margin-top:10px;font-size:12px;color:var(--text3)">
-              葉間裂：<strong>水平裂</strong>（上葉–中葉）＋<strong>斜裂</strong>（中葉–下葉）
-            </div>
-          </div>
-          <div class="col-box left">
-            <div class="col-box-head">
-              <span style="font-family:var(--mono);font-weight:600;color:var(--blue-dark)">左肺</span>
-              <span style="font-size:11px;color:var(--text3)">2葉</span>
-            </div>
-            <ul style="padding-left:15px;font-size:12.5px;line-height:1.9">
-              <li><strong>上葉（LUL）</strong>：舌区（S4・S5）を含む</li>
-              <li><strong>下葉（LLL）</strong>：斜裂の後下方</li>
-            </ul>
-            <div style="margin-top:10px;font-size:12px;color:var(--text3)">
-              葉間裂：<strong>斜裂のみ</strong>（水平裂は原則存在しない）
-            </div>
-          </div>
-        </div>
+  <!-- ===== PANEL 1: 肺区域 ===== -->
+  <div class="panel active" id="panel-seg">
+    <div class="note-box">区域をクリックすると、右パネルに気管支・血管・臨床ポイントを表示します。</div>
 
+    <div class="seg-layout">
+      <!-- 右肺SVG -->
+      <div class="svg-wrap">
+        <h3>右肺 — 前面観（模式図）</h3>
+        <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+          <!-- 右上葉 S1 肺尖区 -->
+          <path id="r-s1" class="seg" fill="#2d8a5e"
+            d="M55,14 Q95,6 128,16 Q148,28 152,52 Q138,72 112,78 Q88,80 68,66 Q52,50 52,30 Z"
+            onclick="showSeg('r-s1')" />
+          <text class="seg-label" x="102" y="48" text-anchor="middle">S1</text>
+
+          <!-- 右上葉 S2 後上葉区 -->
+          <path id="r-s2" class="seg" fill="#3aa870"
+            d="M152,52 Q162,30 178,26 Q196,22 205,48 Q210,72 196,88 Q178,96 160,86 Q148,74 152,52 Z"
+            onclick="showSeg('r-s2')" />
+          <text class="seg-label" x="183" y="62" text-anchor="middle">S2</text>
+
+          <!-- 右上葉 S3 前上葉区 -->
+          <path id="r-s3" class="seg" fill="#48c685"
+            d="M52,30 Q52,50 68,66 Q88,80 112,78 Q124,95 118,114 Q100,120 80,116 Q60,110 50,92 Q44,72 48,50 Z"
+            onclick="showSeg('r-s3')" />
+          <text class="seg-label" x="86" y="98" text-anchor="middle">S3</text>
+
+          <!-- 葉間裂：水平裂 -->
+          <line x1="44" y1="114" x2="196" y2="114" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity=".4"/>
+
+          <!-- 右中葉 S4 外側中葉区 -->
+          <path id="r-s4" class="seg" fill="#2d6da8"
+            d="M118,114 Q124,95 112,78 Q140,72 160,86 Q168,100 164,120 Q150,132 132,130 Q120,126 118,114 Z"
+            onclick="showSeg('r-s4')" />
+          <text class="seg-label" x="143" y="110" text-anchor="middle">S4</text>
+
+          <!-- 右中葉 S5 内側中葉区 -->
+          <path id="r-s5" class="seg" fill="#3a88c8"
+            d="M50,92 Q60,110 80,116 Q100,120 118,114 Q120,126 132,130 Q122,144 105,148 Q84,148 68,138 Q52,125 50,105 Z"
+            onclick="showSeg('r-s5')" />
+          <text class="seg-label" x="94" y="132" text-anchor="middle">S5</text>
+
+          <!-- 葉間裂：斜裂 -->
+          <line x1="46" y1="148" x2="210" y2="148" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity=".4"/>
+
+          <!-- 右下葉 S6 上下葉区 -->
+          <path id="r-s6" class="seg" fill="#c87a2d"
+            d="M160,86 Q178,96 196,88 Q210,72 210,100 Q212,128 206,148 Q188,148 164,120 Q168,100 160,86 Z"
+            onclick="showSeg('r-s6')" />
+          <text class="seg-label" x="190" y="122" text-anchor="middle">S6</text>
+
+          <!-- 右下葉 S7 内側肺底区 -->
+          <path id="r-s7" class="seg" fill="#e8903a"
+            d="M46,148 Q50,170 56,195 Q64,215 76,224 Q82,196 84,170 Q84,158 84,148 Q68,148 46,148 Z"
+            onclick="showSeg('r-s7')" />
+          <text class="seg-label" x="66" y="190" text-anchor="middle">S7</text>
+
+          <!-- 右下葉 S8 前肺底区 -->
+          <path id="r-s8" class="seg" fill="#f0a84e"
+            d="M84,148 Q84,158 84,170 Q82,196 76,224 Q96,236 118,238 Q134,216 136,190 Q136,170 132,148 Q114,148 84,148 Z"
+            onclick="showSeg('r-s8')" />
+          <text class="seg-label" x="108" y="196" text-anchor="middle">S8</text>
+
+          <!-- 右下葉 S9 外側肺底区 -->
+          <path id="r-s9" class="seg" fill="#f0c06e"
+            d="M132,148 Q136,170 134,216 Q118,238 118,238 Q140,248 158,242 Q172,226 172,200 Q172,172 168,148 Q152,148 132,148 Z"
+            onclick="showSeg('r-s9')" />
+          <text class="seg-label" x="153" y="200" text-anchor="middle">S9</text>
+
+          <!-- 右下葉 S10 後肺底区 -->
+          <path id="r-s10" class="seg" fill="#d4a240"
+            d="M168,148 Q172,172 172,200 Q172,226 158,242 Q172,246 188,238 Q204,222 208,196 Q212,170 206,148 Q188,148 168,148 Z"
+            onclick="showSeg('r-s10')" />
+          <text class="seg-label" x="191" y="198" text-anchor="middle">S10</text>
+
+          <!-- 横隔膜 -->
+          <path d="M56,224 Q76,250 118,254 Q158,254 188,242 Q204,234 208,240 Q188,270 140,278 Q100,282 68,268 Q44,254 44,238 Z" fill="none" stroke="#8aab96" stroke-width="1.2" stroke-dasharray="3,3" opacity=".5"/>
+
+          <!-- 葉ラベル -->
+          <text x="56" y="12" font-size="8" fill="#1a5c35" font-weight="600" font-family="Inter,sans-serif" opacity=".8">上葉</text>
+          <text x="54" y="140" font-size="8" fill="#0c3d6e" font-weight="600" font-family="Inter,sans-serif" opacity=".8">中葉</text>
+          <text x="56" y="164" font-size="8" fill="#6b3d00" font-weight="600" font-family="Inter,sans-serif" opacity=".8">下葉</text>
+        </svg>
       </div>
-    </section>
 
-    <div class="divider"></div>
+      <!-- 左肺SVG -->
+      <div class="svg-wrap">
+        <h3>左肺 — 前面観（模式図）</h3>
+        <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+          <!-- 左上葉 S1+2 肺尖後区 -->
+          <path id="l-s12" class="seg" fill="#7a4db0"
+            d="M92,14 Q128,6 158,16 Q172,26 174,52 Q162,76 136,84 Q112,86 92,72 Q76,56 78,30 Z"
+            onclick="showSeg('l-s12')" />
+          <text class="seg-label" x="128" y="50" text-anchor="middle">S1+2</text>
 
-    <!-- ===================== 2. 肺区域 ===================== -->
-    <section id="segments">
-      <h2 class="sec-h2">肺区域解剖（Bronchopulmonary Segments）</h2>
+          <!-- 左上葉 S3 前上葉区 -->
+          <path id="l-s3" class="seg" fill="#9060c8"
+            d="M78,30 Q76,56 92,72 Q112,86 136,84 Q146,104 140,122 Q118,130 96,124 Q74,116 66,96 Q62,76 68,52 Z"
+            onclick="showSeg('l-s3')" />
+          <text class="seg-label" x="106" y="102" text-anchor="middle">S3</text>
 
-      <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
-        肺区域は各区域気管支（B）に対応する機能的単位。区域切除術では区域間平面に沿って切離するため、区域気管支・区域動脈・区域静脈の正確な把握が必須。
-      </p>
+          <!-- 葉間裂：斜裂 -->
+          <line x1="58" y1="148" x2="196" y2="148" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity=".4"/>
 
-      <!-- 右肺区域 -->
-      <h3 class="sec-h3" id="seg-right">右肺区域（S1〜S10）</h3>
-      <div class="seg-table-wrap">
-        <table class="seg-table">
+          <!-- 左上葉（舌区）S4 上舌区 -->
+          <path id="l-s4" class="seg" fill="#c04080"
+            d="M66,96 Q74,116 96,124 Q118,130 140,122 Q148,142 146,162 Q128,172 108,170 Q88,166 74,152 Q62,136 62,118 Z"
+            onclick="showSeg('l-s4')" />
+          <text class="seg-label" x="107" y="146" text-anchor="middle">S4</text>
+
+          <!-- 左上葉（舌区）S5 下舌区 -->
+          <path id="l-s5" class="seg" fill="#d85898"
+            d="M62,118 Q62,136 74,152 Q88,166 108,170 Q128,172 146,162 Q148,186 142,210 Q124,224 100,222 Q78,218 66,200 Q58,182 60,160 Z"
+            onclick="showSeg('l-s5')" />
+          <text class="seg-label" x="104" y="192" text-anchor="middle">S5</text>
+
+          <!-- 左下葉 S6 上下葉区 -->
+          <path id="l-s6" class="seg" fill="#b03030"
+            d="M136,84 Q162,76 174,52 Q182,30 196,42 Q208,58 206,88 Q202,116 190,130 Q172,138 156,128 Q146,114 146,104 Q140,122 136,84 Z"
+            onclick="showSeg('l-s6')" />
+          <text class="seg-label" x="182" y="98" text-anchor="middle">S6</text>
+
+          <!-- 左下葉 S8 前肺底区 -->
+          <path id="l-s8" class="seg" fill="#c84040"
+            d="M58,148 Q60,160 60,182 Q66,200 78,218 Q100,228 100,222 Q78,218 80,200 Q82,178 84,160 Q84,154 84,148 Z"
+            onclick="showSeg('l-s8')" />
+          <!-- 修正：S8をより適切な領域に -->
+          <path id="l-s8b" class="seg" fill="#c84040"
+            d="M84,148 Q84,160 84,178 Q82,200 100,222 Q118,234 130,230 Q138,210 138,186 Q136,166 130,148 Z"
+            onclick="showSeg('l-s8')" />
+          <text class="seg-label" x="112" y="194" text-anchor="middle" style="display:none">S8</text>
+
+          <!-- 左下葉 S9 外側肺底区 -->
+          <path id="l-s9" class="seg" fill="#d85858"
+            d="M130,148 Q136,166 138,186 Q138,210 130,230 Q148,240 164,234 Q178,218 180,194 Q182,170 176,148 Z"
+            onclick="showSeg('l-s9')" />
+          <text class="seg-label" x="157" y="196" text-anchor="middle">S9</text>
+
+          <!-- 左下葉 S10 後肺底区 -->
+          <path id="l-s10" class="seg" fill="#e07070"
+            d="M176,148 Q182,170 180,194 Q178,218 164,234 Q178,240 192,232 Q204,216 206,190 Q208,164 204,148 Z"
+            onclick="showSeg('l-s10')" />
+          <text class="seg-label" x="191" y="196" text-anchor="middle">S10</text>
+
+          <!-- S8 ラベル（重心位置調整） -->
+          <text class="seg-label" x="72" y="186" text-anchor="middle" pointer-events="none" onclick="showSeg('l-s8')" style="cursor:pointer">S8</text>
+
+          <!-- 横隔膜 -->
+          <path d="M60,220 Q100,252 140,252 Q172,248 192,238 Q196,252 168,268 Q130,280 96,276 Q66,268 52,250 Z" fill="none" stroke="#8aab96" stroke-width="1.2" stroke-dasharray="3,3" opacity=".5"/>
+
+          <!-- 葉ラベル -->
+          <text x="76" y="12" font-size="8" fill="#3b1a7a" font-weight="600" font-family="Inter,sans-serif" opacity=".8">上葉（上区）</text>
+          <text x="58" y="140" font-size="8" fill="#6b0030" font-weight="600" font-family="Inter,sans-serif" opacity=".8">舌区</text>
+          <text x="152" y="140" font-size="8" fill="#6b1c1c" font-weight="600" font-family="Inter,sans-serif" opacity=".8">下葉</text>
+        </svg>
+      </div>
+
+      <!-- 情報パネル -->
+      <div class="seg-info-panel" id="seg-info">
+        <div class="sip-empty" id="sip-empty">
+          <div class="sip-icon">🫁</div>
+          <div>区域をクリックしてください</div>
+        </div>
+        <div id="sip-content" style="display:none">
+          <div class="sip-name" id="sip-name"></div>
+          <div class="sip-en" id="sip-en"></div>
+          <div class="sip-badge" id="sip-badges"></div>
+          <div class="sip-divider"></div>
+          <div class="sip-label">臨床ポイント</div>
+          <div class="sip-text" id="sip-clinical"></div>
+        </div>
+      </div>
+    </div><!-- /seg-layout -->
+
+    <!-- 区域一覧表 -->
+    <h2 class="sec-h2" style="margin-top:36px">区域一覧</h2>
+    <table class="ln-table">
+      <thead>
+        <tr><th>区域</th><th>日本語名</th><th>英語名</th><th>気管支</th><th>動脈</th><th>静脈</th></tr>
+      </thead>
+      <tbody>
+        <tr class="ln-group-head"><td colspan="6">右上葉</td></tr>
+        <tr><td class="ln-num">S1</td><td>肺尖区</td><td>Apical</td><td>B1</td><td>A1</td><td>V1</td></tr>
+        <tr><td class="ln-num">S2</td><td>後上葉区</td><td>Posterior</td><td>B2</td><td>A2</td><td>V2</td></tr>
+        <tr><td class="ln-num">S3</td><td>前上葉区</td><td>Anterior</td><td>B3</td><td>A3</td><td>V3</td></tr>
+        <tr class="ln-group-head"><td colspan="6">右中葉</td></tr>
+        <tr><td class="ln-num">S4</td><td>外側中葉区</td><td>Lateral</td><td>B4</td><td>A4</td><td>V4</td></tr>
+        <tr><td class="ln-num">S5</td><td>内側中葉区</td><td>Medial</td><td>B5</td><td>A5</td><td>V5</td></tr>
+        <tr class="ln-group-head"><td colspan="6">右下葉</td></tr>
+        <tr><td class="ln-num">S6</td><td>上下葉区</td><td>Superior</td><td>B6</td><td>A6</td><td>V6</td></tr>
+        <tr><td class="ln-num">S7</td><td>内側肺底区</td><td>Medial basal</td><td>B7</td><td>A7</td><td>V7</td></tr>
+        <tr><td class="ln-num">S8</td><td>前肺底区</td><td>Anterior basal</td><td>B8</td><td>A8</td><td>V8</td></tr>
+        <tr><td class="ln-num">S9</td><td>外側肺底区</td><td>Lateral basal</td><td>B9</td><td>A9</td><td>V9</td></tr>
+        <tr><td class="ln-num">S10</td><td>後肺底区</td><td>Posterior basal</td><td>B10</td><td>A10</td><td>V10</td></tr>
+        <tr class="ln-group-head"><td colspan="6">左上葉（上区）</td></tr>
+        <tr><td class="ln-num">S1+2</td><td>肺尖後区</td><td>Apicoposterior</td><td>B1+2</td><td>A1+2</td><td>V1+2</td></tr>
+        <tr><td class="ln-num">S3</td><td>前上葉区</td><td>Anterior</td><td>B3</td><td>A3</td><td>V3</td></tr>
+        <tr class="ln-group-head"><td colspan="6">左上葉（舌区）</td></tr>
+        <tr><td class="ln-num">S4</td><td>上舌区</td><td>Superior lingular</td><td>B4</td><td>A4</td><td>V4</td></tr>
+        <tr><td class="ln-num">S5</td><td>下舌区</td><td>Inferior lingular</td><td>B5</td><td>A5</td><td>V5</td></tr>
+        <tr class="ln-group-head"><td colspan="6">左下葉</td></tr>
+        <tr><td class="ln-num">S6</td><td>上下葉区</td><td>Superior</td><td>B6</td><td>A6</td><td>V6</td></tr>
+        <tr><td class="ln-num">S7</td><td colspan="5" style="color:var(--text3);font-size:11.5px">欠損または小さくS8に含まれることが多い（解剖学的変異）</td></tr>
+        <tr><td class="ln-num">S8</td><td>前肺底区</td><td>Anterior basal</td><td>B8</td><td>A8</td><td>V8</td></tr>
+        <tr><td class="ln-num">S9</td><td>外側肺底区</td><td>Lateral basal</td><td>B9</td><td>A9</td><td>V9</td></tr>
+        <tr><td class="ln-num">S10</td><td>後肺底区</td><td>Posterior basal</td><td>B10</td><td>A10</td><td>V10</td></tr>
+      </tbody>
+    </table>
+  </div><!-- /panel-seg -->
+
+  <!-- ===== PANEL 2: 気管支樹 ===== -->
+  <div class="panel" id="panel-bronchus">
+    <div class="info-box">気管（trachea）→ 右主気管支 / 左主気管支 → 葉気管支 → 区域気管支（B1〜B10）→ 亜区域気管支（Ba, Bb）の順に分岐する。</div>
+
+    <div class="bronchus-grid">
+      <div class="bronchus-card">
+        <div class="bc-head">右主気管支 → 右肺</div>
+        <div class="bc-body">
+          <div style="font-size:11px;font-weight:600;color:var(--text3);margin:4px 0;text-transform:uppercase;letter-spacing:.05em">右上葉気管支</div>
+          <div class="bc-row"><span class="bc-code">B1</span><span class="bc-name">肺尖区支（Apical）</span></div>
+          <div class="bc-row"><span class="bc-code">B2</span><span class="bc-name">後上葉区支（Posterior）</span></div>
+          <div class="bc-row"><span class="bc-code">B3</span><span class="bc-name">前上葉区支（Anterior）</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--text3);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.05em">右中葉気管支</div>
+          <div class="bc-row"><span class="bc-code">B4</span><span class="bc-name">外側中葉区支（Lateral）</span></div>
+          <div class="bc-row"><span class="bc-code">B5</span><span class="bc-name">内側中葉区支（Medial）</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--text3);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.05em">右下葉気管支</div>
+          <div class="bc-row"><span class="bc-code">B6</span><span class="bc-name">上下葉区支（Superior）</span></div>
+          <div class="bc-row"><span class="bc-code">B7</span><span class="bc-name">内側肺底区支（Medial basal）</span></div>
+          <div class="bc-row"><span class="bc-code">B8</span><span class="bc-name">前肺底区支（Anterior basal）</span></div>
+          <div class="bc-row"><span class="bc-code">B9</span><span class="bc-name">外側肺底区支（Lateral basal）</span></div>
+          <div class="bc-row"><span class="bc-code">B10</span><span class="bc-name">後肺底区支（Posterior basal）</span></div>
+        </div>
+      </div>
+
+      <div class="bronchus-card">
+        <div class="bc-head">左主気管支 → 左肺</div>
+        <div class="bc-body">
+          <div style="font-size:11px;font-weight:600;color:var(--text3);margin:4px 0;text-transform:uppercase;letter-spacing:.05em">左上葉気管支（上区）</div>
+          <div class="bc-row"><span class="bc-code">B1+2</span><span class="bc-name">肺尖後区支（Apicoposterior）</span></div>
+          <div class="bc-row"><span class="bc-code">B3</span><span class="bc-name">前上葉区支（Anterior）</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--text3);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.05em">左上葉気管支（舌区）</div>
+          <div class="bc-row"><span class="bc-code">B4</span><span class="bc-name">上舌区支（Superior lingular）</span></div>
+          <div class="bc-row"><span class="bc-code">B5</span><span class="bc-name">下舌区支（Inferior lingular）</span></div>
+          <div style="font-size:11px;font-weight:600;color:var(--text3);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.05em">左下葉気管支</div>
+          <div class="bc-row"><span class="bc-code">B6</span><span class="bc-name">上下葉区支（Superior）</span></div>
+          <div class="bc-row"><span class="bc-code">B7</span><span class="bc-name">内側肺底区支（欠損または小さいことが多い）</span></div>
+          <div class="bc-row"><span class="bc-code">B8</span><span class="bc-name">前肺底区支（Anterior basal）</span></div>
+          <div class="bc-row"><span class="bc-code">B9</span><span class="bc-name">外側肺底区支（Lateral basal）</span></div>
+          <div class="bc-row"><span class="bc-code">B10</span><span class="bc-name">後肺底区支（Posterior basal）</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sec-h2">亜区域気管支と臨床的注意点</h2>
+    <div class="bronchus-grid">
+      <div class="bronchus-card">
+        <div class="bc-head">主な亜区域支</div>
+        <div class="bc-body">
+          <div class="bc-row"><span class="bc-code">B1a/b</span><span class="bc-name">肺尖区支 → 前方枝 / 後方枝</span></div>
+          <div class="bc-row"><span class="bc-code">B2a/b</span><span class="bc-name">後上葉区支 → 外側枝 / 後方枝</span></div>
+          <div class="bc-row"><span class="bc-code">B6a/b/c</span><span class="bc-name">上下葉区支 → 上枝 / 外側枝 / 下枝</span></div>
+          <div class="bc-row"><span class="bc-code">B8a/b</span><span class="bc-name">前肺底区支 → 外側枝 / 基底枝</span></div>
+        </div>
+      </div>
+      <div class="bronchus-card">
+        <div class="bc-head">分岐の臨床的注意点</div>
+        <div class="bc-body">
+          <div class="bc-row"><span class="bc-code" style="min-width:unset;margin-right:6px;font-size:13px">›</span><span class="bc-name">右主気管支は左より短く（約2.5 cm）・急峻に分岐 → 誤嚥・誤挿管が起きやすい</span></div>
+          <div class="bc-row"><span class="bc-code" style="min-width:unset;margin-right:6px;font-size:13px">›</span><span class="bc-name">右上葉気管支は主気管支からほぼ直角に分岐 → 気管支鏡でのアクセスに体位の工夫が必要</span></div>
+          <div class="bc-row"><span class="bc-code" style="min-width:unset;margin-right:6px;font-size:13px">›</span><span class="bc-name">左上葉気管支は上区と舌区に分かれる前に数 cm の共通幹をもつ</span></div>
+          <div class="bc-row"><span class="bc-code" style="min-width:unset;margin-right:6px;font-size:13px">›</span><span class="bc-name">B6は中間幹から後壁に向かって水平に分岐 → 気管支鏡正面視では開口部が見えにくい</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <strong>気管支鏡での枝読みのコツ：</strong>分岐の向きを3D的にイメージする。B6は中間幹の後壁から分岐するため，正面視では開口部が見落とされやすい。B7（右）は心臓の後ろを走行し，CT上での位置同定が重要。
+    </div>
+  </div><!-- /panel-bronchus -->
+
+  <!-- ===== PANEL 3: リンパ節マップ ===== -->
+  <div class="panel" id="panel-lymph">
+    <div class="note-box">IASLC（国際肺癌学会）縦隔リンパ節マップ準拠。日本肺癌取扱い規約第9版に対応。</div>
+
+    <h2 class="sec-h2">縦隔・肺門・肺内リンパ節</h2>
+    <table class="ln-table">
+      <thead>
+        <tr>
+          <th style="width:72px">番号</th>
+          <th style="width:170px">名称（日本語）</th>
+          <th>解剖学的位置・ポイント</th>
+          <th style="width:72px">N因子</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ln-group-head"><td colspan="4">上縦隔リンパ節</td></tr>
+        <tr>
+          <td class="ln-num">#1R/L</td>
+          <td>最上部縦隔<br><span style="font-size:10.5px;color:var(--text3)">（鎖骨上窩を含む）</span></td>
+          <td>腕頭動脈の起始部より頭側。左：大動脈弓の左縁まで</td>
+          <td><span class="n-badge n2">#1R：N2</span><br><span class="n-badge n3" style="margin-top:3px">#1L：N3</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#2R</td>
+          <td>右上部気管傍</td>
+          <td>腕頭動脈起始部〜気管右縁・大動脈弓上縁の間</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#2L</td>
+          <td>左上部気管傍</td>
+          <td>大動脈弓上縁〜気管左縁の間</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#3a</td>
+          <td>血管前</td>
+          <td>大血管（SVC・大動脈）の前方。CTでは縦隔前部に位置</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#3p</td>
+          <td>気管後</td>
+          <td>気管の後方・食道の前方</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#4R</td>
+          <td>右下部気管傍</td>
+          <td>腕頭動脈起始部下縁〜気管分岐部の右側。奇静脈弓が目印</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#4L</td>
+          <td>左下部気管傍</td>
+          <td>大動脈弓下縁〜気管分岐部の左側。動脈管索が目印</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr class="ln-group-head"><td colspan="4">大動脈リンパ節</td></tr>
+        <tr>
+          <td class="ln-num">#5</td>
+          <td>大動脈下<br><span style="font-size:10.5px;color:var(--text3)">（AP window）</span></td>
+          <td>大動脈弓と左肺動脈の間（大動脈肺動脈窓）。左上葉癌のN2評価で重要</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#6</td>
+          <td>大動脈傍<br><span style="font-size:10.5px;color:var(--text3)">（上行大動脈周囲）</span></td>
+          <td>上行大動脈・大動脈弓の前方・左側</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr class="ln-group-head"><td colspan="4">下縦隔リンパ節</td></tr>
+        <tr>
+          <td class="ln-num">#7</td>
+          <td>気管分岐下<br><span style="font-size:10.5px;color:var(--text3)">（Subcarinal）</span></td>
+          <td>隆起下。両肺からリンパ流入。PETで集積しやすい。EBUS-TBNAでアクセスしやすい主要ステーション</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#8</td>
+          <td>食道傍</td>
+          <td>食道に隣接する後縦隔。#7より尾側</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#9</td>
+          <td>肺靱帯</td>
+          <td>下肺静脈下縁〜横隔膜の間（肺靱帯内）</td>
+          <td><span class="n-badge n2">N2</span></td>
+        </tr>
+        <tr class="ln-group-head"><td colspan="4">肺門・葉間・肺内リンパ節</td></tr>
+        <tr>
+          <td class="ln-num">#10</td>
+          <td>肺門<br><span style="font-size:10.5px;color:var(--text3)">（主気管支周囲）</span></td>
+          <td>胸膜反転部より末梢，主気管支・肺動脈周囲。縦隔胸膜内側</td>
+          <td><span class="n-badge n1">N1</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#11</td>
+          <td>葉間</td>
+          <td>葉気管支間（右：中間幹周囲，左：上下葉気管支分岐部）</td>
+          <td><span class="n-badge n1">N1</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#12</td>
+          <td>葉気管支周囲</td>
+          <td>葉気管支に隣接</td>
+          <td><span class="n-badge n1">N1</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#13</td>
+          <td>区域気管支周囲</td>
+          <td>区域気管支に隣接</td>
+          <td><span class="n-badge n1">N1</span></td>
+        </tr>
+        <tr>
+          <td class="ln-num">#14</td>
+          <td>亜区域気管支周囲</td>
+          <td>亜区域支に隣接。肺内最深部</td>
+          <td><span class="n-badge n1">N1</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="sec-h2">N因子サマリー</h2>
+    <div class="bronchus-grid">
+      <div class="bronchus-card">
+        <div class="bc-head" style="background:#e3edf8;color:#0c3d6e">N1：第1群（#10〜#14）</div>
+        <div class="bc-body" style="font-size:12.5px;color:var(--text2);line-height:1.8">
+          肺門・葉間・肺内リンパ節<br>
+          <span style="font-size:11.5px;color:var(--text3)">同側の肺内・肺門リンパ節への転移</span>
+        </div>
+      </div>
+      <div class="bronchus-card">
+        <div class="bc-head" style="background:#e4f0e8;color:#0d5c3a">N2：第2群（#1〜#9 同側）</div>
+        <div class="bc-body" style="font-size:12.5px;color:var(--text2);line-height:1.8">
+          同側縦隔・気管分岐下リンパ節<br>
+          <span style="font-size:11.5px;color:var(--text3)">同側の縦隔リンパ節への転移</span>
+        </div>
+      </div>
+      <div class="bronchus-card">
+        <div class="bc-head" style="background:#fce8e8;color:#6b1c1c">N3：第3群（対側・鎖骨上窩）</div>
+        <div class="bc-body" style="font-size:12.5px;color:var(--text2);line-height:1.8">
+          対側縦隔・対側肺門・鎖骨上窩（#1L等）<br>
+          <span style="font-size:11.5px;color:var(--text3)">対側または鎖骨上窩への転移 → 手術不能</span>
+        </div>
+      </div>
+      <div class="bronchus-card">
+        <div class="bc-head">郭清の基本方針</div>
+        <div class="bc-body" style="font-size:12px;color:var(--text2);line-height:1.8">
+          系統的リンパ節郭清（ND2a-1/2a-2）が標準。<br>
+          右肺癌：#2R, #4R, #7, #8, #9, #10R〜<br>
+          左肺癌：#4L, #5, #6, #7, #8, #9, #10L〜
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:8px">
+      <strong>#5/#6（大動脈窓）：</strong>左上葉癌では重要なN2ステーション。EBUS-TBNAでアクセスが困難な場合，縦隔鏡（左側：Chamberlain手技，即ち前縦隔切開術）が必要になることがある。
+    </div>
+  </div><!-- /panel-lymph -->
+
+  <!-- ===== PANEL 4: CT読影ポイント ===== -->
+  <div class="panel" id="panel-ct">
+
+    <div class="ct-card">
+      <div class="ct-head"><span class="ct-num">1</span>肺野窓と縦隔窓の使い分け</div>
+      <div class="ct-body">
+        <table class="window-table">
           <thead>
-            <tr>
-              <th style="width:60px">区域</th>
-              <th style="width:180px">区域名（英語）</th>
-              <th style="width:140px">区域名（日本語）</th>
-              <th>対応気管支</th>
-            </tr>
+            <tr><th>ウィンドウ</th><th>WL（中心値）</th><th>WW（幅）</th><th>主な用途</th></tr>
           </thead>
           <tbody>
-            <tr class="seg-lobe-row">
-              <td colspan="4">上葉（RUL — Right Upper Lobe）</td>
+            <tr>
+              <td>肺野窓</td>
+              <td class="wl-lung">−600〜−700 HU</td>
+              <td class="wl-lung">1200〜1500 HU</td>
+              <td>肺実質・間質・気道・肺内結節の評価</td>
             </tr>
             <tr>
-              <td><span class="seg-num">S1</span></td>
-              <td>Apical</td>
-              <td>肺尖区</td>
-              <td><span class="seg-num">B1</span></td>
+              <td>縦隔窓</td>
+              <td class="wl-med">30〜50 HU</td>
+              <td class="wl-med">300〜400 HU</td>
+              <td>縦隔・リンパ節・胸膜・胸水・腫瘤内部の評価</td>
             </tr>
             <tr>
-              <td><span class="seg-num">S2</span></td>
-              <td>Posterior</td>
-              <td>後上区</td>
-              <td><span class="seg-num">B2</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S3</span></td>
-              <td>Anterior</td>
-              <td>前上区</td>
-              <td><span class="seg-num">B3</span></td>
-            </tr>
-            <tr class="seg-lobe-row">
-              <td colspan="4">中葉（RML — Right Middle Lobe）</td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S4</span></td>
-              <td>Lateral</td>
-              <td>外側区</td>
-              <td><span class="seg-num">B4</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S5</span></td>
-              <td>Medial</td>
-              <td>内側区</td>
-              <td><span class="seg-num">B5</span></td>
-            </tr>
-            <tr class="seg-lobe-row">
-              <td colspan="4">下葉（RLL — Right Lower Lobe）</td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S6</span></td>
-              <td>Superior（Apical）</td>
-              <td>上区（背区）</td>
-              <td><span class="seg-num">B6</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S7</span></td>
-              <td>Medial basal</td>
-              <td>内側底区</td>
-              <td><span class="seg-num">B7</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S8</span></td>
-              <td>Anterior basal</td>
-              <td>前底区</td>
-              <td><span class="seg-num">B8</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S9</span></td>
-              <td>Lateral basal</td>
-              <td>外側底区</td>
-              <td><span class="seg-num">B9</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num">S10</span></td>
-              <td>Posterior basal</td>
-              <td>後底区</td>
-              <td><span class="seg-num">B10</span></td>
+              <td>骨条件</td>
+              <td class="wl-bone">300〜400 HU</td>
+              <td class="wl-bone">1500〜2000 HU</td>
+              <td>骨浸潤・胸壁転移・脊椎病変</td>
             </tr>
           </tbody>
         </table>
+        <ul>
+          <li>肺内小結節（GGO含む）は必ず肺野窓で評価する。縦隔窓では見逃す</li>
+          <li>縦隔リンパ節の短径・内部壊死・石灰化は縦隔窓で評価</li>
+          <li>胸壁浸潤・横隔膜浸潤は骨条件と縦隔窓を組み合わせる</li>
+        </ul>
       </div>
-
-      <!-- 左肺区域 -->
-      <h3 class="sec-h3" id="seg-left">左肺区域（S1+2〜S10）</h3>
-      <div class="seg-table-wrap">
-        <table class="seg-table">
-          <thead>
-            <tr>
-              <th style="width:70px">区域</th>
-              <th style="width:200px">区域名（英語）</th>
-              <th style="width:140px">区域名（日本語）</th>
-              <th>対応気管支</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="seg-lobe-row-blue">
-              <td colspan="4">上葉（LUL — Left Upper Lobe）</td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S1+2</span></td>
-              <td>Apicoposterior</td>
-              <td>肺尖後区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B1+2</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S3</span></td>
-              <td>Anterior</td>
-              <td>前上区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B3</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S4</span></td>
-              <td>Superior lingular</td>
-              <td>上舌区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B4</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S5</span></td>
-              <td>Inferior lingular</td>
-              <td>下舌区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B5</span></td>
-            </tr>
-            <tr class="seg-lobe-row-blue">
-              <td colspan="4">下葉（LLL — Left Lower Lobe）</td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S6</span></td>
-              <td>Superior（Apical）</td>
-              <td>上区（背区）</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B6</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S8</span></td>
-              <td>Anterior basal</td>
-              <td>前底区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B8</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S9</span></td>
-              <td>Lateral basal</td>
-              <td>外側底区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B9</span></td>
-            </tr>
-            <tr>
-              <td><span class="seg-num" style="color:var(--blue-dark)">S10</span></td>
-              <td>Posterior basal</td>
-              <td>後底区</td>
-              <td><span class="seg-num" style="color:var(--blue-dark)">B10</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ===================== 3. 気管支分岐 ===================== -->
-    <section id="bronchi">
-      <h2 class="sec-h2">気管支分岐</h2>
-
-      <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
-        気管（trachea）は隆起（carina）で左右の主気管支に分岐する。
-      </p>
-
-      <div class="two-col">
-        <!-- 右側 -->
-        <div class="col-box right" id="bronchi-right">
-          <div class="col-box-head">
-            <span style="font-family:var(--mono);font-weight:600;color:var(--green-dark)">右側気管支分岐</span>
-          </div>
-          <div class="b-tree">
-            <div class="level0">右主気管支（Right main bronchus）</div>
-            <div class="level1">├ 右上葉気管支</div>
-            <div class="level2">├ <span class="b-num">B1</span> 肺尖区</div>
-            <div class="level2">├ <span class="b-num">B2</span> 後上区</div>
-            <div class="level2">└ <span class="b-num">B3</span> 前上区</div>
-            <div class="level1">└ 中間幹気管支（Bronchus intermedius）</div>
-            <div class="level2" style="padding-left:48px">├ 右中葉気管支</div>
-            <div class="level2" style="padding-left:64px">├ <span class="b-num">B4</span> 外側区</div>
-            <div class="level2" style="padding-left:64px">└ <span class="b-num">B5</span> 内側区</div>
-            <div class="level2" style="padding-left:48px">└ 右下葉気管支</div>
-            <div class="level2" style="padding-left:64px">├ <span class="b-num">B6</span> 上区（背区）</div>
-            <div class="level2" style="padding-left:64px">├ <span class="b-num">B7</span> 内側底区</div>
-            <div class="level2" style="padding-left:64px">├ <span class="b-num">B8</span> 前底区</div>
-            <div class="level2" style="padding-left:64px">├ <span class="b-num">B9</span> 外側底区</div>
-            <div class="level2" style="padding-left:64px">└ <span class="b-num">B10</span> 後底区</div>
-          </div>
-        </div>
-
-        <!-- 左側 -->
-        <div class="col-box left" id="bronchi-left">
-          <div class="col-box-head">
-            <span style="font-family:var(--mono);font-weight:600;color:var(--blue-dark)">左側気管支分岐</span>
-          </div>
-          <div class="b-tree">
-            <div class="level0">左主気管支（Left main bronchus）</div>
-            <div class="level1">├ 左上葉気管支</div>
-            <div class="level2">├ <span class="b-num-blue">B1+2</span> 肺尖後区</div>
-            <div class="level2">├ <span class="b-num-blue">B3</span> 前上区</div>
-            <div class="level2">└ 舌区気管支</div>
-            <div class="level2" style="padding-left:48px">├ <span class="b-num-blue">B4</span> 上舌区</div>
-            <div class="level2" style="padding-left:48px">└ <span class="b-num-blue">B5</span> 下舌区</div>
-            <div class="level1">└ 左下葉気管支</div>
-            <div class="level2" style="padding-left:32px">├ <span class="b-num-blue">B6</span> 上区（背区）</div>
-            <div class="level2" style="padding-left:32px">├ <span class="b-num-blue">B8</span> 前底区</div>
-            <div class="level2" style="padding-left:32px">├ <span class="b-num-blue">B9</span> 外側底区</div>
-            <div class="level2" style="padding-left:32px">└ <span class="b-num-blue">B10</span> 後底区</div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ===================== 4. 肺門構造 ===================== -->
-    <section id="hilum">
-      <h2 class="sec-h2">肺門構造</h2>
-
-      <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
-        肺門は気管支・肺動脈・肺静脈・リンパ管・神経が出入りする部位。肺葉切除・区域切除では肺門での血管・気管支処理が基本となる。
-      </p>
-
-      <div class="two-col" id="hilum-vessels">
-        <div class="col-box right">
-          <div class="col-box-head">
-            <span style="font-family:var(--mono);font-weight:600;color:var(--green-dark)">右肺門</span>
-          </div>
-          <div style="font-size:12.5px;color:var(--text2);line-height:1.9">
-            <p><strong>前方（腹側）から後方（背側）の順：</strong></p>
-            <ol style="padding-left:18px;margin-top:6px">
-              <li>上肺静脈（Superior pulmonary vein）</li>
-              <li>肺動脈（Pulmonary artery）</li>
-              <li>右上葉気管支（Upper lobe bronchus）</li>
-              <li>中間幹気管支（Bronchus intermedius）</li>
-              <li>下肺静脈（Inferior pulmonary vein）</li>
-            </ol>
-          </div>
-        </div>
-        <div class="col-box left">
-          <div class="col-box-head">
-            <span style="font-family:var(--mono);font-weight:600;color:var(--blue-dark)">左肺門</span>
-          </div>
-          <div style="font-size:12.5px;color:var(--text2);line-height:1.9">
-            <p><strong>前方から後方の順：</strong></p>
-            <ol style="padding-left:18px;margin-top:6px">
-              <li>上肺静脈（Superior pulmonary vein）</li>
-              <li>肺動脈（Pulmonary artery）— 気管支の上方を<strong>アーチ状</strong>に走行</li>
-              <li>左上葉・左下葉気管支</li>
-              <li>下肺静脈（Inferior pulmonary vein）</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ===================== 5. リンパ節分類 ===================== -->
-    <section id="lymph">
-      <h2 class="sec-h2">リンパ節分類</h2>
-
-      <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
-        肺癌のリンパ節転移評価にはIASLC（国際肺癌研究学会）のリンパ節地図が国際標準として使用される。N因子（N1/N2/N3）は手術適応・治療方針に直結する。
-      </p>
-
-      <div id="iaslc">
-        <h3 class="sec-h3">リンパ節分類（IASLC Staging Cards 9th Edition 2024 / 肺がん取り扱い規約 第9版）</h3>
-
-        <p style="font-size:12.5px;color:var(--text3);margin-bottom:12px">
-          以下の英語名称・境界定義はIASLC Staging Cards 9th Edition 2024に準拠。日本語名称は肺がん取り扱い規約 第9版（表1 CT読影基準）に対応。
-        </p>
-
-        <div class="ln-table-wrap">
-          <table class="ln-table">
-            <thead>
-              <tr>
-                <th style="width:55px">#</th>
-                <th style="width:95px">IASLC 名称</th>
-                <th style="width:130px">日本語名称（第9版）</th>
-                <th style="width:60px">N因子</th>
-                <th>上縁 / 下縁（IASLC 9th Ed. 2024）</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- #1 -->
-              <tr class="ln-group-row">
-                <td colspan="5">#1 — Low cervical, supraclavicular and sternal notch nodes</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#1R / #1L</span></td>
-                <td>Low cervical, supraclavicular &amp; sternal notch</td>
-                <td>低頸部・鎖骨上窩・胸骨切痕リンパ節</td>
-                <td>N3</td>
-                <td>上縁：輪状軟骨下縁 / 下縁：両側鎖骨・正中では胸骨柄上縁。気管正中線で#1R・#1Lを区別</td>
-              </tr>
-              <!-- 上部縦隔 -->
-              <tr class="ln-group-row">
-                <td colspan="5">上部縦隔 — #2〜#4</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#2R</span></td>
-                <td>Upper paratracheal (R)</td>
-                <td>右上部気管傍リンパ節</td>
-                <td>N2（右肺）/ N3（左肺）</td>
-                <td>上縁：肺尖・胸膜頂（正中：胸骨柄上縁）/ 下縁：左腕頭静脈尾側縁と気管の交差部。気管左外側縁より右側</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#2L</span></td>
-                <td>Upper paratracheal (L)</td>
-                <td>左上部気管傍リンパ節</td>
-                <td>N2（左肺）/ N3（右肺）</td>
-                <td>上縁：肺尖・胸膜頂（正中：胸骨柄上縁）/ 下縁：大動脈弓上縁。気管左外側縁より左側</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#3a</span></td>
-                <td>Prevascular</td>
-                <td>前血管リンパ節</td>
-                <td>N2</td>
-                <td>上縁：胸膜頂 / 下縁：隆起レベル。胸骨後方・前縁：胸骨後面。後縁：右＝上大静脈前縁、左＝左総頸動脈</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#3p</span></td>
-                <td>Retrotracheal</td>
-                <td>気管後リンパ節</td>
-                <td>N2</td>
-                <td>上縁：胸膜頂 / 下縁：隆起レベル。気管後縁より後方</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#4R</span></td>
-                <td>Lower paratracheal (R)</td>
-                <td>右下部気管傍リンパ節</td>
-                <td>N2（右肺）/ N3（左肺）</td>
-                <td>上縁：左腕頭静脈尾側縁と気管の交差部 / 下縁：奇静脈下縁。右気管傍・気管前リンパ節を含む。気管左外側縁より右側</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#4L</span></td>
-                <td>Lower paratracheal (L)</td>
-                <td>左下部気管傍リンパ節</td>
-                <td>N2（左肺）/ N3（右肺）</td>
-                <td>上縁：大動脈弓上縁 / 下縁：左主肺動脈上縁。動脈管索内側のリンパ節を含む。気管左外側縁より左側</td>
-              </tr>
-              <!-- 大動脈 -->
-              <tr class="ln-group-row">
-                <td colspan="5">大動脈リンパ節 — #5〜#6（左肺原発に関連）</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#5</span></td>
-                <td>Subaortic (AP window)</td>
-                <td>大動脈下リンパ節（大動脈肺動脈窓）</td>
-                <td>N2（左肺）/ N3（右肺）</td>
-                <td>上縁：大動脈弓下縁 / 下縁：左主肺動脈上縁。動脈管索の外側（lateral）に位置</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#6</span></td>
-                <td>Para-aortic (ascending aorta or phrenic)</td>
-                <td>傍大動脈リンパ節</td>
-                <td>N2（左肺）/ N3（右肺）</td>
-                <td>上縁：大動脈弓上縁に接する接線 / 下縁：大動脈弓下縁。上行大動脈・大動脈弓の前方・外側</td>
-              </tr>
-              <!-- 下部縦隔 -->
-              <tr class="ln-group-row">
-                <td colspan="5">下部縦隔 — #7〜#9</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#7</span></td>
-                <td>Subcarinal</td>
-                <td>気管分岐下リンパ節</td>
-                <td>N2（両側）</td>
-                <td>上縁：隆起 / 下縁：左＝下葉支上縁、右＝中間幹下縁</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#8R / #8L</span></td>
-                <td>Para-esophageal (below carina)</td>
-                <td>傍食道リンパ節（隆起下より下方）</td>
-                <td>N2（両側）</td>
-                <td>上縁：左＝下葉支上縁、右＝中間幹下縁 / 下縁：横隔膜。食道壁に接し正中線の左右に存在（#7を除く）</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#9R / #9L</span></td>
-                <td>Pulmonary ligament</td>
-                <td>肺靱帯リンパ節</td>
-                <td>N2（両側）</td>
-                <td>上縁：下肺静脈 / 下縁：横隔膜。肺靱帯内に位置</td>
-              </tr>
-              <!-- N1 -->
-              <tr class="ln-group-row">
-                <td colspan="5">N1リンパ節 — #10〜#14</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#10R / #10L</span></td>
-                <td>Hilar</td>
-                <td>肺門リンパ節</td>
-                <td>N1</td>
-                <td>主気管支・肺門血管に隣接。肺静脈近位部・主肺動脈を含む。上縁：右＝奇静脈下縁、左＝肺動脈上縁 / 下縁：両側葉間領域</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#11（#11s / #11i）</span></td>
-                <td>Interlobar</td>
-                <td>葉間リンパ節</td>
-                <td>N1</td>
-                <td>葉気管支起点の間。右肺：#11s＝上葉支〜中間幹間、#11i＝中葉支〜下葉支間（任意のサブカテゴリ）</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#12</span></td>
-                <td>Lobar</td>
-                <td>葉気管支周囲リンパ節</td>
-                <td>N1</td>
-                <td>葉気管支に隣接</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#13</span></td>
-                <td>Segmental</td>
-                <td>区域気管支周囲リンパ節</td>
-                <td>N1</td>
-                <td>区域気管支に隣接</td>
-              </tr>
-              <tr>
-                <td><span class="ln-num">#14</span></td>
-                <td>Sub-segmental</td>
-                <td>亜区域気管支周囲リンパ節</td>
-                <td>N1</td>
-                <td>亜区域気管支に隣接</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-
-        <div class="info-box">
-          <strong>N因子の要点：</strong>#1（鎖骨上窩）はN3。#2・#4は同側N2 / 対側N3。#5・#6は左側原発N2 / 右側原発N3相当。#7〜#9は両側ともN2。#10〜#14はN1（同側）/ N3（対側）。
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 参照文献 -->
-    <section id="references">
-      <h2 class="sec-h2">参照文献</h2>
-      <div class="anatomy-card">
-        <div class="anatomy-card-body">
-          <ol style="padding-left:18px;font-size:12.5px;color:var(--text2);line-height:2.1">
-            <li>
-              日本肺癌学会（編）．<strong>肺癌取り扱い規約 第9版</strong>．金原出版，2017．
-              <span style="font-size:11px;color:var(--text3)">— 表1「リンパ節部位のCT読影基準」（#1〜#14の境界定義・名称）を直接参照</span>
-            </li>
-            <li>
-              IASLC. <strong>Staging Cards 9th Edition 2024.</strong> International Association for the Study of Lung Cancer, 2024.
-              <span style="font-size:11px;color:var(--text3)">— #1〜#14 の英語名称・上縁/下縁の境界定義を直接参照</span>
-            </li>
-            <li>
-              Goldstraw P, Chansky K, Crowley J, et al. The IASLC Lung Cancer Staging Project: Proposals for Revision of the TNM Stage Groupings in the Forthcoming (Eighth) Edition of the TNM Classification for Lung Cancer.
-              <em>J Thorac Oncol.</em> 2016;11(1):39–51.
-              <span style="font-size:11px;color:var(--text3)">— 第8版TNM分類（N因子定義の基盤）</span>
-            </li>
-            <li>
-              Netter FH. <strong>Atlas of Human Anatomy</strong>, 7th ed. Elsevier, 2019.
-              <span style="font-size:11px;color:var(--text3)">— 肺・縦隔解剖のイラスト参照</span>
-            </li>
-            <li>
-              Fishman AP, et al. <strong>Fishman's Pulmonary Diseases and Disorders</strong>, 5th ed. McGraw-Hill, 2015.
-              <span style="font-size:11px;color:var(--text3)">— 気管支解剖・肺門構造の記述参照</span>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <div style="background:var(--surface2);border-radius:var(--radius-lg);padding:16px 20px;font-size:12px;color:var(--text3);line-height:1.8">
-      <strong style="color:var(--text2)">免責・要確認事項：</strong>本ページの内容は教育目的であり、診療の根拠として単独で使用しないこと。<!-- 要確認 -->のコメントが付いた記述は一次文献・各施設の解剖バリエーション・最新のガイドライン改訂版と照合が必要。気管支・血管の解剖学的変異は頻繁に存在するため、術前の3D-CTや術中の直視確認を常に優先すること。
     </div>
 
-  </main>
-</div>
+    <div class="ct-card">
+      <div class="ct-head"><span class="ct-num">2</span>区域同定の手順（CTコマ送りの方向）</div>
+      <div class="ct-body">
+        <ul>
+          <li><strong>頭側→尾側：</strong>気管分岐部（隆起）を確認 → 右上葉・左上葉気管支を同定 → 中間幹気管支を下行しながら追う</li>
+          <li><strong>S6（上下葉区）の同定：</strong>中間幹の後壁から分岐する水平走行の気管支。コマ送りで後壁を意識して追う</li>
+          <li><strong>肺底区（S8〜S10）：</strong>下葉気管支が基幹部から扇状に分岐する。横断像では前方S8・外側S9・後方S10の順に並ぶ（左も同様）</li>
+          <li><strong>冠状断・矢状断：</strong>葉間裂（水平裂・斜裂）の位置確認に有用。腫瘍の葉にまたがる浸潤の評価に使う</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ct-card">
+      <div class="ct-head"><span class="ct-num">3</span>気管支を追うときのコツ</div>
+      <div class="ct-body">
+        <ul>
+          <li><strong>右上葉：</strong>右上葉気管支はほぼ水平に走行するためCT横断像では短く見える。上下の連続スライスを組み合わせる。<strong>B2（後上葉区）はCT画像を左右反転して見ると方向感が掴みやすい</strong>（外科医間で広く使われる慣用的手法）</li>
+          <li><strong>左上葉：</strong>上区と舌区の分岐部を冠状断で同定してから横断像に戻ると区域が整理される</li>
+          <li><strong>B6：</strong>中間幹から直角に後方へ分岐。横断像で中間幹の断面を見ながら後壁を追うと見つかりやすい</li>
+          <li><strong>thin-slice CT（1〜1.5 mm）：</strong>区域同定には必須。5 mm 以上のスライスでは気管支分岐を見逃す</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ct-card">
+      <div class="ct-head"><span class="ct-num">4</span>Subsuperior segment（S*・B*）</div>
+      <div class="ct-body">
+        <p style="margin-bottom:10px">下葉のS6とS8の間に存在することがある解剖学的変異区域。<strong>Subsuperior segment</strong>とも呼ばれる。</p>
+        <ul>
+          <li>右下葉に比較的多く見られる解剖学的変異</li>
+          <li>気管支はB*（またはB6bなど），動脈はA*として記載されることがある</li>
+          <li><strong>臨床的意義：</strong>区域切除術を計画する際，この区域の存在を見落とすと切除範囲が不適切になる可能性がある。術前CTで下葉気管支の分岐パターンを丁寧に確認することが重要</li>
+          <li>3D-CT血管造影（3D-CTBA）を用いた術前評価が区域切除の標準化を促進している</li>
+        </ul>
+        <div class="warn-box" style="margin-top:12px">
+          区域切除術（segmentectomy）では，術前の3D-CTBAによる血管・気管支解剖の確認が安全な切離線決定に不可欠。特に肺底区では個体差が大きく，慎重な評価が必要。
+        </div>
+      </div>
+    </div>
+
+    <div class="ct-card">
+      <div class="ct-head"><span class="ct-num">5</span>肺結節のCT評価チェックリスト</div>
+      <div class="ct-body">
+        <ul>
+          <li><strong>位置：</strong>葉・区域を同定（気管支・葉間裂を基準に）</li>
+          <li><strong>サイズ：</strong>最大径（縦隔窓と肺野窓で計測が異なる場合は肺野窓優先）</li>
+          <li><strong>性状：</strong>充実性 / GGO / 混合型（part-solid），辺縁（スピキュラ・胸膜牽引）</li>
+          <li><strong>内部：</strong>空洞・石灰化・脂肪成分・血管走行</li>
+          <li><strong>葉間裂との関係：</strong>浸潤・接触の有無（区域・葉切除の計画に直結）</li>
+          <li><strong>胸膜・胸壁：</strong>接触か浸潤かを縦隔窓・冠状断で評価</li>
+          <li><strong>縦隔・リンパ節：</strong>短径10 mm以上を要評価（サイズ基準のみでは不十分。PETを参照）</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /panel-ct -->
+
+</main>
+</div><!-- /layout -->
 
 <footer class="footer">
   <span class="footer-logo"><span>lung</span>atlas</span>
@@ -831,36 +716,150 @@ fetch('/lungatlas/nav.html')
 </footer>
 
 <script>
-function activate(el) {
-  document.querySelectorAll('.sb-item').forEach(function(i){ i.classList.remove('active'); });
-  el.classList.add('active');
+// nav fetch
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+
+// タブ・サイドバー切り替え
+function sw(name) {
+  var panels = ['seg','bronchus','lymph','ct'];
+  panels.forEach(function(n) {
+    document.getElementById('panel-' + n).classList.toggle('active', n === name);
+    document.getElementById('tab-' + n).classList.toggle('active', n === name);
+    var sb = document.getElementById('sb-' + n);
+    if (sb) sb.classList.toggle('active', n === name);
+  });
 }
 
-/* スクロール連動サイドバー */
-var sections = [
-  { id: 'overview',    el: null },
-  { id: 'segments',    el: null },
-  { id: 'bronchi',     el: null },
-  { id: 'hilum',       el: null },
-  { id: 'lymph',       el: null },
-  { id: 'references',  el: null },
-];
-sections.forEach(function(s){ s.el = document.getElementById(s.id); });
+// 区域データ
+var SEG = {
+  'r-s1': {
+    name: 'S1 肺尖区（右）',
+    en: 'Right Upper Lobe — Apical Segment',
+    b: 'B1', a: 'A1', v: 'V1',
+    clinical: 'CTでは肺尖部に位置し，結核・肺炎などの上葉病変が多い区域。外科的には右上葉切除時に最初にアクセスする区域。B1は主気管支から比較的水平に分岐する。'
+  },
+  'r-s2': {
+    name: 'S2 後上葉区（右）',
+    en: 'Right Upper Lobe — Posterior Segment',
+    b: 'B2', a: 'A2', v: 'V2',
+    clinical: '肺の後方に位置。CTでは後壁側に接する。気管支鏡では右上葉気管支から後方に向かう枝を追う。区域切除時はS1+S2切除（S1+2切除）として行われることが多い。'
+  },
+  'r-s3': {
+    name: 'S3 前上葉区（右）',
+    en: 'Right Upper Lobe — Anterior Segment',
+    b: 'B3', a: 'A3', v: 'V3',
+    clinical: '前胸壁に面する。肺門部腫瘍が前方に浸潤する際に侵される区域。CT冠状断で前胸壁との接触を確認する。'
+  },
+  'r-s4': {
+    name: 'S4 外側中葉区（右）',
+    en: 'Right Middle Lobe — Lateral Segment',
+    b: 'B4', a: 'A4', v: 'V4',
+    clinical: '右中葉の外側部。中葉症候群（無気肺）は，B4/B5が外圧（リンパ節腫大など）で閉塞することで生じる。中葉は葉間裂に挟まれた薄い葉で，側面から見るとくさび形。'
+  },
+  'r-s5': {
+    name: 'S5 内側中葉区（右）',
+    en: 'Right Middle Lobe — Medial Segment',
+    b: 'B5', a: 'A5', v: 'V5',
+    clinical: '心臓に隣接する内側区域。CTでは前縦隔・心臓との境界を意識する。B5は中葉気管支から内側に分岐する。'
+  },
+  'r-s6': {
+    name: 'S6 上下葉区（右）',
+    en: 'Right Lower Lobe — Superior Segment',
+    b: 'B6', a: 'A6', v: 'V6',
+    clinical: '下葉最上部に位置。B6は中間幹から直角に後方へ分岐するため，CT読影では見逃しに注意。肺癌の発生が比較的多い区域のひとつ。区域切除としてS6切除は定型的に行われる。'
+  },
+  'r-s7': {
+    name: 'S7 内側肺底区（右）',
+    en: 'Right Lower Lobe — Medial Basal Segment',
+    b: 'B7', a: 'A7', v: 'V7',
+    clinical: '心臓の後下方に位置し，CTでは心臓に隠れやすい。B7は下葉基幹部から最初に内側に分岐する。右肺にのみ明瞭に存在（左はS7が欠損または小さいことが多い）。'
+  },
+  'r-s8': {
+    name: 'S8 前肺底区（右）',
+    en: 'Right Lower Lobe — Anterior Basal Segment',
+    b: 'B8', a: 'A8', v: 'V8',
+    clinical: '下葉前方の肺底区。横隔膜に面する。S8の区域切除は比較的行いやすいが，A8の走行変異に注意。'
+  },
+  'r-s9': {
+    name: 'S9 外側肺底区（右）',
+    en: 'Right Lower Lobe — Lateral Basal Segment',
+    b: 'B9', a: 'A9', v: 'V9',
+    clinical: '下葉外側の肺底区。肋骨・横隔膜に面する。CTでは背臥位で後下部に位置する。'
+  },
+  'r-s10': {
+    name: 'S10 後肺底区（右）',
+    en: 'Right Lower Lobe — Posterior Basal Segment',
+    b: 'B10', a: 'A10', v: 'V10',
+    clinical: '下葉後方の肺底区。脊椎・後胸壁に面する。誤嚥性肺炎や重力依存性の無気肺が好発する区域。CTの背臥位では最も後方下部に位置する。'
+  },
+  'l-s12': {
+    name: 'S1+2 肺尖後区（左）',
+    en: 'Left Upper Lobe — Apicoposterior Segment',
+    b: 'B1+2', a: 'A1+2', v: 'V1+2',
+    clinical: '右肺のS1とS2が融合した区域。左肺には独立したS1とS2がなく，B1+2として単一の区域支をもつ。外科的には左上葉切除，またはS1+2+S3切除（左上区切除）として扱う。'
+  },
+  'l-s3': {
+    name: 'S3 前上葉区（左）',
+    en: 'Left Upper Lobe — Anterior Segment',
+    b: 'B3', a: 'A3', v: 'V3',
+    clinical: '左上葉の前方区域。前胸壁に面する。左上区切除（S1+2+S3）は左肺の上区に相当し，解剖学的区域切除として定型化されている。'
+  },
+  'l-s4': {
+    name: 'S4 上舌区（左）',
+    en: 'Left Upper Lobe — Superior Lingular Segment',
+    b: 'B4', a: 'A4', v: 'V4',
+    clinical: '舌区の上部。心臓前面に隣接。右中葉に相当する機能的役割をもつ。舌区切除（S4+S5）は左上葉に対する区域切除として行われる。'
+  },
+  'l-s5': {
+    name: 'S5 下舌区（左）',
+    en: 'Left Upper Lobe — Inferior Lingular Segment',
+    b: 'B5', a: 'A5', v: 'V5',
+    clinical: '舌区の下部。横隔膜・心臓底部に面する。B5の閉塞では舌区無気肺が生じ，CTで三角形状の浸影を示す（中葉症候群の左側相当）。'
+  },
+  'l-s6': {
+    name: 'S6 上下葉区（左）',
+    en: 'Left Lower Lobe — Superior Segment',
+    b: 'B6', a: 'A6', v: 'V6',
+    clinical: '右S6と同様，左下葉の最上部。脊椎の左側に位置する。左S6切除は区域切除として定型的に行われる。'
+  },
+  'l-s8': {
+    name: 'S8 前肺底区（左）',
+    en: 'Left Lower Lobe — Anterior Basal Segment',
+    b: 'B8', a: 'A8', v: 'V8',
+    clinical: '左下葉前方。左S7は解剖学的変異（欠損または小さい）があるため，実質的にS8が内側肺底区も包括することがある。'
+  },
+  'l-s9': {
+    name: 'S9 外側肺底区（左）',
+    en: 'Left Lower Lobe — Lateral Basal Segment',
+    b: 'B9', a: 'A9', v: 'V9',
+    clinical: '左下葉外側。肋骨面に接する。'
+  },
+  'l-s10': {
+    name: 'S10 後肺底区（左）',
+    en: 'Left Lower Lobe — Posterior Basal Segment',
+    b: 'B10', a: 'A10', v: 'V10',
+    clinical: '左下葉後方の肺底区。誤嚥性肺炎・重力依存性変化が好発する。脊椎・後胸壁に接する。'
+  }
+};
 
-var sbItems = document.querySelectorAll('.sb-item');
+function showSeg(id) {
+  document.querySelectorAll('.seg.selected').forEach(function(el){ el.classList.remove('selected'); });
+  document.querySelectorAll('[id="' + id + '"]').forEach(function(el){ el.classList.add('selected'); });
 
-window.addEventListener('scroll', function() {
-  var y = window.scrollY + 80;
-  var active = sections[0].id;
-  sections.forEach(function(s){
-    if (s.el && s.el.offsetTop <= y) active = s.id;
-  });
-  sbItems.forEach(function(item){
-    item.classList.toggle('active', item.getAttribute('href') === '#' + active);
-  });
-}, { passive: true });
-
+  var d = SEG[id];
+  if (!d) return;
+  document.getElementById('sip-empty').style.display = 'none';
+  document.getElementById('sip-content').style.display = 'block';
+  document.getElementById('sip-name').textContent = d.name;
+  document.getElementById('sip-en').textContent = d.en;
+  document.getElementById('sip-badges').innerHTML =
+    '<span class="badge badge-b">気管支 ' + d.b + '</span>' +
+    '<span class="badge badge-a">動脈 ' + d.a + '</span>' +
+    '<span class="badge badge-v">静脈 ' + d.v + '</span>';
+  document.getElementById('sip-clinical').textContent = d.clinical;
+}
 </script>
-
 </body>
 </html>
