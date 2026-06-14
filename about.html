@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>このサイトについて — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f5;--surface:#fff;--border:#d4e0d6;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --navy:#0a1628;--navy2:#12243f;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;
+  --font:'Inter',sans-serif;--serif:'Libre Baskerville',serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:54px;background:rgba(10,22,40,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.07)}
+.logo{font-size:15px;font-weight:600;color:#fff;text-decoration:none}
+.logo span{color:#5ecfa0}
+.nav-links{display:flex;gap:4px}
+.nav-links a{font-size:12.5px;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.active{color:#5ecfa0}
+
+/* HERO */
+.hero{background:var(--navy);padding:120px 32px 80px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(255,255,255,.07)}
+.hero-inner{max-width:720px;margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyeline{width:28px;height:1px;background:#5ecfa0}
+.eyelabel{font-size:10.5px;font-weight:500;color:#5ecfa0;letter-spacing:.1em;text-transform:uppercase}
+.hero-h1{font-family:var(--serif);font-size:clamp(28px,5vw,48px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:16px}
+.hero-h1 em{font-style:italic;color:#5ecfa0}
+.hero-lead{font-size:15px;color:rgba(255,255,255,.5);line-height:1.8;max-width:580px}
+
+/* MAIN */
+.main{max-width:720px;margin:0 auto;padding:60px 32px 80px}
+
+/* ABSTRACT-STYLE SECTION */
+.abstract-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:32px;position:relative}
+.abstract-block::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green-mid);border-radius:3px 0 0 3px}
+.ab-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green-mid);margin-bottom:12px}
+.ab-title{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:16px}
+.ab-text{font-size:14px;color:var(--text2);line-height:1.85}
+.ab-text p{margin-bottom:14px}
+.ab-text p:last-child{margin-bottom:0}
+.ab-text strong{color:var(--text);font-weight:600}
+
+/* BACKGROUND (経歴に相当しない匿名の文脈) */
+.context-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.context-item{display:flex;gap:12px;align-items:flex-start}
+.ci-dot{width:6px;height:6px;border-radius:50%;background:var(--green-mid);flex-shrink:0;margin-top:7px}
+.ci-text{font-size:13.5px;color:var(--text2);line-height:1.65}
+
+/* STATEMENT */
+.statement-block{background:var(--navy);border-radius:12px;padding:36px;margin-bottom:32px}
+.stmt-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5ecfa0;margin-bottom:16px}
+.stmt-text{font-family:var(--serif);font-size:17px;font-style:italic;color:rgba(255,255,255,.8);line-height:1.75}
+.stmt-text em{color:#5ecfa0;font-style:normal}
+
+/* PRINCIPLES */
+.principles{margin-bottom:32px}
+.pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+.pr-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
+.pr-num{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--green-mid);margin-bottom:8px}
+.pr-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:5px}
+.pr-desc{font-size:12px;color:var(--text3);line-height:1.65}
+
+/* DISCLAIMER */
+.disclaimer{background:var(--amber-light);border:1px solid #e8c87a;border-radius:10px;padding:20px;margin-bottom:32px}
+.disc-title{font-size:12px;font-weight:600;color:var(--amber-dark);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
+.disc-text{font-size:12px;color:var(--amber-dark);line-height:1.7}
+
+/* CTA */
+.cta-block{background:var(--green-pale);border:1px solid var(--green-light);border-radius:12px;padding:28px;text-align:center}
+.cta-text{font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.7}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-p{font-size:13px;font-weight:500;background:var(--green-mid);color:#fff;border:none;padding:10px 22px;border-radius:8px;cursor:pointer;font-family:var(--font);text-decoration:none;transition:background .15s}
+.btn-p:hover{background:var(--green-dark)}
+.btn-s{font-size:13px;font-weight:500;background:var(--surface);color:var(--green-dark);border:1px solid var(--green-light);padding:10px 22px;border-radius:8px;cursor:pointer;font-family:var(--font);text-decoration:none;transition:all .15s}
+.btn-s:hover{background:var(--green-light)}
+
+/* FOOTER */
+.footer{background:var(--navy);padding:32px;color:rgba(255,255,255,.35);font-size:12px;text-align:center;border-top:1px solid rgba(255,255,255,.07)}
+.footer-logo{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.footer-logo span{color:#5ecfa0}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero{padding:90px 20px 60px}
+  .main{padding:40px 20px 60px}
+  .pr-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="logo" href="home.html"><span>lung</span>atlas</a>
+  <div class="nav-links">
+    <a href="home.html">トップ</a>
+    <a href="index.html">化学療法</a>
+    <a href="driver-positive.html">変異陽性</a>
+    <a href="about.html" class="active">このサイトについて</a>
+  </div>
+  <a href="about-en.html" style="font-size:11px;font-weight:500;color:rgba(255,255,255,.5);text-decoration:none;padding:5px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;transition:all .15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">EN</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <div class="eyeline"></div>
+      <div class="eyelabel">About · LungAtlas</div>
+    </div>
+    <h1 class="hero-h1">このサイトに<br>ついて</h1>
+  </div>
+</section>
+
+<main class="main">
+
+  <!-- メッセージ -->
+  <div class="statement-block">
+    <div class="stmt-label">From Dr. UMA</div>
+    <p class="stmt-text">
+      若手医師として勉強したことを、<em>AIとともに</em>整理しています。<br>
+      自分のための学習ノートが、隣の後輩にも、<br>世界のどこかの研修医にも役に立てば——<br>
+      そしてAIと人間が一緒に作る医学教育の可能性を、<br>ここで模索しています。
+    </p>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="disc-title">⚠ 免責事項 · Disclaimer</div>
+    <div class="disc-text">
+      このサイトの内容は教育・情報提供を目的としており、個別の診療・治療方針の決定に用いることを意図していません。臨床判断は必ず最新のガイドライン・原著論文・担当医の判断に従ってください。掲載データは最新の注意を払って作成していますが、最終的な臨床判断の根拠としては原著論文を直接参照してください。
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <p class="cta-text">すべてのコンテンツは無料・オープンアクセスです。</p>
+    <div class="cta-btns">
+      <a class="btn-p" href="index.html">化学療法から始める</a>
+      <a class="btn-s" href="driver-positive.html">変異陽性 NSCLC を見る</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-logo"><span>lung</span>atlas</div>
+  <div>Built on trials, not textbooks. — Dr. UMA · 2026</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage IV NSCLC 1st-line: Driver-Positive — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f5f7f5;--surface:#fff;--surface2:#f0f4f1;--border:#d4e0d6;--border2:#b8cfbb;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --blue-dark:#0c3d6e;--blue-light:#e3edf8;--purple-dark:#3b2d7a;--purple-light:#eeebfb;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;--red-dark:#6b1c1c;--red-light:#fce8e8;
+  --teal-dark:#085041;--teal-light:#e1f5ee;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:10px;--radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+.nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:52px;position:sticky;top:0;z-index:100}
+.logo{font-size:15px;font-weight:600;color:var(--text);text-decoration:none}
+.logo span{color:var(--green-mid)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
+.nav-links a:hover{background:var(--surface2);color:var(--text)}
+.nav-links a.active{color:var(--green-dark);font-weight:500;background:var(--green-light)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.lang-switch{display:flex;gap:4px}
+.lang-btn{font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text3);cursor:pointer;font-family:var(--font);transition:all .15s;text-decoration:none}
+.lang-btn:hover{border-color:var(--border2);color:var(--text)}
+.lang-btn.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark)}
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sb-head{font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--text3);padding:8px 18px 4px;text-transform:uppercase}
+.sb-item{display:block;padding:8px 18px;font-size:12.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;cursor:pointer;line-height:1.4}
+.sb-item:hover{background:var(--green-pale);color:var(--green-dark)}
+.sb-item.active{background:var(--green-light);color:var(--green-dark);font-weight:500;border-left-color:var(--green-mid)}
+.sb-sub{display:block;padding:5px 18px 5px 30px;font-size:11.5px;color:var(--text3);text-decoration:none;cursor:pointer;transition:color .15s}
+.sb-sub:hover,.sb-sub.active{color:var(--green-dark);font-weight:500}
+.main{flex:1;padding:28px 36px 60px;max-width:860px}
+.crumb{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.crumb span{color:var(--green-mid)}
+.updated{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--green-dark);background:var(--green-light);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.updated::before{content:'↻';font-size:12px}
+.art-h1{font-size:22px;font-weight:600;line-height:1.2;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--text2);line-height:1.75;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.sec-h2{font-size:14px;font-weight:600;color:var(--text);margin:24px 0 12px;display:flex;align-items:center;gap:8px}
+.sec-h2::before{content:'';display:block;width:3px;height:15px;background:var(--green-mid);border-radius:2px;flex-shrink:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.tab{font-size:12.5px;padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.tab:hover{border-color:var(--border2);color:var(--green-dark)}
+.tab.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark);font-weight:500}
+.panel{display:none}.panel.active{display:block}
+.trial-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden}
+.tc-top{padding:18px 20px 16px;border-bottom:1px solid var(--border)}
+.tc-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.trial-link{font-size:13.5px;font-weight:600;color:var(--green-dark);text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-family:var(--mono)}
+.trial-link:hover{opacity:.7}
+.trial-link .ext{font-size:11px;opacity:.7}
+.jbadge{font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:8px;white-space:nowrap}
+.j-nejm{background:var(--blue-light);color:var(--blue-dark)}
+.j-jco{background:var(--purple-light);color:var(--purple-dark)}
+.j-jto{background:var(--teal-light);color:var(--teal-dark)}
+.ybadge{font-size:10.5px;color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:8px}
+.new-badge{font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:8px;background:#fdf0d8;color:#6b3d00}
+.drug-title{font-size:15px;font-weight:600;margin-bottom:3px}
+.drug-sub{font-size:12.5px;color:var(--text2);margin-bottom:12px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat{background:var(--green-pale);border-radius:8px;padding:10px 13px}
+.stat-val{font-size:17px;font-weight:600;color:var(--green-dark);font-family:var(--mono)}
+.stat-label{font-size:10.5px;color:var(--text3);margin-top:2px;line-height:1.4}
+.stat-vs{font-size:11px;color:var(--text2);margin-top:2px}
+.tc-body{padding:16px 20px}
+.trial-desc{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.gl-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.gl-item{display:flex;align-items:flex-start;gap:8px;border-radius:8px;padding:9px 13px;font-size:12px;line-height:1.65}
+.gl-jp{background:var(--green-light);color:var(--green-dark)}
+.gl-us{background:var(--blue-light);color:var(--blue-dark)}
+.gl-eu{background:var(--purple-light);color:var(--purple-dark)}
+.gl-flag{font-size:14px;flex-shrink:0;margin-top:1px}
+.tox-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tox{font-size:11px;background:var(--red-light);color:var(--red-dark);padding:3px 10px;border-radius:10px}
+.expand-btn{font-size:11.5px;color:var(--green-dark);background:none;border:none;cursor:pointer;margin-top:8px;padding:0;display:inline-flex;align-items:center;gap:4px;font-family:var(--font)}
+.expand-btn:hover{opacity:.7}
+.expand-btn .chev{display:inline-block}
+.extra{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12.5px;color:var(--text2);line-height:1.8}
+.extra.open{display:block}
+.info-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
+.note-box{background:var(--blue-light);border-left:3px solid #2d6db5;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--blue-dark);line-height:1.75;margin:14px 0}
+.divider{height:1px;background:var(--border);margin:20px 0}
+.next-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.next-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);font-weight:500;background:var(--green-light);border:none;cursor:pointer;padding:9px 16px;border-radius:8px;font-family:var(--font);text-decoration:none;transition:background .15s}
+.next-btn:hover{background:#cce8d4}
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:20px 36px;font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-weight:600;color:var(--text)}
+.footer-logo span{color:var(--green-mid)}
+@media(max-width:768px){.sidebar{display:none}.main{padding:20px 18px 40px}.stat-row{grid-template-columns:1fr 1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="home.html"><span>lung</span>atlas</a>
+  <div class="nav-links">
+    <a href="home.html">Top</a>
+    <a href="driver-positive-en.html" class="active">Driver+</a>
+    <a href="index.html">Driver−</a>
+    <a href="about.html">About</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <a class="lang-btn" href="driver-positive.html">日本語</a>
+      <a class="lang-btn active" href="driver-positive-en.html">English</a>
+    </div>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-head">Chemotherapy</div>
+    <a class="sb-item active" href="#">Stage IV NSCLC</a>
+    <a class="sb-sub active" href="driver-positive-en.html">1st-line: Driver-positive</a>
+    <a class="sb-sub" href="index.html">1st-line: Driver-negative</a>
+    <a class="sb-sub" href="#">Post-resistance strategies</a>
+    <a class="sb-item" href="#">Stage IV SCLC</a>
+    <a class="sb-item" href="#">Perioperative therapy</a>
+    <a class="sb-item" href="#">Toxicity management</a>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">Chemotherapy › <span>Stage IV NSCLC › 1st-line: Driver mutation-positive</span></div>
+    <div class="updated">Last updated June 2026 — Primary literature–based / International guideline comparison</div>
+    <h1 class="art-h1">Stage IV NSCLC First-Line Therapy<br>Driver Mutation–Positive</h1>
+    <p class="lead">Treatment decisions should be grounded in primary literature. This page presents key Phase III trial data supporting each regimen, with guideline recommendations listed below. Comprehensive genomic profiling (CGP) is the starting point — the specific mutation detected directly determines prognosis and treatment choice.</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="sw('egfr',this)">EGFR Mutation</button>
+      <button class="tab" onclick="sw('alk',this)">ALK Fusion</button>
+      <button class="tab" onclick="sw('ros1',this)">ROS1 / HER2</button>
+      <button class="tab" onclick="sw('others',this)">KRAS / MET / Others</button>
+      <button class="tab" onclick="sw('flow',this)">Treatment Flow</button>
+    </div>
+
+    <!-- EGFR -->
+    <div id="p-egfr" class="panel active">
+
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2503001" target="_blank" rel="noopener">MARIPOSA (Final OS) <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2024 / Sept 2025</span>
+            <span class="ybadge">Phase III · n=1,074</span>
+            <span class="new-badge">2025 landmark</span>
+          </div>
+          <div class="drug-title">Amivantamab + Lazertinib vs Osimertinib</div>
+          <div class="drug-sub">Treatment-naive EGFR exon19del / L858R · Locally advanced or metastatic NSCLC</div>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-val">23.7 mo</div>
+              <div class="stat-label">Median PFS</div>
+              <div class="stat-vs">vs 16.6 mo (HR 0.70, p&lt;0.001)</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.75</div>
+              <div class="stat-label">OS — Final analysis (NEJM 2025)</div>
+              <div class="stat-vs">3-yr OS 60% vs 51% (p=0.005)</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">25.8 mo</div>
+              <div class="stat-label">Median DoR</div>
+              <div class="stat-vs">vs 16.8 mo (osimertinib)</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">PFS data published in NEJM 2024 (HR 0.70); final OS analysis published NEJM September 2025. This is the first Phase III trial to demonstrate both PFS and OS benefit of amivantamab (EGFR-MET bispecific antibody) + lazertinib (3rd-gen EGFR-TKI) over osimertinib monotherapy. Median OS is projected to exceed osimertinib by more than one year.</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>Japan (GL 2025):</strong> Added as recommended 1st-line for exon19del/L858R. Approved March 2025.</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN v4.2026 / ASCO Living GL:</strong> Category 1. FDA approval 2024. ASCO Living GL updated through 2026.</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO 2025:</strong> Grade A recommendation. EMA approval early 2025.</span></div>
+          </div>
+          <div class="tox-row">
+            <span class="tox">Infusion reactions</span>
+            <span class="tox">Skin toxicity (Grade 2–3)</span>
+            <span class="tox">Venous thromboembolism</span>
+            <span class="tox">Discontinuation rate 10% vs 3%</span>
+          </div>
+          <button class="expand-btn" onclick="tog(this)"><span class="chev">▼</span> Trial design and subgroup caveats</button>
+          <div class="extra">Randomized 2:2:1 to amivantamab+lazertinib, osimertinib, or lazertinib alone. Subgroup analyses suggest attenuated OS benefit in patients ≥65 years (MD Anderson, E. Singhi). Requires IV infusion, complicating outpatient management. VTE risk is elevated; anticoagulation prophylaxis is recommended.</div>
+        </div>
+      </div>
+
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2304729" target="_blank" rel="noopener">FLAURA2 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2023</span>
+            <span class="ybadge">Phase III · n=557</span>
+          </div>
+          <div class="drug-title">Osimertinib + Chemotherapy (Carboplatin/Cisplatin + Pemetrexed) vs Osimertinib alone</div>
+          <div class="drug-sub">Treatment-naive EGFR exon19del / L858R · PS 0–1 · Non-squamous</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">25.5 mo</div><div class="stat-label">Median PFS (combination)</div><div class="stat-vs">vs 16.7 mo (monotherapy)</div></div>
+            <div class="stat"><div class="stat-val">HR 0.62</div><div class="stat-label">PFS hazard ratio</div><div class="stat-vs">p &lt; 0.001</div></div>
+            <div class="stat"><div class="stat-val">OS pending</div><div class="stat-label">Overall survival</div><div class="stat-vs">Final analysis ongoing</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">Adding platinum-based chemotherapy to osimertinib extended PFS by ~9 months. However, toxicity burden (hematologic, nausea) increases substantially. Without confirmed OS benefit, many experts reserve this regimen for PS 0–1 patients with high CNS metastasis risk.</p>
+          <div class="gl-list">
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN:</strong> Category 1. Caution advised for universal application before OS data mature.</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO:</strong> Recommended for PS 0–1 non-squamous. OS data awaited before definitive positioning.</span></div>
+          </div>
+          <div class="tox-row">
+            <span class="tox">Neutropenia</span><span class="tox">Nausea/vomiting</span><span class="tox">Increased fatigue</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa1810858" target="_blank" rel="noopener">FLAURA <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2018 / 2020 (OS)</span>
+            <span class="ybadge">Phase III · n=556 · Standard-of-care reference</span>
+          </div>
+          <div class="drug-title">Osimertinib monotherapy 80 mg/day</div>
+          <div class="drug-sub">Treatment-naive EGFR exon19del / L858R · The control arm for all subsequent trials</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">18.9 mo</div><div class="stat-label">Median PFS</div><div class="stat-vs">vs 10.2 mo (gefitinib/erlotinib)</div></div>
+            <div class="stat"><div class="stat-val">38.6 mo</div><div class="stat-label">Median OS</div><div class="stat-vs">vs 31.8 mo (HR 0.80)</div></div>
+            <div class="stat"><div class="stat-val">80 mg/day</div><div class="stat-label">Dosing</div><div class="stat-vs">Oral, once daily</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">The first 3rd-generation EGFR-TKI to demonstrate OS benefit in the 1st-line setting. Significant PFS benefit in CNS metastasis subgroups. Remains the most widely used reference standard. ADAURA trial also established osimertinib as adjuvant therapy post-resection (DFS HR 0.17).</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>Japan:</strong> Continued Category 1 recommendation. Adjuvant use (ADAURA) also covered by insurance.</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO:</strong> Category 1 for 1st-line and adjuvant settings (upgraded 2025).</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO:</strong> Standard of care. Choice between osimertinib and MARIPOSA should be individualized based on patient profile and healthcare setting.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <h2 class="sec-h2">Exon20 insertion: Distinct from classic EGFR mutations — conventional TKIs are ineffective</h2>
+
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2220826" target="_blank" rel="noopener">PAPILLON <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2023</span>
+            <span class="ybadge">Phase III · n=308</span>
+            <span class="new-badge">GL 2025 — new recommendation</span>
+          </div>
+          <div class="drug-title">Amivantamab + Chemotherapy vs Chemotherapy alone</div>
+          <div class="drug-sub">EGFR exon20 insertion mutation · Treatment-naive · Separate category from exon19del/L858R</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">11.4 mo</div><div class="stat-label">Median PFS (combination)</div><div class="stat-vs">vs 6.7 mo (HR 0.40)</div></div>
+            <div class="stat"><div class="stat-val">HR 0.40</div><div class="stat-label">PFS hazard ratio</div><div class="stat-vs">p &lt; 0.001</div></div>
+            <div class="stat"><div class="stat-val">57% vs 21%</div><div class="stat-label">ORR</div><div class="stat-vs">Combination vs chemotherapy</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">The first Phase III trial to demonstrate benefit for EGFR exon20 insertion, a subset for which conventional EGFR-TKIs are largely ineffective. Accurate identification via CGP is essential for treatment selection.</p>
+          <div class="gl-list">
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN:</strong> Category 1. Exon20 insertion explicitly categorized separately from exon19del/L858R.</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO 2025:</strong> New recommendation added. Highlights need for CGP at diagnosis.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('alk',document.querySelectorAll('.tab')[1])">→ ALK Fusion data</button>
+        <button class="next-btn" onclick="sw('flow',document.querySelectorAll('.tab')[4])">→ Treatment flow</button>
+      </div>
+    </div>
+
+    <!-- ALK -->
+    <div id="p-alk" class="panel">
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1200/JCO.24.00581" target="_blank" rel="noopener">CROWN (5-year analysis) <span class="ext">↗</span></a>
+            <span class="jbadge j-jco">J Clin Oncol 2024</span>
+            <span class="ybadge">Phase III · n=296 · 60-month follow-up</span>
+            <span class="new-badge">Longest PFS ever reported</span>
+          </div>
+          <div class="drug-title">Lorlatinib 100 mg/day vs Crizotinib</div>
+          <div class="drug-sub">Treatment-naive ALK-positive advanced NSCLC · 25% with brain metastases at baseline</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">Not reached</div><div class="stat-label">Median PFS (lorlatinib)</div><div class="stat-vs">vs 9.1 mo (crizotinib)</div></div>
+            <div class="stat"><div class="stat-val">60% vs 8%</div><div class="stat-label">5-year PFS rate</div><div class="stat-vs">HR 0.19 (95%CI 0.13–0.27)</div></div>
+            <div class="stat"><div class="stat-val">92% reduction</div><div class="stat-label">Intracranial progression risk</div><div class="stat-vs">Exceptional CNS control</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">Presented at ASCO 2024 (Solomon et al., JCO 2024). With median PFS not reached at 5 years, this represents the longest PFS ever reported for any single-agent targeted therapy across all metastatic solid tumors. 50% of lorlatinib patients remained on treatment at 5 years. Asian subgroup analysis (JTO 2025) confirmed similar results (5-yr PFS 63%).</p>
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>Japan (GL 2025):</strong> Highest-level recommendation for ALK-positive 1st-line treatment.</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN:</strong> Category 1. 5-year data further solidifies lorlatinib as preferred 1st-line agent.</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO:</strong> Grade A recommendation. Particularly valuable in patients with or at high risk for CNS metastases.</span></div>
+          </div>
+          <div class="tox-row">
+            <span class="tox">Hyperlipidemia (common)</span><span class="tox">Edema</span>
+            <span class="tox">Cognitive/mood changes</span><span class="tox">Weight gain</span>
+          </div>
+          <button class="expand-btn" onclick="tog(this)"><span class="chev">▼</span> Positioning vs alectinib (J-ALEX) and treatment sequencing</button>
+          <div class="extra">J-ALEX (Lancet 2017) established alectinib as an effective and well-tolerated option in Japanese patients with ALK+ NSCLC, and it remains widely used in Japan. The cognitive and metabolic side effects of lorlatinib require careful monitoring. An ongoing debate concerns sequencing strategies: starting with alectinib and switching to lorlatinib upon progression vs. using lorlatinib upfront.</div>
+        </div>
+      </div>
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('ros1',document.querySelectorAll('.tab')[2])">→ ROS1 / HER2</button>
+      </div>
+    </div>
+
+    <!-- ROS1/HER2 -->
+    <div id="p-ros1" class="panel">
+      <h2 class="sec-h2">ROS1 Fusion–Positive</h2>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1200/JCO.23.00319" target="_blank" rel="noopener">TRIDENT-1 <span class="ext">↗</span></a>
+            <span class="jbadge j-jco">J Clin Oncol 2023</span>
+            <span class="ybadge">Phase I/II · Taletrectinib</span>
+            <span class="new-badge">Approved 2025</span>
+          </div>
+          <div class="drug-title">Taletrectinib (Ibtrozi)</div>
+          <div class="drug-sub">ROS1-positive NSCLC · Treatment-naive and pretreated · Markedly improved CNS toxicity profile</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">High ORR</div><div class="stat-label">Treatment-naive patients</div><div class="stat-vs">Active against CNS metastases</div></div>
+            <div class="stat"><div class="stat-val">CNS tox ↓</div><div class="stat-label">Chronic dizziness/fall risk</div><div class="stat-vs">Major improvement over prior agents</div></div>
+            <div class="stat"><div class="stat-val">2025</div><div class="stat-label">Japan / FDA approval</div><div class="stat-vs">Summer 2025</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">Taletrectinib substantially reduces CNS toxicities (chronic dizziness, balance impairment, fall risk) that plagued earlier-generation ROS1 inhibitors such as crizotinib and entrectinib, while maintaining high response rates and intracranial activity. QOL improvement is the primary differentiator of this next-generation agent.</p>
+          <div class="gl-list">
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN:</strong> Added following FDA approval summer 2025. Reduced dizziness noted as key QOL advantage.</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO 2025:</strong> Recommended as new agent for ROS1-positive NSCLC.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <h2 class="sec-h2">HER2 Mutation–Positive</h2>
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2220506" target="_blank" rel="noopener">DESTINY-Lung02 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2023</span>
+            <span class="ybadge">Phase II · T-DXd · n=102</span>
+          </div>
+          <div class="drug-title">Trastuzumab deruxtecan (T-DXd / Enhertu)</div>
+          <div class="drug-sub">HER2 mutation–positive NSCLC · Previously treated · Antibody-drug conjugate</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">49%</div><div class="stat-label">ORR (6.4 mg/kg cohort)</div><div class="stat-vs">Highest reported in HER2-mutant lung</div></div>
+            <div class="stat"><div class="stat-val">ADC</div><div class="stat-label">Mechanism</div><div class="stat-vs">HER2-targeted + topo I inhibition</div></div>
+            <div class="stat"><div class="stat-val">ILD risk</div><div class="stat-label">Critical adverse event</div><div class="stat-vs">Grade 3+: ~5–12%</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">The ADC with the strongest evidence in HER2-mutant lung cancer. Interstitial lung disease (ILD) is a potentially severe adverse event requiring regular CT surveillance. Zongertinib (oral HER2-TKI, approved Japan/FDA August 2025) offers a more tolerable oral alternative; comparative positioning is evolving.</p>
+          <div class="gl-list">
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN:</strong> T-DXd Category 1. ILD monitoring protocol is explicitly required.</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO:</strong> Recommended. Zongertinib added as alternative option (2025 update).</span></div>
+          </div>
+          <div class="tox-row">
+            <span class="tox">ILD — most critical</span><span class="tox">Nausea</span><span class="tox">Myelosuppression</span>
+          </div>
+        </div>
+      </div>
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('others',document.querySelectorAll('.tab')[3])">→ KRAS / MET / Others</button>
+      </div>
+    </div>
+
+    <!-- OTHERS -->
+    <div id="p-others" class="panel">
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2204894" target="_blank" rel="noopener">CodeBreaK 200 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2022</span>
+            <span class="ybadge">Phase III · KRAS G12C · n=345</span>
+          </div>
+          <div class="drug-title">Sotorasib vs Docetaxel — KRAS G12C</div>
+          <div class="drug-sub">KRAS G12C mutation–positive previously treated NSCLC · ~12% of lung adenocarcinomas</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">5.6 mo</div><div class="stat-label">Median PFS</div><div class="stat-vs">vs 4.5 mo (HR 0.66)</div></div>
+            <div class="stat"><div class="stat-val">28% vs 13%</div><div class="stat-label">ORR</div><div class="stat-vs">p &lt; 0.001</div></div>
+            <div class="stat"><div class="stat-val">2nd-line+</div><div class="stat-label">Current positioning</div><div class="stat-vs">1st-line trials ongoing</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">KRAS G12C was long considered "undruggable" until the development of covalent inhibitors (sotorasib, adagrasib). No significant OS difference (HR 1.01) generated debate, but PFS benefit and tolerability favor targeted therapy over docetaxel. First-line positioning under investigation.</p>
+        </div>
+      </div>
+
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1200/JCO.21.02395" target="_blank" rel="noopener">GEOMETRY mono-1 <span class="ext">↗</span></a>
+            <span class="jbadge j-jco">J Clin Oncol 2022</span>
+            <span class="ybadge">MET exon14 skipping</span>
+          </div>
+          <div class="drug-title">Capmatinib / Tepotinib — MET exon14 skipping</div>
+          <div class="drug-sub">MET exon14 skipping mutation–positive NSCLC · More common in older smokers</div>
+          <div class="stat-row">
+            <div class="stat"><div class="stat-val">41–44%</div><div class="stat-label">ORR (treatment-naive)</div><div class="stat-vs">More common in elderly smokers</div></div>
+            <div class="stat"><div class="stat-val">1st-line</div><div class="stat-label">Eligible from</div><div class="stat-vs">CGP identification required</div></div>
+            <div class="stat"><div class="stat-val">Edema</div><div class="stat-label">Primary adverse event</div><div class="stat-vs">Grade 2–3 common</div></div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">More prevalent in older patients with smoking history, particularly lung adenocarcinoma and sarcomatoid carcinoma. Detection requires CGP. Should be actively suspected in elderly smokers testing negative for EGFR/ALK.</p>
+        </div>
+      </div>
+
+      <div class="note-box">CGP testing covers: EGFR · ALK · ROS1 · HER2 · KRAS G12C · MET exon14 · RET (selpercatinib) · NTRK (entrectinib) · BRAF V600E (dabrafenib+trametinib). Each alteration has a matched targeted therapy.</div>
+
+      <div class="next-row">
+        <button class="next-btn" onclick="sw('flow',document.querySelectorAll('.tab')[4])">→ Treatment flow</button>
+      </div>
+    </div>
+
+    <!-- FLOW -->
+    <div id="p-flow" class="panel">
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:18px">
+          <h2 class="sec-h2" style="margin-top:0">Diagnosis to First-Line Treatment: Standard Flow</h2>
+          <div style="display:flex;flex-direction:column;gap:0">
+            <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">1</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">Pathologic diagnosis + Adequate tissue acquisition</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">Confirm squamous vs non-squamous histology. Obtaining sufficient tissue for CGP and PD-L1 testing is the critical first step.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">2</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">Comprehensive Genomic Profiling (CGP) + PD-L1</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">Simultaneously test for EGFR · ALK · ROS1 · HER2 · KRAS G12C · MET exon14 · RET · NTRK · BRAF V600E. Measure PD-L1 TPS concurrently.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">3</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">Driver mutation positive → Matched targeted therapy (this page)</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">EGFR (MARIPOSA/FLAURA2/FLAURA) · ALK (CROWN) · ROS1 (TRIDENT-1) · HER2 (DESTINY-Lung02) · exon20 (PAPILLON)</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding:12px 0">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">4</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:3px">Driver mutation negative → Immunotherapy based on PD-L1 expression</div>
+                <div style="font-size:12px;color:var(--text2);line-height:1.65">PD-L1 ≥50%: KEYNOTE-024 (pembrolizumab monotherapy) / All TPS: KEYNOTE-189 / 407 (chemoimmunotherapy)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-row">
+        <a class="next-btn" href="index.html">→ Driver-negative immunotherapy</a>
+        <a class="next-btn" href="#">→ SCLC (coming soon)</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+function sw(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+function tog(btn){
+  const e=btn.nextElementSibling;
+  e.classList.toggle('open');
+  btn.querySelector('.chev').textContent=e.classList.contains('open')?'▲':'▼';
+}
+</script>
+</body>
+</html>
