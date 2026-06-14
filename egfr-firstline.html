@@ -124,6 +124,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .footer-logo{font-weight:600;color:var(--text)}
 .footer-logo span{color:var(--green-mid)}
 
+.trial-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.trial-meta-item{background:var(--surface2);border-radius:6px;padding:6px 10px;font-size:11px}
+.meta-label{font-weight:600;color:var(--text3);margin-right:4px}
+.meta-val{color:var(--text2)}
+.meta-val a{color:var(--green-dark);text-decoration:none}
+
 @media(max-width:768px){
   .sidebar{display:none}
   .main{padding:20px 18px 40px}
@@ -166,7 +172,31 @@ fetch('/lungatlas/nav.html')
     <div class="crumb">化学療法 › 変異陽性NSCLC › <span>EGFR 1次治療 選択ガイド</span></div>
     <div class="updated">最終更新 2026年6月 — WCLC 2025・ESMO 2025・NEJM 2025/2026 対応</div>
     <h1 class="art-h1">EGFR変異陽性NSCLC<br>1次治療 選択ガイド</h1>
-    <p class="lead">2025年のWCLC・ESMOでFLAURA2 OS最終解析が発表され、EGFR変異陽性NSCLCの1次治療は「3択時代」に突入した。オシメルチニブ単剤（FLAURA）/ オシメルチニブ＋化学療法（FLAURA2）/ アミバンタマブ＋ラゼルチニブ（MARIPOSA）——いずれも全ガイドラインのCategory 1だが、患者背景によって最適解が異なる。このページは原著論文のサブグループデータと専門家コンセンサスに基づき、「どの患者にどのレジメンを」の意思決定を整理する。</p>
+    <p class="lead">2025年のWCLC・ESMOでFLAURA2 OS最終解析が発表され、EGFR変異陽性NSCLCの1次治療は「3択時代」に突入した。オシメルチニブ単剤（FLAURA）/ オシメルチニブ＋化学療法（FLAURA2）/ アミバンタマブ＋ラゼルチニブ（MARIPOSA）——いずれも主要ガイドラインで1次治療選択肢として位置づけられるが、推奨度や表記はガイドラインにより異なる。患者背景によって最適解が異なる。このページは原著論文のサブグループデータと専門家コンセンサスに基づき、「どの患者にどのレジメンを」の意思決定を整理する。</p>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:24px">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px">
+        <span style="width:3px;height:14px;background:var(--green-mid);border-radius:2px;display:inline-block"></span>
+        治療選択の概要
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="background:var(--green-pale);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--green-dark)">毒性最小化・通院負担軽減を優先：</strong>オシメルチニブ単剤（FLAURA）
+        </div>
+        <div style="background:var(--green-pale);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--green-dark)">OS最大化・腫瘍量多・PS良好・脳転移あり：</strong>オシメルチニブ＋白金製剤＋PEM（FLAURA2）
+        </div>
+        <div style="background:#eef4fb;border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--blue-dark)">化学療法回避・L858R・EGFR/MET dual blockade重視：</strong>アミバンタマブ＋ラゼルチニブ（MARIPOSA）
+        </div>
+        <div style="background:var(--red-light);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red-dark);line-height:1.7">
+          <strong>VTE・出血リスク高・抗凝固困難な場合：</strong>アミバンタマブ＋ラゼルチニブは慎重に検討
+        </div>
+        <div style="background:var(--amber-light);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--amber-dark);line-height:1.7">
+          <strong>EGFR exon20挿入変異：</strong>上記3レジメンの適応外。PAPILLONに基づくアミバンタマブ＋白金製剤＋PEMを検討
+        </div>
+      </div>
+    </div>
 
     <!-- ① 3レジメン比較 -->
     <h2 class="sec-h2" id="summary">3レジメン OS・PFS データ比較</h2>
@@ -186,7 +216,7 @@ fetch('/lungatlas/nav.html')
       </div>
       <div class="st-row">
         <div class="st-d"><strong><a class="trial-link" href="https://doi.org/10.1056/NEJMoa2510308" target="_blank" rel="noopener">FLAURA2 ↗</a></strong><br><span style="font-size:11px;color:var(--text3)">オシメルチニブ＋CBDCA/CDDP＋PEM</span><br><span style="font-size:10px;background:var(--green-light);color:var(--green-dark);padding:1px 5px;border-radius:4px;margin-top:2px;display:inline-block">WCLC 2025・NEJM 2026 最終OS</span></div>
-        <div class="st-d highlight-cell">47.5 mo<br><span style="font-size:11px;font-weight:400">vs 37.6 mo（HR 0.77, p=0.02）</span><br><span style="font-size:10px">全Phase IIIで最長</span></div>
+        <div class="st-d highlight-cell">47.5 mo<br><span style="font-size:11px;font-weight:400">vs 37.6 mo（HR 0.77, p=0.02）</span><br><span style="font-size:10px">EGFR変異陽性進行NSCLCの1次治療第III相試験として、非常に良好な中央値OSを示した</span></div>
         <div class="st-d">25.5 mo<br><span style="font-size:11px;color:var(--text3)">vs 16.7 mo（HR 0.62）</span></div>
         <div class="st-d highlight-cell">63%<br><span style="font-size:11px;font-weight:400">vs 51%（単剤）</span></div>
       </div>
@@ -213,13 +243,13 @@ fetch('/lungatlas/nav.html')
         </tr>
       </thead>
       <tbody>
-        <tr><td>Grade 3+ 有害事象</td><td class="best">41%</td><td class="mid">64%</td><td class="mid">75%</td></tr>
+        <tr><td>Grade 3+ 有害事象</td><td class="best">41%</td><td class="mid">64%</td><td class="mid">約75–80%（OS最終解析では80%と報告）</td></tr>
         <tr><td>投薬中止率</td><td class="best">3%</td><td class="mid">15%</td><td class="worst">10%（vs 3%）</td></tr>
         <tr><td>血液毒性</td><td class="best">少ない</td><td class="worst">好中球減少 Grade3+ 多い</td><td class="mid">軽度</td></tr>
         <tr><td>悪心・嘔吐</td><td class="best">少ない</td><td class="worst">多い（化療成分）</td><td class="mid">中等度</td></tr>
         <tr><td>Infusion reaction</td><td class="best">なし</td><td class="best">なし</td><td class="worst">Grade3+ 約4%（IV）<br><span style="font-size:10px;color:var(--green-dark)">SC版（リブロファズ）で大幅減</span></td></tr>
         <tr><td>皮膚毒性</td><td class="mid">Grade2–3 約15%</td><td class="mid">Grade2–3 約15%</td><td class="worst">Grade3+ 多い</td></tr>
-        <tr><td>静脈血栓塞栓症（VTE）</td><td class="best">稀</td><td class="best">稀</td><td class="worst">Grade3+ 約4–5%<br>抗凝固療法推奨</td></tr>
+        <tr><td>静脈血栓塞栓症（VTE）</td><td class="best">稀</td><td class="best">稀</td><td class="worst">Grade3+ 約4–5%<br>VTEリスク評価・予防戦略を検討</td></tr>
         <tr><td>脱毛・末梢神経障害</td><td class="best">なし</td><td class="worst">あり（化療成分）</td><td class="best">なし</td></tr>
         <tr><td>外来管理の複雑さ</td><td class="best">経口のみ・シンプル</td><td class="mid">点滴あり（初期）</td><td class="worst">点滴定期的（SCで改善）</td></tr>
       </tbody>
@@ -242,7 +272,7 @@ fetch('/lungatlas/nav.html')
           <div class="rec-badge rb-blue">FLAURA2 を考慮</div>
         </div>
         <div class="dec-body">
-          <p class="dec-reason">腫瘍量が多い場合、化学療法の上乗せによる早期の腫瘍縮小が症状緩和と初回奏効率向上に寄与する。FLAURA2最終OS解析（WCLC 2025・NEJM 2026）では中央値OS 47.5ヶ月——全Phase III試験で最長の記録。</p>
+          <p class="dec-reason">腫瘍量が多い場合、化学療法の上乗せによる早期の腫瘍縮小が症状緩和と初回奏効率向上に寄与する。FLAURA2最終OS解析（WCLC 2025・NEJM 2026）では中央値OS 47.5ヶ月——EGFR変異陽性進行NSCLCの1次治療第III相試験として、非常に良好な中央値OSを示した。</p>
           <div class="dec-evidence">
             <strong>FLAURA2最終OS：</strong>中央値OS 47.5 mo vs 37.6 mo（HR 0.77, p=0.02）。36ヶ月OS率 63% vs 51%。CNS転移ありサブグループでも40.9 mo vs 29.7 mo（HR 0.72）。<br>
             <strong>PSスコア1のサブグループ</strong>でもOSベネフィットが確認（PS0では単剤との差が縮小傾向）。
@@ -251,6 +281,12 @@ fetch('/lungatlas/nav.html')
             <strong>注意：</strong>毒性負荷が増す（Grade 3+ 有害事象 64%）。好中球減少・悪心・脱毛が加わるため、事前のインフォームドコンセントと支持療法（G-CSF・制吐薬）の準備が必要。OSが確認されたが依然「全患者」への一律適用よりも個別判断が推奨される（Daniel Tan, WCLC 2025討論）。
           </div>
           <div class="tox-row"><span class="tox">好中球減少</span><span class="tox">悪心（強）</span><span class="tox">脱毛</span><span class="tox">中止率15%</span></div>
+          <div class="trial-meta-row">
+            <div class="trial-meta-item"><span class="meta-label">DOI</span><span class="meta-val"><a href="https://doi.org/10.1056/NEJMoa2510308" target="_blank" rel="noopener">10.1056/NEJMoa2510308</a>（NEJM 2026;394:27-38）</span></div>
+            <div class="trial-meta-item"><span class="meta-label">国内承認</span><span class="meta-val">あり（2024年承認）</span></div>
+            <div class="trial-meta-item"><span class="meta-label">推奨対象</span><span class="meta-val">exon19del / L858R・PS 0–1・非扁平上皮</span></div>
+            <div class="trial-meta-item"><span class="meta-label">注意点</span><span class="meta-val">好中球減少・悪心・Grade 3+ AE 約75–80%・化療忍容性の事前評価が必要</span></div>
+          </div>
         </div>
       </div>
 
@@ -272,6 +308,12 @@ fetch('/lungatlas/nav.html')
           </div>
           <div class="dec-caution">
             <strong>進行後の選択肢温存：</strong>単剤先行で耐性後にFLAURA2/MARIPOSA相当のレジメンを使えるかは現在研究中。単剤→耐性後のシーケンス戦略が今後の重要課題。
+          </div>
+          <div class="trial-meta-row">
+            <div class="trial-meta-item"><span class="meta-label">PMID</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/30280635/" target="_blank" rel="noopener">30280635</a></span></div>
+            <div class="trial-meta-item"><span class="meta-label">国内承認</span><span class="meta-val">あり（タグリッソ®）</span></div>
+            <div class="trial-meta-item"><span class="meta-label">推奨対象</span><span class="meta-val">exon19del / L858R・全年齢・PS 0–2</span></div>
+            <div class="trial-meta-item"><span class="meta-label">注意点</span><span class="meta-val">QTc延長・間質性肺疾患（定期モニタリング）</span></div>
           </div>
         </div>
       </div>
@@ -329,7 +371,7 @@ fetch('/lungatlas/nav.html')
             <div class="dec-title">L858R変異（exon21点変異）</div>
             <div class="dec-sub">exon19delと比較してオシメルチニブ単剤の効果がやや劣る変異型</div>
           </div>
-          <div class="rec-badge rb-blue">強化レジメンを積極考慮</div>
+          <div class="rec-badge rb-blue">強化レジメンを検討しやすい背景</div>
         </div>
         <div class="dec-body">
           <p class="dec-reason">L858R変異はexon19delと比較してオシメルチニブ単剤への感受性がやや低い傾向がある。MARIPOSAのL858R サブグループでは特にアミバンタマブ＋ラゼルチニブのベネフィットが大きく、PFS HR 0.58（vs exon19del群 HR 0.76）。強化レジメンが特に有効な可能性。</p>
@@ -339,6 +381,12 @@ fetch('/lungatlas/nav.html')
           </div>
           <div class="dec-caution">
             サブグループ解析のため確実性は限定的。L858Rだからといって一律にMARIPOSAを選択するのではなく、他の患者背景と組み合わせて総合的に判断する。
+          </div>
+          <div class="trial-meta-row">
+            <div class="trial-meta-item"><span class="meta-label">PMID</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/40923797/" target="_blank" rel="noopener">40923797</a></span></div>
+            <div class="trial-meta-item"><span class="meta-label">国内承認</span><span class="meta-val">あり（2025年3月）</span></div>
+            <div class="trial-meta-item"><span class="meta-label">推奨対象</span><span class="meta-val">exon19del / L858R・PS 0–1・VTEリスク評価済み</span></div>
+            <div class="trial-meta-item"><span class="meta-label">注意点</span><span class="meta-val">VTE（Grade 3+ 約5%）・infusion reaction・皮膚毒性・65歳以上はベネフィット縮小傾向</span></div>
           </div>
         </div>
       </div>
@@ -354,10 +402,10 @@ fetch('/lungatlas/nav.html')
           <div class="rec-badge rb-green">MARIPOSA は回避 → 単剤かFLAURA2</div>
         </div>
         <div class="dec-body">
-          <p class="dec-reason">アミバンタマブ＋ラゼルチニブではGrade 3以上のVTEが約4–5%に発生し、抗凝固療法の予防的投与が推奨されている。VTE既往や抗凝固療法が困難な患者には不適。</p>
+          <p class="dec-reason">アミバンタマブ＋ラゼルチニブではGrade 3以上のVTEが約4–5%に発生する。VTEリスクを事前に評価し、VTE既往や抗凝固療法が困難な患者では本レジメンの選択を慎重に検討する。</p>
           <div class="dec-evidence">
             <strong>MARIPOSA VTE：</strong>Grade 3+ VTE 約4–5%（アミバンタマブ群）vs 1%未満（オシメルチニブ群）。<br>
-            全患者への抗凝固療法（予防的LMWH等）の投与が多くの施設で採用されている。
+            VTEリスク評価・予防戦略を検討。予防的抗凝固療法は出血リスク、併用薬、患者背景、施設方針を踏まえて個別判断。
           </div>
         </div>
       </div>
@@ -368,14 +416,20 @@ fetch('/lungatlas/nav.html')
           <div class="dec-icon ic-amber">⚠️</div>
           <div style="flex:1">
             <div class="dec-title">EGFR exon20挿入変異</div>
-            <div class="dec-sub">exon19del / L858R とは全く別のカテゴリー — 上記3レジメンは無効</div>
+            <div class="dec-sub">exon19del / L858R とは治療戦略が異なる</div>
           </div>
           <div class="rec-badge rb-amber">PAPILLON（アミバンタマブ＋化療）</div>
         </div>
         <div class="dec-body">
-          <p class="dec-reason">exon20挿入変異は従来のEGFR-TKIおよびMARIPOSA/FLAURA2が対象とする変異とは全く別物。上記3レジメンはいずれも無効。</p>
+          <p class="dec-reason">EGFR exon20挿入変異はexon19 deletion/L858Rとは治療戦略が異なる。common EGFR mutationとは区別し、1次治療ではPAPILLONに基づくアミバンタマブ＋白金製剤＋PEMを検討する。</p>
           <div class="dec-evidence">
             <strong>PAPILLON（NEJM 2023）：</strong>アミバンタマブ＋化療 vs 化療単独。PFS HR 0.40。ORR 57% vs 21%。日本・米国・欧州ガイドラインで2025年に新規推奨。
+          </div>
+          <div class="trial-meta-row">
+            <div class="trial-meta-item"><span class="meta-label">PMID</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/37870976/" target="_blank" rel="noopener">37870976</a></span></div>
+            <div class="trial-meta-item"><span class="meta-label">国内承認</span><span class="meta-val">あり</span></div>
+            <div class="trial-meta-item"><span class="meta-label">推奨対象</span><span class="meta-val">EGFR exon20挿入変異・未治療・PS 0–1</span></div>
+            <div class="trial-meta-item"><span class="meta-label">注意点</span><span class="meta-val">common EGFR変異には使用しない。infusion reaction・血液毒性</span></div>
           </div>
         </div>
       </div>
@@ -476,12 +530,12 @@ fetch('/lungatlas/nav.html')
         <div class="dec-icon ic-blue">💉</div>
         <div style="flex:1">
           <div class="dec-title">アテゾリズマブ＋ベバシズマブ＋カルボプラチン＋パクリタキセル（ABCP）</div>
-          <div class="dec-sub">EGFR-TKI耐性後の数少ない免疫療法を含むレジメン — IMpower150サブグループとATTLAS Phase IIIが根拠</div>
+          <div class="dec-sub">EGFR-TKI耐性後に検討される化学免疫療法レジメンの一つ — IMpower150探索的解析とATTLAS試験が根拠</div>
         </div>
         <div class="rec-badge rb-blue">TKI耐性後の選択肢</div>
       </div>
       <div class="dec-body">
-        <p class="dec-reason">EGFR変異陽性NSCLCは免疫療法単剤がほぼ無効だが、ABCPの4剤併用はTKI耐性後の例外的に有効性が示されたレジメン。ベバシズマブ（抗VEGF抗体）がTKI耐性後に変化した免疫抑制的腫瘍微小環境を改善し、免疫療法の効果を引き出す機序が提唱されている。TKI耐性後に再生検でPD-L1発現・TMBが上昇するという知見とも合致する。</p>
+        <p class="dec-reason">EGFR変異陽性NSCLCではICI単剤の効果は一般に限定的。ABCPはEGFR-TKI耐性後に検討される化学免疫療法レジメンの一つ。根拠はIMpower150探索的解析およびATTLAS試験。ICI単剤ではなく、抗VEGF薬・化学療法との併用として評価された点に注意。ベバシズマブ（抗VEGF抗体）がTKI耐性後に変化した免疫抑制的腫瘍微小環境を改善し、免疫療法の効果を引き出す機序が提唱されている。TKI耐性後に再生検でPD-L1発現・TMBが上昇するという知見とも合致する。</p>
         <div class="dec-evidence">
           <strong>IMpower150 EGFR/ALKサブグループ（最終OS解析, JTO 2021）：</strong>ABCP群のPFS中央値 9.7 mo vs BCP群 6.1 mo（HR 0.59, 95%CI 0.37–0.94）。EGFR/ALK変異陽性例を含む代表的な大規模免疫療法試験。<br>
           <strong>ATTLAS（KCSG-LU19-04, JCO 2024）：</strong>EGFR/ALK TKI耐性後のABCP vs プラチナ＋ペメトレキセドをPhase IIIで検証。PFS相対リスク38%減。特にL858Rサブグループ・T790M非獲得例で有意なベネフィット。
