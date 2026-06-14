@@ -55,7 +55,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .warn-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
 
 /* SEGMENT MAP LAYOUT */
-.seg-layout{display:grid;grid-template-columns:1fr 1fr 300px;gap:16px;align-items:start}
+.seg-layout{display:grid;grid-template-columns:1fr 1fr 280px;gap:16px;align-items:start}
 .svg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px}
 .svg-wrap h3{font-size:11px;font-weight:600;color:var(--text3);text-align:center;margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
 .seg-info-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;min-height:360px}
@@ -177,152 +177,282 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
       <!-- 右肺SVG -->
       <div class="svg-wrap">
         <h3>右肺 — 前面観（模式図）</h3>
-        <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-          <!-- 右上葉 S1 肺尖区 -->
-          <path id="r-s1" class="seg" fill="#2d8a5e"
-            d="M55,14 Q95,6 128,16 Q148,28 152,52 Q138,72 112,78 Q88,80 68,66 Q52,50 52,30 Z"
-            onclick="showSeg('r-s1')" />
-          <text class="seg-label" x="102" y="48" text-anchor="middle">S1</text>
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+          <defs>
+            <filter id="lung-shadow-r" x="-8%" y="-4%" width="116%" height="116%">
+              <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0d5c3a" flood-opacity=".18"/>
+            </filter>
+            <!-- 右肺外形：洋梨型、上部丸く下部横に広がる、縦隔側(左)がやや凹む -->
+            <clipPath id="clip-right">
+              <path d="
+                M148,10
+                C175,8 210,20 228,50
+                C245,78 242,115 235,148
+                C228,182 220,205 218,230
+                C215,260 212,285 200,308
+                C188,330 168,342 148,344
+                C128,346 108,338 94,322
+                C80,306 72,282 68,255
+                C64,228 65,205 62,178
+                C58,148 50,128 48,102
+                C44,70 52,38 75,22
+                C92,11 122,12 148,10 Z
+              "/>
+            </clipPath>
+          </defs>
 
-          <!-- 右上葉 S2 後上葉区 -->
-          <path id="r-s2" class="seg" fill="#3aa870"
-            d="M152,52 Q162,30 178,26 Q196,22 205,48 Q210,72 196,88 Q178,96 160,86 Q148,74 152,52 Z"
-            onclick="showSeg('r-s2')" />
-          <text class="seg-label" x="183" y="62" text-anchor="middle">S2</text>
+          <!-- 右肺外形（背景・影） -->
+          <path filter="url(#lung-shadow-r)" fill="#e8f5ee" stroke="#7ab890" stroke-width="1.5"
+            d="
+              M148,10
+              C175,8 210,20 228,50
+              C245,78 242,115 235,148
+              C228,182 220,205 218,230
+              C215,260 212,285 200,308
+              C188,330 168,342 148,344
+              C128,346 108,338 94,322
+              C80,306 72,282 68,255
+              C64,228 65,205 62,178
+              C58,148 50,128 48,102
+              C44,70 52,38 75,22
+              C92,11 122,12 148,10 Z
+            "/>
 
-          <!-- 右上葉 S3 前上葉区 -->
-          <path id="r-s3" class="seg" fill="#48c685"
-            d="M52,30 Q52,50 68,66 Q88,80 112,78 Q124,95 118,114 Q100,120 80,116 Q60,110 50,92 Q44,72 48,50 Z"
-            onclick="showSeg('r-s3')" />
-          <text class="seg-label" x="86" y="98" text-anchor="middle">S3</text>
+          <!-- 区域 (clipPathで外形内に収める) -->
+          <g clip-path="url(#clip-right)">
 
-          <!-- 葉間裂：水平裂 -->
-          <line x1="44" y1="114" x2="196" y2="114" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity=".4"/>
+            <!-- 右上葉 S1 肺尖区：上部中央 -->
+            <path id="r-s1" class="seg" fill="#2d8a5e"
+              d="M80,10 C104,6 148,6 185,14 C205,22 225,40 230,60 C210,68 188,72 165,70 C140,68 118,60 100,50 C85,40 76,28 80,10 Z"
+              onclick="showSeg('r-s1')"/>
+            <text class="seg-label" x="154" y="44" text-anchor="middle">S1</text>
 
-          <!-- 右中葉 S4 外側中葉区 -->
-          <path id="r-s4" class="seg" fill="#2d6da8"
-            d="M118,114 Q124,95 112,78 Q140,72 160,86 Q168,100 164,120 Q150,132 132,130 Q120,126 118,114 Z"
-            onclick="showSeg('r-s4')" />
-          <text class="seg-label" x="143" y="110" text-anchor="middle">S4</text>
+            <!-- 右上葉 S2 後上葉区：右上 -->
+            <path id="r-s2" class="seg" fill="#3aa870"
+              d="M185,14 C210,18 235,32 248,56 C255,72 248,95 238,110 C222,118 202,115 185,105 C168,94 158,78 165,70 C188,72 210,68 230,60 C225,40 205,22 185,14 Z"
+              onclick="showSeg('r-s2')"/>
+            <text class="seg-label" x="222" y="76" text-anchor="middle">S2</text>
 
-          <!-- 右中葉 S5 内側中葉区 -->
-          <path id="r-s5" class="seg" fill="#3a88c8"
-            d="M50,92 Q60,110 80,116 Q100,120 118,114 Q120,126 132,130 Q122,144 105,148 Q84,148 68,138 Q52,125 50,105 Z"
-            onclick="showSeg('r-s5')" />
-          <text class="seg-label" x="94" y="132" text-anchor="middle">S5</text>
+            <!-- 右上葉 S3 前上葉区：左側 -->
+            <path id="r-s3" class="seg" fill="#48c685"
+              d="M80,10 C76,28 85,40 100,50 C118,60 140,68 165,70 C158,78 148,88 135,96 C118,104 98,106 80,100 C64,94 54,80 50,65 C48,50 56,28 80,10 Z"
+              onclick="showSeg('r-s3')"/>
+            <text class="seg-label" x="100" y="72" text-anchor="middle">S3</text>
 
-          <!-- 葉間裂：斜裂 -->
-          <line x1="46" y1="148" x2="210" y2="148" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity=".4"/>
+            <!-- 水平裂 -->
+            <line x1="48" y1="130" x2="248" y2="130" stroke="white" stroke-width="2" stroke-dasharray="6,4" opacity=".8"/>
 
-          <!-- 右下葉 S6 上下葉区 -->
-          <path id="r-s6" class="seg" fill="#c87a2d"
-            d="M160,86 Q178,96 196,88 Q210,72 210,100 Q212,128 206,148 Q188,148 164,120 Q168,100 160,86 Z"
-            onclick="showSeg('r-s6')" />
-          <text class="seg-label" x="190" y="122" text-anchor="middle">S6</text>
+            <!-- 右中葉 S4 外側中葉区：右側 -->
+            <path id="r-s4" class="seg" fill="#2d6da8"
+              d="M135,96 C148,88 158,78 185,105 C202,115 222,118 238,110 C242,128 240,148 235,148 C215,148 192,142 170,132 C152,124 140,114 135,96 Z"
+              onclick="showSeg('r-s4')"/>
+            <text class="seg-label" x="200" y="120" text-anchor="middle">S4</text>
 
-          <!-- 右下葉 S7 内側肺底区 -->
-          <path id="r-s7" class="seg" fill="#e8903a"
-            d="M46,148 Q50,170 56,195 Q64,215 76,224 Q82,196 84,170 Q84,158 84,148 Q68,148 46,148 Z"
-            onclick="showSeg('r-s7')" />
-          <text class="seg-label" x="66" y="190" text-anchor="middle">S7</text>
+            <!-- 右中葉 S5 内側中葉区：左側 -->
+            <path id="r-s5" class="seg" fill="#3a88c8"
+              d="M50,65 C54,80 64,94 80,100 C98,106 118,104 135,96 C140,114 152,124 170,132 C158,148 130,148 104,148 C82,148 62,144 50,135 C46,118 46,90 50,65 Z"
+              onclick="showSeg('r-s5')"/>
+            <text class="seg-label" x="100" y="126" text-anchor="middle">S5</text>
 
-          <!-- 右下葉 S8 前肺底区 -->
-          <path id="r-s8" class="seg" fill="#f0a84e"
-            d="M84,148 Q84,158 84,170 Q82,196 76,224 Q96,236 118,238 Q134,216 136,190 Q136,170 132,148 Q114,148 84,148 Z"
-            onclick="showSeg('r-s8')" />
-          <text class="seg-label" x="108" y="196" text-anchor="middle">S8</text>
+            <!-- 斜裂 -->
+            <line x1="48" y1="148" x2="235" y2="148" stroke="white" stroke-width="2.5" stroke-dasharray="6,4" opacity=".9"/>
 
-          <!-- 右下葉 S9 外側肺底区 -->
-          <path id="r-s9" class="seg" fill="#f0c06e"
-            d="M132,148 Q136,170 134,216 Q118,238 118,238 Q140,248 158,242 Q172,226 172,200 Q172,172 168,148 Q152,148 132,148 Z"
-            onclick="showSeg('r-s9')" />
-          <text class="seg-label" x="153" y="200" text-anchor="middle">S9</text>
+            <!-- 右下葉 S6 上下葉区：右上部（後方） -->
+            <path id="r-s6" class="seg" fill="#c87a2d"
+              d="M170,132 C192,142 215,148 235,148 C232,172 226,192 220,210 C200,205 182,195 168,178 C158,165 155,152 170,132 Z"
+              onclick="showSeg('r-s6')"/>
+            <text class="seg-label" x="205" y="178" text-anchor="middle">S6</text>
 
-          <!-- 右下葉 S10 後肺底区 -->
-          <path id="r-s10" class="seg" fill="#d4a240"
-            d="M168,148 Q172,172 172,200 Q172,226 158,242 Q172,246 188,238 Q204,222 208,196 Q212,170 206,148 Q188,148 168,148 Z"
-            onclick="showSeg('r-s10')" />
-          <text class="seg-label" x="191" y="198" text-anchor="middle">S10</text>
+            <!-- 右下葉 S7 内側肺底区 -->
+            <path id="r-s7" class="seg" fill="#e8903a"
+              d="M48,148 C48,170 52,195 60,218 C70,238 80,248 90,252 C90,230 88,210 84,188 C80,170 72,158 60,148 Z"
+              onclick="showSeg('r-s7')"/>
+            <text class="seg-label" x="68" y="202" text-anchor="middle">S7</text>
 
-          <!-- 横隔膜 -->
-          <path d="M56,224 Q76,250 118,254 Q158,254 188,242 Q204,234 208,240 Q188,270 140,278 Q100,282 68,268 Q44,254 44,238 Z" fill="none" stroke="#8aab96" stroke-width="1.2" stroke-dasharray="3,3" opacity=".5"/>
+            <!-- 右下葉 S8 前肺底区 -->
+            <path id="r-s8" class="seg" fill="#f0a84e"
+              d="M60,148 C72,158 80,170 84,188 C88,210 90,230 90,252 C108,258 126,260 140,258 C142,236 140,212 136,190 C130,168 118,152 104,148 Z"
+              onclick="showSeg('r-s8')"/>
+            <text class="seg-label" x="100" y="210" text-anchor="middle">S8</text>
+
+            <!-- 右下葉 S9 外側肺底区 -->
+            <path id="r-s9" class="seg" fill="#f0c06e"
+              d="M104,148 C118,152 130,168 136,190 C140,212 142,236 140,258 C158,262 175,260 188,254 C190,232 188,208 182,186 C174,162 160,148 140,148 Z"
+              onclick="showSeg('r-s9')"/>
+            <text class="seg-label" x="152" y="208" text-anchor="middle">S9</text>
+
+            <!-- 右下葉 S10 後肺底区 -->
+            <path id="r-s10" class="seg" fill="#d4a240"
+              d="M140,148 C160,148 174,162 182,186 C188,208 190,232 188,254 C200,248 212,238 220,225 C228,210 232,190 235,170 C234,158 232,148 235,148 C215,148 192,142 170,132 C155,152 158,165 168,178 C178,192 190,202 192,218 C185,230 174,242 160,248 C152,252 144,254 136,252 C138,232 140,210 140,148 Z"
+              onclick="showSeg('r-s10')"/>
+            <text class="seg-label" x="208" y="222" text-anchor="middle">S10</text>
+
+          </g>
+
+          <!-- 肺外形線（区域の上に重ねて輪郭をくっきり） -->
+          <path fill="none" stroke="#5a9070" stroke-width="1.8"
+            d="
+              M148,10
+              C175,8 210,20 228,50
+              C245,78 242,115 235,148
+              C228,182 220,205 218,230
+              C215,260 212,285 200,308
+              C188,330 168,342 148,344
+              C128,346 108,338 94,322
+              C80,306 72,282 68,255
+              C64,228 65,205 62,178
+              C58,148 50,128 48,102
+              C44,70 52,38 75,22
+              C92,11 122,12 148,10 Z
+            "/>
 
           <!-- 葉ラベル -->
-          <text x="56" y="12" font-size="8" fill="#1a5c35" font-weight="600" font-family="Inter,sans-serif" opacity=".8">上葉</text>
-          <text x="54" y="140" font-size="8" fill="#0c3d6e" font-weight="600" font-family="Inter,sans-serif" opacity=".8">中葉</text>
-          <text x="56" y="164" font-size="8" fill="#6b3d00" font-weight="600" font-family="Inter,sans-serif" opacity=".8">下葉</text>
+          <text x="52" y="22" font-size="9" fill="#1a5c35" font-weight="700" font-family="Inter,sans-serif" opacity=".9">上葉</text>
+          <text x="52" y="140" font-size="9" fill="#0c3d6e" font-weight="700" font-family="Inter,sans-serif" opacity=".9">中葉</text>
+          <text x="52" y="196" font-size="9" fill="#6b3d00" font-weight="700" font-family="Inter,sans-serif" opacity=".9">下葉</text>
         </svg>
       </div>
 
       <!-- 左肺SVG -->
       <div class="svg-wrap">
         <h3>左肺 — 前面観（模式図）</h3>
-        <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-          <!-- 左上葉 S1+2 肺尖後区 -->
-          <path id="l-s12" class="seg" fill="#7a4db0"
-            d="M92,14 Q128,6 158,16 Q172,26 174,52 Q162,76 136,84 Q112,86 92,72 Q76,56 78,30 Z"
-            onclick="showSeg('l-s12')" />
-          <text class="seg-label" x="128" y="50" text-anchor="middle">S1+2</text>
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+          <defs>
+            <filter id="lung-shadow-l" x="-8%" y="-4%" width="116%" height="116%">
+              <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0d5c3a" flood-opacity=".18"/>
+            </filter>
+            <!--
+              左肺外形：右より細長く2葉。
+              左側（外側）が膨らみ、右側（縦隔側）はやや直線的。
+              下内側に心切痕（cardiac notch）の凹みを表現。
+              肺尖は右肺と同程度の高さ。
+            -->
+            <clipPath id="clip-left">
+              <path d="
+                M152,10
+                C128,8 96,14 76,30
+                C56,46 50,72 48,102
+                C46,130 50,155 52,178
+                C54,202 56,220 58,240
+                C60,262 64,285 74,305
+                C86,328 106,344 128,346
+                C150,348 170,338 184,320
+                C198,302 204,278 206,252
+                C208,228 206,205 205,182
+                C203,158 200,138 196,116
+                C190,90 180,65 175,50
+                C186,38 206,30 220,48
+                C224,54 224,62 220,68
+                C226,62 228,52 222,42
+                C210,22 182,8 152,10 Z
+              "/>
+            </clipPath>
+          </defs>
 
-          <!-- 左上葉 S3 前上葉区 -->
-          <path id="l-s3" class="seg" fill="#9060c8"
-            d="M78,30 Q76,56 92,72 Q112,86 136,84 Q146,104 140,122 Q118,130 96,124 Q74,116 66,96 Q62,76 68,52 Z"
-            onclick="showSeg('l-s3')" />
-          <text class="seg-label" x="106" y="102" text-anchor="middle">S3</text>
+          <!-- 左肺外形（背景・影） -->
+          <path filter="url(#lung-shadow-l)" fill="#e8f5ee" stroke="#7ab890" stroke-width="1.5"
+            d="
+              M152,10
+              C128,8 96,14 76,30
+              C56,46 50,72 48,102
+              C46,130 50,155 52,178
+              C54,202 56,220 58,240
+              C60,262 64,285 74,305
+              C86,328 106,344 128,346
+              C150,348 170,338 184,320
+              C198,302 204,278 206,252
+              C208,228 206,205 205,182
+              C203,158 200,138 196,116
+              C190,90 180,65 175,50
+              C186,38 206,30 220,48
+              C224,54 224,62 220,68
+              C226,62 228,52 222,42
+              C210,22 182,8 152,10 Z
+            "/>
 
-          <!-- 葉間裂：斜裂 -->
-          <line x1="58" y1="148" x2="196" y2="148" stroke="#444" stroke-width="1" stroke-dasharray="4,3" opacity=".4"/>
+          <g clip-path="url(#clip-left)">
 
-          <!-- 左上葉（舌区）S4 上舌区 -->
-          <path id="l-s4" class="seg" fill="#c04080"
-            d="M66,96 Q74,116 96,124 Q118,130 140,122 Q148,142 146,162 Q128,172 108,170 Q88,166 74,152 Q62,136 62,118 Z"
-            onclick="showSeg('l-s4')" />
-          <text class="seg-label" x="107" y="146" text-anchor="middle">S4</text>
+            <!-- 左上葉 S1+2 肺尖後区：上部右寄り（後方） -->
+            <path id="l-s12" class="seg" fill="#7a4db0"
+              d="M152,10 C175,8 198,16 215,34 C222,42 224,54 220,68 C205,75 188,78 170,76 C150,74 132,66 118,54 C108,44 104,32 110,20 C122,12 138,10 152,10 Z"
+              onclick="showSeg('l-s12')"/>
+            <text class="seg-label" x="174" y="50" text-anchor="middle">S1+2</text>
 
-          <!-- 左上葉（舌区）S5 下舌区 -->
-          <path id="l-s5" class="seg" fill="#d85898"
-            d="M62,118 Q62,136 74,152 Q88,166 108,170 Q128,172 146,162 Q148,186 142,210 Q124,224 100,222 Q78,218 66,200 Q58,182 60,160 Z"
-            onclick="showSeg('l-s5')" />
-          <text class="seg-label" x="104" y="192" text-anchor="middle">S5</text>
+            <!-- 左上葉 S3 前上葉区：上部左側（前方） -->
+            <path id="l-s3" class="seg" fill="#9060c8"
+              d="M110,20 C104,32 108,44 118,54 C132,66 150,74 170,76 C175,90 172,108 162,120 C146,128 126,130 108,122 C90,114 76,100 68,84 C60,68 58,50 68,34 C80,20 96,14 110,20 Z"
+              onclick="showSeg('l-s3')"/>
+            <text class="seg-label" x="116" y="82" text-anchor="middle">S3</text>
 
-          <!-- 左下葉 S6 上下葉区 -->
-          <path id="l-s6" class="seg" fill="#b03030"
-            d="M136,84 Q162,76 174,52 Q182,30 196,42 Q208,58 206,88 Q202,116 190,130 Q172,138 156,128 Q146,114 146,104 Q140,122 136,84 Z"
-            onclick="showSeg('l-s6')" />
-          <text class="seg-label" x="182" y="98" text-anchor="middle">S6</text>
+            <!-- 斜裂（上葉/下葉境界） -->
+            <line x1="50" y1="148" x2="210" y2="148" stroke="white" stroke-width="2.5" stroke-dasharray="6,4" opacity=".9"/>
 
-          <!-- 左下葉 S8 前肺底区 -->
-          <path id="l-s8" class="seg" fill="#c84040"
-            d="M58,148 Q60,160 60,182 Q66,200 78,218 Q100,228 100,222 Q78,218 80,200 Q82,178 84,160 Q84,154 84,148 Z"
-            onclick="showSeg('l-s8')" />
-          <!-- 修正：S8をより適切な領域に -->
-          <path id="l-s8b" class="seg" fill="#c84040"
-            d="M84,148 Q84,160 84,178 Q82,200 100,222 Q118,234 130,230 Q138,210 138,186 Q136,166 130,148 Z"
-            onclick="showSeg('l-s8')" />
-          <text class="seg-label" x="112" y="194" text-anchor="middle" style="display:none">S8</text>
+            <!-- 左上葉舌区 S4 上舌区 -->
+            <path id="l-s4" class="seg" fill="#c04080"
+              d="M68,84 C76,100 90,114 108,122 C126,130 146,128 162,120 C168,136 168,148 150,148 C130,148 106,148 84,148 C66,148 52,144 50,132 C50,116 56,98 68,84 Z"
+              onclick="showSeg('l-s4')"/>
+            <text class="seg-label" x="110" y="128" text-anchor="middle">S4</text>
 
-          <!-- 左下葉 S9 外側肺底区 -->
-          <path id="l-s9" class="seg" fill="#d85858"
-            d="M130,148 Q136,166 138,186 Q138,210 130,230 Q148,240 164,234 Q178,218 180,194 Q182,170 176,148 Z"
-            onclick="showSeg('l-s9')" />
-          <text class="seg-label" x="157" y="196" text-anchor="middle">S9</text>
+            <!-- 左上葉舌区 S5 下舌区 -->
+            <path id="l-s5" class="seg" fill="#d85898"
+              d="M50,132 C52,144 66,148 84,148 C70,164 64,182 64,200 C64,220 70,236 80,248 C70,244 60,234 56,220 C52,206 52,188 52,170 C50,156 50,144 50,132 Z"
+              onclick="showSeg('l-s5')"/>
+            <text class="seg-label" x="64" y="196" text-anchor="middle">S5</text>
 
-          <!-- 左下葉 S10 後肺底区 -->
-          <path id="l-s10" class="seg" fill="#e07070"
-            d="M176,148 Q182,170 180,194 Q178,218 164,234 Q178,240 192,232 Q204,216 206,190 Q208,164 204,148 Z"
-            onclick="showSeg('l-s10')" />
-          <text class="seg-label" x="191" y="196" text-anchor="middle">S10</text>
+            <!-- 左下葉 S6 上下葉区：右側上部（後方） -->
+            <path id="l-s6" class="seg" fill="#b03030"
+              d="M170,76 C188,78 205,75 220,68 C225,82 228,100 226,118 C224,136 218,148 210,148 C195,148 180,140 168,126 C162,114 162,100 162,120 C162,108 166,96 170,76 Z"
+              onclick="showSeg('l-s6')"/>
+            <text class="seg-label" x="205" y="110" text-anchor="middle">S6</text>
 
-          <!-- S8 ラベル（重心位置調整） -->
-          <text class="seg-label" x="72" y="186" text-anchor="middle" pointer-events="none" onclick="showSeg('l-s8')" style="cursor:pointer">S8</text>
+            <!-- 左下葉 S8 前肺底区 -->
+            <path id="l-s8" class="seg" fill="#c84040"
+              d="M84,148 C106,148 130,148 150,148 C148,168 144,190 138,210 C130,230 118,244 104,250 C90,244 80,232 76,216 C72,200 72,180 76,162 C78,154 80,148 84,148 Z"
+              onclick="showSeg('l-s8')"/>
+            <text class="seg-label" x="112" y="204" text-anchor="middle">S8</text>
 
-          <!-- 横隔膜 -->
-          <path d="M60,220 Q100,252 140,252 Q172,248 192,238 Q196,252 168,268 Q130,280 96,276 Q66,268 52,250 Z" fill="none" stroke="#8aab96" stroke-width="1.2" stroke-dasharray="3,3" opacity=".5"/>
+            <!-- 左下葉 S9 外側肺底区 -->
+            <path id="l-s9" class="seg" fill="#d85858"
+              d="M150,148 C168,148 185,148 198,150 C202,168 204,190 202,212 C200,232 194,250 184,262 C172,256 160,244 152,228 C144,212 140,194 138,210 C144,190 148,168 150,148 Z"
+              onclick="showSeg('l-s9')"/>
+            <text class="seg-label" x="176" y="202" text-anchor="middle">S9</text>
+
+            <!-- 左下葉 S10 後肺底区 -->
+            <path id="l-s10" class="seg" fill="#e07070"
+              d="M198,150 C205,148 210,148 210,148 C218,148 224,136 226,118 C228,100 225,82 220,68 C224,80 228,100 228,125 C228,148 222,170 214,192 C208,210 204,230 202,248 C202,232 202,212 198,150 Z"
+              onclick="showSeg('l-s10')"/>
+            <text class="seg-label" x="220" y="168" text-anchor="middle">S10</text>
+
+            <!-- 心切痕（cardiac notch）表示 -->
+            <path d="M80,248 C90,256 104,262 120,266" fill="none" stroke="white" stroke-width="1.5" stroke-dasharray="3,3" opacity=".7"/>
+
+          </g>
+
+          <!-- 肺外形線（輪郭） -->
+          <path fill="none" stroke="#5a9070" stroke-width="1.8"
+            d="
+              M152,10
+              C128,8 96,14 76,30
+              C56,46 50,72 48,102
+              C46,130 50,155 52,178
+              C54,202 56,220 58,240
+              C60,262 64,285 74,305
+              C86,328 106,344 128,346
+              C150,348 170,338 184,320
+              C198,302 204,278 206,252
+              C208,228 206,205 205,182
+              C203,158 200,138 196,116
+              C190,90 180,65 175,50
+              C186,38 206,30 220,48
+              C224,54 224,62 220,68
+              C226,62 228,52 222,42
+              C210,22 182,8 152,10 Z
+            "/>
 
           <!-- 葉ラベル -->
-          <text x="76" y="12" font-size="8" fill="#3b1a7a" font-weight="600" font-family="Inter,sans-serif" opacity=".8">上葉（上区）</text>
-          <text x="58" y="140" font-size="8" fill="#6b0030" font-weight="600" font-family="Inter,sans-serif" opacity=".8">舌区</text>
-          <text x="152" y="140" font-size="8" fill="#6b1c1c" font-weight="600" font-family="Inter,sans-serif" opacity=".8">下葉</text>
+          <text x="52" y="22" font-size="9" fill="#3b1a7a" font-weight="700" font-family="Inter,sans-serif" opacity=".9">上葉（上区）</text>
+          <text x="52" y="140" font-size="9" fill="#6b0030" font-weight="700" font-family="Inter,sans-serif" opacity=".9">舌区</text>
+          <text x="195" y="80" font-size="9" fill="#6b1c1c" font-weight="700" font-family="Inter,sans-serif" opacity=".9">下葉</text>
         </svg>
       </div>
 
