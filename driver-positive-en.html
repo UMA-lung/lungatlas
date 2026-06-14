@@ -101,21 +101,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 </style>
 </head>
 <body>
-<nav class="nav">
-  <a class="logo" href="home.html"><span>lung</span>atlas</a>
-  <div class="nav-links">
-    <a href="home.html">Top</a>
-    <a href="driver-positive-en.html" class="active">Driver+</a>
-    <a href="index.html">Driver−</a>
-    <a href="about.html">About</a>
-  </div>
-  <div class="nav-right">
-    <div class="lang-switch">
-      <a class="lang-btn" href="driver-positive.html">日本語</a>
-      <a class="lang-btn active" href="driver-positive-en.html">English</a>
-    </div>
-  </div>
-</nav>
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
 
 <div class="layout">
   <aside class="sidebar">

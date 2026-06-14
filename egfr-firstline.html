@@ -146,16 +146,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 </head>
 <body>
 
-<nav class="nav">
-  <a class="logo" href="home.html"><span>lung</span>atlas</a>
-  <div class="nav-links">
-    <a href="home.html">トップ</a>
-    <a href="driver-positive.html">変異陽性</a>
-    <a href="index.html">変異陰性</a>
-    <a href="about.html">このサイトについて</a>
-  </div>
-  <a class="nav-back" href="driver-positive.html">← 変異陽性 概要ページ</a>
-</nav>
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
 
 <div class="layout">
   <aside class="sidebar">

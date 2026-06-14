@@ -102,16 +102,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 </head>
 <body>
 
-<nav class="nav">
-  <a class="logo" href="home.html"><span>lung</span>atlas</a>
-  <div class="nav-links">
-    <a href="home.html">Top</a>
-    <a href="index.html">Chemo</a>
-    <a href="driver-positive-en.html">Driver+</a>
-    <a href="about-en.html" class="active">About</a>
-  </div>
-  <a href="about.html" style="font-size:11px;font-weight:500;color:rgba(255,255,255,.5);text-decoration:none;padding:5px 10px;border:1px solid rgba(255,255,255,.15);border-radius:6px;transition:all .15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">日本語</a>
-</nav>
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
 
 <!-- HERO -->
 <section class="hero">

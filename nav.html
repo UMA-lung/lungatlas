@@ -1,0 +1,225 @@
+<style>
+#lungatlas-nav {
+  background: #fff;
+  border-bottom: 1px solid #d4e0d6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
+}
+#lungatlas-nav .nav-logo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111a14;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+#lungatlas-nav .nav-logo span { color: #1a7a4e; }
+#lungatlas-nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+#lungatlas-nav .nav-links a {
+  font-size: 12.5px;
+  color: #6b8070;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all .15s;
+  white-space: nowrap;
+}
+#lungatlas-nav .nav-links a:hover {
+  background: #f0f7f2;
+  color: #0d5c3a;
+}
+#lungatlas-nav .nav-links a.active {
+  color: #0d5c3a;
+  font-weight: 500;
+  background: #e4f0e8;
+}
+
+/* ドロップダウン */
+#lungatlas-nav .nav-dropdown {
+  position: relative;
+}
+#lungatlas-nav .nav-dropdown > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+#lungatlas-nav .nav-dropdown > a::after {
+  content: '▾';
+  font-size: 10px;
+  color: #6b8070;
+}
+#lungatlas-nav .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: #fff;
+  border: 1px solid #d4e0d6;
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  z-index: 2000;
+}
+#lungatlas-nav .nav-dropdown:hover .dropdown-menu,
+#lungatlas-nav .nav-dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+#lungatlas-nav .dropdown-menu a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  color: #3d5042;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background .12s;
+  white-space: nowrap;
+}
+#lungatlas-nav .dropdown-menu a:hover {
+  background: #f0f7f2;
+  color: #0d5c3a;
+}
+#lungatlas-nav .dropdown-menu a.active {
+  color: #0d5c3a;
+  font-weight: 500;
+  background: #e4f0e8;
+}
+#lungatlas-nav .dropdown-divider {
+  height: 1px;
+  background: #d4e0d6;
+  margin: 4px 6px;
+}
+#lungatlas-nav .dropdown-soon {
+  display: block;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #6b8070;
+  cursor: default;
+}
+#lungatlas-nav .dropdown-soon span {
+  font-size: 10px;
+  background: #fdf0d8;
+  color: #6b3d00;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  font-weight: 500;
+}
+#lungatlas-nav .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+#lungatlas-nav .lang-btn {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #d4e0d6;
+  background: #fff;
+  color: #6b8070;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .15s;
+  font-family: 'Inter', sans-serif;
+}
+#lungatlas-nav .lang-btn:hover {
+  border-color: #1a7a4e;
+  color: #0d5c3a;
+}
+#lungatlas-nav .lang-btn.active {
+  background: #e4f0e8;
+  color: #0d5c3a;
+  border-color: #9FE1CB;
+}
+
+@media (max-width: 768px) {
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+
+<nav id="lungatlas-nav">
+  <a class="nav-logo" href="/lungatlas/home.html"><span>lung</span>atlas</a>
+
+  <div class="nav-links">
+
+    <!-- 解剖学・画像診断 -->
+    <div class="nav-dropdown">
+      <a id="nav-anatomy" href="#">解剖学・画像診断</a>
+      <div class="dropdown-menu">
+        <span class="dropdown-soon">肺の解剖学<span>近日公開</span></span>
+        <span class="dropdown-soon">CT画像診断<span>近日公開</span></span>
+      </div>
+    </div>
+
+    <!-- 化学療法 -->
+    <div class="nav-dropdown">
+      <a id="nav-chemo" href="#">化学療法</a>
+      <div class="dropdown-menu">
+        <a id="nav-driver-pos" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
+        <a id="nav-egfr" href="/lungatlas/egfr-firstline.html">EGFR 1次治療 選択ガイド</a>
+        <a id="nav-driver-neg" href="/lungatlas/index.html">変異陰性 NSCLC</a>
+        <div class="dropdown-divider"></div>
+        <span class="dropdown-soon">SCLC<span>近日公開</span></span>
+        <span class="dropdown-soon">周術期薬物療法<span>近日公開</span></span>
+        <span class="dropdown-soon">耐性後の戦略<span>近日公開</span></span>
+      </div>
+    </div>
+
+    <!-- 手術手技 -->
+    <div class="nav-dropdown">
+      <a id="nav-surgery" href="#">手術手技</a>
+      <div class="dropdown-menu">
+        <span class="dropdown-soon">VATS 肺葉切除術<span>近日公開</span></span>
+        <span class="dropdown-soon">肺区域切除術<span>近日公開</span></span>
+        <span class="dropdown-soon">縦隔郭清<span>近日公開</span></span>
+      </div>
+    </div>
+
+    <!-- About -->
+    <a id="nav-about" href="/lungatlas/about.html">About</a>
+
+  </div>
+
+  <div class="nav-right" id="nav-lang-switch">
+    <!-- 言語切り替えは各ページがここに挿入 -->
+  </div>
+</nav>
+
+<script>
+(function() {
+  // 現在のパスに応じてactiveクラスを付与
+  var path = window.location.pathname;
+  var map = {
+    'nav-driver-pos':  ['driver-positive.html'],
+    'nav-egfr':        ['egfr-firstline.html'],
+    'nav-driver-neg':  ['index.html'],
+    'nav-about':       ['about.html', 'about-en.html'],
+  };
+  Object.keys(map).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    map[id].forEach(function(p) {
+      if (path.indexOf(p) !== -1) el.classList.add('active');
+    });
+  });
+  // 化学療法ドロップダウンのparent active
+  var chemoPages = ['driver-positive', 'egfr-firstline', 'index.html', 'sclc', 'resistance'];
+  if (chemoPages.some(function(p){ return path.indexOf(p) !== -1; })) {
+    var chemoLink = document.getElementById('nav-chemo');
+    if (chemoLink) chemoLink.classList.add('active');
+  }
+})();
+</script>

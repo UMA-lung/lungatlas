@@ -320,15 +320,12 @@ input[type=range] {
 </head>
 <body>
 
-<nav class="nav">
-  <a class="logo" href="home.html"><span>lung</span>atlas</a>
-  <div class="nav-links">
-    <a href="home.html">トップ</a>
-    <a href="driver-positive.html">変異陽性</a>
-    <a href="index.html" class="active">変異陰性</a>
-    <a href="about.html">このサイトについて</a>
-  </div>
-</nav>
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
 
 <div class="layout">
   <aside class="sidebar">
