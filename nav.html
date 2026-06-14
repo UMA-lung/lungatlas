@@ -159,7 +159,7 @@
     <div class="nav-dropdown">
       <a id="nav-anatomy" href="#">解剖学・画像診断</a>
       <div class="dropdown-menu">
-        <span class="dropdown-soon">肺の解剖学<span>近日公開</span></span>
+        <a id="nav-anatomy-page" href="/lungatlas/anatomy.html">肺の解剖学</a>
         <span class="dropdown-soon">CT画像診断<span>近日公開</span></span>
       </div>
     </div>
@@ -203,6 +203,7 @@
   // 現在のパスに応じてactiveクラスを付与
   var path = window.location.pathname;
   var map = {
+    'nav-anatomy-page': ['anatomy.html'],
     'nav-driver-pos':  ['driver-positive.html'],
     'nav-egfr':        ['egfr-firstline.html'],
     'nav-driver-neg':  ['index.html'],
@@ -220,6 +221,10 @@
   if (chemoPages.some(function(p){ return path.indexOf(p) !== -1; })) {
     var chemoLink = document.getElementById('nav-chemo');
     if (chemoLink) chemoLink.classList.add('active');
+  }
+  if (path.indexOf('anatomy.html') !== -1) {
+    var anatLink = document.getElementById('nav-anatomy');
+    if (anatLink) anatLink.classList.add('active');
   }
 })();
 </script>
