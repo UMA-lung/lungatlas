@@ -267,6 +267,9 @@ fetch('/lungatlas/nav.html')
       <a class="sb-item" href="#lymph" onclick="activate(this)">リンパ節分類</a>
       <a class="sb-sub" href="#iaslc">IASLC/山形分類</a>
     </div>
+    <div class="sb-section">
+      <a class="sb-item" href="#references" onclick="activate(this)">参照文献</a>
+    </div>
   </aside>
 
   <main class="main">
@@ -643,131 +646,193 @@ fetch('/lungatlas/nav.html')
       </p>
 
       <div id="iaslc">
-        <h3 class="sec-h3">IASLC/山形分類（#1〜#14）<!-- 要確認：最新版の改訂状況 --></h3>
+        <h3 class="sec-h3">リンパ節分類（肺がん取り扱い規約 第9版 CT読影基準）</h3>
+
+        <p style="font-size:12.5px;color:var(--text3);margin-bottom:12px">
+          以下の境界定義は「表1 リンパ節部位のCT読影基準」（第9版, p.○○）に準拠。<!-- 要確認：ページ番号 -->IASLC 2009年リンパ節地図（Rusch et al., JTO 2009）に対応。
+        </p>
 
         <div class="ln-table-wrap">
           <table class="ln-table">
             <thead>
               <tr>
-                <th style="width:55px">#</th>
-                <th style="width:160px">名称</th>
-                <th style="width:70px">N因子</th>
-                <th>位置・ランドマーク</th>
+                <th style="width:60px">#</th>
+                <th style="width:175px">正式名称（第9版）</th>
+                <th style="width:65px">N因子</th>
+                <th>CT読影基準（第9版）</th>
               </tr>
             </thead>
             <tbody>
+              <!-- #1 -->
               <tr class="ln-group-row">
-                <td colspan="4">縦隔上部リンパ節（Superior Mediastinal Nodes）</td>
+                <td colspan="4">鎖骨上窩リンパ節</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#1</span></td>
-                <td>上縦隔</td>
-                <td>N3（対側）/ N2</td>
-                <td>鎖骨上·頸部·上縦隔の境界。鎖骨上は#1に含む</td>
+                <td><span class="ln-num">#1R / #1L</span></td>
+                <td>鎖骨上窩リンパ節</td>
+                <td>N3</td>
+                <td>輪状軟骨下縁から、正中では胸骨柄上縁・左右では鎖骨までの範囲。気管正中線で#1R（右）と#1L（左）を区別</td>
+              </tr>
+              <!-- 上部縦隔 -->
+              <tr class="ln-group-row">
+                <td colspan="4">上部縦隔リンパ節 — #2〜#4</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#2R/2L</span></td>
-                <td>上気管傍</td>
-                <td>N2（同側）/ N3（対側）</td>
-                <td>気管の右側（2R）・左側（2L）。大動脈弓上縁が#2L/#4Lの境界</td>
+                <td><span class="ln-num">#2R</span></td>
+                <td>右上部気管傍リンパ節</td>
+                <td>N2（右肺）/ N3（左肺）</td>
+                <td>右肺尖・胸膜頂より尾側。胸骨柄上縁〜気管と左腕頭静脈尾側の交差まで。気管左外側縁の右側</td>
+              </tr>
+              <tr>
+                <td><span class="ln-num">#2L</span></td>
+                <td>左上部気管傍リンパ節</td>
+                <td>N2（左肺）/ N3（右肺）</td>
+                <td>左肺尖・胸膜頂より尾側。胸骨柄上縁〜大動脈弓上縁まで。気管左外側縁の左側</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#3a</span></td>
-                <td>前縦隔</td>
+                <td>血管前リンパ節</td>
                 <td>N2</td>
-                <td>上大静脈・上行大動脈前方</td>
+                <td>胸膜頂〜気管分岐部レベル。胸骨より後方。右側：上大静脈前縁線より前、左側：左総頸動脈より前</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#3p</span></td>
-                <td>気管後（後縦隔上部）</td>
+                <td>気管後リンパ節</td>
                 <td>N2</td>
-                <td>気管後壁に沿う</td>
+                <td>胸膜頂〜気管分岐部レベル。気管後縁線より後方</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#4R/4L</span></td>
-                <td>下気管傍</td>
-                <td>N2（同側）/ N3（対側）</td>
-                <td>気管分岐部上方。#4Rは奇静脈、#4Lは大動脈弓下縁が境界<!-- 要確認 --></td>
+                <td><span class="ln-num">#4R</span></td>
+                <td>右下部気管傍リンパ節</td>
+                <td>N2（右肺）/ N3（左肺）</td>
+                <td>気管と左腕頭静脈尾側の交差〜奇静脈下縁。右気管傍・気管前リンパ節を含む。気管左外側縁の右側</td>
               </tr>
+              <tr>
+                <td><span class="ln-num">#4L</span></td>
+                <td>左下部気管傍リンパ節</td>
+                <td>N2（左肺）/ N3（右肺）</td>
+                <td>大動脈弓上縁〜左主肺動脈上縁。動脈管索内側のリンパ節を含む。気管左外側縁の左側</td>
+              </tr>
+              <!-- 大動脈 -->
               <tr class="ln-group-row">
-                <td colspan="4">大動脈周囲リンパ節（Aortic Nodes）— 左側のみ</td>
+                <td colspan="4">大動脈リンパ節 — #5〜#6（左側原発に関連）</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#5</span></td>
-                <td>大動脈肺動脈窓（AP窓）</td>
-                <td>N2（左肺）</td>
-                <td>大動脈弓と左肺動脈の間。左上葉癌のドレナージ領域</td>
+                <td>大動脈下リンパ節</td>
+                <td>N2（左肺）/ N3（右肺）</td>
+                <td>大動脈弓下縁〜左主肺動脈の間。動脈管索に対して外側（横）に位置する大動脈下リンパ節</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#6</span></td>
-                <td>大動脈周囲（傍大動脈）</td>
-                <td>N2（左肺）</td>
-                <td>上行大動脈・大動脈弓の前外側</td>
+                <td>大動脈傍リンパ節</td>
+                <td>N2（左肺）/ N3（右肺）</td>
+                <td>大動脈弓上縁〜大動脈弓下縁の間。上行大動脈と大動脈弓の前方・外側</td>
               </tr>
+              <!-- 下部縦隔 -->
               <tr class="ln-group-row">
-                <td colspan="4">下縦隔リンパ節（Inferior Mediastinal Nodes）</td>
+                <td colspan="4">下部縦隔リンパ節 — #7〜#9</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#7</span></td>
-                <td>気管分岐下（Subcarinal）</td>
-                <td>N2</td>
-                <td>隆起直下。両側肺下葉・左上葉のドレナージ経路。郭清必須</td>
+                <td>気管分岐下リンパ節</td>
+                <td>N2（両側）</td>
+                <td>気管分岐部から、左側は下葉支上縁まで、右側は中間幹下縁まで</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#8</span></td>
-                <td>傍食道（中下縦隔）</td>
-                <td>N2</td>
-                <td>食道の左右。#7より尾側</td>
+                <td>食道傍リンパ節（気管分岐下より下方）</td>
+                <td>N2（両側）</td>
+                <td>左側：下葉支上縁、右側：中間幹下縁〜横隔膜まで。#7を除く食道壁に接するリンパ節</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#9</span></td>
-                <td>肺靭帯</td>
-                <td>N2</td>
-                <td>下肺靭帯内。#8・#7との境界に注意</td>
+                <td>肺靱帯リンパ節</td>
+                <td>N2（両側）</td>
+                <td>下肺静脈〜横隔膜までの肺靱帯内</td>
               </tr>
+              <!-- N1 -->
               <tr class="ln-group-row">
-                <td colspan="4">N1リンパ節（肺門・葉内・区域・亜区域）</td>
+                <td colspan="4">N1リンパ節 — #10〜#14</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#10</span></td>
-                <td>肺門</td>
+                <td>主気管支周囲リンパ節</td>
                 <td>N1</td>
-                <td>主気管支・肺動脈に沿う。縦隔胸膜反転部より末梢</td>
+                <td>右側：奇静脈下縁〜肺門脈管領域、左側：肺動脈上縁〜肺門脈管領域。肺静脈・主肺動脈近位部を含む主気管支・肺門脈管群に直接接する</td>
               </tr>
               <tr>
-                <td><span class="ln-num">#11</span></td>
-                <td>葉間</td>
+                <td><span class="ln-num">#11s / #11i</span></td>
+                <td>葉気管支間リンパ節</td>
                 <td>N1</td>
-                <td>葉間裂内。右中葉・下葉の境界部に存在することが多い</td>
+                <td>葉気管支起点の間。右肺：上葉支〜中葉支間を#11s、中葉支〜下葉支間を#11i</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#12</span></td>
-                <td>葉</td>
+                <td>葉気管支周囲リンパ節</td>
                 <td>N1</td>
-                <td>葉気管支に沿う</td>
+                <td>葉気管支に接して位置</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#13</span></td>
-                <td>区域</td>
+                <td>区域気管支周囲リンパ節</td>
                 <td>N1</td>
-                <td>区域気管支に沿う</td>
+                <td>区域気管支に接して位置</td>
               </tr>
               <tr>
                 <td><span class="ln-num">#14</span></td>
-                <td>亜区域</td>
+                <td>亜区域気管支周囲リンパ節</td>
                 <td>N1</td>
-                <td>亜区域気管支に沿う</td>
+                <td>亜区域気管支に接して位置</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="clinical-box">
-          <strong>系統的縦隔リンパ節郭清（ND2a-1 / ND2a-2）の範囲：</strong>右肺では#2R・#4R・#7・#8・#9（＋#10〜#12）が標準郭清範囲。左肺では#4L・#5・#6・#7・#8・#9（＋#10〜#12）。#2L・#3は解剖学的な困難さから施設により対応が異なる。<!-- 要確認：各施設プロトコル・日本肺癌学会GL -->
+          <strong>系統的縦隔リンパ節郭清の標準範囲（第9版）：</strong>
+          右肺：#2R・#4R・#7・#8R・#9R（＋N1：#10〜#12）。
+          左肺：#4L・#5・#6・#7・#8L・#9L（＋N1：#10〜#12）。
+          #3a・#3pは施設・術式によって対応が異なる。<!-- 要確認：日本肺癌学会 外科療法GL最新版 -->
         </div>
 
         <div class="info-box">
-          <strong>N2とN3の境界：</strong>#2・#4は同側がN2、対側がN3。#1・#3a・#3pは同側・対側ともN2とする分類もある。IASLC 2009年版以降では#3a・#3pをN2に含める。<!-- 要確認：最新IASLC版で変更の可能性あり -->
+          <strong>N因子の要点：</strong>#1（鎖骨上窩）はN3。#2・#4は同側N2 / 対側N3。#5・#6は左側原発N2 / 右側原発N3相当。#7〜#9は両側ともN2。#10〜#14はN1（同側）/ N3（対側）。
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 参照文献 -->
+    <section id="references">
+      <h2 class="sec-h2">参照文献</h2>
+      <div class="anatomy-card">
+        <div class="anatomy-card-body">
+          <ol style="padding-left:18px;font-size:12.5px;color:var(--text2);line-height:2.1">
+            <li>
+              日本肺癌学会（編）．<strong>肺癌取り扱い規約 第9版</strong>．金原出版，2017．
+              <span style="font-size:11px;color:var(--text3)">— 表1「リンパ節部位のCT読影基準」（#1〜#14の境界定義・名称）を直接参照</span>
+            </li>
+            <li>
+              Rusch VW, Asamura H, Watanabe H, et al. The IASLC lung cancer staging project: a proposal for a new international lymph node map in the forthcoming seventh edition of the TNM classification for lung cancer.
+              <em>J Thorac Oncol.</em> 2009;4(5):568–577.
+              <span style="font-size:11px;color:var(--text3)">— IASLC 2009 リンパ節地図。第9版の基盤</span>
+            </li>
+            <li>
+              Goldstraw P, Chansky K, Crowley J, et al. The IASLC Lung Cancer Staging Project: Proposals for Revision of the TNM Stage Groupings in the Forthcoming (Eighth) Edition of the TNM Classification for Lung Cancer.
+              <em>J Thorac Oncol.</em> 2016;11(1):39–51.
+              <span style="font-size:11px;color:var(--text3)">— 第8版TNM分類（第9版取り扱い規約が準拠）</span>
+            </li>
+            <li>
+              Netter FH. <strong>Atlas of Human Anatomy</strong>, 7th ed. Elsevier, 2019.
+              <span style="font-size:11px;color:var(--text3)">— 肺・縦隔解剖のイラスト参照</span>
+            </li>
+            <li>
+              Fishman AP, et al. <strong>Fishman's Pulmonary Diseases and Disorders</strong>, 5th ed. McGraw-Hill, 2015.
+              <span style="font-size:11px;color:var(--text3)">— 気管支解剖・肺門構造の記述参照</span>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
@@ -794,11 +859,12 @@ function activate(el) {
 
 /* スクロール連動サイドバー */
 var sections = [
-  { id: 'overview',  el: null },
-  { id: 'segments',  el: null },
-  { id: 'bronchi',   el: null },
-  { id: 'hilum',     el: null },
-  { id: 'lymph',     el: null },
+  { id: 'overview',    el: null },
+  { id: 'segments',    el: null },
+  { id: 'bronchi',     el: null },
+  { id: 'hilum',       el: null },
+  { id: 'lymph',       el: null },
+  { id: 'references',  el: null },
 ];
 sections.forEach(function(s){ s.el = document.getElementById(s.id); });
 
