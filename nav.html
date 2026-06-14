@@ -148,10 +148,19 @@
 @media (max-width: 768px) {
   #lungatlas-nav .nav-links { display: none; }
 }
+
+.disclaimer-footer {
+  background: var(--amber-light, #fdf0d8);
+  border-top: 1px solid #e8c87a;
+  padding: 12px 28px;
+  font-size: 11px;
+  color: var(--amber-dark, #6b3d00);
+  line-height: 1.7;
+}
 </style>
 
-<nav id="lungatlas-nav">
-  <a class="nav-logo" href="/lungatlas/home.html"><span>lung</span>atlas</a>
+<nav id="lungatlas-nav" aria-label="メインナビゲーション">
+  <a class="nav-logo" href="/lungatlas/index.html"><span>lung</span>atlas</a>
 
   <div class="nav-links">
 
@@ -159,7 +168,7 @@
     <div class="nav-dropdown">
       <a id="nav-anatomy" href="#">解剖学・画像診断</a>
       <div class="dropdown-menu">
-        <span class="dropdown-soon">肺の解剖学<span>近日公開</span></span>
+        <a id="nav-anatomy-page" href="/lungatlas/anatomy.html">肺の解剖学</a>
         <span class="dropdown-soon">CT画像診断<span>近日公開</span></span>
       </div>
     </div>
@@ -198,11 +207,17 @@
   </div>
 </nav>
 
+<div class="disclaimer-footer">
+  <strong>医療従事者向け免責事項：</strong>本サイトの情報は教育・学習目的であり、個別の診療判断の根拠として使用しないでください。最新のガイドラインおよび原著論文を必ず参照してください。<br>
+  <strong>AI使用ポリシー：</strong>本サイトのコンテンツはClaude（Anthropic）を用いて作成・整理されています。医学的内容は著者が監修していますが、誤りが含まれる可能性があります。
+</div>
+
 <script>
 (function() {
   // 現在のパスに応じてactiveクラスを付与
   var path = window.location.pathname;
   var map = {
+    'nav-anatomy-page': ['anatomy.html'],
     'nav-driver-pos':  ['driver-positive.html'],
     'nav-egfr':        ['egfr-firstline.html'],
     'nav-driver-neg':  ['index.html'],
@@ -220,6 +235,10 @@
   if (chemoPages.some(function(p){ return path.indexOf(p) !== -1; })) {
     var chemoLink = document.getElementById('nav-chemo');
     if (chemoLink) chemoLink.classList.add('active');
+  }
+  if (path.indexOf('anatomy.html') !== -1) {
+    var anatLink = document.getElementById('nav-anatomy');
+    if (anatLink) anatLink.classList.add('active');
   }
 })();
 </script>

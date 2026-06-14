@@ -21,17 +21,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
 
-/* NAV */
-.nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:52px;position:sticky;top:0;z-index:100}
-.logo{font-size:15px;font-weight:600;color:var(--text);text-decoration:none}
-.logo span{color:var(--green-mid)}
-.nav-links{display:flex;gap:4px}
-.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
-.nav-links a:hover{background:var(--surface2);color:var(--text)}
-.nav-links a.active{color:var(--green-dark);font-weight:500;background:var(--green-light)}
-.nav-back{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--green-dark);text-decoration:none;padding:5px 10px;border-radius:6px;background:var(--green-light);transition:background .15s}
-.nav-back:hover{background:#cce8d4}
-
 /* LAYOUT */
 .layout{display:flex;min-height:calc(100vh - 52px)}
 .sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
@@ -494,7 +483,7 @@ fetch('/lungatlas/nav.html')
       <div class="dec-body">
         <p class="dec-reason">EGFR変異陽性NSCLCは免疫療法単剤がほぼ無効だが、ABCPの4剤併用はTKI耐性後の例外的に有効性が示されたレジメン。ベバシズマブ（抗VEGF抗体）がTKI耐性後に変化した免疫抑制的腫瘍微小環境を改善し、免疫療法の効果を引き出す機序が提唱されている。TKI耐性後に再生検でPD-L1発現・TMBが上昇するという知見とも合致する。</p>
         <div class="dec-evidence">
-          <strong>IMpower150 EGFR/ALKサブグループ（最終OS解析, JTO 2021）：</strong>ABCP群のPFS中央値 9.7 mo vs BCP群 6.1 mo（HR 0.59, 95%CI 0.37–0.94）。EGFR/ALK変異陽性例を含む唯一の大規模免疫療法試験。<br>
+          <strong>IMpower150 EGFR/ALKサブグループ（最終OS解析, JTO 2021）：</strong>ABCP群のPFS中央値 9.7 mo vs BCP群 6.1 mo（HR 0.59, 95%CI 0.37–0.94）。EGFR/ALK変異陽性例を含む代表的な大規模免疫療法試験。<br>
           <strong>ATTLAS（KCSG-LU19-04, JCO 2024）：</strong>EGFR/ALK TKI耐性後のABCP vs プラチナ＋ペメトレキセドをPhase IIIで検証。PFS相対リスク38%減。特にL858Rサブグループ・T790M非獲得例で有意なベネフィット。
         </div>
         <div class="dec-caution">

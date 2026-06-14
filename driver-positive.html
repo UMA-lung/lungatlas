@@ -21,20 +21,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
 
-/* NAV */
-.nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:52px;position:sticky;top:0;z-index:100}
-.logo{font-size:15px;font-weight:600;color:var(--text);text-decoration:none}
-.logo span{color:var(--green-mid)}
-.nav-links{display:flex;gap:4px}
-.nav-links a{font-size:13px;color:var(--text3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .15s}
-.nav-links a:hover{background:var(--surface2);color:var(--text)}
-.nav-links a.active{color:var(--green-dark);font-weight:500;background:var(--green-light)}
-.nav-right{display:flex;align-items:center;gap:8px}
-.lang-switch{display:flex;gap:4px}
-.lang-btn{font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text3);cursor:pointer;font-family:var(--font);transition:all .15s;text-decoration:none}
-.lang-btn:hover{border-color:var(--border2);color:var(--text)}
-.lang-btn.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark)}
-
 /* LAYOUT */
 .layout{display:flex;min-height:calc(100vh - 52px)}
 .sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
@@ -97,6 +83,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .gl-eu{background:var(--purple-light);color:var(--purple-dark)}
 .gl-flag{font-size:14px;flex-shrink:0;margin-top:1px}
 .tox-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.trial-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.trial-meta-item{background:var(--surface2);border-radius:6px;padding:6px 10px;font-size:11px}
+.meta-label{font-weight:600;color:var(--text3);margin-right:4px}
+.meta-val{color:var(--text2)}
+.meta-val a{color:var(--green-dark);text-decoration:none}
+.tox-warning{background:var(--red-light);border-left:3px solid #c0392b;border-radius:0 8px 8px 0;padding:10px 14px;font-size:12px;color:var(--red-dark);line-height:1.7;margin-top:10px}
 .tox{font-size:11px;background:var(--red-light);color:var(--red-dark);padding:3px 10px;border-radius:10px}
 
 /* EXPAND */
@@ -279,7 +271,7 @@ fetch('/lungatlas/nav.html')
               <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:3px">FLAURA2（化療併用）</div>
               <div class="stat-val">25.5 mo</div>
               <div class="stat-label">中央値 PFS</div>
-              <div class="stat-vs">vs 16.7 mo 単剤（HR 0.62）<br>OS最終解析待ち</div>
+              <div class="stat-vs">vs 16.7 mo 単剤（HR 0.62）<br>中央値OS 47.5 mo vs 37.6 mo（HR 0.77）</div>
             </div>
             <div class="stat">
               <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:3px">ADAURA（術後補助）</div>
@@ -290,7 +282,7 @@ fetch('/lungatlas/nav.html')
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">FLAURAは第3世代として初めて1次治療のOS延長を証明し、現在もすべての新規試験の比較対照。FLAURA2では化療上乗せでPFSがさらに9ヶ月延長するが、OS最終解析は追跡中。毒性増加（血液毒性・悪心）を考慮するとPS良好・脳転移高リスク例での選択が現実的。ADAURA試験では術後補助療法として DFS HR 0.17という強力なデータ。</p>
+          <p class="trial-desc">FLAURAは第3世代として初めて1次治療のOS延長を証明し、現在もすべての新規試験の比較対照。FLAURA2では化療上乗せでPFSがさらに9ヶ月延長し、最終OS解析（NEJM 2026）でも47.5 mo vs 37.6 mo（HR 0.77, p=0.02）とOS延長が確認された。毒性増加（血液毒性・悪心）を考慮するとPS良好・脳転移高リスク例での選択が現実的。ADAURA試験では術後補助療法として DFS HR 0.17という強力なデータ。</p>
           <div class="gl-list">
             <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>単剤・化療併用ともに推奨。補助療法（ADAURA）も保険適用。</span></div>
             <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN / ASCO：</strong>Category 1（1次治療・補助療法）。</span></div>
@@ -325,6 +317,7 @@ fetch('/lungatlas/nav.html')
             <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO 2025：</strong>グレードA推奨。EMA承認 2025年初頭。</span></div>
           </div>
           <div class="tox-row"><span class="tox">Infusion reaction（IV）</span><span class="tox">皮膚毒性</span><span class="tox">静脈血栓塞栓症</span><span class="tox">SC版でIRR大幅減</span></div>
+          <div class="tox-warning">⚠️ <strong>VTE（静脈血栓塞栓症）：</strong>Grade 3以上 約5%。予防的抗凝固療法を考慮。</div>
         </div>
       </div>
 
@@ -378,7 +371,7 @@ fetch('/lungatlas/nav.html')
     <!-- ALK -->
     <div id="p-alk" class="panel">
 
-      <div class="note-box" style="margin-bottom:16px"><strong>使い分けの原則：</strong>ロルラチニブが5年PFS未到達という固形腫瘍史上最長データを持つ。アレクチニブは国内処方実績最多・忍容性良好。「最初からロルラチニブ」vs「アレクチニブ先行→進行後ロルラチニブ」のシーケンス戦略は現在も議論継続中。</div>
+      <div class="note-box" style="margin-bottom:16px"><strong>使い分けの原則：</strong>ロルラチニブが5年PFS未到達という現時点で最長クラスのデータを持つ。アレクチニブは国内処方実績最多・忍容性良好。「最初からロルラチニブ」vs「アレクチニブ先行→進行後ロルラチニブ」のシーケンス戦略は現在も議論継続中。</div>
 
       <!-- 全薬剤一覧表 -->
       <div class="trial-card">
@@ -408,7 +401,7 @@ fetch('/lungatlas/nav.html')
                 <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)" rowspan="3">第2世代</td>
                 <td style="padding:8px 12px;border-right:1px solid var(--border)">
                   <strong style="color:var(--green-dark)">アレクチニブ ★国内主流</strong><br>
-                  <span style="font-size:11px;color:var(--text3)">アレセンサ® 600mg×2/日（国内）/ 300mg×2/日（日本承認用量）</span>
+                  <span style="font-size:11px;color:var(--text3)">アレセンサ® 300mg 1日2回（日本承認用量）/ 600mg 1日2回（海外）</span>
                 </td>
                 <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">◎ 推奨</td>
                 <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
@@ -436,12 +429,12 @@ fetch('/lungatlas/nav.html')
                 <td style="padding:8px 10px;font-size:11px;color:var(--text2)">早期肺毒性（開始初期）、高血圧</td>
               </tr>
               <tr>
-                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">第3世代<br><span style="color:var(--green-dark);font-weight:600">★最推奨</span></td>
+                <td style="padding:8px 12px;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">第3世代<br><span style="color:var(--green-dark);font-weight:600">★代表的選択肢</span></td>
                 <td style="padding:8px 12px;border-right:1px solid var(--border)">
-                  <strong style="color:var(--green-dark)">ロルラチニブ ★固形腫瘍史上最長PFS</strong><br>
+                  <strong style="color:var(--green-dark)">ロルラチニブ ★現時点で最長クラスのPFS</strong><br>
                   <span style="font-size:11px;color:var(--text3)">ローブレナ® 100mg/日</span>
                 </td>
-                <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">◎◎ 最推奨</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:600;border-right:1px solid var(--border)">◎◎ 代表的選択肢</td>
                 <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">経口</td>
                 <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">CROWN<br>（JCO 2024, 5年解析）</td>
                 <td style="padding:8px 10px;font-size:11px;color:var(--text2)">高脂血症（高頻度）、浮腫、認知・気分変化、体重増加</td>
@@ -459,7 +452,7 @@ fetch('/lungatlas/nav.html')
             <a class="trial-link" href="https://doi.org/10.1200/JCO.24.00581" target="_blank" rel="noopener">CROWN（5年解析）<span class="ext">↗</span></a>
             <span class="jbadge j-jco">J Clin Oncol 2024</span>
             <span class="ybadge">Phase III · n=296 · 60ヶ月追跡</span>
-            <span class="new-badge">固形腫瘍史上最長PFS</span>
+            <span class="new-badge">現時点で最長クラスのPFS</span>
           </div>
           <div class="drug-title">ロルラチニブ 100mg/日 vs クリゾチニブ</div>
           <div class="drug-sub">未治療 ALK陽性 進行期NSCLC · 脳転移例25%含む</div>
@@ -470,9 +463,9 @@ fetch('/lungatlas/nav.html')
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">2024年ASCO年次総会で発表（Solomon et al., JCO 2024）。5年時点でPFS中央値が未到達——固形腫瘍を含む全転移癌において単剤分子標的薬として史上最長のPFS。50%の患者が5年時点でも投与継続中。アジア人サブグループ（JTO 2025）でも5年PFS 63%と同様の結果。</p>
+          <p class="trial-desc">2024年ASCO年次総会で発表（Solomon et al., JCO 2024）。5年時点でPFS中央値が未到達——固形腫瘍を含む転移癌の単剤分子標的薬として現時点で最長クラスのPFS。50%の患者が5年時点でも投与継続中。アジア人サブグループ（JTO 2025）でも5年PFS 63%と同様の結果。</p>
           <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>ALK融合陽性の1次治療として最も強い推奨。</span></div>
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>ALK融合陽性の1次治療として有力な推奨。</span></div>
             <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>Category 1。5年データを受け1次治療での位置づけがより強化。</span></div>
             <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>グレードA推奨。脳転移リスクの高いALK陽性例で特に有用。</span></div>
           </div>
@@ -505,14 +498,14 @@ fetch('/lungatlas/nav.html')
           <div class="stat-row">
             <div class="stat"><div class="stat-val">高奏効率</div><div class="stat-label">ORR（未治療例）</div><div class="stat-vs">CNS転移例でも有効</div></div>
             <div class="stat"><div class="stat-val">CNS毒性↓</div><div class="stat-label">慢性めまい・転倒リスク</div><div class="stat-vs">旧世代薬の課題を克服</div></div>
-            <div class="stat"><div class="stat-val">2025年</div><div class="stat-label">日本・FDA承認</div><div class="stat-vs">夏季に国内承認</div></div>
+            <div class="stat"><div class="stat-val">2025年9月19日</div><div class="stat-label">国内承認</div><div class="stat-vs">FDA承認も2025年</div></div>
           </div>
         </div>
         <div class="tc-body">
           <p class="trial-desc">クリゾチニブやエヌトレクチニブで問題となっていたCNS毒性（慢性めまい・平衡障害・転倒リスク）を大幅に改善しながら高い奏効率を維持。脳転移への頭蓋内奏効率も良好。QOL改善を主な訴求点とした新世代ROS1阻害薬。</p>
           <div class="gl-list">
             <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>ROS1融合陽性の新規推奨薬として追加。</span></div>
-            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>2025年夏のFDA承認を受けガイドラインに追加。めまい副作用の少なさが患者QOL上の大きなメリット。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>2025年のFDA承認を受けガイドラインに追加。めまい副作用の少なさが患者QOL上の大きなメリット。</span></div>
           </div>
         </div>
       </div>
@@ -529,13 +522,13 @@ fetch('/lungatlas/nav.html')
           <div class="drug-title">トラスツズマブ デルクステカン（T-DXd / エンハーツ®）</div>
           <div class="drug-sub">HER2遺伝子変異陽性NSCLC · 既治療例 · ADC製剤</div>
           <div class="stat-row">
-            <div class="stat"><div class="stat-val">49%</div><div class="stat-label">ORR（6.4mg/kg群）</div><div class="stat-vs">HER2変異肺癌では最高水準</div></div>
+            <div class="stat"><div class="stat-val">49.0% / 56.0%</div><div class="stat-label">ORR（5.4mg/kg群 / 6.4mg/kg群）</div><div class="stat-vs">HER2変異肺癌では最高水準</div></div>
             <div class="stat"><div class="stat-val">ADC</div><div class="stat-label">抗体薬物複合体</div><div class="stat-vs">HER2標的 + トポI阻害</div></div>
             <div class="stat"><div class="stat-val">ILD注意</div><div class="stat-label">最重要有害事象</div><div class="stat-vs">Grade 3以上 約5–12%</div></div>
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">HER2変異肺癌の標準治療として現在最も強いエビデンスを持つADC製剤。間質性肺疾患（ILD）が重篤になりうる有害事象として定期的な画像モニタリングが不可欠。ゾンゲルチニブ（経口HER2-TKI、2025年8月国内承認）との使い分けは今後のデータ蓄積待ち。</p>
+          <p class="trial-desc">HER2変異肺癌の標準治療として現在有力なエビデンスを持つADC製剤。間質性肺疾患（ILD）が重篤になりうる有害事象として定期的な画像モニタリングが不可欠。ゾンゲルチニブ（経口HER2-TKI、2025年8月国内承認）は化学療法後に増悪したHER2変異陽性NSCLCに対する薬剤であり、T-DXdとの使い分けは今後のデータ蓄積待ち。</p>
           <div class="gl-list">
             <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>HER2変異陽性NSCLCに推奨。ゾンゲルチニブも新規追加。</span></div>
             <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>T-DXdをCategory 1。ILDの早期発見・管理プロトコルの整備が重要と明記。</span></div>
@@ -543,6 +536,7 @@ fetch('/lungatlas/nav.html')
           <div class="tox-row">
             <span class="tox">間質性肺疾患（ILD）— 最重要</span><span class="tox">悪心</span><span class="tox">骨髄抑制</span>
           </div>
+          <div class="tox-warning">⚠️ <strong>ILD（間質性肺疾患）：</strong>Grade 3以上 約12%。定期的な胸部CT監視が必須。Grade 2以上で投与中断を検討。</div>
         </div>
       </div>
 
@@ -566,8 +560,8 @@ fetch('/lungatlas/nav.html')
           <div class="stat-row">
             <div class="stat">
               <div style="font-size:10px;font-weight:600;color:var(--green-dark);margin-bottom:2px">カプマチニブ（GEOMETRY）</div>
-              <div class="stat-val">41–44%</div>
-              <div class="stat-label">ORR（未治療例）</div>
+              <div class="stat-val">約41% / 約68%</div>
+              <div class="stat-label">ORR（既治療例 / 未治療例）</div>
               <div class="stat-vs">中央値PFS 12.4 mo</div>
             </div>
             <div class="stat">
@@ -711,7 +705,7 @@ fetch('/lungatlas/nav.html')
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">KRAS G12Cは長年「undruggable」とされてきたが、共有結合型阻害薬（ソトラシブ・アダグラシブ）が実用化した歴史的意義のある分野。OSに有意差なし（HR 1.01）という点が議論を呼んだが、PFSベネフィットと毒性プロファイルでドセタキセルを上回る。アダグラシブ（クラズブリ®）も同様の適応あり。</p>
+          <p class="trial-desc">KRAS G12Cは長年「undruggable」とされてきたが、共有結合型阻害薬（ソトラシブ・アダグラシブ）が実用化した注目すべき分野。OSに有意差なし（HR 1.01）という点が議論を呼んだが、PFSベネフィットと毒性プロファイルでドセタキセルを上回る。アダグラシブ（クラズブリ®）も同様の適応あり。</p>
           <div class="gl-list">
             <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>2次治療以降で保険適用。<strong>1次治療では使用しない</strong>（免疫療法＋化学療法が標準）。</span></div>
             <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>2次治療以降でCategory 1。1次治療での承認は現時点でなし。</span></div>
