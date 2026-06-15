@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>周術期薬物療法（CM816・KN671・AEGEAN）— LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px; flex-shrink: 0; background: var(--surface);
+  border-right: 1px solid var(--border); padding: 20px 0;
+  position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
+}
+.sb-item {
+  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
+  text-decoration: none; border-left: 2px solid transparent;
+  transition: all .15s; cursor: pointer; line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light); color: var(--green-dark);
+  font-weight: 500; border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
+  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 860px; }
+
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 24px 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+.tab {
+  font-size: 12.5px; padding: 6px 16px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text2); cursor: pointer; font-family: var(--font);
+  transition: all .15s;
+}
+.tab:hover { border-color: var(--border2); color: var(--green-dark); }
+.tab.active {
+  background: var(--green-dark); color: #fff;
+  border-color: var(--green-dark); font-weight: 500;
+}
+
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.trial-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
+}
+.tc-top { padding: 18px 20px 16px; border-bottom: 1px solid var(--border); }
+.tc-meta {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+.trial-link {
+  font-size: 13.5px; font-weight: 600; color: var(--green-dark);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); letter-spacing: .01em;
+}
+.trial-link:hover { opacity: .7; }
+.trial-link .ext { font-size: 11px; opacity: .7; }
+.jbadge {
+  font-size: 10.5px; font-weight: 500; padding: 2px 9px;
+  border-radius: 8px; white-space: nowrap;
+}
+.j-nejm  { background: var(--blue-light); color: var(--blue-dark); }
+.j-lancet { background: var(--purple-light); color: var(--purple-dark); }
+.j-jto   { background: var(--green-light); color: var(--green-dark); }
+.ybadge {
+  font-size: 10.5px; color: var(--text3);
+  background: var(--surface2); padding: 2px 8px; border-radius: 8px;
+}
+.drug-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.drug-sub { font-size: 12.5px; color: var(--text2); margin-bottom: 12px; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 10px 13px; }
+.stat-val { font-size: 17px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.tc-body { padding: 16px 20px; }
+.trial-desc { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.gl-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  border-radius: 8px; padding: 9px 13px; font-size: 12px; line-height: 1.65;
+}
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.tox {
+  font-size: 11px; background: var(--red-light); color: var(--red-dark);
+  padding: 3px 10px; border-radius: 10px;
+}
+
+.trial-meta-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.trial-meta-item { background: var(--surface2); border-radius: 6px; padding: 6px 10px; font-size: 11px; }
+.meta-label { font-weight: 600; color: var(--text3); margin-right: 4px; }
+.meta-val { color: var(--text2); }
+.meta-val a { color: var(--green-dark); text-decoration: none; }
+
+.info-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+
+.detail-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; color: var(--text3);
+  background: var(--surface2); border: 0.5px solid var(--border);
+  padding: 6px 12px; border-radius: 6px; margin-top: 10px;
+  text-decoration: none; cursor: default;
+}
+.detail-link .soon {
+  font-size: 10px; font-weight: 500; background: var(--amber-light);
+  color: var(--amber-dark); padding: 1px 6px; border-radius: 4px;
+}
+
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 18px 40px; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-head">化学療法</div>
+      <div style="padding:2px 18px 4px">
+        <div style="font-size:10.5px;color:var(--text3);padding:4px 0 2px">1次治療</div>
+        <a class="sb-sub" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
+        <a class="sb-sub" href="/lungatlas/index.html">変異陰性 NSCLC</a>
+      </div>
+      <a class="sb-item active" href="perioperative.html">周術期薬物療法</a>
+      <a class="sb-item" href="#" style="color:var(--text3);cursor:default;border-left-color:transparent">
+        術後補助療法
+        <span style="font-size:10px;background:var(--amber-light);color:var(--amber-dark);padding:1px 5px;border-radius:4px;margin-left:4px;font-weight:500">近日公開</span>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">化学療法 › <span>周術期薬物療法</span></div>
+    <div class="updated">最終更新 2026年6月 — ASCO 2025最終解析データ基準</div>
+    <h1 class="art-h1">切除可能 NSCLC<br>周術期薬物療法</h1>
+    <p class="lead">術前化学免疫療法（neoadjuvant）と周術期（術前＋術後）化学免疫療法の3大試験を比較する。CheckMate 816（術前のみ）、KEYNOTE-671・AEGEAN（術前＋術後）はいずれもEGFR/ALK陰性の切除可能NSCLCを対象とし、日米欧で承認済み。術後補助療法単独（ADAURA・ALINA・IMpower010）は別ページを参照。</p>
+
+    <div style="margin-bottom:8px;font-size:11px;color:var(--text3);font-weight:500;letter-spacing:.04em">試験・テーマで絞り込む</div>
+    <div class="tabs">
+      <button class="tab active" onclick="sw('neoadj',this)">術前のみ — CM816</button>
+      <button class="tab" onclick="sw('periop',this)">周術期 — KN671・AEGEAN</button>
+      <button class="tab" onclick="sw('compare',this)">3試験比較・使い分け</button>
+    </div>
+
+    <!-- タブ1：術前のみ（CheckMate 816） -->
+    <div id="p-neoadj" class="panel active">
+      <div class="note-box" style="margin-bottom:16px">
+        <strong>対象：</strong>切除可能 NSCLC · Stage IB（≥4cm）–IIIA · EGFR/ALK陰性 · 術前化学免疫療法3サイクル → 手術（術後免疫療法なし）
+      </div>
+
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2202170" target="_blank" rel="noopener">CheckMate 816 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2022（EFS）</span>
+            <span class="jbadge j-nejm">NEJM 2025（OS最終解析）</span>
+            <span class="ybadge">Phase III · n=358 · Stage IB–IIIA</span>
+          </div>
+          <div class="drug-title">ニボルマブ 360mg + 白金製剤ベース化学療法 × 3サイクル → 手術</div>
+          <div class="drug-sub">切除可能 NSCLC · Stage IB（≥4cm）–IIIA · EGFR/ALK陰性 · <strong>術後免疫療法なし</strong></div>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-val">24.0%</div>
+              <div class="stat-label">pCR（病理学的完全奏効）率</div>
+              <div class="stat-vs">vs 2.2%（p&lt;0.001）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.68</div>
+              <div class="stat-label">EFS ハザード比</div>
+              <div class="stat-vs">中央値 31.6 mo vs 20.8 mo（p=0.005）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.71</div>
+              <div class="stat-label">OS ハザード比 ✅</div>
+              <div class="stat-vs">5年OS率 65% vs 55%（p=0.004）</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">ASCO 2025での最終OS解析（PMID: 40454642）にてOS有意差（HR 0.71, p=0.004）が示された。pCR率24.0%（vs 2.2%）、MPR（major pathologic response）率36.9%（vs 8.9%）。術後免疫療法なし・3サイクルのみで5年OS絶対差は10%ポイント。pCR達成例の5年OS率は約80%に達し、pCR・MPRが長期EFS・OSの予測因子として機能することが示された。手術完遂率はニボルマブ群83% vs 化学療法群75%であり、免疫療法による手術delay・中止への悪影響は認められなかった。</p>
+
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>承認あり（ニボルマブ術前補助）Stage IB（≥4cm）–IIIA。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2022年承認。Stage IB（≥4cm）以上・リンパ節陽性の切除可能 NSCLC。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>承認あり。</span></div>
+          </div>
+
+          <div class="trial-meta-row">
+            <div class="trial-meta-item"><span class="meta-label">MPR率</span><span class="meta-val">36.9% vs 8.9%</span></div>
+            <div class="trial-meta-item"><span class="meta-label">手術完遂率</span><span class="meta-val">83% vs 75%</span></div>
+            <div class="trial-meta-item"><span class="meta-label">術前 Grade 3+ irAE</span><span class="meta-val">11% vs 8%</span></div>
+            <div class="trial-meta-item"><span class="meta-label">手術 delay・中止</span><span class="meta-val">影響なし</span></div>
+            <div class="trial-meta-item">
+              <span class="meta-label">OS最終解析</span>
+              <span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/40454642/" target="_blank" rel="noopener">PMID 40454642 ↗</a>（ASCO 2025 / NEJM 2025）</span>
+            </div>
+          </div>
+
+          <div class="tox-row">
+            <span class="tox">Grade 3+ irAE（術前 11%）</span>
+            <span class="tox">手術完遂率への悪影響なし</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- タブ2：周術期（KEYNOTE-671 + AEGEAN） -->
+    <div id="p-periop" class="panel">
+      <div class="note-box" style="margin-bottom:16px">
+        <strong>対象：</strong>切除可能 NSCLC · Stage II–IIIB（N2）· EGFR/ALK陰性 · <strong>術前＋術後</strong>免疫療法を組み合わせた周術期アプローチ
+      </div>
+
+      <!-- KEYNOTE-671 -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2302983" target="_blank" rel="noopener">KEYNOTE-671 <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2023（EFS）</span>
+            <span class="jbadge j-lancet">Lancet 2024（OS）</span>
+            <span class="ybadge">Phase III · n=797 · Stage II–IIIB(N2)</span>
+          </div>
+          <div class="drug-title">ペムブロリズマブ 200mg + 白金製剤 × 4サイクル → 手術 → ペムブロリズマブ × 13サイクル</div>
+          <div class="drug-sub">切除可能 NSCLC · Stage II–IIIB（N2）· EGFR/ALK陰性 · <strong>術後ペムブロリズマブ 13サイクル</strong>を含む</div>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-val">18.1%</div>
+              <div class="stat-label">pCR率</div>
+              <div class="stat-vs">vs 4.0%（p&lt;0.001）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.59</div>
+              <div class="stat-label">EFS ハザード比</div>
+              <div class="stat-vs">中央値 47.2 mo vs 18.3 mo / 3年EFS 54.3% vs 35.4%</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.72</div>
+              <div class="stat-label">OS ハザード比 ✅</div>
+              <div class="stat-vs">3年OS 71% vs 64%（p=0.0052）</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">EFS（HR 0.59）・OS（HR 0.72, p=0.0052）両エンドポイントで有意差が示された（EFS: NEJM 2023 / OS: Lancet 2024）。MPR率30.2%（vs 11.0%）。4年OS率はESMO-IO 2024で68% vs 56.7%と報告されている。PD-L1全TPS層でEFS・OSベネフィットが確認されており、術後ペムブロリズマブ13サイクルを組み込んだ周術期完結型設計が特徴。Grade 3+ irAE（術前）は約12%であり、全体の安全性プロファイルはプラセボと同等と評価されている。</p>
+
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>2024年承認（術前＋術後）。Stage II–IIIB(N2)。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2023年10月承認。Stage II・IIIA・IIIB（N2）。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>承認あり。</span></div>
+          </div>
+
+          <div class="trial-meta-row">
+            <div class="trial-meta-item"><span class="meta-label">MPR率</span><span class="meta-val">30.2% vs 11.0%</span></div>
+            <div class="trial-meta-item"><span class="meta-label">4年OS率</span><span class="meta-val">68% vs 56.7%（ESMO-IO 2024）</span></div>
+            <div class="trial-meta-item"><span class="meta-label">術後サイクル</span><span class="meta-val">ペムブロ 13サイクル</span></div>
+            <div class="trial-meta-item"><span class="meta-label">Grade 3+ irAE（術前）</span><span class="meta-val">～12%</span></div>
+          </div>
+
+          <div class="tox-row">
+            <span class="tox">Grade 3+ irAE（術前 ～12%）</span>
+            <span class="tox">全体安全性はプラセボと同等</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AEGEAN -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2304875" target="_blank" rel="noopener">AEGEAN <span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2023（EFS）/ WCLC 2024（第2次中間解析）</span>
+            <span class="ybadge">Phase III · n=802 · Stage II–IIIB(N2)</span>
+          </div>
+          <div class="drug-title">デュルバルマブ 1500mg + 白金製剤 × 4サイクル → 手術 → デュルバルマブ × 12サイクル</div>
+          <div class="drug-sub">切除可能 NSCLC · Stage II–IIIB（N2）· EGFR/ALK陰性 · <strong>術後デュルバルマブ 12サイクル</strong>を含む</div>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-val">17.2%</div>
+              <div class="stat-label">pCR率</div>
+              <div class="stat-vs">vs 4.3%（p&lt;0.001）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.69</div>
+              <div class="stat-label">EFS ハザード比</div>
+              <div class="stat-vs">中央値 未到達 vs 30.0 mo / 3年EFS 60.1% vs 47.9%（WCLC 2024）</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.88</div>
+              <div class="stat-label">OS（中間解析）</div>
+              <div class="stat-vs">⚠️ 現時点で有意差なし・最終解析待ち</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <p class="trial-desc">EFS（HR 0.69）で有意差が示されたが、OS中間解析（HR 0.88）は現時点で統計的有意差なく、OS最終解析を待つ段階にある。MPR率33.3%（vs 12.3%）。安全性プロファイルはKEYNOTE-671と類似しており、Grade 3+ irAE（術前）は約10%。PD-L1評価にはVentana SP263アッセイを使用（KEYNOTE系の22C3とは異なるアッセイ）。KEYNOTE-671との直接比較試験はなく、試験設計・患者背景は類似している。</p>
+
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>2024年承認。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2024年8月承認。Stage IIA–IIIB（N2）。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>承認あり。</span></div>
+          </div>
+
+          <div class="trial-meta-row">
+            <div class="trial-meta-item"><span class="meta-label">MPR率</span><span class="meta-val">33.3% vs 12.3%</span></div>
+            <div class="trial-meta-item"><span class="meta-label">術後サイクル</span><span class="meta-val">デュルバルマブ 12サイクル</span></div>
+            <div class="trial-meta-item"><span class="meta-label">Grade 3+ irAE（術前）</span><span class="meta-val">約10%</span></div>
+            <div class="trial-meta-item"><span class="meta-label">PD-L1アッセイ</span><span class="meta-val">Ventana SP263</span></div>
+          </div>
+
+          <div class="info-box">
+            <strong>OS最終解析待ち：</strong>中間解析でOS HR 0.88・統計的有意差なし。EFSのみ有意差が示されている段階。OS最終解析の結果によって位置づけが変わりうる。
+          </div>
+
+          <div class="tox-row">
+            <span class="tox">Grade 3+ irAE（術前 約10%）</span>
+            <span class="tox">PD-L1：SP263アッセイ（22C3と別）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- タブ3：3試験比較・使い分け・GL序列 -->
+    <div id="p-compare" class="panel">
+
+      <h2 class="sec-h2">3試験 横断比較</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:580px">
+            <thead>
+              <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
+                <th style="padding:9px 12px;text-align:left;font-weight:600;color:var(--text);border-right:1px solid var(--border)">項目</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">CheckMate 816</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">KEYNOTE-671</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--purple-dark)">AEGEAN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">免疫療法戦略</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:500;border-right:1px solid var(--border)">術前のみ</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--blue-dark);font-weight:500;border-right:1px solid var(--border)">周術期（術前＋術後）</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--purple-dark);font-weight:500">周術期（術前＋術後）</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">薬剤</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">ニボルマブ</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">ペムブロリズマブ</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2)">デュルバルマブ</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">術前サイクル</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">3サイクル</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">4サイクル</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2)">4サイクル</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">術後免疫療法</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text3);border-right:1px solid var(--border)">なし</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2);border-right:1px solid var(--border)">あり（13サイクル）</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--text2)">あり（12サイクル）</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">対象 Stage</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB（≥4cm）–IIIA</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">II–IIIB(N2)</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">IIA–IIIB(N2)</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">pCR率（介入 vs 対照）</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">24.0% vs 2.2%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">18.1% vs 4.0%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--purple-dark)">17.2% vs 4.3%</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">MPR率</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);color:var(--green-dark);border-right:1px solid var(--border)">36.9% vs 8.9%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);color:var(--blue-dark);border-right:1px solid var(--border)">30.2% vs 11.0%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);color:var(--purple-dark)">33.3% vs 12.3%</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">EFS HR</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">0.68</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">0.59</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--purple-dark)">0.69</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">OS HR</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">0.71 ✅</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">0.72 ✅</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);color:var(--text3)">0.88（未有意）</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">長期OS率</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:500;color:var(--green-dark);border-right:1px solid var(--border)">5年 65% vs 55%</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:500;color:var(--blue-dark);border-right:1px solid var(--border)">4年 68% vs 56.7%</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text3)">最終解析待ち</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:11px;color:var(--text3);line-height:1.7">
+            <strong style="color:var(--text2)">読み方の注意：</strong>3試験間で対象Stage・術後治療の有無・追跡期間が異なるため直接比較は不可。EFS HRの差は術前サイクル数・術後継続治療の有無を含む設計差を反映している可能性がある。✅はOS有意差あり。
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-h2">使い分けガイド — 患者背景・状況別の考え方</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+
+            <div style="background:var(--green-pale);border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:6px">Stage IB（≥4cm）の場合</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                CheckMate 816が選択肢。KEYNOTE-671・AEGEANの対象はStage II以上であり、Stage IBへの適用データはCM816のみ提供されている。
+              </div>
+            </div>
+
+            <div style="background:var(--green-pale);border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:6px">術後継続治療の省略が望ましい場合・術後状態が懸念される場合</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                CheckMate 816が有力な選択肢。術後免疫療法なしの3サイクルのみで完結し、OS有意差（HR 0.71, p=0.004）が示されている。術後の忍容性・患者の希望・合併症を考慮する場合に利点がある。
+              </div>
+            </div>
+
+            <div style="background:#eef4fb;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:6px">術後継続治療が可能な場合（Stage II–IIIB · PS良好）</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                KEYNOTE-671が選択肢。EFS HR 0.59（3試験中最良のHR値）・OS有意差（HR 0.72, p=0.0052）が示されている。術後ペムブロリズマブ13サイクルの継続が必要であり、患者の術後状態・忍容性を確認した上で判断する。
+              </div>
+            </div>
+
+            <div style="background:#eef4fb;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--blue-dark);margin-bottom:6px">AEGEAN vs KEYNOTE-671 の使い分け（Stage II–IIIB）</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                直接比較試験はなく、試験設計・患者背景は類似している。AEGEANはOS有意差が現時点で未確認（最終解析待ち）であり、この点がKN671との主な差異。薬剤・施設環境・コスト・PD-L1アッセイ（SP263 vs 22C3）環境によって使い分けを検討する。
+              </div>
+            </div>
+
+            <div style="background:#fdf4e7;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:6px">PD-L1 TPS別の考慮</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                3試験ともPD-L1 TPS問わず全患者でベネフィットが示されており、TPS低発現を理由に除外する根拠はない。TPS高発現例でより大きなベネフィットの傾向が探索的解析で示唆されているが、直接比較ではない点に注意する。
+              </div>
+            </div>
+
+            <div style="background:var(--red-light);border-left:3px solid #c0392b;border-radius:0 10px 10px 0;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--red-dark);margin-bottom:6px">EGFR/ALK変異陽性例</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.75">
+                3試験ともEGFR/ALK変異陽性例は除外されており、本ページの内容は適用されない。EGFR変異陽性には術後オシメルチニブ（ADAURA）が標準的な選択肢となる（術後補助療法ページ参照）。
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-h2">ガイドライン序列 — COIを踏まえた評価</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px">
+          <div class="info-box" style="margin-bottom:16px">
+            <strong>COI（利益相反）について：</strong>CM816はBMS（ニボルマブ）、KN671はMerck（ペムブロリズマブ）、AEGEANはAZ（デュルバルマブ）がスポンサー。いずれも日米欧で承認を得ている。直接比較試験は存在しないため、以下は試験データと承認状況に基づく整理であり、治療選択の意思決定には個々の患者背景を考慮すること。
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px">
+
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--green-light);border-radius:10px;border-left:3px solid var(--green-mid)">
+              <div style="font-size:11px;font-weight:600;color:var(--green-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0">有力な選択肢</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--green-dark)">CheckMate 816（ニボルマブ 術前3サイクルのみ）</div>
+                <div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">術後免疫療法なしで完結し、OS有意差（HR 0.71, p=0.004）が示されている。Stage IB–IIIAまで適用可能。術後継続治療を要さないシンプルな設計が利点。3サイクルのみで5年OS絶対差10%ポイント。</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--blue-light);border-radius:10px;border-left:3px solid #2d6db5">
+              <div style="font-size:11px;font-weight:600;color:var(--blue-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0">有力な選択肢</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--blue-dark)">KEYNOTE-671（ペムブロリズマブ 周術期）</div>
+                <div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">3試験中最良のEFS HR（0.59）とOS有意差（HR 0.72, p=0.0052）が示されている。術後ペムブロリズマブ13サイクルの継続が必要。PS良好で術後継続治療が可能な患者に。Stage II–IIIB(N2)が対象。</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--purple-light);border-radius:10px;border-left:3px solid #6a5ec5">
+              <div style="font-size:11px;font-weight:600;color:var(--purple-dark);background:#fff;border-radius:6px;padding:3px 8px;white-space:nowrap;flex-shrink:0">選択肢となる</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--purple-dark)">AEGEAN（デュルバルマブ 周術期）</div>
+                <div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.65">EFS改善（HR 0.69）は確認されているが、OS最終解析待ち（中間解析HR 0.88・未有意）。KN671との使い分けはデータ上の差が限定的であり、薬剤・施設環境・コスト・SP263アッセイ環境で検討する。</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /p-compare -->
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+
+function sw(id, btn) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('p-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>
