@@ -250,7 +250,10 @@ fetch('/lungatlas/nav.html')
     <div class="crumb">化学療法 › <span>周術期薬物療法</span></div>
     <div class="updated">最終更新 2026年6月 — ASCO 2025最終解析データ基準</div>
     <h1 class="art-h1">切除可能 NSCLC<br>周術期薬物療法</h1>
-    <p class="lead">術前化学免疫療法（neoadjuvant）と周術期（術前＋術後）化学免疫療法の3大試験を比較する。CheckMate 816（術前のみ）、KEYNOTE-671・AEGEAN（術前＋術後）はいずれもEGFR/ALK陰性の切除可能NSCLCを対象とし、日米欧で承認済み。術後補助療法単独（ADAURA・ALINA・IMpower010）は別ページを参照。</p>
+    <div class="note-box" style="margin-bottom:16px">
+      3試験はいずれも切除可能NSCLCを対象とした周術期免疫療法試験だが、設計・対象Stage・術後治療の有無・EGFR/ALK除外基準がそれぞれ異なる。直接比較試験は存在せず、数値の横断比較は参考程度にとどめる。CheckMate 816のみ術前のみの戦略、KEYNOTE-671はEGFR/ALK除外なしという点が3試験の中で特に異なる重要点。
+    </div>
+    <p class="lead">術前化学免疫療法（neoadjuvant）と周術期（術前＋術後）化学免疫療法の3大試験を比較する。CheckMate 816（術前のみ）・AEGEAN（術前＋術後）はEGFR/ALK陰性の切除可能NSCLCを対象とし、KEYNOTE-671（術前＋術後）はEGFR/ALK変異陽性例の除外基準を設けていない。3試験ともに日米欧で承認済み。術後補助療法単独（ADAURA・ALINA・IMpower010）は別ページを参照。</p>
 
     <div style="margin-bottom:8px;font-size:11px;color:var(--text3);font-weight:500;letter-spacing:.04em">試験・テーマで絞り込む</div>
     <div class="tabs">
@@ -295,6 +298,12 @@ fetch('/lungatlas/nav.html')
         </div>
         <div class="tc-body">
           <p class="trial-desc">ASCO 2025での最終OS解析（PMID: 40454642）にてOS有意差（HR 0.71, p=0.004）が示された。pCR率24.0%（vs 2.2%）、MPR（major pathologic response）率36.9%（vs 8.9%）。術後免疫療法なし・3サイクルのみで5年OS絶対差は10%ポイント。pCR達成例の5年OS率は約80%に達し、pCR・MPRが長期EFS・OSの予測因子として機能することが示された。手術完遂率はニボルマブ群83% vs 化学療法群75%であり、免疫療法による手術delay・中止への悪影響は認められなかった。</p>
+          <div class="note-box" style="margin-bottom:12px;font-size:11.5px">
+            <strong>用語定義：</strong>
+            pCR（pathologic complete response）：原発巣および郭清リンパ節に残存腫瘍細胞が認められないこと。
+            MPR（major pathologic response）：残存生存腫瘍細胞≤10%。
+            EFS（event-free survival）：無作為化から疾患進行（手術不能化含む）・再発・死亡までの期間。
+          </div>
 
           <div class="gl-list">
             <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>承認あり（ニボルマブ術前補助）Stage IB（≥4cm）–IIIA。</span></div>
@@ -324,7 +333,7 @@ fetch('/lungatlas/nav.html')
     <!-- タブ2：周術期（KEYNOTE-671 + AEGEAN） -->
     <div id="p-periop" class="panel">
       <div class="note-box" style="margin-bottom:16px">
-        <strong>対象：</strong>切除可能 NSCLC · Stage II–IIIB（N2）· EGFR/ALK陰性 · <strong>術前＋術後</strong>免疫療法を組み合わせた周術期アプローチ
+        <strong>対象：</strong>切除可能 NSCLC · Stage II–IIIB（N2）· <strong>術前＋術後</strong>免疫療法を組み合わせた周術期アプローチ（EGFR/ALK除外基準は試験により異なる → 各カード参照）
       </div>
 
       <!-- KEYNOTE-671 -->
@@ -337,7 +346,7 @@ fetch('/lungatlas/nav.html')
             <span class="ybadge">Phase III · n=797 · Stage II–IIIB(N2)</span>
           </div>
           <div class="drug-title">ペムブロリズマブ 200mg + 白金製剤 × 4サイクル → 手術 → ペムブロリズマブ × 13サイクル</div>
-          <div class="drug-sub">切除可能 NSCLC · Stage II–IIIB（N2）· EGFR/ALK陰性 · <strong>術後ペムブロリズマブ 13サイクル</strong>を含む</div>
+          <div class="drug-sub">切除可能 NSCLC · Stage II–IIIB（N2）· EGFR/ALK変異陽性例も一部含む（除外基準なし）· <strong>術後ペムブロリズマブ 13サイクル</strong>を含む</div>
           <div class="stat-row">
             <div class="stat">
               <div class="stat-val">18.1%</div>
@@ -357,7 +366,7 @@ fetch('/lungatlas/nav.html')
           </div>
         </div>
         <div class="tc-body">
-          <p class="trial-desc">EFS（HR 0.59）・OS（HR 0.72, p=0.0052）両エンドポイントで有意差が示された（EFS: NEJM 2023 / OS: Lancet 2024）。MPR率30.2%（vs 11.0%）。4年OS率はESMO-IO 2024で68% vs 56.7%と報告されている。PD-L1全TPS層でEFS・OSベネフィットが確認されており、術後ペムブロリズマブ13サイクルを組み込んだ周術期完結型設計が特徴。Grade 3+ irAE（術前）は約12%であり、全体の安全性プロファイルはプラセボと同等と評価されている。</p>
+          <p class="trial-desc">EFS（HR 0.59）・OS（HR 0.72, p=0.0052）両エンドポイントで有意差が示された（EFS: NEJM 2023 / OS: Lancet 2024）。MPR率30.2%（vs 11.0%）。4年OS率はESMO-IO 2024で68% vs 56.7%と報告されている。PD-L1全TPS層でEFS・OSベネフィットが確認されており、術後ペムブロリズマブ13サイクルを組み込んだ周術期完結型設計が特徴。Grade 3+ irAE（術前）は約12%であり、全体の安全性プロファイルはプラセボと同等と評価されている。CheckMate 816・AEGEANがEGFR/ALK変異陽性例を除外しているのに対し、KEYNOTE-671はEGFR/ALK変異を除外基準に含めていない。登録患者の4.2%がEGFR変異陽性、2.7%がALK転座陽性であった（Lancet 2024）。EGFR/ALK変異陽性例での周術期免疫療法の位置づけは現在も議論中であり、ADUARAやALINAのような術後TKI補助療法との比較・選択は未解決の問題である。</p>
 
           <div class="gl-list">
             <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>2024年承認（術前＋術後）。Stage II–IIIB(N2)。</span></div>
@@ -477,9 +486,15 @@ fetch('/lungatlas/nav.html')
               </tr>
               <tr style="border-bottom:1px solid var(--border)">
                 <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">対象 Stage</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB（≥4cm）–IIIA</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">II–IIIB(N2)</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">IIA–IIIB(N2)</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB（≥4cm）–IIIA<br><span style="font-size:10px;color:var(--text3)">AJCC 7版</span></td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">II–IIIB(N2)<br><span style="font-size:10px;color:var(--text3)">AJCC 8版</span></td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">IIA–IIIB(N2)<br><span style="font-size:10px;color:var(--text3)">AJCC 8版</span></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">EGFR/ALK</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">除外（陰性のみ）</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--blue-dark);font-weight:500;border-right:1px solid var(--border)">除外基準なし<br><span style="font-size:10px;font-weight:400;color:var(--text3)">CM816・AEGEANとの大きな違い</span></td>
+                <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2)">除外（陰性のみ）</td>
               </tr>
               <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
                 <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">pCR率（介入 vs 対照）</td>
@@ -524,6 +539,13 @@ fetch('/lungatlas/nav.html')
         <div class="tc-body" style="padding-top:16px">
           <div style="display:flex;flex-direction:column;gap:10px">
 
+            <div style="background:var(--amber-light);border:2px solid #d97a00;border-radius:10px;padding:14px 16px">
+              <div style="font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:6px">⚠️ Stage IB（≥4cm）–IIA の患者：試験対象の確認が必要</div>
+              <div style="font-size:12px;color:var(--amber-dark);line-height:1.75">
+                CheckMate 816のみ対象（Stage IB ≥4cm から）。KEYNOTE-671・AEGEANはStage II以上（AJCC 8版）が対象。ただしAJCC版の違いに注意（7版IIIAと8版IIIAは範囲が異なる）。
+              </div>
+            </div>
+
             <div style="background:var(--green-pale);border-radius:10px;padding:14px 16px">
               <div style="font-size:13px;font-weight:600;color:var(--green-dark);margin-bottom:6px">Stage IB（≥4cm）の場合</div>
               <div style="font-size:12px;color:var(--text2);line-height:1.75">
@@ -562,7 +584,7 @@ fetch('/lungatlas/nav.html')
             <div style="background:var(--red-light);border-left:3px solid #c0392b;border-radius:0 10px 10px 0;padding:14px 16px">
               <div style="font-size:13px;font-weight:600;color:var(--red-dark);margin-bottom:6px">EGFR/ALK変異陽性例</div>
               <div style="font-size:12px;color:var(--text2);line-height:1.75">
-                3試験ともEGFR/ALK変異陽性例は除外されており、本ページの内容は適用されない。EGFR変異陽性には術後オシメルチニブ（ADAURA）が標準的な選択肢となる（術後補助療法ページ参照）。
+                CheckMate 816・AEGEANはEGFR/ALK変異陽性例を除外しているが、KEYNOTE-671は除外基準を設けていない（登録例の4.2%がEGFR変異陽性、2.7%がALK転座陽性）。EGFR/ALK変異陽性例における周術期免疫療法の位置づけは現在も議論中であり、ADUARAやALINAのような術後TKI補助療法との比較・選択は未解決の問題である。
               </div>
             </div>
 
