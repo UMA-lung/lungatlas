@@ -377,6 +377,7 @@ fetch('/lungatlas/nav.html')
           <div class="trial-meta-row">
             <div class="trial-meta-item"><span class="meta-label">MPR率</span><span class="meta-val">30.2% vs 11.0%</span></div>
             <div class="trial-meta-item"><span class="meta-label">4年OS率</span><span class="meta-val">68% vs 56.7%（ESMO-IO 2024）</span></div>
+            <div class="trial-meta-item"><span class="meta-label">手術完遂率</span><span class="meta-val">83.4% vs 85.5%</span></div>
             <div class="trial-meta-item"><span class="meta-label">術後サイクル</span><span class="meta-val">ペムブロ 13サイクル</span></div>
             <div class="trial-meta-item"><span class="meta-label">Grade 3+ irAE（術前）</span><span class="meta-val">～12%</span></div>
           </div>
@@ -427,6 +428,7 @@ fetch('/lungatlas/nav.html')
 
           <div class="trial-meta-row">
             <div class="trial-meta-item"><span class="meta-label">MPR率</span><span class="meta-val">33.3% vs 12.3%</span></div>
+            <div class="trial-meta-item"><span class="meta-label">手術完遂率</span><span class="meta-val">76.7% vs 75.8%</span></div>
             <div class="trial-meta-item"><span class="meta-label">術後サイクル</span><span class="meta-val">デュルバルマブ 12サイクル</span></div>
             <div class="trial-meta-item"><span class="meta-label">Grade 3+ irAE（術前）</span><span class="meta-val">約10%</span></div>
             <div class="trial-meta-item"><span class="meta-label">PD-L1アッセイ</span><span class="meta-val">Ventana SP263</span></div>
@@ -491,6 +493,12 @@ fetch('/lungatlas/nav.html')
                 <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">IIA–IIIB(N2)<br><span style="font-size:10px;color:var(--text3)">AJCC 8版</span></td>
               </tr>
               <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">AJCC版</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">第7版</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">第8版</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">第8版</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
                 <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">EGFR/ALK</td>
                 <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text2);border-right:1px solid var(--border)">除外（陰性のみ）</td>
                 <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--blue-dark);font-weight:500;border-right:1px solid var(--border)">除外基準なし<br><span style="font-size:10px;font-weight:400;color:var(--text3)">CM816・AEGEANとの大きな違い</span></td>
@@ -520,16 +528,30 @@ fetch('/lungatlas/nav.html')
                 <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">0.72 ✅</td>
                 <td style="padding:8px 10px;text-align:center;font-family:var(--mono);color:var(--text3)">0.88（未有意）</td>
               </tr>
-              <tr>
+              <tr style="border-bottom:1px solid var(--border)">
                 <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">長期OS率</td>
                 <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:500;color:var(--green-dark);border-right:1px solid var(--border)">5年 65% vs 55%</td>
                 <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:500;color:var(--blue-dark);border-right:1px solid var(--border)">4年 68% vs 56.7%</td>
                 <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text3)">最終解析待ち</td>
               </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">手術完遂率</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--green-dark);border-right:1px solid var(--border)">83% vs 75%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--blue-dark);border-right:1px solid var(--border)">83.4% vs 85.5%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--purple-dark)">76.7% vs 75.8%</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">R0切除率</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--green-dark);border-right:1px solid var(--border)">83% vs 78%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--blue-dark);border-right:1px solid var(--border)">92% vs 84%</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--purple-dark)">94.7% vs 91.3%</td>
+              </tr>
             </tbody>
           </table>
           <div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:11px;color:var(--text3);line-height:1.7">
-            <strong style="color:var(--text2)">読み方の注意：</strong>3試験間で対象Stage・術後治療の有無・追跡期間が異なるため直接比較は不可。EFS HRの差は術前サイクル数・術後継続治療の有無を含む設計差を反映している可能性がある。✅はOS有意差あり。
+            <strong style="color:var(--text2)">読み方の注意：</strong>3試験間で対象Stage・術後治療の有無・追跡期間が異なるため直接比較は不可。EFS HRの差は術前サイクル数・術後継続治療の有無を含む設計差を反映している可能性がある。✅はOS有意差あり。<br>
+            ※CheckMate 816はAJCC第7版、KEYNOTE-671・AEGEANは第8版を使用。同じ病期表記でも版により対象範囲が異なる点に注意。<br>
+            ※R0切除率の分母・解析集団は試験ごとに異なるため、単純比較はできない。KEYNOTE-671およびAEGEANでは手術施行例におけるR0切除率として報告されている。
           </div>
         </div>
       </div>
@@ -559,8 +581,8 @@ fetch('/lungatlas/nav.html')
                 <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
                   <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">R0切除率</td>
                   <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--green-dark);border-right:1px solid var(--border)">83% vs 78%</td>
-                  <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text3);border-right:1px solid var(--border)">約92%との報告あり<br><span style="font-size:10px;color:var(--text3)">要確認</span></td>
-                  <td style="padding:8px 10px;text-align:center;font-size:11px;color:var(--text3)">要確認</td>
+                  <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--blue-dark);border-right:1px solid var(--border)">92% vs 84%<br><span style="font-size:10px;color:var(--text3);font-family:var(--font)">手術施行例中</span></td>
+                  <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--purple-dark)">94.7% vs 91.3%<br><span style="font-size:10px;color:var(--text3);font-family:var(--font)">手術施行例中</span></td>
                 </tr>
                 <tr style="border-bottom:1px solid var(--border)">
                   <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">手術遅延</td>
@@ -651,6 +673,13 @@ fetch('/lungatlas/nav.html')
               <div style="font-size:13px;font-weight:600;color:var(--red-dark);margin-bottom:6px">EGFR/ALK変異陽性例</div>
               <div style="font-size:12px;color:var(--text2);line-height:1.75">
                 CheckMate 816・AEGEANはEGFR/ALK変異陽性例を除外しているが、KEYNOTE-671は除外基準を設けていない（登録例の4.2%がEGFR変異陽性、2.7%がALK転座陽性）。EGFR/ALK変異陽性例における周術期免疫療法の位置づけは現在も議論中であり、ADUARAやALINAのような術後TKI補助療法との比較・選択は未解決の問題である。
+              </div>
+            </div>
+
+            <div class="note-box" style="border-left:3px solid var(--border2);border-radius:0 10px 10px 0">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">【未解決の論点】術前のみ vs 周術期</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.8">
+                CheckMate 816（術前のみ）とKEYNOTE-671・AEGEAN（周術期）の直接比較試験は存在しない。術後免疫療法の上乗せによる追加ベネフィットは証明されておらず、術前のみで十分か・術後継続が必要かは現在も議論が続いている。pCR達成例では術後治療の必要性が低い可能性も指摘されており、今後のctDNA等のバイオマーカー研究が選択の鍵となる可能性がある。
               </div>
             </div>
 
