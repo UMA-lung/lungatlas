@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CheckMate 816 詳細解説 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px; flex-shrink: 0; background: var(--surface);
+  border-right: 1px solid var(--border); padding: 20px 0;
+  position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
+}
+.sb-item {
+  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
+  text-decoration: none; border-left: 2px solid transparent;
+  transition: all .15s; cursor: pointer; line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light); color: var(--green-dark);
+  font-weight: 500; border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
+  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+.sb-sub.active { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 900px; }
+
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+.crumb a { color: var(--text3); text-decoration: none; }
+.crumb a:hover { color: var(--green-mid); }
+
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+
+/* Hero banner */
+.hero-banner {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  color: #fff; border-radius: var(--radius-lg); padding: 22px 26px;
+  margin-bottom: 20px;
+}
+.hero-message {
+  font-size: 15px; font-weight: 600; line-height: 1.5; margin-bottom: 10px;
+}
+.hero-sub {
+  font-size: 12.5px; color: rgba(255,255,255,0.85); line-height: 1.8;
+}
+
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+
+.sec-h3 {
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  margin: 20px 0 10px; padding-left: 10px;
+  border-left: 2px solid var(--border2);
+}
+
+/* Note / Info boxes */
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
+}
+.info-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+.caution-box {
+  background: var(--red-light); border-left: 3px solid #c0392b;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--red-dark); line-height: 1.75; margin: 14px 0;
+}
+.tip-box {
+  background: var(--blue-light); border-left: 3px solid #1a6fbd;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0;
+}
+
+/* Cards */
+.trial-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
+}
+.tc-top { padding: 18px 20px 16px; border-bottom: 1px solid var(--border); }
+.tc-body { padding: 16px 20px; }
+.tc-meta {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+.trial-link {
+  font-size: 13.5px; font-weight: 600; color: var(--green-dark);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); letter-spacing: .01em;
+}
+.trial-link:hover { opacity: .7; }
+.trial-link .ext { font-size: 11px; opacity: .7; }
+.jbadge {
+  font-size: 10.5px; font-weight: 500; padding: 2px 9px;
+  border-radius: 8px; white-space: nowrap;
+}
+.j-nejm  { background: var(--blue-light); color: var(--blue-dark); }
+.j-jco   { background: var(--purple-light); color: var(--purple-dark); }
+.j-annoncol { background: var(--amber-light); color: var(--amber-dark); }
+.ybadge {
+  font-size: 10.5px; color: var(--text3);
+  background: var(--surface2); padding: 2px 8px; border-radius: 8px;
+}
+.drug-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.drug-sub { font-size: 12.5px; color: var(--text2); margin-bottom: 12px; }
+
+/* Stat boxes */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 10px 13px; }
+.stat-val { font-size: 17px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* Tables */
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  margin-bottom: 12px; overflow-x: auto; display: block;
+}
+.data-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  background: var(--surface2); border-bottom: 2px solid var(--border2);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: top; line-height: 1.6;
+}
+.data-table tr:nth-child(even) td { background: var(--green-pale); }
+.data-table tr:last-child td { border-bottom: none; }
+.td-key { font-weight: 500; color: var(--text); white-space: nowrap; }
+.td-nivo { color: var(--green-dark); font-weight: 500; }
+.td-chemo { color: var(--text3); }
+
+sup.ref {
+  font-size: 9px; color: var(--green-dark); font-weight: 600;
+  vertical-align: super; font-family: var(--mono);
+}
+
+/* Reference list */
+.ref-list {
+  list-style: none; counter-reset: ref-counter;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ref-list li {
+  counter-increment: ref-counter;
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 11.5px; color: var(--text2); line-height: 1.65;
+}
+.ref-list li::before {
+  content: '[' counter(ref-counter) ']';
+  font-family: var(--mono); font-size: 10.5px; color: var(--green-dark);
+  font-weight: 600; flex-shrink: 0; padding-top: 1px;
+  min-width: 28px;
+}
+.ref-list a { color: var(--green-mid); text-decoration: none; }
+.ref-list a:hover { text-decoration: underline; }
+
+/* Trial meta row */
+.trial-meta-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.trial-meta-item { background: var(--surface2); border-radius: 6px; padding: 6px 10px; font-size: 11px; }
+.meta-label { font-weight: 600; color: var(--text3); margin-right: 4px; }
+.meta-val { color: var(--text2); }
+.meta-val a { color: var(--green-dark); text-decoration: none; }
+
+/* GL list */
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.gl-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  border-radius: 8px; padding: 9px 13px; font-size: 12px; line-height: 1.65;
+}
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* Body text */
+.trial-desc { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+.body-text { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+
+/* Bullet lists */
+.point-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.point-list li {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 12.5px; color: var(--text2); line-height: 1.65;
+}
+.point-list li::before { content: '•'; color: var(--green-mid); flex-shrink: 0; font-weight: 600; }
+.point-list.pros li::before { color: var(--green-dark); }
+.point-list.cons li::before { content: '△'; color: #c0392b; font-size: 11px; }
+
+/* Review card */
+.review-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 16px;
+}
+.review-half {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+}
+.review-col {
+  background: var(--surface2); border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.review-col-title {
+  font-size: 11.5px; font-weight: 600; margin-bottom: 10px;
+  letter-spacing: .03em;
+}
+.rc-pros { color: var(--green-dark); }
+.rc-cons { color: var(--red-dark); }
+
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 18px 40px; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .review-half { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-head">化学療法</div>
+      <div style="padding:2px 18px 4px">
+        <div style="font-size:10.5px;color:var(--text3);padding:4px 0 2px">1次治療</div>
+        <a class="sb-sub" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
+        <a class="sb-sub" href="/lungatlas/index.html">変異陰性 NSCLC</a>
+      </div>
+      <a class="sb-item" href="/lungatlas/perioperative.html">周術期薬物療法</a>
+      <a class="sb-item active" href="cm816.html">CheckMate 816 詳細</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-head">このページ</div>
+      <a class="sb-sub" href="#trial-overview">試験概要</a>
+      <a class="sb-sub" href="#references">参考文献</a>
+      <a class="sb-sub" href="#primary-data">主要データ表</a>
+      <a class="sb-sub" href="#surgical-outcomes">外科アウトカム</a>
+      <a class="sb-sub" href="#subgroup">サブグループ解析</a>
+      <a class="sb-sub" href="#pcr-surrogate">pCRサロゲート論</a>
+      <a class="sb-sub" href="#ctdna">ctDNA</a>
+      <a class="sb-sub" href="#safety">安全性</a>
+      <a class="sb-sub" href="#neutral-review">総合評価</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">化学療法 › <a href="/lungatlas/perioperative.html">周術期薬物療法</a> › <span>CheckMate 816</span></div>
+    <div class="updated">最終更新 2026年6月 — ASCO 2025・NEJM 2025（5年追跡）データ基準</div>
+    <h1 class="art-h1" id="trial-overview">CheckMate 816<br>詳細解説</h1>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-message">
+        切除可能NSCLCに対する術前のみの化学免疫療法（3サイクル）で、OSの有意な改善を示したPhase III試験。術後免疫療法を用いない治療戦略のエビデンスとして注目されている。
+      </div>
+      <div class="hero-sub">
+        CheckMate 816は、切除可能NSCLCに対して術前nivolumab＋プラチナ併用化学療法を3サイクル行い手術を行う戦略を検証したPhase III試験。EFS・pCRに加え5年追跡でOSの統計学的有意差が報告された。EGFR/ALK陽性例は除外されており、周術期免疫療法との直接比較データは存在しない。
+      </div>
+    </div>
+
+    <!-- 試験概要 -->
+    <div class="trial-card">
+      <div class="tc-top">
+        <div class="tc-meta">
+          <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2202170" target="_blank" rel="noopener">CheckMate 816 <span class="ext">↗</span></a>
+          <span class="jbadge j-nejm">NEJM 2022（EFS・pCR・安全性）</span>
+          <span class="jbadge j-nejm">NEJM 2025（OS最終解析）</span>
+          <span class="ybadge">Phase III · n=358 · Stage IB–IIIA（AJCC第7版）</span>
+        </div>
+        <div class="drug-title">ニボルマブ 360mg ＋ 白金製剤ベース化学療法 × 3サイクル → 手術（術後免疫療法なし）</div>
+        <div class="drug-sub">切除可能 NSCLC · Stage IB（≥4cm）–IIIA · EGFR/ALK陰性 · <strong>術後免疫療法なし</strong></div>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-val">24.0%</div>
+            <div class="stat-label">pCR（病理学的完全奏効）率</div>
+            <div class="stat-vs">vs 2.2%（OR 13.94, p&lt;0.001）<sup class="ref">[1]</sup></div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">HR 0.68</div>
+            <div class="stat-label">EFS ハザード比（最終・2025）</div>
+            <div class="stat-vs">中央値 59.6 vs 21.1か月<sup class="ref">[2]</sup></div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">HR 0.72</div>
+            <div class="stat-label">OS ハザード比 ✅ 有意差あり</div>
+            <div class="stat-vs">5年OS率 65.4% vs 55.0%（p=0.0479）<sup class="ref">[2]</sup></div>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <p class="trial-desc">
+          切除可能NSCLCに対して術前nivolumab＋プラチナ併用化学療法3サイクルを行い手術を実施する戦略を、化学療法単独と比較したPhase III試験。EGFR/ALK変異陽性例は除外。術後免疫療法は設計に含まれない。NEJM 2022でpCR・EFSの有意差<sup class="ref">[1]</sup>、NEJM 2025（ASCO 2025）で5年追跡によるOSの統計学的有意差が報告された<sup class="ref">[2,3]</sup>。
+        </p>
+        <div class="gl-list">
+          <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>承認あり（ニボルマブ術前補助）。Stage IB（≥4cm）–IIIA。</span></div>
+          <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2022年承認。Stage IB（≥4cm）以上・リンパ節陽性の切除可能NSCLC。</span></div>
+          <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>承認あり。</span></div>
+        </div>
+        <div class="trial-meta-row">
+          <div class="trial-meta-item"><span class="meta-label">PMID（EFS）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/35403841/" target="_blank" rel="noopener">35403841 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">PMID（OS最終）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/40454642/" target="_blank" rel="noopener">40454642 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">Stage分類</span><span class="meta-val">AJCC第7版</span></div>
+          <div class="trial-meta-item"><span class="meta-label">除外基準</span><span class="meta-val">EGFR変異・ALK転座陽性例</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 参考文献 -->
+    <h2 class="sec-h2" id="references">参考文献</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ol class="ref-list">
+          <li>Forde PM, et al. Neoadjuvant Nivolumab plus Chemotherapy in Resectable Lung Cancer. <em>N Engl J Med.</em> 2022;386(21):1973-1985. <a href="https://pubmed.ncbi.nlm.nih.gov/35403841/" target="_blank" rel="noopener">PMID: 35403841</a>. doi:10.1056/NEJMoa2202170（EFS・pCR初回・安全性・手術関連AE・手術遅延/中止）</li>
+          <li>Forde PM, et al. Overall Survival with Neoadjuvant Nivolumab plus Chemotherapy in Lung Cancer. <em>N Engl J Med.</em> 2025;393(8):741-752. <a href="https://pubmed.ncbi.nlm.nih.gov/40454642/" target="_blank" rel="noopener">PMID: 40454642</a>. doi:10.1056/NEJMoa2502931（OS最終解析・5年追跡・最終EFS）</li>
+          <li>Spicer J, et al. Overall survival with neoadjuvant nivolumab + chemotherapy in CheckMate 816. <em>J Clin Oncol.</em> 2025;43(17_suppl):LBA8000（ASCO 2025）</li>
+          <li>CheckMate 816 PD-L1別3年解析. <em>Ann Oncol.</em> 2023;34(suppl_2):LBA57（ESMO 2023）</li>
+          <li>Wang C, et al. Subpopulation analysis of Chinese patients in CheckMate 816. <em>ESMO Open.</em> 2023;8(6):102040. doi:10.1016/j.esmoop.2023.102040</li>
+          <li>Spicer J, et al. Surgical outcomes from the phase 3 CheckMate 816 trial. <em>J Clin Oncol.</em> 2021;39(15_suppl):8503. doi:10.1200/JCO.2021.39.15_suppl.8503（手術施行率・R0切除率・術式・肺全摘・conversion・手術時間・入院期間）</li>
+          <li>Mitsudomi T, et al. Japanese subpopulation of CheckMate 816. <em>Cancer Sci.</em> 2024. doi:10.1111/cas.16030（日本人サブ解析）</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 主要データ表 -->
+    <h2 class="sec-h2" id="primary-data">主要データ表</h2>
+    <div class="info-box">
+      EFS HRは初回報告（NEJM 2022, HR 0.63）と5年最終解析（NEJM 2025, HR 0.68）で異なる時点・追跡期間の値であり、単純に同一視しない。OSの有意差はp=0.0479、95%信頼区間上限は0.998と1に近い。統計学的有意差は示されたが、効果量の解釈には追跡期間・イベント数・後治療の影響も考慮する必要がある。
+    </div>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">項目</th>
+              <th style="min-width:160px">Nivolumab＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:220px">解釈・出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">pCR率</td>
+              <td class="td-nivo">24.0%</td>
+              <td class="td-chemo">2.2%</td>
+              <td>OR 13.94, p&lt;0.001。病理学的完全奏効が大きく改善<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">MPR率</td>
+              <td class="td-nivo">36.9%</td>
+              <td class="td-chemo">8.9%</td>
+              <td>残存生存腫瘍細胞≤10%。病理学的奏効も改善<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS中央値（初回・2022）</td>
+              <td class="td-nivo">31.6か月</td>
+              <td class="td-chemo">20.8か月</td>
+              <td>NEJM 2022時点の報告値<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS HR（初回・2022）</td>
+              <td class="td-nivo">0.63</td>
+              <td class="td-chemo">—</td>
+              <td>97.8%CI 0.43–0.91, p=0.005<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS中央値（最終・2025）</td>
+              <td class="td-nivo">59.6か月</td>
+              <td class="td-chemo">21.1か月</td>
+              <td>5年追跡で更新<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS HR（最終・2025）</td>
+              <td class="td-nivo">0.68</td>
+              <td class="td-chemo">—</td>
+              <td>95%CI 0.51–0.91<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">5年EFS率</td>
+              <td class="td-nivo">49%</td>
+              <td class="td-chemo">34%</td>
+              <td>長期EFS差が維持<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">5年OS率</td>
+              <td class="td-nivo">65.4%</td>
+              <td class="td-chemo">55.0%</td>
+              <td>OS改善<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">OS HR</td>
+              <td class="td-nivo">0.72</td>
+              <td class="td-chemo">—</td>
+              <td>95%CI 0.523–0.998, p=0.0479<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">手術施行率（Definitive surgery）</td>
+              <td class="td-nivo">83%</td>
+              <td class="td-chemo">75%</td>
+              <td>手術到達性の明らかな低下は示されず<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">R0切除率</td>
+              <td class="td-nivo">83%</td>
+              <td class="td-chemo">78%</td>
+              <td>外科アウトカム解析で報告<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 3/4 治療関連AE</td>
+              <td class="td-nivo">33.5%</td>
+              <td class="td-chemo">36.9%</td>
+              <td>増加傾向を示さず<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 3/4 手術関連AE</td>
+              <td class="td-nivo">11.4%</td>
+              <td class="td-chemo">14.8%</td>
+              <td>増加傾向を示さず<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 外科アウトカムセクション -->
+    <h2 class="sec-h2" id="surgical-outcomes">Surgical Outcomes：手術到達性と外科的アウトカム</h2>
+    <p class="body-text">
+      周術期治療では腫瘍縮小やpCRだけでなく、予定手術への到達、R0切除、手術遅延、術式、肺全摘率、conversion、手術関連合併症、周術期死亡が重要である。CheckMate 816ではdefinitive surgery 83% vs 75%、R0切除率83% vs 78%と報告された。手術時間中央値は184分 vs 217分であり、nivolumab追加により手術時間の延長は示されなかった。ただし術式・病期・施設経験により実臨床での手術難度は異なりうる。
+    </p>
+
+    <h3 class="sec-h3" id="surgical-feasibility">5-1. 手術到達性・完全切除</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">外科アウトカム</th>
+              <th style="min-width:160px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Definitive surgery（手術施行率）</td>
+              <td class="td-nivo">83%</td>
+              <td class="td-chemo">75%</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">R0切除率</td>
+              <td class="td-nivo">83%</td>
+              <td class="td-chemo">78%</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">手術遅延（AEによる）</td>
+              <td class="td-nivo">3.4%</td>
+              <td class="td-chemo">5.1%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">手術キャンセル（AEによる）</td>
+              <td class="td-nivo">1.1%</td>
+              <td class="td-chemo">0.6%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sec-h3" id="surgical-approach">5-2. 術式・アプローチ・肺全摘</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">術式・アプローチ</th>
+              <th style="min-width:160px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Minimally invasive surgery</td>
+              <td class="td-nivo">30%</td>
+              <td class="td-chemo">22%</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Conversion to thoracotomy</td>
+              <td class="td-nivo">11%</td>
+              <td class="td-chemo">16%</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Lobectomy</td>
+              <td class="td-nivo">77%</td>
+              <td class="td-chemo">61%</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Pneumonectomy（肺全摘）</td>
+              <td class="td-nivo">17%</td>
+              <td class="td-chemo">25%</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">手術時間中央値</td>
+              <td class="td-nivo">184分</td>
+              <td class="td-chemo">217分</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">入院期間中央値</td>
+              <td class="td-nivo">10日</td>
+              <td class="td-chemo">10日</td>
+              <td>JCO 2021<sup class="ref">[6]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          肺全摘率は数値上nivolumab群で低かったが、sleeve lobectomy・気管支形成・血管形成・胸壁合併切除などの拡大手術の詳細な内訳は主要公表データでは限定的であり、拡大手術への影響は断定しない。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3" id="surgical-complications">5-3. 手術関連合併症・死亡</h3>
+    <p class="body-text">
+      nivolumab追加によりGrade 3/4 surgery-related AEの増加傾向は示されなかった。Grade 5 surgery-related AEはnivolumab＋化学療法群で2例、化学療法単独群で0例報告された。nivolumab＋化学療法群の2例はいずれも治験薬との関連なしと判断され、死因は肺塞栓および大動脈破裂であった。治療関連死亡はnivolumab群では報告されず、化学療法単独群で3例報告された。30日死亡・90日死亡は原典Supplementで確認し、数値が確認できる場合のみ掲載し、治療関連死亡や手術関連Grade 5 AEと区別して記載する。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">安全性・合併症</th>
+              <th style="min-width:160px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:220px">解釈・注意</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Surgery-related AE（any grade）</td>
+              <td class="td-nivo">41.6%</td>
+              <td class="td-chemo">46.7%</td>
+              <td>definitive surgery施行例が分母<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 3/4 surgery-related AE</td>
+              <td class="td-nivo">11.4%</td>
+              <td class="td-chemo">14.8%</td>
+              <td>definitive surgery施行例が分母<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 5 surgery-related AE</td>
+              <td class="td-nivo">2例</td>
+              <td class="td-chemo">0例</td>
+              <td>NIVO群の2例はいずれも治験薬関連なし。死因は肺塞栓・大動脈破裂<sup class="ref">[1,6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Treatment-related death（治療関連死亡）</td>
+              <td class="td-nivo">0例</td>
+              <td class="td-chemo">3例（1.7%）</td>
+              <td>化学療法単独群で報告。死因は原典脚注に準拠<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">30日/90日死亡</td>
+              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
+              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
+              <td>数値確認できない場合は掲載しない。治療関連死亡・手術関連Grade 5 AEと混同しない</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="caution-box" style="margin-top:10px">
+          <strong>定義の区別：</strong>周術期死亡の定義は研究により異なる。30日死亡・90日死亡・手術関連Grade 5 AE・治療関連死亡は同義ではないため、ページ内で明確に区別する。
+        </div>
+      </div>
+    </div>
+
+    <!-- サブグループ解析 -->
+    <h2 class="sec-h2" id="subgroup">Subgroup Analysis：どの患者で効果が大きそうか</h2>
+    <div class="info-box">
+      これらのサブグループ解析はいずれも探索的解析であり、各サブグループで検出力を設定した検定ではない。交互作用検定も主目的ではないためHRは点推定値として参考にとどめる。特にPD-L1&lt;1%・組織型別・Stage別では症例数が限られ信頼区間が広い可能性がある。これらの数値だけで個別患者の治療適応を決定することは避けるべきである。
+    </div>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">サブグループ</th>
+              <th style="min-width:220px">OS HRまたは所見</th>
+              <th style="min-width:160px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">PD-L1 ≥50%</td>
+              <td>OS HR 0.33。効果が大きい可能性（探索的解析）</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup> / ASCO 2025<sup class="ref">[3]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">PD-L1 1–49%</td>
+              <td>OS HR 0.66</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup> / ASCO 2025<sup class="ref">[3]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">PD-L1 &lt;1%</td>
+              <td>ベネフィットの確実性は限定的。EFS 3年解析HR 0.87（95%CI 0.57–1.35）</td>
+              <td>ESMO 2023<sup class="ref">[4]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Stage IB–II</td>
+              <td>OS HR 0.77、5年OS 65% vs 60%</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup> / ASCO 2025<sup class="ref">[3]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Stage IIIA</td>
+              <td>OS HR 0.70、5年OS 65% vs 53%</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup> / ASCO 2025<sup class="ref">[3]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">扁平上皮</td>
+              <td>OSはNIVO群を支持する方向（探索的解析）</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">非扁平上皮</td>
+              <td>OSはNIVO群を支持する方向（探索的解析）</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">pCR達成</td>
+              <td>5年OS 95.3%（非pCR 55.7%）</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">ctDNA clearance</td>
+              <td>NIVO群56% vs 化療群35%（評価可能例各43例）。clearance例でOS良好</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup> / ASCO 2025<sup class="ref">[3]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- pCRサロゲート論 -->
+    <h2 class="sec-h2" id="pcr-surrogate">pCRはOSの代替指標になるのか</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <p class="body-text">
+          5年追跡でnivolumab群のpCR達成例の5年OS率は95.3%、非pCR例は55.7%と報告された<sup class="ref">[2]</sup>。pCRが強い予後予測因子である可能性を示唆する。ただしOSの代替エンドポイントとして確立するには慎重な議論が必要である：
+        </p>
+        <ul class="point-list cons">
+          <li>pCR達成群は治療で選択された集団であり、pCR自体が予後良好な腫瘍生物学を反映している可能性がある。</li>
+          <li>pCR非達成例でも一部に長期生存がみられ、効果がpCRのみを介するとは限らない。</li>
+          <li>規制当局レベルで代替エンドポイントとして扱うには複数試験のtrial-level surrogacy検証が必要。</li>
+          <li>pCR達成例に術後補助療法が必要かは未解決であり、今後の試験・バイオマーカー研究が必要。</li>
+        </ul>
+        <div class="note-box" style="margin-top:10px">
+          <strong>注：</strong>NEJM Correspondenceへの関連投稿（PMID 41259770・41259771）が報告されているが、内容の確認が取れた場合のみ今後追記する。
+        </div>
+      </div>
+    </div>
+
+    <!-- ctDNA -->
+    <h2 class="sec-h2" id="ctdna">ctDNA：個別化治療への可能性</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <p class="body-text">
+          探索的解析では術前ctDNA clearance率はnivolumab群56%・化学療法単独群35%、評価可能例は各群43例。ctDNA clearanceは治療群によらず良好なOSと関連した<sup class="ref">[2]</sup>。ただし探索的・少数例であり、測定法・閾値・タイミング・術後治療への反映方法は標準化されていない。現時点でctDNAは有望な個別化マーカーだが、治療省略や術後治療追加を決定する単独の根拠としては不十分である。
+        </p>
+        <div class="info-box">
+          <strong>注意：</strong>ctDNAに基づく術後治療省略・追加の可否については現時点で前向き検証データがなく、探索的知見として参照する。
+        </div>
+      </div>
+    </div>
+
+    <!-- 安全性 -->
+    <h2 class="sec-h2" id="safety">Safety：安全性まとめ</h2>
+    <p class="body-text">
+      nivolumab追加によりGrade 3/4 treatment-related AEの増加傾向は示されなかった。5年追跡でも新たな安全性シグナルは報告されていない<sup class="ref">[2]</sup>。ただしirAE・肺臓炎・内分泌障害・感染症・化学療法毒性の鑑別は実臨床で重要。死亡関連データはtreatment-related death・surgery-related Grade 5 AE・30日/90日死亡を区別して記載する。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">安全性項目</th>
+              <th style="min-width:140px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:200px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Grade 3/4 治療関連AE</td>
+              <td class="td-nivo">33.5%</td>
+              <td class="td-chemo">36.9%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Serious 治療関連AE</td>
+              <td class="td-nivo">11.9%</td>
+              <td class="td-chemo">10.2%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Treatment-related death（治療関連死亡）</td>
+              <td class="td-nivo">0例</td>
+              <td class="td-chemo">3例（1.7%）</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Surgery-related AE（any grade）</td>
+              <td class="td-nivo">41.6%</td>
+              <td class="td-chemo">46.7%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 3/4 surgery-related AE</td>
+              <td class="td-nivo">11.4%</td>
+              <td class="td-chemo">14.8%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 5 surgery-related AE</td>
+              <td class="td-nivo">2例</td>
+              <td class="td-chemo">0例</td>
+              <td>NIVO群2例はいずれも治験薬関連なし。死因は肺塞栓・大動脈破裂<sup class="ref">[1,6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">30日/90日死亡</td>
+              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
+              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
+              <td>数値確認できない場合は掲載しない</td>
+            </tr>
+            <tr>
+              <td class="td-key">新たな安全性シグナル（5年追跡）</td>
+              <td class="td-nivo">なし</td>
+              <td class="td-chemo">—</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 総合評価 -->
+    <h2 class="sec-h2" id="neutral-review">この試験をどう読むか——第三者的視点からの整理</h2>
+    <div class="review-card">
+      <div class="review-half">
+        <div class="review-col">
+          <div class="review-col-title rc-pros">強み</div>
+          <ul class="point-list pros">
+            <li>OSという確実なエンドポイントで統計学的有意差を示した</li>
+            <li>術前3サイクルのみという簡潔な設計で術後免疫療法を前提としない</li>
+            <li>pCR・ctDNA clearanceと長期予後の関連を示した</li>
+            <li>外科アウトカム解析で手術到達性・R0切除率が保たれていた</li>
+            <li>術式・肺全摘率・conversion・手術時間・入院期間の報告から、手術実施を大きく妨げる傾向は示されなかった</li>
+          </ul>
+        </div>
+        <div class="review-col">
+          <div class="review-col-title rc-cons">留意点・限界</div>
+          <ul class="point-list cons">
+            <li>OS HR 0.72・p=0.0479、95%CI上限0.998と1に近い</li>
+            <li>EGFR/ALK陽性例は除外されており適用できない</li>
+            <li>術前のみ（CM816）と周術期（KN671・AEGEAN）の直接比較データはない</li>
+            <li>サブグループ解析は探索的でPD-L1低発現例などの確実性は限定的</li>
+            <li>pCR/ctDNAに基づく術後治療の省略・追加の判断可否は未解決</li>
+            <li>手術関連Grade 5 AEは報告されており、周術期リスクを含めた評価が必要</li>
+            <li>sleeve resection・血管形成・胸壁合併切除などの拡大手術内訳は限定的</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-box">
+        <strong>総括：</strong>CheckMate 816は切除可能NSCLC（特にドライバー変異陰性例）に対する術前化学免疫療法の確立された選択肢の一つとして位置づけられる。術前3サイクルのみでOS改善を示した点は臨床的に重要である。一方で、術後治療を追加すべき集団、pCR/ctDNAに基づく個別化、周術期レジメンとの使い分け、周術期リスク評価は未解決であり今後の研究結果が待たれる。
+      </div>
+    </div>
+
+    <!-- 関連ページ -->
+    <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px">関連ページ</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/lungatlas/perioperative.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);background:var(--green-light);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:500">
+          ← 周術期薬物療法 概要（CM816・KN671・AEGEAN）
+        </a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Lung<span>Atlas</span></span>
+  <span>医療専門家向け学術情報サイト。本ページの情報は診療の代替となるものではありません。</span>
+</footer>
+
+</body>
+</html>
