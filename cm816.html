@@ -283,6 +283,24 @@ sup.ref {
 .rc-pros { color: var(--green-dark); }
 .rc-cons { color: var(--red-dark); }
 
+/* Treatment flow diagram */
+.flow-diagram { margin: 4px 0; display: flex; flex-direction: column; gap: 10px; }
+.flow-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.flow-label {
+  font-size: 10.5px; font-weight: 600; color: var(--text3); min-width: 80px;
+  flex-shrink: 0; text-align: right; padding-right: 10px;
+  border-right: 2px solid var(--border2); line-height: 1.4;
+}
+.flow-box {
+  padding: 8px 12px; border-radius: 8px; font-size: 12px; line-height: 1.5;
+  text-align: center; border: 1px solid var(--border2); flex-shrink: 0;
+}
+.f-nivo { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); font-weight: 500; }
+.f-chemo { background: var(--blue-light); border-color: #5a9fd4; color: var(--blue-dark); }
+.f-surgery { background: var(--amber-light); border-color: #d97a00; color: var(--amber-dark); font-weight: 500; }
+.f-postop { background: var(--surface2); border-style: dashed; color: var(--text3); font-size: 11px; }
+.flow-arr { font-size: 16px; color: var(--border2); flex-shrink: 0; padding: 0 2px; }
+
 .footer {
   background: var(--surface); border-top: 1px solid var(--border);
   padding: 20px 36px; font-size: 12px; color: var(--text3);
@@ -297,6 +315,8 @@ sup.ref {
   .stat-row { grid-template-columns: 1fr 1fr; }
   .review-half { grid-template-columns: 1fr; }
   .nav-links { display: none; }
+  .flow-row { gap: 4px; }
+  .flow-label { min-width: 60px; font-size: 10px; }
 }
 </style>
 </head>
@@ -324,14 +344,16 @@ fetch('/lungatlas/nav.html')
     <div class="sb-section">
       <div class="sb-head">このページ</div>
       <a class="sb-sub" href="#trial-overview">試験概要</a>
-      <a class="sb-sub" href="#references">参考文献</a>
+      <a class="sb-sub" href="#background">試験背景</a>
+      <a class="sb-sub" href="#design">試験デザイン</a>
       <a class="sb-sub" href="#primary-data">主要データ表</a>
       <a class="sb-sub" href="#surgical-outcomes">外科アウトカム</a>
-      <a class="sb-sub" href="#subgroup">サブグループ解析</a>
-      <a class="sb-sub" href="#pcr-surrogate">pCRサロゲート論</a>
-      <a class="sb-sub" href="#ctdna">ctDNA</a>
       <a class="sb-sub" href="#safety">安全性</a>
+      <a class="sb-sub" href="#subgroup">サブグループ解析</a>
+      <a class="sb-sub" href="#pcr-surrogate">pCRサロゲート</a>
+      <a class="sb-sub" href="#ctdna">ctDNA</a>
       <a class="sb-sub" href="#neutral-review">総合評価</a>
+      <a class="sb-sub" href="#references">参考文献</a>
     </div>
   </aside>
 
@@ -385,7 +407,7 @@ fetch('/lungatlas/nav.html')
         </p>
         <div class="gl-list">
           <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>承認あり（ニボルマブ術前補助）。Stage IB（≥4cm）–IIIA。</span></div>
-          <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2022年承認。Stage IB（≥4cm）以上・リンパ節陽性の切除可能NSCLC。</span></div>
+          <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2022年承認。切除可能NSCLCで、腫瘍径4 cm以上またはリンパ節転移陽性例が対象。</span></div>
           <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>承認あり。</span></div>
         </div>
         <div class="trial-meta-row">
@@ -397,19 +419,104 @@ fetch('/lungatlas/nav.html')
       </div>
     </div>
 
-    <!-- 参考文献 -->
-    <h2 class="sec-h2" id="references">参考文献</h2>
+    <!-- 試験背景 -->
+    <h2 class="sec-h2" id="background">試験背景：なぜこの試験が行われたか</h2>
+    <div class="note-box">
+      切除可能NSCLCでは、根治切除後も一定割合が再発する。従来、術前または術後の白金製剤ベース化学療法による上乗せ効果は限定的であった（5年生存の絶対的改善は数%程度）。免疫チェックポイント阻害薬を腫瘍が体内に存在する術前に投与することで、腫瘍特異的T細胞応答をより広く惹起できるのではないかという理論的仮説（neoantigen提示が豊富な術前のほうが免疫応答を引き出しやすい）に基づき、術前nivolumab＋化学療法の有効性を検証する目的でCheckMate 816が計画された。
+    </div>
+
+    <!-- 試験デザイン・患者背景 -->
+    <h2 class="sec-h2" id="design">試験デザイン・患者背景</h2>
+
+    <h3 class="sec-h3">投与スケジュール</h3>
     <div class="trial-card">
       <div class="tc-body">
-        <ol class="ref-list">
-          <li>Forde PM, et al. Neoadjuvant Nivolumab plus Chemotherapy in Resectable Lung Cancer. <em>N Engl J Med.</em> 2022;386(21):1973-1985. <a href="https://pubmed.ncbi.nlm.nih.gov/35403841/" target="_blank" rel="noopener">PMID: 35403841</a>. doi:10.1056/NEJMoa2202170（EFS・pCR初回・安全性・手術関連AE・手術遅延/中止）</li>
-          <li>Forde PM, et al. Overall Survival with Neoadjuvant Nivolumab plus Chemotherapy in Lung Cancer. <em>N Engl J Med.</em> 2025;393(8):741-752. <a href="https://pubmed.ncbi.nlm.nih.gov/40454642/" target="_blank" rel="noopener">PMID: 40454642</a>. doi:10.1056/NEJMoa2502931（OS最終解析・5年追跡・最終EFS）</li>
-          <li>Spicer J, et al. Overall survival with neoadjuvant nivolumab + chemotherapy in CheckMate 816. <em>J Clin Oncol.</em> 2025;43(17_suppl):LBA8000（ASCO 2025）</li>
-          <li>CheckMate 816 PD-L1別3年解析. <em>Ann Oncol.</em> 2023;34(suppl_2):LBA57（ESMO 2023）</li>
-          <li>Wang C, et al. Subpopulation analysis of Chinese patients in CheckMate 816. <em>ESMO Open.</em> 2023;8(6):102040. doi:10.1016/j.esmoop.2023.102040</li>
-          <li>Spicer J, et al. Surgical outcomes from the phase 3 CheckMate 816 trial. <em>J Clin Oncol.</em> 2021;39(15_suppl):8503. doi:10.1200/JCO.2021.39.15_suppl.8503（手術施行率・R0切除率・術式・肺全摘・conversion・手術時間・入院期間）</li>
-          <li>Mitsudomi T, et al. Japanese subpopulation of CheckMate 816. <em>Cancer Sci.</em> 2024. doi:10.1111/cas.16030（日本人サブ解析）</li>
-        </ol>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-label">NIVO群<br>（n=179）</div>
+            <div class="flow-box f-nivo">ニボルマブ 360mg<br>＋白金製剤ベース化学療法<br>3週ごと × 3サイクル</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-surgery">手術<br>（最終投与から<br>6週以内）</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-postop">術後免疫療法<br>なし</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-label">化療群<br>（n=179）</div>
+            <div class="flow-box f-chemo">白金製剤ベース化学療法<br>3週ごと × 3サイクル</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-surgery">手術</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-postop">術後免疫療法<br>なし</div>
+          </div>
+        </div>
+        <div class="note-box" style="margin-top:12px">両群とも術後免疫療法は試験設計に含まれない。</div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">適格基準</h3>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ul class="point-list">
+          <li>新規診断・切除可能NSCLC</li>
+          <li>Stage IB（腫瘍径≥4cm）–IIIA（AJCC第7版）</li>
+          <li>ECOG PS 0–1</li>
+          <li>EGFR変異・ALK転座陽性例は除外</li>
+          <li>前治療なし</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">患者背景（Baseline Characteristics）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">登録数</td>
+              <td>358例（NIVO＋化学療法 179例／化学療法単独 179例）</td>
+            </tr>
+            <tr>
+              <td class="td-key">年齢中央値</td>
+              <td>64歳</td>
+            </tr>
+            <tr>
+              <td class="td-key">Stage IIIA</td>
+              <td>約63%</td>
+            </tr>
+            <tr>
+              <td class="td-key">扁平上皮癌</td>
+              <td>約50%</td>
+            </tr>
+            <tr>
+              <td class="td-key">PD-L1 ≥1%</td>
+              <td>約50%</td>
+            </tr>
+            <tr>
+              <td class="td-key">喫煙歴あり（現/既）</td>
+              <td>約90%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">出典：NEJM 2022<sup class="ref">[1]</sup></div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">エンドポイント定義</h3>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ul class="point-list">
+          <li><strong>pCR</strong>（病理学的完全奏効）：原発巣および郭清リンパ節に生存腫瘍細胞が認められないこと（0%）。BICR（盲検下独立中央判定）で評価。</li>
+          <li><strong>MPR</strong>（major pathologic response）：残存生存腫瘍細胞≤10%。</li>
+          <li><strong>EFS</strong>（event-free survival）：無作為化から疾患進行（手術不能化を含む）・再発・死亡までの期間。BICRで評価。</li>
+          <li><strong>OS</strong>（overall survival）：事前規定・検出力設定済みの副次評価項目。階層的に検定。</li>
+        </ul>
+        <div class="note-box" style="margin-top:10px">共同主要評価項目はpCRとEFS。OSは事前規定の副次評価項目。</div>
       </div>
     </div>
 
@@ -516,7 +623,7 @@ fetch('/lungatlas/nav.html')
     <!-- 外科アウトカムセクション -->
     <h2 class="sec-h2" id="surgical-outcomes">Surgical Outcomes：手術到達性と外科的アウトカム</h2>
     <p class="body-text">
-      周術期治療では腫瘍縮小やpCRだけでなく、予定手術への到達、R0切除、手術遅延、術式、肺全摘率、conversion、手術関連合併症、周術期死亡が重要である。CheckMate 816ではdefinitive surgery 83% vs 75%、R0切除率83% vs 78%と報告された。手術時間中央値は184分 vs 217分であり、nivolumab追加により手術時間の延長は示されなかった。ただし術式・病期・施設経験により実臨床での手術難度は異なりうる。
+      周術期治療では腫瘍縮小やpCRだけでなく、予定手術への到達、R0切除、手術遅延、術式、肺全摘率、conversion、手術関連合併症、周術期死亡が重要である。CheckMate 816ではdefinitive surgery 83% vs 75%、R0切除率83% vs 78%と報告された。手術時間中央値は184分 vs 217分であり、nivolumab追加により手術時間の延長は示されなかった。ただし術式・病期・施設経験により実臨床での手術難度は異なりうる。一方で、Grade 5 surgery-related AEも報告されており、術前治療後の手術では腫瘍縮小効果だけでなく、肺門・縦隔操作の難度、血管処理、塞栓症リスクなどを含めて周術期リスクを評価する必要がある。
     </p>
 
     <h3 class="sec-h3" id="surgical-feasibility">5-1. 手術到達性・完全切除</h3>
@@ -620,7 +727,7 @@ fetch('/lungatlas/nav.html')
 
     <h3 class="sec-h3" id="surgical-complications">5-3. 手術関連合併症・死亡</h3>
     <p class="body-text">
-      nivolumab追加によりGrade 3/4 surgery-related AEの増加傾向は示されなかった。Grade 5 surgery-related AEはnivolumab＋化学療法群で2例、化学療法単独群で0例報告された。nivolumab＋化学療法群の2例はいずれも治験薬との関連なしと判断され、死因は肺塞栓および大動脈破裂であった。治療関連死亡はnivolumab群では報告されず、化学療法単独群で3例報告された。30日死亡・90日死亡は原典Supplementで確認し、数値が確認できる場合のみ掲載し、治療関連死亡や手術関連Grade 5 AEと区別して記載する。
+      nivolumab追加によりGrade 3/4 surgery-related AEの増加傾向は示されなかった。Grade 5 surgery-related AEはnivolumab＋化学療法群で2例、化学療法単独群で0例報告された。nivolumab＋化学療法群の2例はいずれも治験薬との関連なしと判断され、死因は肺塞栓および大動脈破裂であった。治療関連死亡はnivolumab群では報告されず、化学療法単独群で3例報告された。
     </p>
     <div class="trial-card">
       <div class="tc-body" style="overflow-x:auto">
@@ -658,16 +765,83 @@ fetch('/lungatlas/nav.html')
               <td class="td-chemo">3例（1.7%）</td>
               <td>化学療法単独群で報告。死因は原典脚注に準拠<sup class="ref">[1]</sup></td>
             </tr>
-            <tr>
-              <td class="td-key">30日/90日死亡</td>
-              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
-              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
-              <td>数値確認できない場合は掲載しない。治療関連死亡・手術関連Grade 5 AEと混同しない</td>
-            </tr>
           </tbody>
         </table>
         <div class="caution-box" style="margin-top:10px">
-          <strong>定義の区別：</strong>周術期死亡の定義は研究により異なる。30日死亡・90日死亡・手術関連Grade 5 AE・治療関連死亡は同義ではないため、ページ内で明確に区別する。
+          <strong>定義の区別：</strong>治療関連死亡・手術関連Grade 5 AE・30日死亡・90日死亡は異なる指標であり、同義ではない。
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          <strong>Grade 5 surgery-related AEについて：</strong>Grade 5 surgery-related AEは、手術関連AEとして報告された死亡であり、治療関連死亡とは別に集計されている。NIVO＋化学療法群の2例は、治験薬との関連なしと判断された。
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          30日死亡・90日死亡は、治療関連死亡や手術関連Grade 5 AEとは異なる指標である。本ページでは、原典Supplementで定義と数値を確認できる場合のみ記載する。
+        </div>
+      </div>
+    </div>
+
+    <!-- 安全性 -->
+    <h2 class="sec-h2" id="safety">Safety：安全性まとめ</h2>
+    <p class="body-text">
+      nivolumab追加によりGrade 3/4 treatment-related AEの増加傾向は示されなかった。5年追跡でも新たな安全性シグナルは報告されていない<sup class="ref">[2]</sup>。ただしirAE・肺臓炎・内分泌障害・感染症・化学療法毒性の鑑別は実臨床で重要。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">安全性項目</th>
+              <th style="min-width:140px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:200px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Grade 3/4 治療関連AE</td>
+              <td class="td-nivo">33.5%</td>
+              <td class="td-chemo">36.9%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Serious 治療関連AE</td>
+              <td class="td-nivo">11.9%</td>
+              <td class="td-chemo">10.2%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Treatment-related death（治療関連死亡）</td>
+              <td class="td-nivo">0例</td>
+              <td class="td-chemo">3例（1.7%）</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Surgery-related AE（any grade）</td>
+              <td class="td-nivo">41.6%</td>
+              <td class="td-chemo">46.7%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 3/4 surgery-related AE</td>
+              <td class="td-nivo">11.4%</td>
+              <td class="td-chemo">14.8%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 5 surgery-related AE</td>
+              <td class="td-nivo">2例</td>
+              <td class="td-chemo">0例</td>
+              <td>NIVO群2例はいずれも治験薬関連なし。死因は肺塞栓・大動脈破裂<sup class="ref">[1,6]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">新たな安全性シグナル（5年追跡）</td>
+              <td class="td-nivo">なし</td>
+              <td class="td-chemo">—</td>
+              <td>NEJM 2025<sup class="ref">[2]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          30日死亡・90日死亡は、治療関連死亡や手術関連Grade 5 AEとは異なる指標である。本ページでは、原典Supplementで定義と数値を確認できる場合のみ記載する。
         </div>
       </div>
     </div>
@@ -675,7 +849,7 @@ fetch('/lungatlas/nav.html')
     <!-- サブグループ解析 -->
     <h2 class="sec-h2" id="subgroup">Subgroup Analysis：どの患者で効果が大きそうか</h2>
     <div class="info-box">
-      これらのサブグループ解析はいずれも探索的解析であり、各サブグループで検出力を設定した検定ではない。交互作用検定も主目的ではないためHRは点推定値として参考にとどめる。特にPD-L1&lt;1%・組織型別・Stage別では症例数が限られ信頼区間が広い可能性がある。これらの数値だけで個別患者の治療適応を決定することは避けるべきである。
+      これらのサブグループ解析はいずれも探索的解析であり、各サブグループで検出力を設定した検定ではない。交互作用検定も主目的ではないためHRは点推定値として参考にとどめる。特にPD-L1&lt;1%・組織型別・Stage別では症例数が限られ信頼区間が広い可能性がある。これらの数値だけで個別患者の治療適応を決定することは避けるべきである。PD-L1別・Stage別・組織型別のHRは、治療適応を決めるための確定的な閾値ではない。
     </div>
     <div class="trial-card">
       <div class="tc-body" style="overflow-x:auto">
@@ -770,76 +944,6 @@ fetch('/lungatlas/nav.html')
       </div>
     </div>
 
-    <!-- 安全性 -->
-    <h2 class="sec-h2" id="safety">Safety：安全性まとめ</h2>
-    <p class="body-text">
-      nivolumab追加によりGrade 3/4 treatment-related AEの増加傾向は示されなかった。5年追跡でも新たな安全性シグナルは報告されていない<sup class="ref">[2]</sup>。ただしirAE・肺臓炎・内分泌障害・感染症・化学療法毒性の鑑別は実臨床で重要。死亡関連データはtreatment-related death・surgery-related Grade 5 AE・30日/90日死亡を区別して記載する。
-    </p>
-    <div class="trial-card">
-      <div class="tc-body" style="overflow-x:auto">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th style="min-width:220px">安全性項目</th>
-              <th style="min-width:140px">NIVO＋化学療法</th>
-              <th style="min-width:120px">化学療法単独</th>
-              <th style="min-width:200px">出典</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="td-key">Grade 3/4 治療関連AE</td>
-              <td class="td-nivo">33.5%</td>
-              <td class="td-chemo">36.9%</td>
-              <td>NEJM 2022<sup class="ref">[1]</sup></td>
-            </tr>
-            <tr>
-              <td class="td-key">Serious 治療関連AE</td>
-              <td class="td-nivo">11.9%</td>
-              <td class="td-chemo">10.2%</td>
-              <td>NEJM 2022<sup class="ref">[1]</sup></td>
-            </tr>
-            <tr>
-              <td class="td-key">Treatment-related death（治療関連死亡）</td>
-              <td class="td-nivo">0例</td>
-              <td class="td-chemo">3例（1.7%）</td>
-              <td>NEJM 2022<sup class="ref">[1]</sup></td>
-            </tr>
-            <tr>
-              <td class="td-key">Surgery-related AE（any grade）</td>
-              <td class="td-nivo">41.6%</td>
-              <td class="td-chemo">46.7%</td>
-              <td>NEJM 2022<sup class="ref">[1]</sup></td>
-            </tr>
-            <tr>
-              <td class="td-key">Grade 3/4 surgery-related AE</td>
-              <td class="td-nivo">11.4%</td>
-              <td class="td-chemo">14.8%</td>
-              <td>NEJM 2022<sup class="ref">[1]</sup></td>
-            </tr>
-            <tr>
-              <td class="td-key">Grade 5 surgery-related AE</td>
-              <td class="td-nivo">2例</td>
-              <td class="td-chemo">0例</td>
-              <td>NIVO群2例はいずれも治験薬関連なし。死因は肺塞栓・大動脈破裂<sup class="ref">[1,6]</sup></td>
-            </tr>
-            <tr>
-              <td class="td-key">30日/90日死亡</td>
-              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
-              <td style="color:var(--text3);font-size:12px">原典Supplement確認</td>
-              <td>数値確認できない場合は掲載しない</td>
-            </tr>
-            <tr>
-              <td class="td-key">新たな安全性シグナル（5年追跡）</td>
-              <td class="td-nivo">なし</td>
-              <td class="td-chemo">—</td>
-              <td>NEJM 2025<sup class="ref">[2]</sup></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
     <!-- 総合評価 -->
     <h2 class="sec-h2" id="neutral-review">この試験をどう読むか——第三者的視点からの整理</h2>
     <div class="review-card">
@@ -868,7 +972,23 @@ fetch('/lungatlas/nav.html')
         </div>
       </div>
       <div class="note-box">
-        <strong>総括：</strong>CheckMate 816は切除可能NSCLC（特にドライバー変異陰性例）に対する術前化学免疫療法の確立された選択肢の一つとして位置づけられる。術前3サイクルのみでOS改善を示した点は臨床的に重要である。一方で、術後治療を追加すべき集団、pCR/ctDNAに基づく個別化、周術期レジメンとの使い分け、周術期リスク評価は未解決であり今後の研究結果が待たれる。
+        <strong>総括：</strong>CheckMate 816は、切除可能NSCLC、特にドライバー変異陰性例に対する術前化学免疫療法を支持する主要エビデンスの一つである。術前3サイクルのみでOS改善を示した点は臨床的に重要である。一方で、術後治療を追加すべき集団、pCR/ctDNAに基づく個別化、周術期レジメンとの使い分け、周術期リスク評価は未解決であり今後の研究結果が待たれる。
+      </div>
+    </div>
+
+    <!-- 参考文献（末尾へ移動） -->
+    <h2 class="sec-h2" id="references">参考文献</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ol class="ref-list">
+          <li>Forde PM, et al. Neoadjuvant Nivolumab plus Chemotherapy in Resectable Lung Cancer. <em>N Engl J Med.</em> 2022;386(21):1973-1985. <a href="https://pubmed.ncbi.nlm.nih.gov/35403841/" target="_blank" rel="noopener">PMID: 35403841</a>. doi:10.1056/NEJMoa2202170（EFS・pCR初回・安全性・手術関連AE・手術遅延/中止）</li>
+          <li>Forde PM, et al. Overall Survival with Neoadjuvant Nivolumab plus Chemotherapy in Lung Cancer. <em>N Engl J Med.</em> 2025;393(8):741-752. <a href="https://pubmed.ncbi.nlm.nih.gov/40454642/" target="_blank" rel="noopener">PMID: 40454642</a>. doi:10.1056/NEJMoa2502931（OS最終解析・5年追跡・最終EFS）</li>
+          <li>Spicer J, et al. Overall survival with neoadjuvant nivolumab + chemotherapy in CheckMate 816. <em>J Clin Oncol.</em> 2025;43(17_suppl):LBA8000（ASCO 2025）</li>
+          <li>CheckMate 816 PD-L1別3年解析. <em>Ann Oncol.</em> 2023;34(suppl_2):LBA57（ESMO 2023）</li>
+          <li>Wang C, et al. Subpopulation analysis of Chinese patients in CheckMate 816. <em>ESMO Open.</em> 2023;8(6):102040. doi:10.1016/j.esmoop.2023.102040</li>
+          <li>Spicer J, et al. Surgical outcomes from the phase 3 CheckMate 816 trial. <em>J Clin Oncol.</em> 2021;39(15_suppl):8503. doi:10.1200/JCO.2021.39.15_suppl.8503（手術施行率・R0切除率・術式・肺全摘・conversion・手術時間・入院期間）</li>
+          <li>Mitsudomi T, et al. Neoadjuvant nivolumab plus chemotherapy in resectable non-small-cell lung cancer in Japanese patients from CheckMate 816. <em>Cancer Sci.</em> 2024;115(2):540-554. <a href="https://pubmed.ncbi.nlm.nih.gov/38098261/" target="_blank" rel="noopener">PMID: 38098261</a>. doi:10.1111/cas.16030.（日本人サブ解析）</li>
+        </ol>
       </div>
     </div>
 
