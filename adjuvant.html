@@ -321,7 +321,7 @@ fetch('/lungatlas/nav.html')
       <a class="sb-item active" href="/lungatlas/adjuvant.html">術後補助療法</a>
       <a class="sb-sub" href="/lungatlas/adjuvant.html#p-adaura">└ ADAURA（EGFR）</a>
       <a class="sb-sub" href="/lungatlas/adjuvant.html#p-alina">└ ALINA（ALK）</a>
-      <a class="sb-sub" href="/lungatlas/adjuvant.html#p-impower">└ IMpower010（陰性）</a>
+      <a class="sb-sub" href="/lungatlas/adjuvant.html#p-impower">└ IMpower010（PD-L1陽性）</a>
     </div>
   </aside>
 
@@ -331,16 +331,16 @@ fetch('/lungatlas/nav.html')
     <h1 class="art-h1">完全切除 NSCLC<br>術後補助療法</h1>
 
     <div class="note-box" style="margin-bottom:16px">
-      術後補助療法の4試験は対象変異・対象Stage・術後化学療法の有無・対照群がそれぞれ異なる。直接比較試験は存在せず、数値の横断比較は参考程度にとどめる。ADAURA（オシメルチニブ）・ALINA（アレクチニブ）はドライバー変異陽性に限定、IMpower010（アテゾリズマブ）はEGFR/ALK陰性かつPD-L1陽性でベネフィットが明確。UFTはStage I腺癌を対象とした日本発のデータで、ドライバー変異が考慮されていない時代の試験である点に注意。
+      術後補助療法の4試験は対象変異・対象Stage・術後化学療法の有無・対照群がそれぞれ異なる。直接比較試験は存在せず、数値の横断比較は参考程度にとどめる。ADAURA（オシメルチニブ）・ALINA（アレクチニブ）はドライバー変異陽性に限定、IMpower010（アテゾリズマブ）は実臨床上EGFR/ALK陰性例のPD-L1陽性でベネフィットが明確（試験自体はEGFR/ALK検査必須ではなかった）。UFTはStage I腺癌を対象とした日本発のデータで、ドライバー変異が考慮されていない時代の試験である点に注意。
     </div>
 
-    <p class="lead">完全切除NSCLCに対する術後補助療法を、ドライバー変異の有無で整理する。EGFR陽性にはオシメルチニブ（ADAURA）、ALK陽性にはアレクチニブ（ALINA）、EGFR/ALK陰性のPD-L1陽性例にはアテゾリズマブ（IMpower010、術後化学療法後）が選択肢となる。細胞毒性化学療法（白金併用・UFT）は変異の有無を問わない古典的選択肢として併載する。</p>
+    <p class="lead">完全切除NSCLCに対する術後補助療法を、ドライバー変異の有無で整理する。EGFR陽性にはオシメルチニブ（ADAURA）、ALK陽性にはアレクチニブ（ALINA）、実臨床上EGFR/ALK陰性のPD-L1陽性例ではアテゾリズマブ（IMpower010、術後化学療法後）が選択肢となる。細胞毒性化学療法（白金併用・UFT）は変異の有無を問わない古典的選択肢として併載する。</p>
 
     <div style="margin-bottom:8px;font-size:11px;color:var(--text3);font-weight:500;letter-spacing:.04em">試験・テーマで絞り込む</div>
     <div class="tabs">
       <button class="tab active" onclick="sw('adaura',this)">EGFR陽性 — ADAURA</button>
       <button class="tab" onclick="sw('alina',this)">ALK陽性 — ALINA</button>
-      <button class="tab" onclick="sw('impower',this)">EGFR/ALK陰性 — IMpower010</button>
+      <button class="tab" onclick="sw('impower',this)">IMpower010（PD-L1陽性例）</button>
       <button class="tab" onclick="sw('cyto',this)">細胞毒性化学療法 — UFT・白金併用</button>
     </div>
 
@@ -403,7 +403,7 @@ fetch('/lungatlas/nav.html')
           </div>
 
           <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>Stage IB–IIIAのEGFR陽性切除例にオシメルチニブを推奨。保険適用（2021年）</span></div>
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>EGFR変異陽性の完全切除NSCLCに対する術後補助療法として承認・保険適用あり（2021年）。推奨Stageや術後化学療法との位置づけは、日本肺癌学会GLに従って判断する。</span></div>
             <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>Stage IB–IIIAでカテゴリー1。術後化学療法との逐次投与を推奨</span></div>
             <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>Stage II–IIIAに推奨。Stage IBは個別判断</span></div>
           </div>
@@ -423,7 +423,7 @@ fetch('/lungatlas/nav.html')
           <div class="tc-meta">
             <a class="trial-link blue" href="https://doi.org/10.1056/NEJMoa2310532" target="_blank" rel="noopener">ALINA（DFS）<span class="ext">↗</span></a>
             <span class="jbadge j-nejm">NEJM 2024</span>
-            <span class="jbadge j-esmo">ESMO 2025（4年フォローアップ）</span>
+            <span class="jbadge j-esmo">ESMO 2025学会報告（Abstract 1787MO）</span>
             <span class="ybadge">Phase III · n=257</span>
             <span class="new-badge">国内承認 2024年8月</span>
           </div>
@@ -444,7 +444,7 @@ fetch('/lungatlas/nav.html')
             <div class="stat blue">
               <div class="stat-val">98.4%</div>
               <div class="stat-label">4年OS率（アレクチニブ群）</div>
-              <div class="stat-vs">ESMO 2025 · OSは依然未成熟</div>
+              <div class="stat-vs">ESMO 2025学会報告 · OSは依然未成熟</div>
             </div>
           </div>
         </div>
@@ -466,17 +466,17 @@ fetch('/lungatlas/nav.html')
                 <tr><td class="td-key">2年DFS率（ITT）</td><td>93.6%</td><td>63.7%</td><td>—</td><td>NEJM 2024</td></tr>
                 <tr><td class="td-key">3年DFS率（ITT）</td><td>88.7%</td><td>54.0%</td><td>—</td><td>NEJM 2024</td></tr>
                 <tr><td class="td-key">CNS DFS（ITT）</td><td>—</td><td>—</td><td style="font-family:var(--mono)">0.22（0.08–0.58）</td><td>NEJM 2024</td></tr>
-                <tr><td class="td-key">OS</td><td colspan="2" style="text-align:center">未成熟（4年OS率 98.4%）</td><td>データ未成熟</td><td>ESMO 2025</td></tr>
+                <tr><td class="td-key">OS</td><td colspan="2" style="text-align:center">未成熟（4年OS率 98.4%）</td><td>データ未成熟</td><td>ESMO 2025学会報告</td></tr>
               </tbody>
             </table>
           </div>
 
           <div class="note-box" style="margin-bottom:14px">
-            対照群が白金製剤化学療法である点がADAURA（プラセボ対照）と異なるため、HRの解釈に注意。追跡期間中央値27.9ヶ月（初回）→約47ヶ月（ESMO 2025）でOSは依然未成熟だが、4年OS率98.4%と良好なトレンド。多くの再発イベントは2年の投与終了後に発生しており、至適投与期間は議論がある。ALK検査法（IHC/FISH/NGS）により検出に差が出うる。術後補助の用量600mg×2/日は進行・再発の国内承認用量（300mg×2/日）の2倍で、日本人集団の安全性・PKはJSMO 2025で別途報告。
+            対照群が白金製剤化学療法である点がADAURA（プラセボ対照）と異なるため、HRの解釈に注意。追跡期間中央値27.9ヶ月（初回・NEJM 2024）→約47ヶ月（ESMO 2025学会報告、Abstract 1787MO）でOSは依然未成熟だが、4年OS率98.4%と良好なトレンド。査読論文化後に更新予定。多くの再発イベントは2年の投与終了後に発生しており、至適投与期間は議論がある。ALK検査法（IHC/FISH/NGS）により検出に差が出うる。術後補助の用量600mg×2/日は進行・再発の国内承認用量（300mg×2/日）の2倍で、日本人集団の安全性・PKはJSMO 2025で別途報告。
           </div>
 
           <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>肺癌診療GL 2025年版 — ALK陽性 病理病期II–IIB期（第9版、N3除く）完全切除例に、従来の術後補助薬物療法の代わりとしてアレクチニブを弱く推奨[2B]。2024年8月28日 適応追加承認（希少疾病用医薬品・優先審査）</span></div>
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>2024年8月に「ALK融合遺伝子陽性NSCLCにおける術後補助療法」として適応追加承認（希少疾病用医薬品・優先審査）。肺癌診療GLでの推奨Stageは原典（日本肺癌学会ガイドライン）に基づき確認する。<!-- 要確認：GL推奨Stage・推奨グレード --></span></div>
             <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN/FDA：</strong>Stage IB–IIIAでカテゴリー1。FDA承認2024年4月</span></div>
             <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO/EMA：</strong>Stage IB–IIIAに推奨</span></div>
           </div>
@@ -502,7 +502,7 @@ fetch('/lungatlas/nav.html')
             <span class="ybadge">Phase III · n=1,005</span>
           </div>
           <div class="drug-title">アテゾリズマブ 1200mg q3w ×16サイクル vs 最良支持療法（BSC）</div>
-          <div class="drug-sub">完全切除NSCLC（Stage IB≥4cm–IIIA, UICC/AJCC第7版）· 術後シスプラチン併用化学療法 1–4サイクル完了後に1:1無作為化 · EGFR/ALK陰性</div>
+          <div class="drug-sub">完全切除NSCLC（Stage IB≥4cm–IIIA, UICC/AJCC第7版）· 術後シスプラチン併用化学療法 1–4サイクル完了後に1:1無作為化 · 試験登録時EGFR/ALK検査は必須ではなく、既知陽性例も一部含まれ得た</div>
 
           <div class="stat-row">
             <div class="stat purple">
@@ -568,13 +568,13 @@ fetch('/lungatlas/nav.html')
           </div>
 
           <div class="note-box" style="margin-bottom:14px">
-            術後シスプラチン併用化学療法（1–4サイクル）完了後に無作為化した試験であり、術後化学療法が前提。PD-L1はSP142アッセイで評価され、22C3等とは互換性に注意。JCO 2025の5年最終解析ではITT集団のDFSは有意性に未到達（HR 0.85, p=0.07）で、ベネフィットはPD-L1陽性、特にTC≥50%に集中。OSは中間解析段階で依然未成熟、確定的なOS改善は示されていない。EGFR/ALK陽性例にはICIではなくTKI（ADAURA/ALINA）を優先する。
+            術後シスプラチン併用化学療法（1–4サイクル）完了後に無作為化した試験であり、術後化学療法が前提。試験ではEGFR/ALK検査は必須ではなく既知陽性例も一部含まれ得るが、実臨床上はEGFR変異陽性例にはオシメルチニブ（ADAURA）、ALK陽性例にはアレクチニブ（ALINA）を優先し、アテゾリズマブはEGFR/ALK陰性のPD-L1陽性例での適用を検討する。PD-L1はSP142アッセイで評価され、22C3等とは互換性に注意。JCO 2025の5年最終解析ではITT集団のDFSは有意性に未到達（HR 0.85, p=0.07）で、ベネフィットはPD-L1陽性、特にTC≥50%に集中。OSは中間解析段階で依然未成熟、確定的なOS改善は示されていない。承認条件は地域によって異なる（日本・FDAはPD-L1 TC≥1%、EMAはTC≥50%かつEGFR/ALK陰性に限定）。詳細は各ページ参照予定。
           </div>
 
           <div class="gl-list">
-            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>Stage II–IIIAのEGFR/ALK野生型・PD-L1 TC≥1%に推奨。承認（2022年）</span></div>
-            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>PD-L1≥1%のStage II–IIIAでカテゴリー1。PD-L1&lt;1%は推奨せず（米国適応はTC≥1%）</span></div>
-            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>EUの承認はPD-L1 TC≥50%のStage II–IIIAに限定</span></div>
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>Stage II–IIIAのPD-L1 TC≥1%に承認（2022年）。承認条件にEGFR/ALK陰性の規定はないが、実臨床上はEGFR/ALK陽性例にはTKIを優先する。</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN/FDA：</strong>PD-L1≥1%のStage II–IIIAでカテゴリー1。PD-L1&lt;1%は推奨せず。</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>EUの承認はPD-L1 TC≥50%かつEGFR/ALK陰性のStage II–IIIAに限定。日本・米国と承認条件が異なる。</span></div>
           </div>
 
           <div class="tox-row">
@@ -606,12 +606,12 @@ fetch('/lungatlas/nav.html')
               <div class="stat-vs">5年OS 88% vs 85%（0.52–0.98, p=0.04）</div>
             </div>
             <div class="stat amber">
-              <div class="stat-val">有意に良好</div>
+              <div class="stat-val">OS：UFT優位</div>
               <div class="stat-label">T2（Stage IB相当）サブグループ</div>
-              <div class="stat-vs">n=263 · より明確なベネフィット</div>
+              <div class="stat-vs">n=263 · 有意に良好</div>
             </div>
             <div class="stat amber">
-              <div class="stat-val">有意差なし</div>
+              <div class="stat-val">OS：有意差なし</div>
               <div class="stat-label">T1サブグループ</div>
               <div class="stat-vs">n=716</div>
             </div>
@@ -650,6 +650,9 @@ fetch('/lungatlas/nav.html')
         </div>
         <div class="tc-body">
           <p class="body-text">ドライバー変異陰性のStage II–IIIA（および高リスクIB）では、シスプラチン併用術後補助化学療法が標準。代表的試験とメタ解析を以下に示す。ドライバー変異陽性例では、これら化学療法完了後にTKIを逐次追加する戦略が現在の標準である。</p>
+          <div class="note-box" style="margin-bottom:14px">
+            現在は、EGFR陽性では術後化学療法後にオシメルチニブ（ADAURA）、ALK陽性ではアレクチニブ（ALINA）、EGFR/ALK陰性PD-L1陽性では術後化学療法後にアテゾリズマブ（IMpower010）を検討するため、白金併用術後補助化学療法は「単独で完結する治療」ではなく、後続の分子標的薬・ICIとの順序を含めて考える。なお、UFT（経口フッ化ピリミジン系）は白金併用レジメンとは別カテゴリの試験（Stage I腺癌・日本発）であり、混同に注意する。
+          </div>
 
           <div style="overflow-x:auto;margin-bottom:14px">
             <table class="data-table">
@@ -699,11 +702,11 @@ fetch('/lungatlas/nav.html')
         <ol class="refs-list">
           <li data-n="1">Wu YL, et al. Osimertinib in Resected EGFR-Mutated NSCLC (ADAURA primary). <em>N Engl J Med</em> 2020;383:1711-1723. PMID 32955177. <a href="https://doi.org/10.1056/NEJMoa2027071" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2027071 ↗</a></li>
           <li data-n="2">Herbst RS, et al. Adjuvant Osimertinib: Updated DFS (ADAURA). <em>J Clin Oncol</em> 2023;41:1830-1840. PMID 36720083. <a href="https://doi.org/10.1200/JCO.22.02186" target="_blank" rel="noopener">DOI 10.1200/JCO.22.02186 ↗</a></li>
-          <li data-n="3">Tsuboi M, et al. Overall Survival with Osimertinib in Resected EGFR-Mutated NSCLC (ADAURA OS). <em>N Engl J Med</em> 2023;389:137-147. PMID 38466534. <a href="https://doi.org/10.1056/NEJMoa2304594" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2304594 ↗</a></li>
+          <li data-n="3">Tsuboi M, et al. Overall Survival with Osimertinib in Resected EGFR-Mutated NSCLC (ADAURA OS). <em>N Engl J Med.</em> 2023;389:137-147. PMID: 37272535. <a href="https://doi.org/10.1056/NEJMoa2304594" target="_blank" rel="noopener">doi:10.1056/NEJMoa2304594 ↗</a></li>
           <li data-n="4">Wu YL, et al. Alectinib in Resected ALK-Positive NSCLC (ALINA). <em>N Engl J Med</em> 2024;390:1265-1276. PMID 38598794. <a href="https://doi.org/10.1056/NEJMoa2310532" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2310532 ↗</a></li>
           <li data-n="5">Felip E, et al. Adjuvant Atezolizumab after Chemotherapy in Resected Stage IB-IIIA NSCLC (IMpower010 DFS). <em>Lancet</em> 2021;398:1344-1357. PMID 34555333. <a href="https://doi.org/10.1016/S0140-6736(21)02098-5" target="_blank" rel="noopener">DOI 10.1016/S0140-6736(21)02098-5 ↗</a></li>
           <li data-n="6">Felip E, et al. Overall Survival with Adjuvant Atezolizumab (IMpower010 OS interim). <em>Ann Oncol</em> 2023;34:907-919. PMID 37467930. <a href="https://doi.org/10.1016/j.annonc.2023.07.001" target="_blank" rel="noopener">DOI 10.1016/j.annonc.2023.07.001 ↗</a></li>
-          <li data-n="7">Wakelee H, et al. Five-Year Survival Outcomes with Atezolizumab (IMpower010 final). <em>J Clin Oncol</em> 2025;43:2343-2349. PMID 40424549. <a href="https://doi.org/10.1200/JCO-24-01681" target="_blank" rel="noopener">DOI 10.1200/JCO-24-01681 ↗</a></li>
+          <li data-n="7">Felip E, Altorki N, Wakelee HA, et al; IMpower010 Study Investigators. Five-Year Survival Outcomes With Atezolizumab After Chemotherapy in Resected Stage IB-IIIA NSCLC (IMpower010). <em>J Clin Oncol.</em> 2025;43(21):2343-2349. PMID: 40446184. <a href="https://doi.org/10.1200/JCO-24-01681" target="_blank" rel="noopener">doi:10.1200/JCO-24-01681 ↗</a></li>
           <li data-n="8">Kato H, et al. A Randomized Trial of Adjuvant Chemotherapy with Uracil-Tegafur for Adenocarcinoma of the Lung. <em>N Engl J Med</em> 2004;350:1713-1721. PMID 15102997. <a href="https://doi.org/10.1056/NEJMoa032792" target="_blank" rel="noopener">DOI 10.1056/NEJMoa032792 ↗</a></li>
           <li data-n="9">Hamada C, et al. Meta-analysis of Postoperative Adjuvant Chemotherapy with Tegafur-Uracil in NSCLC. <em>J Clin Oncol</em> 2005;23:4999-5006. PMID 16087941. <a href="https://doi.org/10.1200/JCO.2005.09.017" target="_blank" rel="noopener">DOI 10.1200/JCO.2005.09.017 ↗</a></li>
           <li data-n="10">Pignon JP, et al. Lung Adjuvant Cisplatin Evaluation (LACE) Meta-analysis. <em>J Clin Oncol</em> 2008;26:3552-3559. PMID 18506026. <a href="https://doi.org/10.1200/JCO.2007.13.9030" target="_blank" rel="noopener">DOI 10.1200/JCO.2007.13.9030 ↗</a></li>
