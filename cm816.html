@@ -318,6 +318,46 @@ sup.ref {
   .flow-row { gap: 4px; }
   .flow-label { min-width: 60px; font-size: 10px; }
 }
+
+/* Mini bar chart */
+.mini-bar-section {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 16px;
+}
+.mini-bar-title { font-size: 11px; font-weight: 600; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.mini-bar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.mini-bar-item { background: var(--surface2); border-radius: 8px; padding: 10px 14px; }
+.mini-bar-metric { font-size: 11.5px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.mini-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.mini-bar-name { font-size: 10px; color: var(--text3); min-width: 50px; flex-shrink: 0; }
+.mini-bar-track { flex: 1; height: 12px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.mini-bar-fill-nivo { height: 100%; background: var(--green-mid); border-radius: 3px; }
+.mini-bar-fill-chemo { height: 100%; background: #5a9fd4; border-radius: 3px; }
+.mini-bar-pct { font-size: 10.5px; font-weight: 600; color: var(--text); min-width: 38px; text-align: right; }
+
+/* Surgical summary card */
+.surgical-summary {
+  background: var(--green-pale); border: 1px solid var(--green-mid);
+  border-radius: var(--radius-lg); padding: 14px 18px; margin-bottom: 16px;
+}
+.surgical-summary-title { font-size: 11px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .06em; }
+.surgical-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ss-item { font-size: 11.5px; }
+.ss-label { color: var(--text3); font-size: 10.5px; display: block; }
+.ss-val { font-weight: 600; color: var(--green-dark); }
+
+/* Clinical checklist */
+.checklist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
+.checklist-card { background: var(--surface2); border-radius: var(--radius); padding: 14px 16px; }
+.checklist-title { font-size: 11.5px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border2); }
+.checklist-card ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.checklist-card ul li { font-size: 11px; color: var(--text2); line-height: 1.6; display: flex; gap: 6px; align-items: flex-start; }
+.checklist-card ul li::before { content: '□'; color: var(--green-mid); flex-shrink: 0; font-size: 12px; }
+@media (max-width: 768px) {
+  .mini-bar-grid { grid-template-columns: 1fr; }
+  .surgical-summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .checklist-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -346,12 +386,18 @@ fetch('/lungatlas/nav.html')
       <a class="sb-sub" href="#trial-overview">試験概要</a>
       <a class="sb-sub" href="#background">試験背景</a>
       <a class="sb-sub" href="#design">試験デザイン</a>
+      <a class="sb-sub" href="#regimen-details">Regimen Details</a>
       <a class="sb-sub" href="#primary-data">主要データ表</a>
+      <a class="sb-sub" href="#adjuvant-therapy">術後治療・後治療</a>
       <a class="sb-sub" href="#surgical-outcomes">外科アウトカム</a>
+      <a class="sb-sub" href="#surgery-non-completion">手術未施行理由</a>
       <a class="sb-sub" href="#safety">安全性</a>
+      <a class="sb-sub" href="#ae-details">AE Details</a>
       <a class="sb-sub" href="#subgroup">サブグループ解析</a>
+      <a class="sb-sub" href="#japanese-subgroup">日本人サブ解析</a>
       <a class="sb-sub" href="#pcr-surrogate">pCRサロゲート</a>
       <a class="sb-sub" href="#ctdna">ctDNA</a>
+      <a class="sb-sub" href="#checklist">実臨床チェックリスト</a>
       <a class="sb-sub" href="#neutral-review">総合評価</a>
       <a class="sb-sub" href="#references">参考文献</a>
     </div>
@@ -396,7 +442,7 @@ fetch('/lungatlas/nav.html')
           </div>
           <div class="stat">
             <div class="stat-val">HR 0.72</div>
-            <div class="stat-label">OS ハザード比 ✅ 有意差あり</div>
+            <div class="stat-label">OS HR 0.72／95%CI 0.523–0.998, p=0.0479／統計学的有意差あり</div>
             <div class="stat-vs">5年OS率 65.4% vs 55.0%（p=0.0479）<sup class="ref">[2]</sup></div>
           </div>
         </div>
@@ -407,7 +453,7 @@ fetch('/lungatlas/nav.html')
         </p>
         <div class="gl-list">
           <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>承認あり（ニボルマブ術前補助）。Stage IB（≥4cm）–IIIA。</span></div>
-          <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2022年承認。切除可能NSCLCで、腫瘍径4 cm以上またはリンパ節転移陽性例が対象。</span></div>
+          <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2022年承認。成人の切除可能NSCLCで、腫瘍径4 cm以上またはリンパ節転移陽性例に対する術前nivolumab＋白金製剤併用化学療法として承認。</span></div>
           <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>承認あり。</span></div>
         </div>
         <div class="trial-meta-row">
@@ -520,8 +566,153 @@ fetch('/lungatlas/nav.html')
       </div>
     </div>
 
+    <!-- Regimen Details -->
+    <h2 class="sec-h2" id="regimen-details">Regimen Details：実際に用いられた術前治療</h2>
+    <p class="body-text">
+      CheckMate 816では、nivolumab 360 mgを3週ごとに投与し、組織型に応じた白金製剤併用化学療法と併用した。術前治療は3サイクル行われ、術前治療完了から6週以内に手術が予定された。術後は両群とも最大4サイクルの補助化学療法・放射線療法（またはその両方）が許可されていたが、術後免疫療法は設計に含まれない。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">組織型・状況</th>
+              <th style="min-width:220px">レジメン</th>
+              <th style="min-width:130px">投与スケジュール</th>
+              <th style="min-width:200px">注意点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">全組織型で使用可能</td>
+              <td>Nivolumab 360 mg + CBDCA + PTX</td>
+              <td>q3w × 3 cycles</td>
+              <td>末梢神経障害・アレルギー・骨髄抑制に注意</td>
+            </tr>
+            <tr>
+              <td class="td-key">非扁平上皮</td>
+              <td>Nivolumab 360 mg + CDDP + PEM</td>
+              <td>q3w × 3 cycles</td>
+              <td>CDDP適応・腎機能・PEM適応を確認</td>
+            </tr>
+            <tr>
+              <td class="td-key">扁平上皮</td>
+              <td>Nivolumab 360 mg + CDDP + GEM</td>
+              <td>q3w × 3 cycles</td>
+              <td>GEMはday1/8投与を含む可能性があるため原典/レジメン表で確認</td>
+            </tr>
+            <tr>
+              <td class="td-key">化学療法単独群・術後補助で追加選択可</td>
+              <td>VNR + CDDP または DOC + CDDP</td>
+              <td>—</td>
+              <td>術前NIVO併用レジメンではなく、化学療法単独群・術後補助で選択可能だった</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          パクリタキセル＋カルボプラチンは全組織型、ゲムシタビン＋シスプラチンは扁平上皮、ペメトレキセド＋シスプラチンは非扁平上皮で用いられた。化学療法単独群および術後補助ではビノレルビン＋シスプラチン、ドセタキセル＋シスプラチンも選択可能だった（Cancer Sci. 2024日本人サブ解析の記載に準拠）。用量・day1/8の詳細は原典プロトコール・添付文書・eviQ等で確認できる範囲のみ記載し、確認できない用量は断定しない。「日本で推奨」等の表現は避け、CheckMate 816で用いられた術前治療の整理として記載する。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">白金製剤内訳（ASCO Post／NEJM 2022）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:140px">白金製剤</th>
+              <th style="min-width:160px">NIVO＋化学療法群</th>
+              <th style="min-width:130px">化学療法単独群</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Cisplatin</td>
+              <td class="td-nivo">69.3%</td>
+              <td class="td-chemo">74.9%</td>
+            </tr>
+            <tr>
+              <td class="td-key">Carboplatin</td>
+              <td class="td-nivo">21.8%</td>
+              <td class="td-chemo">18.4%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          白金製剤の選択は腎機能・PS・聴力・併存症・組織型・施設方針により異なる。CheckMate 816のレジメン内訳は実臨床での治療選択をそのまま規定するものではない。
+        </div>
+        <div class="info-box" style="margin-top:10px">
+          <strong>探索的サブ解析（交絡に注意）：</strong>探索的サブ解析では、cisplatin群のOS HR 0.79（95%CI 0.53–1.17）、carboplatin群のOS HR 0.36（95%CI 0.16–0.81）と報告された（ASCO 2025）。ただしcarboplatin群は扁平上皮に偏っていた可能性が指摘されており、白金製剤の種類による効果差と解釈することはできない。症例数も少なく（carboplatin群 NIVO 39例 vs 化療 33例）、交絡を含む探索的知見として扱う。
+        </div>
+      </div>
+    </div>
+
     <!-- 主要データ表 -->
     <h2 class="sec-h2" id="primary-data">主要データ表</h2>
+
+    <!-- ミニ棒グラフ -->
+    <div class="mini-bar-section">
+      <div class="mini-bar-title">主要アウトカム概観（CheckMate 816報告値）</div>
+      <div class="mini-bar-grid">
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">pCR率</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">NIVO群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-nivo" style="width:24%"></div></div>
+            <span class="mini-bar-pct">24.0%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">化療群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:2.2%"></div></div>
+            <span class="mini-bar-pct">2.2%</span>
+          </div>
+        </div>
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">MPR率</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">NIVO群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-nivo" style="width:36.9%"></div></div>
+            <span class="mini-bar-pct">36.9%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">化療群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:8.9%"></div></div>
+            <span class="mini-bar-pct">8.9%</span>
+          </div>
+        </div>
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">5年EFS率</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">NIVO群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-nivo" style="width:49%"></div></div>
+            <span class="mini-bar-pct">49%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">化療群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:34%"></div></div>
+            <span class="mini-bar-pct">34%</span>
+          </div>
+        </div>
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">5年OS率</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">NIVO群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-nivo" style="width:65.4%"></div></div>
+            <span class="mini-bar-pct">65.4%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">化療群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:55%"></div></div>
+            <span class="mini-bar-pct">55.0%</span>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:10.5px;color:var(--text3);margin-top:10px">
+        数値はCheckMate 816の報告に基づく模式的な棒グラフ。OSの解釈ではHR・95%CI・p値・後治療の影響を考慮する。原著Kaplan–Meier曲線の再現ではありません。
+      </p>
+    </div>
+
     <div class="info-box">
       EFS HRは初回報告（NEJM 2022, HR 0.63）と5年最終解析（NEJM 2025, HR 0.68）で異なる時点・追跡期間の値であり、単純に同一視しない。OSの有意差はp=0.0479、95%信頼区間上限は0.998と1に近い。統計学的有意差は示されたが、効果量の解釈には追跡期間・イベント数・後治療の影響も考慮する必要がある。
     </div>
@@ -620,8 +811,68 @@ fetch('/lungatlas/nav.html')
       </div>
     </div>
 
+    <!-- 術後治療・後治療 -->
+    <h2 class="sec-h2" id="adjuvant-therapy">Adjuvant and Subsequent Therapy：術後治療・後治療</h2>
+    <p class="body-text">
+      CheckMate 816は術後免疫療法を組み込まない治療設計である。試験設計上、術後は両群とも最大4サイクルの補助化学療法・放射線療法（またはその両方）が許可されていた。術後化学療法や再発後治療は一定割合で行われており、OSの解釈では後治療の影響も考慮する必要がある。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">術後・後治療</th>
+              <th style="min-width:160px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:160px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Adjuvant chemotherapy</td>
+              <td class="td-nivo">11.9%</td>
+              <td class="td-chemo">22.2%</td>
+              <td>NEJM 2022／ASCO Post</td>
+            </tr>
+            <tr>
+              <td class="td-key">Any subsequent cancer therapy</td>
+              <td class="td-nivo">21.2%</td>
+              <td class="td-chemo">43.6%</td>
+              <td>NEJM 2022／ASCO Post</td>
+            </tr>
+            <tr>
+              <td class="td-key">Subsequent systemic therapy</td>
+              <td class="td-nivo">17.3%</td>
+              <td class="td-chemo">36.3%</td>
+              <td>NEJM 2022／ASCO Post</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          本試験は術後免疫療法を前提としない設計である。nivolumab併用群では後治療を要した患者が少なかったが、KEYNOTE-671やAEGEANなどの周術期ICIレジメンとの直接比較は存在しないため、術前のみと周術期治療の優劣は断定しない。
+        </div>
+      </div>
+    </div>
+
     <!-- 外科アウトカムセクション -->
     <h2 class="sec-h2" id="surgical-outcomes">Surgical Outcomes：手術到達性と外科的アウトカム</h2>
+
+    <!-- 外科アウトカム要約カード -->
+    <div class="surgical-summary">
+      <div class="surgical-summary-title">Surgical Takeaways（NIVO＋化学療法 vs 化学療法単独）</div>
+      <div class="surgical-summary-grid">
+        <div class="ss-item"><span class="ss-label">Definitive surgery</span><span class="ss-val">83% vs 75%</span></div>
+        <div class="ss-item"><span class="ss-label">R0切除率</span><span class="ss-val">83% vs 78%</span></div>
+        <div class="ss-item"><span class="ss-label">Minimally invasive surgery</span><span class="ss-val">30% vs 22%</span></div>
+        <div class="ss-item"><span class="ss-label">Conversion to thoracotomy</span><span class="ss-val">11% vs 16%</span></div>
+        <div class="ss-item"><span class="ss-label">Pneumonectomy</span><span class="ss-val">17% vs 25%</span></div>
+        <div class="ss-item"><span class="ss-label">Grade 5 surgery-related AE</span><span class="ss-val">2例 vs 0例</span></div>
+      </div>
+      <p style="font-size:10.5px;color:var(--text3);margin-top:10px">
+        これらの外科アウトカムは探索的・記述的な解析であり、術前nivolumab＋化学療法が手術を容易にしたと断定するものではない。
+      </p>
+    </div>
+
     <p class="body-text">
       周術期治療では腫瘍縮小やpCRだけでなく、予定手術への到達、R0切除、手術遅延、術式、肺全摘率、conversion、手術関連合併症、周術期死亡が重要である。CheckMate 816ではdefinitive surgery 83% vs 75%、R0切除率83% vs 78%と報告された。手術時間中央値は184分 vs 217分であり、nivolumab追加により手術時間の延長は示されなかった。ただし術式・病期・施設経験により実臨床での手術難度は異なりうる。一方で、Grade 5 surgery-related AEも報告されており、術前治療後の手術では腫瘍縮小効果だけでなく、肺門・縦隔操作の難度、血管処理、塞栓症リスクなどを含めて周術期リスクを評価する必要がある。
     </p>
@@ -665,6 +916,49 @@ fetch('/lungatlas/nav.html')
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- 手術未施行理由 -->
+    <h3 class="sec-h3" id="surgery-non-completion">5-1b. Why surgery was not performed：手術未施行・キャンセル理由</h3>
+    <p class="body-text">
+      術前治療では有効性だけでなく、予定手術まで到達できるかが重要である。CheckMate 816ではNIVO群の15.6%が手術に至らなかった。手術中止をStage別にみると、Stage IB–IIで12%、Stage IIIAで17%が手術に進まなかったと報告されている（JTO 2024）。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">手術未施行・キャンセル理由</th>
+              <th style="min-width:160px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:160px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">疾患進行</td>
+              <td class="td-nivo">6.7%</td>
+              <td class="td-chemo">9.5%</td>
+              <td>NEJM 2022／Supplement<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">AE</td>
+              <td class="td-nivo">1.1%</td>
+              <td class="td-chemo">0.6%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">その他</td>
+              <td class="td-nivo">7.8%</td>
+              <td class="td-chemo">10.6%</td>
+              <td>NEJM 2022／Supplement<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          手術未施行理由の分母・定義は原典に従う。疾患進行・AE・患者判断・その他の理由は同義ではないため、表中で混同しない。早期Stageでも一定割合が手術に至らなかった点は術前治療の選択時に考慮すべきである。
+        </div>
       </div>
     </div>
 
@@ -846,6 +1140,155 @@ fetch('/lungatlas/nav.html')
       </div>
     </div>
 
+    <!-- AE Details -->
+    <h2 class="sec-h2" id="ae-details">AE Details：有害事象の詳細</h2>
+
+    <h3 class="sec-h3">全体AE・治療関連AE</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:240px">AE分類</th>
+              <th style="min-width:140px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Any-cause AE, any grade</td>
+              <td class="td-nivo">92.6%</td>
+              <td class="td-chemo">97.2%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Any-cause AE, Grade 3/4</td>
+              <td class="td-nivo">40.9%</td>
+              <td class="td-chemo">43.8%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Treatment-related AE, any grade</td>
+              <td class="td-nivo">82.4%</td>
+              <td class="td-chemo">88.6%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Treatment-related AE, Grade 3/4</td>
+              <td class="td-nivo">33.5%</td>
+              <td class="td-chemo">36.9%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Serious treatment-related AE</td>
+              <td class="td-nivo">11.9%</td>
+              <td class="td-chemo">10.2%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Treatment-related death</td>
+              <td class="td-nivo">0例</td>
+              <td class="td-chemo">3例（1.7%）</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="body-text" style="margin-top:10px">
+          nivolumab追加によりGrade 3/4 treatment-related AEが増加する傾向は示されなかった。一方で、免疫関連AEや肺臓炎、内分泌障害などICI特有の毒性には注意が必要である。
+        </p>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">主なGrade 3/4 AE（血液毒性中心）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">Grade 3/4 AE</th>
+              <th style="min-width:140px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Neutropenia</td>
+              <td class="td-nivo">8.5%</td>
+              <td class="td-chemo">11.9%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Decreased neutrophil count</td>
+              <td class="td-nivo">7.4%</td>
+              <td class="td-chemo">10.8%</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          術前治療では、好中球減少・発熱性好中球減少・感染症・腎機能障害・悪心・倦怠感などが手術時期に影響しうる。Grade 3/4 AEの有無だけでなく、手術予定日への影響も考慮する。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">高頻度の任意グレードAE（FDA label）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">AE（any grade, &gt;20%）</th>
+              <th style="min-width:180px">NIVO＋化学療法群（n=176）</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">Nausea</td><td class="td-nivo">38%</td><td>FDA label</td></tr>
+            <tr><td class="td-key">Constipation</td><td class="td-nivo">34%</td><td>FDA label</td></tr>
+            <tr><td class="td-key">Fatigue</td><td class="td-nivo">26%</td><td>FDA label</td></tr>
+            <tr><td class="td-key">Decreased appetite</td><td class="td-nivo">20%</td><td>FDA label</td></tr>
+            <tr><td class="td-key">Rash</td><td class="td-nivo">20%</td><td>FDA label</td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">FDA labelに基づく任意グレードの高頻度AE。一次文献で確認できる数値は一次文献を優先する。</div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">免疫関連AE</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <p class="body-text">
+          免疫関連AEとしては皮疹・肺臓炎・内分泌障害・肝障害・大腸炎などに注意する。術前治療では、irAEが手術時期・ステロイド使用・感染症リスク・周術期管理に影響しうる。
+        </p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">免疫関連AE</th>
+              <th style="min-width:160px">NIVO＋化学療法</th>
+              <th style="min-width:220px">注意点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Rash（免疫関連）</td>
+              <td class="td-nivo">8.5%</td>
+              <td>多くは軽症だが、重症皮膚障害は手術時期に影響しうる</td>
+            </tr>
+            <tr>
+              <td class="td-key">Pneumonitis</td>
+              <td class="td-nivo">1.1%</td>
+              <td>報告例はGrade 1/2。術前画像で感染症・癌進行との鑑別が重要</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          免疫関連AEの頻度・定義は報告により異なるため、原典の分類に従って記載する。なお、CheckMate 816の任意グレード肺臓炎（1.1%）は周術期ICIレジメン（3.0–5.9%）と比較して低い水準と報告されている（JTO 2025）。
+        </div>
+      </div>
+    </div>
+
     <!-- サブグループ解析 -->
     <h2 class="sec-h2" id="subgroup">Subgroup Analysis：どの患者で効果が大きそうか</h2>
     <div class="info-box">
@@ -912,6 +1355,70 @@ fetch('/lungatlas/nav.html')
       </div>
     </div>
 
+    <!-- 日本人サブ解析 -->
+    <h2 class="sec-h2" id="japanese-subgroup">Japanese Subpopulation：日本人サブ解析</h2>
+    <p class="body-text">
+      日本人サブ解析（Cancer Sci. 2024）では、日本国内の患者を対象としてCheckMate 816の有効性・安全性が検討された。症例数は限られており、効果量・安全性の推定には不確実性がある。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">項目</th>
+              <th style="min-width:160px">NIVO＋化学療法</th>
+              <th style="min-width:120px">化学療法単独</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">症例数</td>
+              <td class="td-nivo">33</td>
+              <td class="td-chemo">35</td>
+              <td>Cancer Sci. 2024<sup class="ref">[7]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">手術施行率</td>
+              <td class="td-nivo">93.9%（31例）</td>
+              <td class="td-chemo">82.9%（29例）</td>
+              <td>Cancer Sci. 2024<sup class="ref">[7]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS中央値</td>
+              <td class="td-nivo">30.6か月</td>
+              <td class="td-chemo">19.6か月</td>
+              <td>Cancer Sci. 2024<sup class="ref">[7]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS HR</td>
+              <td class="td-nivo">0.60</td>
+              <td class="td-chemo">—</td>
+              <td>Cancer Sci. 2024<sup class="ref">[7]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">pCR率</td>
+              <td class="td-nivo">30.3%</td>
+              <td class="td-chemo">5.7%</td>
+              <td>Cancer Sci. 2024<sup class="ref">[7]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 3/4 treatment-related AE</td>
+              <td class="td-nivo">59.4%</td>
+              <td class="td-chemo">42.9%</td>
+              <td>Cancer Sci. 2024<sup class="ref">[7]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          日本人サブ解析は少数例解析であり、global populationと単純比較しない。特にGrade 3/4 treatment-related AEは数値上高く見えるが、症例数が限られるため解釈には注意が必要である。手術施行率は数値上高かったが、これも少数例に基づく。
+        </div>
+        <div class="note-box" style="margin-top:6px">
+          出典：Mitsudomi T, et al. <em>Cancer Sci.</em> 2024;115(2):540-554. PMID: 38098261. doi:10.1111/cas.16030.
+        </div>
+      </div>
+    </div>
+
     <!-- pCRサロゲート論 -->
     <h2 class="sec-h2" id="pcr-surrogate">pCRはOSの代替指標になるのか</h2>
     <div class="trial-card">
@@ -941,6 +1448,48 @@ fetch('/lungatlas/nav.html')
         <div class="info-box">
           <strong>注意：</strong>ctDNAに基づく術後治療省略・追加の可否については現時点で前向き検証データがなく、探索的知見として参照する。
         </div>
+      </div>
+    </div>
+
+    <!-- 実臨床チェックリスト -->
+    <h2 class="sec-h2" id="checklist">Clinical Checklist：実臨床で確認したいポイント</h2>
+    <div class="checklist-grid">
+      <div class="checklist-card">
+        <div class="checklist-title">Before Treatment：治療開始前</div>
+        <ul>
+          <li>EGFR変異・ALK融合遺伝子を確認する</li>
+          <li>PD-L1は参考情報となるが、サブグループ解析のみで適応を決めない</li>
+          <li>切除可能性を呼吸器外科・腫瘍内科・放射線診断科で確認する</li>
+          <li>N2症例、bulky N2、多駅N2では手術適応を慎重に検討する</li>
+          <li>CDDP適応を確認する（腎機能・聴力・PS・末梢神経障害・併存症）</li>
+          <li>PEM適応を確認する（非扁平上皮・腎機能・胸水貯留・葉酸/ビタミンB12補充）</li>
+          <li>ICI注意例を確認する（間質性肺炎・自己免疫疾患・臓器移植歴・ステロイド使用）</li>
+          <li>術前治療3サイクル後の再評価時期と手術予定時期を事前に共有する</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <div class="checklist-title">Before Surgery：手術前</div>
+        <ul>
+          <li>術前治療後のCT/PET-CTで腫瘍縮小・リンパ節変化・炎症性変化を評価する</li>
+          <li>RECIST上の進行だけでなく、pseudoprogressionや炎症性変化も鑑別する</li>
+          <li>irAE・肺臓炎・感染症・薬剤性肺障害の有無を確認する</li>
+          <li>ステロイド使用歴・免疫抑制薬使用歴を確認する</li>
+          <li>肺門・縦隔リンパ節周囲の炎症・線維化を想定する</li>
+          <li>肺塞栓・血栓症リスクを確認する</li>
+          <li>conversion・肺全摘・血管処理・気管支形成の可能性を術前に説明する</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <div class="checklist-title">After Surgery：術後</div>
+        <ul>
+          <li>pCR・MPR・残存viable tumor割合を確認する</li>
+          <li>ypTNMを確認する</li>
+          <li>原発巣とリンパ節の病理学的奏効を分けて評価する</li>
+          <li>R0/R1/R2を確認する</li>
+          <li>術後補助療法の必要性は未確立であり、pCRのみで術後治療不要と断定しない</li>
+          <li>ctDNAは有望な個別化マーカーだが、治療省略・追加の単独根拠にはしない</li>
+          <li>EGFR/ALK陽性が後から判明した場合は、術後TKI等を含めて個別に再検討する</li>
+        </ul>
       </div>
     </div>
 
