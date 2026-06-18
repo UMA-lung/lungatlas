@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>術後補助療法（ADAURA・ALINA・IMpower010・UFT）— LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px; flex-shrink: 0; background: var(--surface);
+  border-right: 1px solid var(--border); padding: 20px 0;
+  position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
+}
+.sb-item {
+  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
+  text-decoration: none; border-left: 2px solid transparent;
+  transition: all .15s; cursor: pointer; line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light); color: var(--green-dark);
+  font-weight: 500; border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
+  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 860px; }
+
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 24px 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+.sec-h3 {
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  margin: 18px 0 10px;
+}
+
+.body-text {
+  font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px;
+}
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+.tab {
+  font-size: 12.5px; padding: 6px 16px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text2); cursor: pointer; font-family: var(--font);
+  transition: all .15s;
+}
+.tab:hover { border-color: var(--border2); color: var(--green-dark); }
+.tab.active {
+  background: var(--green-dark); color: #fff;
+  border-color: var(--green-dark); font-weight: 500;
+}
+
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
+}
+
+.warn-box {
+  background: var(--amber-light); border: 1px solid #d97a00;
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.trial-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
+}
+.tc-top { padding: 18px 20px 16px; border-bottom: 1px solid var(--border); }
+.tc-meta {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+.trial-link {
+  font-size: 13.5px; font-weight: 600; color: var(--green-dark);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); letter-spacing: .01em;
+}
+.trial-link:hover { opacity: .7; }
+.trial-link .ext { font-size: 11px; opacity: .7; }
+.trial-link.blue { color: var(--blue-dark); }
+.trial-link.purple { color: var(--purple-dark); }
+.trial-link.amber { color: var(--amber-dark); }
+
+.jbadge {
+  font-size: 10.5px; font-weight: 500; padding: 2px 9px;
+  border-radius: 8px; white-space: nowrap;
+}
+.j-nejm  { background: var(--blue-light); color: var(--blue-dark); }
+.j-lancet { background: var(--purple-light); color: var(--purple-dark); }
+.j-jto   { background: var(--green-light); color: var(--green-dark); }
+.j-jco   { background: var(--amber-light); color: var(--amber-dark); }
+.j-annonc { background: var(--red-light); color: var(--red-dark); }
+.j-esmo  { background: #f3edfb; color: #5b3d8e; }
+
+.ybadge {
+  font-size: 10.5px; color: var(--text3);
+  background: var(--surface2); padding: 2px 8px; border-radius: 8px;
+}
+.new-badge {
+  font-size: 10.5px; font-weight: 600; padding: 2px 9px;
+  border-radius: 8px; white-space: nowrap;
+  background: #e3f8ee; color: #0d5c3a; border: 1px solid #9fe1cb;
+}
+
+.drug-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.drug-sub { font-size: 12.5px; color: var(--text2); margin-bottom: 12px; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 10px 13px; }
+.stat.blue { background: var(--blue-light); }
+.stat.purple { background: var(--purple-light); }
+.stat.amber { background: var(--amber-light); }
+.stat-val { font-size: 17px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat.blue .stat-val { color: var(--blue-dark); }
+.stat.purple .stat-val { color: var(--purple-dark); }
+.stat.amber .stat-val { color: var(--amber-dark); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.tc-body { padding: 16px 20px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.gl-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  border-radius: 8px; padding: 9px 13px; font-size: 12px; line-height: 1.65;
+}
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.tox {
+  font-size: 11px; background: var(--red-light); color: var(--red-dark);
+  padding: 3px 10px; border-radius: 10px;
+}
+
+.coi-note {
+  font-size: 10.5px; color: var(--text3); margin-top: 12px;
+  padding-top: 10px; border-top: 1px solid var(--border);
+}
+
+/* data-table */
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 12px; min-width: 540px;
+}
+.data-table thead tr {
+  background: var(--surface2); border-bottom: 1px solid var(--border);
+}
+.data-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  border-right: 1px solid var(--border);
+}
+.data-table th:last-child { border-right: none; }
+.data-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.data-table td:last-child { border-right: none; }
+.data-table tbody tr:nth-child(even) { background: #f6fbf7; }
+.td-key { font-weight: 500; color: var(--text2); }
+
+/* flowchart */
+.flow-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 16px; }
+.flow-start-label { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+.flow-question { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 10px; padding: 12px 14px; background: var(--surface2); border-radius: 8px; border-left: 3px solid var(--green-mid); }
+.flow-choices { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.flow-btn {
+  font-size: 12px; padding: 7px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border2); background: var(--surface);
+  color: var(--text2); cursor: pointer; font-family: var(--font); transition: all .15s;
+}
+.flow-btn:hover { border-color: var(--green-mid); color: var(--green-dark); background: var(--green-pale); }
+.flow-btn.active { background: var(--green-dark); color: #fff; border-color: var(--green-dark); font-weight: 500; }
+.flow-btn.blue.active { background: var(--blue-dark); border-color: var(--blue-dark); }
+.flow-btn.purple.active { background: var(--purple-dark); border-color: var(--purple-dark); }
+.flow-btn.amber.active { background: var(--amber-dark); border-color: var(--amber-dark); }
+.flow-node { margin-top: 12px; padding-left: 16px; border-left: 2px solid var(--border); }
+.flow-result {
+  margin-top: 10px; padding: 12px 14px; border-radius: 8px;
+  font-size: 12.5px; line-height: 1.75;
+}
+.flow-result.green { background: var(--green-pale); border-left: 3px solid var(--green-mid); border-radius: 0 8px 8px 0; }
+.flow-result.blue  { background: var(--blue-light);  border-left: 3px solid var(--blue-dark);  border-radius: 0 8px 8px 0; }
+.flow-result.purple{ background: var(--purple-light);border-left: 3px solid var(--purple-dark);border-radius: 0 8px 8px 0; }
+.flow-result.amber { background: var(--amber-light); border-left: 3px solid #d97a00; border-radius: 0 8px 8px 0; }
+.flow-result.neutral{ background: var(--surface2); border-left: 3px solid var(--border2); border-radius: 0 8px 8px 0; }
+.flow-jump-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; padding: 4px 12px; border-radius: 6px;
+  border: 1px solid var(--border2); background: var(--surface);
+  color: var(--text2); cursor: pointer; font-family: var(--font);
+  margin-top: 8px; text-decoration: none; transition: all .15s;
+}
+.flow-jump-btn:hover { background: var(--green-pale); color: var(--green-dark); border-color: var(--green-mid); }
+.flow-reset-btn {
+  font-size: 11px; padding: 5px 14px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--surface2);
+  color: var(--text3); cursor: pointer; font-family: var(--font);
+  margin-top: 16px; transition: all .15s;
+}
+.flow-reset-btn:hover { border-color: var(--border2); color: var(--text2); }
+
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+.refs-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.refs-list li { font-size: 12px; color: var(--text2); line-height: 1.7; padding-left: 22px; position: relative; }
+.refs-list li::before { content: attr(data-n); position: absolute; left: 0; color: var(--text3); font-weight: 600; font-family: var(--mono); }
+.refs-list a { color: var(--green-dark); text-decoration: none; }
+.refs-list a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 18px 40px; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-head">化学療法</div>
+      <div style="padding:2px 18px 4px">
+        <div style="font-size:10.5px;color:var(--text3);padding:4px 0 2px">1次治療</div>
+        <a class="sb-sub" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
+        <a class="sb-sub" href="/lungatlas/index.html">変異陰性 NSCLC</a>
+      </div>
+      <a class="sb-item" href="/lungatlas/perioperative.html">周術期薬物療法</a>
+      <a class="sb-sub" href="/lungatlas/cm816.html">└ CheckMate 816 詳細</a>
+      <a class="sb-item active" href="/lungatlas/adjuvant.html">術後補助療法</a>
+      <a class="sb-sub" href="/lungatlas/adjuvant.html#p-adaura">└ ADAURA（EGFR）</a>
+      <a class="sb-sub" href="/lungatlas/adjuvant.html#p-alina">└ ALINA（ALK）</a>
+      <a class="sb-sub" href="/lungatlas/adjuvant.html#p-impower">└ IMpower010（陰性）</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">化学療法 › <span>術後補助療法</span></div>
+    <div class="updated">最終更新 2026年6月 — IMpower010 5年最終解析（JCO 2025）・ALINA国内承認・ALINA 4年フォローアップ（ESMO 2025）反映</div>
+    <h1 class="art-h1">完全切除 NSCLC<br>術後補助療法</h1>
+
+    <div class="note-box" style="margin-bottom:16px">
+      術後補助療法の4試験は対象変異・対象Stage・術後化学療法の有無・対照群がそれぞれ異なる。直接比較試験は存在せず、数値の横断比較は参考程度にとどめる。ADAURA（オシメルチニブ）・ALINA（アレクチニブ）はドライバー変異陽性に限定、IMpower010（アテゾリズマブ）はEGFR/ALK陰性かつPD-L1陽性でベネフィットが明確。UFTはStage I腺癌を対象とした日本発のデータで、ドライバー変異が考慮されていない時代の試験である点に注意。
+    </div>
+
+    <p class="lead">完全切除NSCLCに対する術後補助療法を、ドライバー変異の有無で整理する。EGFR陽性にはオシメルチニブ（ADAURA）、ALK陽性にはアレクチニブ（ALINA）、EGFR/ALK陰性のPD-L1陽性例にはアテゾリズマブ（IMpower010、術後化学療法後）が選択肢となる。細胞毒性化学療法（白金併用・UFT）は変異の有無を問わない古典的選択肢として併載する。</p>
+
+    <div style="margin-bottom:8px;font-size:11px;color:var(--text3);font-weight:500;letter-spacing:.04em">試験・テーマで絞り込む</div>
+    <div class="tabs">
+      <button class="tab active" onclick="sw('adaura',this)">EGFR陽性 — ADAURA</button>
+      <button class="tab" onclick="sw('alina',this)">ALK陽性 — ALINA</button>
+      <button class="tab" onclick="sw('impower',this)">EGFR/ALK陰性 — IMpower010</button>
+      <button class="tab" onclick="sw('cyto',this)">細胞毒性化学療法 — UFT・白金併用</button>
+      <button class="tab" onclick="sw('compare',this)">4試験比較・使い分けフロー</button>
+    </div>
+
+    <!-- ===== タブ1：ADAURA ===== -->
+    <div id="p-adaura" class="panel active">
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2027071" target="_blank" rel="noopener">ADAURA（DFS）<span class="ext">↗</span></a>
+            <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2304594" target="_blank" rel="noopener" style="margin-left:4px">ADAURA（OS最終解析）<span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2020（DFS）</span>
+            <span class="jbadge j-nejm">NEJM 2023（OS最終）</span>
+            <span class="ybadge">Phase III · n=682</span>
+          </div>
+          <div class="drug-title">オシメルチニブ 80mg/日 経口 ×最長3年 vs プラセボ</div>
+          <div class="drug-sub">完全切除NSCLC · EGFR exon19del/L858R · Stage IB–IIIA（UICC/AJCC第7版）· 術後化学療法は施行・不施行を問わない</div>
+
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-val">HR 0.17</div>
+              <div class="stat-label">DFS（Stage II–IIIA, 主要評価）</div>
+              <div class="stat-vs">vs プラセボ（0.11–0.26）NEJM 2020</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.49</div>
+              <div class="stat-label">OS（IB–IIIA, 最終解析）</div>
+              <div class="stat-vs">5年OS 88% vs 78% · NEJM 2023</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">HR 0.24</div>
+              <div class="stat-label">CNS DFS（II–IIIA）</div>
+              <div class="stat-vs">0.14–0.42 · 中枢神経再発抑制</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>エンドポイント</th>
+                  <th>オシメルチニブ</th>
+                  <th>プラセボ</th>
+                  <th>HR (95%CI)</th>
+                  <th>出典</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="td-key">DFS Stage II–IIIA（24ヶ月・主要評価）</td><td>90%</td><td>44%</td><td style="font-family:var(--mono)">0.17（0.11–0.26）</td><td>NEJM 2020</td></tr>
+                <tr><td class="td-key">DFS IB–IIIA全体（24ヶ月）</td><td>89%</td><td>52%</td><td style="font-family:var(--mono)">0.20（0.15–0.27）</td><td>NEJM 2020</td></tr>
+                <tr><td class="td-key">DFS II–IIIA（4年DFS率）</td><td>70%</td><td>29%</td><td style="font-family:var(--mono)">0.23（0.18–0.30）</td><td>JCO 2023</td></tr>
+                <tr><td class="td-key">OS Stage II–IIIA（5年OS率）</td><td>85%</td><td>73%</td><td style="font-family:var(--mono)">0.49（0.33–0.73）</td><td>NEJM 2023</td></tr>
+                <tr><td class="td-key">OS IB–IIIA全体（5年OS率）</td><td>88%</td><td>78%</td><td style="font-family:var(--mono)">0.49（0.34–0.70）</td><td>NEJM 2023</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box" style="margin-bottom:14px">
+            OS最終解析（データカットオフ2023年1月）でIB–IIIA全体のOS HR 0.49（p&lt;0.001、5年OS 88% vs 78%）と強力な結果。ただしイベント成熟度は約18%と低く、プラセボ群の一部が再発後にオシメルチニブへ移行している。DFS改善がOS改善に寄与した一方、後治療による交絡の評価は今後の課題。CNS再発抑制（CNS DFS HR 0.24）は副次評価項目。Stage IBの適応はGL間でニュアンスが異なる。
+          </div>
+
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>Stage IB–IIIAのEGFR陽性切除例にオシメルチニブを推奨。保険適用（2021年）</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>Stage IB–IIIAでカテゴリー1。術後化学療法との逐次投与を推奨</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO：</strong>Stage II–IIIAに推奨。Stage IBは個別判断</span></div>
+          </div>
+
+          <div class="tox-row">
+            <span class="tox">皮疹</span><span class="tox">下痢</span><span class="tox">爪囲炎</span><span class="tox">口内炎</span><span class="tox">まれにILD・QTc延長</span>
+          </div>
+          <div class="coi-note">AstraZeneca資金提供</div>
+        </div>
+      </div>
+    </div><!-- /p-adaura -->
+
+    <!-- ===== タブ2：ALINA ===== -->
+    <div id="p-alina" class="panel">
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link blue" href="https://doi.org/10.1056/NEJMoa2310532" target="_blank" rel="noopener">ALINA（DFS）<span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2024</span>
+            <span class="jbadge j-esmo">ESMO 2025（4年フォローアップ）</span>
+            <span class="ybadge">Phase III · n=257</span>
+            <span class="new-badge">国内承認 2024年8月</span>
+          </div>
+          <div class="drug-title">アレクチニブ 600mg×2/日 経口 ×24ヶ月 vs 白金製剤ベース化学療法</div>
+          <div class="drug-sub">完全切除NSCLC · ALK融合遺伝子陽性 · Stage IB（腫瘍≥4cm）–IIIA（UICC/AJCC第7版）· 対照：CDDP 75mg/m² + VNR/GEM/PEM 4サイクル · 化学療法の併用は義務付けられていない</div>
+
+          <div class="stat-row">
+            <div class="stat blue">
+              <div class="stat-val">HR 0.24</div>
+              <div class="stat-label">DFS（ITT・IB–IIIA, 主要評価）</div>
+              <div class="stat-vs">再発・死亡リスク76%低下（0.13–0.43, p&lt;0.001）</div>
+            </div>
+            <div class="stat blue">
+              <div class="stat-val">HR 0.22</div>
+              <div class="stat-label">CNS DFS（ITT）</div>
+              <div class="stat-vs">0.08–0.58 · 中枢神経再発抑制</div>
+            </div>
+            <div class="stat blue">
+              <div class="stat-val">98.4%</div>
+              <div class="stat-label">4年OS率（アレクチニブ群）</div>
+              <div class="stat-vs">ESMO 2025 · OSは依然未成熟</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>エンドポイント</th>
+                  <th>アレクチニブ</th>
+                  <th>化学療法</th>
+                  <th>HR (95%CI)</th>
+                  <th>出典</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="td-key">DFS Stage II–IIIA（主要評価）</td><td>中央値NR</td><td>44.4ヶ月</td><td style="font-family:var(--mono)">0.24（0.13–0.45）</td><td>NEJM 2024</td></tr>
+                <tr><td class="td-key">DFS ITT（IB–IIIA, 主要評価）</td><td>中央値NR</td><td>41.3ヶ月</td><td style="font-family:var(--mono)">0.24（0.13–0.43）</td><td>NEJM 2024</td></tr>
+                <tr><td class="td-key">2年DFS率（ITT）</td><td>93.6%</td><td>63.7%</td><td>—</td><td>NEJM 2024</td></tr>
+                <tr><td class="td-key">3年DFS率（ITT）</td><td>88.7%</td><td>54.0%</td><td>—</td><td>NEJM 2024</td></tr>
+                <tr><td class="td-key">CNS DFS（ITT）</td><td>—</td><td>—</td><td style="font-family:var(--mono)">0.22（0.08–0.58）</td><td>NEJM 2024</td></tr>
+                <tr><td class="td-key">OS</td><td colspan="2" style="text-align:center">未成熟（4年OS率 98.4%）</td><td>データ未成熟</td><td>ESMO 2025</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box" style="margin-bottom:14px">
+            対照群が白金製剤化学療法である点がADAURA（プラセボ対照）と異なるため、HRの解釈に注意。追跡期間中央値27.9ヶ月（初回）→約47ヶ月（ESMO 2025）でOSは依然未成熟だが、4年OS率98.4%と良好なトレンド。多くの再発イベントは2年の投与終了後に発生しており、至適投与期間は議論がある。ALK検査法（IHC/FISH/NGS）により検出に差が出うる。術後補助の用量600mg×2/日は進行・再発の国内承認用量（300mg×2/日）の2倍で、日本人集団の安全性・PKはJSMO 2025で別途報告。
+          </div>
+
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>肺癌診療GL 2025年版 — ALK陽性 病理病期II–IIB期（第9版、N3除く）完全切除例に、従来の術後補助薬物療法の代わりとしてアレクチニブを弱く推奨[2B]。2024年8月28日 適応追加承認（希少疾病用医薬品・優先審査）</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN/FDA：</strong>Stage IB–IIIAでカテゴリー1。FDA承認2024年4月</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO/EMA：</strong>Stage IB–IIIAに推奨</span></div>
+          </div>
+
+          <div class="tox-row">
+            <span class="tox">肝機能障害</span><span class="tox">CK上昇・筋肉痛</span><span class="tox">便秘</span><span class="tox">浮腫</span><span class="tox">光線過敏</span><span class="tox">徐脈</span><span class="tox">貧血</span>
+          </div>
+          <div class="coi-note">F. Hoffmann–La Roche資金提供</div>
+        </div>
+      </div>
+    </div><!-- /p-alina -->
+
+    <!-- ===== タブ3：IMpower010 ===== -->
+    <div id="p-impower" class="panel">
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link purple" href="https://doi.org/10.1016/S0140-6736(21)02098-5" target="_blank" rel="noopener">IMpower010（DFS）<span class="ext">↗</span></a>
+            <a class="trial-link purple" href="https://doi.org/10.1200/JCO-24-01681" target="_blank" rel="noopener" style="margin-left:4px">IMpower010（5年最終解析）<span class="ext">↗</span></a>
+            <span class="jbadge j-lancet">Lancet 2021（DFS初回）</span>
+            <span class="jbadge j-annonc">Ann Oncol 2023（OS中間）</span>
+            <span class="jbadge j-jco">JCO 2025（5年最終）</span>
+            <span class="ybadge">Phase III · n=1,005</span>
+          </div>
+          <div class="drug-title">アテゾリズマブ 1200mg q3w ×16サイクル vs 最良支持療法（BSC）</div>
+          <div class="drug-sub">完全切除NSCLC（Stage IB≥4cm–IIIA, UICC/AJCC第7版）· 術後シスプラチン併用化学療法 1–4サイクル完了後に1:1無作為化 · EGFR/ALK陰性</div>
+
+          <div class="stat-row">
+            <div class="stat purple">
+              <div class="stat-val">HR 0.70</div>
+              <div class="stat-label">DFS（II–IIIA PD-L1≥1%, 5年最終）</div>
+              <div class="stat-vs">n=476 · JCO 2025</div>
+            </div>
+            <div class="stat purple">
+              <div class="stat-val">HR 0.43</div>
+              <div class="stat-label">DFS（II–IIIA PD-L1≥50%, 初回）</div>
+              <div class="stat-vs">0.27–0.68 · 最も明確</div>
+            </div>
+            <div class="stat purple">
+              <div class="stat-val">HR 0.85</div>
+              <div class="stat-label">DFS（ITT IB–IIIA, 5年最終）</div>
+              <div class="stat-vs">0.71–1.01, p=0.07 · 有意性未到達</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+
+          <div class="sec-h3">DFSテーブル（5年最終解析 · JCO 2025、cutoff 2024年1月）</div>
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table class="data-table">
+              <thead>
+                <tr><th>集団</th><th>DFS HR (95%CI)</th><th>コメント</th><th>出典</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="td-key">ITT（IB–IIIA, n=1,005）</td><td style="font-family:var(--mono)">0.85（0.71–1.01）p=0.07</td><td>ITTでは有意性に未到達</td><td>JCO 2025</td></tr>
+                <tr><td class="td-key">全Stage II–IIIA（n=882）</td><td style="font-family:var(--mono)">0.83（0.69–1.00）</td><td>—</td><td>JCO 2025</td></tr>
+                <tr><td class="td-key">II–IIIA PD-L1 TC≥1%（n=476）</td><td style="font-family:var(--mono)">0.70（0.55–0.91）</td><td>明確なベネフィット</td><td>JCO 2025</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sec-h3">PD-L1別DFSテーブル（初回解析 · SP142アッセイ）</div>
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table class="data-table">
+              <thead>
+                <tr><th>PD-L1（SP142 TC）</th><th>DFS HR (95%CI)</th><th>コメント</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="td-key">TC≥50%</td><td style="font-family:var(--mono)">0.43（0.27–0.68）</td><td>最も明確</td></tr>
+                <tr><td class="td-key">TC 1–49%</td><td style="font-family:var(--mono)">0.87（0.60–1.26）</td><td>有意差なし</td></tr>
+                <tr><td class="td-key">TC&lt;1%</td><td style="font-family:var(--mono)">1.12（0.79–1.57）</td><td>ベネフィット示されず</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="sec-h3">OSテーブル（第1回中間解析 · Ann Oncol 2023、cutoff 2022年4月）</div>
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table class="data-table">
+              <thead>
+                <tr><th>集団</th><th>OS HR (95%CI)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="td-key">ITT（IB–IIIA）</td><td style="font-family:var(--mono)">0.995（0.78–1.28）</td></tr>
+                <tr><td class="td-key">全II–IIIA</td><td style="font-family:var(--mono)">0.95（0.74–1.24）</td></tr>
+                <tr><td class="td-key">II–IIIA PD-L1≥1%</td><td style="font-family:var(--mono)">0.71（0.49–1.03）</td></tr>
+                <tr><td class="td-key">II–IIIA PD-L1≥50%</td><td style="font-family:var(--mono)">0.43（0.24–0.78）</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box" style="margin-bottom:14px">
+            術後シスプラチン併用化学療法（1–4サイクル）完了後に無作為化した試験であり、術後化学療法が前提。PD-L1はSP142アッセイで評価され、22C3等とは互換性に注意。JCO 2025の5年最終解析ではITT集団のDFSは有意性に未到達（HR 0.85, p=0.07）で、ベネフィットはPD-L1陽性、特にTC≥50%に集中。OSは中間解析段階で依然未成熟、確定的なOS改善は示されていない。EGFR/ALK陽性例にはICIではなくTKI（ADAURA/ALINA）を優先する。
+          </div>
+
+          <div class="gl-list">
+            <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>Stage II–IIIAのEGFR/ALK野生型・PD-L1 TC≥1%に推奨。承認（2022年）</span></div>
+            <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN：</strong>PD-L1≥1%のStage II–IIIAでカテゴリー1。PD-L1&lt;1%は推奨せず（米国適応はTC≥1%）</span></div>
+            <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>EUの承認はPD-L1 TC≥50%のStage II–IIIAに限定</span></div>
+          </div>
+
+          <div class="tox-row">
+            <span class="tox">irAE（甲状腺機能障害）</span><span class="tox">肺臓炎</span><span class="tox">肝炎</span><span class="tox">大腸炎</span><span class="tox">皮疹</span><span class="tox">内分泌障害</span><span class="tox">疲労</span>
+          </div>
+          <div class="coi-note">F. Hoffmann–La Roche / Genentech資金提供</div>
+        </div>
+      </div>
+    </div><!-- /p-impower -->
+
+    <!-- ===== タブ4：細胞毒性化学療法 ===== -->
+    <div id="p-cyto" class="panel">
+
+      <!-- UFT -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <a class="trial-link amber" href="https://doi.org/10.1056/NEJMoa032792" target="_blank" rel="noopener">UFT（Kato et al.）<span class="ext">↗</span></a>
+            <span class="jbadge j-nejm">NEJM 2004</span>
+            <span class="ybadge">Phase III · n=979 · 日本発</span>
+          </div>
+          <div class="drug-title">UFT（テガフール・ウラシル）250mg/m²/日 経口 ×2年間 vs 無治療観察</div>
+          <div class="drug-sub">完全切除 病理病期I期 腺癌のみ · 主要評価項目：OS · 日本肺癌研究グループ（JLCRG）· 1994–1997年登録</div>
+
+          <div class="stat-row">
+            <div class="stat amber">
+              <div class="stat-val">HR 0.71</div>
+              <div class="stat-label">OS（Stage I腺癌全体）</div>
+              <div class="stat-vs">5年OS 88% vs 85%（0.52–0.98, p=0.04）</div>
+            </div>
+            <div class="stat amber">
+              <div class="stat-val">有意に良好</div>
+              <div class="stat-label">T2（Stage IB相当）サブグループ</div>
+              <div class="stat-vs">n=263 · より明確なベネフィット</div>
+            </div>
+            <div class="stat amber">
+              <div class="stat-val">有意差なし</div>
+              <div class="stat-label">T1サブグループ</div>
+              <div class="stat-vs">n=716</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table class="data-table">
+              <thead>
+                <tr><th>エンドポイント</th><th>UFT</th><th>観察</th><th>HR (95%CI)</th><th>出典</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="td-key">5年OS率（全Stage I腺癌, n=979）</td><td>88%</td><td>85%</td><td style="font-family:var(--mono)">0.71（0.52–0.98）</td><td>NEJM 2004</td></tr>
+                <tr><td class="td-key">サブグループ T2（Stage IB相当, n=263）</td><td colspan="2" style="text-align:center">UFTで有意に良好</td><td>より明確なベネフィット</td><td>NEJM 2004</td></tr>
+                <tr><td class="td-key">サブグループ T1（n=716）</td><td colspan="2" style="text-align:center">有意差なし</td><td>—</td><td>NEJM 2004</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box" style="margin-bottom:14px">
+            全体の5年OSは88% vs 85%（HR 0.71, p=0.04）と絶対差は小さいが統計的に有意。ベネフィットはT2（Stage IB相当）サブグループで顕著で、T1では有意差なし。対象はStage I腺癌のみで、扁平上皮癌・II期以降は対象外。EGFR/ALK等のドライバー変異が考慮されていない時代の試験。後年のメタ解析（Hamada et al. JCO 2005）でもStage Iでの有用性が支持された。欧米では術後補助の標準的承認なし。日本のGLでは選択肢として残るが、ドライバー変異精査後の適応判断が前提。
+          </div>
+
+          <div class="coi-note">UFT試験：大鵬薬品の関与あり。詳細は原著参照。</div>
+        </div>
+      </div>
+
+      <!-- 白金製剤 -->
+      <div class="trial-card">
+        <div class="tc-top">
+          <div class="tc-meta">
+            <span class="ybadge">参考：白金製剤ベース術後補助化学療法</span>
+          </div>
+          <div class="drug-title" style="font-size:14px">白金製剤ベース術後補助化学療法（参考）</div>
+          <div class="drug-sub">ドライバー変異陰性のStage II–IIIA（および高リスクIB）での標準選択肢。ドライバー変異陽性例では化学療法完了後にTKIを逐次追加する。</div>
+        </div>
+        <div class="tc-body">
+          <p class="body-text">ドライバー変異陰性のStage II–IIIA（および高リスクIB）では、シスプラチン併用術後補助化学療法が標準。代表的試験とメタ解析を以下に示す。ドライバー変異陽性例では、これら化学療法完了後にTKIを逐次追加する戦略が現在の標準である。</p>
+
+          <div style="overflow-x:auto;margin-bottom:14px">
+            <table class="data-table">
+              <thead>
+                <tr><th>試験</th><th>対象</th><th>レジメン</th><th>OS HR (95%CI)</th><th>出典</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-key">LACE メタ解析</td>
+                  <td>切除後NSCLC（5試験統合, n=4,584）</td>
+                  <td>CDDP併用</td>
+                  <td style="font-family:var(--mono)">0.89（0.82–0.96）<br><span style="font-size:10.5px;font-family:var(--font)">5年OS +5.4%</span></td>
+                  <td>JCO 2008</td>
+                </tr>
+                <tr>
+                  <td class="td-key">IALT</td>
+                  <td>Stage I–III, n=1,867</td>
+                  <td>CDDP併用</td>
+                  <td style="font-family:var(--mono)">0.86（0.76–0.98）<br><span style="font-size:10.5px;font-family:var(--font)">5年OS 44.5% vs 40.4%</span></td>
+                  <td>NEJM 2004</td>
+                </tr>
+                <tr>
+                  <td class="td-key">JBR.10</td>
+                  <td>Stage IB–II, n=482</td>
+                  <td>CDDP+VNR ×4</td>
+                  <td style="font-family:var(--mono)">0.69（0.52–0.91）</td>
+                  <td>NEJM 2005</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box">
+            LACEメタ解析ではStage II–IIIAで最もベネフィットが明確、Stage IAではベネフィットなし。IALT（NEJM 2004）は5年OS 44.5% vs 40.4%（HR 0.86）。ドライバー変異陽性例では術後化学療法後にオシメルチニブ/アレクチニブを逐次追加する。
+          </div>
+
+          <div class="coi-note">UFT試験は大鵬薬品の関与あり。各試験の詳細COIは原著参照。</div>
+        </div>
+      </div>
+    </div><!-- /p-cyto -->
+
+    <!-- ===== タブ5：4試験比較・使い分けフロー ===== -->
+    <div id="p-compare" class="panel">
+
+      <h2 class="sec-h2">4試験 横断比較</h2>
+      <div class="trial-card">
+        <div class="tc-body" style="padding-top:16px;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:640px">
+            <thead>
+              <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
+                <th style="padding:9px 12px;text-align:left;font-weight:600;color:var(--text);border-right:1px solid var(--border)">項目</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">ADAURA</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">ALINA</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--purple-dark);border-right:1px solid var(--border)">IMpower010</th>
+                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--amber-dark)">UFT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">薬剤</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:500;border-right:1px solid var(--border)">オシメルチニブ</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--blue-dark);font-weight:500;border-right:1px solid var(--border)">アレクチニブ</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--purple-dark);font-weight:500;border-right:1px solid var(--border)">アテゾリズマブ</td>
+                <td style="padding:8px 10px;text-align:center;color:var(--amber-dark);font-weight:500">テガフール・ウラシル</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">標的</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">EGFR ex19del/L858R</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">ALK陽性</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">EGFR/ALK野生型</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">問わず（I期腺癌）</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">対象Stage</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB–IIIA</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB(≥4cm)–IIIA</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB(≥4cm)–IIIA</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">I期腺癌</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">術後化学療法</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">任意</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">任意（代替可）</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--purple-dark);font-weight:500;border-right:1px solid var(--border)">必須（前提）</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">なし</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">対照群</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">プラセボ</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">化学療法</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">BSC</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">観察</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">主要評価 HR</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">DFS 0.17<br><span style="font-size:10px;font-weight:400;color:var(--text3);font-family:var(--font)">（II–IIIA）</span></td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">DFS 0.24<br><span style="font-size:10px;font-weight:400;color:var(--text3);font-family:var(--font)">（ITT）</span></td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--purple-dark);border-right:1px solid var(--border)">DFS 0.70<br><span style="font-size:10px;font-weight:400;color:var(--text3);font-family:var(--font)">（PD-L1≥1%）</span></td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--amber-dark)">OS 0.71</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">OS</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--green-dark);font-weight:500;border-right:1px solid var(--border)">HR 0.49（最終）✅</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text3);border-right:1px solid var(--border)">未成熟<br>（4年98.4%）</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text3);border-right:1px solid var(--border)">未確立（中間）</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--amber-dark)">改善<br>（88% vs 85%）</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">投与期間</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">3年</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">2年</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">約1年（16サイクル）</td>
+                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">2年</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">国内承認</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">2021</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">2024年8月</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">2022</td>
+                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">既承認</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:11px;color:var(--text3);line-height:1.7">
+            <strong style="color:var(--text2)">読み方の注意：</strong>4試験は対照群・対象変異・追跡期間・化学療法の有無が異なるため直接比較は不可。HR数値の横断比較は参考程度にとどめる。✅はOS有意差あり。
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-h2">インタラクティブ使い分けフロー</h2>
+      <div class="flow-wrap">
+        <div class="flow-start-label">完全切除 NSCLC — 変異・Stage・PD-L1に応じた補助療法選択</div>
+
+        <div class="flow-question">Q1. ドライバー変異検索の結果は？</div>
+        <div class="flow-choices">
+          <button class="flow-btn" data-target="fl-egfr" onclick="flowGo('fl-egfr',this)">EGFR ex19del/L858R 陽性</button>
+          <button class="flow-btn" data-target="fl-alk" onclick="flowGo('fl-alk',this)">ALK 陽性</button>
+          <button class="flow-btn" data-target="fl-wt" onclick="flowGo('fl-wt',this)">EGFR/ALK 野生型</button>
+        </div>
+
+        <!-- EGFR陽性 -->
+        <div id="fl-egfr" class="flow-node" style="display:none">
+          <div class="flow-result green">
+            <strong style="color:var(--green-dark)">推奨：オシメルチニブ 3年（ADAURA）</strong><br>
+            Stage II–IIIAは術後化学療法後に追加が一般的。Stage IBも適応範囲内。<br>
+            <button class="flow-jump-btn" onclick="sw('adaura', document.querySelectorAll('.tab')[0])">→ ADAURAタブで詳細を確認</button>
+          </div>
+        </div>
+
+        <!-- ALK陽性 -->
+        <div id="fl-alk" class="flow-node" style="display:none">
+          <div class="flow-result blue">
+            <strong style="color:var(--blue-dark)">推奨：アレクチニブ 2年（ALINA）</strong><br>
+            化学療法の代替として、または逐次投与。2024年8月国内承認。<br>
+            <button class="flow-jump-btn" onclick="sw('alina', document.querySelectorAll('.tab')[1])">→ ALINAタブで詳細を確認</button>
+          </div>
+        </div>
+
+        <!-- 野生型 -->
+        <div id="fl-wt" class="flow-node" style="display:none">
+          <div class="flow-question" style="margin-top:10px">Q2. Stageは？</div>
+          <div class="flow-choices">
+            <button class="flow-btn" data-target="fl-stage23" onclick="flowGo('fl-stage23',this)">Stage II–IIIA</button>
+            <button class="flow-btn" data-target="fl-stage1" onclick="flowGo('fl-stage1',this)">Stage I</button>
+          </div>
+        </div>
+
+        <!-- Stage II–IIIA -->
+        <div id="fl-stage23" class="flow-node" style="display:none">
+          <div class="flow-result neutral" style="margin-bottom:8px">
+            術後シスプラチン併用化学療法（標準）を実施。化学療法完了後 →
+          </div>
+          <div class="flow-question">Q3. 化学療法完了後 PD-L1（SP142）は？</div>
+          <div class="flow-choices">
+            <button class="flow-btn" data-target="fl-pdl1pos" onclick="flowGo('fl-pdl1pos',this)">TC≥1%</button>
+            <button class="flow-btn" data-target="fl-pdl1neg" onclick="flowGo('fl-pdl1neg',this)">TC&lt;1%（または不明）</button>
+          </div>
+        </div>
+
+        <!-- PD-L1≥1% -->
+        <div id="fl-pdl1pos" class="flow-node" style="display:none">
+          <div class="flow-result purple">
+            <strong style="color:var(--purple-dark)">推奨：アテゾリズマブ（IMpower010）</strong><br>
+            TC≥1%でDFS HR 0.70（JCO 2025）。TC≥50%でより明確（HR 0.43）。承認（2022年）。<br>
+            <button class="flow-jump-btn" onclick="sw('impower', document.querySelectorAll('.tab')[2])">→ IMpower010タブで詳細を確認</button>
+          </div>
+        </div>
+
+        <!-- PD-L1<1% -->
+        <div id="fl-pdl1neg" class="flow-node" style="display:none">
+          <div class="flow-result neutral">
+            <strong>経過観察</strong>（ICIのベネフィットは不明確）<br>
+            TC&lt;1%ではDFS HR 1.12（0.79–1.57）とベネフィット示されず（初回解析）。術後化学療法のみで完結。
+          </div>
+        </div>
+
+        <!-- Stage I -->
+        <div id="fl-stage1" class="flow-node" style="display:none">
+          <div class="flow-result amber">
+            化学療法の標準的適応は限定的。<br>
+            <strong style="color:var(--amber-dark)">I期腺癌では UFT 2年が日本での選択肢</strong>（変異精査後に判断）。T2（Stage IB相当）でのベネフィットが顕著。<br>
+            <button class="flow-jump-btn" onclick="sw('cyto', document.querySelectorAll('.tab')[3])">→ 細胞毒性化学療法タブで詳細を確認</button>
+          </div>
+        </div>
+
+        <button class="flow-reset-btn" onclick="flowReset()">↺ 最初からやり直す</button>
+      </div><!-- /flow-wrap -->
+
+      <div class="warn-box">
+        <strong>⚠️ 注意：</strong>4試験は直接比較されていない。HR等の数値は対照群・対象集団・解析時点が異なるため横断比較は不可。各症例の変異・Stage・PS・併存症・術後化学療法の実施可否に基づき個別に判断する。最終更新時点で未承認・適応外の組み合わせに注意。
+      </div>
+    </div><!-- /p-compare -->
+
+    <!-- References -->
+    <h2 class="sec-h2" style="margin-top:40px">References</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="padding-top:16px">
+        <ol class="refs-list">
+          <li data-n="1">Wu YL, et al. Osimertinib in Resected EGFR-Mutated NSCLC (ADAURA primary). <em>N Engl J Med</em> 2020;383:1711-1723. PMID 32955177. <a href="https://doi.org/10.1056/NEJMoa2027071" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2027071 ↗</a></li>
+          <li data-n="2">Herbst RS, et al. Adjuvant Osimertinib: Updated DFS (ADAURA). <em>J Clin Oncol</em> 2023;41:1830-1840. PMID 36720083. <a href="https://doi.org/10.1200/JCO.22.02186" target="_blank" rel="noopener">DOI 10.1200/JCO.22.02186 ↗</a></li>
+          <li data-n="3">Tsuboi M, et al. Overall Survival with Osimertinib in Resected EGFR-Mutated NSCLC (ADAURA OS). <em>N Engl J Med</em> 2023;389:137-147. PMID 38466534. <a href="https://doi.org/10.1056/NEJMoa2304594" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2304594 ↗</a></li>
+          <li data-n="4">Wu YL, et al. Alectinib in Resected ALK-Positive NSCLC (ALINA). <em>N Engl J Med</em> 2024;390:1265-1276. PMID 38598794. <a href="https://doi.org/10.1056/NEJMoa2310532" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2310532 ↗</a></li>
+          <li data-n="5">Felip E, et al. Adjuvant Atezolizumab after Chemotherapy in Resected Stage IB-IIIA NSCLC (IMpower010 DFS). <em>Lancet</em> 2021;398:1344-1357. PMID 34555333. <a href="https://doi.org/10.1016/S0140-6736(21)02098-5" target="_blank" rel="noopener">DOI 10.1016/S0140-6736(21)02098-5 ↗</a></li>
+          <li data-n="6">Felip E, et al. Overall Survival with Adjuvant Atezolizumab (IMpower010 OS interim). <em>Ann Oncol</em> 2023;34:907-919. PMID 37467930. <a href="https://doi.org/10.1016/j.annonc.2023.07.001" target="_blank" rel="noopener">DOI 10.1016/j.annonc.2023.07.001 ↗</a></li>
+          <li data-n="7">Wakelee H, et al. Five-Year Survival Outcomes with Atezolizumab (IMpower010 final). <em>J Clin Oncol</em> 2025;43:2343-2349. PMID 40424549. <a href="https://doi.org/10.1200/JCO-24-01681" target="_blank" rel="noopener">DOI 10.1200/JCO-24-01681 ↗</a></li>
+          <li data-n="8">Kato H, et al. A Randomized Trial of Adjuvant Chemotherapy with Uracil-Tegafur for Adenocarcinoma of the Lung. <em>N Engl J Med</em> 2004;350:1713-1721. PMID 15102997. <a href="https://doi.org/10.1056/NEJMoa032792" target="_blank" rel="noopener">DOI 10.1056/NEJMoa032792 ↗</a></li>
+          <li data-n="9">Hamada C, et al. Meta-analysis of Postoperative Adjuvant Chemotherapy with Tegafur-Uracil in NSCLC. <em>J Clin Oncol</em> 2005;23:4999-5006. PMID 16087941. <a href="https://doi.org/10.1200/JCO.2005.09.017" target="_blank" rel="noopener">DOI 10.1200/JCO.2005.09.017 ↗</a></li>
+          <li data-n="10">Pignon JP, et al. Lung Adjuvant Cisplatin Evaluation (LACE) Meta-analysis. <em>J Clin Oncol</em> 2008;26:3552-3559. PMID 18506026. <a href="https://doi.org/10.1200/JCO.2007.13.9030" target="_blank" rel="noopener">DOI 10.1200/JCO.2007.13.9030 ↗</a></li>
+        </ol>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks.</span>
+</footer>
+
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+
+function sw(id, btn) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('p-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
+/* フローチャート */
+var FLOW_LEVELS = {
+  'fl-egfr': 1, 'fl-alk': 1, 'fl-wt': 1,
+  'fl-stage23': 2, 'fl-stage1': 2,
+  'fl-pdl1pos': 3, 'fl-pdl1neg': 3
+};
+
+function flowGo(nodeId, btn) {
+  var targetLevel = FLOW_LEVELS[nodeId];
+  Object.keys(FLOW_LEVELS).forEach(function(id) {
+    if (FLOW_LEVELS[id] >= targetLevel) {
+      document.getElementById(id).style.display = 'none';
+    }
+  });
+  document.getElementById(nodeId).style.display = 'block';
+  document.querySelectorAll('.flow-btn').forEach(function(b) {
+    if (FLOW_LEVELS[b.dataset.target] >= targetLevel) {
+      b.classList.remove('active');
+    }
+  });
+  if (btn) btn.classList.add('active');
+}
+
+function flowReset() {
+  Object.keys(FLOW_LEVELS).forEach(function(id) {
+    document.getElementById(id).style.display = 'none';
+  });
+  document.querySelectorAll('.flow-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+}
+
+/* ハッシュによる直接リンク対応 */
+window.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash;
+  if (!hash) return;
+  var panelId = hash.substring(1);
+  var el = document.getElementById(panelId);
+  if (!el || !el.classList.contains('panel')) return;
+  var idSuffix = panelId.replace('p-', '');
+  var tabs = document.querySelectorAll('.tab');
+  var orderMap = { 'adaura': 0, 'alina': 1, 'impower': 2, 'cyto': 3, 'compare': 4 };
+  sw(idSuffix, tabs[orderMap[idSuffix]]);
+});
+</script>
+</body>
+</html>
