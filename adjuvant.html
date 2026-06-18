@@ -342,7 +342,7 @@ fetch('/lungatlas/nav.html')
       <button class="tab" onclick="sw('alina',this)">ALK陽性 — ALINA</button>
       <button class="tab" onclick="sw('impower',this)">EGFR/ALK陰性 — IMpower010</button>
       <button class="tab" onclick="sw('cyto',this)">細胞毒性化学療法 — UFT・白金併用</button>
-      <button class="tab" onclick="sw('compare',this)">4試験比較・使い分けフロー</button>
+      <button class="tab" onclick="sw('compare',this)">使い分けフロー</button>
     </div>
 
     <!-- ===== タブ1：ADAURA ===== -->
@@ -695,92 +695,7 @@ fetch('/lungatlas/nav.html')
     <!-- ===== タブ5：4試験比較・使い分けフロー ===== -->
     <div id="p-compare" class="panel">
 
-      <h2 class="sec-h2">4試験 横断比較</h2>
-      <div class="trial-card">
-        <div class="tc-body" style="padding-top:16px;overflow-x:auto">
-          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:640px">
-            <thead>
-              <tr style="background:var(--surface2);border-bottom:1px solid var(--border)">
-                <th style="padding:9px 12px;text-align:left;font-weight:600;color:var(--text);border-right:1px solid var(--border)">項目</th>
-                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">ADAURA</th>
-                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">ALINA</th>
-                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--purple-dark);border-right:1px solid var(--border)">IMpower010</th>
-                <th style="padding:9px 10px;text-align:center;font-weight:600;color:var(--amber-dark)">UFT</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid var(--border)">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">薬剤</td>
-                <td style="padding:8px 10px;text-align:center;color:var(--green-dark);font-weight:500;border-right:1px solid var(--border)">オシメルチニブ</td>
-                <td style="padding:8px 10px;text-align:center;color:var(--blue-dark);font-weight:500;border-right:1px solid var(--border)">アレクチニブ</td>
-                <td style="padding:8px 10px;text-align:center;color:var(--purple-dark);font-weight:500;border-right:1px solid var(--border)">アテゾリズマブ</td>
-                <td style="padding:8px 10px;text-align:center;color:var(--amber-dark);font-weight:500">テガフール・ウラシル</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">標的</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">EGFR ex19del/L858R</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">ALK陽性</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">EGFR/ALK野生型</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">問わず（I期腺癌）</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border)">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">対象Stage</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB–IIIA</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB(≥4cm)–IIIA</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">IB(≥4cm)–IIIA</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">I期腺癌</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">術後化学療法</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">任意</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">任意（代替可）</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--purple-dark);font-weight:500;border-right:1px solid var(--border)">必須（前提）</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">なし</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border)">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">対照群</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">プラセボ</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">化学療法</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">BSC</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">観察</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">主要評価 HR</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--green-dark);border-right:1px solid var(--border)">DFS 0.17<br><span style="font-size:10px;font-weight:400;color:var(--text3);font-family:var(--font)">（II–IIIA）</span></td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--blue-dark);border-right:1px solid var(--border)">DFS 0.24<br><span style="font-size:10px;font-weight:400;color:var(--text3);font-family:var(--font)">（ITT）</span></td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--purple-dark);border-right:1px solid var(--border)">DFS 0.70<br><span style="font-size:10px;font-weight:400;color:var(--text3);font-family:var(--font)">（PD-L1≥1%）</span></td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-weight:600;color:var(--amber-dark)">OS 0.71</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border)">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">OS</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--green-dark);font-weight:500;border-right:1px solid var(--border)">HR 0.49（最終）✅</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text3);border-right:1px solid var(--border)">未成熟<br>（4年98.4%）</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text3);border-right:1px solid var(--border)">未確立（中間）</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--amber-dark)">改善<br>（88% vs 85%）</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border);background:#f6fbf7">
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">投与期間</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">3年</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">2年</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2);border-right:1px solid var(--border)">約1年（16サイクル）</td>
-                <td style="padding:8px 10px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text2)">2年</td>
-              </tr>
-              <tr>
-                <td style="padding:8px 12px;font-weight:500;color:var(--text2);border-right:1px solid var(--border)">国内承認</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">2021</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">2024年8月</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2);border-right:1px solid var(--border)">2022</td>
-                <td style="padding:8px 10px;text-align:center;font-size:11.5px;color:var(--text2)">既承認</td>
-              </tr>
-            </tbody>
-          </table>
-          <div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:11px;color:var(--text3);line-height:1.7">
-            <strong style="color:var(--text2)">読み方の注意：</strong>4試験は対照群・対象変異・追跡期間・化学療法の有無が異なるため直接比較は不可。HR数値の横断比較は参考程度にとどめる。✅はOS有意差あり。
-          </div>
-        </div>
-      </div>
-
-      <h2 class="sec-h2">インタラクティブ使い分けフロー</h2>
+      <h2 class="sec-h2">使い分けフロー</h2>
       <div class="flow-wrap">
         <div class="flow-start-label">完全切除 NSCLC — 変異・Stage・PD-L1に応じた補助療法選択</div>
 
