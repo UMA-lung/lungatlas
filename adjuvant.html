@@ -342,7 +342,6 @@ fetch('/lungatlas/nav.html')
       <button class="tab" onclick="sw('alina',this)">ALK陽性 — ALINA</button>
       <button class="tab" onclick="sw('impower',this)">EGFR/ALK陰性 — IMpower010</button>
       <button class="tab" onclick="sw('cyto',this)">細胞毒性化学療法 — UFT・白金併用</button>
-      <button class="tab" onclick="sw('compare',this)">使い分けフロー</button>
     </div>
 
     <!-- ===== タブ1：ADAURA ===== -->
@@ -692,92 +691,6 @@ fetch('/lungatlas/nav.html')
       </div>
     </div><!-- /p-cyto -->
 
-    <!-- ===== タブ5：4試験比較・使い分けフロー ===== -->
-    <div id="p-compare" class="panel">
-
-      <h2 class="sec-h2">使い分けフロー</h2>
-      <div class="flow-wrap">
-        <div class="flow-start-label">完全切除 NSCLC — 変異・Stage・PD-L1に応じた補助療法選択</div>
-
-        <div class="flow-question">Q1. ドライバー変異検索の結果は？</div>
-        <div class="flow-choices">
-          <button class="flow-btn" data-target="fl-egfr" onclick="flowGo('fl-egfr',this)">EGFR ex19del/L858R 陽性</button>
-          <button class="flow-btn" data-target="fl-alk" onclick="flowGo('fl-alk',this)">ALK 陽性</button>
-          <button class="flow-btn" data-target="fl-wt" onclick="flowGo('fl-wt',this)">EGFR/ALK 野生型</button>
-        </div>
-
-        <!-- EGFR陽性 -->
-        <div id="fl-egfr" class="flow-node" style="display:none">
-          <div class="flow-result green">
-            <strong style="color:var(--green-dark)">推奨：オシメルチニブ 3年（ADAURA）</strong><br>
-            Stage II–IIIAは術後化学療法後に追加が一般的。Stage IBも適応範囲内。<br>
-            <button class="flow-jump-btn" onclick="sw('adaura', document.querySelectorAll('.tab')[0])">→ ADAURAタブで詳細を確認</button>
-          </div>
-        </div>
-
-        <!-- ALK陽性 -->
-        <div id="fl-alk" class="flow-node" style="display:none">
-          <div class="flow-result blue">
-            <strong style="color:var(--blue-dark)">推奨：アレクチニブ 2年（ALINA）</strong><br>
-            化学療法の代替として、または逐次投与。2024年8月国内承認。<br>
-            <button class="flow-jump-btn" onclick="sw('alina', document.querySelectorAll('.tab')[1])">→ ALINAタブで詳細を確認</button>
-          </div>
-        </div>
-
-        <!-- 野生型 -->
-        <div id="fl-wt" class="flow-node" style="display:none">
-          <div class="flow-question" style="margin-top:10px">Q2. Stageは？</div>
-          <div class="flow-choices">
-            <button class="flow-btn" data-target="fl-stage23" onclick="flowGo('fl-stage23',this)">Stage II–IIIA</button>
-            <button class="flow-btn" data-target="fl-stage1" onclick="flowGo('fl-stage1',this)">Stage I</button>
-          </div>
-        </div>
-
-        <!-- Stage II–IIIA -->
-        <div id="fl-stage23" class="flow-node" style="display:none">
-          <div class="flow-result neutral" style="margin-bottom:8px">
-            術後シスプラチン併用化学療法（標準）を実施。化学療法完了後 →
-          </div>
-          <div class="flow-question">Q3. 化学療法完了後 PD-L1（SP142）は？</div>
-          <div class="flow-choices">
-            <button class="flow-btn" data-target="fl-pdl1pos" onclick="flowGo('fl-pdl1pos',this)">TC≥1%</button>
-            <button class="flow-btn" data-target="fl-pdl1neg" onclick="flowGo('fl-pdl1neg',this)">TC&lt;1%（または不明）</button>
-          </div>
-        </div>
-
-        <!-- PD-L1≥1% -->
-        <div id="fl-pdl1pos" class="flow-node" style="display:none">
-          <div class="flow-result purple">
-            <strong style="color:var(--purple-dark)">推奨：アテゾリズマブ（IMpower010）</strong><br>
-            TC≥1%でDFS HR 0.70（JCO 2025）。TC≥50%でより明確（HR 0.43）。承認（2022年）。<br>
-            <button class="flow-jump-btn" onclick="sw('impower', document.querySelectorAll('.tab')[2])">→ IMpower010タブで詳細を確認</button>
-          </div>
-        </div>
-
-        <!-- PD-L1<1% -->
-        <div id="fl-pdl1neg" class="flow-node" style="display:none">
-          <div class="flow-result neutral">
-            <strong>経過観察</strong>（ICIのベネフィットは不明確）<br>
-            TC&lt;1%ではDFS HR 1.12（0.79–1.57）とベネフィット示されず（初回解析）。術後化学療法のみで完結。
-          </div>
-        </div>
-
-        <!-- Stage I -->
-        <div id="fl-stage1" class="flow-node" style="display:none">
-          <div class="flow-result amber">
-            化学療法の標準的適応は限定的。<br>
-            <strong style="color:var(--amber-dark)">I期腺癌では UFT 2年が日本での選択肢</strong>（変異精査後に判断）。T2（Stage IB相当）でのベネフィットが顕著。<br>
-            <button class="flow-jump-btn" onclick="sw('cyto', document.querySelectorAll('.tab')[3])">→ 細胞毒性化学療法タブで詳細を確認</button>
-          </div>
-        </div>
-
-        <button class="flow-reset-btn" onclick="flowReset()">↺ 最初からやり直す</button>
-      </div><!-- /flow-wrap -->
-
-      <div class="warn-box">
-        <strong>⚠️ 注意：</strong>4試験は直接比較されていない。HR等の数値は対照群・対象集団・解析時点が異なるため横断比較は不可。各症例の変異・Stage・PS・併存症・術後化学療法の実施可否に基づき個別に判断する。最終更新時点で未承認・適応外の組み合わせに注意。
-      </div>
-    </div><!-- /p-compare -->
 
     <!-- References -->
     <h2 class="sec-h2" style="margin-top:40px">References</h2>
@@ -818,38 +731,6 @@ function sw(id, btn) {
   if (btn) btn.classList.add('active');
 }
 
-/* フローチャート */
-var FLOW_LEVELS = {
-  'fl-egfr': 1, 'fl-alk': 1, 'fl-wt': 1,
-  'fl-stage23': 2, 'fl-stage1': 2,
-  'fl-pdl1pos': 3, 'fl-pdl1neg': 3
-};
-
-function flowGo(nodeId, btn) {
-  var targetLevel = FLOW_LEVELS[nodeId];
-  Object.keys(FLOW_LEVELS).forEach(function(id) {
-    if (FLOW_LEVELS[id] >= targetLevel) {
-      document.getElementById(id).style.display = 'none';
-    }
-  });
-  document.getElementById(nodeId).style.display = 'block';
-  document.querySelectorAll('.flow-btn').forEach(function(b) {
-    if (FLOW_LEVELS[b.dataset.target] >= targetLevel) {
-      b.classList.remove('active');
-    }
-  });
-  if (btn) btn.classList.add('active');
-}
-
-function flowReset() {
-  Object.keys(FLOW_LEVELS).forEach(function(id) {
-    document.getElementById(id).style.display = 'none';
-  });
-  document.querySelectorAll('.flow-btn').forEach(function(b) {
-    b.classList.remove('active');
-  });
-}
-
 /* ハッシュによる直接リンク対応 */
 window.addEventListener('DOMContentLoaded', function() {
   var hash = window.location.hash;
@@ -859,7 +740,7 @@ window.addEventListener('DOMContentLoaded', function() {
   if (!el || !el.classList.contains('panel')) return;
   var idSuffix = panelId.replace('p-', '');
   var tabs = document.querySelectorAll('.tab');
-  var orderMap = { 'adaura': 0, 'alina': 1, 'impower': 2, 'cyto': 3, 'compare': 4 };
+  var orderMap = { 'adaura': 0, 'alina': 1, 'impower': 2, 'cyto': 3 };
   sw(idSuffix, tabs[orderMap[idSuffix]]);
 });
 </script>
