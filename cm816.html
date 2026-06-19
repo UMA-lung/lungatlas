@@ -615,7 +615,7 @@ fetch('/lungatlas/nav.html')
       </div>
     </div>
 
-    <h3 class="sec-h3">白金製剤内訳（ASCO Post／NEJM 2022）</h3>
+    <h3 class="sec-h3">白金製剤内訳（NEJM 2022<sup class="ref">[1]</sup>）</h3>
     <div class="trial-card">
       <div class="tc-body" style="overflow-x:auto">
         <table class="data-table">
@@ -643,7 +643,7 @@ fetch('/lungatlas/nav.html')
           白金製剤の選択は腎機能・PS・聴力・併存症・組織型・施設方針により異なる。CheckMate 816のレジメン内訳は実臨床での治療選択をそのまま規定するものではない。
         </div>
         <div class="info-box" style="margin-top:10px">
-          <strong>探索的サブ解析（交絡に注意）：</strong>探索的サブ解析では、cisplatin群のOS HR 0.79（95%CI 0.53–1.17）、carboplatin群のOS HR 0.36（95%CI 0.16–0.81）と報告された（ASCO 2025）。ただしcarboplatin群は扁平上皮に偏っていた可能性が指摘されており、白金製剤の種類による効果差と解釈することはできない。症例数も少なく（carboplatin群 NIVO 39例 vs 化療 33例）、交絡を含む探索的知見として扱う。
+          <strong>探索的サブ解析（交絡に注意）：</strong>探索的サブ解析では、cisplatin群のOS HR 0.79（95%CI 0.53–1.17）、carboplatin群のOS HR 0.36（95%CI 0.16–0.81）と報告された<sup class="ref">[3]</sup>。ただしcarboplatin群は扁平上皮に偏っていた可能性が指摘されており、白金製剤の種類による効果差と解釈することはできない。症例数も少なく（carboplatin群 NIVO 39例 vs 化療 33例）、交絡を含む探索的知見として扱う。
         </div>
       </div>
     </div>
@@ -832,19 +832,19 @@ fetch('/lungatlas/nav.html')
               <td class="td-key">Adjuvant chemotherapy</td>
               <td class="td-nivo">11.9%</td>
               <td class="td-chemo">22.2%</td>
-              <td>NEJM 2022／ASCO Post</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
             </tr>
             <tr>
               <td class="td-key">Any subsequent cancer therapy</td>
               <td class="td-nivo">21.2%</td>
               <td class="td-chemo">43.6%</td>
-              <td>NEJM 2022／ASCO Post</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
             </tr>
             <tr>
               <td class="td-key">Subsequent systemic therapy</td>
               <td class="td-nivo">17.3%</td>
               <td class="td-chemo">36.3%</td>
-              <td>NEJM 2022／ASCO Post</td>
+              <td>NEJM 2022<sup class="ref">[1]</sup></td>
             </tr>
           </tbody>
         </table>
@@ -922,7 +922,7 @@ fetch('/lungatlas/nav.html')
     <!-- 手術未施行理由 -->
     <h3 class="sec-h3" id="surgery-non-completion">5-1b. Why surgery was not performed：手術未施行・キャンセル理由</h3>
     <p class="body-text">
-      術前治療では有効性だけでなく、予定手術まで到達できるかが重要である。CheckMate 816ではNIVO群の15.6%が手術に至らなかった。手術中止をStage別にみると、Stage IB–IIで12%、Stage IIIAで17%が手術に進まなかったと報告されている（JTO 2024）。
+      術前治療では有効性だけでなく、予定手術まで到達できるかが重要である。CheckMate 816ではNIVO群の15.6%が手術に至らなかった。手術中止をStage別にみると、Stage IB–IIで12%、Stage IIIAで17%が手術に進まなかったと報告されている<sup class="ref">[8]</sup>。
     </p>
     <div class="trial-card">
       <div class="tc-body" style="overflow-x:auto">
@@ -1068,7 +1068,98 @@ fetch('/lungatlas/nav.html')
           <strong>Grade 5 surgery-related AEについて：</strong>Grade 5 surgery-related AEは、手術関連AEとして報告された死亡であり、治療関連死亡とは別に集計されている。NIVO＋化学療法群の2例は、治験薬との関連なしと判断された。
         </div>
         <div class="note-box" style="margin-top:8px">
-          30日死亡・90日死亡は、治療関連死亡や手術関連Grade 5 AEとは異なる指標である。本ページでは、原典Supplementで定義と数値を確認できる場合のみ記載する。
+          30日死亡・90日死亡は、治療関連死亡や手術関連Grade 5 AEとは異なる指標である。CheckMate 816では術後90日以内の死亡がSupplement Table S15に個票で報告されており、下表に整理した。なお30日死亡率（分母つきの率）としての集計は原典に明示されていない。
+        </div>
+      </div>
+    </div>
+
+    <!-- 術後90日以内死亡（Supplement Table S15） -->
+    <h3 class="sec-h3" id="postop-death">術後90日以内の死亡（個票・Supplement Table S15）</h3>
+    <p class="body-text">
+      NEJM 2022のSupplement Table S15には、手術を妨げた致死的有害事象および術後90日以内の死亡が個票（患者単位）で報告されている。これは「率」ではなく症例の列挙であり、術式・術後日数・baseline stageが併記されている。手術関連Grade 5 AE（24時間以内死亡と定義）とは集計範囲が異なる点に注意する。本試験では術式別の死亡「率」（分母つき）は提示されていない。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:140px">群</th>
+              <th style="min-width:170px">死因</th>
+              <th style="min-width:110px">術後日数</th>
+              <th style="min-width:180px">術式</th>
+              <th style="min-width:80px">Stage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-nivo" rowspan="5" style="vertical-align:top;font-weight:600">NIVO＋化学療法<br><span style="font-weight:400;font-size:11px;color:var(--text3)">術後死亡 5例</span></td>
+              <td>大動脈破裂</td>
+              <td style="text-align:center">0</td>
+              <td>R0・肺全摘（pneumonectomy）</td>
+              <td style="text-align:center">IIIA</td>
+            </tr>
+            <tr>
+              <td>術中出血（hemorrhage during surgery）</td>
+              <td style="text-align:center">0</td>
+              <td>R0・葉切除（lobectomy）</td>
+              <td style="text-align:center">IIB</td>
+            </tr>
+            <tr>
+              <td>肺塞栓（pulmonary embolism）</td>
+              <td style="text-align:center">7</td>
+              <td>R0・葉切除（lobectomy）</td>
+              <td style="text-align:center">IIIA</td>
+            </tr>
+            <tr>
+              <td>食道穿孔（esophageal perforation）</td>
+              <td style="text-align:center">10</td>
+              <td>R0・二葉切除（bilobectomy）</td>
+              <td style="text-align:center">IIA</td>
+            </tr>
+            <tr>
+              <td>肺炎（pneumonia）</td>
+              <td style="text-align:center">13</td>
+              <td>R0・葉切除（lobectomy）</td>
+              <td style="text-align:center">IIIA</td>
+            </tr>
+            <tr>
+              <td class="td-chemo" rowspan="4" style="vertical-align:top;font-weight:600">化学療法単独<br><span style="font-weight:400;font-size:11px;color:var(--text3)">術前死亡 2例<br>術後死亡 2例</span></td>
+              <td>腸炎感染（enterocolitis infection）<sup class="ref">†</sup></td>
+              <td style="text-align:center">術前</td>
+              <td>—（手術に至らず）</td>
+              <td style="text-align:center">IIIA</td>
+            </tr>
+            <tr>
+              <td>急性腎障害／汎血球減少／下痢<sup class="ref">†</sup></td>
+              <td style="text-align:center">術前</td>
+              <td>—（手術に至らず）</td>
+              <td style="text-align:center">IIIA</td>
+            </tr>
+            <tr>
+              <td>薬剤関連肺炎（drug-related pneumonia）</td>
+              <td style="text-align:center">1</td>
+              <td>R0・肺全摘（pneumonectomy）</td>
+              <td style="text-align:center">IIIA</td>
+            </tr>
+            <tr>
+              <td>肺炎（pneumonia）</td>
+              <td style="text-align:center">57</td>
+              <td>R0・葉切除（lobectomy）</td>
+              <td style="text-align:center">IIB</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="caution-box" style="margin-top:10px">
+          <strong>件数と定義の対応：</strong>本表の「術後死亡」（90日以内）は、手術関連Grade 5 AE（24時間以内死亡）とは集計範囲が異なる。NIVO群の術後0日死亡2例（大動脈破裂・術中出血）のうち、Grade 5 surgery-related AEとして治験薬関連なしと判定されたのは大動脈破裂・肺塞栓の2例である（死亡日と判定区分が一致しない点に注意。原典の集計定義に従う）。
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          <sup class="ref">†</sup> 化学療法単独群の2例は手術前に治療関連有害事象により死亡した症例であり、術後死亡ではない。化学療法単独群の治療関連死亡3例（本文）とは集計が異なる場合があるため、原典脚注を参照のこと。
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          <strong>解釈上の注意：</strong>これは個票（NIVO群5例 vs 化学療法群の術後2例）であり、術式別の死亡率（分母つき）ではない。「肺全摘の死亡率○%」のような率としての記載は本試験データからはできない。少数例であり、群間比較や術式別リスクの定量的結論を導くことは適切でない。
+        </div>
+        <div class="note-box" style="margin-top:6px">
+          出典：Forde PM, et al. <em>N Engl J Med.</em> 2022;386(21):1973-1985. Supplementary Appendix, Table S15. <a href="https://pubmed.ncbi.nlm.nih.gov/35403841/" target="_blank" rel="noopener">PMID: 35403841</a>. doi:10.1056/NEJMoa2202170.
         </div>
       </div>
     </div>
@@ -1252,7 +1343,7 @@ fetch('/lungatlas/nav.html')
             <tr><td class="td-key">Rash</td><td class="td-nivo">20%</td><td>FDA label</td></tr>
           </tbody>
         </table>
-        <div class="note-box" style="margin-top:8px">FDA labelに基づく任意グレードの高頻度AE。一次文献で確認できる数値は一次文献を優先する。</div>
+        <div class="note-box" style="margin-top:8px">FDA labelに基づく任意グレードの高頻度AE。一次文献で確認できる数値は一次文献を優先する。参照：<a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/125554s132lbl.pdf" target="_blank" rel="noopener">Opdivo FDA prescribing information (2025年版, 125554s132)</a>（アクセス日：2026年6月19日）。</div>
       </div>
     </div>
 
@@ -1284,7 +1375,7 @@ fetch('/lungatlas/nav.html')
           </tbody>
         </table>
         <div class="note-box" style="margin-top:10px">
-          免疫関連AEの頻度・定義は報告により異なるため、原典の分類に従って記載する。なお、CheckMate 816の任意グレード肺臓炎（1.1%）は周術期ICIレジメン（3.0–5.9%）と比較して低い水準と報告されている（JTO 2025）。
+          免疫関連AEの頻度・定義は報告により異なるため、原典の分類に従って記載する。
         </div>
       </div>
     </div>
@@ -1433,7 +1524,7 @@ fetch('/lungatlas/nav.html')
           <li>pCR達成例に術後補助療法が必要かは未解決であり、今後の試験・バイオマーカー研究が必要。</li>
         </ul>
         <div class="note-box" style="margin-top:10px">
-          <strong>注：</strong>NEJM Correspondenceへの関連投稿（PMID 41259770・41259771）が報告されているが、内容の確認が取れた場合のみ今後追記する。
+          <strong>注：</strong>NEJM CorrespondenceにOS最終解析（NEJMoa2502931）へのレター（Li X, Mu X. <em>N Engl J Med.</em> 2025;393(20):2068-2069. PMID: 41259770. doi:10.1056/NEJMc2513316）が掲載されている<sup class="ref">[9]</sup>。内容の要約は確認が取れ次第追記する。
         </div>
       </div>
     </div>
@@ -1537,6 +1628,8 @@ fetch('/lungatlas/nav.html')
           <li>Wang C, et al. Subpopulation analysis of Chinese patients in CheckMate 816. <em>ESMO Open.</em> 2023;8(6):102040. doi:10.1016/j.esmoop.2023.102040</li>
           <li>Spicer J, et al. Surgical outcomes from the phase 3 CheckMate 816 trial. <em>J Clin Oncol.</em> 2021;39(15_suppl):8503. doi:10.1200/JCO.2021.39.15_suppl.8503（手術施行率・R0切除率・術式・肺全摘・conversion・手術時間・入院期間）</li>
           <li>Mitsudomi T, et al. Neoadjuvant nivolumab plus chemotherapy in resectable non-small-cell lung cancer in Japanese patients from CheckMate 816. <em>Cancer Sci.</em> 2024;115(2):540-554. <a href="https://pubmed.ncbi.nlm.nih.gov/38098261/" target="_blank" rel="noopener">PMID: 38098261</a>. doi:10.1111/cas.16030.（日本人サブ解析）</li>
+          <li>Ugalde Figueroa P, Lacroix V, Van Schil PE, et al. Neoadjuvant Chemoimmunotherapy Complicates Subsequent Surgical Resection and Adjuvant Immunotherapy Is Preferable From the Surgical Standpoint. <em>J Thorac Oncol.</em> 2024;19(6):858-861.（CheckMate 816データを引用したPerspective論文）</li>
+          <li>Li X, Mu X. Neoadjuvant Nivolumab plus Chemotherapy in Lung Cancer. <em>N Engl J Med.</em> 2025;393(20):2068-2069. <a href="https://pubmed.ncbi.nlm.nih.gov/41259770/" target="_blank" rel="noopener">PMID: 41259770</a>. doi:10.1056/NEJMc2513316.（OS最終解析へのNEJM Correspondence）</li>
         </ol>
       </div>
     </div>
