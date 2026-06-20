@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 145" width="860" height="145" font-family="sans-serif">
+  <rect width="860" height="145" fill="#f5f7f5" rx="6"/>
+
+  <!-- FRAME 1: 索状物を確認 -->
+  <g transform="translate(10,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <line x1="20" y1="40" x2="85" y2="40" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <line x1="20" y1="56" x2="85" y2="56" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <line x1="20" y1="40" x2="20" y2="56" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <line x1="85" y1="40" x2="85" y2="56" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="52" cy="75" rx="14" ry="6" fill="#f0e8f4" stroke="#9070a0" stroke-width="1.5"/>
+    <text x="52" y="78" text-anchor="middle" font-size="8" fill="#9070a0">LN</text>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">1</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#3d5042" font-weight="500">索状物を確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="119,61 127,65 119,69" fill="#9aab9a"/>
+  <line x1="115" y1="65" x2="119" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 2: 周囲を剥離 -->
+  <g transform="translate(130,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <line x1="22" y1="48" x2="83" y2="48" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="52" cy="48" rx="30" ry="16" fill="none" stroke="#c8c8c8" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="16" y1="64" x2="40" y2="52" stroke="#7a8898" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="12" y1="60" x2="36" y2="58" stroke="#7a8898" stroke-width="2" stroke-linecap="round"/>
+    <rect x="8" y="57" width="8" height="5" rx="2" fill="#7a8898"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">2</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#3d5042" font-weight="500">周囲を剥離</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="239,61 247,65 239,69" fill="#9aab9a"/>
+  <line x1="235" y1="65" x2="239" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 3: クリップ準備 -->
+  <g transform="translate(250,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <rect x="20" y="38" width="65" height="28" rx="5" fill="#e8ecf0" stroke="#5a6a78" stroke-width="2"/>
+    <rect x="26" y="44" width="53" height="16" rx="3" fill="#d0d8e0" stroke="#5a6a78" stroke-width="1"/>
+    <rect x="44" y="58" width="17" height="18" rx="2" fill="#e8ecf0" stroke="#5a6a78" stroke-width="1.5"/>
+    <line x1="52" y1="66" x2="52" y2="76" stroke="#5a6a78" stroke-width="1"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">3</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#3d5042" font-weight="500">クリップ準備</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="359,61 367,65 359,69" fill="#9aab9a"/>
+  <line x1="355" y1="65" x2="359" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 4: 中枢・末梢にクリップ -->
+  <g transform="translate(370,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <line x1="20" y1="52" x2="85" y2="52" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <!-- clip symbols (U shapes) -->
+    <path d="M28,44 L28,56 Q34,60 40,56 L40,44" fill="none" stroke="#5a6a78" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M64,44 L64,56 Q70,60 76,56 L76,44" fill="none" stroke="#5a6a78" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="34" y="75" text-anchor="middle" font-size="8" fill="#5a6a78">中枢</text>
+    <text x="70" y="75" text-anchor="middle" font-size="8" fill="#5a6a78">末梢</text>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">4</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">両側にクリップ</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="479,61 487,65 479,69" fill="#9aab9a"/>
+  <line x1="475" y1="65" x2="479" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 5: 間を切離 (PURPLE) -->
+  <g transform="translate(490,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f0fc" stroke="#c8bef0" stroke-width="1.5"/>
+    <line x1="20" y1="52" x2="85" y2="52" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M28,44 L28,56 Q34,60 40,56 L40,44" fill="none" stroke="#5a6a78" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M64,44 L64,56 Q70,60 76,56 L76,44" fill="none" stroke="#5a6a78" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- scissors between clips -->
+    <line x1="45" y1="38" x2="59" y2="52" stroke="#6b52d4" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="59" y1="38" x2="45" y2="52" stroke="#6b52d4" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="43" cy="37" r="3.5" fill="none" stroke="#6b52d4" stroke-width="1.5"/>
+    <circle cx="61" cy="37" r="3.5" fill="none" stroke="#6b52d4" stroke-width="1.5"/>
+    <circle cx="11" cy="11" r="9" fill="#6b52d4"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">5</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#3b2d7a" font-weight="500">間を切離</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="599,61 607,65 599,69" fill="#9aab9a"/>
+  <line x1="595" y1="65" x2="599" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 6: 断端を確認 -->
+  <g transform="translate(610,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- two clipped ends -->
+    <line x1="20" y1="48" x2="44" y2="48" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M36,40 L36,52 Q42,56 48,52 L48,40" fill="none" stroke="#5a6a78" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="61" y1="48" x2="85" y2="48" stroke="#d0a8a8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M57,40 L57,52 Q63,56 69,52 L69,40" fill="none" stroke="#5a6a78" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- check mark -->
+    <polyline points="38,68 46,76 66,58" fill="none" stroke="#1a7a4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">6</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#0d5c3a" font-weight="500">断端を確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="719,61 727,65 719,69" fill="#9aab9a"/>
+  <line x1="715" y1="65" x2="719" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 7: 使用器械・切除片を整理 -->
+  <g transform="translate(730,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- tray icon -->
+    <rect x="22" y="42" width="60" height="36" rx="4" fill="#f0f0f0" stroke="#9090a0" stroke-width="1.5"/>
+    <ellipse cx="52" cy="55" rx="12" ry="8" fill="#ffe0c8" stroke="#c87070" stroke-width="1" stroke-dasharray="2,1"/>
+    <text x="52" y="57" text-anchor="middle" font-size="7" fill="#c87070">切除片</text>
+    <!-- clip icons in tray -->
+    <path d="M30,66 L30,70 Q33,72 36,70 L36,66" fill="none" stroke="#5a6a78" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M40,66 L40,70 Q43,72 46,70 L46,66" fill="none" stroke="#5a6a78" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">7</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">器械・切除片を整理</text>
+  </g>
+</svg>

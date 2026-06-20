@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 145" width="860" height="145" font-family="sans-serif">
+  <rect width="860" height="145" fill="#f5f7f5" rx="6"/>
+
+  <!-- FRAME 1: 組織を剥離 -->
+  <g transform="translate(10,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <ellipse cx="52" cy="50" rx="26" ry="10" fill="#fce8e8" stroke="#c87070" stroke-width="1.5"/>
+    <ellipse cx="52" cy="50" rx="36" ry="20" fill="none" stroke="#e0c8c8" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="16" y1="70" x2="42" y2="52" stroke="#7a8898" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="8" y="65" width="9" height="6" rx="3" fill="#7a8898"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">1</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#3d5042" font-weight="500">組織を剥離</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="119,61 127,65 119,69" fill="#9aab9a"/>
+  <line x1="115" y1="65" x2="119" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 2: 挿入角度を探す -->
+  <g transform="translate(130,10)">
+    <rect width="105" height="110" rx="8" fill="#fef2f0" stroke="#e8b8b8" stroke-width="1.5"/>
+    <ellipse cx="52" cy="68" rx="26" ry="10" fill="#fce8e8" stroke="#c87070" stroke-width="1.5"/>
+    <!-- stapler approaching at angle -->
+    <rect x="48" y="24" width="36" height="16" rx="4" fill="#fce0e0" stroke="#c0392b" stroke-width="2" transform="rotate(-25 66 32)"/>
+    <line x1="30" y1="50" x2="54" y2="62" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+    <!-- angle indicator -->
+    <path d="M30,50 Q38,44 46,50" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <circle cx="11" cy="11" r="9" fill="#c0392b"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">2</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#6b1c1c" font-weight="500">挿入角度を探す</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="239,61 247,65 239,69" fill="#9aab9a"/>
+  <line x1="235" y1="65" x2="239" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 3: カートリッジ確認 -->
+  <g transform="translate(250,10)">
+    <rect width="105" height="110" rx="8" fill="#fef2f0" stroke="#e8b8b8" stroke-width="1.5"/>
+    <!-- cartridge box -->
+    <rect x="28" y="30" width="50" height="30" rx="4" fill="#fce0e0" stroke="#c0392b" stroke-width="2"/>
+    <line x1="35" y1="45" x2="71" y2="45" stroke="#c0392b" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="52" y="43" text-anchor="middle" font-size="8" fill="#c0392b">血管用</text>
+    <!-- check -->
+    <polyline points="34,68 42,76 66,58" fill="none" stroke="#1a7a4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="11" cy="11" r="9" fill="#c0392b"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">3</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#6b1c1c" font-weight="500">カートリッジ確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="359,61 367,65 359,69" fill="#9aab9a"/>
+  <line x1="355" y1="65" x2="359" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 4: 組織を挟む -->
+  <g transform="translate(370,10)">
+    <rect width="105" height="110" rx="8" fill="#fef2f0" stroke="#e8b8b8" stroke-width="1.5"/>
+    <!-- stapler jaw with tissue -->
+    <rect x="22" y="46" width="62" height="12" rx="3" fill="#fce0e0" stroke="#c0392b" stroke-width="2"/>
+    <ellipse cx="52" cy="52" rx="20" ry="6" fill="#fce8e8" stroke="#c87070" stroke-width="1.5"/>
+    <line x1="22" y1="58" x2="84" y2="58" stroke="#c0392b" stroke-width="1.5"/>
+    <rect x="22" y="58" width="62" height="12" rx="3" fill="#fce0e0" stroke="#c0392b" stroke-width="2"/>
+    <circle cx="11" cy="11" r="9" fill="#c0392b"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">4</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#6b1c1c" font-weight="500">組織を挟む</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="479,61 487,65 479,69" fill="#9aab9a"/>
+  <line x1="475" y1="65" x2="479" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 5: 周囲を確認してファイア -->
+  <g transform="translate(490,10)">
+    <rect width="105" height="110" rx="8" fill="#fef2f0" stroke="#e8b8b8" stroke-width="1.5"/>
+    <rect x="22" y="44" width="62" height="22" rx="3" fill="#fce0e0" stroke="#c0392b" stroke-width="2"/>
+    <!-- staple dots -->
+    <circle cx="30" cy="55" r="2" fill="#c0392b"/>
+    <circle cx="38" cy="55" r="2" fill="#c0392b"/>
+    <circle cx="46" cy="55" r="2" fill="#c0392b"/>
+    <circle cx="54" cy="55" r="2" fill="#c0392b"/>
+    <circle cx="62" cy="55" r="2" fill="#c0392b"/>
+    <circle cx="70" cy="55" r="2" fill="#c0392b"/>
+    <circle cx="78" cy="55" r="2" fill="#c0392b"/>
+    <!-- fire indicator -->
+    <text x="86" y="50" font-size="12" fill="#d97a00">!</text>
+    <circle cx="11" cy="11" r="9" fill="#c0392b"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">5</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#6b1c1c" font-weight="500">確認してファイア</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="599,61 607,65 599,69" fill="#9aab9a"/>
+  <line x1="595" y1="65" x2="599" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 6: 切離線を確認 -->
+  <g transform="translate(610,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- two tissue halves with staple lines -->
+    <ellipse cx="36" cy="52" rx="18" ry="10" fill="#fce8e8" stroke="#c87070" stroke-width="1.5"/>
+    <ellipse cx="70" cy="52" rx="18" ry="10" fill="#fce8e8" stroke="#c87070" stroke-width="1.5"/>
+    <!-- staple lines -->
+    <line x1="18" y1="52" x2="54" y2="52" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <line x1="52" y1="52" x2="88" y2="52" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <!-- check mark -->
+    <polyline points="34,72 42,80 66,62" fill="none" stroke="#1a7a4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">6</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#0d5c3a" font-weight="500">切離線を確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="719,61 727,65 719,69" fill="#9aab9a"/>
+  <line x1="715" y1="65" x2="719" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 7: 次のカートリッジ・吸引を準備 -->
+  <g transform="translate(730,10)">
+    <rect width="105" height="110" rx="8" fill="#fef2f0" stroke="#e8b8b8" stroke-width="1.5"/>
+    <!-- spare cartridge -->
+    <rect x="20" y="34" width="36" height="22" rx="3" fill="#fce0e0" stroke="#c0392b" stroke-width="1.5"/>
+    <text x="38" y="48" text-anchor="middle" font-size="7" fill="#c0392b">予備</text>
+    <!-- suction tube (blue) -->
+    <rect x="62" y="28" width="8" height="38" rx="4" fill="#c8daf4" stroke="#1a5fa0" stroke-width="1.5"/>
+    <line x1="66" y1="66" x2="58" y2="76" stroke="#1a5fa0" stroke-width="2" stroke-linecap="round"/>
+    <!-- ready arrow -->
+    <polygon points="42,66 50,66 46,74" fill="#1a7a4e"/>
+    <circle cx="11" cy="11" r="9" fill="#c0392b"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">7</text>
+    <text x="52" y="101" text-anchor="middle" font-size="8.5" fill="#6b1c1c" font-weight="500">次の準備を先読み</text>
+  </g>
+</svg>

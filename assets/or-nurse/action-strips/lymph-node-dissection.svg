@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 145" width="860" height="145" font-family="sans-serif">
+  <rect width="860" height="145" fill="#f5f7f5" rx="6"/>
+
+  <!-- FRAME 1: リンパ節周囲を展開 -->
+  <g transform="translate(10,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <ellipse cx="52" cy="52" rx="20" ry="15" fill="#f0e8f4" stroke="#9070a0" stroke-width="2"/>
+    <text x="52" y="55" text-anchor="middle" font-size="9" fill="#9070a0">LN</text>
+    <ellipse cx="52" cy="52" rx="32" ry="24" fill="none" stroke="#c8c0d4" stroke-width="1" stroke-dasharray="3,2"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">1</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">リンパ節を展開</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="119,61 127,65 119,69" fill="#9aab9a"/>
+  <line x1="115" y1="65" x2="119" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 2: 吸引で視野を作る (BLUE) -->
+  <g transform="translate(130,10)">
+    <rect width="105" height="110" rx="8" fill="#eef4fb" stroke="#b0c8e0" stroke-width="1.5"/>
+    <ellipse cx="52" cy="60" rx="20" ry="15" fill="#f0e8f4" stroke="#9070a0" stroke-width="2"/>
+    <!-- suction tube -->
+    <rect x="26" y="22" width="8" height="42" rx="4" fill="#c8daf4" stroke="#1a5fa0" stroke-width="1.5"/>
+    <line x1="30" y1="64" x2="44" y2="54" stroke="#1a5fa0" stroke-width="2" stroke-linecap="round"/>
+    <!-- suction droplets -->
+    <circle cx="38" cy="40" r="2" fill="#1a5fa0" opacity="0.4"/>
+    <circle cx="42" cy="32" r="1.5" fill="#1a5fa0" opacity="0.3"/>
+    <circle cx="46" cy="26" r="1" fill="#1a5fa0" opacity="0.2"/>
+    <circle cx="11" cy="11" r="9" fill="#1a5fa0"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">2</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#0c3d6e" font-weight="500">吸引で視野確保</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="239,61 247,65 239,69" fill="#9aab9a"/>
+  <line x1="235" y1="65" x2="239" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 3: 綿球で圧排 (GRAY) -->
+  <g transform="translate(250,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <ellipse cx="52" cy="62" rx="20" ry="15" fill="#f0e8f4" stroke="#9070a0" stroke-width="2"/>
+    <!-- cotton ball -->
+    <ellipse cx="34" cy="42" rx="12" ry="10" fill="white" stroke="#9090a0" stroke-width="1.5"/>
+    <ellipse cx="34" cy="42" rx="8" ry="6" fill="#f8f8f8" stroke="#c0c0c0" stroke-width="1"/>
+    <!-- pushing arrow -->
+    <polygon points="42,50 50,56 42,62" fill="#9090a0"/>
+    <circle cx="11" cy="11" r="9" fill="#7a8898"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">3</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#3d5042" font-weight="500">綿球で圧排</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="359,61 367,65 359,69" fill="#9aab9a"/>
+  <line x1="355" y1="65" x2="359" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 4: エネルギーデバイスで剥離 (ORANGE) -->
+  <g transform="translate(370,10)">
+    <rect width="105" height="110" rx="8" fill="#fef6ee" stroke="#e8c888" stroke-width="1.5"/>
+    <ellipse cx="52" cy="62" rx="20" ry="15" fill="#f0e8f4" stroke="#9070a0" stroke-width="2"/>
+    <!-- energy device fork -->
+    <line x1="34" y1="20" x2="44" y2="48" stroke="#d97a00" stroke-width="3" stroke-linecap="round"/>
+    <line x1="54" y1="20" x2="44" y2="48" stroke="#d97a00" stroke-width="3" stroke-linecap="round"/>
+    <line x1="44" y1="48" x2="44" y2="56" stroke="#d97a00" stroke-width="3" stroke-linecap="round"/>
+    <line x1="36" y1="32" x2="52" y2="32" stroke="#d97a00" stroke-width="2" stroke-linecap="round"/>
+    <!-- activation sparks -->
+    <line x1="60" y1="44" x2="64" y2="40" stroke="#d97a00" stroke-width="1.5"/>
+    <line x1="62" y1="46" x2="67" y2="44" stroke="#d97a00" stroke-width="1.5"/>
+    <circle cx="11" cy="11" r="9" fill="#d97a00"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">4</text>
+    <text x="52" y="101" text-anchor="middle" font-size="8.5" fill="#6b3d00" font-weight="500">エネルギーで剥離</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="479,61 487,65 479,69" fill="#9aab9a"/>
+  <line x1="475" y1="65" x2="479" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 5: クリップまたは結紮 (GREEN/GRAY) -->
+  <g transform="translate(490,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- small vessels around lymph node -->
+    <line x1="20" y1="52" x2="50" y2="52" stroke="#d0a8a8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M30,44 L30,56 Q36,60 42,56 L42,44" fill="none" stroke="#5a6a78" stroke-width="2" stroke-linecap="round"/>
+    <!-- or suture (green) -->
+    <path d="M60,44 Q72,38 80,48" fill="none" stroke="#1a7a4e" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="44" x2="56" y2="36" stroke="#1a7a4e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="80" y1="48" x2="84" y2="40" stroke="#1a7a4e" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="52" y="70" text-anchor="middle" font-size="8" fill="#5a6a78">or</text>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">5</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0d5c3a" font-weight="500">クリップ or 結紮</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="599,61 607,65 599,69" fill="#9aab9a"/>
+  <line x1="595" y1="65" x2="599" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 6: リンパ節を摘出 -->
+  <g transform="translate(610,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- lymph node being lifted out -->
+    <ellipse cx="52" cy="50" rx="18" ry="14" fill="#f0e8f4" stroke="#9070a0" stroke-width="2"/>
+    <text x="52" y="53" text-anchor="middle" font-size="9" fill="#9070a0">LN</text>
+    <!-- forceps gripping -->
+    <line x1="44" y1="36" x2="36" y2="20" stroke="#7a8898" stroke-width="2" stroke-linecap="round"/>
+    <line x1="60" y1="36" x2="68" y2="20" stroke="#7a8898" stroke-width="2" stroke-linecap="round"/>
+    <!-- up arrow -->
+    <polygon points="48,76 56,76 52,68" fill="#1a7a4e"/>
+    <line x1="52" y1="76" x2="52" y2="85" stroke="#1a7a4e" stroke-width="1.5"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">6</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#3d5042" font-weight="500">リンパ節を摘出</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="719,61 727,65 719,69" fill="#9aab9a"/>
+  <line x1="715" y1="65" x2="719" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 7: 容器・ラベル確認 -->
+  <g transform="translate(730,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- specimen container -->
+    <rect x="28" y="38" width="50" height="36" rx="4" fill="#f8f4e0" stroke="#c8a830" stroke-width="1.5"/>
+    <ellipse cx="53" cy="52" rx="14" ry="10" fill="#f0e8f4" stroke="#9070a0" stroke-width="1.5"/>
+    <!-- label -->
+    <rect x="30" y="72" width="46" height="12" rx="2" fill="white" stroke="#c8a830" stroke-width="1"/>
+    <text x="53" y="81" text-anchor="middle" font-size="7.5" fill="#6b4800">#7 右 確認</text>
+    <!-- check mark -->
+    <polyline points="62,44 68,50 80,38" fill="none" stroke="#1a7a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">7</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0d5c3a" font-weight="500">容器・ラベル確認</text>
+  </g>
+</svg>

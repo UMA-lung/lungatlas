@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 145" width="860" height="145" font-family="sans-serif">
+  <rect width="860" height="145" fill="#f5f7f5" rx="6"/>
+
+  <!-- FRAME 1: 標本が切離される -->
+  <g transform="translate(10,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- specimen (lung lobe) -->
+    <path d="M24,62 Q20,44 34,34 Q50,24 66,34 Q80,44 76,62 Q66,78 50,81 Q34,78 24,62Z" fill="#ffe8e8" stroke="#c87070" stroke-width="1.5"/>
+    <!-- staple line separating specimen -->
+    <line x1="26" y1="66" x2="74" y2="66" stroke="#c0392b" stroke-width="2" stroke-dasharray="4,3"/>
+    <!-- scissors at staple line -->
+    <line x1="32" y1="56" x2="48" y2="72" stroke="#6b52d4" stroke-width="2" stroke-linecap="round"/>
+    <line x1="48" y1="56" x2="32" y2="72" stroke="#6b52d4" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="11" cy="11" r="9" fill="#6b52d4"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">1</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#3d5042" font-weight="500">標本が切離される</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="119,61 127,65 119,69" fill="#9aab9a"/>
+  <line x1="115" y1="65" x2="119" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 2: エンドバッグを準備 (ORANGE) -->
+  <g transform="translate(130,10)">
+    <rect width="105" height="110" rx="8" fill="#fef6ee" stroke="#e8c888" stroke-width="1.5"/>
+    <!-- endobag: envelope shape -->
+    <path d="M20,38 L52,22 L84,38 L84,82 L20,82 Z" fill="#fef0d8" stroke="#d97a00" stroke-width="2"/>
+    <path d="M20,38 L52,54 L84,38" fill="none" stroke="#d97a00" stroke-width="2"/>
+    <!-- open indicator (V at top) -->
+    <path d="M34,22 L52,30 L70,22" fill="none" stroke="#d97a00" stroke-width="2" stroke-dasharray="3,2"/>
+    <!-- "袋" label -->
+    <text x="52" y="72" text-anchor="middle" font-size="9" fill="#d97a00">標本袋</text>
+    <circle cx="11" cy="11" r="9" fill="#d97a00"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">2</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#6b3d00" font-weight="500">エンドバッグ準備</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="239,61 247,65 239,69" fill="#9aab9a"/>
+  <line x1="235" y1="65" x2="239" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 3: 標本をバッグに -->
+  <g transform="translate(250,10)">
+    <rect width="105" height="110" rx="8" fill="#fef6ee" stroke="#e8c888" stroke-width="1.5"/>
+    <!-- bag -->
+    <path d="M18,52 L52,38 L86,52 L86,86 L18,86 Z" fill="#fef0d8" stroke="#d97a00" stroke-width="2"/>
+    <!-- specimen going in (above bag) -->
+    <ellipse cx="52" cy="36" rx="18" ry="12" fill="#ffe8e8" stroke="#c87070" stroke-width="1.5"/>
+    <!-- down arrow -->
+    <polygon points="46,50 58,50 52,58" fill="#d97a00"/>
+    <line x1="52" y1="48" x2="52" y2="52" stroke="#d97a00" stroke-width="2"/>
+    <circle cx="11" cy="11" r="9" fill="#d97a00"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">3</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#6b3d00" font-weight="500">標本をバッグに</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="359,61 367,65 359,69" fill="#9aab9a"/>
+  <line x1="355" y1="65" x2="359" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 4: 取り出し創から摘出 -->
+  <g transform="translate(370,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- port/incision (vertical oval) -->
+    <ellipse cx="52" cy="70" rx="14" ry="22" fill="#f4e8d8" stroke="#c8a870" stroke-width="2"/>
+    <!-- bag being pulled up through incision -->
+    <path d="M38,54 L52,38 L66,54 L66,68 L38,68 Z" fill="#fef0d8" stroke="#d97a00" stroke-width="1.5"/>
+    <!-- up arrow -->
+    <polygon points="46,36 58,36 52,28" fill="#d97a00"/>
+    <line x1="52" y1="36" x2="52" y2="38" stroke="#d97a00" stroke-width="2"/>
+    <circle cx="11" cy="11" r="9" fill="#7a8898"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">4</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">取り出し創から摘出</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="479,61 487,65 479,69" fill="#9aab9a"/>
+  <line x1="475" y1="65" x2="479" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 5: 標本を潰さず確認 -->
+  <g transform="translate(490,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- specimen on surface -->
+    <ellipse cx="52" cy="52" rx="26" ry="20" fill="#ffe8e8" stroke="#c87070" stroke-width="1.5"/>
+    <!-- gentle hands indication -->
+    <path d="M22,52 Q22,36 30,30" fill="none" stroke="#9090a0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M82,52 Q82,36 74,30" fill="none" stroke="#9090a0" stroke-width="2" stroke-linecap="round"/>
+    <!-- "潰さない" note -->
+    <text x="52" y="55" text-anchor="middle" font-size="8" fill="#6b1c1c">腫瘍を</text>
+    <text x="52" y="65" text-anchor="middle" font-size="8" fill="#6b1c1c">潰さない</text>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">5</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">標本を潰さず確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="599,61 607,65 599,69" fill="#9aab9a"/>
+  <line x1="595" y1="65" x2="599" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 6: 容器・ラベル確認 -->
+  <g transform="translate(610,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- specimen jar -->
+    <rect x="24" y="36" width="56" height="44" rx="6" fill="#f8f4e0" stroke="#c8a830" stroke-width="2"/>
+    <rect x="24" y="36" width="56" height="10" rx="6" fill="#e8c830" stroke="#c8a830" stroke-width="1.5"/>
+    <!-- label -->
+    <rect x="28" y="76" width="48" height="12" rx="2" fill="white" stroke="#c8a830" stroke-width="1"/>
+    <text x="52" y="85" text-anchor="middle" font-size="7.5" fill="#6b4800">右上葉 左右確認</text>
+    <!-- check -->
+    <polyline points="60,46 66,52 78,42" fill="none" stroke="#1a7a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">6</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0d5c3a" font-weight="500">容器・ラベル確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="719,61 727,65 719,69" fill="#9aab9a"/>
+  <line x1="715" y1="65" x2="719" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 7: 迅速病理または固定へ -->
+  <g transform="translate(730,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- two paths: rapid path and fixation -->
+    <!-- rapid pathology -->
+    <rect x="14" y="30" width="36" height="28" rx="4" fill="#eef4fb" stroke="#1a5fa0" stroke-width="1.5"/>
+    <text x="32" y="44" text-anchor="middle" font-size="8" fill="#1a5fa0">迅速</text>
+    <text x="32" y="53" text-anchor="middle" font-size="8" fill="#1a5fa0">病理</text>
+    <!-- or label -->
+    <text x="56" y="48" text-anchor="middle" font-size="9" fill="#5a6a78">or</text>
+    <!-- fixation jar -->
+    <rect x="62" y="30" width="30" height="28" rx="4" fill="#f8f4e0" stroke="#c8a830" stroke-width="1.5"/>
+    <text x="77" y="44" text-anchor="middle" font-size="8" fill="#6b4800">固定</text>
+    <text x="77" y="53" text-anchor="middle" font-size="8" fill="#6b4800">液</text>
+    <!-- forward arrow from both -->
+    <polygon points="44,72 54,68 54,76" fill="#1a7a4e"/>
+    <polygon points="72,72 62,68 62,76" fill="#1a7a4e"/>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">7</text>
+    <text x="52" y="101" text-anchor="middle" font-size="8.5" fill="#0d5c3a" font-weight="500">迅速病理 or 固定</text>
+  </g>
+</svg>

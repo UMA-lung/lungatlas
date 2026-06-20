@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 145" width="860" height="145" font-family="sans-serif">
+  <rect width="860" height="145" fill="#f5f7f5" rx="6"/>
+
+  <!-- FRAME 1: 肺切離面を確認 -->
+  <g transform="translate(10,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <path d="M26,64 Q22,44 36,34 Q52,26 68,34 Q82,44 78,64 Q68,80 52,83 Q36,80 26,64Z" fill="#fff0f0" stroke="#c87070" stroke-width="1.5"/>
+    <!-- staple line on surface -->
+    <line x1="30" y1="60" x2="74" y2="60" stroke="#c0392b" stroke-width="2"/>
+    <circle cx="34" cy="60" r="1.5" fill="#c0392b"/>
+    <circle cx="42" cy="60" r="1.5" fill="#c0392b"/>
+    <circle cx="50" cy="60" r="1.5" fill="#c0392b"/>
+    <circle cx="58" cy="60" r="1.5" fill="#c0392b"/>
+    <circle cx="66" cy="60" r="1.5" fill="#c0392b"/>
+    <!-- check mark -->
+    <polyline points="32,72 40,80 58,64" fill="none" stroke="#1a7a4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">1</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0d5c3a" font-weight="500">切離面を確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="119,61 127,65 119,69" fill="#9aab9a"/>
+  <line x1="115" y1="65" x2="119" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 2: 生食を入れる (BLUE) -->
+  <g transform="translate(130,10)">
+    <rect width="105" height="110" rx="8" fill="#eef4fb" stroke="#b0c8e0" stroke-width="1.5"/>
+    <!-- chest cavity with saline -->
+    <path d="M26,64 Q22,44 36,34 Q52,26 68,34 Q82,44 78,64 Q68,80 52,83 Q36,80 26,64Z" fill="#fff0f0" stroke="#c87070" stroke-width="1.5"/>
+    <!-- saline pool at bottom -->
+    <ellipse cx="52" cy="76" rx="22" ry="6" fill="#c8e8f8" stroke="#1a5fa0" stroke-width="1"/>
+    <!-- pouring saline from syringe -->
+    <rect x="66" y="18" width="8" height="22" rx="3" fill="#e0f0fc" stroke="#1a5fa0" stroke-width="1.5"/>
+    <polygon points="66,38 74,38 70,44" fill="#1a5fa0"/>
+    <!-- drops -->
+    <line x1="70" y1="44" x2="68" y2="56" stroke="#1a5fa0" stroke-width="1.5" stroke-dasharray="2,3"/>
+    <circle cx="11" cy="11" r="9" fill="#1a5fa0"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">2</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#0c3d6e" font-weight="500">生食を入れる</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="239,61 247,65 239,69" fill="#9aab9a"/>
+  <line x1="235" y1="65" x2="239" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 3: 麻酔科に換気を依頼 -->
+  <g transform="translate(250,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- speech bubble indicating communication -->
+    <path d="M20,28 L80,28 Q86,28 86,34 L86,60 Q86,66 80,66 L56,66 L50,76 L44,66 L20,66 Q14,66 14,60 L14,34 Q14,28 20,28Z" fill="#e8f0f8" stroke="#5a78a0" stroke-width="1.5"/>
+    <text x="50" y="44" text-anchor="middle" font-size="9" fill="#0c3d6e" font-weight="500">麻酔科</text>
+    <text x="50" y="56" text-anchor="middle" font-size="8.5" fill="#0c3d6e">換気お願い</text>
+    <!-- lung inflating indication -->
+    <path d="M36,85 Q52,78 68,85" fill="none" stroke="#c87070" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">3</text>
+    <text x="52" y="101" text-anchor="middle" font-size="8.5" fill="#3d5042" font-weight="500">麻酔科に換気依頼</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="359,61 367,65 359,69" fill="#9aab9a"/>
+  <line x1="355" y1="65" x2="359" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 4: 気泡を見る (BLUE) -->
+  <g transform="translate(370,10)">
+    <rect width="105" height="110" rx="8" fill="#eef4fb" stroke="#b0c8e0" stroke-width="1.5"/>
+    <!-- saline pool -->
+    <ellipse cx="52" cy="72" rx="32" ry="8" fill="#c8e8f8" stroke="#1a5fa0" stroke-width="1"/>
+    <!-- lung submerged -->
+    <path d="M26,68 Q22,52 36,44 Q52,38 68,44 Q82,52 78,68" fill="#fff0f0" stroke="#c87070" stroke-width="1.5"/>
+    <!-- staple line -->
+    <line x1="30" y1="64" x2="74" y2="64" stroke="#c0392b" stroke-width="1.5"/>
+    <!-- bubbles rising from no-leak point (good case) -->
+    <circle cx="52" cy="60" r="2.5" fill="none" stroke="#1a5fa0" stroke-width="1.5"/>
+    <circle cx="48" cy="52" r="2" fill="none" stroke="#1a5fa0" stroke-width="1.5"/>
+    <circle cx="56" cy="48" r="1.5" fill="none" stroke="#1a5fa0" stroke-width="1.5"/>
+    <circle cx="11" cy="11" r="9" fill="#1a5fa0"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">4</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#0c3d6e" font-weight="500">気泡を見る</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="479,61 487,65 479,69" fill="#9aab9a"/>
+  <line x1="475" y1="65" x2="479" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 5: リーク部位を確認 -->
+  <g transform="translate(490,10)">
+    <rect width="105" height="110" rx="8" fill="#fef6ee" stroke="#e8c888" stroke-width="1.5"/>
+    <ellipse cx="52" cy="72" rx="32" ry="8" fill="#c8e8f8" stroke="#1a5fa0" stroke-width="1"/>
+    <path d="M26,68 Q22,52 36,44 Q52,38 68,44 Q82,52 78,68" fill="#fff0f0" stroke="#c87070" stroke-width="1.5"/>
+    <line x1="30" y1="64" x2="74" y2="64" stroke="#c0392b" stroke-width="1.5"/>
+    <!-- bubble cluster at leak point -->
+    <circle cx="42" cy="62" r="3" fill="none" stroke="#d97a00" stroke-width="2"/>
+    <circle cx="38" cy="54" r="2.5" fill="none" stroke="#d97a00" stroke-width="1.5"/>
+    <circle cx="45" cy="48" r="2" fill="none" stroke="#d97a00" stroke-width="1.5"/>
+    <!-- pointer -->
+    <line x1="62" y1="42" x2="46" y2="58" stroke="#d97a00" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="46,58 42,52 52,52" fill="#d97a00"/>
+    <circle cx="11" cy="11" r="9" fill="#d97a00"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">5</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#6b3d00" font-weight="500">リーク部位を確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="599,61 607,65 599,69" fill="#9aab9a"/>
+  <line x1="595" y1="65" x2="599" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 6: 追加縫合・被覆材を準備 (GREEN) -->
+  <g transform="translate(610,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- suture needle (green) -->
+    <path d="M28,32 Q44,20 58,36" fill="none" stroke="#1a7a4e" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="58" cy="36" r="3" fill="#1a7a4e"/>
+    <!-- sealant patch -->
+    <rect x="28" y="50" width="50" height="22" rx="4" fill="#d8f0e8" stroke="#1a7a4e" stroke-width="1.5"/>
+    <text x="53" y="65" text-anchor="middle" font-size="8" fill="#0d5c3a">被覆材</text>
+    <!-- or label -->
+    <text x="52" y="46" text-anchor="middle" font-size="8" fill="#5a6a78">or</text>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">6</text>
+    <text x="52" y="101" text-anchor="middle" font-size="8.5" fill="#0d5c3a" font-weight="500">追加縫合・被覆材</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="719,61 727,65 719,69" fill="#9aab9a"/>
+  <line x1="715" y1="65" x2="719" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 7: 吸引して次の操作へ (BLUE) -->
+  <g transform="translate(730,10)">
+    <rect width="105" height="110" rx="8" fill="#eef4fb" stroke="#b0c8e0" stroke-width="1.5"/>
+    <!-- cleared saline with suction -->
+    <ellipse cx="52" cy="72" rx="26" ry="6" fill="#e8f4fc" stroke="#1a5fa0" stroke-width="1"/>
+    <path d="M30,68 Q26,54 38,46 Q52,40 66,46 Q78,54 74,68" fill="#fff8f8" stroke="#c87070" stroke-width="1.5"/>
+    <!-- suction tube -->
+    <rect x="36" y="22" width="8" height="40" rx="4" fill="#c8daf4" stroke="#1a5fa0" stroke-width="1.5"/>
+    <line x1="40" y1="62" x2="52" y2="66" stroke="#1a5fa0" stroke-width="2" stroke-linecap="round"/>
+    <!-- forward arrow -->
+    <polygon points="66,52 76,48 76,56" fill="#1a7a4e"/>
+    <line x1="56" y1="52" x2="66" y2="52" stroke="#1a7a4e" stroke-width="2"/>
+    <circle cx="11" cy="11" r="9" fill="#1a5fa0"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">7</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0c3d6e" font-weight="500">吸引して次へ</text>
+  </g>
+</svg>

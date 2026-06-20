@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 145" width="860" height="145" font-family="sans-serif">
+  <rect width="860" height="145" fill="#f5f7f5" rx="6"/>
+
+  <!-- FRAME 1: 術者が次の操作を見ている -->
+  <g transform="translate(10,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- monitor screen -->
+    <rect x="18" y="22" width="68" height="50" rx="4" fill="#1a2a3a" stroke="#5a7098" stroke-width="2"/>
+    <ellipse cx="52" cy="42" rx="22" ry="16" fill="#2a3a4a"/>
+    <!-- operating image on monitor (simplified) -->
+    <ellipse cx="52" cy="42" rx="14" ry="10" fill="#3a5a48" opacity="0.8"/>
+    <line x1="44" y1="40" x2="60" y2="40" stroke="#90c090" stroke-width="1" opacity="0.6"/>
+    <!-- surgeon eyes on monitor -->
+    <text x="52" y="80" text-anchor="middle" font-size="8" fill="#5a7098">モニターを注視</text>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">1</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">術者が次を見る</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="119,61 127,65 119,69" fill="#9aab9a"/>
+  <line x1="115" y1="65" x2="119" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 2: カメラ視野が変わる -->
+  <g transform="translate(130,10)">
+    <rect width="105" height="110" rx="8" fill="#eef4fb" stroke="#b0c8e0" stroke-width="1.5"/>
+    <!-- monitor with view change arrows -->
+    <rect x="18" y="22" width="68" height="46" rx="4" fill="#1a2a3a" stroke="#5a7098" stroke-width="2"/>
+    <!-- camera pan/tilt arrows -->
+    <polygon points="26,36 22,44 30,44" fill="#5a7098"/>
+    <polygon points="78,36 82,44 74,44" fill="#5a7098"/>
+    <line x1="26" y1="44" x2="30" y2="44" stroke="#5a7098" stroke-width="1"/>
+    <line x1="74" y1="44" x2="78" y2="44" stroke="#5a7098" stroke-width="1"/>
+    <!-- center image -->
+    <ellipse cx="52" cy="42" rx="14" ry="10" fill="#2a4a38" opacity="0.8"/>
+    <!-- camera icon (blue) -->
+    <rect x="34" y="72" width="36" height="20" rx="4" fill="#c8daf4" stroke="#1a5fa0" stroke-width="1.5"/>
+    <circle cx="52" cy="82" r="5" fill="#1a5fa0"/>
+    <circle cx="52" cy="82" r="3" fill="#0c3d6e"/>
+    <circle cx="11" cy="11" r="9" fill="#1a5fa0"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">2</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0c3d6e" font-weight="500">カメラ視野が変わる</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="239,61 247,65 239,69" fill="#9aab9a"/>
+  <line x1="235" y1="65" x2="239" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 3: 鉗子交換の指示 -->
+  <g transform="translate(250,10)">
+    <rect width="105" height="110" rx="8" fill="#fef6ee" stroke="#e8c888" stroke-width="1.5"/>
+    <!-- speech from surgeon (right side) to scrub (left) -->
+    <path d="M54,26 L90,26 Q96,26 96,32 L96,52 Q96,58 90,58 L70,58 L64,66 L58,58 L54,58 Q48,58 48,52 L48,32 Q48,26 54,26Z" fill="#fef0d8" stroke="#d97a00" stroke-width="1.5"/>
+    <text x="72" y="40" text-anchor="middle" font-size="8" fill="#6b3d00">次は</text>
+    <text x="72" y="50" text-anchor="middle" font-size="8" fill="#6b3d00">●●で</text>
+    <!-- listening scrub -->
+    <circle cx="22" cy="44" r="12" fill="#e8f0f8" stroke="#1a5fa0" stroke-width="1.5"/>
+    <text x="22" y="48" text-anchor="middle" font-size="10" fill="#1a5fa0">聴</text>
+    <circle cx="11" cy="11" r="9" fill="#d97a00"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">3</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#6b3d00" font-weight="500">交換の指示を受ける</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="359,61 367,65 359,69" fill="#9aab9a"/>
+  <line x1="355" y1="65" x2="359" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 4: 器械を渡す -->
+  <g transform="translate(370,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- instrument being handed off -->
+    <!-- instrument (forceps shape) -->
+    <line x1="24" y1="28" x2="58" y2="58" stroke="#7a8898" stroke-width="3" stroke-linecap="round"/>
+    <line x1="28" y1="22" x2="62" y2="52" stroke="#7a8898" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- handle circles (handing) -->
+    <circle cx="22" cy="30" r="5" fill="none" stroke="#7a8898" stroke-width="2"/>
+    <circle cx="26" cy="22" r="5" fill="none" stroke="#7a8898" stroke-width="2"/>
+    <!-- receiving hand area (glove) -->
+    <path d="M62,52 Q72,44 80,52 Q84,58 78,64 Q70,68 62,64 Q56,60 62,52Z" fill="#f0f0e8" stroke="#9090a0" stroke-width="1.5"/>
+    <!-- passing arrow -->
+    <polygon points="52,68 62,64 56,74" fill="#1a7a4e"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">4</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#3d5042" font-weight="500">器械を渡す</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="479,61 487,65 479,69" fill="#9aab9a"/>
+  <line x1="475" y1="65" x2="479" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 5: コード・向き・先端を確認 -->
+  <g transform="translate(490,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- instrument with check points -->
+    <line x1="24" y1="28" x2="80" y2="72" stroke="#7a8898" stroke-width="3" stroke-linecap="round"/>
+    <!-- cord check (tip) -->
+    <circle cx="78" cy="72" r="6" fill="none" stroke="#1a7a4e" stroke-width="2"/>
+    <text x="89" y="72" font-size="8" fill="#1a7a4e">先</text>
+    <!-- direction check (middle) -->
+    <circle cx="52" cy="50" r="6" fill="none" stroke="#1a7a4e" stroke-width="2"/>
+    <text x="63" y="50" font-size="8" fill="#1a7a4e">向</text>
+    <!-- cord check (handle) -->
+    <circle cx="26" cy="30" r="6" fill="none" stroke="#1a7a4e" stroke-width="2"/>
+    <text x="14" y="30" font-size="8" fill="#1a7a4e">紐</text>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">5</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0d5c3a" font-weight="500">コード・向き・先端確認</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="599,61 607,65 599,69" fill="#9aab9a"/>
+  <line x1="595" y1="65" x2="599" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 6: 使用済み器械を受け取る -->
+  <g transform="translate(610,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- used instrument coming back -->
+    <line x1="80" y1="28" x2="44" y2="62" stroke="#9090a0" stroke-width="3" stroke-linecap="round"/>
+    <line x1="76" y1="22" x2="40" y2="56" stroke="#9090a0" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- receiving tray/area -->
+    <rect x="18" y="66" width="44" height="22" rx="4" fill="#f0f0f0" stroke="#9090a0" stroke-width="1.5"/>
+    <text x="40" y="80" text-anchor="middle" font-size="8" fill="#5a6a78">返却</text>
+    <!-- down arrow -->
+    <polygon points="36,62 44,62 40,68" fill="#5a6a78"/>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">6</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">使用済みを受け取る</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="719,61 727,65 719,69" fill="#9aab9a"/>
+  <line x1="715" y1="65" x2="719" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 7: 次の器械を予測 -->
+  <g transform="translate(730,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- monitor (small) -->
+    <rect x="14" y="20" width="42" height="32" rx="3" fill="#1a2a3a" stroke="#5a7098" stroke-width="1.5"/>
+    <ellipse cx="35" cy="36" rx="12" ry="8" fill="#2a4a38" opacity="0.8"/>
+    <!-- arrow pointing to next instrument ready -->
+    <polygon points="58,36 66,32 66,40" fill="#1a7a4e"/>
+    <line x1="56" y1="36" x2="58" y2="36" stroke="#1a7a4e" stroke-width="2"/>
+    <!-- next instrument ready -->
+    <line x1="68" y1="22" x2="90" y2="44" stroke="#7a8898" stroke-width="3" stroke-linecap="round"/>
+    <line x1="72" y1="16" x2="94" y2="38" stroke="#7a8898" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="68" cy="22" r="4" fill="none" stroke="#7a8898" stroke-width="2"/>
+    <circle cx="72" cy="16" r="4" fill="none" stroke="#7a8898" stroke-width="2"/>
+    <!-- question mark (predict) -->
+    <text x="78" y="62" text-anchor="middle" font-size="14" fill="#1a7a4e" font-weight="bold">?</text>
+    <text x="52" y="76" text-anchor="middle" font-size="8" fill="#0d5c3a">先読みして準備</text>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">7</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0d5c3a" font-weight="500">次の器械を予測</text>
+  </g>
+</svg>

@@ -285,6 +285,99 @@ body {
 .footer-logo { font-weight: 600; color: var(--text); }
 .footer-logo span { color: var(--green-mid); }
 
+/* ACTION STRIP CARDS */
+.action-section-intro {
+  font-size: 13px; color: var(--text2); line-height: 1.75;
+  background: var(--green-pale); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 16px; margin-bottom: 20px;
+}
+
+.action-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 20px; overflow: hidden;
+}
+.action-card-head {
+  padding: 13px 18px 11px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.action-card-num {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  color: var(--green-mid); background: var(--green-light);
+  padding: 2px 8px; border-radius: 6px; flex-shrink: 0;
+}
+.action-card-title {
+  font-size: 13.5px; font-weight: 600; color: var(--text);
+}
+.strip-scroll {
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  padding: 14px 16px 10px; background: #f0f4f1;
+  border-bottom: 1px solid var(--border);
+}
+.strip-scroll img {
+  display: block; height: 145px; width: auto; max-width: none;
+}
+.strip-color-key {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 8px 16px; background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+.color-chip {
+  font-size: 10px; padding: 2px 8px; border-radius: 8px; font-weight: 500;
+}
+.chip-blue   { background: #ddeefa; color: #0c3d6e; }
+.chip-green  { background: var(--green-light); color: var(--green-dark); }
+.chip-purple { background: var(--purple-light); color: var(--purple-dark); }
+.chip-orange { background: var(--amber-light); color: var(--amber-dark); }
+.chip-red    { background: var(--red-light); color: var(--red-dark); }
+.chip-gray   { background: #eaeaea; color: #4a5060; }
+
+.strip-meta {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; padding: 0;
+}
+.strip-meta-col {
+  padding: 12px 16px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.strip-meta-col:nth-child(2n) { border-right: none; }
+.strip-meta-col:nth-last-child(-n+2) { border-bottom: none; }
+.strip-meta-label {
+  font-size: 9.5px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 6px;
+}
+.strip-meta-body {
+  font-size: 12px; color: var(--text2); line-height: 1.7;
+}
+.strip-meta-body ul { padding-left: 14px; }
+.strip-meta-body li { margin-bottom: 2px; }
+
+.strip-senior-memo {
+  padding: 10px 16px; background: var(--amber-light);
+  border-top: 1px solid #e8c888; font-size: 12px;
+  color: var(--amber-dark); line-height: 1.7;
+}
+.strip-senior-memo strong { color: #5a3000; }
+
+/* GROWTH POINTS */
+.growth-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 20px;
+}
+.growth-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px;
+  border-left: 3px solid var(--green-mid);
+}
+.growth-if {
+  font-size: 11px; font-weight: 600; color: var(--green-dark);
+  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px;
+}
+.growth-then {
+  font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px;
+}
+.growth-body { font-size: 12px; color: var(--text2); line-height: 1.65; }
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .sidebar { display: none; }
@@ -292,6 +385,11 @@ body {
   .concept-grid { grid-template-columns: 1fr; }
   .scene-cols { grid-template-columns: 1fr; }
   .checklist-grid { grid-template-columns: 1fr; }
+  .strip-meta { grid-template-columns: 1fr; }
+  .strip-meta-col { border-right: none; }
+  .strip-meta-col:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .strip-meta-col:last-child { border-bottom: none; }
+  .growth-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -325,6 +423,18 @@ fetch('/lungatlas/nav.html')
       <a class="sb-item" href="#mistakes">やりがちなミス</a>
       <a class="sb-item" href="#surgeon-view">術者目線</a>
       <a class="sb-item" href="#checklist">5分チェックリスト</a>
+      <a class="sb-item" href="#action-strips">一動作で読む流れ</a>
+      <a class="sb-sub" href="#strip-vessel">血管結紮・切離</a>
+      <a class="sb-sub" href="#strip-clip">クリップ処理</a>
+      <a class="sb-sub" href="#strip-stapler">自動縫合器</a>
+      <a class="sb-sub" href="#strip-lymph">リンパ節郭清</a>
+      <a class="sb-sub" href="#strip-adhesion">癒着剥離</a>
+      <a class="sb-sub" href="#strip-leak">リークテスト</a>
+      <a class="sb-sub" href="#strip-specimen">標本摘出</a>
+      <a class="sb-sub" href="#strip-drain">ドレーン閉創</a>
+      <a class="sb-sub" href="#strip-bleeding">出血時</a>
+      <a class="sb-sub" href="#strip-vats">VATS/RATS交換</a>
+      <a class="sb-item" href="#growth-points">新人が伸びる見方</a>
     </div>
     <div class="sb-section" style="margin-top:12px">
       <div class="sb-head">凡例</div>
@@ -964,6 +1074,481 @@ fetch('/lungatlas/nav.html')
           <li><span class="check-icon">☐</span>閉胸前はカウント・ドレーン・検体を確認する</li>
         </ul>
       </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===================== SECTION: ACTION STRIPS ===================== -->
+    <h2 class="sec-h2" id="action-strips">一動作で読む 呼吸器外科の流れ</h2>
+
+    <div class="action-section-intro">
+      各場面を7コマのステップ図で示す。左から右へ操作が進む。器械の色は下の凡例に対応。<strong>スマートフォンでは横スクロールで確認できる。</strong><br>
+      <small style="color:var(--text3)">施設・術者によって手順は異なる。このイラストは場面の把握を目的とした教材であり、実際の手術手順書の代わりにはならない。</small>
+    </div>
+
+    <div class="strip-color-key">
+      <span class="color-chip chip-gray">▮ 解剖・剥離</span>
+      <span class="color-chip chip-green">▮ 糸・結紮</span>
+      <span class="color-chip chip-blue">▮ 吸引</span>
+      <span class="color-chip chip-purple">▮ ハサミ</span>
+      <span class="color-chip chip-orange">▮ エネルギーデバイス</span>
+      <span class="color-chip chip-red">▮ 自動縫合器</span>
+    </div>
+
+    <!-- CARD 1: 血管結紮・切離 -->
+    <div class="action-card" id="strip-vessel">
+      <div class="action-card-head">
+        <span class="action-card-num">01</span>
+        <span class="action-card-title">血管周囲の剥離から結紮・切離まで</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/vessel-ligation.svg" alt="血管剥離・結紮・切離のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            血管周囲をゆっくり剥離 → 裏に器械を通す → 糸を通す → 結紮 → 結び目を送る → デバイスまたはハサミで切離 → 糸端をカット
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>結紮が始まったら<strong>ハサミを意識</strong></li>
+              <li>糸が2本出ていれば両端切りになることも</li>
+              <li>切離後は糸端・小ガーゼの回収を確認</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            裏を通す操作中は「引っかかっていないか」を見る。結紮後は糸端だけでなく、術野に残っているものが増えていないか確認する。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            取る側（助手）が糸を持つ場面では、強く引きすぎず術者の手元を見る。糸くず・綿球・小ガーゼの回収まで一連の動作として覚える。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: クリップ処理 -->
+    <div class="action-card" id="strip-clip">
+      <div class="action-card-head">
+        <span class="action-card-num">02</span>
+        <span class="action-card-title">細い血管・リンパ管のクリップ処理</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/clip-division.svg" alt="クリップ処理のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            細い索状物を確認 → 周囲を剥離 → クリップ鉗子を準備 → 中枢・末梢の両側にクリップ → 間を切離 → 断端の確認 → 使用器械・切除片の整理
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>クリップ後は<strong>切離器械（ハサミ・エネルギー）</strong>が必要</li>
+              <li>クリップは1発で終わらないことがある</li>
+              <li>サイズの違いに注意（ML・L・XL）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            クリップをかける前は吸引で視野を確保しているかを見る。クリップ後は「次は切離」と意識して切離器械を手元に持っておく。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            クリップの残数が少ない時は早めに外回りに伝える。切除片（細い索状物）が術野に残らないよう、切離後は回収を確認する。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: 自動縫合器 -->
+    <div class="action-card" id="strip-stapler">
+      <div class="action-card-head">
+        <span class="action-card-num">03</span>
+        <span class="action-card-title">自動縫合器が出る場面</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/stapler-sequence.svg" alt="自動縫合器使用のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            組織を剥離・展開 → 挿入角度を探す → カートリッジ確認 → 組織を挟む → 周囲をクリアにしてファイア → 切離線を確認 → 次の準備（カートリッジ・吸引）
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>ファイア後は<strong>予備カートリッジを意識</strong></li>
+              <li>血管用・気管支用・肺実質用で選択が変わる</li>
+              <li>挟み直しがあるので片付けを急がない</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            角度を探している時間は「次の選択肢を準備する時間」。ステープラーが入らなければ別サイズや別角度が必要になるかもしれない。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            1発で終わると思わない。カートリッジを使い切った後に追加が必要になることが多い。外回りは在庫をあらかじめ確認しておく。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: リンパ節郭清 -->
+    <div class="action-card" id="strip-lymph">
+      <div class="action-card-head">
+        <span class="action-card-num">04</span>
+        <span class="action-card-title">リンパ節郭清でよく起きる動き</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/lymph-node-dissection.svg" alt="リンパ節郭清のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            リンパ節周囲を展開 → 吸引で視野を作る → 綿球で圧排 → エネルギーデバイスで剥離 → クリップまたは結紮 → リンパ節を摘出 → 容器・ラベル確認
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>吸引と綿球が途切れないようにする</li>
+              <li>摘出後は<strong>すぐに検体容器とラベル</strong></li>
+              <li>次のリンパ節に移る前に処理を完了</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            じわじわした出血が起きやすい。吸引量の変化を見る。リンパ節の部位名・左右・ステーション番号を取り間違えないよう、摘出の瞬間に確認する。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            検体が小さいので紛失に注意。迅速病理か永久病理かをその場で確認する。「右か左か」「何番か」を曖昧にしない。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5: 癒着剥離 -->
+    <div class="action-card" id="strip-adhesion">
+      <div class="action-card-head">
+        <span class="action-card-num">05</span>
+        <span class="action-card-title">癒着剥離では視野と出血に集中</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/adhesion-dissection.svg" alt="癒着剥離のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            癒着範囲を確認 → 肺を愛護的に把持 → 鈍的に剥離 → エネルギーデバイスで切離 → にじむ出血を圧迫 → 吸引で視野確保 → 次の剥離面へ進む
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>出血・肺損傷・エアリークに注意</li>
+              <li>吸引・綿球・ガーゼを先回りして準備</li>
+              <li>強い癒着なら<strong>開胸器械の場所を確認</strong></li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            肺を強くつかみすぎない場面。術者が「動かさないで」と言ったら一切動かさない。カメラが汚れやすいので拭く準備も持っておく。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            癒着剥離は時間がかかる。焦らず、吸引と圧迫を切らさない。「癒着が強い」という言葉が聞こえたら、外回りは開胸器械の準備状況を静かに確認する。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 6: リークテスト -->
+    <div class="action-card" id="strip-leak">
+      <div class="action-card-head">
+        <span class="action-card-num">06</span>
+        <span class="action-card-title">リークテスト前後の動き</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/air-leak-test.svg" alt="リークテストのステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            切離面を確認 → 生食を胸腔内に入れる → 麻酔科に換気を依頼 → 気泡が出るか見る → リーク部位を確認 → 追加縫合または被覆材 → 吸引して次へ
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>「水入れて」の前に<strong>生食と吸引を準備</strong></li>
+              <li>リークがあれば縫合糸またはシーラントを準備</li>
+              <li>気泡の場所を見逃さないよう視野を確保</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            生食を入れたら肺を膨らませる前に「準備できているか」を確認する。気泡が出た場所を口頭で共有する場合もある。見逃さないよう集中する。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            リークが出た場合、場所・数・大きさによって対応が変わる。追加縫合かシーラントか術者が判断するので、両方を準備できる状態にしておく。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 7: 標本摘出 -->
+    <div class="action-card" id="strip-specimen">
+      <div class="action-card-head">
+        <span class="action-card-num">07</span>
+        <span class="action-card-title">標本摘出と病理提出</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/specimen-retrieval.svg" alt="標本摘出のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            標本が切離される → エンドバッグを準備 → 標本をバッグに入れる → 取り出し創から摘出 → 標本を潰さず確認 → 容器・ラベル確認 → 迅速病理または固定
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>切離が近づいたら<strong>エンドバッグを準備</strong></li>
+              <li>摘出後すぐに検体容器・ラベルを確認</li>
+              <li>迅速病理なら外回りが病理科に連絡</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            腫瘍を潰さないよう丁寧に扱う。標本が出た瞬間に「右肺上葉」「左右」「マーキング有無」を確認する。摘出後は検体処理に集中する。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            標本袋から標本を出す際に潰してしまう事故が起こりやすい。ラベルと左右の確認は2人以上で声に出して行う。迅速がある場合は時間が重要。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 8: ドレーン・閉創 -->
+    <div class="action-card" id="strip-drain">
+      <div class="action-card-head">
+        <span class="action-card-num">08</span>
+        <span class="action-card-title">ドレーンから閉創まで</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/drain-closure.svg" alt="ドレーン・閉創のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            胸腔内を最終確認 → ドレーンを準備 → ドレーンを挿入 → 位置確認 → 固定糸を準備 → カウント確認 → ドレッシング
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>ドレーンが出たら<strong>閉創が近い</strong>と考える</li>
+              <li>ドレーンバッグ・陰圧設定・接続先を確認</li>
+              <li>閉創前にカウントを一致させる</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            ドレーンの種類と本数を確認する。固定糸・ドレッシング・接続を段取りよく準備する。検体提出が残っていないか確認する。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            閉創前こそ気を抜かない。カウントを後回しにすると、縫合が進んでから数が合わないことになる。疲れが出やすい時間だが最も重要な確認場面。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 9: 出血時 -->
+    <div class="action-card" id="strip-bleeding">
+      <div class="action-card-head">
+        <span class="action-card-num">09</span>
+        <span class="action-card-title">出血時に新人が止まらないための動き</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/bleeding-response.svg" alt="出血時対応のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            出血を認識 → 吸引を要求 → 圧迫用ガーゼ・綿球 → 血管鉗子・クリップ・糸を準備 → 追加器械を外回りへ依頼 → 開胸移行の可能性を念頭に → 使用物品とガーゼを管理
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>まず<strong>吸引を切らさない</strong></li>
+              <li>圧迫できるものをすぐ出す（ガーゼ・綿球）</li>
+              <li>必要物品を短く復唱する</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            慌てて術野から目を離さない。術者の「圧迫」「鉗子」「開胸」という言葉に素早く反応する。ガーゼ数の管理が乱れやすいので意識する。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            出血時は器械出しは手元を崩さず術野に集中し、外回りは追加物品と人員の手配を担う。二人がそれぞれの役割を静かに果たすことが大事。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 10: VATS/RATS器械交換 -->
+    <div class="action-card" id="strip-vats">
+      <div class="action-card-head">
+        <span class="action-card-num">10</span>
+        <span class="action-card-title">胸腔鏡・ロボット手術の器械交換</span>
+      </div>
+      <div class="strip-scroll">
+        <img src="assets/or-nurse/action-strips/vats-rats-exchange.svg" alt="VATS/RATS器械交換のステップ図" height="145">
+      </div>
+      <div class="strip-meta">
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">術者の動き</div>
+          <div class="strip-meta-body">
+            術者が次の操作をモニターで見る → カメラ視野が変わる → 鉗子交換の指示 → 器械を渡す → コード・向き・先端を確認 → 使用済み器械を受け取る → 次の器械を予測
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">次に出すもの</div>
+          <div class="strip-meta-body">
+            <ul>
+              <li>画面と術者の手元を両方見る</li>
+              <li>コード類の絡まりに注意</li>
+              <li>ロボットではアーム交換・ドッキング中に操作が止まりやすい</li>
+            </ul>
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">新人が見るポイント</div>
+          <div class="strip-meta-body">
+            開腹・開胸と異なり、モニター越しに操作を見ることになる。モニターの映像と渡す器械が一致しているか確認する習慣をつける。
+          </div>
+        </div>
+        <div class="strip-meta-col">
+          <div class="strip-meta-label">先輩メモ</div>
+          <div class="strip-meta-body">
+            VATSとRATSでは器械交換の頻度・方法が異なる。施設ごとに手順が決まっているので、まず自施設の流れを覚える。コードの方向は渡す前に確認する癖をつける。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===================== SECTION: 新人が伸びる見方 ===================== -->
+    <h2 class="sec-h2" id="growth-points">新人が伸びる見方</h2>
+
+    <div class="tip-box">
+      手術は「器械名」だけで覚えようとすると限界がある。<strong>「流れ」で覚える</strong>と、初めて入る術式でも次が予測できるようになる。
+    </div>
+
+    <div class="growth-grid">
+      <div class="growth-card">
+        <div class="growth-if">糸が出たら</div>
+        <div class="growth-then">次はハサミ</div>
+        <div class="growth-body">結紮した後は必ず糸を切る。糸切りが終わるまでハサミを意識し続ける。</div>
+      </div>
+      <div class="growth-card">
+        <div class="growth-if">剥離が深くなったら</div>
+        <div class="growth-then">吸引と圧迫を準備</div>
+        <div class="growth-body">深い剥離ほど出血リスクが上がる。吸引と圧迫用のガーゼを常に意識する。</div>
+      </div>
+      <div class="growth-card">
+        <div class="growth-if">自動縫合器が出たら</div>
+        <div class="growth-then">カートリッジと予備を確認</div>
+        <div class="growth-body">1発で終わることは少ない。部位に合ったカートリッジの予備があるか確認する。</div>
+      </div>
+      <div class="growth-card">
+        <div class="growth-if">標本が外れたら</div>
+        <div class="growth-then">エンドバッグと容器を準備</div>
+        <div class="growth-body">標本摘出・検体ラベル・病理提出まで一連の流れとして準備する。</div>
+      </div>
+      <div class="growth-card">
+        <div class="growth-if">閉創が近づいたら</div>
+        <div class="growth-then">ドレーン・カウント・ドレッシング</div>
+        <div class="growth-body">ドレーンが出たら閉創が近いサイン。カウント確認と後片付けの準備を始める。</div>
+      </div>
+      <div class="growth-card">
+        <div class="growth-if">使ったものを渡したら</div>
+        <div class="growth-then">回収までが一動作</div>
+        <div class="growth-body">「出す」だけでなく「受け取る」「回収する」「数える」まで一連の動作として意識する。</div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>上達のポイント：</strong>手術中は「今→次→その次」を予測しながら動く。最初は1手先だけでよい。それが習慣になると、2手・3手先が見えるようになる。予測が外れても問題ない。外れた経験が次の予測精度を上げる。
     </div>
 
     <div class="info-box">

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 145" width="860" height="145" font-family="sans-serif">
+  <rect width="860" height="145" fill="#f5f7f5" rx="6"/>
+
+  <!-- FRAME 1: 出血を認識 -->
+  <g transform="translate(10,10)">
+    <rect width="105" height="110" rx="8" fill="#fef2f0" stroke="#e8b8b8" stroke-width="1.5"/>
+    <!-- vessel with disruption -->
+    <ellipse cx="52" cy="48" rx="26" ry="10" fill="#fce8e8" stroke="#c87070" stroke-width="1.5"/>
+    <!-- disruption gap -->
+    <circle cx="52" cy="48" r="4" fill="#c87070"/>
+    <!-- spreading dark pool (non-graphic, just a gradient oval) -->
+    <ellipse cx="52" cy="66" rx="28" ry="10" fill="#f0d0d0" stroke="#c87070" stroke-width="1" opacity="0.7"/>
+    <!-- alert symbol -->
+    <polygon points="74,18 82,34 66,34" fill="none" stroke="#c0392b" stroke-width="2"/>
+    <text x="75" y="30" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="bold">!</text>
+    <circle cx="11" cy="11" r="9" fill="#c0392b"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">1</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9.5" fill="#6b1c1c" font-weight="500">出血を認識</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="119,61 127,65 119,69" fill="#c87070"/>
+  <line x1="115" y1="65" x2="119" y2="65" stroke="#c87070" stroke-width="2"/>
+
+  <!-- FRAME 2: 吸引を出す (BLUE) -->
+  <g transform="translate(130,10)">
+    <rect width="105" height="110" rx="8" fill="#eef4fb" stroke="#b0c8e0" stroke-width="1.5"/>
+    <ellipse cx="52" cy="68" rx="26" ry="10" fill="#f0d0d0" stroke="#c87070" stroke-width="1" opacity="0.7"/>
+    <!-- suction tube in action -->
+    <rect x="26" y="18" width="8" height="50" rx="4" fill="#c8daf4" stroke="#1a5fa0" stroke-width="2"/>
+    <line x1="30" y1="68" x2="44" y2="62" stroke="#1a5fa0" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- rapid action arrows -->
+    <polygon points="20,32 28,28 28,36" fill="#1a5fa0"/>
+    <circle cx="11" cy="11" r="9" fill="#1a5fa0"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">2</text>
+    <text x="52" y="101" text-anchor="middle" font-size="10" fill="#0c3d6e" font-weight="500">まず吸引を出す</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="239,61 247,65 239,69" fill="#9aab9a"/>
+  <line x1="235" y1="65" x2="239" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 3: ガーゼ・綿球を出す (WHITE/GRAY) -->
+  <g transform="translate(250,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- gauze pad -->
+    <rect x="24" y="34" width="56" height="38" rx="4" fill="white" stroke="#9090a0" stroke-width="2"/>
+    <line x1="32" y1="44" x2="72" y2="44" stroke="#d8d8d8" stroke-width="1.5"/>
+    <line x1="32" y1="52" x2="72" y2="52" stroke="#d8d8d8" stroke-width="1.5"/>
+    <line x1="32" y1="60" x2="72" y2="60" stroke="#d8d8d8" stroke-width="1.5"/>
+    <!-- cotton ball -->
+    <ellipse cx="52" cy="80" rx="10" ry="8" fill="white" stroke="#9090a0" stroke-width="1.5"/>
+    <ellipse cx="52" cy="80" rx="6" ry="5" fill="#f8f8f8" stroke="#c8c8c8" stroke-width="1"/>
+    <circle cx="11" cy="11" r="9" fill="#7a8898"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">3</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">圧迫用ガーゼ・綿球</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="359,61 367,65 359,69" fill="#9aab9a"/>
+  <line x1="355" y1="65" x2="359" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 4: 血管鉗子・クリップ・糸を準備 -->
+  <g transform="translate(370,10)">
+    <rect width="105" height="110" rx="8" fill="#f4f5f4" stroke="#c8d0c8" stroke-width="1.5"/>
+    <!-- vascular clamp icon -->
+    <path d="M16,38 L54,50 L16,62" fill="none" stroke="#5a6a78" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="10" y="36" width="8" height="26" rx="3" fill="#7a8898"/>
+    <!-- clip -->
+    <path d="M64,36 L64,50 Q72,54 80,50 L80,36" fill="none" stroke="#5a6a78" stroke-width="2.5" stroke-linecap="round" transform="scale(0.7) translate(38,20)"/>
+    <!-- green thread -->
+    <path d="M62,54 Q74,44 84,54" fill="none" stroke="#1a7a4e" stroke-width="2" stroke-linecap="round"/>
+    <line x1="62" y1="54" x2="58" y2="46" stroke="#1a7a4e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="84" y1="54" x2="88" y2="46" stroke="#1a7a4e" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="52" y="80" text-anchor="middle" font-size="8" fill="#5a6a78">鉗子/クリップ/糸</text>
+    <circle cx="11" cy="11" r="9" fill="#5a6a78"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">4</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#3d5042" font-weight="500">止血物品を準備</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="479,61 487,65 479,69" fill="#9aab9a"/>
+  <line x1="475" y1="65" x2="479" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 5: 追加器械を外回りへ依頼 -->
+  <g transform="translate(490,10)">
+    <rect width="105" height="110" rx="8" fill="#fef6ee" stroke="#e8c888" stroke-width="1.5"/>
+    <!-- communication bubble from scrub to circulator -->
+    <path d="M14,26 L56,26 Q62,26 62,32 L62,52 Q62,58 56,58 L44,58 L38,66 L32,58 L14,58 Q8,58 8,52 L8,32 Q8,26 14,26Z" fill="#e8f0f8" stroke="#5a78a0" stroke-width="1.5"/>
+    <text x="35" y="40" text-anchor="middle" font-size="8" fill="#0c3d6e">追加</text>
+    <text x="35" y="50" text-anchor="middle" font-size="8" fill="#0c3d6e">お願い</text>
+    <!-- circulator icon (running figure) -->
+    <circle cx="82" cy="38" r="8" fill="#e8f4fc" stroke="#1a5fa0" stroke-width="1.5"/>
+    <text x="82" y="42" text-anchor="middle" font-size="11" fill="#1a5fa0">外</text>
+    <!-- arrow between them -->
+    <polygon points="64,44 74,40 74,48" fill="#d97a00"/>
+    <circle cx="11" cy="11" r="9" fill="#d97a00"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">5</text>
+    <text x="52" y="101" text-anchor="middle" font-size="8.5" fill="#6b3d00" font-weight="500">外回りへ依頼・連絡</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="599,61 607,65 599,69" fill="#9aab9a"/>
+  <line x1="595" y1="65" x2="599" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 6: 開胸移行の可能性を意識 -->
+  <g transform="translate(610,10)">
+    <rect width="105" height="110" rx="8" fill="#fef2f0" stroke="#e8b8b8" stroke-width="1.5"/>
+    <!-- chest retractor symbol -->
+    <line x1="20" y1="36" x2="84" y2="36" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="36" x2="20" y2="80" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+    <line x1="84" y1="36" x2="84" y2="80" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+    <!-- expand arrows -->
+    <polygon points="26,48 20,42 14,48" fill="#c0392b"/>
+    <polygon points="78,48 84,42 90,48" fill="#c0392b"/>
+    <text x="52" y="62" text-anchor="middle" font-size="8.5" fill="#6b1c1c">開胸移行</text>
+    <text x="52" y="72" text-anchor="middle" font-size="8" fill="#6b1c1c">可能性を意識</text>
+    <circle cx="11" cy="11" r="9" fill="#c0392b"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">6</text>
+    <text x="52" y="101" text-anchor="middle" font-size="8.5" fill="#6b1c1c" font-weight="500">開胸移行を念頭に</text>
+  </g>
+
+  <!-- ARROW -->
+  <polygon points="719,61 727,65 719,69" fill="#9aab9a"/>
+  <line x1="715" y1="65" x2="719" y2="65" stroke="#9aab9a" stroke-width="2"/>
+
+  <!-- FRAME 7: 使用物品とガーゼを管理 -->
+  <g transform="translate(730,10)">
+    <rect width="105" height="110" rx="8" fill="#f0f7f2" stroke="#b8cfbb" stroke-width="1.5"/>
+    <!-- count board -->
+    <rect x="14" y="24" width="76" height="62" rx="4" fill="white" stroke="#a0b0a0" stroke-width="1.5"/>
+    <line x1="20" y1="36" x2="84" y2="36" stroke="#d4e0d6" stroke-width="1"/>
+    <line x1="20" y1="48" x2="84" y2="48" stroke="#d4e0d6" stroke-width="1"/>
+    <line x1="20" y1="60" x2="84" y2="60" stroke="#d4e0d6" stroke-width="1"/>
+    <text x="34" y="34" text-anchor="middle" font-size="8" fill="#3d5042">ガーゼ数</text>
+    <text x="34" y="46" text-anchor="middle" font-size="8" fill="#3d5042">器械</text>
+    <text x="34" y="58" text-anchor="middle" font-size="8" fill="#3d5042">物品</text>
+    <!-- count numbers -->
+    <text x="72" y="34" text-anchor="middle" font-size="8" fill="#1a7a4e">管理中</text>
+    <text x="72" y="46" text-anchor="middle" font-size="8" fill="#1a7a4e">管理中</text>
+    <text x="72" y="58" text-anchor="middle" font-size="8" fill="#1a7a4e">管理中</text>
+    <text x="52" y="76" text-anchor="middle" font-size="8" fill="#c0392b">目を離さない</text>
+    <circle cx="11" cy="11" r="9" fill="#1a7a4e"/>
+    <text x="11" y="15" text-anchor="middle" font-size="10" fill="white" font-weight="bold">7</text>
+    <text x="52" y="101" text-anchor="middle" font-size="9" fill="#0d5c3a" font-weight="500">物品とガーゼを管理</text>
+  </g>
+</svg>
