@@ -195,6 +195,8 @@
         <span class="dropdown-soon">VATS 肺葉切除術<span>近日公開</span></span>
         <span class="dropdown-soon">肺区域切除術<span>近日公開</span></span>
         <span class="dropdown-soon">縦隔郭清<span>近日公開</span></span>
+        <div class="dropdown-divider"></div>
+        <a id="nav-or-nurse" href="/lungatlas/or-nurse-lung-surgery.html">肺手術ナビ for OR Nurses</a>
       </div>
     </div>
 
@@ -240,6 +242,13 @@
   if (path.indexOf('anatomy.html') !== -1) {
     var anatLink = document.getElementById('nav-anatomy');
     if (anatLink) anatLink.classList.add('active');
+  }
+  var surgeryPages = ['or-nurse-lung-surgery'];
+  if (surgeryPages.some(function(p){ return path.indexOf(p) !== -1; })) {
+    var surgeryLink = document.getElementById('nav-surgery');
+    if (surgeryLink) surgeryLink.classList.add('active');
+    var orNurseLink = document.getElementById('nav-or-nurse');
+    if (orNurseLink) orNurseLink.classList.add('active');
   }
 })();
 </script>

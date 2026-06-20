@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肺手術ナビ for OR Nurses — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --blue-mid: #1a5fa0;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --teal-dark: #0a5260;
+  --teal-light: #e0f4f7;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* LAYOUT */
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
+}
+.sb-item {
+  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
+  text-decoration: none; border-left: 2px solid transparent;
+  transition: all .15s; cursor: pointer; line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light); color: var(--green-dark);
+  font-weight: 500; border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
+  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+
+/* MAIN */
+.main { flex: 1; padding: 28px 36px 60px; max-width: 900px; }
+
+/* BREADCRUMB */
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+
+/* UPDATE BADGE */
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+/* HEADINGS */
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 6px; }
+.art-sub { font-size: 13px; color: var(--text3); margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+.lead-note {
+  font-size: 12px; color: var(--text3); background: var(--surface2);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 10px 14px; margin-top: 12px;
+}
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+.sec-h3 {
+  font-size: 13px; font-weight: 600; color: var(--text);
+  margin: 20px 0 10px;
+}
+
+/* NOTE / WARNING BOXES */
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
+}
+.note-box ul, .note-box ol { padding-left: 18px; }
+.note-box li { margin-bottom: 2px; }
+
+.info-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+
+.warning-box {
+  background: var(--red-light); border-left: 3px solid #c0392b;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--red-dark); line-height: 1.75; margin: 14px 0;
+}
+
+.tip-box {
+  background: var(--teal-light); border-left: 3px solid #0a7a9a;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--teal-dark); line-height: 1.75; margin: 14px 0;
+}
+
+/* ROLE BADGE */
+.role-badge {
+  display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .04em;
+  padding: 2px 8px; border-radius: 8px; vertical-align: middle; margin-left: 4px;
+  text-transform: uppercase;
+}
+.role-scrub { background: var(--green-light); color: var(--green-dark); }
+.role-circ  { background: var(--blue-light); color: var(--blue-dark); }
+
+/* CONCEPT CARDS */
+.concept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.concept-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px;
+}
+.concept-num {
+  font-family: var(--mono); font-size: 20px; font-weight: 500;
+  color: var(--green-mid); margin-bottom: 6px;
+}
+.concept-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.concept-body { font-size: 12px; color: var(--text2); line-height: 1.65; }
+
+/* SCENE CARD */
+.scene-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
+}
+.scene-top {
+  padding: 14px 18px 12px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.scene-icon {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; margin-top: 1px;
+}
+.scene-icon.red  { background: var(--red-light); }
+.scene-icon.amber{ background: var(--amber-light); }
+.scene-icon.teal { background: var(--teal-light); }
+.scene-icon.blue { background: var(--blue-light); }
+.scene-icon.green{ background: var(--green-light); }
+.scene-title { font-size: 14px; font-weight: 600; }
+.scene-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.scene-body { padding: 14px 18px; }
+.scene-body p { font-size: 12.5px; color: var(--text2); line-height: 1.75; margin-bottom: 10px; }
+
+/* PREP / POINTS GRID */
+.scene-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.scene-col-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 6px;
+}
+.scene-list { font-size: 12px; color: var(--text2); line-height: 1.7; padding-left: 14px; }
+.scene-list li { margin-bottom: 2px; }
+
+/* ATTENTION TAGS */
+.attn-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.attn-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 10px; font-weight: 500;
+}
+.attn-tag.red  { background: var(--red-light); color: var(--red-dark); }
+.attn-tag.amber{ background: var(--amber-light); color: var(--amber-dark); }
+.attn-tag.green{ background: var(--green-light); color: var(--green-dark); }
+.attn-tag.blue { background: var(--blue-light); color: var(--blue-dark); }
+
+/* TABLES */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 16px; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+.data-table { border-collapse: collapse; width: 100%; min-width: 600px; background: var(--surface); }
+.data-table th {
+  background: var(--surface2); font-size: 11px; font-weight: 600;
+  color: var(--text3); text-transform: uppercase; letter-spacing: .05em;
+  padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border2);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 10px 12px; font-size: 12.5px; color: var(--text2);
+  border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--green-pale); }
+.td-now { font-weight: 500; color: var(--text); }
+.td-scrub { color: var(--green-dark); }
+.td-circ { color: var(--blue-dark); }
+.td-tip { color: var(--teal-dark); font-style: italic; }
+.td-mistake { color: var(--red-dark); font-weight: 500; }
+
+/* STEP FLOW */
+.step-flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.step-item {
+  background: var(--green-pale); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--green-dark);
+  font-weight: 500;
+}
+.step-arrow { color: var(--text3); font-size: 12px; }
+
+/* CHECKLIST */
+.checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.checklist-section {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px;
+}
+.checklist-head {
+  font-size: 12px; font-weight: 600; color: var(--text);
+  margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+}
+.check-phase {
+  font-size: 10px; font-weight: 600; padding: 2px 8px;
+  border-radius: 8px;
+}
+.check-phase.pre  { background: var(--blue-light); color: var(--blue-dark); }
+.check-phase.intra{ background: var(--amber-light); color: var(--amber-dark); }
+.checklist-items { list-style: none; }
+.checklist-items li {
+  font-size: 12.5px; color: var(--text2); line-height: 1.6;
+  padding: 5px 0; display: flex; align-items: flex-start; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.checklist-items li:last-child { border-bottom: none; }
+.check-icon { flex-shrink: 0; margin-top: 1px; color: var(--text3); }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+/* FOOTER */
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 18px 40px; }
+  .concept-grid { grid-template-columns: 1fr; }
+  .scene-cols { grid-template-columns: 1fr; }
+  .checklist-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-head">このページ</div>
+      <a class="sb-item active" href="#intro">3つの意識</a>
+      <a class="sb-item" href="#prediction">一動作先読みリスト</a>
+      <a class="sb-item" href="#scenes">場面別ガイド</a>
+      <a class="sb-sub" href="#scene-entry">胸腔内に入った直後</a>
+      <a class="sb-sub" href="#scene-adhesion">癒着剥離</a>
+      <a class="sb-sub" href="#scene-vessel">肺動脈・肺静脈周囲</a>
+      <a class="sb-sub" href="#scene-stapler">ステープラー使用時</a>
+      <a class="sb-sub" href="#scene-bronchus">気管支切離・リーク確認</a>
+      <a class="sb-sub" href="#scene-lymph">リンパ節郭清</a>
+      <a class="sb-sub" href="#scene-closure">閉胸前</a>
+      <a class="sb-item" href="#scrub-detail">器械出し深掘り</a>
+      <a class="sb-item" href="#circulator">外回り準備</a>
+      <a class="sb-item" href="#mistakes">やりがちなミス</a>
+      <a class="sb-item" href="#surgeon-view">術者目線</a>
+      <a class="sb-item" href="#checklist">5分チェックリスト</a>
+    </div>
+    <div class="sb-section" style="margin-top:12px">
+      <div class="sb-head">凡例</div>
+      <div style="padding:6px 18px;font-size:11px;color:var(--text3);line-height:1.8">
+        <span class="role-badge role-scrub">器械出し</span> 器械出し<br>
+        <span class="role-badge role-circ">外回り</span> 外回り<br>
+        <span class="attn-tag red" style="font-size:10px">&#9888; 目を離さない</span> 高緊張場面
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <div class="crumb">手術手技 › <span>看護師向けガイド › 肺手術ナビ for OR Nurses</span></div>
+    <div class="updated">2026年6月作成</div>
+    <h1 class="art-h1">肺手術ナビ for OR Nurses</h1>
+    <p class="art-sub">新人手術室看護師のための「一動作先読み」ガイド</p>
+
+    <p class="lead">
+      肺手術では、器械出し・外回りが「今の操作」だけでなく「次の一手」を予測できると、手術の流れが大きくスムーズになる。このページでは、新人手術室看護師向けに、肺手術の場面ごとに必要な器具、目を離さない場面、術者が「こうしてくれたら助かる」と感じるポイントを整理する。
+      <div class="lead-note">
+        ⚠️ <strong>施設差について：</strong>術式・採用品・手順は施設・術者により大きく異なる。このページは手順書の代わりではなく、肺手術に入る前の予習・復習として使う。最終的には各施設の手順書・先輩看護師・術者の指示に必ず従うこと。
+      </div>
+    </p>
+
+    <!-- ===================== SECTION 1 ===================== -->
+    <h2 class="sec-h2" id="intro">1. まず最初に見る：肺手術で新人が意識する3つのこと</h2>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="concept-num">01</div>
+        <div class="concept-title">今の操作を見る</div>
+        <div class="concept-body">
+          癒着剥離中・血管剥離中・ステープラーを通している・リンパ節郭清中など、<strong>今何をしているか</strong>を把握する。<br>
+          カメラ映像と術者の手元を同時に意識する習慣をつける。
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-num">02</div>
+        <div class="concept-title">次に必要なものを予測する</div>
+        <div class="concept-body">
+          結紮したらハサミ、血管周囲なら吸引とガーゼ、ステープラー後は標本袋やリークテストなど、<strong>1手先を読む</strong>。<br>
+          「言われてから探す」ではなく「来る前に準備する」ことが流れを止めない。
+        </div>
+      </div>
+      <div class="concept-card" style="border-left: 3px solid #c0392b;">
+        <div class="concept-num" style="color:var(--red-dark)">03</div>
+        <div class="concept-title">目を離さない場面を知る</div>
+        <div class="concept-body">
+          肺動脈周囲・強い癒着・出血時・気管支切離・閉胸前確認など、特定の場面は<strong>絶対に目を離さない</strong>。<br>
+          術者の動きと言葉の変化をセンサーにする。
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 2 ===================== -->
+    <h2 class="sec-h2" id="prediction">2. 一動作先読みリスト：こうしてくれると助かる</h2>
+
+    <div class="info-box">
+      <strong>見方：</strong>「今していること」から「次に何が起こるか」を予測し、器械出し・外回りそれぞれが何を準備するかをまとめた。「こうしてくれると助かる」は術者・先輩看護師の視点。
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="min-width:130px">今していること</th>
+            <th style="min-width:140px">次に起こりやすいこと</th>
+            <th style="min-width:150px"><span class="role-badge role-scrub">器械出し</span> 準備</th>
+            <th style="min-width:150px"><span class="role-badge role-circ">外回り</span> 準備・確認</th>
+            <th style="min-width:160px">こうしてくれると助かる</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-now">糸で結紮している</td>
+            <td>結紮後に糸を切る</td>
+            <td class="td-scrub">ハサミをすぐ出せる位置に置く</td>
+            <td class="td-circ">追加の糸が必要か見る</td>
+            <td class="td-tip">結び終わる前からハサミを意識する</td>
+          </tr>
+          <tr>
+            <td class="td-now">針糸で縫合している</td>
+            <td>結紮、糸切り、針回収</td>
+            <td class="td-scrub">持針器、鑷子、ハサミ</td>
+            <td class="td-circ">針カウントを意識</td>
+            <td class="td-tip">針が戻ったらすぐ確認し、糸切りまで流れを止めない</td>
+          </tr>
+          <tr>
+            <td class="td-now">クリップをかけている</td>
+            <td>追加クリップ、切離</td>
+            <td class="td-scrub">クリップ鉗子、剪刀、エネルギー</td>
+            <td class="td-circ">クリップ残数確認</td>
+            <td class="td-tip">1個で終わると思わず、追加がすぐ出せるようにする</td>
+          </tr>
+          <tr style="background:#fff8f8">
+            <td class="td-now">吸引が増えている</td>
+            <td>出血、視野不良</td>
+            <td class="td-scrub">吸引、ガーゼ、綿球</td>
+            <td class="td-circ">ガーゼ追加、開胸器械確認</td>
+            <td class="td-tip" style="color:var(--red-dark)">吸引だけでなく圧迫用ガーゼを考える</td>
+          </tr>
+          <tr style="background:#fff8f8">
+            <td class="td-now">ガーゼで圧迫している</td>
+            <td>出血点確認、追加処置</td>
+            <td class="td-scrub">追加ガーゼ、血管鉗子、クリップ</td>
+            <td class="td-circ">輸血準備、麻酔科の動き確認</td>
+            <td class="td-tip" style="color:var(--red-dark)">圧迫中は次の指示が出るまで目を離さない</td>
+          </tr>
+          <tr>
+            <td class="td-now">ステープラーを通している</td>
+            <td>切離、追加カートリッジ</td>
+            <td class="td-scrub">指定カートリッジ、予備</td>
+            <td class="td-circ">カートリッジ在庫確認</td>
+            <td class="td-tip">1発で終わらないことが多いので予備を意識</td>
+          </tr>
+          <tr>
+            <td class="td-now">ステープラーの角度を探している</td>
+            <td>別サイズ・別角度が必要</td>
+            <td class="td-scrub">別のステープラー、カートリッジ</td>
+            <td class="td-circ">追加ポートや開胸移行の可能性</td>
+            <td class="td-tip">「入らない時間」は次の選択肢を準備する時間</td>
+          </tr>
+          <tr>
+            <td class="td-now">肺を膨らませる指示が出た</td>
+            <td>エアリーク確認</td>
+            <td class="td-scrub">生食、吸引</td>
+            <td class="td-circ">麻酔科との連携、ドレーン準備</td>
+            <td class="td-tip">「水入れて」の前に生食を意識できるとよい</td>
+          </tr>
+          <tr>
+            <td class="td-now">検体を取り出した</td>
+            <td>標本袋、病理提出</td>
+            <td class="td-scrub">標本袋、把持鉗子</td>
+            <td class="td-circ">検体容器、ラベル、迅速確認</td>
+            <td class="td-tip">検体名・左右・部位をその場で確認する</td>
+          </tr>
+          <tr>
+            <td class="td-now">ドレーンを入れている</td>
+            <td>固定、接続、閉創</td>
+            <td class="td-scrub">縫合糸、持針器、剪刀</td>
+            <td class="td-circ">ドレーンバッグ、陰圧設定</td>
+            <td class="td-tip">ドレーンが出たら閉胸が近いと考える</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===================== SECTION 3 ===================== -->
+    <h2 class="sec-h2" id="scenes">3. 場面別：目を離さないでほしいところ</h2>
+
+    <!-- 3-1 -->
+    <div class="scene-card" id="scene-entry">
+      <div class="scene-top">
+        <div class="scene-icon green">🔍</div>
+        <div>
+          <div class="scene-title">3-1. 胸腔内に入った直後</div>
+          <div class="scene-sub">癒着・胸水・術式判断の場面</div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <p>胸腔内に入った直後は、癒着・胸水・播種・腫瘍位置・肺の虚脱具合を確認する場面である。予定通り進むか、追加ポートや術式変更が必要かを判断することがある。</p>
+        <div class="scene-cols">
+          <div>
+            <div class="scene-col-head">準備しておくもの</div>
+            <ul class="scene-list">
+              <li>吸引</li>
+              <li>カメラ拭き</li>
+              <li>追加ポート</li>
+              <li>胸水細胞診容器</li>
+              <li>標本袋</li>
+            </ul>
+          </div>
+          <div>
+            <div class="scene-col-head">目を離さないポイント</div>
+            <div class="attn-row">
+              <span class="attn-tag amber">胸水がある</span>
+              <span class="attn-tag amber">癒着が強い</span>
+              <span class="attn-tag amber">腫瘍が胸壁に近い</span>
+              <span class="attn-tag amber">ポート位置を相談している</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-2 -->
+    <div class="scene-card" id="scene-adhesion">
+      <div class="scene-top">
+        <div class="scene-icon amber">⚡</div>
+        <div>
+          <div class="scene-title">3-2. 癒着剥離</div>
+          <div class="scene-sub">出血・肺損傷が起こりやすい。時間がかかる場面</div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <p>出血や肺損傷が起こりやすい場面。再手術・炎症後・強い胸膜癒着では時間がかかる。カメラが汚れやすく、視野確保のための吸引とガーゼが頻繁に必要になる。</p>
+        <div class="scene-cols">
+          <div>
+            <div class="scene-col-head">準備しておくもの</div>
+            <ul class="scene-list">
+              <li>エネルギーデバイス</li>
+              <li>吸引</li>
+              <li>小ガーゼ・大ガーゼ</li>
+              <li>クリップ</li>
+              <li>開胸器械（場所を確認）</li>
+            </ul>
+          </div>
+          <div>
+            <div class="scene-col-head">こうしてくれると助かる</div>
+            <ul class="scene-list">
+              <li>吸引が増えたらガーゼも考える</li>
+              <li>「癒着強い」と聞こえたら開胸器械の場所を確認</li>
+              <li>カメラが汚れやすいので拭く準備をしておく</li>
+              <li>ガーゼを入れた数を曖昧にしない</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-3 -->
+    <div class="scene-card" id="scene-vessel">
+      <div class="scene-top">
+        <div class="scene-icon red">&#9888;</div>
+        <div>
+          <div class="scene-title">3-3. 肺動脈・肺静脈周囲</div>
+          <div class="scene-sub">最も緊張感が高い場面。絶対に目を離さない</div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <p>肺手術で最も緊張感が高い場面の一つ。血管周囲の剥離・リンパ節との癒着・ステープラー挿入時は出血に注意する。術者が無言になる、鉗子の動きが細かくなる、吸引が増えるなどのサインを見逃さない。</p>
+
+        <div class="warning-box">
+          <strong>目を離さないサイン：</strong><br>
+          術者が無言になる ／ 鉗子の動きが細かくなる ／ 吸引が増える ／ ステープラーを何度も入れ直す ／ 「血管近い」「ちょっと待って」「圧迫」と言う
+        </div>
+
+        <div class="scene-cols">
+          <div>
+            <div class="scene-col-head">準備しておくもの</div>
+            <ul class="scene-list">
+              <li>吸引</li>
+              <li>小ガーゼ</li>
+              <li>血管鉗子</li>
+              <li>クリップ</li>
+              <li>血管用ステープラー</li>
+              <li>予備カートリッジ</li>
+              <li>開胸器械</li>
+            </ul>
+          </div>
+          <div>
+            <div class="scene-col-head">こうしてくれると助かる</div>
+            <ul class="scene-list">
+              <li>出血してから探すのではなく、血管周囲に入った時点で吸引とガーゼを意識する</li>
+              <li>ステープラーは1発で終わらないことがあるため、次のカートリッジを考える</li>
+              <li>開胸移行の可能性を外回りが先に考える</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-4 -->
+    <div class="scene-card" id="scene-stapler">
+      <div class="scene-top">
+        <div class="scene-icon teal">✂</div>
+        <div>
+          <div class="scene-title">3-4. ステープラー使用時</div>
+          <div class="scene-sub">部位によってカートリッジが異なる。予備を意識</div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <p>肺実質・血管・気管支の切離で使用する。部位によってカートリッジが異なるため、術者の指示を確認する。1発で終わらないことが多い。</p>
+        <div class="scene-cols">
+          <div>
+            <div class="scene-col-head">準備しておくもの</div>
+            <ul class="scene-list">
+              <li>ステープラー本体</li>
+              <li>指定カートリッジ</li>
+              <li>予備カートリッジ</li>
+              <li>吸引</li>
+              <li>把持鉗子</li>
+              <li>標本袋</li>
+            </ul>
+          </div>
+          <div>
+            <div class="scene-col-head">こうしてくれると助かる</div>
+            <ul class="scene-list">
+              <li>「ステープラー」と言われてから探さない</li>
+              <li>使ったカートリッジ数を意識する</li>
+              <li>次の1発が必要そうなら予備を手元に置く</li>
+              <li>ステープラーが入らない時は別サイズ・別角度・追加ポートの可能性を考える</li>
+              <li>切離後は標本袋やエアリーク確認に進むことを予測する</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-5 -->
+    <div class="scene-card" id="scene-bronchus">
+      <div class="scene-top">
+        <div class="scene-icon blue">💨</div>
+        <div>
+          <div class="scene-title">3-5. 気管支切離・エアリーク確認</div>
+          <div class="scene-sub">麻酔科との連携が必要になる場面</div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <p>気管支切離後は断端確認やエアリーク確認を行うことが多い。「肺を膨らませて」「水入れて」「リーク見ます」「もう一回換気して」などの言葉が合図になる。</p>
+        <div class="attn-row" style="margin-bottom:10px">
+          <span class="attn-tag blue">「肺を膨らませて」</span>
+          <span class="attn-tag blue">「水入れて」</span>
+          <span class="attn-tag blue">「リーク見ます」</span>
+          <span class="attn-tag blue">「もう一回換気して」</span>
+        </div>
+        <div class="scene-cols">
+          <div>
+            <div class="scene-col-head">準備しておくもの</div>
+            <ul class="scene-list">
+              <li>ステープラー</li>
+              <li>生食</li>
+              <li>吸引</li>
+              <li>ドレーン</li>
+              <li>縫合糸</li>
+              <li>シーラント（施設により）</li>
+            </ul>
+          </div>
+          <div>
+            <div class="scene-col-head">こうしてくれると助かる</div>
+            <ul class="scene-list">
+              <li>「水入れて」と言われる前に生食を意識する</li>
+              <li>吸引をすぐ使えるようにする</li>
+              <li>リークがあれば追加縫合やシーラントに進む可能性を考える</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-6 -->
+    <div class="scene-card" id="scene-lymph">
+      <div class="scene-top">
+        <div class="scene-icon green">🔬</div>
+        <div>
+          <div class="scene-title">3-6. リンパ節郭清</div>
+          <div class="scene-sub">小さな検体が複数出る。ラベル管理に注意</div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <p>リンパ節郭清では小さな検体が複数出る。出血・神経周囲の操作・検体ラベル間違いに注意する。「右か左か」「何番リンパ節か」「迅速か永久か」を曖昧にしない。</p>
+        <div class="scene-cols">
+          <div>
+            <div class="scene-col-head">準備しておくもの</div>
+            <ul class="scene-list">
+              <li>エネルギーデバイス</li>
+              <li>吸引</li>
+              <li>クリップ</li>
+              <li>小ガーゼ</li>
+              <li>検体容器（複数）</li>
+              <li>ラベル（部位名・左右）</li>
+            </ul>
+          </div>
+          <div>
+            <div class="scene-col-head">こうしてくれると助かる</div>
+            <ul class="scene-list">
+              <li>検体が小さいので紛失しない</li>
+              <li>部位名をその場で確認する</li>
+              <li>迅速か永久か確認する</li>
+              <li>右か左か・何番リンパ節かを曖昧にしない</li>
+              <li>次のリンパ節に移る前に検体処理を完了する</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-7 -->
+    <div class="scene-card" id="scene-closure">
+      <div class="scene-top">
+        <div class="scene-icon amber">✔</div>
+        <div>
+          <div class="scene-title">3-7. 閉胸前</div>
+          <div class="scene-sub">カウント・ドレーン・検体・エアリーク確認。気を抜かない</div>
+        </div>
+      </div>
+      <div class="scene-body">
+        <p>閉胸前は、出血確認・エアリーク確認・カウント・ドレーン留置・肺再膨張を確認する重要な場面。疲れが出やすい時間だが、確認が最も必要な場面でもある。</p>
+        <div class="scene-cols">
+          <div>
+            <div class="scene-col-head">準備しておくもの</div>
+            <ul class="scene-list">
+              <li>生食</li>
+              <li>吸引</li>
+              <li>ドレーン</li>
+              <li>固定糸</li>
+              <li>縫合糸</li>
+              <li>ドレッシング</li>
+              <li>ドレーンバッグ</li>
+            </ul>
+          </div>
+          <div>
+            <div class="scene-col-head">こうしてくれると助かる</div>
+            <ul class="scene-list">
+              <li>ドレーンが出たら閉胸が近いと考える</li>
+              <li>カウントを後回しにしない</li>
+              <li>ドレーン接続と陰圧設定を確認する</li>
+              <li>検体提出が残っていないか確認する</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===================== SECTION 4 ===================== -->
+    <h2 class="sec-h2" id="scrub-detail">4. 器械出し向け：基本動作の深掘り <span class="role-badge role-scrub">器械出し</span></h2>
+
+    <div class="concept-grid" style="grid-template-columns: 1fr 1fr 1fr">
+
+      <div class="concept-card" style="border-top: 3px solid var(--green-mid)">
+        <div class="concept-title">結紮のあと</div>
+        <div class="concept-body">
+          術者が糸を結び始めたら、次はハサミが必要になることが多い。結び終わってからハサミを探すと流れが止まる。<br><br>
+          糸を切った後は、切った糸端や針付き糸の回収を意識する。針付き糸の場合は<strong>針カウントに直結</strong>する。
+        </div>
+      </div>
+
+      <div class="concept-card" style="border-top: 3px solid var(--green-mid)">
+        <div class="concept-title">縫合の1セット</div>
+        <div class="concept-body">
+          以下の流れを1セットとして見る：
+          <div class="step-flow" style="margin-top:8px">
+            <span class="step-item">針をかける</span>
+            <span class="step-arrow">→</span>
+            <span class="step-item">糸を引く</span>
+            <span class="step-arrow">→</span>
+            <span class="step-item">結紮</span>
+            <span class="step-arrow">→</span>
+            <span class="step-item">糸切り</span>
+            <span class="step-arrow">→</span>
+            <span class="step-item">針回収</span>
+          </div>
+          流れが止まらないように1セット先を意識して準備する。
+        </div>
+      </div>
+
+      <div class="concept-card" style="border-top: 3px solid var(--green-mid)">
+        <div class="concept-title">クリップのあと</div>
+        <div class="concept-body">
+          1個で終わるとは限らない。追加クリップ・切離・エネルギーデバイス使用へ進むことがある。<br><br>
+          クリップの<strong>残数とサイズ</strong>を意識する。
+        </div>
+      </div>
+
+      <div class="concept-card" style="border-top: 3px solid var(--teal-dark)">
+        <div class="concept-title">吸引の意味</div>
+        <div class="concept-body">
+          吸引が増えた時は、何を吸っているのかを見る：<br>
+          <ul style="padding-left:14px;margin-top:6px;font-size:12px;line-height:1.8">
+            <li>ただの液体吸引</li>
+            <li>出血で視野を確保している</li>
+            <li>エアリーク確認で生食を吸っている</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="concept-card" style="border-top: 3px solid var(--teal-dark)">
+        <div class="concept-title">ガーゼの意味</div>
+        <div class="concept-body">
+          ガーゼには複数の用途がある：<br>
+          <ul style="padding-left:14px;margin-top:6px;font-size:12px;line-height:1.8">
+            <li>拭くため</li>
+            <li>圧迫止血のため</li>
+            <li>視野展開のため</li>
+            <li>臓器保護のため</li>
+          </ul>
+          ガーゼが入ったら、<strong>数と位置を意識</strong>する。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================== SECTION 5 ===================== -->
+    <h2 class="sec-h2" id="circulator">5. 外回り向け：こういう時に準備してほしい <span class="role-badge role-circ">外回り</span></h2>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="min-width:160px">状況</th>
+            <th style="min-width:200px">外回りが準備するもの</th>
+            <th style="min-width:180px">理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff8f8">
+            <td class="td-now">癒着が強い</td>
+            <td class="td-circ">開胸器械、追加ガーゼ、追加吸引</td>
+            <td>開胸移行や出血対応の可能性</td>
+          </tr>
+          <tr style="background:#fff8f8">
+            <td class="td-now">血管周囲を剥離している</td>
+            <td class="td-circ">輸血準備確認、開胸セット確認</td>
+            <td>急な出血に備える</td>
+          </tr>
+          <tr>
+            <td class="td-now">ステープラー使用が続く</td>
+            <td class="td-circ">カートリッジ在庫確認</td>
+            <td>途中で不足すると流れが止まる</td>
+          </tr>
+          <tr>
+            <td class="td-now">リンパ節郭清が始まる</td>
+            <td class="td-circ">検体容器、ラベル</td>
+            <td>検体が複数に分かれる</td>
+          </tr>
+          <tr>
+            <td class="td-now">迅速病理が出る</td>
+            <td class="td-circ">病理連絡、搬送確認</td>
+            <td>タイミングが重要</td>
+          </tr>
+          <tr>
+            <td class="td-now">ドレーンが出る</td>
+            <td class="td-circ">ドレーンバッグ、陰圧設定</td>
+            <td>閉胸が近い</td>
+          </tr>
+          <tr style="background:#fff8f8">
+            <td class="td-now">術者が開胸を示唆</td>
+            <td class="td-circ">開胸器械、照明、追加人員</td>
+            <td>移行をスムーズにする</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===================== SECTION 6 ===================== -->
+    <h2 class="sec-h2" id="mistakes">6. 新人がやりがちなミスと対策</h2>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="min-width:160px">やりがちなこと</th>
+            <th style="min-width:160px">なぜ困るか</th>
+            <th style="min-width:180px">どうするとよいか</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-mistake">言われてから探す</td>
+            <td>流れが止まる</td>
+            <td class="td-tip">今の操作から次を予測する</td>
+          </tr>
+          <tr>
+            <td class="td-mistake">ステープラーを1回で終わると思う</td>
+            <td>追加が必要なことが多い</td>
+            <td class="td-tip">予備カートリッジを意識</td>
+          </tr>
+          <tr>
+            <td class="td-mistake">検体ラベルを後回しにする</td>
+            <td>部位間違いの原因</td>
+            <td class="td-tip">出た瞬間に確認</td>
+          </tr>
+          <tr>
+            <td class="td-mistake">吸引だけ見てガーゼを忘れる</td>
+            <td>出血時に圧迫できない</td>
+            <td class="td-tip">吸引が増えたらガーゼも考える</td>
+          </tr>
+          <tr>
+            <td class="td-mistake">閉胸前に気が抜ける</td>
+            <td>カウント・ドレーン・検体確認が残る</td>
+            <td class="td-tip">閉胸前こそ確認する</td>
+          </tr>
+          <tr>
+            <td class="td-mistake">画面を見ていない</td>
+            <td>何が起きているか分からない</td>
+            <td class="td-tip">手元だけでなくモニターを見る</td>
+          </tr>
+          <tr>
+            <td class="td-mistake">医師の言葉だけ待つ</td>
+            <td>先読みできない</td>
+            <td class="td-tip">操作と雰囲気を見る</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===================== SECTION 7 ===================== -->
+    <h2 class="sec-h2" id="surgeon-view">7. 術者目線：こうしてくれると助かる</h2>
+
+    <div class="note-box">
+      <ul>
+        <li>結紮している時に、ハサミが自然に出てくる。</li>
+        <li>血管周囲に入った時点で、吸引とガーゼを意識している。</li>
+        <li>ステープラーを使った後、次のカートリッジや標本袋を考えている。</li>
+        <li>「水入れて」の前に、生食と吸引を準備している。</li>
+        <li>検体が出た時に、部位名と左右をその場で確認してくれる。</li>
+        <li>出血時に、器械出しは手元を崩さず、外回りは追加物品と人を呼ぶ準備をしている。</li>
+        <li>閉胸前に、カウント・検体・ドレーン・陰圧設定を一緒に確認してくれる。</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ===================== SECTION 8 ===================== -->
+    <h2 class="sec-h2" id="checklist">8. 5分チェックリスト</h2>
+
+    <div class="checklist-grid">
+      <div class="checklist-section">
+        <div class="checklist-head">
+          手術前 <span class="check-phase pre">PRE-OP</span>
+        </div>
+        <ul class="checklist-items">
+          <li><span class="check-icon">☐</span>術式を確認した</li>
+          <li><span class="check-icon">☐</span>右左を確認した</li>
+          <li><span class="check-icon">☐</span>VATS・RATS・開胸を確認した</li>
+          <li><span class="check-icon">☐</span>病理迅速の有無を確認した</li>
+          <li><span class="check-icon">☐</span>ステープラーとカートリッジを確認した</li>
+          <li><span class="check-icon">☐</span>ドレーン予定を確認した</li>
+          <li><span class="check-icon">☐</span>開胸器械の場所を確認した</li>
+        </ul>
+      </div>
+      <div class="checklist-section">
+        <div class="checklist-head">
+          術中 <span class="check-phase intra">INTRA-OP</span>
+        </div>
+        <ul class="checklist-items">
+          <li><span class="check-icon">☐</span>癒着剥離中は吸引とガーゼを意識する</li>
+          <li><span class="check-icon">☐</span>血管周囲では目を離さない</li>
+          <li><span class="check-icon">☐</span>結紮後はハサミ</li>
+          <li><span class="check-icon">☐</span>縫合後は糸切りと針回収</li>
+          <li><span class="check-icon">☐</span>ステープラー後は追加カートリッジを意識する</li>
+          <li><span class="check-icon">☐</span>リンパ節は検体ラベルをその場で確認する</li>
+          <li><span class="check-icon">☐</span>閉胸前はカウント・ドレーン・検体を確認する</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>最後に：</strong>このページは予習・復習のためのガイドです。実際の手術室では、各施設の手順書・先輩看護師・術者の指示を最優先にしてください。「次はこうなりそう」という予測が経験とともに精度を上げていきます。
+    </div>
+
+    <div style="font-size:11px; color:var(--text3); margin-top:20px;">最終更新：2026年6月21日</div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>© 2026 LungAtlas — 医療従事者向け学習用コンテンツ</span>
+</footer>
+
+<script>
+// サイドバーのアクティブ状態をスクロールに連動
+(function() {
+  var sections = document.querySelectorAll('[id]');
+  var sbItems = document.querySelectorAll('.sb-item, .sb-sub');
+  window.addEventListener('scroll', function() {
+    var scrollY = window.scrollY + 80;
+    var current = '';
+    sections.forEach(function(s) {
+      if (s.offsetTop <= scrollY) current = s.id;
+    });
+    sbItems.forEach(function(item) {
+      var href = item.getAttribute('href');
+      if (href && href === '#' + current) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
