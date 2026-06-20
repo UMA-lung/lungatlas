@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEYNOTE-671 詳細解説 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px; flex-shrink: 0; background: var(--surface);
+  border-right: 1px solid var(--border); padding: 20px 0;
+  position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
+}
+.sb-item {
+  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
+  text-decoration: none; border-left: 2px solid transparent;
+  transition: all .15s; cursor: pointer; line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light); color: var(--green-dark);
+  font-weight: 500; border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
+  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+.sb-sub.active { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 900px; }
+
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+.crumb a { color: var(--text3); text-decoration: none; }
+.crumb a:hover { color: var(--green-mid); }
+
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  color: #fff; border-radius: var(--radius-lg); padding: 22px 26px;
+  margin-bottom: 20px;
+}
+.hero-message {
+  font-size: 15px; font-weight: 600; line-height: 1.5; margin-bottom: 10px;
+}
+.hero-sub {
+  font-size: 12.5px; color: rgba(255,255,255,0.85); line-height: 1.8;
+}
+
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+
+.sec-h3 {
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  margin: 20px 0 10px; padding-left: 10px;
+  border-left: 2px solid var(--border2);
+}
+
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
+}
+.info-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+.caution-box {
+  background: var(--red-light); border-left: 3px solid #c0392b;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--red-dark); line-height: 1.75; margin: 14px 0;
+}
+.tip-box {
+  background: var(--blue-light); border-left: 3px solid #1a6fbd;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0;
+}
+
+.trial-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
+}
+.tc-top { padding: 18px 20px 16px; border-bottom: 1px solid var(--border); }
+.tc-body { padding: 16px 20px; }
+.tc-meta {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+.trial-link {
+  font-size: 13.5px; font-weight: 600; color: var(--green-dark);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); letter-spacing: .01em;
+}
+.trial-link:hover { opacity: .7; }
+.trial-link .ext { font-size: 11px; opacity: .7; }
+.jbadge {
+  font-size: 10.5px; font-weight: 500; padding: 2px 9px;
+  border-radius: 8px; white-space: nowrap;
+}
+.j-nejm  { background: var(--blue-light); color: var(--blue-dark); }
+.j-lancet { background: var(--red-light); color: var(--red-dark); }
+.j-jco   { background: var(--purple-light); color: var(--purple-dark); }
+.j-annoncol { background: var(--amber-light); color: var(--amber-dark); }
+.ybadge {
+  font-size: 10.5px; color: var(--text3);
+  background: var(--surface2); padding: 2px 8px; border-radius: 8px;
+}
+.drug-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.drug-sub { font-size: 12.5px; color: var(--text2); margin-bottom: 12px; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 10px 13px; }
+.stat-val { font-size: 17px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  margin-bottom: 12px; overflow-x: auto; display: block;
+}
+.data-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  background: var(--surface2); border-bottom: 2px solid var(--border2);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: top; line-height: 1.6;
+}
+.data-table tr:nth-child(even) td { background: var(--green-pale); }
+.data-table tr:last-child td { border-bottom: none; }
+.td-key { font-weight: 500; color: var(--text); white-space: nowrap; }
+.td-pembro { color: var(--green-dark); font-weight: 500; }
+.td-chemo { color: var(--text3); }
+
+sup.ref {
+  font-size: 9px; color: var(--green-dark); font-weight: 600;
+  vertical-align: super; font-family: var(--mono);
+}
+
+.ref-list {
+  list-style: none; counter-reset: ref-counter;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ref-list li {
+  counter-increment: ref-counter;
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 11.5px; color: var(--text2); line-height: 1.65;
+}
+.ref-list li::before {
+  content: '[' counter(ref-counter) ']';
+  font-family: var(--mono); font-size: 10.5px; color: var(--green-dark);
+  font-weight: 600; flex-shrink: 0; padding-top: 1px;
+  min-width: 28px;
+}
+.ref-list a { color: var(--green-mid); text-decoration: none; }
+.ref-list a:hover { text-decoration: underline; }
+
+.trial-meta-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.trial-meta-item { background: var(--surface2); border-radius: 6px; padding: 6px 10px; font-size: 11px; }
+.meta-label { font-weight: 600; color: var(--text3); margin-right: 4px; }
+.meta-val { color: var(--text2); }
+.meta-val a { color: var(--green-dark); text-decoration: none; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.gl-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  border-radius: 8px; padding: 9px 13px; font-size: 12px; line-height: 1.65;
+}
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.trial-desc { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+.body-text { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+
+.point-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.point-list li {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 12.5px; color: var(--text2); line-height: 1.65;
+}
+.point-list li::before { content: '•'; color: var(--green-mid); flex-shrink: 0; font-weight: 600; }
+.point-list.pros li::before { color: var(--green-dark); }
+.point-list.cons li::before { content: '△'; color: #c0392b; font-size: 11px; }
+
+.review-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 16px;
+}
+.review-half {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+}
+.review-col {
+  background: var(--surface2); border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.review-col-title {
+  font-size: 11.5px; font-weight: 600; margin-bottom: 10px;
+  letter-spacing: .03em;
+}
+.rc-pros { color: var(--green-dark); }
+.rc-cons { color: var(--red-dark); }
+
+.flow-diagram { margin: 4px 0; display: flex; flex-direction: column; gap: 10px; }
+.flow-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.flow-label {
+  font-size: 10.5px; font-weight: 600; color: var(--text3); min-width: 80px;
+  flex-shrink: 0; text-align: right; padding-right: 10px;
+  border-right: 2px solid var(--border2); line-height: 1.4;
+}
+.flow-box {
+  padding: 8px 12px; border-radius: 8px; font-size: 12px; line-height: 1.5;
+  text-align: center; border: 1px solid var(--border2); flex-shrink: 0;
+}
+.f-pembro { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); font-weight: 500; }
+.f-chemo { background: var(--blue-light); border-color: #5a9fd4; color: var(--blue-dark); }
+.f-surgery { background: var(--amber-light); border-color: #d97a00; color: var(--amber-dark); font-weight: 500; }
+.f-postop { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); font-weight: 500; }
+.f-postop-pbo { background: var(--surface2); border-style: dashed; color: var(--text3); font-size: 11px; }
+.flow-arr { font-size: 16px; color: var(--border2); flex-shrink: 0; padding: 0 2px; }
+
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 18px 40px; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .review-half { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .flow-row { gap: 4px; }
+  .flow-label { min-width: 60px; font-size: 10px; }
+}
+
+.mini-bar-section {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 16px;
+}
+.mini-bar-title { font-size: 11px; font-weight: 600; color: var(--text3); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.mini-bar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.mini-bar-item { background: var(--surface2); border-radius: 8px; padding: 10px 14px; }
+.mini-bar-metric { font-size: 11.5px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.mini-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.mini-bar-name { font-size: 10px; color: var(--text3); min-width: 50px; flex-shrink: 0; }
+.mini-bar-track { flex: 1; height: 12px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.mini-bar-fill-pembro { height: 100%; background: var(--green-mid); border-radius: 3px; }
+.mini-bar-fill-chemo { height: 100%; background: #5a9fd4; border-radius: 3px; }
+.mini-bar-pct { font-size: 10.5px; font-weight: 600; color: var(--text); min-width: 38px; text-align: right; }
+
+.surgical-summary {
+  background: var(--green-pale); border: 1px solid var(--green-mid);
+  border-radius: var(--radius-lg); padding: 14px 18px; margin-bottom: 16px;
+}
+.surgical-summary-title { font-size: 11px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .06em; }
+.surgical-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ss-item { font-size: 11.5px; }
+.ss-label { color: var(--text3); font-size: 10.5px; display: block; }
+.ss-val { font-weight: 600; color: var(--green-dark); }
+
+.checklist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
+.checklist-card { background: var(--surface2); border-radius: var(--radius); padding: 14px 16px; }
+.checklist-title { font-size: 11.5px; font-weight: 600; color: var(--green-dark); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border2); }
+.checklist-card ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.checklist-card ul li { font-size: 11px; color: var(--text2); line-height: 1.6; display: flex; gap: 6px; align-items: flex-start; }
+.checklist-card ul li::before { content: '□'; color: var(--green-mid); flex-shrink: 0; font-size: 12px; }
+@media (max-width: 768px) {
+  .mini-bar-grid { grid-template-columns: 1fr; }
+  .surgical-summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .checklist-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-head">化学療法</div>
+      <div style="padding:2px 18px 4px">
+        <div style="font-size:10.5px;color:var(--text3);padding:4px 0 2px">1次治療</div>
+        <a class="sb-sub" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
+        <a class="sb-sub" href="/lungatlas/index.html">変異陰性 NSCLC</a>
+      </div>
+      <a class="sb-item" href="/lungatlas/perioperative.html">周術期薬物療法</a>
+      <a class="sb-item" href="cm816.html">CheckMate 816 詳細</a>
+      <a class="sb-item active" href="kn671.html">KEYNOTE-671 詳細</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-head">このページ</div>
+      <a class="sb-sub" href="#trial-overview">試験概要</a>
+      <a class="sb-sub" href="#background">試験背景</a>
+      <a class="sb-sub" href="#design">試験デザイン</a>
+      <a class="sb-sub" href="#regimen-details">Regimen Details</a>
+      <a class="sb-sub" href="#primary-data">主要データ表</a>
+      <a class="sb-sub" href="#followup">長期追跡データ</a>
+      <a class="sb-sub" href="#surgical-outcomes">外科アウトカム</a>
+      <a class="sb-sub" href="#downstaging">病期ダウンステージ</a>
+      <a class="sb-sub" href="#postop-death">術後90日以内死亡</a>
+      <a class="sb-sub" href="#surgery-non-completion">手術未施行理由</a>
+      <a class="sb-sub" href="#adjuvant-therapy">術後・後治療</a>
+      <a class="sb-sub" href="#safety">安全性</a>
+      <a class="sb-sub" href="#ae-details">AE Details</a>
+      <a class="sb-sub" href="#subgroup">サブグループ解析</a>
+      <a class="sb-sub" href="#pdl1-detail">PD-L1別 HR</a>
+      <a class="sb-sub" href="#pcr-surrogate">pCRサロゲート</a>
+      <a class="sb-sub" href="#qol">QoL（健康関連QOL）</a>
+      <a class="sb-sub" href="#vs-cm816">CM816との比較</a>
+      <a class="sb-sub" href="#checklist">実臨床チェックリスト</a>
+      <a class="sb-sub" href="#neutral-review">総合評価</a>
+      <a class="sb-sub" href="#references">参考文献</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">化学療法 › <a href="/lungatlas/perioperative.html">周術期薬物療法</a> › <span>KEYNOTE-671</span></div>
+    <div class="updated">最終更新 2026年6月 — Lancet 2024（OS第2回中間解析）・NEJM 2023（EFS第1回中間解析）・Ann Thorac Surg 2026（外科アウトカム）原著基準</div>
+    <h1 class="art-h1" id="trial-overview">KEYNOTE-671<br>詳細解説</h1>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-message">
+        切除可能NSCLCに対する周術期（術前化学免疫療法＋術後ペムブロリズマブ単剤）レジメンで、EFS・OSの両方で有意な改善を示したPhase III試験。術後免疫療法を組み込む「周術期」戦略の代表的エビデンス。
+      </div>
+      <div class="hero-sub">
+        KEYNOTE-671は、切除可能Stage II・IIIA・IIIB(N2) NSCLCに対し、術前ペムブロリズマブ＋シスプラチン併用化学療法を4サイクル行い、手術後にペムブロリズマブ単剤を最大13サイクル投与する周術期戦略を、術前化学療法＋手術＋術後プラセボと比較したPhase III二重盲検試験（n=797）。EFSとOSを共同主要評価項目とし、いずれも統計学的有意差を示した。EGFR/ALK変異は適格基準で必須除外とされておらず少数が登録された（解析対象外）。CheckMate 816（術前のみ・3サイクル）との直接比較データは存在しない。
+      </div>
+    </div>
+
+    <!-- 試験概要 -->
+    <div class="trial-card">
+      <div class="tc-top">
+        <div class="tc-meta">
+          <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2302983" target="_blank" rel="noopener">KEYNOTE-671 <span class="ext">↗</span></a>
+          <span class="jbadge j-nejm">NEJM 2023（EFS第1回中間解析）</span>
+          <span class="jbadge j-lancet">Lancet 2024（OS第2回中間解析）</span>
+          <span class="ybadge">Phase III · n=797 · Stage II–IIIB(N2)（AJCC第8版）</span>
+        </div>
+        <div class="drug-title">術前 ペムブロリズマブ 200mg ＋ シスプラチンベース化学療法 ×4サイクル → 手術 → 術後 ペムブロリズマブ単剤 ×最大13サイクル</div>
+        <div class="drug-sub">切除可能 NSCLC · Stage II–IIIA–IIIB(N2) · PD-L1発現問わず · <strong>術後ペムブロリズマブあり（周術期レジメン）</strong></div>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-val">18.1%</div>
+            <div class="stat-label">pCR（病理学的完全奏効）率</div>
+            <div class="stat-vs">vs 4.0%（差14.2%, p&lt;0.0001）<sup class="ref">[1]</sup></div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">HR 0.58</div>
+            <div class="stat-label">EFS HR（第1回中間解析）</div>
+            <div class="stat-vs">95%CI 0.46–0.72, p&lt;0.001<sup class="ref">[1]</sup></div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">HR 0.72</div>
+            <div class="stat-label">OS HR（第2回中間解析）</div>
+            <div class="stat-vs">95%CI 0.56–0.93, one-sided p=0.0052<sup class="ref">[2]</sup></div>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <p class="trial-desc">
+          切除可能NSCLCに対し、周術期ペムブロリズマブ（術前化学療法併用4サイクル＋術後単剤最大13サイクル）を、術前化学療法単独＋術後プラセボと比較したPhase III二重盲検プラセボ対照試験（189施設）。共同主要評価項目はEFSとOS。NEJM 2023で第1回中間解析（中央値25.2か月）のEFS・pCR・mPRの有意差<sup class="ref">[1]</sup>、Lancet 2024で第2回中間解析（中央値36.6か月）のOSの統計学的有意差<sup class="ref">[2]</sup>が報告された。EGFR/ALK陽性例は適格基準で必須除外とされず少数が登録されたが、サブグループ解析の確定的解釈には不十分。CheckMate 816（術前のみ3サイクル・術後ICIなし）とは試験デザインが大きく異なり、直接比較データはない。
+        </p>
+        <div class="gl-list">
+          <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本：</strong>承認あり（ペムブロリズマブ術前・術後補助）。切除可能NSCLC。<strong>具体的な適応範囲・投与法は最新の添付文書で確認すること。</strong></span></div>
+          <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>FDA：</strong>2023年10月16日承認。切除可能（腫瘍径≥4cmまたはリンパ節転移陽性）NSCLCに対する術前ペムブロリズマブ＋白金製剤併用化学療法、および術後ペムブロリズマブ単剤として承認。</span></div>
+          <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>EMA：</strong>承認あり（2024年）。</span></div>
+        </div>
+        <div class="trial-meta-row">
+          <div class="trial-meta-item"><span class="meta-label">PMID（EFS・NEJM）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/37272513/" target="_blank" rel="noopener">37272513 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">DOI（OS・Lancet）</span><span class="meta-val"><a href="https://doi.org/10.1016/S0140-6736(24)01756-2" target="_blank" rel="noopener">10.1016/S0140-6736(24)01756-2 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">NCT</span><span class="meta-val">NCT03425643</span></div>
+          <div class="trial-meta-item"><span class="meta-label">Stage分類</span><span class="meta-val">AJCC第8版</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 試験背景 -->
+    <h2 class="sec-h2" id="background">試験背景：なぜこの試験が行われたか</h2>
+    <div class="note-box">
+      切除可能NSCLCでは、根治切除後も一定割合が再発する。1994年以降30年にわたり、周術期化学療法による上乗せは限定的（5年生存の絶対的改善は数%程度）で、有意なOS改善を示した周術期・術前レジメンは存在しなかった。免疫チェックポイント阻害薬を術前（腫瘍が体内に存在し腫瘍特異的T細胞応答を惹起しやすい時点）と術後（微小残存病変の制御）の両方に用いる「周術期」アプローチが、単独アプローチを上回る可能性が仮説とされた。KEYNOTE-671は、術前ペムブロリズマブ＋化学療法に術後ペムブロリズマブ単剤を加えた周術期レジメンの有効性を検証する目的で計画された。なお本試験は、術前免疫療法と術後免疫療法それぞれの寄与を分離評価する設計ではない（原著が明示的に限界として記載）。
+    </div>
+
+    <!-- 試験デザイン・患者背景 -->
+    <h2 class="sec-h2" id="design">試験デザイン・患者背景</h2>
+
+    <h3 class="sec-h3">投与スケジュール</h3>
+    <div class="trial-card">
+      <div class="tc-body">
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-label">ペムブロ群<br>（n=397）</div>
+            <div class="flow-box f-pembro">術前<br>ペムブロリズマブ 200mg<br>＋シスプラチンベース化学療法<br>q3w × 4サイクル</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-surgery">手術<br>（初回投与から<br>20週以内）</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-postop">術後<br>ペムブロリズマブ単剤<br>q3w × 最大13サイクル</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-label">対照群<br>（n=400）</div>
+            <div class="flow-box f-chemo">術前<br>プラセボ<br>＋シスプラチンベース化学療法<br>q3w × 4サイクル</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-surgery">手術</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-postop-pbo">術後<br>プラセボ<br>× 最大13サイクル</div>
+          </div>
+        </div>
+        <div class="note-box" style="margin-top:12px">
+          総治療サイクルは最大17サイクル（術前4＋術後13）。手術は術前初回投与から20週以内（4サイクル完遂例）。術後治療は手術後4〜12週以内に開始。無作為化は病期（II vs III）・PD-L1 TPS（&lt;50% vs ≥50%）・組織型（扁平 vs 非扁平）・地域（東アジア vs その他）で層別化。CheckMate 816（術前のみ3サイクル・術後ICIなし）とはサイクル数・術後相の有無が大きく異なる。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">適格基準</h3>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ul class="point-list">
+          <li>前治療歴のない病理学的確定切除可能NSCLC</li>
+          <li>Stage II・IIIA・IIIB(N2：同側縦隔または気管分岐下リンパ節≥1個転移)（AJCC第8版）</li>
+          <li>外科コンサルト・治験医評価で切除可能と判断</li>
+          <li>PD-L1発現を問わない（中央検査で22C3 pharmDx評価）</li>
+          <li>ECOG PS 0–1（無作為化前10日以内）</li>
+        </ul>
+        <div class="note-box" style="margin-top:10px">
+          <strong>主な除外基準：</strong>2年以内に全身治療を要した活動性自己免疫疾患、免疫抑制を要する病態、ステロイドを要した間質性肺疾患または肺臓炎の既往。<strong>EGFR変異・ALK転座は必須除外とされず、実際に少数が登録された</strong>（EGFR陽性：ペムブロ14例/プラセボ19例、ALK陽性：12例/9例）。EGFR/ALK検査は治験医裁量で局所実施され、大半は「不明」であった。ドライバー変異陽性例はサブグループ解析で確定的な解釈を行うには少数すぎ（ALK陽性は計21例で30例未満のためフォレストプロットから除外）、実臨床ではEGFR/ALK等のドライバー検索を行い、陽性例では対応するTKI戦略（術後オシメルチニブ・アレクチニブ等）を優先的に検討する。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">患者背景（Baseline Characteristics・ITT集団）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">項目</th>
+              <th>ペムブロ群（n=397）</th>
+              <th>プラセボ群（n=400）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">年齢中央値</td><td>63歳（26–83）</td><td>64歳（35–81）</td></tr>
+            <tr><td class="td-key">65歳以上</td><td>44.3%</td><td>46.5%</td></tr>
+            <tr><td class="td-key">男性</td><td>70.3%</td><td>71.0%</td></tr>
+            <tr><td class="td-key">東アジア</td><td>31.0%</td><td>30.2%</td></tr>
+            <tr><td class="td-key">Stage III</td><td>70.3%（IIIA 54.7%／IIIB 15.6%）</td><td>69.8%（IIIA 56.2%／IIIB 13.5%）</td></tr>
+            <tr><td class="td-key">N2</td><td>42.3%</td><td>46.8%</td></tr>
+            <tr><td class="td-key">非扁平上皮</td><td>56.9%</td><td>56.8%</td></tr>
+            <tr><td class="td-key">PD-L1 TPS ≥50%</td><td>33.2%</td><td>33.5%</td></tr>
+            <tr><td class="td-key">PD-L1 TPS 1–49%</td><td>32.0%</td><td>28.8%</td></tr>
+            <tr><td class="td-key">PD-L1 TPS &lt;1%</td><td>34.8%</td><td>37.8%</td></tr>
+            <tr><td class="td-key">現/既喫煙</td><td>86.4%</td><td>88.3%</td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">出典：NEJM 2023 Table 1<sup class="ref">[1]</sup>。両群でバランス良好。黒人は全体で2%（797例中16例）と少数だが、米国登録例78例中では10%（8例）を占めた。</div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">エンドポイント定義</h3>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ul class="point-list">
+          <li><strong>EFS</strong>（event-free survival）：無作為化から、計画手術を妨げる局所進行・切除不能・RECIST v1.1による進行/再発（治験医評価）・全死亡のいずれか最初の事象までの期間。<strong>共同主要評価項目</strong>。</li>
+          <li><strong>OS</strong>（overall survival）：無作為化から全死亡までの期間。<strong>共同主要評価項目</strong>。</li>
+          <li><strong>mPR</strong>（major pathologic response）：切除原発巣・郭清リンパ節の残存生存腫瘍細胞≤10%。盲検下中央病理判定。<strong>主要副次評価項目</strong>。</li>
+          <li><strong>pCR</strong>（病理学的完全奏効）：切除原発巣・郭清リンパ節に浸潤癌なし（ypT0/Tis ypN0）。盲検下中央病理判定。<strong>主要副次評価項目</strong>。</li>
+        </ul>
+        <div class="note-box" style="margin-top:10px">
+          <strong>多重性制御：</strong>familywise type I error 0.025（片側）をEFS・OS・mPR・pCRの4仮説で厳密に制御。各仮説の初期α配分はEFS 0.01・OS 0.0148・mPR 0.0001・pCR 0.0001。EFS/mPR/pCRが棄却されればOS検定に全αを配分。第2回中間解析でのOS優越境界は片側p=0.0054。CheckMate 816（共同主要：pCR・EFS）と異なり、KEYNOTE-671の共同主要評価項目は<strong>EFSとOS</strong>である点に注意。
+        </div>
+      </div>
+    </div>
+
+    <!-- Regimen Details -->
+    <h2 class="sec-h2" id="regimen-details">Regimen Details：実際に用いられた治療</h2>
+    <p class="body-text">
+      KEYNOTE-671では、術前にペムブロリズマブ 200 mgを3週ごとに投与し、組織型に応じたシスプラチンベース化学療法と4サイクル併用した。手術後はペムブロリズマブ単剤を3週ごとに最大13サイクル投与した。化学療法はシスプラチンを基盤とし、組織型によりペメトレキセドまたはゲムシタビンが併用された。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:160px">相</th>
+              <th style="min-width:260px">レジメン</th>
+              <th style="min-width:150px">投与スケジュール</th>
+              <th style="min-width:170px">注意点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">術前（非扁平上皮）</td>
+              <td>ペムブロリズマブ 200 mg + CDDP 75 mg/m² + PEM 500 mg/m²</td>
+              <td>q3w × 4 cycles</td>
+              <td>CDDP適応・腎機能・PEM適応（葉酸/B12補充）を確認</td>
+            </tr>
+            <tr>
+              <td class="td-key">術前（扁平上皮）</td>
+              <td>ペムブロリズマブ 200 mg + CDDP 75 mg/m² + GEM 1,000 mg/m²（day1, 8）</td>
+              <td>q3w × 4 cycles</td>
+              <td>GEMはday1/8投与。骨髄抑制に注意</td>
+            </tr>
+            <tr>
+              <td class="td-key">術後</td>
+              <td>ペムブロリズマブ 200 mg 単剤</td>
+              <td>q3w × 最大13 cycles</td>
+              <td>術後4〜12週以内に開始。irAEに注意</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          用量・スケジュールはNEJM 2023本文に準拠<sup class="ref">[1]</sup>。手術はlobectomy・bilobectomy・pneumonectomy・sleeve lobectomy/pneumonectomy（胸壁合併切除の有無を問わず）が許容され、楔状切除・区域切除は不可。縦隔リンパ節（N2）郭清が推奨された。<strong>本試験はシスプラチンベースに限定</strong>されたが、転移期データに基づき結果はカルボプラチンベースにも一般化可能と原著が記載し、各国の承認もこれを反映している。
+        </div>
+        <div class="info-box" style="margin-top:10px">
+          <strong>術前・術後の寄与の分離不可：</strong>本試験は術前免疫療法と術後免疫療法を一体の「周術期レジメン」として検証したもの。術前・術後それぞれの効果を分離するには、術前ペムブロ＋術後プラセボ、術前プラセボ＋術後ペムブロの2群を加えた大規模デザインが必要であり、本試験単独では術後ペムブロリズマブ単剤の上乗せ効果を定量できない（原著が明示）。
+        </div>
+      </div>
+    </div>
+
+    <!-- 主要データ表 -->
+    <h2 class="sec-h2" id="primary-data">主要データ表</h2>
+
+    <!-- ミニ棒グラフ -->
+    <div class="mini-bar-section">
+      <div class="mini-bar-title">主要アウトカム概観（KEYNOTE-671報告値）</div>
+      <div class="mini-bar-grid">
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">pCR率（第1回中間解析）</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">ペムブロ群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-pembro" style="width:18.1%"></div></div>
+            <span class="mini-bar-pct">18.1%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">対照群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:4%"></div></div>
+            <span class="mini-bar-pct">4.0%</span>
+          </div>
+        </div>
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">mPR率（第1回中間解析）</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">ペムブロ群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-pembro" style="width:30.2%"></div></div>
+            <span class="mini-bar-pct">30.2%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">対照群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:11%"></div></div>
+            <span class="mini-bar-pct">11.0%</span>
+          </div>
+        </div>
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">24か月EFS率（第1回中間解析）</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">ペムブロ群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-pembro" style="width:62.4%"></div></div>
+            <span class="mini-bar-pct">62.4%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">対照群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:40.6%"></div></div>
+            <span class="mini-bar-pct">40.6%</span>
+          </div>
+        </div>
+        <div class="mini-bar-item">
+          <div class="mini-bar-metric">36か月OS率（第2回中間解析）</div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">ペムブロ群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-pembro" style="width:71%"></div></div>
+            <span class="mini-bar-pct">71%</span>
+          </div>
+          <div class="mini-bar-row">
+            <span class="mini-bar-name">対照群</span>
+            <div class="mini-bar-track"><div class="mini-bar-fill-chemo" style="width:64%"></div></div>
+            <span class="mini-bar-pct">64%</span>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:10.5px;color:var(--text3);margin-top:10px">
+        数値はKEYNOTE-671の報告に基づく模式的な棒グラフ。pCR/mPR/24か月EFSは第1回中間解析（NEJM 2023, 中央値25.2か月）、36か月OSは第2回中間解析（Lancet 2024, 中央値36.6か月）の値で、解析時点が異なるため横並びの単純比較には注意。原著Kaplan–Meier曲線の再現ではありません。
+      </p>
+    </div>
+
+    <div class="info-box">
+      KEYNOTE-671のEFS・OSは複数の解析時点で報告されている。確定的・検定済みの値は、EFSが第1回中間解析（HR 0.58）、OSが第2回中間解析（HR 0.72, one-sided p=0.0052）である。第1回中間解析時点ではOSは有意水準に達していなかった（p=0.02、境界未達）。追跡延長に伴う4年・5年データは探索的（検定なし）であり、効果量の確定的主張には検定済みの値を用いる。
+    </div>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">項目</th>
+              <th style="min-width:180px">ペムブロ＋化学療法</th>
+              <th style="min-width:140px">化学療法＋プラセボ</th>
+              <th style="min-width:230px">解釈・出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">pCR率</td>
+              <td class="td-pembro">18.1%（95%CI 14.5–22.3）</td>
+              <td class="td-chemo">4.0%（2.3–6.4）</td>
+              <td>差14.2%（10.1–18.7）, p&lt;0.0001<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">mPR率</td>
+              <td class="td-pembro">30.2%（25.7–35.0）</td>
+              <td class="td-chemo">11.0%（8.1–14.5）</td>
+              <td>差19.2%（13.9–24.7）, p&lt;0.0001<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS中央値（第1回中間解析）</td>
+              <td class="td-pembro">未到達（95%CI 34.1–NR）</td>
+              <td class="td-chemo">17.0か月（14.3–22.0）</td>
+              <td>中央値25.2か月時点<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS HR（第1回中間解析）</td>
+              <td class="td-pembro">0.58（0.46–0.72）</td>
+              <td class="td-chemo">—</td>
+              <td>p&lt;0.001。24か月EFS率 62.4% vs 40.6%<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS中央値（第2回中間解析）</td>
+              <td class="td-pembro">47.2か月（32.9–NR）</td>
+              <td class="td-chemo">18.3か月（14.8–22.1）</td>
+              <td>36か月EFS率 54% vs 35%<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EFS HR（第2回中間解析）</td>
+              <td class="td-pembro">0.59（0.48–0.72）</td>
+              <td class="td-chemo">—</td>
+              <td>中央値36.6か月時点。EFSは前回有意のため正式検定なし<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">36か月OS率（第2回中間解析）</td>
+              <td class="td-pembro">71%（66–76）</td>
+              <td class="td-chemo">64%（58–69）</td>
+              <td>OS差7ポイント<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">OS HR（第2回中間解析）</td>
+              <td class="td-pembro">0.72（0.56–0.93）</td>
+              <td class="td-chemo">—</td>
+              <td>one-sided p=0.0052（境界0.0054）。統計学的有意<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">OS中央値（第2回中間解析）</td>
+              <td class="td-pembro">未到達</td>
+              <td class="td-chemo">52.4か月（45.7–NR）</td>
+              <td>ペムブロ群は中央値・95%CI下限とも未到達<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">手術施行率（in-study surgery）</td>
+              <td class="td-pembro">82.1%（325/397）</td>
+              <td class="td-chemo">79.4%（317/400）</td>
+              <td>ITTを分母<sup class="ref">[1,3]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">R0切除率（手術施行例中）</td>
+              <td class="td-pembro">92.0%</td>
+              <td class="td-chemo">84.2%</td>
+              <td>手術施行例を分母<sup class="ref">[1,3]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade 3–5 治療関連AE</td>
+              <td class="td-pembro">44.9%（第1回）／45%（第2回）</td>
+              <td class="td-chemo">37.3%／38%</td>
+              <td>as-treated集団<sup class="ref">[1,2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade ≥3 免疫関連AE</td>
+              <td class="td-pembro">5.8%（第1回）／7%（第2回）</td>
+              <td class="td-chemo">1.5%／2%</td>
+              <td>ペムブロ群で増加<sup class="ref">[1,2]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">
+          OS中央値の対照群「52.4か月」は第2回中間解析（Lancet 2024）の値。第1回中間解析（NEJM 2023）時点では対照群OS中央値45.5か月と報告されており、追跡期間が異なる別カットの値である点に注意。
+        </div>
+      </div>
+    </div>
+
+    <!-- 長期追跡データ -->
+    <h2 class="sec-h2" id="followup">解析時点別データ（検定済み vs 探索的）</h2>
+    <p class="body-text">
+      KEYNOTE-671は複数回の解析が報告されている。<strong>事前規定の検定を満たした確定値は、EFSが第1回中間解析（NEJM 2023）、OSが第2回中間解析（Lancet 2024）</strong>である。それ以降の4年・5年追跡は探索的解析（統計学的検定なし）として報告された。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">解析時点</th>
+              <th style="min-width:130px">追跡中央値</th>
+              <th style="min-width:160px">EFS HR</th>
+              <th style="min-width:160px">OS HR</th>
+              <th style="min-width:160px">出典・位置づけ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">第1回中間解析（IA1）</td>
+              <td>25.2か月</td>
+              <td class="td-pembro">0.58（0.46–0.72）★検定済</td>
+              <td>OS未達（p=0.02・境界未達）</td>
+              <td>NEJM 2023<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">第2回中間解析（IA2）</td>
+              <td>36.6か月</td>
+              <td class="td-pembro">0.59（0.48–0.72）</td>
+              <td class="td-pembro">0.72（0.56–0.93）★検定済</td>
+              <td>Lancet 2024<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">4年追跡（探索的）</td>
+              <td>41.1か月</td>
+              <td class="td-pembro">0.57（0.47–0.69）</td>
+              <td class="td-pembro">0.73（0.58–0.92）</td>
+              <td>ESMO IO 2024<sup class="ref">[4]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">5年追跡（探索的）</td>
+              <td>60.4か月</td>
+              <td class="td-pembro">0.58（0.48–0.69）</td>
+              <td class="td-pembro">0.74（0.59–0.92）</td>
+              <td>ESMO 2025 LBA67<sup class="ref">[5]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          ★＝事前規定の検定を満たした確定値。4年・5年は探索的（検定なし）。5年追跡時点（ESMO 2025）の探索的数値：5年OS率 64.6%（95%CI 59.5–69.2）vs 53.6%（48.3–58.6）、対照群OS中央値70.7か月、5年EFS率 49.9% vs 26.5%、新たな安全性シグナルなし<sup class="ref">[5]</sup>。HR点推定値は時点間で概ね安定。
+        </div>
+        <div class="info-box" style="margin-top:8px">
+          <strong>制限時間平均生存（RMST）：</strong>第2回中間解析の感度解析では、60か月時点のRMSTがペムブロ群46.6か月 vs 対照群42.5か月（差4.2か月、95%CI 1.1–7.3）。比例ハザード性の検証として報告された<sup class="ref">[2]</sup>。
+        </div>
+      </div>
+    </div>
+
+    <!-- 外科アウトカム -->
+    <h2 class="sec-h2" id="surgical-outcomes">Surgical Outcomes：手術到達性と外科的アウトカム</h2>
+    <div class="surgical-summary">
+      <div class="surgical-summary-title">Surgical Takeaways（ペムブロ vs プラセボ・外科解析論文）</div>
+      <div class="surgical-summary-grid">
+        <div class="ss-item"><span class="ss-label">手術施行率</span><span class="ss-val">82.1% vs 79.4%</span></div>
+        <div class="ss-item"><span class="ss-label">R0切除率（手術例中）</span><span class="ss-val">92.0% vs 84.2%</span></div>
+        <div class="ss-item"><span class="ss-label">手術遅延</span><span class="ss-val">4.9% vs 7.6%</span></div>
+        <div class="ss-item"><span class="ss-label">Lobectomy</span><span class="ss-val">78.8% vs 75.1%</span></div>
+        <div class="ss-item"><span class="ss-label">Pneumonectomy</span><span class="ss-val">11.4% vs 12.3%</span></div>
+        <div class="ss-item"><span class="ss-label">入院期間中央値</span><span class="ss-val">8日 vs 8日</span></div>
+      </div>
+      <p style="font-size:10.5px;color:var(--text3);margin-top:10px">
+        外科アウトカムはAnn Thorac Surg 2026（Liberman/Jones et al.、IA2データ・手術集団）の探索的・記述的解析。術前ペムブロリズマブが手術選択・手術時期・入院期間に大きな影響を与えなかったことを示す。
+      </p>
+    </div>
+    <p class="body-text">
+      KEYNOTE-671の外科アウトカム解析（Ann Thorac Surg 2026）<sup class="ref">[3]</sup>では、術前ペムブロリズマブは術式選択を変えず、手術を遅延させず、入院期間を延長しなかった。R0切除率は数値上ペムブロリズマブ群で高く（92.0% vs 84.2%、R0非達成は約半分）、これは病期・地域を問わず一貫した。手術遅延の原因はペムブロリズマブ群でAEがやや多かったが（3.1% vs 2.5%）、全体の遅延率は両群とも低い。
+    </p>
+
+    <h3 class="sec-h3">術式・アプローチ・手術時期（手術集団）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">外科アウトカム</th>
+              <th style="min-width:160px">ペムブロ群（n=325）</th>
+              <th style="min-width:140px">プラセボ群（n=317）</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">手術遅延（規定超過）</td><td class="td-pembro">4.9%（16例）</td><td class="td-chemo">7.6%（24例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">うちAEによる遅延</td><td>3.1%（10例）</td><td>2.5%（8例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">無作為化→手術 中央値</td><td>15.4週</td><td>15.4週</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">最終術前投与→手術 中央値</td><td>5.9週</td><td>5.6週</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">Lobectomy</td><td class="td-pembro">78.8%（256例）</td><td class="td-chemo">75.1%（238例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">Bilobectomy</td><td>8.0%（26例）</td><td>8.2%（26例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">Pneumonectomy（肺全摘）</td><td>11.4%（37例）</td><td>12.3%（39例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">その他（開胸等）</td><td>1.8%（6例）</td><td>4.4%（14例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">入院期間中央値</td><td>8日（1–50）</td><td>8日（1–65）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          術式分布は両群で概ね同等。肺全摘率はむしろペムブロリズマブ群でわずかに低い（11.4% vs 12.3%）。北米・西欧・東アジア以外の地域で肺全摘率がやや高く、入院期間も長い傾向（地域診療慣行の差と考察）。楔状切除・区域切除は本試験では許容されていない。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">完全切除（surgical completeness・病期別）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">切除完全性</th>
+              <th style="min-width:160px">ペムブロ群</th>
+              <th style="min-width:140px">プラセボ群</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">R0（全体）</td><td class="td-pembro">92.0%（299例）</td><td class="td-chemo">84.2%（267例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">R0（Stage II）</td><td class="td-pembro">94.9%</td><td class="td-chemo">86.4%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">R0（Stage III）</td><td class="td-pembro">90.7%</td><td class="td-chemo">83.2%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">R1</td><td>5.2%（17例）</td><td>9.8%（31例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">R2</td><td>1.2%（4例）</td><td>1.3%（4例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">切除不能（術中判明）</td><td>1.5%（5例）</td><td>4.7%（15例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          R0非達成（R1/R2/切除不能）はプラセボ群で約2倍（ペムブロ8.0% vs プラセボ15.8%）。R0切除は予後と関連するため、R0率の改善がEFS便益の一因と考察されている。EFSサブ解析でもR0切除例ではペムブロリズマブが便益を示した（HR 0.53, 95%CI 0.41–0.68）が、R1/R2例では示さなかった（HR 1.04, 0.54–2.03）。
+        </div>
+      </div>
+    </div>
+
+    <!-- 病期ダウンステージ -->
+    <h2 class="sec-h2" id="downstaging">Nodal/Tumor Downstaging：病期ダウンステージ</h2>
+    <p class="body-text">
+      術前ペムブロリズマブは、リンパ節・原発巣・全体病期のいずれでもダウンステージを増加させた。特にN（リンパ節）ダウンステージは臨床的に重要であり、ペムブロリズマブ群でより高頻度であった。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">ダウンステージ（手術集団）</th>
+              <th style="min-width:160px">ペムブロ群</th>
+              <th style="min-width:140px">プラセボ群</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">Nダウンステージ（あり）</td><td class="td-pembro">38.9%</td><td class="td-chemo">28.4%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">うち pN0 へのダウンステージ</td><td class="td-pembro">34.3%</td><td class="td-chemo">23.4%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">Tダウンステージ（あり）</td><td class="td-pembro">69.5%</td><td class="td-chemo">47.9%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">うち T0（術後）</td><td class="td-pembro">28.7%</td><td class="td-chemo">6.6%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">全体病期ダウンステージ</td><td class="td-pembro">69.2%</td><td class="td-chemo">47.5%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">うち病期0（術後）</td><td class="td-pembro">27.4%</td><td class="td-chemo">6.9%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          術前ペムブロリズマブは、リンパ節・原発巣・全体病期のダウンステージをいずれも増加させた。これは病理学的奏効（pCR/mPR）の高さと整合する。ただしダウンステージは記述的所見であり、術後治療の要否を直接規定するものではない。
+        </div>
+      </div>
+    </div>
+
+    <!-- 術後90日以内死亡 -->
+    <h2 class="sec-h2" id="postop-death">術後30日・90日以内の死亡</h2>
+    <p class="body-text">
+      外科アウトカム解析（IA2・手術集団）では、術後早期死亡が術式別・群別に報告されている。ペムブロリズマブ群で30日・90日死亡がわずかに高かったが、術後早期死亡（≤30日）はすべて手術関連と判定された。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">術後死亡</th>
+              <th style="min-width:160px">ペムブロ群（n=325）</th>
+              <th style="min-width:140px">プラセボ群（n=317）</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">術後30日以内死亡</td><td class="td-pembro">6例（1.8%）</td><td class="td-chemo">2例（0.6%）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">術後90日以内死亡（累積）</td><td class="td-pembro">13例（4.0%）</td><td class="td-chemo">5例（1.6%）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">Lobectomy/bilobectomy 90日死亡率</td><td>3.5%</td><td>1.5%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">Pneumonectomy 90日死亡率</td><td>8.1%</td><td>2.6%</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="caution-box" style="margin-top:10px">
+          <strong>術後30日以内死亡の死因（ペムブロ群6例）：</strong>肺塞栓2例、術中動脈損傷による肺出血・肺敗血症・呼吸不全・敗血症性ショック各1例——いずれも手術関連と判定。<strong>プラセボ群2例：</strong>肺炎・呼吸不全各1例（手術関連）。31〜90日の追加死亡（ペムブロ7例・プラセボ3例）は手術関連ではなく、悪性腫瘍進行3例、心停止・肺出血・免疫関連肺疾患（治験薬関連）・原因不明各1例（ペムブロ群）等。
+        </div>
+        <div class="note-box" style="margin-top:8px">
+          肺全摘（pneumonectomy）の90日死亡率は葉切除/二葉切除より高く（8.1% vs 3.5%、ペムブロ群）、これは術式そのもののリスクを反映する既知の傾向と一致する。地域差もみられ、北米0%〜北米/西欧/東アジア以外7.7%（ペムブロ群90日）。少数例に基づくため、術式別リスクの定量的結論には注意。術後早期死亡率は歴史的報告と概ね同等と考察されている。
+        </div>
+      </div>
+    </div>
+
+    <!-- 手術未施行理由 -->
+    <h2 class="sec-h2" id="surgery-non-completion">Why surgery was not performed：手術未施行・キャンセル</h2>
+    <p class="body-text">
+      術前治療を受けたペムブロリズマブ群の<strong>6.3%</strong>が、術前相のAEにより手術を受けなかった（外科解析論文）。NEJM本文・FDA labelでも、AEによる手術未施行は約6%と報告されている。手術キャンセルに至ったirAE/輸注反応による治療中止は1.8%（7例）で、その内訳は免疫関連肺疾患・心筋炎・大腸炎・筋炎・間質性肺疾患(2例)・呼吸困難・肺臓炎であった。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:260px">手術関連の中断・遅延（ペムブロ群）</th>
+              <th style="min-width:140px">割合</th>
+              <th style="min-width:180px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">術前相AEにより手術未施行</td><td class="td-pembro">6.3%（25例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">irAE/輸注反応による治療中止</td><td class="td-pembro">1.8%（7例）</td><td>Ann Thorac Surg<sup class="ref">[3]</sup></td></tr>
+            <tr><td class="td-key">術後治療を受けられず（AE）</td><td class="td-pembro">19例（術後）</td><td>NEJM Fig.1<sup class="ref">[2]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          手術未施行の理由は疾患進行・AE・患者/医師判断・切除不能などに分かれ、同義ではない。Lancet試験プロファイル（Fig.1）では、ペムブロ群で「手術意図なく術前治療中止」31例（AE 16例・進行5例・同意撤回6例等）、「術前完遂も手術未施行」23例（AE 8例・進行10例等）が報告されている。術前治療を行っても一定割合が予定手術に至らない点は、術前治療の選択時に考慮すべきである。
+        </div>
+      </div>
+    </div>
+
+    <!-- 術後・後治療 -->
+    <h2 class="sec-h2" id="adjuvant-therapy">Adjuvant and Subsequent Therapy：術後・後治療</h2>
+    <p class="body-text">
+      KEYNOTE-671は術後ペムブロリズマブ単剤（最大13サイクル）を治療設計に組み込む点がCheckMate 816と本質的に異なる。第2回中間解析（Lancet 2024）では、ITT全体で後治療（subsequent therapy）を受けた患者はペムブロ群30% vs 対照群52%、うちPD-1/PD-L1阻害薬は8% vs 29%であった。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:240px">後治療（ITT集団）</th>
+              <th style="min-width:160px">ペムブロ群</th>
+              <th style="min-width:140px">プラセボ群</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">何らかの後治療</td><td class="td-pembro">30%（118/397）</td><td class="td-chemo">52%（208/400）</td><td>Lancet 2024<sup class="ref">[2]</sup></td></tr>
+            <tr><td class="td-key">うち PD-1/PD-L1阻害薬</td><td class="td-pembro">8%（30例）</td><td class="td-chemo">29%（114例）</td><td>Lancet 2024<sup class="ref">[2]</sup></td></tr>
+            <tr><td class="td-key">進行/再発例での後治療</td><td>80%（99/124）</td><td>86%（178/208）</td><td>Lancet 2024<sup class="ref">[2]</sup></td></tr>
+            <tr><td class="td-key">進行/再発例でのPD-1/L1</td><td>21%（26例）</td><td>50%（104例）</td><td>Lancet 2024<sup class="ref">[2]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          対照群では再発後にPD-1/PD-L1阻害薬を受けた患者が多く（進行/再発例の50%）、これは対照群の一部が「救済免疫療法」を受けたことを意味する。OSの解釈では、対照群の後治療（クロスオーバー的ICI使用を含む）の影響を考慮する必要がある。原著は、対照群の後治療は局所再発・遠隔転移に対する世界標準を反映したものと記載。周術期ICI戦略（KN671）・術前のみICI戦略（CM816）・術後のみICI戦略（IMpower010・PEARLS/KN091）の直接比較データは存在しないため、戦略間の優劣は断定しない。
+        </div>
+        <div class="info-box" style="margin-top:8px">
+          <strong>術後治療の寄与に関する探索的所見：</strong>術後時点からのランドマーク解析（postrandomization因子・要注意）では、術後治療を受けた患者では周術期ペムブロリズマブがOSを改善したが、術後治療を受けなかった患者では明確なOS便益がみられなかった。両群とも術後治療を受けた患者の方がEFS・OSが長かった。これは術前・術後の両相が便益に寄与する可能性を排除しないが、術後因子に基づく探索的解析であり、確定的結論には別デザインの試験が必要（原著が明示）。
+        </div>
+      </div>
+    </div>
+
+    <!-- 安全性 -->
+    <h2 class="sec-h2" id="safety">Safety：安全性まとめ</h2>
+    <p class="body-text">
+      ペムブロリズマブ追加によりGrade 3–5治療関連AEは数値上やや増加した（44.9% vs 37.3%、第1回中間解析）。免疫関連AEはペムブロリズマブ群で明らかに高頻度（全grade 25.3% vs 10.5%、Grade≥3 5.8% vs 1.5%）。最も多いirAEは甲状腺機能低下・亢進・肺臓炎であった。健康関連QOLは周術期を通じて対照群と差がなく、新たな安全性シグナルは報告されていない。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:260px">安全性項目（as-treated）</th>
+              <th style="min-width:150px">ペムブロ群（n=396）</th>
+              <th style="min-width:140px">プラセボ群（n=399）</th>
+              <th style="min-width:160px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">治療関連AE（any grade）</td><td class="td-pembro">96.7%</td><td class="td-chemo">95.0%</td><td>NEJM 2023<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">Grade 3–5 治療関連AE</td><td class="td-pembro">44.9%</td><td class="td-chemo">37.3%</td><td>NEJM 2023<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">重篤 治療関連AE</td><td class="td-pembro">17.7%</td><td class="td-chemo">14.3%</td><td>NEJM 2023<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">治療関連死亡</td><td class="td-pembro">4例（1.0%）</td><td class="td-chemo">3例（0.8%）</td><td>NEJM 2023<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">全治療中止に至るAE</td><td class="td-pembro">12.6%</td><td class="td-chemo">5.3%</td><td>NEJM 2023<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">免疫関連AE/輸注反応（any grade）</td><td class="td-pembro">25.3%</td><td class="td-chemo">10.5%</td><td>NEJM 2023<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">Grade ≥3 免疫関連AE</td><td class="td-pembro">5.8%</td><td class="td-chemo">1.5%</td><td>NEJM 2023<sup class="ref">[1]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="caution-box" style="margin-top:10px">
+          <strong>治療関連死亡の死因：</strong>ペムブロ群4例＝免疫関連肺疾患・肺炎・心臓突然死（術前/手術相 各1例）、心房細動（術後相1例）。プラセボ群3例＝急性冠症候群・肺炎・肺出血（いずれも術前/手術相）。免疫関連死亡はペムブロ群の肺臓炎1例。
+        </div>
+        <div class="caution-box" style="margin-top:8px">
+          <strong>irAEの管理：</strong>最も多いirAEは甲状腺機能低下・亢進・肺臓炎（術前/手術相・術後相とも）。術前相のirAEは手術時期・ステロイド使用・周術期感染リスクに影響しうる。術後相でも長期にわたるirAE監視（甲状腺機能・肝酵素・クレアチニンの定期評価）が必要。術後相のGrade≥3治療関連AEはペムブロ12%（34/290）vs プラセボ6%（16/267）と、術後ペムブロリズマブ単剤の負担が反映される。
+        </div>
+      </div>
+    </div>
+
+    <!-- AE Details -->
+    <h2 class="sec-h2" id="ae-details">AE Details：治療関連AE（≥10%・第1回中間解析）</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">治療関連AE</th>
+              <th style="min-width:150px">ペムブロ any/G3-4</th>
+              <th style="min-width:150px">プラセボ any/G3-4</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">悪心</td><td class="td-pembro">54.3% / 2.0%</td><td class="td-chemo">51.1% / 1.5%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">好中球減少</td><td class="td-pembro">42.2% / 20.7%</td><td class="td-chemo">41.9% / 19.5%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">貧血</td><td class="td-pembro">36.1% / 7.3%</td><td class="td-chemo">33.8% / 5.5%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">白血球減少</td><td class="td-pembro">28.0% / 5.3%</td><td class="td-chemo">24.6% / 5.5%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">倦怠感</td><td class="td-pembro">27.3% / 1.5%</td><td class="td-chemo">23.6% / 0.8%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">血小板減少</td><td class="td-pembro">18.7% / 5.1%</td><td class="td-chemo">18.5% / 6.0%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">皮疹</td><td class="td-pembro">11.4% / 0.8%</td><td class="td-chemo">6.5% / 0%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+            <tr><td class="td-key">ALT上昇</td><td class="td-pembro">12.9% / 1.8%</td><td class="td-chemo">7.8% / 1.0%</td><td>NEJM<sup class="ref">[1]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          最頻の治療関連AEは悪心・好中球減少・貧血で、いずれも化学療法に伴う既知のもの。Grade 3/4の血液毒性は両群で同等。皮疹・ALT上昇はペムブロリズマブ群でやや高く、免疫関連の関与が示唆される。術前治療では好中球減少・発熱性好中球減少・感染症・腎機能障害が手術予定日に影響しうる。手術関連AE（any grade）は術前ペムブロリズマブで増加せず（71.1% vs 71.3%、最頻は手技関連疼痛）。
+        </div>
+      </div>
+    </div>
+
+    <!-- サブグループ解析 -->
+    <h2 class="sec-h2" id="subgroup">Subgroup Analysis：どの患者で効果が大きそうか</h2>
+    <div class="info-box">
+      以下のサブグループ解析はいずれも探索的であり、本試験は各サブグループでの治療効果差を検出する検出力を持たない。多重比較の調整も行われていない。原著は「すべてのEFS・OSサブグループで95%CIが全体集団のそれと重なった」と明記しており、HRは点推定値として参考にとどめる。30例未満のサブグループ（ALK転座陽性21例）はフォレストプロットから除外。EGFR陽性（計33例）も少数で確定的解釈は不可。
+    </div>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">サブグループ</th>
+              <th style="min-width:220px">所見（EFS/OS）</th>
+              <th style="min-width:160px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Stage II</td>
+              <td>EFS HR 0.65（0.42–1.01）／OS HR 0.67（0.41–1.10）。EFSは便益方向だがCI上限が1に接近</td>
+              <td>NEJM<sup class="ref">[1]</sup> / Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Stage III</td>
+              <td>EFS HR 0.54（0.42–0.70）／OS（III N2）HR 0.74（0.51–1.07）。主たる構成集団</td>
+              <td>NEJM<sup class="ref">[1]</sup> / Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">扁平上皮 / 非扁平上皮</td>
+              <td>EFS HR 0.57（扁平）/ 0.58（非扁平）。組織型によらず同等の便益（注目される所見）</td>
+              <td>NEJM<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">N status（N0/N1/N2）</td>
+              <td>EFS HR 0.58（N0）/ 0.56（N1）/ 0.63（N2）。結節状態によらず便益</td>
+              <td>Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">65歳以上 / 非喫煙 / 東アジア / 非白人</td>
+              <td>OSの相対的便益が点推定値上、明確さが低下（OS未成熟が一因の可能性）。EFSは便益方向</td>
+              <td>Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">EGFR陽性 / ALK陽性</td>
+              <td>少数（EGFR計33例・ALK計21例）。ALKは30例未満でフォレストプロット除外。確定的解釈不可</td>
+              <td>NEJM<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">pCR / mPR 達成</td>
+              <td>達成例でEFS便益がより顕著（後述のpCRサロゲートの項を参照）</td>
+              <td>NEJM<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PD-L1別 HR -->
+    <h2 class="sec-h2" id="pdl1-detail">PD-L1 TPS別 ハザード比（原著フォレストプロット）</h2>
+    <p class="body-text">
+      PD-L1発現が高いほど相対的便益が大きい傾向が、EFS・OSいずれでも一貫して観察された。ただし全カテゴリーでHRはペムブロリズマブ群を支持し、95%CIは互いに重なる。原著は「PD-L1低発現でも便益方向だが、確実性は相対的に限定的」と慎重に解釈している。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:160px">PD-L1 TPS</th>
+              <th style="min-width:200px">EFS HR（第1回中間解析）</th>
+              <th style="min-width:200px">OS HR（第2回中間解析）</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">TPS ≥50%</td>
+              <td class="td-pembro">0.42（0.28–0.65）</td>
+              <td class="td-pembro">0.55（0.33–0.92）</td>
+              <td>NEJM<sup class="ref">[1]</sup> / Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">TPS 1–49%</td>
+              <td class="td-pembro">0.51（0.34–0.75）</td>
+              <td>0.69（0.44–1.07）</td>
+              <td>NEJM<sup class="ref">[1]</sup> / Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">TPS &lt;1%</td>
+              <td>0.77（0.55–1.07）</td>
+              <td>0.91（0.63–1.32）</td>
+              <td>NEJM<sup class="ref">[1]</sup> / Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">TPS &lt;50%（参考）</td>
+              <td class="td-pembro">0.64（0.49–0.82）</td>
+              <td class="td-pembro">0.79（0.60–1.06）</td>
+              <td>NEJM<sup class="ref">[1]</sup> / Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">TPS ≥1%（参考）</td>
+              <td class="td-pembro">0.47（0.36–0.63）</td>
+              <td class="td-pembro">0.62（0.45–0.87）</td>
+              <td>NEJM<sup class="ref">[1]</sup> / Lancet<sup class="ref">[2]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="info-box" style="margin-top:10px">
+          <strong>解釈上の注意：</strong>PD-L1低発現（TPS &lt;1%）ではEFS HR 0.77・OS HR 0.91と便益の確実性が相対的に低下する。ただし95%CIは全体集団と重なり、原著は「すべての場合でHRはペムブロリズマブ群を支持し、CIは互いに重なる」と記載。PD-L1別HRは治療適応を決める確定的閾値ではない。CheckMate 816でもPD-L1陰性例で便益が限定的との探索的所見があり、複数の周術期ICI試験で「PD-L1高発現でより大きな便益」の傾向は一貫している。事前規定外サブグループ（TPS 1–49%・≥1%・&lt;1%）も含まれる点に注意。
+        </div>
+      </div>
+    </div>
+
+    <!-- pCRサロゲート論 -->
+    <h2 class="sec-h2" id="pcr-surrogate">pCR・病理学的奏効はEFS/OSの代替指標になるのか</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <p class="body-text">
+          KEYNOTE-671の探索的解析（NEJM Fig.3）では、pCR/mPR達成例でEFSの便益がより顕著であった。一方、pCR/mPR非達成例でも便益が認められた点が重要である：
+        </p>
+        <ul class="point-list">
+          <li><strong>pCR達成例：</strong>EFS HR 0.33（95%CI 0.09–1.22）／<strong>pCR非達成例：</strong>0.69（0.55–0.85）</li>
+          <li><strong>mPR達成例：</strong>EFS HR 0.54（0.24–1.22）／<strong>mPR非達成例：</strong>0.73（0.58–0.92）</li>
+        </ul>
+        <p class="body-text" style="margin-top:8px">
+          注目すべきは、<strong>pCR非達成例でのEFS HRがCheckMate 816（0.84, 95%CI 0.61–1.17）よりKEYNOTE-671（0.69, 0.55–0.85）で良好だった</strong>点で、原著はこれを「術後（adjuvant）相が便益に寄与する可能性を示唆する」と慎重に記載している（ただしクロススタディ比較は注意）。代替エンドポイントとして確立するには：
+        </p>
+        <ul class="point-list cons">
+          <li>pCR/mPR達成群は治療で選択された集団であり、奏効自体が予後良好な腫瘍生物学を反映する可能性。</li>
+          <li>pCR非達成例でも便益がみられ、効果が病理学的奏効のみを介するとは限らない。</li>
+          <li>規制当局レベルで代替エンドポイントとして扱うには複数試験のtrial-level surrogacy検証が必要。</li>
+          <li>KEYNOTE-671ではpCR/mPRは主要副次評価項目であり、共同主要評価項目はEFSとOS。</li>
+          <li>pCR達成例にも本試験では術後ペムブロリズマブが投与されており、術後治療省略の可否は未解決。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- QoL -->
+    <h2 class="sec-h2" id="qol">Health-Related Quality of Life：健康関連QOL</h2>
+    <p class="body-text">
+      Lancet 2024では、EORTC QLQ-C30/LC13による患者報告アウトカム（PRO）が報告された。周術期ペムブロリズマブは、術前相・術後相のいずれでも全般的健康状態/QOL（GHS/QoL）を悪化させなかった。
+    </p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:240px">GHS/QoL（ベースラインからの変化）</th>
+              <th style="min-width:160px">ペムブロ群</th>
+              <th style="min-width:140px">プラセボ群</th>
+              <th style="min-width:130px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">術前相 week11（LSM変化）</td><td>−9.3点</td><td>−10.7点</td><td>Lancet<sup class="ref">[2]</sup></td></tr>
+            <tr><td class="td-key">術後相 week10（LSM変化）</td><td>−1.5点</td><td>−3.7点</td><td>Lancet<sup class="ref">[2]</sup></td></tr>
+            <tr><td class="td-key">改善または安定の割合</td><td class="td-pembro">59%（54–64）</td><td class="td-chemo">52%（47–57）</td><td>Lancet<sup class="ref">[2]</sup></td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          両群とも術前相でQOLが低下（化学療法・腫瘍症状の影響）し、術後相でほぼベースラインに回復。10点閾値での群間差はなく、術後ペムブロリズマブ単剤（対照群は無治療）でもQOLは悪化しなかった。原著は「irAEは術後相で対照群より多いが、QOLには悪影響を及ぼさない」と結論。なおQLQ-LC13は切除不能例向けに開発された指標であり、切除可能集団での使用には限界がある（原著が言及）。
+        </div>
+      </div>
+    </div>
+
+    <!-- CM816との比較 -->
+    <h2 class="sec-h2" id="vs-cm816">CheckMate 816との比較（間接比較・注意）</h2>
+    <div class="caution-box">
+      <strong>直接比較は存在しない：</strong>CheckMate 816とKEYNOTE-671を直接比較したランダム化試験は存在しない。以下は両試験のデザイン・報告値を並置したもので、数値を横並びに比較して優劣を結論することはできない。適格基準（病期範囲・AJCC版）、治療相（術前のみ vs 周術期）、サイクル数、化学療法レジメン、薬剤（nivolumab vs pembrolizumab）、解析時点・成熟度がいずれも異なる。
+    </div>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:160px">項目</th>
+              <th style="min-width:200px">CheckMate 816</th>
+              <th style="min-width:200px">KEYNOTE-671</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">薬剤</td><td>ニボルマブ</td><td>ペムブロリズマブ</td></tr>
+            <tr><td class="td-key">治療戦略</td><td>術前のみ（術後ICIなし）</td><td>周術期（術前＋術後単剤）</td></tr>
+            <tr><td class="td-key">術前サイクル数</td><td>3サイクル</td><td>4サイクル</td></tr>
+            <tr><td class="td-key">術後免疫療法</td><td>なし</td><td>ペムブロリズマブ単剤 最大13サイクル</td></tr>
+            <tr><td class="td-key">対象病期</td><td>IB（≥4cm）–IIIA（AJCC第7版）</td><td>II–IIIA–IIIB(N2)（AJCC第8版）</td></tr>
+            <tr><td class="td-key">共同主要評価項目</td><td>pCR・EFS</td><td>EFS・OS</td></tr>
+            <tr><td class="td-key">EGFR/ALK陽性</td><td>適格基準で除外</td><td>必須除外なし（少数登録・解析対象外）</td></tr>
+            <tr><td class="td-key">pCR率</td><td>24.0% vs 2.2%</td><td>18.1% vs 4.0%</td></tr>
+            <tr><td class="td-key">OS HR（検定時点）</td><td>0.72（5年最終・p=0.0479）</td><td>0.72（第2回中間解析・p=0.0052）</td></tr>
+            <tr><td class="td-key">pCR非達成例 EFS HR</td><td>0.84（0.61–1.17）</td><td>0.69（0.55–0.85）</td></tr>
+            <tr><td class="td-key">白金製剤</td><td>シスプラチンまたはカルボプラチン</td><td>シスプラチンベース（カルボにも一般化可）</td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:10px">
+          両試験ともOS HRは0.72と数値上同一だが、解析時点（CM816は5年最終／KN671は第2回中間解析）・対象病期・AJCC版・治療相が異なり、効果量が同等であることを意味しない。原著（NEJM 2023）が言及する通り、pCR非達成例のEFS HRはKN671（0.69）の方がCM816（0.84）より良好だが、これは異なるデザイン・化学療法レジメンを跨いだクロススタディ比較であり、術後相の寄与を確証するものではない。「術前のみ」と「周術期」のどちらが優れるかは直接比較データがなく結論できない。実臨床では術後治療の上乗せ負担（最大1年の追加投与・irAEリスク・通院負担）と便益のバランス、患者背景、施設方針を踏まえて選択する。
+        </div>
+        <div class="tip-box" style="margin-top:8px">
+          周術期NSCLCのICI試験は、KN671・AEGEAN（デュルバルマブ）・CheckMate 77T（ニボルマブ）・Neotorch（トリパリマブ）・RATIONALE-315（チスレリズマブ）など複数が陽性結果を報告。KEYNOTE-671はこのうち最初に統計学的に有意なOS改善を示した試験である（原著が記載）。これらの相互比較も間接比較に留まる。
+        </div>
+      </div>
+    </div>
+
+    <!-- 実臨床チェックリスト -->
+    <h2 class="sec-h2" id="checklist">Clinical Checklist：実臨床で確認したいポイント</h2>
+    <div class="checklist-grid">
+      <div class="checklist-card">
+        <div class="checklist-title">Before Treatment：治療開始前</div>
+        <ul>
+          <li>EGFR変異・ALK融合等のドライバー遺伝子を確認する（陽性例ではTKI戦略を優先検討）</li>
+          <li>PD-L1 TPSを評価する（高発現でより大きな便益傾向。低発現でも便益方向だが確実性は限定的）</li>
+          <li>切除可能性を呼吸器外科・腫瘍内科・放射線診断科で確認する</li>
+          <li>N2症例・bulky N2・multiple N2では手術適応を慎重に検討する</li>
+          <li>CDDP適応を確認する（腎機能・聴力・PS・末梢神経障害・併存症）</li>
+          <li>PEM適応を確認する（非扁平上皮・腎機能・葉酸/B12補充）</li>
+          <li>ICI注意例を確認する（間質性肺炎・自己免疫疾患・臓器移植歴・ステロイド使用）</li>
+          <li>術前4サイクル＋術後最大13サイクルの全体スケジュール・通院負担を共有する</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <div class="checklist-title">Before Surgery：手術前</div>
+        <ul>
+          <li>術前治療後のCT/PET-CTで腫瘍縮小・リンパ節変化・炎症性変化を評価する</li>
+          <li>RECIST上の進行だけでなく、pseudoprogressionや炎症性変化も鑑別する</li>
+          <li>irAE・肺臓炎・感染症・薬剤性肺障害の有無を確認する（手術未施行AEの一因は間質性肺疾患）</li>
+          <li>ステロイド使用歴・免疫抑制薬使用歴を確認する</li>
+          <li>肺門・縦隔リンパ節周囲の炎症・線維化を想定する</li>
+          <li>静脈血栓塞栓症リスクを確認する（術前相で3.3%報告）</li>
+          <li>肺全摘では術後90日死亡率が高い点（8.1%）を踏まえ、術式と周術期リスクを説明する</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <div class="checklist-title">After Surgery：術後</div>
+        <ul>
+          <li>pCR・mPR・残存viable tumor割合を確認する</li>
+          <li>ypTNM・R0/R1/R2・リンパ節ダウンステージを確認する</li>
+          <li>術後ペムブロリズマブ開始時期（術後4〜12週）を計画する</li>
+          <li>術後相のirAE（甲状腺・肝・肺・消化管）を長期に監視する</li>
+          <li>術後相のGrade≥3 AE（ペムブロ12% vs プラセボ6%）と完遂率を記録する</li>
+          <li>pCR達成例でも本試験では術後ペムブロリズマブが投与されている点に留意する</li>
+          <li>ドライバー変異が後から判明した場合は個別に再検討する</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 総合評価 -->
+    <h2 class="sec-h2" id="neutral-review">この試験をどう読むか——第三者的視点からの整理</h2>
+    <div class="review-card">
+      <div class="review-half">
+        <div class="review-col">
+          <div class="review-col-title rc-pros">強み</div>
+          <ul class="point-list pros">
+            <li>EFSとOSの両方を共同主要評価項目とし、いずれも検定済みで有意差を示した</li>
+            <li>周術期ICI試験として最初に統計学的に有意なOS改善を示した</li>
+            <li>PD-L1発現を問わず登録し、幅広い切除可能NSCLC（Stage II–IIIB N2）を対象</li>
+            <li>大規模（n=797）・189施設・二重盲検・プラセボ対照の堅牢なデザイン</li>
+            <li>R0切除率・リンパ節ダウンステージがペムブロリズマブ群で高い（92% vs 84%）</li>
+            <li>扁平/非扁平で同等の便益。健康関連QOLを悪化させない</li>
+            <li>術前ペムブロリズマブは手術選択・時期・入院期間に悪影響を与えない</li>
+          </ul>
+        </div>
+        <div class="review-col">
+          <div class="review-col-title rc-cons">留意点・限界</div>
+          <ul class="point-list cons">
+            <li>術前相と術後相の効果を分離評価する設計ではない（術後上乗せ効果は不明）</li>
+            <li>術前のみ（CM816）と周術期（KN671）の直接比較データはない</li>
+            <li>Grade ≥3 irAEがペムブロリズマブ群で増加（5.8% vs 1.5%）</li>
+            <li>術後最大1年の追加投与に伴う通院・毒性・コスト負担</li>
+            <li>PD-L1 &lt;1%（OS HR 0.91）・高齢・非喫煙・東アジアでOSの確実性が低下（OS未成熟）</li>
+            <li>ドライバー変異陽性例は少数登録・解析対象外で適用非推奨</li>
+            <li>肺全摘の術後90日死亡率が高い（8.1% vs 2.6%）</li>
+            <li>対照群の後治療（進行例の50%がICI）がOS解釈に影響しうる</li>
+            <li>追跡期間は早期病期試験としてまだ短い（原著が限界として記載）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-box">
+        <strong>総括：</strong>KEYNOTE-671は、切除可能Stage II–IIIB(N2) NSCLC、特にドライバー変異陰性例に対する周術期化学免疫療法を支持する主要エビデンスの一つであり、周術期ICI試験として最初にEFS・OS双方で有意差を示した。R0切除率・ダウンステージの改善、QOL非悪化も臨床的に重要である。一方で、術後ペムブロリズマブの上乗せ効果の定量、術前のみ戦略（CM816）との使い分け、pCR/ctDNAに基づく術後治療の個別化（省略・追加）、肺全摘を含む周術期リスク評価は未解決であり、今後の研究結果が待たれる。レジメン選択は患者背景・施設方針・患者意向を踏まえた個別判断が求められる。
+      </div>
+    </div>
+
+    <!-- 参考文献 -->
+    <h2 class="sec-h2" id="references">参考文献</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ol class="ref-list">
+          <li>Wakelee H, Liberman M, Kato T, et al. Perioperative Pembrolizumab for Early-Stage Non–Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2023;389(6):491-503. <a href="https://pubmed.ncbi.nlm.nih.gov/37272513/" target="_blank" rel="noopener">PMID: 37272513</a>. doi:10.1056/NEJMoa2302983（第1回中間解析：EFS HR 0.58・pCR 18.1%・mPR 30.2%・PD-L1別EFS HR・治療関連AE・患者背景・手術アウトカム）</li>
+          <li>Spicer JD, Garassino MC, Wakelee H, et al. Neoadjuvant pembrolizumab plus chemotherapy followed by adjuvant pembrolizumab compared with neoadjuvant chemotherapy alone in patients with early-stage non-small-cell lung cancer (KEYNOTE-671): a randomised, double-blind, placebo-controlled, phase 3 trial. <em>Lancet.</em> 2024;404(10459):1240-1252. doi:10.1016/S0140-6736(24)01756-2（第2回中間解析：OS HR 0.72・PD-L1別OS HR・後治療・QOL・安全性）</li>
+          <li>Liberman M, Jones DR, Wakelee H, et al. Clinical Characteristics and Surgical Outcomes of Patients Receiving Perioperative Pembrolizumab in KEYNOTE-671. <em>Ann Thorac Surg.</em> 2026;121(2):281-289. doi:10.1016/j.athoracsur.2025.10.016（外科アウトカム：術式・R0・手術遅延・ダウンステージ・術後30/90日死亡・術式別死亡率）</li>
+          <li>KEYNOTE-671 4-year follow-up. ESMO Immuno-Oncology Congress 2024（4年追跡・探索的：OS HR 0.73・EFS HR 0.57・48か月OS率68.0% vs 56.7%）.</li>
+          <li>Wakelee H, et al. 5-year update of KEYNOTE-671. ESMO Congress 2025, LBA67（5年追跡・探索的：OS HR 0.74・5年OS率64.6% vs 53.6%・5年EFS率49.9% vs 26.5%・新規シグナルなし）.</li>
+          <li>1210P. Subgroup analyses of the phase III KEYNOTE-671 study. <em>Ann Oncol.</em> 2024;35(suppl_2)（ESMO 2024：PD-L1別・病期別・組織型別サブグループ解析）.</li>
+          <li>KEYTRUDA Prescribing Information（FDA label）. Merck, 2024/2025. 参照：<a href="https://www.keytrudahcp.com/efficacy/nsclc-perioperative-regimen/" target="_blank" rel="noopener">keytrudahcp.com（KEYNOTE-671）</a>（アクセス日：2026年6月19日）.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 関連ページ -->
+    <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px">関連ページ</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/lungatlas/perioperative.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);background:var(--green-light);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:500">
+          ← 周術期薬物療法 概要（CM816・KN671・AEGEAN）
+        </a>
+        <a href="cm816.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);background:var(--green-light);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:500">
+          CheckMate 816 詳細 →
+        </a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Lung<span>Atlas</span></span>
+  <span>医療専門家向け学術情報サイト。本ページの情報は診療の代替となるものではありません。</span>
+</footer>
+
+</body>
+</html>
