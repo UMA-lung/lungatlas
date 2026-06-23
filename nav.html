@@ -179,7 +179,7 @@
       <div class="dropdown-menu">
         <a id="nav-driver-pos" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
         <a id="nav-egfr" href="/lungatlas/egfr-firstline.html">EGFR 1次治療 選択ガイド</a>
-        <a id="nav-driver-neg" href="/lungatlas/index.html">変異陰性 NSCLC</a>
+        <a id="nav-driver-neg" href="/lungatlas/driver-negative.html">変異陰性 NSCLC</a>
         <div class="dropdown-divider"></div>
         <span class="dropdown-soon">SCLC<span>近日公開</span></span>
         <a id="nav-periop" href="/lungatlas/perioperative.html">周術期薬物療法</a>
@@ -223,7 +223,7 @@
     'nav-anatomy-page': ['anatomy.html'],
     'nav-driver-pos':  ['driver-positive.html'],
     'nav-egfr':        ['egfr-firstline.html'],
-    'nav-driver-neg':  ['index.html'],
+    'nav-driver-neg':  ['driver-negative.html'],
     'nav-about':       ['about.html', 'about-en.html'],
   };
   Object.keys(map).forEach(function(id) {
@@ -234,7 +234,7 @@
     });
   });
   // 化学療法ドロップダウンのparent active
-  var chemoPages = ['driver-positive', 'egfr-firstline', 'index.html', 'perioperative', 'adjuvant', 'sclc', 'resistance'];
+  var chemoPages = ['driver-positive', 'driver-negative', 'egfr-firstline', 'perioperative', 'adjuvant', 'sclc', 'resistance'];
   if (chemoPages.some(function(p){ return path.indexOf(p) !== -1; })) {
     var chemoLink = document.getElementById('nav-chemo');
     if (chemoLink) chemoLink.classList.add('active');
