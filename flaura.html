@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLAURA試験 詳細 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== driver-negative.html / egfr-firstline.html から流用 ===== */
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* MAIN */
+.main { max-width: 900px; margin: 0 auto; padding: 28px 36px 60px; }
+
+/* BREADCRUMB */
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; justify-content: space-between; }
+.crumb-path span { color: var(--green-mid); }
+.crumb-path a { color: var(--text3); text-decoration: none; }
+.crumb-path a:hover { color: var(--green-dark); }
+.crumb-updated { font-size: 11px; color: var(--text3); white-space: nowrap; }
+
+/* HEADINGS */
+.sec-h2 {
+  font-size: 15px; font-weight: 600; color: var(--text);
+  margin: 28px 0 14px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 16px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+.sec-h3 { font-size: 13.5px; font-weight: 600; color: var(--text); margin: 22px 0 10px; }
+
+/* ===== ③ TRIAL HERO ===== */
+.trial-hero {
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 4px solid var(--green-mid);
+  border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 16px;
+}
+.trial-hero h1 { font-size: 24px; font-weight: 600; line-height: 1.2; margin-bottom: 8px; }
+.page-sub { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 18px; }
+
+/* STAT ROW（既存定義を流用） */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* ===== COI BAR ===== */
+.coi-bar {
+  background: #FFF3CD; border: 1px solid #e8d28a;
+  border-radius: var(--radius); padding: 10px 14px; margin-bottom: 22px;
+  font-size: 12px; color: var(--amber-dark); line-height: 1.7;
+}
+.coi-bar strong { font-weight: 600; }
+
+/* ===== ④ TABS（driver-negative の .tab を流用） ===== */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+.tab-btn {
+  font-size: 12.5px; padding: 7px 17px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text2); cursor: pointer; font-family: var(--font);
+  transition: all .15s;
+}
+.tab-btn:hover { border-color: var(--border2); color: var(--green-dark); }
+.tab-btn.active {
+  background: var(--green-dark); color: #fff;
+  border-color: var(--green-dark); font-weight: 500;
+}
+
+/* ===== TAB PANEL ===== */
+.tab-panel { display: none; }
+
+/* CARD */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 16px;
+}
+
+/* SOURCE BADGE */
+.src-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; font-weight: 500; color: var(--blue-dark);
+  background: var(--blue-light); padding: 4px 11px; border-radius: 8px;
+  text-decoration: none; margin-bottom: 12px;
+}
+.src-badge:hover { opacity: .8; }
+
+/* COMPARISON TABLE（egfr-firstline から流用） */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+.comp-table .best { color: var(--green-dark); font-weight: 600; }
+
+/* 2列カード（介入・対照） */
+.arm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+.arm-card { border-radius: var(--radius); padding: 16px 18px; font-size: 13px; line-height: 1.7; }
+.arm-int { background: var(--green-light); color: var(--green-dark); border: 1px solid var(--border2); }
+.arm-ctrl { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+.arm-card .arm-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.arm-card .arm-drug { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.arm-int .arm-drug { color: var(--green-dark); }
+
+/* BOXES（egfr-firstline から流用：info=青 / note=緑 / warn=琥珀） */
+.info-box { background: var(--blue-light); border-left: 3px solid #2d6db5; border-radius: 0 8px 8px 0; padding: 11px 14px; font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0; }
+.note-box { background: var(--green-light); border-left: 3px solid var(--green-mid); border-radius: 0 8px 8px 0; padding: 11px 14px; font-size: 12.5px; color: var(--green-dark); line-height: 1.75; margin: 14px 0; }
+.warn-box { background: var(--amber-light); border-left: 3px solid #d97a00; border-radius: 0 8px 8px 0; padding: 11px 14px; font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0; }
+
+/* GL LIST（driver-negative から流用） */
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* POINT CARD（臨床的意義） */
+.point-card { border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 12px; border: 1px solid var(--border); border-left-width: 4px; background: var(--surface); }
+.pc-green { border-left-color: var(--green-mid); }
+.pc-blue { border-left-color: #2d6db5; }
+.pc-orange { border-left-color: #d97a00; }
+.pc-title { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 7px; display: flex; align-items: center; gap: 8px; }
+.pc-icon { font-size: 17px; }
+.pc-body { font-size: 12.5px; color: var(--text2); line-height: 1.8; }
+
+/* COMPARE NOTE（間接比較の注意・amber） */
+.compare-note { background: var(--amber-light); border: 1px solid #e8d28a; border-radius: var(--radius); padding: 11px 14px; font-size: 12px; color: var(--amber-dark); line-height: 1.7; margin: 12px 0; }
+
+/* NEXT BTN（流用） */
+.next-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.next-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--green-dark); font-weight: 500; background: var(--green-light); border: none; cursor: pointer; padding: 10px 18px; border-radius: 8px; font-family: var(--font); text-decoration: none; transition: background .15s; }
+.next-btn:hover { background: #cce8d4; }
+
+/* ===== ⑥ REF LIST ===== */
+.ref-list { list-style: none; counter-reset: ref; margin-top: 12px; }
+.ref-item {
+  position: relative; padding: 12px 14px 12px 40px; margin-bottom: 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 12px; color: var(--text2); line-height: 1.75;
+}
+.ref-item::before {
+  counter-increment: ref; content: counter(ref);
+  position: absolute; left: 12px; top: 12px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green-dark); color: #fff;
+  font-size: 11px; font-weight: 600; font-family: var(--mono);
+  display: flex; align-items: center; justify-content: center;
+}
+.ref-item .ref-title { font-weight: 600; color: var(--text); }
+.ref-item .ref-links { margin-top: 5px; }
+.ref-item .ref-links a { color: var(--green-dark); text-decoration: none; font-family: var(--mono); font-size: 11.5px; }
+.ref-item .ref-links a:hover { text-decoration: underline; }
+.ref-item .ref-sep { color: var(--text3); margin: 0 6px; }
+
+/* FOOTER（既存と同一） */
+.footer { background: var(--surface); border-top: 1px solid var(--border); padding: 20px 36px; font-size: 12px; color: var(--text3); display: flex; align-items: center; justify-content: space-between; }
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .main { padding: 20px 18px 40px; }
+  .stat-row { grid-template-columns: 1fr; }
+  .arm-grid { grid-template-columns: 1fr; }
+  .comp-table { font-size: 11.5px; }
+  .nav-links { display: none; }
+  .crumb { flex-direction: column; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<main class="main">
+
+  <!-- ② パンくず -->
+  <div class="crumb">
+    <span class="crumb-path">
+      <a href="index.html">化学療法</a> ›
+      <a href="driver-positive.html">変異陽性NSCLC</a> ›
+      <a href="egfr-firstline.html">EGFR 1次治療</a> ›
+      <span>FLAURA試験</span>
+    </span>
+    <span class="crumb-updated">最終更新 2026年6月 — NEJM 2018（PFS）/ NEJM 2020（OS最終解析）原著データ基準</span>
+  </div>
+
+  <!-- ③ ページヘッダー -->
+  <div class="trial-hero">
+    <h1>FLAURA試験</h1>
+    <p class="page-sub">
+      オシメルチニブ（80mg/日）vs ゲフィチニブ／エルロチニブ<br>
+      未治療 EGFR exon19del / L858R 陽性 進行NSCLC · Phase III · n=556
+    </p>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val">18.9ヶ月</div><div class="stat-label">中央値 PFS</div><div class="stat-vs">vs 10.2mo（対照群）</div></div>
+      <div class="stat"><div class="stat-val">38.6ヶ月</div><div class="stat-label">中央値 OS</div><div class="stat-vs">vs 31.8mo（HR 0.80）</div></div>
+      <div class="stat"><div class="stat-val">HR 0.46</div><div class="stat-label">PFS ハザード比</div><div class="stat-vs">p&lt;0.001</div></div>
+    </div>
+  </div>
+
+  <!-- COI注記バー -->
+  <div class="coi-bar">
+    <strong>スポンサー：</strong>AstraZeneca（資金提供・データ収集解析・解釈に関与）／ メディカルライティングはAstraZeneca資金 ／ <strong>国内承認：</strong>あり（タグリッソ®）／ <strong>COI：</strong>著者の多くがAstraZenecaとの利益相反を開示
+  </div>
+
+  <!-- ④ タブ -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-overview', this)">試験概要</button>
+    <button class="tab-btn" onclick="switchTab('tab-results', this)">主要結果</button>
+    <button class="tab-btn" onclick="switchTab('tab-subgroup', this)">サブグループ</button>
+    <button class="tab-btn" onclick="switchTab('tab-safety', this)">安全性</button>
+    <button class="tab-btn" onclick="switchTab('tab-clinical', this)">臨床的意義</button>
+  </div>
+
+  <!-- ===== Tab1: 試験概要 ===== -->
+  <div id="tab-overview" class="tab-panel" style="display:block">
+
+    <h2 class="sec-h2">試験デザイン</h2>
+    <div class="card">
+      <table class="comp-table">
+        <tbody>
+          <tr><td>正式名称</td><td>FLAURA（First-Line Assessment of a Reference Regimen of Osimertinib）</td></tr>
+          <tr><td>試験相</td><td>第III相 ランダム化二重盲検プラセボ対照比較試験</td></tr>
+          <tr><td>試験登録番号</td><td>NCT02296125</td></tr>
+          <tr><td>スポンサー</td><td>AstraZeneca</td></tr>
+          <tr><td>ランダム化比</td><td>1:1</td></tr>
+          <tr><td>盲検化</td><td>二重盲検（患者・試験担当医ともに盲検化）</td></tr>
+          <tr><td>層別化因子</td><td>EGFR変異型（exon19del vs L858R）× 人種（アジア vs 非アジア）</td></tr>
+          <tr><td>クロスオーバー</td><td>プロトコル上の規定なし</td></tr>
+          <tr><td>追跡終了条件</td><td>PD確認または死亡まで</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sec-h2">対象患者</h2>
+    <div class="card">
+      <table class="comp-table">
+        <tbody>
+          <tr><td>組織型</td><td>非扁平上皮 NSCLC（腺癌中心）</td></tr>
+          <tr><td>変異型</td><td>EGFR exon19del または L858R（中央検査にて確認）</td></tr>
+          <tr><td>治療歴</td><td>全身薬物療法歴なし（1次治療未治療）</td></tr>
+          <tr><td>病期</td><td>局所進行（IIIB）または転移性（IV期）</td></tr>
+          <tr><td>PS</td><td>ECOG PS 0 または 1</td></tr>
+          <tr><td>脳転移</td><td>安定した脳転移は許容（症候性脳転移・軟膜癌腫症は除外）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sec-h2">介入・対照</h2>
+    <div class="arm-grid">
+      <div class="arm-card arm-int">
+        <div class="arm-title">介入群（n=279）</div>
+        <div class="arm-drug">オシメルチニブ 80mg 経口 1日1回</div>
+        ＋ プラセボ（対照薬に相当）
+      </div>
+      <div class="arm-card arm-ctrl">
+        <div class="arm-title">対照群（n=277）</div>
+        <div class="arm-drug">ゲフィチニブ 250mg 経口 1日1回<br>または エルロチニブ 150mg 経口 1日1回</div>
+        （試験担当医が選択）＋ プラセボ（オシメルチニブに相当）<br>
+        <span style="font-size:12px;color:var(--text3)">内訳：ゲフィチニブ 183例（66%）／ エルロチニブ 94例（34%）</span>
+      </div>
+    </div>
+
+    <h2 class="sec-h2">エンドポイント</h2>
+    <div class="card">
+      <table class="comp-table">
+        <tbody>
+          <tr><td>主要エンドポイント</td><td>無増悪生存期間（PFS）：独立中央評価委員会（ICR）および治験担当医評価（RECIST 1.1）</td></tr>
+          <tr><td>副次エンドポイント</td><td>全生存期間（OS）、奏効率（ORR）、奏効持続期間（DoR）、疾患制御率（DCR）、CNS奏効率、健康関連QOL（PRO）、安全性</td></tr>
+          <tr><td>エンドポイント変更</td><td>変更歴なし</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">
+        主要エンドポイントとしてのOSはFLAURAでは副次エンドポイント。OS解析は別途 Ramalingam SS et al. NEJM 2020 として発表された（PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31751012/" target="_blank" rel="noopener" style="color:inherit;font-weight:600">31751012</a>）。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Tab2: 主要結果 ===== -->
+  <div id="tab-results" class="tab-panel">
+
+    <h2 class="sec-h2">無増悪生存期間（PFS）</h2>
+    <div class="card">
+      <a class="src-badge" href="https://pubmed.ncbi.nlm.nih.gov/30280635/" target="_blank" rel="noopener">📄 Soria JC et al. NEJM 2018 · PMID 30280635 ↗</a>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">18.9ヶ月</div><div class="stat-label">中央値PFS</div><div class="stat-vs">オシメルチニブ</div></div>
+        <div class="stat"><div class="stat-val">10.2ヶ月</div><div class="stat-label">中央値PFS</div><div class="stat-vs">ゲフィチニブ/エルロチニブ</div></div>
+        <div class="stat"><div class="stat-val">0.46</div><div class="stat-label">ハザード比</div><div class="stat-vs">95%CI 0.37–0.57 · p&lt;0.001</div></div>
+      </div>
+      <table class="comp-table" style="margin-top:14px">
+        <thead><tr><th>指標</th><th>オシメルチニブ群</th><th>対照群</th></tr></thead>
+        <tbody>
+          <tr><td>中央値 PFS</td><td class="best">18.9ヶ月</td><td>10.2ヶ月</td></tr>
+          <tr><td>ハザード比（HR）</td><td>0.46</td><td>—</td></tr>
+          <tr><td>95%信頼区間</td><td>0.37–0.57</td><td>—</td></tr>
+          <tr><td>p値</td><td>&lt;0.001</td><td>—</td></tr>
+          <tr><td>18ヶ月 PFS率</td><td class="best">54%</td><td>31%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sec-h2">全生存期間（OS）</h2>
+    <div class="card">
+      <a class="src-badge" href="https://pubmed.ncbi.nlm.nih.gov/31751012/" target="_blank" rel="noopener">📄 Ramalingam SS et al. NEJM 2020 · PMID 31751012 ↗</a>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">38.6ヶ月</div><div class="stat-label">中央値OS</div><div class="stat-vs">オシメルチニブ</div></div>
+        <div class="stat"><div class="stat-val">31.8ヶ月</div><div class="stat-label">中央値OS</div><div class="stat-vs">対照群</div></div>
+        <div class="stat"><div class="stat-val">0.80</div><div class="stat-label">ハザード比</div><div class="stat-vs">95.05%CI 0.64–1.00 · p=0.046</div></div>
+      </div>
+      <table class="comp-table" style="margin-top:14px">
+        <thead><tr><th>指標</th><th>オシメルチニブ群</th><th>対照群</th></tr></thead>
+        <tbody>
+          <tr><td>中央値 OS</td><td class="best">38.6ヶ月</td><td>31.8ヶ月</td></tr>
+          <tr><td>ハザード比（HR）</td><td>0.80</td><td>—</td></tr>
+          <tr><td>95.05%信頼区間</td><td>0.64–1.00</td><td>—</td></tr>
+          <tr><td>p値（有意水準 P=0.0495）</td><td>0.046</td><td>—</td></tr>
+          <tr><td>12ヶ月 OS率</td><td class="best">89%</td><td>83%</td></tr>
+          <tr><td>24ヶ月 OS率</td><td class="best">74%</td><td>59%</td></tr>
+          <tr><td>36ヶ月 OS率</td><td class="best">54%</td><td>44%</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">
+        OSの有意水準はLan-DeMets法により両側P=0.0495に設定された（PFS中間解析でαを消費したため）。観察されたP=0.046 &lt; 0.0495 のため、OS延長は統計学的に有意。ただし95.05%CIの上限が1.00に接しており、ベネフィットの大きさには幅がある点に留意。<br>
+        ※精密値：HR 0.799（95.05%CI 0.641–0.997）、P=0.0462。事前設定のcritical HR 0.801を下回ったことが統計学的有意性の根拠（Supplementary Appendix）。
+      </div>
+      <div class="warn-box">
+        <strong>後治療クロスオーバーの影響：</strong>対照群277例中85例（31%）がPD後の初回後治療としてオシメルチニブへクロスオーバーした。これは対照群のOS（31.8ヶ月）を延長させる方向に働くため、真のOSベネフィットはHR 0.80が示す以上に大きい可能性がある。OS延長6.8ヶ月はクロスオーバー存在下での値である。<br>
+        <strong>内訳：</strong>試験内クロスオーバー70例＋試験外でのオシメルチニブ投与15例＝計85例。変異型別ではEx19delで30%（53/174）、L858Rで17%（17/103）がクロスオーバーしており、Ex19del患者の方がオシメルチニブに到達しやすかった。
+      </div>
+    </div>
+
+    <h2 class="sec-h2">奏効率・奏効持続期間</h2>
+    <div class="card">
+      <table class="comp-table" style="margin-bottom:0">
+        <thead><tr><th>指標</th><th>オシメルチニブ群</th><th>対照群</th></tr></thead>
+        <tbody>
+          <tr><td>奏効率（ORR）</td><td class="best">80%</td><td>76%</td></tr>
+          <tr><td>中央値 DoR</td><td class="best">17.2ヶ月</td><td>8.5ヶ月</td></tr>
+          <tr><td>疾患制御率（DCR）</td><td class="best">97%</td><td>92%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sec-h2">後治療までの時間</h2>
+    <div class="card">
+      <a class="src-badge" href="https://pubmed.ncbi.nlm.nih.gov/31751012/" target="_blank" rel="noopener">📄 Ramalingam SS et al. NEJM 2020 · Supplementary Fig S3 ↗</a>
+      <table class="comp-table" style="margin-bottom:0">
+        <thead><tr><th>指標</th><th>オシメルチニブ</th><th>標準EGFR-TKI</th><th>HR（95%CI）</th></tr></thead>
+        <tbody>
+          <tr><td>初回後治療または死亡までの時間（TFST）中央値</td><td class="best">25.5ヶ月（22.0–29.1）</td><td>13.7ヶ月（12.3–15.7）</td><td class="num">0.478（0.393–0.581）<br>P&lt;0.0001</td></tr>
+          <tr><td>2回目後治療または死亡までの時間（TSST）中央値</td><td class="best">31.1ヶ月（28.8–35.9）</td><td>23.4ヶ月（20.0–25.6）</td><td class="num">0.687（0.561–0.842）<br>P=0.0003</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        TFSTのHR 0.48は、オシメルチニブ群が次の治療を要するまでの期間を大きく延長したことを示す。1次治療を長く有効に維持できることの定量的指標。
+      </div>
+    </div>
+
+    <h2 class="sec-h2">ガイドライン推奨</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-jp"><span class="gl-flag">🇯🇵</span><span><strong>日本（GL 2025年版）：</strong>exon19del / L858R の1次治療としてカテゴリー1推奨。タグリッソ® 保険適用あり。</span></div>
+      <div class="gl-item gl-us"><span class="gl-flag">🇺🇸</span><span><strong>NCCN v4.2026 / ASCO Living GL：</strong>Category 1（1次治療・術後補助療法ともに）。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">🇪🇺</span><span><strong>ESMO 2025：</strong>標準治療（standard of care）として推奨。MARIPOSA・FLAURA2との選択は患者背景・医療体制で個別判断。</span></div>
+    </div>
+
+  </div>
+
+  <!-- ===== Tab3: サブグループ ===== -->
+  <div id="tab-subgroup" class="tab-panel">
+
+    <p style="font-size:12px;color:var(--text3);margin-bottom:8px">出典：Soria JC et al. NEJM 2018（PFS, Fig2）/ Ramalingam SS et al. NEJM 2020（OS, Fig2）</p>
+
+    <h2 class="sec-h2">PFS サブグループ解析</h2>
+    <div class="card">
+      <p style="font-size:11.5px;color:var(--text3);margin-bottom:8px">NEJM 2018 Fig2（Cox比例ハザードモデル）</p>
+      <table class="comp-table">
+        <thead><tr><th>サブグループ</th><th>n</th><th>PFS HR（95%CI）</th></tr></thead>
+        <tbody>
+          <tr><td>全体</td><td class="num">556</td><td class="num">0.46（0.37–0.57）</td></tr>
+          <tr><td>男性</td><td class="num">206</td><td class="num">0.58（0.41–0.82）</td></tr>
+          <tr><td>女性</td><td class="num">350</td><td class="num">0.40（0.30–0.52）</td></tr>
+          <tr><td>&lt;65歳</td><td class="num">298</td><td class="num">0.44（0.33–0.58）</td></tr>
+          <tr><td>≥65歳</td><td class="num">258</td><td class="num">0.49（0.35–0.67）</td></tr>
+          <tr><td>アジア人</td><td class="num">347</td><td class="num">0.55（0.42–0.72）</td></tr>
+          <tr><td>非アジア人</td><td class="num">209</td><td class="num">0.34（0.23–0.48）</td></tr>
+          <tr><td>exon19del</td><td class="num">349</td><td class="num">0.43（0.32–0.56）</td></tr>
+          <tr><td>L858R</td><td class="num">207</td><td class="num">0.51（0.36–0.71）</td></tr>
+          <tr><td>CNS転移あり</td><td class="num">116</td><td class="num">0.47（0.30–0.74）</td></tr>
+          <tr><td>CNS転移なし</td><td class="num">440</td><td class="num">0.46（0.36–0.59）</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        すべてのサブグループでオシメルチニブが優位。変異型間（exon19del 0.43 / L858R 0.51）で交互作用検定の有意差はなく、いずれも適応となる。サブグループ解析は探索的であり、信頼区間も重複するため解釈には注意する。
+      </div>
+    </div>
+
+    <!-- 注意: FLAURA原著に「CNS ORR 91%」は存在しない。CNSで原著にあるのはPFS HR 0.47・CNS進行イベント6%vs15%・OS論文18moPFS率58%vs40%のみ。 -->
+    <h2 class="sec-h2">CNS転移サブグループ</h2>
+    <div class="card">
+      <table class="comp-table">
+        <thead><tr><th>指標</th><th>オシメルチニブ</th><th>標準EGFR-TKI</th></tr></thead>
+        <tbody>
+          <tr><td>CNS転移あり 中央値PFS</td><td class="best">15.2ヶ月（12.1–21.4）</td><td>9.6ヶ月（7.0–12.4）</td></tr>
+          <tr><td>CNS転移あり PFS HR</td><td>0.47（0.30–0.74）</td><td>—</td></tr>
+          <tr><td>CNS転移なし 中央値PFS</td><td class="best">19.1ヶ月（15.2–23.5）</td><td>10.9ヶ月（9.6–12.3）</td></tr>
+          <tr><td>CNS進行イベント（全体）</td><td class="best">17例（6%）</td><td>42例（15%）</td></tr>
+          <tr><td>CNS転移あり 18ヶ月PFS率（OS論文）</td><td class="best">58%（40–72）</td><td>40%（25–55）, HR 0.48（0.26–0.86）</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">
+        オシメルチニブはCNS転移ありサブグループでもPFSを延長（HR 0.47）。CNS進行イベントは6% vs 15%と少なく、BBB透過性を反映する。ただし活動性（神経学的に不安定な）脳転移は除外されており、安定脳転移に対するデータである点に注意。本試験ではベースライン脳画像が既知/疑いCNS転移例のみ必須であったため、無症候性脳転移を検出できておらず、CNSベネフィットは過小評価の可能性がある（原著が限界として言及）。
+      </div>
+    </div>
+
+    <h2 class="sec-h2">OS サブグループ解析</h2>
+    <div class="card">
+      <p style="font-size:11.5px;color:var(--text3);margin-bottom:8px">NEJM 2020 Fig2（Cox比例ハザードモデル）</p>
+      <table class="comp-table">
+        <thead><tr><th>サブグループ</th><th>n</th><th>OS HR（95%CI）</th></tr></thead>
+        <tbody>
+          <tr><td>全体</td><td class="num">556</td><td class="num">0.79（0.63–0.98）</td></tr>
+          <tr><td>男性</td><td class="num">206</td><td class="num">0.79（0.55–1.14）</td></tr>
+          <tr><td>女性</td><td class="num">350</td><td class="num">0.79（0.60–1.04）</td></tr>
+          <tr><td>&lt;65歳</td><td class="num">298</td><td class="num">0.72（0.54–0.97）</td></tr>
+          <tr><td>≥65歳</td><td class="num">258</td><td class="num">0.87（0.63–1.22）</td></tr>
+          <tr><td>アジア人</td><td class="num">347</td><td class="num">1.00（0.75–1.32）</td></tr>
+          <tr><td>非アジア人</td><td class="num">209</td><td class="num">0.54（0.38–0.77）</td></tr>
+          <tr><td>exon19del</td><td class="num">349</td><td class="num">0.68（0.51–0.90）</td></tr>
+          <tr><td>L858R</td><td class="num">207</td><td class="num">1.00（0.71–1.40）</td></tr>
+          <tr><td>CNS転移あり</td><td class="num">116</td><td class="num">0.83（0.53–1.30）</td></tr>
+          <tr><td>CNS転移なし</td><td class="num">440</td><td class="num">0.79（0.61–1.01）</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:var(--text3);line-height:1.7;margin-bottom:10px">※主要OS解析の層別log-rank由来HRは0.80（P=0.046）。本表のサブグループHRはFig2のCox比例ハザードモデル由来（全体0.79）。</p>
+      <div class="warn-box">
+        OSサブグループ解析（Cox、全体HR 0.79）では、アジア人（HR 1.00, 95%CI 0.75–1.32）および L858R（HR 1.00, 95%CI 0.71–1.40）でOSベネフィットが減弱した。特にアジア人 vs 非アジア人の治療効果差は、Global interaction test において10%有意水準で統計学的に有意（P=0.0127）であり、単なる偶然ではない定量的交互作用と判定された。ただし定性的交互作用は否定されており（方向性の逆転はない）、また人種とクロスオーバー率・後治療パターンの交絡が影響している可能性がある。OSは副次評価項目であり検出力不足のため、確定的結論は導けない。アジア人KM曲線はランダム化から約3年まで分離し、その後収束した（Fig S2A）。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Tab4: 安全性 ===== -->
+  <div id="tab-safety" class="tab-panel">
+
+    <p style="font-size:12px;color:var(--text3);margin-bottom:8px">出典：Soria JC et al. NEJM 2018（安全性は主要論文に記載）</p>
+
+    <h2 class="sec-h2">投薬管理</h2>
+    <div class="card">
+      <table class="comp-table">
+        <thead><tr><th>指標</th><th>オシメルチニブ群</th><th>対照群</th></tr></thead>
+        <tbody>
+          <tr><td>AEによる投薬中止</td><td class="best">13%</td><td>18%</td></tr>
+          <tr><td>用量減量</td><td class="best">4%</td><td>9%</td></tr>
+          <tr><td>いずれかの Grade ≥3 AE</td><td class="best">34%</td><td>45%</td></tr>
+        </tbody>
+      </table>
+      <div class="stat-row" style="margin-top:6px">
+        <div class="stat"><div class="stat-val">34%</div><div class="stat-label">Grade ≥3 AE</div><div class="stat-vs">vs 45%（対照群）</div></div>
+        <div class="stat"><div class="stat-val">13%</div><div class="stat-label">AEによる中止</div><div class="stat-vs">vs 18%（対照群）</div></div>
+        <div class="stat"><div class="stat-val">4%</div><div class="stat-label">用量減量</div><div class="stat-vs">vs 9%（対照群）</div></div>
+      </div>
+    </div>
+
+    <h2 class="sec-h2">主要な有害事象（全Grade）</h2>
+    <div class="card">
+      <table class="comp-table" style="margin-bottom:0">
+        <thead><tr><th>有害事象（全Grade）</th><th>オシメルチニブ群</th><th>対照群</th></tr></thead>
+        <tbody>
+          <tr><td>下痢</td><td>58%</td><td>57%</td></tr>
+          <tr><td>皮疹・ざ瘡</td><td class="best">58%</td><td>78%</td></tr>
+          <tr><td>乾燥皮膚</td><td>36%</td><td>36%</td></tr>
+          <tr><td>爪囲炎</td><td>22%</td><td>26%</td></tr>
+          <tr><td>口内炎</td><td>20%</td><td>17%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sec-h2">注目すべき有害事象（Adverse Events of Special Interest）</h2>
+    <div class="card">
+      <table class="comp-table">
+        <thead><tr><th>有害事象</th><th>オシメルチニブ群（全Grade）</th><th>対照群（全Grade）</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>間質性肺疾患（ILD）/肺臓炎</td><td>4%</td><td>2%</td><td>定期的な肺機能・画像モニタリング要</td></tr>
+          <tr><td>QTc延長（全Grade）</td><td>10%（29例）</td><td>5%（13例）</td><td>Grade≥3は1%（osi 4例 / 対照 2例）。Torsades・致死例なし</td></tr>
+          <tr><td>QTc延長（Grade ≥3）</td><td>1%（4例）</td><td>&lt;1%（2例）</td><td>—</td></tr>
+          <tr><td>心不全（全Grade）</td><td>2%</td><td>1%</td><td>心毒性モニタリング要</td></tr>
+        </tbody>
+      </table>
+      <div class="warn-box">
+        <strong>ILD（間質性肺疾患）：</strong>Grade 1–2のILDが4%に発生。いったん発症した場合は投薬中止・ステロイド投与を検討。新たな呼吸器症状（咳嗽・息切れ・発熱）が出現した場合は速やかにCTを施行すること。
+      </div>
+      <div class="warn-box">
+        <strong>QTc延長：</strong>全Grade 10%（29例）。Grade ≥3は1%（osi 4例）で重篤例は少なく、Torsades de pointes・致死例の報告はないが、QTc延長をきたす薬剤（抗不整脈薬、マクロライド系抗菌薬など）との併用時は注意が必要。定期的な心電図モニタリングを推奨。
+      </div>
+    </div>
+
+    <h2 class="sec-h2">対照群との比較優位点</h2>
+    <div class="note-box">
+      オシメルチニブは対照群（ゲフィチニブ/エルロチニブ）と比較して、Grade ≥3 AE発生率が低い（34% vs 45%）。特に肝毒性（ALT/AST上昇 Grade ≥3）が対照群より少ない傾向がある。皮疹もGrade ≥3では対照群の方が高い（1% vs 9%）。
+    </div>
+
+    <h2 class="sec-h2">投薬中止理由・薬剤関連AE（OS解析時点）</h2>
+    <div class="warn-box">
+      <strong>AEによる永続的投薬中止</strong>（osi 15% / 対照 18%）の主な原因：オシメルチニブ群ではILD（6例）・肺臓炎（5例）・QT延長（4例）。対照群ではALT上昇（12例）・AST上昇（8例）。肝毒性が対照群の主な中止理由である点が対照的。<br>
+      <strong>駆出率低下：</strong>osi 5%（13例）vs 対照 2%（5例）、いずれも無症候性。ベースラインから≥10%低下かつ&lt;50%への低下は osi 4%（12/267）vs 対照 1%（4/271）。
+    </div>
+    <div class="info-box" style="margin-bottom:0">
+      治験担当医が薬剤関連と判定したAEは osi 91% / 対照 92%。主な薬剤関連AE：下痢（50%/52%）、ざ瘡様皮膚炎（25%/48%）、爪囲炎（30%/28%）、口内炎（25%/17%）、AST上昇（8%/21%）、ALT上昇（6%/22%）。肝酵素上昇は対照群で顕著（Table S5）。
+    </div>
+
+  </div>
+
+  <!-- ===== Tab5: 臨床的意義 ===== -->
+  <div id="tab-clinical" class="tab-panel">
+
+    <h2 class="sec-h2">このデータが実臨床に意味すること</h2>
+
+    <div class="point-card pc-green">
+      <div class="pc-title"><span class="pc-icon">🏆</span>第3世代EGFR-TKIとして初めて1次治療でOS延長を証明</div>
+      <div class="pc-body">FLAURAは第3世代EGFR-TKI（オシメルチニブ）が1次治療において全生存期間（OS）を延長することを初めて証明した試験である。中央値OS 38.6ヶ月はゲフィチニブ・エルロチニブの31.8ヶ月を有意に上回り（HR 0.80, p=0.046）、EGFR変異陽性NSCLCの治療標準を塗り替えた。</div>
+    </div>
+
+    <div class="point-card pc-blue">
+      <div class="pc-title"><span class="pc-icon">🧠</span>CNS活性の実臨床的意義</div>
+      <div class="pc-body">オシメルチニブはCNS転移ありサブグループでもPFSを延長し（HR 0.47）、CNS進行イベントは6% vs 15%と少ない。これはオシメルチニブの高いBBB透過性を示す。EGFR変異陽性NSCLCは脳転移リスクが高く（診断時15–30%、経過中さらに増加）、CNSに対する有効性は治療戦略上の重要な優位点である。安定脳転移例では局所療法（SRS等）を併用せずにオシメルチニブ単独での管理も選択肢となる根拠のひとつ。ただし活動性脳転移は除外されている点に注意。</div>
+    </div>
+
+    <div class="point-card pc-orange">
+      <div class="pc-title"><span class="pc-icon">⚖️</span>毒性プロファイルの優位性</div>
+      <div class="pc-body">Grade ≥3 AEは34%と対照群（45%）より低く、投薬中止率（13% vs 18%）・用量減量率（4% vs 9%）も少ない。特に肝毒性・皮膚毒性の軽減は、高齢者・合併症保有例での使用継続性向上に寄与する。ただしILD（4%）とQTc延長（7%）は定期的なモニタリングが必要。</div>
+    </div>
+
+    <h2 class="sec-h2">FLAURA2・MARIPOSAとの位置づけ</h2>
+    <h3 class="sec-h3">3試験の位置づけ（2026年時点）</h3>
+    <div class="compare-note">
+      以下は直接比較試験（head-to-head）の結果ではなく、各試験の数値の並列提示です。患者背景・試験デザインが異なるため直接比較はできません。
+    </div>
+    <table class="comp-table">
+      <thead><tr><th>試験</th><th>レジメン</th><th>中央値 PFS</th><th>中央値 OS</th><th>Grade≥3 AE</th><th>中止率</th><th>対象の特徴</th></tr></thead>
+      <tbody>
+        <tr><td>FLAURA</td><td>オシメルチニブ単剤</td><td class="num">18.9mo</td><td class="num">38.6mo</td><td class="num">34%</td><td class="num">13%</td><td>PS 0–2・全年齢</td></tr>
+        <tr><td>FLAURA2</td><td>オシ＋白金製剤＋PEM</td><td class="num">25.5mo</td><td class="num">47.5mo</td><td class="num">64%</td><td class="num">15%</td><td>PS 0–1・非扁平</td></tr>
+        <tr><td>MARIPOSA</td><td>アミバ＋ラゼルチニブ</td><td class="num">23.7mo</td><td class="num">HR 0.75</td><td class="num">~75-80%</td><td class="num">10%</td><td>PS 0–1</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--text3);line-height:1.7;margin-bottom:12px">※ OS欄はFLAURA / FLAURA2 / MARIPOSAそれぞれの試験ごとの数値であり、試験間の直接比較ではない。MARIPOSAのOSは最終解析時点で中央値未到達のためHRを記載。</p>
+
+    <div class="info-box">
+      FLAURAはすべての後続試験のコントロールアームとして位置づけられており、EGFR変異陽性NSCLCの1次治療を議論する際の「基準点」である。毒性・利便性・OSのバランスにおいてFLAURAはPS 0–2の全年齢患者に適用可能な最も広い適応を持つ。後続試験との最終的な位置づけは egfr-firstline.html の選択ガイドを参照のこと。
+    </div>
+
+    <div class="next-row">
+      <a class="next-btn" href="egfr-firstline.html">→ EGFR 1次治療 選択ガイドへ</a>
+    </div>
+
+  </div>
+
+  <!-- ===== ⑥ 文献リスト ===== -->
+  <h2 class="sec-h2">文献・出典</h2>
+  <ol class="ref-list">
+    <li class="ref-item">
+      <span class="ref-title">Soria JC, Ohe Y, Vansteenkiste J, et al.</span><br>
+      Osimertinib in Untreated EGFR-Mutated Advanced Non–Small-Cell Lung Cancer.<br>
+      N Engl J Med. 2018;378(2):113-125.
+      <div class="ref-links">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/30280635/" target="_blank" rel="noopener">PMID: 30280635 ↗</a>
+        <span class="ref-sep">|</span>
+        <a href="https://doi.org/10.1056/NEJMoa1713137" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa1713137 ↗</a>
+      </div>
+    </li>
+    <li class="ref-item">
+      <span class="ref-title">Ramalingam SS, Vansteenkiste J, Planchard D, et al.</span><br>
+      Overall Survival with Osimertinib in Untreated, EGFR-Mutated Advanced NSCLC.<br>
+      N Engl J Med. 2020;382(1):41-50.
+      <div class="ref-links">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/31751012/" target="_blank" rel="noopener">PMID: 31751012 ↗</a>
+        <span class="ref-sep">|</span>
+        <a href="https://doi.org/10.1056/NEJMoa1913662" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa1913662 ↗</a>
+      </div>
+    </li>
+  </ol>
+
+</main>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.style.display = 'none'; });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById(id).style.display = 'block';
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
