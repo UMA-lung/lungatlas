@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>術前呼吸機能評価 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  color: var(--text3);
+  padding: 8px 18px 4px;
+  text-transform: uppercase;
+}
+.sb-item {
+  display: block;
+  padding: 8px 18px;
+  font-size: 12.5px;
+  color: var(--text2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+  line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-weight: 500;
+  border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 11.5px;
+  color: var(--text3);
+  text-decoration: none;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 920px; }
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+.updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--green-dark);
+  background: var(--green-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 8px; }
+.art-sub { font-size: 13px; color: var(--text3); margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.75;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+.sec-h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 28px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-h2::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 15px;
+  background: var(--green-mid);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.sec-h3 { font-size: 13px; font-weight: 600; margin: 18px 0 8px; }
+
+.note-box,
+.info-box,
+.warn-box {
+  border-radius: 0 8px 8px 0;
+  padding: 11px 14px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  margin: 14px 0;
+}
+.note-box { background: var(--green-light); border-left: 3px solid var(--green-mid); color: var(--green-dark); }
+.info-box { background: var(--blue-light); border-left: 3px solid #2d6db5; color: var(--blue-dark); }
+.warn-box { background: var(--amber-light); border-left: 3px solid #d97a00; color: var(--amber-dark); }
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 16px 0 22px;
+}
+.principle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  min-height: 114px;
+}
+.principle-num {
+  font-family: var(--mono);
+  color: var(--green-mid);
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.principle-title { font-size: 12.5px; font-weight: 600; line-height: 1.45; }
+.principle-body { font-size: 11.5px; color: var(--text3); line-height: 1.6; margin-top: 5px; }
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+.flow-step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 13px;
+}
+.flow-label {
+  font-family: var(--mono);
+  color: var(--text3);
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+.flow-title { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.flow-body { font-size: 11.5px; color: var(--text2); line-height: 1.65; margin-top: 5px; }
+
+.surgery-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0 18px;
+}
+.surgery-table th {
+  padding: 9px 11px;
+  background: var(--surface2);
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.surgery-table td {
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  line-height: 1.65;
+  vertical-align: top;
+}
+.surgery-table tr:nth-child(even) td { background: #f8fbf9; }
+
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 0; }
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 10px;
+}
+.tag.green { background: var(--green-light); color: var(--green-dark); }
+.tag.blue { background: var(--blue-light); color: var(--blue-dark); }
+.tag.purple { background: var(--purple-light); color: var(--purple-dark); }
+.tag.amber { background: var(--amber-light); color: var(--amber-dark); }
+
+.ref-list {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.ref-list ol { padding-left: 18px; }
+.ref-list a { color: var(--green-dark); text-decoration: none; font-weight: 500; }
+.ref-list a:hover { text-decoration: underline; }
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 18px 36px;
+  font-size: 12px;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 980px) {
+  .principle-grid { grid-template-columns: repeat(2, 1fr); }
+  .flow { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 16px 40px; }
+  .principle-grid,
+  .flow { grid-template-columns: 1fr; }
+  .surgery-table { font-size: 11.5px; }
+  .footer { padding: 16px; display: block; line-height: 1.8; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sb-section">
+    <div class="sb-head">術前呼吸機能評価</div>
+    <a class="sb-item active" href="#principles">評価の原則</a>
+    <a class="sb-item" href="#algorithm">アルゴリズム全体像</a>
+    <a class="sb-item" href="#spirometry">スパイロメトリー・DLCO</a>
+    <a class="sb-item" href="#ppo">PPO の算出</a>
+    <a class="sb-item" href="#risk">PPO リスク層別化</a>
+    <a class="sb-item" href="#exercise">運動負荷試験</a>
+    <a class="sb-item" href="#cardiac">心血管リスク評価</a>
+    <a class="sb-item" href="#rehab">術前禁煙・呼吸リハビリ</a>
+    <a class="sb-item" href="#comparison">三ガイドライン比較</a>
+    <a class="sb-item" href="#references">参考文献</a>
+  </div>
+  <div class="sb-section" style="margin-top:16px">
+    <div class="sb-head">関連ページ</div>
+    <a class="sb-sub" href="/lungatlas/lung-surgery.html">肺癌外科手術（総論）</a>
+    <a class="sb-sub" href="/lungatlas/anatomy.html">肺の外科解剖</a>
+    <a class="sb-sub" href="/lungatlas/lymph-nodes.html">IASLCリンパ節マップ</a>
+    <a class="sb-sub" href="/lungatlas/perioperative.html">周術期薬物療法</a>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="crumb">LungAtlas &rsaquo; <span>術前呼吸機能評価</span></div>
+  <div class="updated">2026年6月24日更新</div>
+  <h1 class="art-h1">術前呼吸機能評価</h1>
+  <p class="art-sub">肺癌手術における耐術能評価 ― 日本呼吸器外科学会2021 / ACCP 2013 / ERS/ESTS 2009</p>
+  <p class="lead">肺癌患者は喫煙に関連した肺機能障害や動脈硬化性の心血管疾患を合併しやすく、術前の耐術能評価は完全切除と残存肺機能温存の両立、および周術期リスクの予測に不可欠である。本ページは、<strong>日本呼吸器外科学会2021・ACCP 2013・ERS/ESTS 2009</strong> の三ガイドラインを軸に、各検査が「何を測るか」という基礎から、スパイロメトリー・DLCO・PPO 算出・運動負荷試験・心血管評価・術前禁煙/呼吸リハビリまでのステップワイズ評価を整理する。なお、<strong>間質性肺炎合併肺癌の呼吸機能評価（日本GL 2021 CQ12-13）は本ページでは扱わず、別ページに分離する。</strong></p>
+
+  <section id="principles">
+    <h2 class="sec-h2">1. 評価の原則</h2>
+    <!-- 出典: 日本呼吸器外科学会『肺癌手術症例に対する術前呼吸機能評価のガイドライン』2021（Textbook/呼外呼吸機能.pdf）CQ1（p.6）, CQ2（p.6-7）, CQ3（p.7-8）。推奨度・エビデンスの質・合意率はPDF原文と照合済み。 -->
+    <div class="info-box">
+      <strong>年齢単独では手術を断念しない（CQ1）：</strong>年齢単独では肺癌根治術を断念する要因にはならない。高齢者であっても、心肺機能を含む耐術能評価を十分に行ったうえで総合的に評価・検討することが推奨される。
+      <div class="tag-row"><span class="tag green">推奨の強さ 1</span><span class="tag blue">エビデンス C</span><span class="tag amber">合意率 100%</span><span class="tag purple">日本GL 2021 CQ1</span></div>
+    </div>
+    <div class="info-box">
+      <strong>方針は集学的チームで決定する（CQ2）：</strong>肺癌の手術適応を含む治療方針は、呼吸器外科医・腫瘍内科医・放射線腫瘍医・呼吸器内科医を含む集学的チーム（multidisciplinary team, MDT）で検討することが推奨される。診断・方針決定までの時間を短縮し、適切な方針決定に貢献する。
+      <div class="tag-row"><span class="tag green">推奨の強さ 1</span><span class="tag blue">エビデンス C</span><span class="tag amber">合意率 71%</span><span class="tag purple">日本GL 2021 CQ2</span></div>
+    </div>
+    <div class="info-box">
+      <strong>全例で心血管リスク評価を行う（CQ3）：</strong>肺癌患者は喫煙に伴う動脈硬化性の心血管合併症を併発するリスクが高い。縮小手術を含む全症例で、術前に心血管のリスク評価を積極的に行うことが推奨される。
+      <div class="tag-row"><span class="tag green">推奨の強さ 1</span><span class="tag blue">エビデンス C</span><span class="tag amber">合意率 100%</span><span class="tag purple">日本GL 2021 CQ3</span></div>
+    </div>
+  </section>
+
+  <section id="algorithm">
+    <h2 class="sec-h2">2. 評価アルゴリズム全体像</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">日本GL 2021（図1）は、スパイロメトリーを起点に PPO 算出 → リスク層別化 → 運動負荷試験へと進むステップワイズアルゴリズムを示す。以下にその流れをテキスト分岐で再現する（将来 SVG 図に差し替え予定）。</p>
+    <!-- TODO: 将来このテキスト分岐をSVG図に差し替える -->
+    <!-- 注: 日本GL 2021 図1は閾値を「≧60%」「≧30%」で表記し、CQ6-8の推奨文は「>60%」「<60%」「<30%」を用いる。本ページはCQ本文の表記に揃えて「>60% / <60% / <30%」で記載している。 -->
+    <div class="flow" style="grid-template-columns:1fr">
+      <div class="flow-step">
+        <div class="flow-label">STEP 1</div>
+        <div class="flow-title">スパイロメトリー（全例）</div>
+        <div class="flow-body">
+          FEV1 が十分（肺葉切除 ≧1.5L／一側全摘 ≧2.0L／または ≧予測値の80%）の場合：
+          <ul style="margin:4px 0 6px 16px">
+            <li>リスク因子<sup>*</sup>なし → <strong>★平均的なリスク</strong>（追加検査不要）</li>
+            <li>リスク因子<sup>*</sup>あり → DLCO 測定 → STEP 2 へ</li>
+          </ul>
+          FEV1 が不十分（上記を下回る）→ STEP 2 へ<br>
+          <sup>*</sup>リスク因子：労作時息切れ・画像上びまん性間質性変化・喫煙歴・COPD・ほか呼吸器併存疾患
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">STEP 2</div>
+        <div class="flow-title">PPO FEV1・PPO DLCO の算出</div>
+        <div class="flow-body">区域カウント法、または肺全摘では換気・血流シンチグラフィを用いて術後予測値を算出する（詳細は §4）。</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">STEP 3</div>
+        <div class="flow-title">PPO によるリスク層別化</div>
+        <div class="flow-body">
+          <ul style="margin:4px 0 0 16px">
+            <li>PPO FEV1 &gt;60% <strong>かつ</strong> PPO DLCO &gt;60% → <strong>★平均的なリスク</strong>（追加検査不要）</li>
+            <li>PPO FEV1 &lt;60% <strong>または</strong> PPO DLCO &lt;60%（両者ともに ≧30%）→ <strong>▲高いリスクの可能性</strong> → STEP 4 へ</li>
+            <li>PPO FEV1 &lt;30% <strong>または</strong> PPO DLCO &lt;30% → <strong>▲▲非常に高いリスクの可能性</strong> → STEP 4 + 5 で慎重判断</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">STEP 4</div>
+        <div class="flow-title">簡易型運動負荷試験</div>
+        <div class="flow-body">
+          <ul style="margin:4px 0 0 16px">
+            <li>シャトル歩行試験（SWT）≧400m または ≧25往復 → <strong>★可</strong>（平均的なリスクに準ずる）</li>
+            <li>階段昇降試験（SCT）≧22m（葉切：3階／全摘：5階 目安）→ <strong>★可</strong></li>
+            <li>上記を下回る → STEP 5 へ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">STEP 5（括弧付き：必須でない）</div>
+        <div class="flow-title">心肺運動負荷試験（CPET）</div>
+        <div class="flow-body">
+          <ul style="margin:4px 0 0 16px">
+            <li>VO2max &gt;20 mL/kg/min または &gt;予測値75% → <strong>★平均的なリスク</strong>（全摘を含む予定術式が可）</li>
+            <li>VO2max 10–20 mL/kg/min または 35–75% → <strong>▲高いリスク</strong></li>
+            <li>VO2max &lt;10 mL/kg/min または &lt;予測値35% → <strong>▲▲非常に高いリスク</strong>（低侵襲手術・縮小切除・非外科治療を考慮）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">CPET が施行不可能な施設では、SCT で<strong>1階以上登れる場合は高いリスク</strong>、<strong>1階も登れない場合は非常に高いリスク</strong>として判断する（日本GL 2021）。本アルゴリズムは日本GL 2021 図1に基づく。CPET は図1で括弧付きとされ、必須項目ではなく推奨度2（CQ11 解説）である。</div>
+    <!-- 出典: 日本呼吸器外科学会『肺癌手術症例に対する術前呼吸機能評価のガイドライン』2021, 図1（Textbook/呼外呼吸機能.pdf p.12）。ACCP 2013・ERS/ESTS 2009 も概ね同一のステップワイズ構造を採用。 -->
+  </section>
+
+  <section id="spirometry">
+    <h2 class="sec-h2">3. スパイロメトリーと DLCO</h2>
+
+    <h3 class="sec-h3">3.5 呼吸機能検査の基礎</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">評価アルゴリズムに入る前に、各検査が「何を測る検査か」を整理する。以下の解説は textbook/ 内の呼吸器外科テキストの呼吸生理・機能的適応の記載に基づく。</p>
+
+    <h3 class="sec-h3">スパイロメトリー（Spirometry）とは</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">努力呼出による換気機能検査。<strong>FEV1（1秒量＝最初の1秒間に吐ける量）・FVC（努力肺活量）・VC（肺活量）</strong>などを測定する。VC と FVC の差や FEV1/FVC、フローボリューム曲線から、閉塞性・拘束性・混合性の換気障害を評価する。<strong>%FEV1（対標準1秒量）</strong>は予測値に対する比で、低値であるほど術後合併症・周術期死亡率の上昇と相関することが知られる。</p>
+
+    <h3 class="sec-h3">DLCO（肺拡散能）とは</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">肺胞から毛細血管へのガス交換能力を測る検査。<strong>一酸化炭素（CO）</strong>を用い、肺胞気から血液中ヘモグロビンへ CO がどれだけ移行するかを測定する。肺胞-毛細血管膜の面積・厚さ・肺血流・ヘモグロビン量を反映し、間質性肺疾患・肺気腫・肺血管病変で低下する。スパイロメトリーが正常でも DLCO が低下することがあり（両者の相関は強くない）、術後呼吸器合併症の独立した予測因子となる。</p>
+
+    <h3 class="sec-h3">PPO（術後予測呼吸機能, Predicted Postoperative）とは</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">切除によって失われる肺機能を見込んだ「術後に残ると予測される機能」。術前値に残存する機能的区域の割合を掛けて算出する（詳細は §4）。<strong>PPO FEV1・PPO DLCO</strong>（およびその対標準比 %PPO FEV1・%PPO DLCO）が周術期リスクの中心的指標となる。</p>
+
+    <h3 class="sec-h3">CPET（心肺運動負荷試験）と VO2max とは</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">自転車エルゴメータ等で運動負荷をかけ、運動中の呼気ガス（酸素摂取・二酸化炭素排出）・心拍数反応・分時換気量などを分析する精密検査。<strong>最大酸素摂取量（VO2max）</strong>は心臓・肺・骨格筋を統合した全身の予備能を反映し、安静時検査では捉えられない、肺切除に伴う身体的ストレスへの耐容性を評価できる。</p>
+
+    <h3 class="sec-h3">簡易型運動負荷試験（SWT・SCT・6MWT）とは</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">CPET が施行できない場合の代替・前段検査。<strong>シャトル歩行試験（SWT：音声ペーシングで一定区間を往復）</strong>、<strong>階段昇降試験（SCT：自身のペースで登れる高さを測定）</strong>、<strong>6分間歩行試験（6MWT：6分間の歩行距離）</strong>があり、日常労作の耐容能を簡便に評価できる。SWT・SCT は VO2max や術後合併症発生率との相関が報告されている。</p>
+    <!-- 出典: 各検査の基礎解説は Textbook/呼吸器外科テキスト 改訂第二版（本セッションで抽出・照合）に基づく。
+         「呼吸生理と呼吸機能検査」章（PDF p.57-63：VC/FVC/FEV1・フローボリューム曲線・DLCO・換気血流比V/Q・運動負荷検査が何を測るか）、
+         「周術期管理と術後合併症―肺切除術の機能的適応」章（PDF p.158-161：spirometry/DLCO/PPO算出式 ppoFEV1=preop FEV1×(1-y/z)・6MWT・SWT・SCT 22m閾値・ECOG PS）。
+         CPET/VO2max・SWT/SCT の手技的記述は日本GL 2021 CQ9-11解説（呼外呼吸機能.pdf p.23-26）でも確認。
+         ※本テキストはOCRテキスト層を介して読んだため、固有の数値はGL本文と二重照合した範囲でのみ記載した。 -->
+
+    <h3 class="sec-h3">検査の推奨（日本GL 2021 CQ4）</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">スパイロメトリーはすべての肺癌手術予定患者に行うことが強く推奨される。DLCO は特定のリスク因子を有する場合に推奨（推奨1）、全例実施は弱く推奨される（推奨2）。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr><th>検査</th><th>対象</th><th>推奨の強さ</th><th>エビデンスの質</th><th>合意率</th><th>出典</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>スパイロメトリー</td><td>全例</td><td>1（強い）</td><td>C</td><td>100%</td><td>日本GL 2021 CQ4</td></tr>
+        <tr><td>DLCO</td><td>全例</td><td>2（弱い）</td><td>C</td><td>100%</td><td>日本GL 2021 CQ4</td></tr>
+        <tr><td>DLCO</td><td>リスク因子あり例<sup>※</sup></td><td>1（強い）</td><td>C</td><td>100%</td><td>日本GL 2021 CQ4</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11.5px;color:var(--text3)"><sup>※</sup>リスク因子：労作時息切れ・画像上びまん性間質性変化・喫煙歴・COPD・ほか呼吸器併存疾患</p>
+    <!-- 出典: 日本GL 2021 CQ4（Textbook/呼外呼吸機能.pdf p.13-14）。推奨度・合意率は原文と照合済み。 -->
+    <div class="info-box">
+      <strong>ACCP 2013</strong> はすべての切除予定患者で FEV1・DLCO 両方の測定を推奨。<strong>ERS/ESTS 2009</strong> は FEV1 または DLCO が予測値の80%未満の場合に運動負荷試験へ進むとしている。日本では DLCO 測定率が低く（2010年の肺癌登録合同委員会集計で27%、2018年の学会全国アンケートで39%）、この現状を踏まえ日本GL 2021 は全例 DLCO を弱く推奨（推奨2）としている。
+    </div>
+
+    <h3 class="sec-h3">ACOSOG Z4032 肺葉切除ハイリスク基準</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">Major criteria を1つ、または Minor criteria を2つ満たした場合に肺葉切除ハイリスクと判断する。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr><th>区分</th><th>基準</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Major criteria<br>（1つ以上で高リスク）</td><td>FEV1 ≤50% predicted<br>DLCO ≤50% predicted</td></tr>
+        <tr><td>Minor criteria<br>（2つ以上で高リスク）</td><td>年齢 ≥75歳<br>FEV1 51–60% predicted<br>DLCO 51–60% predicted<br>肺高血圧（肺動脈収縮期圧 &gt;40 mmHg、心エコーまたは右心カテーテルで推定）<br>左室機能低下（EF ≤40%）<br>安静時または運動時の動脈血 PO2 ≤55 mmHg または SpO2 ≤88%<br>PCO2 &gt;45 mmHg<br>修正 MRC 息切れスケール ≥3</td></tr>
+      </tbody>
+    </table>
+    <!-- 出典: ACOSOG Z4032試験のハイリスク基準。日本GL 2021 CQ4 解説内 表3（Textbook/呼外呼吸機能.pdf p.14-15）に記載。
+         原典: Fernando HC, Landreneau RJ, Mandrekar SJ, et al. J Thorac Cardiovasc Surg. 2011;142(5):1143-51. -->
+  </section>
+
+  <section id="ppo">
+    <h2 class="sec-h2">4. PPO の算出</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">PPO FEV1 の算出は全例に推奨（推奨1／C／100%）。PPO DLCO はリスク因子あり例に推奨1、全例に推奨2である（日本GL 2021 CQ5）。</p>
+    <div class="note-box" style="font-family:var(--mono);font-size:12px;line-height:1.9">
+      【肺葉切除・区域切除（区域カウント法）】<br>
+      PPO FEV1 = 術前 FEV1 × ( 1 − y / z )<br>
+      &nbsp;&nbsp;y = 切除予定の機能的（閉塞していない）肺区域数<br>
+      &nbsp;&nbsp;z = 左右区域数の合計（通常：右10 + 左9 = 19）<br>
+      &nbsp;&nbsp;同式を DLCO に適用し PPO DLCO を算出してもよい。<br>
+      <br>
+      【肺全摘（換気血流シンチグラフィ使用）】<br>
+      PPO FEV1 = 術前 FEV1 × ( 1 − 切除肺の灌流割合 )
+    </div>
+    <div class="warn-box">肺全摘予定例では、局所的な気道閉塞や肺血流障害のため区域カウント法では不正確になりうる。肺換気・血流シンチグラフィを施行したうえで、灌流割合ベースの式を用いることが推奨される。</div>
+    <div class="note-box">区域切除・楔状切除後の術後呼吸機能予測についてはエビデンスが乏しい。区域切除では切除区域数と相関して低下するが、区域カウント法（式2）の予測値より低くなる傾向がある。楔状切除では約5%の FEV1 低下が報告されている。（日本GL 2021 CQ5 解説）</div>
+    <!-- 出典: 日本GL 2021 CQ5（Textbook/呼外呼吸機能.pdf p.15-17）。z=右10左9=19、楔状切除約5%低下を原文と照合済み。
+         区域カウント法の式: Ali MK, et al. Chest 1980;77(3):337-42（GL引用[18]）。
+         シンチ法（灌流割合）: Corris PA, et al. Thorax 1987;42(4):285-91（GL引用[25]）。 -->
+  </section>
+
+  <section id="risk">
+    <h2 class="sec-h2">5. PPO によるリスク層別化</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">PPO 値から周術期リスクを三段階に層別化し、次のステップを決定する。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr><th>PPO 値</th><th>リスク判定</th><th>推奨される次のステップ</th><th>推奨／エビデンス／合意率</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>PPO FEV1 &gt;60% <strong>かつ</strong> PPO DLCO &gt;60%</td><td>平均的なリスク</td><td>追加の運動負荷試験は不要。切除可</td><td>推奨2／C／100%（CQ6）</td></tr>
+        <tr><td>PPO FEV1 &lt;60% <strong>または</strong> PPO DLCO &lt;60%（両者 ≧30%）</td><td>高いリスクの可能性</td><td>簡易型運動負荷試験を考慮</td><td>推奨1／C／71%（CQ7）</td></tr>
+        <tr><td>PPO FEV1 &lt;30% <strong>または</strong> PPO DLCO &lt;30%</td><td>非常に高いリスクの可能性</td><td>簡易運動負荷／CPET で慎重に適応判断</td><td>推奨2／C／100%（CQ8）</td></tr>
+      </tbody>
+    </table>
+    <!-- 出典: 日本GL 2021 CQ6（p.17）, CQ7（p.17）, CQ8（p.18）。推奨度・合意率を原文と照合済み。 -->
+
+    <h3 class="sec-h3">開胸 vs 胸腔鏡（VATS）別の合併症・死亡率</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">日本GL 2021 CQ8 解説 表4 より。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr><th></th><th>開胸 合併症発生率</th><th>開胸 周術期死亡率</th><th>VATS 合併症発生率</th><th>VATS 周術期死亡率</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>全体</td><td>13.1%</td><td>2.1%</td><td>7.5%</td><td>0.8%</td></tr>
+        <tr><td>PPO FEV1 &lt;60%</td><td>17.1%</td><td>3.0%</td><td>11.2%</td><td>1.1%</td></tr>
+        <tr><td>PPO DLCO &lt;60%</td><td>14.9%</td><td>2.7%</td><td>10.4%</td><td>1.1%</td></tr>
+        <tr><td>PPO FEV1 &lt;30%</td><td>22%</td><td>10%</td><td>11.3%</td><td>3.2%</td></tr>
+        <tr><td>PPO DLCO &lt;30%</td><td>21.9%</td><td>6.7%</td><td>14.6%</td><td>2.6%</td></tr>
+      </tbody>
+    </table>
+    <!-- 出典: 日本GL 2021 CQ8 解説内 表4（Textbook/呼外呼吸機能.pdf p.18）。全数値を原文と照合済み。
+         データ原典: Burt BM, Kosinski AS, Shrager JB, Onaitis MW, Weigel T. J Thorac Cardiovasc Surg. 2014;148(1):19-28（GL引用[23]、STSデータベース）。
+         注: GL表4のキャプションは「ACOSOG Z4032試験における…」と表記するが、解説本文の引用文献[23]はSTSデータベースのBurt 2014であり、GL内に表記の不一致がある。本ページは数値と引用[23]に従う。 -->
+    <div class="info-box">PPO &lt;60% でも、VATS（胸腔鏡）の場合は開胸より合併症・周術期死亡率が低い。低肺機能症例ほど VATS の恩恵が大きく、アプローチの選択が重要となる（日本GL 2021 CQ8）。なお、PPO &lt;60% でも、コホート全体に比べリスクは上昇するものの十分に受容可能な範囲とされ、PPO &lt;30% では追加検査による患者選別が重要となる。</div>
+  </section>
+
+  <section id="exercise">
+    <h2 class="sec-h2">6. 運動負荷試験</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">安静時の呼吸機能評価だけでは、耐術能の境界領域症例の判断が難しい。心肺運動負荷試験（CPET）と簡易型運動負荷試験は、心肺両機能を含む全身機能を動的に評価できるため、境界領域症例での追加情報として推奨される（日本GL 2021 CQ9、推奨1／C／86%）。</p>
+
+    <h3 class="sec-h3">VO2max 三段階基準</h3>
+    <table class="surgery-table">
+      <thead>
+        <tr><th>VO2max</th><th>%予測値</th><th>リスク判定</th><th>対応</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>&gt;20 mL/kg/min</td><td>&gt;75%</td><td>平均的なリスク</td><td>予定術式（全摘含む）が可</td></tr>
+        <tr><td>10–20 mL/kg/min</td><td>35–75%</td><td>高いリスク</td><td>術式・リスクを慎重に評価</td></tr>
+        <tr><td>&lt;10 mL/kg/min</td><td>&lt;35%</td><td>非常に高いリスク</td><td>低侵襲手術・縮小切除・非外科治療を考慮（推奨1／C／86%、CQ11）</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sec-h3">簡易型運動負荷試験</h3>
+    <table class="surgery-table">
+      <thead>
+        <tr><th>検査</th><th>閾値（次のステップへ進む）</th><th>CPET との対応</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>シャトル歩行試験（SWT）</td><td>&lt;25往復 または &lt;400m</td><td>VO2max &lt;10 mL/kg/min の可能性（推奨2／C／100%、CQ10）</td></tr>
+        <tr><td>階段昇降試験（SCT）</td><td>&lt;22m（葉切3階・全摘5階 目安）</td><td>CPET へ進む（推奨2／C／100%、CQ10）</td></tr>
+        <tr><td>6分間歩行試験（6MWT）</td><td>—</td><td>ERS/ESTS では推奨されず。検査法・評価の標準化が不十分</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box">CPET は施行できる施設が限られており、本アルゴリズムでは括弧付き（必須でない）。CPET が不可能な施設では SCT で代用し、<strong>1階以上可なら高リスク、1階も不可なら非常に高リスク</strong>として判断する（日本GL 2021 CQ9・解説）。SCT は階段の高さ・段数・速度が施設間で統一されておらず、解釈に注意が必要。</div>
+    <!-- 出典: 日本GL 2021 CQ9-11（Textbook/呼外呼吸機能.pdf p.23-26）。VO2max カットオフ（20／10-20／<10 mL/kg/min）、SWT 25往復/400m、SCT 22m を原文と照合済み。
+         VO2max カットオフは ACCP 2013・ERS/ESTS 2009・日本GL 2021 の三者でほぼ一致。
+         SCT 22m 閾値の原典: Brunelli A, et al. Ann Thorac Surg. 2008;86(1):240-7（GL引用[21]）。 -->
+  </section>
+
+  <section id="cardiac">
+    <h2 class="sec-h2">7. 心血管リスク評価</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">肺癌患者は喫煙による動脈硬化性疾患を合併しやすく、AHA/ACC ガイドライン（2014）に基づくステップワイズ評価が推奨される（日本GL 2021 CQ3）。肺切除症例には、肺切除術用に修正された <strong>ThRCRI（Thoracic Revised Cardiac Risk Index）</strong> の使用が推奨される。</p>
+    <div class="flow" style="grid-template-columns:1fr">
+      <div class="flow-step"><div class="flow-label">Step 1</div><div class="flow-title">緊急手術か否か</div><div class="flow-body">緊急を要する場合は、有する心血管合併症に応じた適切な監視・管理下に手術を行う。</div></div>
+      <div class="flow-step"><div class="flow-label">Step 2</div><div class="flow-title">活動性の心障害の有無</div><div class="flow-body">急性冠症候群・非代償性心不全・重篤な不整脈・重症弁膜症があれば、先に心疾患の治療を行う。</div></div>
+      <div class="flow-step"><div class="flow-label">Step 3</div><div class="flow-title">心血管合併症リスクの評価</div><div class="flow-body">ThRCRI または ACS-NSQIP risk calculator で、重篤な心血管合併症の発症リスクを評価する。</div></div>
+      <div class="flow-step"><div class="flow-label">Step 4</div><div class="flow-title">リスク &lt;1%</div><div class="flow-body">そのまま手術を行う。</div></div>
+      <div class="flow-step"><div class="flow-label">Step 5</div><div class="flow-title">リスク ≥1%</div><div class="flow-body">患者の運動容量を評価する。4 MET 以上（例：階段を1階以上登れる）であれば手術可。</div></div>
+      <div class="flow-step"><div class="flow-label">Step 6</div><div class="flow-title">4 MET 未満</div><div class="flow-body">薬剤負荷試験等の追加検査を行う。</div></div>
+      <div class="flow-step"><div class="flow-label">Step 7</div><div class="flow-title">総合的に方針決定</div><div class="flow-body">肺癌と心疾患の治療方針を総合的に決定する。</div></div>
+    </div>
+    <div class="note-box"><strong>ThRCRI</strong> は肺切除術症例用に修正された心血管リスク指標で、ACCP ガイドラインはこちらの使用を推奨している。<strong>ACS-NSQIP</strong> risk calculator は簡便で、胸腔鏡／開胸のアプローチ別・術式別に評価できる点で優れるが、虚血性心疾患・脳血管疾患の既往が入力項目に含まれない。これらの既往を持つ症例では RCRI／ThRCRI がより適切とされる（日本GL 2021 CQ3）。</div>
+    <!-- 出典: 日本GL 2021 CQ3（Textbook/呼外呼吸機能.pdf p.7-9）。AHAステップ・ThRCRI/ACS-NSQIPの記述を原文と照合済み。
+         AHA/ACC 2014: Fleisher LA, et al. J Am Coll Cardiol. 2014;64(22):e77-137（GL引用[4]）。
+         ThRCRI: Brunelli A, Varela G, Salati M, et al. Ann Thorac Surg. 2010;90(1):199-203（GL引用[25]）。
+         注: GL本文は運動容量の目安として「6分間歩行距離≧660m」「平地を毎時5.6km以上」等も挙げる。本ページは概略のみ記載。 -->
+  </section>
+
+  <section id="rehab">
+    <h2 class="sec-h2">8. 術前禁煙・呼吸リハビリテーション</h2>
+    <div class="info-box">
+      <strong>禁煙（CQ14）：</strong>非小細胞肺癌の術前・術後の患者に対して、禁煙を行うよう推奨する。術前禁煙期間が長いほど術後呼吸器合併症の発生率が低い傾向があるが、最適な禁煙期間を一律に定めるエビデンスは現時点で不十分とされる。非燃焼・加熱式タバコ・電子タバコも、従来のタバコと同様に周術期の使用を控えるべきとされる。
+      <div class="tag-row"><span class="tag green">推奨の強さ 1</span><span class="tag blue">エビデンス C</span><span class="tag amber">合意率 100%</span><span class="tag purple">日本GL 2021 CQ14</span></div>
+    </div>
+    <div class="info-box">
+      <strong>呼吸リハビリテーション（CQ15）：</strong>非小細胞肺癌の術前・術後の患者に対して、特にハイリスク症例において呼吸リハビリテーションを行うよう推奨する。術前リハビリにより VO2max が約 2.8 mL/kg/min 上昇したとの報告があり、7研究・404例のメタアナリシスでは術後呼吸器合併症が有意に低減（OR 0.44、95%CI 0.27–0.71）、術後在院日数が平均 4.23 日短縮した。
+      <div class="tag-row"><span class="tag green">推奨の強さ 1</span><span class="tag blue">エビデンス C</span><span class="tag amber">合意率 85.7%</span><span class="tag purple">日本GL 2021 CQ15</span></div>
+    </div>
+    <!-- 出典: 日本GL 2021 CQ14（Textbook/呼外呼吸機能.pdf p.32-34）, CQ15（p.34-36）。VO2max 2.8mL/kg/min上昇・OR 0.44(0.27-0.71)・在院4.23日短縮・合意率85.7%を原文と照合済み。 -->
+  </section>
+
+  <section id="comparison">
+    <h2 class="sec-h2">9. 三ガイドライン比較</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">三ガイドラインの主要な相違点を以下に整理する。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr><th>項目</th><th>日本GL 2021</th><th>ACCP 2013</th><th>ERS/ESTS 2009</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>形式</td><td>GRADE・CQ形式（15 CQ）</td><td>エビデンスベース</td><td>ERS/ESTS 合同タスクフォース</td></tr>
+        <tr><td>スパイロメトリー</td><td>全例・推奨1</td><td>全例推奨</td><td>全例推奨</td></tr>
+        <tr><td>DLCO 全例測定</td><td>推奨2（リスク因子ありで推奨1）</td><td>全例推奨</td><td>FEV1/DLCO &lt;80%で運動負荷へ</td></tr>
+        <tr><td>PPO 算出</td><td>PPO FEV1 全例・推奨1</td><td>全例推奨</td><td>全例推奨</td></tr>
+        <tr><td>平均的リスクの PPO 閾値</td><td>PPO FEV1 &gt;60% かつ PPO DLCO &gt;60%</td><td>PPO FEV1 &gt;60%（2007版は40%）</td><td>ppoFEV1 &gt;30% を一つの目安</td></tr>
+        <tr><td>高リスク閾値</td><td>&lt;60%（両者 ≧30%）</td><td>&lt;60%</td><td>—</td></tr>
+        <tr><td>非常に高リスク閾値</td><td>&lt;30%</td><td>&lt;30%</td><td>ppoFEV1 &lt;30%</td></tr>
+        <tr><td>運動負荷の位置づけ</td><td>簡易負荷を前段、CPETは括弧付き</td><td>PPO &lt;60%/&lt;30%で段階的適用</td><td>FEV1/DLCO &lt;80%で推奨</td></tr>
+        <tr><td>VO2max 三段階閾値</td><td>&gt;20 / 10–20 / &lt;10（mL/kg/min）</td><td>同様</td><td>同様</td></tr>
+        <tr><td>禁煙</td><td>推奨1（CQ14）</td><td>推奨あり</td><td>推奨あり</td></tr>
+        <tr><td>呼吸リハビリ</td><td>推奨1・ハイリスク例（CQ15）</td><td>推奨あり</td><td>推奨あり</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box">VO2max の三段階カットオフ（&gt;20 / 10–20 / &lt;10 mL/kg/min）は、三ガイドラインでほぼ一致している数少ないポイント。PPO 閾値の60%は ACCP が2007年版の40%から2013年版で引き上げたもので、日本GL 2021 はこの ACCP 2013 基準を踏襲している。</div>
+    <!-- 出典: 日本GL 2021 各CQ（Textbook/呼外呼吸機能.pdf）。ACCP 2013（Brunelli, Chest 2013）・ERS/ESTS 2009（Brunelli, Eur Respir J 2009）との対比はGL本文の記述に基づく。
+         ERS/ESTSの「FEV1/DLCO<80%で運動負荷へ」「ppoFEV1>30%目安」は本GL内の引用記述に基づくものであり、原ガイドラインの全条件を網羅するものではない。<!-- 要確認: ERS/ESTS 2009原文の閾値詳細は本GL経由の記述 --> -->
+  </section>
+
+  <section id="references">
+    <h2 class="sec-h2">10. 参考文献</h2>
+    <div class="ref-list">
+      <ol>
+        <li>日本呼吸器外科学会ガイドライン検討委員会. 肺癌手術症例に対する術前呼吸機能評価のガイドライン. 2021年5月. 参照: Textbook/呼外呼吸機能.pdf（CQ1-11・14-15、図1、表3・表4）。</li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/23649437/" target="_blank">Brunelli A, Kim AW, Berger KI, Addrizzo-Harris DJ. Physiologic evaluation of the patient with lung cancer being considered for resectional surgery: ACCP evidence-based clinical practice guidelines (3rd ed). Chest. 2013;143(5 Suppl):e166S-e190S. PMID: 23649437</a> <a href="https://doi.org/10.1378/chest.12-2395" target="_blank">DOI</a><!-- PMID 23649437・DOI 10.1378/chest.12-2395 はGL引用文献リストと一致を確認。PubMed実在はライブ未検証。 --></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/19567600/" target="_blank">Brunelli A, Charloux A, Bolliger CT, et al. ERS/ESTS clinical guidelines on fitness for radical therapy in lung cancer patients (surgery and chemo-radiotherapy). Eur Respir J. 2009;34(1):17-41. PMID: 19567600</a> <a href="https://doi.org/10.1183/09031936.00184308" target="_blank">DOI</a><!-- PMID 19567600・DOI 10.1183/09031936.00184308 はGL引用文献リストと一致を確認。PubMed実在はライブ未検証。 --></li>
+        <li><a href="https://doi.org/10.1016/j.jacc.2014.07.944" target="_blank">Fleisher LA, Fleischmann KE, Auerbach AD, et al. 2014 ACC/AHA guideline on perioperative cardiovascular evaluation and management of patients undergoing noncardiac surgery. J Am Coll Cardiol. 2014;64(22):e77-137.</a></li>
+        <li><a href="https://doi.org/10.1016/j.athoracsur.2010.03.042" target="_blank">Brunelli A, Varela G, Salati M, et al. Recalibration of the revised cardiac risk index in lung resection candidates. Ann Thorac Surg. 2010;90(1):199-203.</a></li>
+        <li>呼吸器外科テキスト 改訂第二版（南江堂）. 参照: Textbook/呼吸器外科テキスト 改訂第二版.pdf 「呼吸生理と呼吸機能検査」章（p.57-63）・「周術期管理と術後合併症―肺切除術の機能的適応」章（p.158-161）。§3.5 の各検査の基礎解説の根拠。<!-- 要確認: 書誌（編者・出版年・ISBN）はPDFから確定できず未記載。 --></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-logo"><span>Lung</span>Atlas</div>
+  <div>医療専門職向け教育資料。診療判断には最新ガイドラインと原著論文を確認してください。</div>
+</footer>
+
+</body>
+</html>
