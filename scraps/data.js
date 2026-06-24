@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "ALINA試験 — 術後補助 alectinib vs 白金製剤化学療法（ALK陽性NSCLC）",
+    summary: "完全切除ALK陽性Stage IB（4cm以上）–IIIA NSCLCでalectinibを24か月投与し、白金製剤化学療法よりDFSを改善した第3相試験。OSは未成熟。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/alina.html"
+  },
+  {
     title: "MARIPOSA-2試験 — osimertinib後 amivantamab + 化学療法（EGFR変異陽性NSCLC）",
     summary: "osimertinib耐性後のEGFR ex19del/L858R NSCLCでamivantamab + carboplatin-pemetrexedがPFS・ORRを改善した第3相試験。OSは有利な傾向だが規定有意水準に未到達。",
     date: "2026-06-24",

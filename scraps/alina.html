@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALINA試験 — 術後補助 alectinib vs 白金製剤化学療法（ALK陽性NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。ALINA試験（ALK陽性完全切除NSCLC、術後補助alectinib）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>ALINA試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">ALINA試験 — 術後補助 alectinib vs 白金製剤化学療法（ALK陽性NSCLC）</h1>
+
+  <p class="scrap-summary">完全切除ALK陽性Stage IB（4cm以上）–IIIA NSCLCで、alectinib 600mg 1日2回を24か月投与し、白金製剤化学療法よりDFSを改善した第3相試験。OSは未成熟。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/38598794/" target="_blank" rel="noopener">NEJM 2024（PMID 38598794）</a> ／
+      <a href="https://doi.org/10.1056/NEJMoa2310532" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2310532</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+    <h2>1. 試験概要</h2>
+    <p>ALINA試験（NCT03456076）は、完全切除ALK陽性NSCLCに対する術後補助alectinibを、術後白金製剤化学療法と比較した国際共同・第3相・非盲検・無作為化試験。対象はStage IB（腫瘍径4cm以上）、II、IIIA（AJCC/UICC第7版）のALK陽性NSCLC。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・非盲検・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>完全切除ALK陽性NSCLC、Stage IB（腫瘍径4cm以上）–IIIA（AJCC/UICC第7版）</td></tr>
+        <tr><td>症例数</td><td>257例（alectinib 130例 / 化学療法 127例）</td></tr>
+        <tr><td>介入</td><td>alectinib 600mg 1日2回、24か月</td></tr>
+        <tr><td>対照</td><td>静注白金製剤ベース化学療法、21日ごと4サイクル</td></tr>
+        <tr><td>主要評価項目</td><td>DFS。Stage II–IIIA集団で階層的に検定し、その後ITT集団で検定</td></tr>
+        <tr><td>副次評価項目</td><td>CNS DFS、OS、安全性など</td></tr>
+        <tr><td>スポンサー</td><td>F. Hoffmann-La Roche（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT03456076</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — DFS</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.24</div>
+        <div class="stat-label">DFS（Stage II–IIIA、主要評価）</div>
+        <div class="stat-vs">95%CI 0.13–0.45、p&lt;0.001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">93.8% vs 63.0%</div>
+        <div class="stat-label">2年DFS率（Stage II–IIIA）</div>
+        <div class="stat-vs">alectinib vs 化学療法</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.24</div>
+        <div class="stat-label">DFS（ITT、Stage IB–IIIA）</div>
+        <div class="stat-vs">95%CI 0.13–0.43、p&lt;0.001</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>解析</th><th>alectinib</th><th>化学療法</th><th>HR / 結果</th><th>出典</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Stage II–IIIA DFS 2年</td><td class="num">93.8%</td><td class="num">63.0%</td><td>HR 0.24（95%CI 0.13–0.45）</td><td>NEJM 2024</td></tr>
+        <tr><td>ITT DFS 2年</td><td class="num">93.6%</td><td class="num">63.7%</td><td>HR 0.24（95%CI 0.13–0.43）</td><td>NEJM 2024</td></tr>
+        <tr><td>CNS DFS</td><td>—</td><td>—</td><td>HR 0.22（95%CI 0.08–0.58）</td><td>NEJM 2024</td></tr>
+        <tr><td>OS</td><td colspan="2">未成熟</td><td><!-- 要確認: OS更新データは査読論文化後に確認 --></td><td>NEJM 2024</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. CNS再発</h2>
+    <p>alectinibは、化学療法と比較してCNS DFSについても臨床的に意味のある改善を示した。NEJM 2024抄録では、CNS disease recurrence or deathのHRは0.22（95%CI 0.08–0.58）と報告されている。</p>
+
+    <!-- 要確認: CNS再発イベント数、脳転移既往の有無別解析、CNS DFS曲線の詳細は原著本文・Supplementより確認 -->
+
+    <h2>4. 安全性</h2>
+    <p>NEJM 2024抄録では、予期しない安全性所見は認められなかったと記載されている。術後補助として24か月投与するため、長期内服に伴う毒性管理とアドヒアランスが重要。</p>
+
+    <div class="tox-row">
+      <span class="tox">肝機能障害 <!-- 要確認: 発現率 --></span>
+      <span class="tox">CK上昇・筋肉痛 <!-- 要確認: 発現率 --></span>
+      <span class="tox">便秘 <!-- 要確認: 発現率 --></span>
+      <span class="tox">浮腫 <!-- 要確認: 発現率 --></span>
+      <span class="tox">光線過敏 <!-- 要確認: 発現率 --></span>
+      <span class="tox">徐脈 <!-- 要確認: 発現率 --></span>
+      <span class="tox">貧血 <!-- 要確認: 発現率 --></span>
+    </div>
+
+    <!-- 要確認: Grade 3以上有害事象、減量率、中止率、治療関連死亡、化学療法群との安全性比較はNEJM 2024 Table/Supplementより確認 -->
+
+    <h2>5. 位置づけと注意点</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">日本</span>
+        <span>2024年8月にALK融合遺伝子陽性NSCLCにおける術後補助療法として適応追加承認とされる。添付文書上の正確な効能・効果、用量、対象StageはPMDAで要確認。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">FDA</span>
+        <span>FDAは2024年4月に、腫瘍切除後のALK陽性NSCLCに対する術後補助alectinibを承認したとされる。正確な適応文言は最新版ラベルで要確認。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>ALINAは白金製剤化学療法を対照とした試験であり、ADAURAのようなプラセボ対照試験ではない。効果量の解釈では対照群の違いに注意する。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>OSは未成熟。現時点でOS改善は確定的に示されていない。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">GL</span>
+        <span>日本肺癌診療ガイドライン、NCCN、ESMOでの推奨Stage・推奨グレードは要確認。</span>
+      </div>
+    </div>
+
+    <h2>6. 要確認メモ</h2>
+    <ul>
+      <li><!-- 要確認: NEJM 2024本文/TableでDFS中央値、Stage別サブグループ、ALK検査法別の記載を確認 -->DFS中央値、Stage別サブグループ、ALK検査法別の詳細</li>
+      <li><!-- 要確認: NEJM 2024 Supplementで白金製剤レジメン内訳を確認 -->化学療法群のレジメン内訳</li>
+      <li><!-- 要確認: NEJM 2024 Table/Supplementで安全性詳細を確認 -->安全性詳細（Grade別、減量・中止率、治療関連死亡）</li>
+      <li><!-- 要確認: PMDAで国内承認日・効能効果・用法用量を確認 -->国内承認日・添付文書上の正確な適応</li>
+      <li><!-- 要確認: GL原典で推奨Stage・推奨グレードを確認 -->各ガイドラインの推奨Stage・推奨グレード</li>
+    </ul>
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献・情報源</h2>
+    <ol>
+      <li>Wu YL, Dziadziuszko R, Ahn JS, et al; ALINA Investigators. Alectinib in Resected ALK-Positive Non-Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2024. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38598794/" target="_blank" rel="noopener">38598794</a> / DOI: <a href="https://doi.org/10.1056/NEJMoa2310532" target="_blank" rel="noopener">10.1056/NEJMoa2310532</a></li>
+      <li>ClinicalTrials.gov. ALINA, NCT03456076. <a href="https://clinicaltrials.gov/study/NCT03456076" target="_blank" rel="noopener">Study record</a></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
