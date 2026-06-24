@@ -220,6 +220,31 @@ a.map-card:hover {
 .home-footer .footer-logo span { color: var(--green-mid); }
 .home-footer .foot-tagline { color: var(--text2); }
 
+/* SCRAPS セクション（下部） */
+.sidebar-scraps-sub {
+  font-size: 12.5px;
+  color: var(--text3);
+  margin: -8px 0 14px;
+  line-height: 1.6;
+}
+#scraps-recent .map-date {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--mono);
+  white-space: nowrap;
+}
+#scraps-recent .map-note { font-family: var(--font); }
+.scraps-empty { font-size: 13px; color: var(--text3); font-family: var(--mono); padding: 4px 0; }
+.scraps-more {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--green-dark);
+  text-decoration: none;
+}
+.scraps-more:hover { text-decoration: underline; }
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .home { padding: 0 18px; }
@@ -322,6 +347,14 @@ fetch('/lungatlas/nav.html')
     </div>
   </section>
 
+  <!-- セクション5：Scraps -->
+  <section class="home-section sidebar-scraps">
+    <h2 class="home-section-head">📝 Scraps</h2>
+    <p class="sidebar-scraps-sub">速報・ボツ試験・気になる論文のAIドラフト置き場（管理人による正誤確認前のメモ）</p>
+    <div class="card-grid" id="scraps-recent"></div>
+    <a href="scraps/index.html" class="scraps-more">すべて見る →</a>
+  </section>
+
 </div>
 
 <footer class="home-footer">
@@ -329,6 +362,31 @@ fetch('/lungatlas/nav.html')
   <div class="foot-tagline">医療専門職向けリファレンス。診療上の最終判断は担当医の責任で行ってください。</div>
   <div>最終更新 2026年6月</div>
 </footer>
+
+<!-- scraps/data.js を読み込む（scraps/index.html とは読み込みパスが異なる点に注意） -->
+<script src="scraps/data.js"></script>
+<script>
+(function(){
+  var box = document.getElementById('scraps-recent');
+  if (!box) return;
+  var data = (typeof SCRAPS_DATA !== 'undefined') ? SCRAPS_DATA.slice() : [];
+  // 更新日降順にソートして最新3件
+  data.sort(function(a, b){ return b.date.localeCompare(a.date); });
+  var items = data.slice(0, 3);
+
+  if (items.length === 0) {
+    box.innerHTML = '<p class="scraps-empty">まだ記事はありません。</p>';
+    return;
+  }
+  box.innerHTML = items.map(function(s){
+    return '<a class="map-card" href="' + s.url + '">' +
+      '<div class="map-card-top"><span class="map-label">Scrap</span>' +
+      '<span class="map-date">' + s.date + '</span></div>' +
+      '<div class="map-title">' + s.title + '</div>' +
+      '<div class="map-note">' + s.summary + '</div></a>';
+  }).join('');
+})();
+</script>
 
 </body>
 </html>

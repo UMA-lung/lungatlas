@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scraps — LungAtlas</title>
+<meta name="description" content="速報・ボツ試験・気になる論文のAIドラフト置き場。管理人による正誤確認前のメモです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.home { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+/* ===== AIドラフトバナー（_template.htmlと同一） ===== */
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+
+/* HERO */
+.hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); }
+.hero-h1 {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+.hero-sub { font-size: 14px; color: var(--text2); font-family: var(--mono); margin-bottom: 14px; }
+.hero-desc { font-size: 13.5px; color: var(--text2); line-height: 1.75; max-width: 640px; }
+
+/* SECTION */
+.home-section { padding: 30px 0 6px; }
+.home-section-head {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.home-section-head::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 15px;
+  background: var(--green-mid);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* CARD GRID */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+/* CARD */
+.map-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+a.map-card:hover {
+  border-color: var(--border2);
+  box-shadow: 0 4px 16px rgba(13, 92, 58, .08);
+  transform: translateY(-1px);
+}
+.map-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+.map-label {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  color: var(--text3);
+  background: var(--surface2);
+  padding: 3px 9px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.map-date { font-size: 11px; color: var(--text3); font-family: var(--mono); white-space: nowrap; }
+.map-title { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
+.map-note { font-size: 12px; color: var(--text3); line-height: 1.6; }
+
+.scraps-empty { font-size: 13px; color: var(--text3); font-family: var(--mono); padding: 8px 0; }
+
+/* FOOTER */
+.home-footer {
+  margin-top: 44px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 26px 28px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+.home-footer .footer-logo { font-weight: 600; color: var(--text); font-size: 13px; }
+.home-footer .footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 768px) {
+  .home { padding: 0 18px; }
+  .hero { padding: 32px 0 24px; }
+  .hero-h1 { font-size: 24px; }
+  .card-grid { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用、Scrapsがアクティブ） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="home">
+
+  <header class="hero">
+    <h1 class="hero-h1">Scraps</h1>
+    <p class="hero-sub">Trials, papers, and things worth remembering</p>
+    <p class="hero-desc">速報・ボツ試験・気になる論文のAIドラフト置き場。管理人による正誤確認前のメモです。</p>
+  </header>
+
+  <section class="home-section">
+    <h2 class="home-section-head">記事一覧</h2>
+    <div class="card-grid" id="scraps-list"></div>
+  </section>
+
+</div>
+
+<footer class="home-footer">
+  <div class="footer-logo"><span>Lung</span>Atlas — Scraps</div>
+  <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。</div>
+</footer>
+
+<!-- 同階層の data.js を読み込む（index.html とは読み込みパスが異なる点に注意） -->
+<script src="data.js"></script>
+<script>
+(function(){
+  var list = document.getElementById('scraps-list');
+  if (!list) return;
+  var data = (typeof SCRAPS_DATA !== 'undefined') ? SCRAPS_DATA.slice() : [];
+  // 更新日降順にソート
+  data.sort(function(a, b){ return b.date.localeCompare(a.date); });
+
+  if (data.length === 0) {
+    list.innerHTML = '<p class="scraps-empty">まだ記事はありません。</p>';
+    return;
+  }
+  list.innerHTML = data.map(function(s){
+    return '<a class="map-card" href="' + s.url + '">' +
+      '<div class="map-card-top"><span class="map-label">Scrap</span>' +
+      '<span class="map-date">' + s.date + '</span></div>' +
+      '<div class="map-title">' + s.title + '</div>' +
+      '<div class="map-note">' + s.summary + '</div></a>';
+  }).join('');
+})();
+</script>
+
+</body>
+</html>

@@ -207,6 +207,9 @@
     <!-- About -->
     <a id="nav-about" href="/lungatlas/about.html">About</a>
 
+    <!-- Scraps -->
+    <a id="nav-scraps" href="/lungatlas/scraps/index.html">Scraps</a>
+
   </div>
 
   <div class="nav-right" id="nav-lang-switch">
@@ -259,6 +262,10 @@
   if (path.indexOf('preop-pulmonary') !== -1) {
     var preopLink = document.getElementById('nav-preop-pulm');
     if (preopLink) preopLink.classList.add('active');
+  }
+  if (path.indexOf('/scraps/') !== -1) {
+    var scrapsLink = document.getElementById('nav-scraps');
+    if (scrapsLink) scrapsLink.classList.add('active');
   }
   if (path.indexOf('or-nurse-lung-surgery') !== -1) {
     var orNurseLink = document.getElementById('nav-or-nurse');
