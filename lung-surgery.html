@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肺癌外科手術 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  color: var(--text3);
+  padding: 8px 18px 4px;
+  text-transform: uppercase;
+}
+.sb-item {
+  display: block;
+  padding: 8px 18px;
+  font-size: 12.5px;
+  color: var(--text2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+  line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-weight: 500;
+  border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 11.5px;
+  color: var(--text3);
+  text-decoration: none;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 920px; }
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+.updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--green-dark);
+  background: var(--green-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 8px; }
+.art-sub { font-size: 13px; color: var(--text3); margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.75;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+.sec-h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 28px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-h2::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 15px;
+  background: var(--green-mid);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.sec-h3 { font-size: 13px; font-weight: 600; margin: 18px 0 8px; }
+
+.note-box,
+.info-box,
+.warn-box {
+  border-radius: 0 8px 8px 0;
+  padding: 11px 14px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  margin: 14px 0;
+}
+.note-box { background: var(--green-light); border-left: 3px solid var(--green-mid); color: var(--green-dark); }
+.info-box { background: var(--blue-light); border-left: 3px solid #2d6db5; color: var(--blue-dark); }
+.warn-box { background: var(--amber-light); border-left: 3px solid #d97a00; color: var(--amber-dark); }
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 16px 0 22px;
+}
+.principle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  min-height: 114px;
+}
+.principle-num {
+  font-family: var(--mono);
+  color: var(--green-mid);
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.principle-title { font-size: 12.5px; font-weight: 600; line-height: 1.45; }
+.principle-body { font-size: 11.5px; color: var(--text3); line-height: 1.6; margin-top: 5px; }
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+.flow-step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 13px;
+}
+.flow-label {
+  font-family: var(--mono);
+  color: var(--text3);
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+.flow-title { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.flow-body { font-size: 11.5px; color: var(--text2); line-height: 1.65; margin-top: 5px; }
+
+.surgery-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0 18px;
+}
+.surgery-table th {
+  padding: 9px 11px;
+  background: var(--surface2);
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.surgery-table td {
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  line-height: 1.65;
+  vertical-align: top;
+}
+.surgery-table tr:nth-child(even) td { background: #f8fbf9; }
+
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 0; }
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 10px;
+}
+.tag.green { background: var(--green-light); color: var(--green-dark); }
+.tag.blue { background: var(--blue-light); color: var(--blue-dark); }
+.tag.purple { background: var(--purple-light); color: var(--purple-dark); }
+.tag.amber { background: var(--amber-light); color: var(--amber-dark); }
+
+.ref-list {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.ref-list ol { padding-left: 18px; }
+.ref-list a { color: var(--green-dark); text-decoration: none; font-weight: 500; }
+.ref-list a:hover { text-decoration: underline; }
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 18px 36px;
+  font-size: 12px;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 980px) {
+  .principle-grid { grid-template-columns: repeat(2, 1fr); }
+  .flow { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 16px 40px; }
+  .principle-grid,
+  .flow { grid-template-columns: 1fr; }
+  .surgery-table { font-size: 11.5px; }
+  .footer { padding: 16px; display: block; line-height: 1.8; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sb-section">
+    <div class="sb-head">肺癌外科（手術総論）</div>
+    <a class="sb-item active" href="#assessment">術前評価</a>
+    <a class="sb-item" href="#anatomy">外科解剖</a>
+    <a class="sb-item" href="#approach">アプローチ・開胸</a>
+    <a class="sb-item" href="#procedures">基本手技と術式</a>
+    <a class="sb-item" href="#drainage">ドレーン管理</a>
+    <a class="sb-item" href="#postop">術後合併症</a>
+    <a class="sb-item" href="#references">参考文献</a>
+  </div>
+  <div class="sb-section" style="margin-top:16px">
+    <div class="sb-head">関連ページ</div>
+    <!-- preop-pulmonary.html は未作成。次回作成予定（リンク切れを許容） -->
+    <a class="sb-sub" href="/lungatlas/preop-pulmonary.html">術前呼吸機能評価</a>
+    <a class="sb-sub" href="/lungatlas/perioperative.html">周術期薬物療法</a>
+    <a class="sb-sub" href="/lungatlas/adjuvant.html">術後補助療法</a>
+    <!-- anatomy.html は未公開のため掲載しない -->
+  </div>
+</aside>
+
+<main class="main">
+  <div class="crumb">LungAtlas &rsaquo; <span>肺癌外科手術（総論）</span></div>
+  <div class="updated">2026年6月24日更新</div>
+  <h1 class="art-h1">肺癌外科手術（総論）</h1>
+  <p class="art-sub">外科を志す専攻医・若手向け。術前評価から術後管理までの基礎と手技の総論</p>
+  <p class="lead">このページは、肺癌外科の<strong>手技と基礎の総論</strong>を扱う。術前呼吸機能評価、外科解剖、アプローチ・開胸、基本手技と術式、ドレーン・術後早期管理、術後合併症を、専攻医が術野で必要とする範囲で整理する。<strong>手術適応の判断、縮小手術（区域・楔状切除）の適応とエビデンス比較、リンパ節マップ、病期別の治療戦略は、本ページでは扱わず別ページに分離する。</strong>各セクションは現時点では大枠であり、本文は章ごとに段階的に充実させる。</p>
+
+  <section id="assessment">
+    <h2 class="sec-h2">1. 術前評価（サマリ）</h2>
+    <!-- 出典: 日本呼吸器外科学会『肺癌手術症例に対する術前呼吸機能評価のガイドライン』2021（Textbook/呼外呼吸機能.pdf）図1, CQ1-11。ACCP 2013 (Brunelli, Chest 2013;143(5 Suppl):e166S-e190S, GL引用[3]) / ERS/ESTS 2009 (Brunelli, Eur Respir J 2009;34(1):17-41, GL引用[18])。数値はGL図1・CQ6-11と照合済み。 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:6px">耐術能評価の目的は、<strong>完全切除と残存肺機能温存の両立、および周術期リスクの予測</strong>にある。評価は <strong>日本呼吸器外科学会2021・ACCP 2013・ERS/ESTS 2009</strong> の三ガイドラインを軸に進める。以下は評価の流れの要約で、数値・閾値の詳細は術前呼吸機能評価ページで扱う。</p>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-label">STEP 1</div>
+        <div class="flow-title">スパイロメトリー</div>
+        <div class="flow-body">全例で施行。FEV1の目安は肺葉切除 ≥1.5L／一側全摘 ≥2.0L、または ≥予測値の80%。これを満たし呼吸器併存がなければ平均的リスク。</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">STEP 2</div>
+        <div class="flow-title">PPO算出</div>
+        <div class="flow-body">切除予定の機能的肺区域数から術後予測値（PPO FEV1・PPO DLCO）を算出する（区域カウント法）。</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">STEP 3</div>
+        <div class="flow-title">PPOで層別化</div>
+        <div class="flow-body">PPO FEV1>60%かつPPO DLCO>60%＝平均的リスク／いずれか<60%＝高リスク／いずれか<30%＝非常に高いリスク。</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">STEP 4</div>
+        <div class="flow-title">運動負荷</div>
+        <div class="flow-body">簡易（SWT 25往復・400m／SCT 22m）で振り分け、精密にはCPETでVO2max（>20／10–20／<10 mL/kg/min）を評価。</div>
+      </div>
+    </div>
+    <div class="info-box">
+      総論として、<strong>年齢単独では根治術を断念しない（CQ1）</strong>／<strong>手術適応を含む方針は集学的チームで決定する（CQ2）</strong>／<strong>喫煙に伴う動脈硬化性疾患を背景に心血管リスク評価も併せて行う（CQ3）</strong>。
+    </div>
+    <div class="note-box">詳細・数値・三ガイドラインの比較・心血管評価・術前禁煙/呼吸リハビリは、<a href="/lungatlas/preop-pulmonary.html">術前呼吸機能評価ページ</a>で扱う（次回作成予定）。</div>
+  </section>
+
+  <section id="anatomy">
+    <h2 class="sec-h2">2. 外科解剖</h2>
+    <!-- 出典: Shield's General Thoracic Surgery, 8th ed (Textbook/Shield's.pdf) Ch.8 Surgical Anatomy of the Lungs（気管支肺区域・肺門構造・解剖学的変異）。大枠の骨子をShieldsで照合済み。固有の数値・分類名は未記載（要確認）。 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">本ページでは、<strong>術野で必要な範囲の解剖</strong>に絞る。すなわち、葉・区域の概観、肺門での肺動脈・肺静脈・気管支の位置関係、葉間裂、肺靭帯など、肺門展開と血管・気管支処理に直結する構造を扱う。系統的・詳細な解剖は将来の別ページで扱う。</p>
+    <!-- TODO: 術野視点の外科解剖。肺門展開で見える構造、肺動脈の分枝、上下肺静脈、葉間裂の完成度、肺靭帯。詳細解剖は将来の別ページ（anatomy.html、現在未公開）で扱う。anatomy.htmlへのリンクは張らない。記述を充実させる際は参照した教科書（PEARSON 等）を本コメントに出典として明記すること。現時点では大枠のため固有の数値・分類名は未記載（要確認）。 -->
+  </section>
+
+  <section id="approach">
+    <h2 class="sec-h2">3. アプローチ・体位・開胸</h2>
+    <!-- 出典: Shield's General Thoracic Surgery, 8th ed (Textbook/Shield's.pdf) Ch.27 Thoracic Incisions（体位＝仰臥位/半仰臥位/側臥位、後側方/前方腋窩・筋温存/VATS/clamshell・hemi-clamshell/胸骨正中切開）, Ch.33 Robotic-Assisted Surgery, Ch.34 VATS, Ch.35 Uniportal VATS Lobectomy。開胸法の列挙と体位の骨子をShieldsで照合済み。ロボット支援の国内保険適用・施設基準はShieldsの対象外のため要確認のまま。 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">肺切除のアプローチには開胸・鏡視下・ロボット支援があり、皮切や切離する筋層、肋間、体位が異なる。ここでは種類の網羅を目的とし、優劣の比較は最小限にとどめる。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr>
+          <th>術式</th>
+          <th>要点</th>
+          <th>注意点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>後側方開胸<br>posterolateral thoracotomy</td>
+          <td>古典的な標準開胸。広い視野が得られる。</td>
+          <td>切離する筋層が多く侵襲が大きい。</td>
+        </tr>
+        <tr>
+          <td>前側方開胸<br>anterolateral thoracotomy</td>
+          <td>仰臥位寄りの体位で行う前方からの開胸。</td>
+          <td>後方の視野は後側方に劣る。</td>
+        </tr>
+        <tr>
+          <td>筋温存開胸<br>muscle-sparing thoracotomy</td>
+          <td>広背筋・前鋸筋などを温存する開胸。</td>
+          <td>視野とのバランスを要する。</td>
+        </tr>
+        <tr>
+          <td>VATS<br>（multiport：2–3ポート／uniportal）</td>
+          <td>胸腔鏡下アプローチ。多孔式と単孔式がある。</td>
+          <td>単肺換気が前提。強い癒着・低肺機能などは制約となりうる。</td>
+        </tr>
+        <tr>
+          <td>ロボット支援<br>RATS</td>
+          <td>ロボット支援下に行う鏡視下手術。</td>
+          <td><!-- 要確認: ロボット支援肺手術の国内保険適用・施設基準・適応範囲。断定しない。 -->国内保険適用・施設基準は要確認。</td>
+        </tr>
+        <tr>
+          <td>胸骨正中切開<br>median sternotomy</td>
+          <td>前縦隔・両側へのアプローチに用いられる。</td>
+          <td>肺後方の操作には不向きな場合がある。</td>
+        </tr>
+        <tr>
+          <td>両側前胸部横切開<br>clamshell</td>
+          <td>両側胸腔への広い到達。hemi-clamshellは片側＋部分胸骨切開。</td>
+          <td>侵襲が大きく、適応は限られる。</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- TODO: 各セルに皮切・切離する筋層・肋間・体位・主な適応・利点欠点を後日詰める。記述充実時は参照した教科書（PEARSON 等）を出典コメントに明記。現時点は大枠のため一般的記述に留め、固有の数値・適応は未記載（要確認）。 -->
+  </section>
+
+  <section id="procedures">
+    <h2 class="sec-h2">4. 基本手技と術式</h2>
+    <!-- 出典: Shield's General Thoracic Surgery, 8th ed (Textbook/Shield's.pdf) Ch.28 Technical Aspects of Lobectomy（肺門剥離による肺葉切除）, Ch.29 Pneumonectomy and Its Modifications（一側肺全切除＝空となる胸腔）, Ch.30 Sleeve Lobectomy（主気管支＋葉気管支の環状切除・肺全摘の代替）, Ch.32 Segmentectomy and Lesser Pulmonary Resections（区域＝解剖学的縮小切除／楔状＝非解剖学的、辺縁的心肺機能・小型末梢・GGO・転移）。術式の種類と概念の骨子をShieldsで照合済み。手順の具体ステップは未記載。 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">切除は、肺の解剖単位に沿って行う<strong>解剖学的切除</strong>（肺葉切除・区域切除・袖状切除・肺全摘）と、解剖単位に依らない<strong>非解剖学的切除</strong>（楔状切除）に大別される。ここでは各術式の<strong>種類と概念</strong>を総論として示す。具体的な手順のステップ、および縮小手術の適応の優劣・エビデンス比較は本ページでは扱わない。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr>
+          <th>術式</th>
+          <th>概念</th>
+          <th>手技上の要点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>肺葉切除<br>lobectomy</td>
+          <td>1肺葉を解剖学的に切除する。肺癌に対する代表的な解剖学的切除。</td>
+          <td>肺門での動脈・静脈・気管支の個別処理、葉間裂の処理。</td>
+        </tr>
+        <tr>
+          <td>区域切除<br>segmentectomy</td>
+          <td>肺区域単位の解剖学的縮小切除。</td>
+          <td>区域動脈・区域気管支の同定、区域間平面の設定、切除マージンの確保。</td>
+        </tr>
+        <tr>
+          <td>楔状切除<br>wedge resection</td>
+          <td>解剖単位に依らない非解剖学的切除。</td>
+          <td>病変の深さとマージン、ステープラーによる切除線の設定。</td>
+        </tr>
+        <tr>
+          <td>袖状切除<br>sleeve resection</td>
+          <td>気管支（・血管）を環状に切除し形成・吻合する。肺全摘回避の選択肢。</td>
+          <td>気管支/血管の吻合、断端の評価、吻合部の被覆。</td>
+        </tr>
+        <tr>
+          <td>肺全摘<br>pneumonectomy</td>
+          <td>一側肺の全切除。より小さい切除で完全切除が得られない場合に検討される。</td>
+          <td>主気管支断端処理、断端の被覆、術後の生理学的負荷への配慮。</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box"><strong>肺門の処理と基本デバイス（概念）：</strong>肺門では肺静脈・肺動脈・気管支をそれぞれ同定して処理する。血管・実質の切離には自動縫合器（stapler）やエネルギーデバイスが用いられ、気管支は断端を閉鎖・処理する。各構造の処理順序や手技の詳細は術式・アプローチにより異なる。<!-- TODO: 静脈/動脈/気管支の処理順序、stapler/エネルギーデバイスの使い分け、気管支断端処理（手縫い/stapler、被覆）を教科書に基づき後日詰める。出典を明記。要確認。 --></div>
+    <div class="warn-box">小型末梢NSCLCに対する縮小手術の適応の議論（JCOG0802/WJOG4607L、CALGB140503 など）は、<strong>本ページでは扱わず別ページで整理する</strong>。ここでは術式の種類と概念にとどめ、適応の優劣には踏み込まない。</div>
+  </section>
+
+  <section id="drainage">
+    <h2 class="sec-h2">5. ドレーン・術後早期管理</h2>
+    <!-- 出典: Shield's General Thoracic Surgery, 8th ed (Textbook/Shield's.pdf) Ch.40 General Principles of Postoperative Care（退院遅延要因として遷延air leak・無気肺/肺炎・心房性不整脈・疼痛管理。Table 40.1）。術後早期管理の骨子をShieldsで照合済み。遷延air leakの定義値・抜去排液量基準などの具体値は未抽出のため要確認。 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">肺切除後は胸腔ドレーンを留置し、排液・air leak・肺の再膨張を管理する。本数・位置・吸引圧、air leak評価、抜去基準、術後早期離床が早期管理の骨子となる。</p>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-label">DRAIN</div>
+        <div class="flow-title">ドレーン留置</div>
+        <div class="flow-body">本数・位置・吸引圧の設定。<!-- 要確認 --></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">AIR LEAK</div>
+        <div class="flow-title">air leak評価</div>
+        <div class="flow-body">経時的に評価。遷延air leakの定義は後日詰める。<!-- 要確認 --></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">REMOVAL</div>
+        <div class="flow-title">抜去基準</div>
+        <div class="flow-body">air leak消失と排液量基準で判断。具体値は後日詰める。<!-- 要確認 --></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">MOBILIZE</div>
+        <div class="flow-title">早期離床</div>
+        <div class="flow-body">疼痛管理・呼吸理学療法と並行して術後早期離床を図る。</div>
+      </div>
+    </div>
+    <!-- TODO: digital drainage system、遷延air leakの定義、抜去の排液量基準（具体値）などを教科書に基づき後日詰める。参照した教科書を出典コメントに明記。現時点は大枠のため固有の数値は未記載（要確認）。 -->
+  </section>
+
+  <section id="postop">
+    <h2 class="sec-h2">6. 術後合併症</h2>
+    <!-- 出典: Textbook/PEARSON.pdf p.183-p.187 -->
+    <!-- 出典: Shield's General Thoracic Surgery, 8th ed (Textbook/Shield's.pdf) Ch.42 Complications of Thoracic Surgical Procedures, Ch.40 Table 40.1（肺瘻/遷延air leak・心房性不整脈・無気肺/肺炎の頻度）。骨子をShieldsで照合済み。 -->
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-label">AIR LEAK</div>
+        <div class="flow-title">肺瘻</div>
+        <div class="flow-body">肺切除後に多い合併症。退院を遅らせる肺瘻を遷延肺瘻として扱う考え方が示されている。</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">AF</div>
+        <div class="flow-title">心房細動</div>
+        <div class="flow-body">肺切除後の代表的な心血管合併症。年齢、切除量、既往などがリスクとなる。</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">ATELECTASIS</div>
+        <div class="flow-title">無気肺・肺炎</div>
+        <div class="flow-body">咳嗽不良、疼痛管理不足、肺機能低下が関与する。呼吸理学療法と早期離床が重要。</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-label">BPF</div>
+        <div class="flow-title">気管支胸膜瘻</div>
+        <div class="flow-body">肺全摘後で頻度が高く、肺葉切除後ではまれ。早期診断と治療方針の判断が必要。</div>
+      </div>
+    </div>
+    <div class="note-box">術後管理は術前から始まる。禁煙、呼吸リハビリ、インセンティブスパイロメトリ指導、患者教育が、術後合併症を減らす要素としてPearsonに記載されている。</div>
+  </section>
+
+  <section id="references">
+    <h2 class="sec-h2">7. 参考文献</h2>
+    <div class="ref-list">
+      <ol>
+        <li>Shields' General Thoracic Surgery, 8th ed. Wolters Kluwer, 2019. ISBN: 9781451195224. 参照: Textbook/Shield's.pdf Ch.8（外科解剖）, Ch.27（開胸・体位）, Ch.28-30・32（肺葉/全摘/袖状/区域・楔状切除）, Ch.33-35（ロボット・VATS・uniportal VATS）, Ch.40・42（術後管理・合併症）。</li>
+        <li>Pearson's Thoracic and Esophageal Surgery, 3rd ed. Churchill Livingstone/Elsevier, 2008. ISBN: 978-0-443-06861-4. 参照: Textbook/PEARSON.pdf p.183-187（術後合併症）。</li>
+        <li>日本呼吸器外科学会『肺癌手術症例に対する術前呼吸機能評価のガイドライン』2021（ガイドライン検討委員会）. 参照: Textbook/呼外呼吸機能.pdf 図1, CQ1-11（術前評価の数値・層別化）。</li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/23649437/" target="_blank">Brunelli A, et al. Physiologic evaluation of the patient with lung cancer being considered for resectional surgery. ACCP evidence-based clinical practice guidelines. Chest 2013;143(5 Suppl):e166S-e190S, PMID: 23649437</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/19567600/" target="_blank">Brunelli A, et al. ERS/ESTS clinical guidelines on fitness for radical therapy in lung cancer patients. Eur Respir J 2009;34(1):17-41, PMID: 19567600</a></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-logo"><span>Lung</span>Atlas</div>
+  <div>医療専門職向け教育資料。診療判断には最新ガイドラインと原著論文を確認してください。</div>
+</footer>
+
+</body>
+</html>
