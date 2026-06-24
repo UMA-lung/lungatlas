@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "MARIPOSA試験 — 1次治療 amivantamab + lazertinib vs osimertinib（EGFR変異陽性NSCLC）",
+    summary: "治療歴なしのEGFR exon 19 del/L858R NSCLC でamivantamab + lazertinib が osimertinib単剤を上回るPFS・OS を示した最大規模第3相試験。Grade≥3有害事象80%。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/mariposa.html"
+  },
+  {
     title: "AEGEAN試験 — 周術期 durvalumab + 化学療法（切除可能NSCLC）",
     summary: "切除可能Stage II–IIIB(N2) NSCLCで周術期durvalumabを検証。pCR・EFSを改善。OSは未成熟。",
     date: "2026-06-24",
