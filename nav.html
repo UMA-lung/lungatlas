@@ -192,6 +192,8 @@
     <div class="nav-dropdown">
       <a id="nav-surgery" href="#">手術手技</a>
       <div class="dropdown-menu">
+        <a id="nav-surgery-overview" href="/lungatlas/lung-surgery.html">肺癌外科手術（総論）</a>
+        <div class="dropdown-divider"></div>
         <span class="dropdown-soon">VATS 肺葉切除術<span>近日公開</span></span>
         <span class="dropdown-soon">肺区域切除術<span>近日公開</span></span>
         <span class="dropdown-soon">縦隔郭清<span>近日公開</span></span>
@@ -243,12 +245,18 @@
     var anatLink = document.getElementById('nav-anatomy');
     if (anatLink) anatLink.classList.add('active');
   }
-  var surgeryPages = ['or-nurse-lung-surgery'];
+  var surgeryPages = ['or-nurse-lung-surgery', 'lung-surgery'];
   if (surgeryPages.some(function(p){ return path.indexOf(p) !== -1; })) {
     var surgeryLink = document.getElementById('nav-surgery');
     if (surgeryLink) surgeryLink.classList.add('active');
+  }
+  if (path.indexOf('or-nurse-lung-surgery') !== -1) {
     var orNurseLink = document.getElementById('nav-or-nurse');
     if (orNurseLink) orNurseLink.classList.add('active');
+  }
+  if (path.indexOf('lung-surgery.html') !== -1 && path.indexOf('or-nurse') === -1) {
+    var surgeryOverviewLink = document.getElementById('nav-surgery-overview');
+    if (surgeryOverviewLink) surgeryOverviewLink.classList.add('active');
   }
 })();
 </script>
