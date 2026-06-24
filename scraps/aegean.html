@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEGEAN試験 — 周術期 durvalumab + 化学療法（切除可能NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。AEGEAN試験（切除可能NSCLC、周術期durvalumab + 化学療法）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>AEGEAN試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">AEGEAN試験 — 周術期 durvalumab + 化学療法（切除可能NSCLC）</h1>
+
+  <p class="scrap-summary">切除可能Stage II–IIIB(N2) NSCLCで周術期durvalumabを検証。pCR・EFSを改善。OSは未成熟。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/37870974/" target="_blank" rel="noopener">NEJM 2023（PMID 37870974）</a> ／
+      <a href="https://doi.org/10.1056/NEJMoa2304875" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2304875</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+    <h2>1. 試験概要</h2>
+    <p>AEGEAN試験（NCT03800134）は、切除可能NSCLCに対する周術期durvalumab + 白金製剤ベース化学療法を、プラセボ + 白金製剤ベース化学療法と比較した国際共同・第3相・二重盲検・無作為化試験。術前に4サイクル投与し、手術後にdurvalumabまたはプラセボを12サイクル継続する設計。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・二重盲検・プラセボ対照・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>切除可能NSCLC、Stage II–IIIB（N2）（AJCC第8版）</td></tr>
+        <tr><td>症例数</td><td>802例（durvalumab 400例 / placebo 402例）</td></tr>
+        <tr><td>介入</td><td>術前：durvalumab + 白金製剤ベース化学療法、3週ごと4サイクル。術後：durvalumab、4週ごと12サイクル</td></tr>
+        <tr><td>対照</td><td>術前：placebo + 白金製剤ベース化学療法、3週ごと4サイクル。術後：placebo、4週ごと12サイクル</td></tr>
+        <tr><td>主要評価項目</td><td>EFS（BICR）およびpCR（中央病理判定）</td></tr>
+        <tr><td>層別化因子</td><td>病期（II vs III）、PD-L1発現（1%以上 vs 1%未満）</td></tr>
+        <tr><td>EGFR/ALK</td><td>modified ITT解析ではEGFRまたはALK alterationが確認された62例を除外</td></tr>
+        <tr><td>スポンサー</td><td>AstraZeneca（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT03800134</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.68</div>
+        <div class="stat-label">EFS（第1回中間解析）</div>
+        <div class="stat-vs">95%CI 0.53–0.88、p=0.004</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">17.2% vs 4.3%</div>
+        <div class="stat-label">pCR率（最終解析）</div>
+        <div class="stat-vs">差 13.0ポイント、p&lt;0.001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">73.4% vs 64.5%</div>
+        <div class="stat-label">12か月EFS率</div>
+        <div class="stat-vs">durvalumab vs placebo</div>
+      </div>
+    </div>
+
+    <p class="sub">EFS中央値</p>
+    <table class="comp-table">
+      <thead>
+        <tr><th>解析・出典</th><th>durvalumab群</th><th>placebo群</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FDA承認資料</td><td>未到達（95%CI 31.9–NE）</td><td>25.9か月（95%CI 18.9–NE）</td><td>HR 0.68（95%CI 0.53–0.88）、p=0.0039</td></tr>
+        <tr><td>WCLC 2024 第2次中間解析</td><td><!-- 要確認: WCLC 2024発表または論文化資料で確認 --></td><td><!-- 要確認: WCLC 2024発表または論文化資料で確認 --></td><td><!-- 要確認: HR 0.69、3年EFS率 60.1% vs 47.9% の出典確認 --></td></tr>
+      </tbody>
+    </table>
+
+    <p class="sub">OS</p>
+    <div class="gl-list">
+      <div class="gl-item gl-warn"><span class="gl-flag">OS</span><span>NEJM 2023原著時点ではOSは未成熟で、正式な統計学的検定は行われていない。<!-- 要確認: WCLC 2024 第2次中間解析のOS HR 0.88、最終解析状況を確認 --></span></div>
+    </div>
+
+    <h2>3. 安全性</h2>
+    <p>原著要約では、Grade 3または4の有害事象はdurvalumab群42.4%、placebo群43.2%。安全性プロファイルは各薬剤で既知のものと整合すると記載されている。</p>
+
+    <div class="tox-row">
+      <span class="tox">Grade 3/4 AE：42.4% vs 43.2%</span>
+      <span class="tox">術前durvalumabでAEにより手術不可：1.7%</span>
+      <span class="tox">placeboでAEにより手術不可：1.0%</span>
+      <span class="tox">貧血</span>
+      <span class="tox">悪心</span>
+      <span class="tox">便秘</span>
+      <span class="tox">疲労</span>
+      <span class="tox">筋骨格痛</span>
+      <span class="tox">発疹</span>
+    </div>
+
+    <!-- 要確認: Grade 3以上irAE、肺臓炎、手術遅延、R0切除率、術後治療完遂率の正確な数値は原著TableまたはSupplementで確認 -->
+
+    <h2>4. 位置づけと注意点</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-jp"><span class="gl-flag">設計</span><span>術前durvalumab + 化学療法に加えて、術後durvalumabを12サイクル継続する周術期レジメン。</span></div>
+      <div class="gl-item gl-us"><span class="gl-flag">FDA</span><span>米国では2024年8月15日に、EGFR変異またはALK再構成が知られていない切除可能NSCLC（腫瘍径4cm以上またはリンパ節陽性）に対して承認。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">解析</span><span>modified ITT解析ではEGFR/ALK alterationが確認された62例を除外しているため、EGFR/ALK陽性例への外挿は避ける。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">比較</span><span>CheckMate 816やKEYNOTE-671との直接比較試験ではない。対象Stage、術前・術後治療、EGFR/ALKの扱い、PD-L1測定法の違いに注意。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">OS</span><span>OSは未成熟であり、最終解析の確認が必要。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">日本</span><span>国内承認状況、適応文言、用法用量はPMDA添付文書で確認が必要。<!-- 要確認: PMDA最新添付文書で確認 --></span></div>
+    </div>
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>
+        Heymach JV, Harpole D, Mitsudomi T, et al; AEGEAN Investigators.
+        Perioperative Durvalumab for Resectable Non-Small-Cell Lung Cancer.
+        N Engl J Med. 2023;389(18):1672-1684.
+        <a href="https://pubmed.ncbi.nlm.nih.gov/37870974/" target="_blank" rel="noopener">PMID: 37870974</a> /
+        <a href="https://doi.org/10.1056/NEJMoa2304875" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa2304875</a>
+      </li>
+      <li>
+        U.S. Food and Drug Administration.
+        FDA approves neoadjuvant/adjuvant durvalumab for resectable non-small cell lung cancer.
+        Content current as of 2024-08-15.
+        <a href="https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-neoadjuvantadjuvant-durvalumab-resectable-non-small-cell-lung-cancer" target="_blank" rel="noopener">FDA approval notice</a>
+      </li>
+      <li>
+        ClinicalTrials.gov.
+        A Study of Neoadjuvant/adjuvant Durvalumab for the Treatment of Patients With Resectable Non-small Cell Lung Cancer (AEGEAN).
+        <a href="https://clinicaltrials.gov/study/NCT03800134" target="_blank" rel="noopener">NCT03800134</a>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
