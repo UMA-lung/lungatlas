@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- REPLACE: 記事タイトル -->
+<title>CROWN試験 — 1次治療 lorlatinib vs crizotinib（ALK陽性NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。CROWN試験（未治療ALK陽性NSCLC、lorlatinib vs crizotinib）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+/* ===== 新規クラス1：AIドラフトバナー ===== */
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+/* ===== 新規クラス2：一言サマリー ===== */
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+/* ===== 新規クラス3：本文 ===== */
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+/* ===== 新規クラス4：関連文献リスト ===== */
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+/* ===== 既存ページから流用したクラス（新規作成せず定義を再利用） ===== */
+/* COMPARISON TABLE（flaura.html / egfr-firstline.html より） */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+.comp-table .best { color: var(--green-dark); font-weight: 600; }
+
+/* STATS（driver-positive.html / flaura.html より） */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* GL LIST（driver-positive.html より） */
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ===== 既存サイト準拠の補助スタイル ===== */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <!-- REPLACE: 記事タイトル -->
+    <span>CROWN試験</span>
+  </nav>
+
+  <!-- 記事タイトル -->
+  <!-- REPLACE: 記事タイトル -->
+  <h1 class="scrap-h1">CROWN試験 — 1次治療 lorlatinib vs crizotinib（ALK陽性NSCLC）</h1>
+
+  <!-- 一言サマリー -->
+  <!-- REPLACE: 一言サマリー（100字以内） -->
+  <p class="scrap-summary">未治療ALK陽性NSCLCで3世代ALK-TKIロルラチニブが長期PFSを示した第3相試験。7年フォローでPFS中央値未到達。OS優越性は未示、毒性プロファイルは2世代と大きく異なる。</p>
+
+  <!-- メタ情報行：公開日・更新日・対象論文 -->
+  <div class="scrap-meta">
+    <!-- REPLACE: 公開日 YYYY年MM月DD日 -->
+    <span>公開日：2026年6月24日</span>
+    <!-- REPLACE: 更新日 YYYY年MM月DD日 -->
+    <span>更新日：2026年6月24日</span>
+    <!-- REPLACE: PMID / DOI（4文献を併記） -->
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/33207094/" target="_blank" rel="noopener">NEJM 2020</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/36535300/" target="_blank" rel="noopener">Lancet Respir Med 2023</a> ／
+      <a href="https://doi.org/10.1200/JCO.24.00581" target="_blank" rel="noopener">J Clin Oncol 2024</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/42217582/" target="_blank" rel="noopener">Ann Oncol 2026</a>
+    </span>
+  </div>
+
+  <!-- 本文エリア -->
+  <!-- REPLACE: 本文 -->
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>CROWN試験（NCT03052608）は、未治療の進行ALK陽性NSCLCに対し、3世代ALK-TKIであるlorlatinibと1世代のcrizotinibを比較した国際共同・第3相・非盲検・無作為化試験。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・非盲検・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>未治療 Stage IIIB/IV ALK陽性NSCLC</td></tr>
+        <tr><td>症例数</td><td>296例（lorlatinib 149例 / crizotinib 147例）</td></tr>
+        <tr><td>投与量</td><td>lorlatinib 100mg 1日1回 / crizotinib 250mg 1日2回</td></tr>
+        <tr><td>主要評価項目</td><td>BICR評価によるPFS</td></tr>
+        <tr><td>副次評価項目</td><td>ORR、頭蓋内奏効、OS、安全性</td></tr>
+        <tr><td>crossover</td><td>禁止</td></tr>
+        <tr><td>層別化因子</td><td>ベースライン脳転移の有無・アジア人種</td></tr>
+        <tr><td>登録期間</td><td><!-- 要確認: 原著(NEJM 2020)より確認 -->要確認</td></tr>
+        <tr><td>スポンサー</td><td>Pfizer（製薬会社スポンサー試験）</td></tr>
+      </tbody>
+    </table>
+
+    <p>無症候性の治療済み・未治療の脳転移いずれも組み入れ可とされた。</p>
+
+    <!-- ===== セクション2：有効性 — PFS ===== -->
+    <h2>2. 有効性 — PFS</h2>
+
+    <p class="sub">初回解析（NEJM 2020、BICR評価）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">NR</div>
+        <div class="stat-label">PFS中央値（lorlatinib, BICR）</div>
+        <div class="stat-vs">vs crizotinib 9.3か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.28</div>
+        <div class="stat-label">PFS ハザード比</div>
+        <div class="stat-vs">95%CI 0.19–0.41</div>
+      </div>
+    </div>
+    <ul>
+      <li>p値：<!-- 要確認: 原著より確認 -->要確認</li>
+      <li>フォローアップ中央値：<!-- 要確認: 原著より確認 -->要確認</li>
+      <li>12か月PFS率：<!-- 要確認: 原著より確認 -->要確認</li>
+    </ul>
+
+    <p class="sub">7年update（Ann Oncol 2026、投与医師評価、median follow-up 83.0 / 77.2か月）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">NR</div>
+        <div class="stat-label">PFS中央値（lorlatinib, 投与医師評価）</div>
+        <div class="stat-vs">95%CI 68.5–NR ／ vs crizotinib 9.1か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.19</div>
+        <div class="stat-label">PFS ハザード比</div>
+        <div class="stat-vs">95%CI 0.13–0.26</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">55% vs 3%</div>
+        <div class="stat-label">7年PFS率（lorlatinib vs crizotinib）</div>
+      </div>
+    </div>
+    <ul>
+      <li>24か月時点で無増悪だった患者の7年時無増悪継続確率：79%</li>
+    </ul>
+
+    <p>初回解析はBICR評価、7年updateは投与医師評価であり、評価方法が異なる点に注意。</p>
+
+    <p>原著（Ann Oncol 2026）では、進行NSCLCを含む全固形癌において分子標的薬単剤で報告された最長のPFSであると記載されている。ただしこれは試験を横断した記述であり、直接比較に基づくものではない点に注意。</p>
+
+    <!-- 要確認: 5年PFS率（JCO 2024記載値）をここに追記可能。原著より確認。 -->
+    <!-- 要確認: ORR（全体）の数値は原著（NEJM 2020）より確認して追記 -->
+
+    <!-- ===== セクション3：頭蓋内効果（CNS） ===== -->
+    <h2>3. 頭蓋内効果（CNS）</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">NR vs 16.4か月</div>
+        <div class="stat-label">頭蓋内増悪までの期間中央値（lorlatinib vs crizotinib）</div>
+        <div class="stat-vs">95%CI 12.7–21.9（crizotinib）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.06</div>
+        <div class="stat-label">頭蓋内増悪までの期間 ハザード比</div>
+        <div class="stat-vs">95%CI 0.03–0.12</div>
+      </div>
+    </div>
+    <ul>
+      <li>lorlatinib群では投与開始30か月以降、新規の頭蓋内増悪イベントなし（Ann Oncol 2026）</li>
+    </ul>
+
+    <!-- 要確認: 脳転移有サブグループにおける頭蓋内ORR（%）はNEJM 2020またはJCO 2024より確認 -->
+    <!-- 要確認: 脳転移有vs無サブグループ別PFSはLancet Respir Med 2023またはNEJM 2020 Supplementより確認 -->
+
+    <p>lorlatinibの高い脳血液関門透過性を反映した所見であり、脳転移を有するALK陽性NSCLCにおいて特に重要な特徴とされる。</p>
+
+    <!-- ===== セクション4：全生存（OS） ===== -->
+    <h2>4. 全生存（OS）</h2>
+    <p><strong>7年フォロー時点においても、OSのイベント数はprotocol-specifiedな解析の実施基準に到達しておらず、OS解析は行われていない（Ann Oncol 2026）。</strong>現時点でlorlatinibのOS優越性は示されていない。</p>
+
+    <!-- 要確認: OS解析のイベント数規定（何例到達で解析予定か）は原著プロトコルまたはNEJM 2020 Supplementより確認 -->
+
+    <!-- ===== セクション5：安全性 ===== -->
+    <h2>5. 安全性</h2>
+    <p>lorlatinibは2世代ALK-TKI（alectinib・brigatinib）と毒性プロファイルが大きく異なる。lorlatinibでより高頻度に報告された有害事象を以下に示す（発現率はすべて要確認）。</p>
+
+    <!-- 注：3列の表データのため、既存の表クラス comp-table を使用（tox-rowはチップ表示用のため非該当） -->
+    <table class="comp-table">
+      <thead>
+        <tr><th>有害事象</th><th>lorlatinib発現率</th><th>crizotinib発現率</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>高コレステロール血症</td><td><!-- 要確認: NEJM 2020 Table より -->要確認</td><td><!-- 要確認 -->要確認</td></tr>
+        <tr><td>高トリグリセリド血症</td><td><!-- 要確認 -->要確認</td><td><!-- 要確認 -->要確認</td></tr>
+        <tr><td>浮腫</td><td><!-- 要確認 -->要確認</td><td><!-- 要確認 -->要確認</td></tr>
+        <tr><td>体重増加</td><td><!-- 要確認 -->要確認</td><td><!-- 要確認 -->要確認</td></tr>
+        <tr><td>末梢神経障害</td><td><!-- 要確認 -->要確認</td><td><!-- 要確認 -->要確認</td></tr>
+        <tr><td>認知系・精神系有害事象</td><td><!-- 要確認 -->要確認</td><td><!-- 要確認 -->要確認</td></tr>
+        <tr><td>CPK上昇</td><td><!-- 要確認 -->要確認</td><td><!-- 要確認 -->要確認</td></tr>
+      </tbody>
+    </table>
+
+    <p>7年フォローにおいて、lorlatinib群では投与開始26か月以降に治療関連有害事象による投与中止は発生しなかった（Ann Oncol 2026）。</p>
+    <p>5年以降の安全性プロファイルに新たな変化は認めなかった（Ann Oncol 2026）。</p>
+
+    <!-- 要確認: Grade 3/4有害事象の発現率はNEJM 2020 Table / JCO 2024より確認 -->
+    <!-- 要確認: 投与中止率はNEJM 2020より確認 -->
+
+    <!-- ===== セクション6：位置づけと注意点 ===== -->
+    <h2>6. 位置づけと注意点</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">🇯🇵</span>
+        <span>lorlatinibは国内でALK陽性NSCLC 1次治療として承認済み。<!-- 要確認: 日本国内の承認日・適応詳細はPMDAより確認 --></span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">⚖️</span>
+        <span>alectinib（ALEX試験）・brigatinib（ALTA-1L試験）との直接比較試験は存在しない。いずれもcrizotinibを対照とした別試験であり、試験集団・評価方法・フォロー期間が異なるため、数値の直接比較は不適切。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">💊</span>
+        <span>lorlatinibに特徴的な脂質異常・認知/精神系毒性の管理が必要。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">⚠️</span>
+        <span>OS優越性は未証明（前述）。</span>
+      </div>
+    </div>
+
+    <!-- 要確認: バイオマーカー解析（耐性機序・ctDNA）の詳細はAnn Oncol 2026より確認・追記可能 -->
+
+  </article>
+
+  <!-- 関連文献リスト -->
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <!-- REPLACE: 関連文献 -->
+      <li>Shaw AT et al. First-Line Lorlatinib or Crizotinib in Advanced ALK-Positive Lung Cancer. N Engl J Med. 2020;383(21):2018-2029. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/33207094/" target="_blank" rel="noopener">33207094</a> / DOI: <a href="https://doi.org/10.1056/NEJMoa2027187" target="_blank" rel="noopener">10.1056/NEJMoa2027187</a></li>
+      <li>Solomon BJ et al. Efficacy and safety of first-line lorlatinib versus crizotinib in patients with advanced, ALK-positive non-small-cell lung cancer: updated analysis of data from the phase 3, randomised, open-label CROWN study. Lancet Respir Med. 2023;11(4):354-366. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36535300/" target="_blank" rel="noopener">36535300</a> / DOI: <a href="https://doi.org/10.1016/S2213-2600(22)00437-4" target="_blank" rel="noopener">10.1016/S2213-2600(22)00437-4</a></li>
+      <li>Solomon BJ et al. Lorlatinib versus crizotinib in patients with advanced ALK-positive non-small cell lung cancer: 5-year outcomes from the phase III CROWN study. J Clin Oncol. 2024;42(29):3400-3409. DOI: <a href="https://doi.org/10.1200/JCO.24.00581" target="_blank" rel="noopener">10.1200/JCO.24.00581</a></li>
+      <li>Shaw AT et al. Lorlatinib versus crizotinib as first-line treatment for advanced ALK-positive non-small-cell lung cancer: 7-year update from the phase III CROWN study. Ann Oncol. 2026 May 29. Online ahead of print. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/42217582/" target="_blank" rel="noopener">42217582</a> / DOI: <a href="https://doi.org/10.1016/j.annonc.2026.05.692" target="_blank" rel="noopener">10.1016/j.annonc.2026.05.692</a></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
