@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IASLCリンパ節マップ — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 52px;
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  color: var(--text3);
+  padding: 8px 18px 4px;
+  text-transform: uppercase;
+}
+.sb-item {
+  display: block;
+  padding: 8px 18px;
+  font-size: 12.5px;
+  color: var(--text2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+  line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-weight: 500;
+  border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block;
+  padding: 5px 18px 5px 30px;
+  font-size: 11.5px;
+  color: var(--text3);
+  text-decoration: none;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 920px; }
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+.updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--green-dark);
+  background: var(--green-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 8px; }
+.art-sub { font-size: 13px; color: var(--text3); margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.75;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+.sec-h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 28px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-h2::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 15px;
+  background: var(--green-mid);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.sec-h3 { font-size: 13px; font-weight: 600; margin: 18px 0 8px; }
+
+.note-box,
+.info-box,
+.warn-box {
+  border-radius: 0 8px 8px 0;
+  padding: 11px 14px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  margin: 14px 0;
+}
+.note-box { background: var(--green-light); border-left: 3px solid var(--green-mid); color: var(--green-dark); }
+.info-box { background: var(--blue-light); border-left: 3px solid #2d6db5; color: var(--blue-dark); }
+.warn-box { background: var(--amber-light); border-left: 3px solid #d97a00; color: var(--amber-dark); }
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 16px 0 22px;
+}
+.principle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  min-height: 114px;
+}
+.principle-num {
+  font-family: var(--mono);
+  color: var(--green-mid);
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.principle-title { font-size: 12.5px; font-weight: 600; line-height: 1.45; }
+.principle-body { font-size: 11.5px; color: var(--text3); line-height: 1.6; margin-top: 5px; }
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 14px 0 20px;
+}
+.flow-step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 13px;
+}
+.flow-label {
+  font-family: var(--mono);
+  color: var(--text3);
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+.flow-title { font-size: 12.5px; font-weight: 600; color: var(--text); }
+.flow-body { font-size: 11.5px; color: var(--text2); line-height: 1.65; margin-top: 5px; }
+
+.surgery-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0 18px;
+}
+.surgery-table th {
+  padding: 9px 11px;
+  background: var(--surface2);
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.surgery-table td {
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  line-height: 1.65;
+  vertical-align: top;
+}
+.surgery-table tr:nth-child(even) td { background: #f8fbf9; }
+
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 0; }
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 10px;
+}
+.tag.green { background: var(--green-light); color: var(--green-dark); }
+.tag.blue { background: var(--blue-light); color: var(--blue-dark); }
+.tag.purple { background: var(--purple-light); color: var(--purple-dark); }
+.tag.amber { background: var(--amber-light); color: var(--amber-dark); }
+
+.ref-list {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.ref-list ol { padding-left: 18px; }
+.ref-list a { color: var(--green-dark); text-decoration: none; font-weight: 500; }
+.ref-list a:hover { text-decoration: underline; }
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 18px 36px;
+  font-size: 12px;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 980px) {
+  .principle-grid { grid-template-columns: repeat(2, 1fr); }
+  .flow { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 16px 40px; }
+  .principle-grid,
+  .flow { grid-template-columns: 1fr; }
+  .surgery-table { font-size: 11.5px; }
+  .footer { padding: 16px; display: block; line-height: 1.8; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sb-section">
+    <div class="sb-head">IASLCリンパ節マップ</div>
+    <a class="sb-item active" href="#zones">ゾーンとステーション</a>
+    <a class="sb-item" href="#n-classification">N分類との対応</a>
+    <a class="sb-item" href="#surgical-implication">外科的含意</a>
+    <a class="sb-item" href="#external-map">外部図リンク</a>
+    <a class="sb-item" href="#references">参考文献</a>
+  </div>
+  <div class="sb-section" style="margin-top:16px">
+    <div class="sb-head">関連ページ</div>
+    <a class="sb-sub" href="/lungatlas/lung-surgery.html">肺癌外科手術（総論）</a>
+    <!-- preop-pulmonary.html は未作成。次回作成予定（リンク切れを許容） -->
+    <a class="sb-sub" href="/lungatlas/preop-pulmonary.html">術前呼吸機能評価</a>
+    <a class="sb-sub" href="/lungatlas/perioperative.html">周術期薬物療法</a>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="crumb">LungAtlas &rsaquo; <span>IASLCリンパ節マップ</span></div>
+  <div class="updated">2026年6月24日更新</div>
+  <h1 class="art-h1">IASLCリンパ節マップ</h1>
+  <p class="art-sub">肺癌 TNM 病期分類における N 因子の解剖学的基盤（IASLC 2009）</p>
+  <p class="lead">IASLCリンパ節マップは、肺癌の<strong>病期分類・手術郭清・放射線治療計画</strong>を結ぶ共通言語であり、リンパ節の所在を統一された番号と境界で記述する。2009年に Rusch らが提案した統一マップは、それ以前の日本（Naruke）マップと MD-ATS マップの間にあった<strong>命名上の不一致を解消</strong>し、ステーション番号とゾーン区分を国際的に標準化した。本ページでは、ゾーンとステーションの一覧、N分類との対応、外科的含意の概論を順に整理する。</p>
+
+  <section id="zones">
+    <h2 class="sec-h2">1. ゾーンとステーション一覧</h2>
+    <!-- 出典: Rusch VW, Asamura H, Watanabe H, Giroux DJ, Rami-Porta R, Goldstraw P; Members of IASLC Staging Committee. The IASLC Lung Cancer Staging Project: a proposal for a new international lymph node map in the forthcoming seventh edition of the TNM classification for lung cancer. J Thorac Oncol 2009;4(5):568-577. PMID:19357537 / DOI:10.1097/JTO.0b013e3181a0d82e。表データはChat側で原典に基づき確認済み。 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">IASLC マップは<strong>14ステーションを7ゾーン</strong>に分類する。各ステーションは解剖学的境界で定義され、CT・術中所見・病理標本に一貫して適用する。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr>
+          <th>ゾーン</th>
+          <th>ステーション番号・名称（英語）</th>
+          <th>解剖学的範囲の要点</th>
+          <th>側性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Supraclavicular zone</td>
+          <td>#1<br>Low cervical, supraclavicular &amp; sternal notch nodes</td>
+          <td>輪状軟骨下縁〜鎖骨・胸骨柄上縁。気管正中線で 1R と 1L に分ける</td>
+          <td>R / L</td>
+        </tr>
+        <tr>
+          <td>Upper zone</td>
+          <td>#2R<br>Upper paratracheal (R)</td>
+          <td>胸骨柄上縁〜腕頭静脈（左腕頭静脈）尾側縁と気管の交点</td>
+          <td>R</td>
+        </tr>
+        <tr>
+          <td>Upper zone</td>
+          <td>#2L<br>Upper paratracheal (L)</td>
+          <td>胸骨柄上縁〜大動脈弓上縁。気管左外側縁の左側</td>
+          <td>L</td>
+        </tr>
+        <tr>
+          <td>Upper zone</td>
+          <td>#3a<br>Pre-vascular</td>
+          <td>血管前方の前縦隔リンパ節</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Upper zone</td>
+          <td>#3p<br>Retrotracheal</td>
+          <td>気管後方のリンパ節</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Upper zone</td>
+          <td>#4R<br>Lower paratracheal (R)</td>
+          <td>腕頭静脈尾側縁〜奇静脈下縁。気管右外側縁の右側</td>
+          <td>R</td>
+        </tr>
+        <tr>
+          <td>Upper zone</td>
+          <td>#4L<br>Lower paratracheal (L)</td>
+          <td>大動脈弓上縁〜左主肺動脈上縁。気管左外側縁の左側</td>
+          <td>L</td>
+        </tr>
+        <tr>
+          <td>AP zone</td>
+          <td>#5<br>Subaortic (AP window)</td>
+          <td>大動脈弓下・左主肺動脈上（動脈管靭帯外側）。左側のみ</td>
+          <td>L</td>
+        </tr>
+        <tr>
+          <td>AP zone</td>
+          <td>#6<br>Para-aortic</td>
+          <td>上行大動脈・大動脈弓前面・外側。左側のみ</td>
+          <td>L</td>
+        </tr>
+        <tr>
+          <td>Subcarinal zone</td>
+          <td>#7<br>Subcarinal</td>
+          <td>気管分岐部直下。両主気管支の間</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Lower zone</td>
+          <td>#8<br>Paraesophageal (below carina)</td>
+          <td>分岐部より下の食道傍リンパ節（左右）</td>
+          <td>R / L</td>
+        </tr>
+        <tr>
+          <td>Lower zone</td>
+          <td>#9<br>Pulmonary ligament</td>
+          <td>肺靭帯内のリンパ節（下肺靭帯）</td>
+          <td>R / L</td>
+        </tr>
+        <tr>
+          <td>Hilar/Interlobar zone</td>
+          <td>#10<br>Hilar</td>
+          <td>主気管支・肺動脈根部の周囲。臓側胸膜翻転部が #4 との境界</td>
+          <td>R / L</td>
+        </tr>
+        <tr>
+          <td>Hilar/Interlobar zone</td>
+          <td>#11<br>Interlobar</td>
+          <td>葉間部のリンパ節（11Rs：上・中葉間 / 11Ri：中・下葉間 / 11L：左上・下葉間）</td>
+          <td>R / L</td>
+        </tr>
+        <tr>
+          <td>Peripheral zone</td>
+          <td>#12<br>Lobar</td>
+          <td>葉気管支周囲</td>
+          <td>R / L</td>
+        </tr>
+        <tr>
+          <td>Peripheral zone</td>
+          <td>#13<br>Segmental</td>
+          <td>区域気管支周囲</td>
+          <td>R / L</td>
+        </tr>
+        <tr>
+          <td>Peripheral zone</td>
+          <td>#14<br>Subsegmental</td>
+          <td>亜区域気管支周囲</td>
+          <td>R / L</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note-box">#3a・#3p はゾーン区分上は Upper zone に含まれるが、臨床的には前縦隔（血管前方・気管後方）として扱われる。#5・#6 は左側にのみ存在する。</div>
+  </section>
+
+  <section id="n-classification">
+    <h2 class="sec-h2">2. N分類との対応</h2>
+    <!-- 出典: Rusch VW et al. J Thorac Oncol 2009;4(5):568-577（N1/N2/N3とステーション・ゾーンの対応）。N記述子はTNM分類に準拠。 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">ステーション番号とゾーンは TNM 分類の N 記述子に直接対応する。<strong>同側縦隔（N2）と対側縦隔・鎖骨上（N3）の区別</strong>が治療方針決定に直結する。</p>
+    <table class="surgery-table">
+      <thead>
+        <tr>
+          <th>N分類</th>
+          <th>対応ステーション</th>
+          <th>定義の要点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>N0</td>
+          <td>—</td>
+          <td>所属リンパ節転移なし</td>
+        </tr>
+        <tr>
+          <td>N1</td>
+          <td>#10–14（同側）</td>
+          <td>同側気管支周囲・肺門・肺内リンパ節（臓側胸膜翻転部より末梢）</td>
+        </tr>
+        <tr>
+          <td>N2</td>
+          <td>#1–9（同側）</td>
+          <td>同側縦隔・気管分岐部リンパ節</td>
+        </tr>
+        <tr>
+          <td>N3</td>
+          <td>#1–9（対側）、#1（両側）、鎖骨上</td>
+          <td>対側縦隔・対側肺門・同側または対側鎖骨上・前斜角筋リンパ節</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box">N1 と N2 の解剖学的境界は<strong>臓側胸膜翻転部（visceral pleural reflection）</strong>であり、#10（N1・肺門）と #4（N2・下傍気管）を分ける重要なランドマークである。術中・病理標本でこの境界を意識することが、正確な N 分類に不可欠である。</div>
+  </section>
+
+  <section id="surgical-implication">
+    <h2 class="sec-h2">3. 外科的含意</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">リンパ節マップは、郭清・サンプリングの範囲を記述し、病理での病期確定（pN）を支える枠組みとなる。以下に概論を示す（郭清範囲の詳細・エビデンスは別ページで扱う）。</p>
+    <ul style="font-size:13px;color:var(--text2);line-height:1.85;margin:8px 0 4px;padding-left:20px">
+      <li>系統的リンパ節郭清（systematic nodal dissection: SND）では、切除肺葉に応じた縦隔ステーション（ゾーン）を <strong>en bloc</strong> で郭清する。</li>
+      <li>リンパ節サンプリング（sampling）との違いは、<strong>郭清の体系性</strong>にある。</li>
+      <li>術後病理標本では、<strong>ステーション別</strong>にリンパ節を提出・記録することが病期確定（pN）に必要である。</li>
+    </ul>
+    <div class="warn-box">郭清範囲（葉別郭清・完全縦隔郭清）のエビデンス・各ガイドライン推奨は別ページで扱う。</div>
+    <!-- TODO: 葉別リンパ節郭清マップ（例: 右上葉→#2R,#4R,#7,#10,#11、等）は
+         将来このページまたは別セクションで詳述。
+         出典: Rusch VW et al. J Thorac Oncol 2009;4(5):568-577 /
+         Lardinois D et al. Eur J Cardiothorac Surg 2006（ESTS guidelines）を後日参照 -->
+  </section>
+
+  <section id="external-map">
+    <h2 class="sec-h2">4. 外部図へのリンク</h2>
+    <div class="note-box">
+      IASLCリンパ節マップの図解は以下の外部リソースを参照（本サイトは将来独自図を追加予定）：
+      <ul style="margin:6px 0 0;padding-left:20px;line-height:1.85">
+        <li><a href="https://www.imaios.com/en/e-anatomy/anatomical-structures/iaslc-thoracic-lymph-node-map-133575400" target="_blank" rel="noopener">IMAIOS e-Anatomy – IASLC Thoracic Lymph Node Map</a>（インタラクティブ解剖図、無料）</li>
+        <li><a href="https://webapp.radiologytutor.com/iaslc.html" target="_blank" rel="noopener">Radiology Tutor – IASLC Nodal zones and stations</a>（各ステーションのCT対応）</li>
+      </ul>
+    </div>
+    <!-- TODO: 将来的に独自SVG図（前面観・正面縦隔模式図）をここに差し込む。
+         現時点では外部リンクで代替。
+         著作権上、IASLC公式図・論文図の直接転載は行わないこと。 -->
+  </section>
+
+  <section id="references">
+    <h2 class="sec-h2">5. 参考文献</h2>
+    <div class="ref-list">
+      <ol>
+        <li>Rusch VW, Asamura H, Watanabe H, Giroux DJ, Rami-Porta R, Goldstraw P; Members of IASLC Staging Committee. The IASLC Lung Cancer Staging Project: a proposal for a new international lymph node map in the forthcoming seventh edition of the TNM classification for lung cancer. J Thorac Oncol. 2009;4(5):568–577. DOI: <a href="https://doi.org/10.1097/JTO.0b013e3181a0d82e" target="_blank" rel="noopener">10.1097/JTO.0b013e3181a0d82e</a> | <a href="https://pubmed.ncbi.nlm.nih.gov/19357537/" target="_blank" rel="noopener">PubMed (PMID: 19357537)</a></li>
+        <li>Goldstraw P, et al. IASLC Staging Manual in Thoracic Oncology.<!-- 版・ISBN 要確認: 手元に版情報が確認できないため、版・出版年・ISBNは未記載 --></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-logo"><span>Lung</span>Atlas</div>
+  <div>医療専門職向け教育資料。診療判断には最新ガイドラインと原著論文を確認してください。</div>
+</footer>
+
+</body>
+</html>
