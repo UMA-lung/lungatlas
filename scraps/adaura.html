@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADAURA試験 — 術後補助 osimertinib vs placebo（EGFR変異陽性NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。ADAURA試験（EGFR変異陽性完全切除NSCLC、術後補助osimertinib）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-red { background: var(--red-light); color: var(--red-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.note-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 13px;
+  color: var(--text2);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 8px 0 14px;
+}
+.coi-note {
+  display: inline-block;
+  margin: 4px 0 14px;
+  background: var(--amber-light);
+  color: var(--amber-dark);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: var(--mono);
+}
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>ADAURA試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">ADAURA試験 — 術後補助 osimertinib vs placebo（EGFR変異陽性NSCLC）</h1>
+
+  <p class="scrap-summary">完全切除EGFR exon 19 del/L858R陽性Stage IB–IIIA NSCLCに対し、osimertinib 80mg/日を最長3年投与した第3相試験。DFSに続き、OS最終解析でも有意差が示された。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/32955177/" target="_blank" rel="noopener">NEJM 2020（DFS、PMID 32955177）</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/36720083/" target="_blank" rel="noopener">JCO 2023（DFS更新、PMID 36720083）</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/37272535/" target="_blank" rel="noopener">NEJM 2023（OS、PMID 37272535）</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>ADAURA試験（NCT02511106）は、完全切除後のEGFR変異陽性NSCLCに対する術後補助osimertinibを検証した国際共同・第3相・二重盲検・無作為化・プラセボ対照試験。対象はEGFR exon 19 deletionまたはL858Rを有するStage IB–IIIA（AJCC/UICC第7版）の完全切除NSCLCで、術後化学療法は施行・不施行を問わなかった。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・二重盲検・プラセボ対照・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>完全切除後のEGFR変異陽性NSCLC、Stage IB–IIIA（AJCC/UICC第7版）</td></tr>
+        <tr><td>EGFR変異</td><td>exon 19 deletionまたはL858R。ClinicalTrials.govでは、他のEGFR変異との併存も可と記載。</td></tr>
+        <tr><td>症例数</td><td>682例（osimertinib 339例 / placebo 343例）</td></tr>
+        <tr><td>介入</td><td>osimertinib 80mg 1日1回（減量時40mg）またはプラセボ、最長3年</td></tr>
+        <tr><td>術後化学療法</td><td>施行・不施行を問わない。ClinicalTrials.govでは、術後化学療法は白金製剤併用で最大4サイクルと記載。</td></tr>
+        <tr><td>主要評価項目</td><td>Stage II–IIIA集団のDFS（investigator assessment）</td></tr>
+        <tr><td>副次評価項目</td><td>Stage IB–IIIA全体のDFS、OS、安全性など。CNS DFS・再発パターンはJCO 2023で探索的評価として報告。</td></tr>
+        <tr><td>層別化因子</td><td>病期、EGFR変異型、人種（JCO 2023抄録）</td></tr>
+        <tr><td>スポンサー</td><td>AstraZeneca（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT02511106</td></tr>
+      </tbody>
+    </table>
+
+    <div class="coi-note">Funded by AstraZeneca</div>
+
+    <div class="note-box">
+      ClinicalTrials.govの適格基準では、完全切除、断端陰性、WHO PS 0–1、脳MRI/CTの実施などが記載されている。区域切除または楔状切除のみの症例、術前化学療法、術前/術後放射線療法、既往のEGFR-TKI補助療法などは除外。
+    </div>
+
+    <!-- ===== セクション2：DFS ===== -->
+    <h2>2. 有効性 — DFS</h2>
+
+    <p class="sub">Primary DFS解析（NEJM 2020）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.17</div>
+        <div class="stat-label">DFS（Stage II–IIIA、主要評価）</div>
+        <div class="stat-vs">99.06%CI 0.11–0.26、p&lt;0.001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90% vs 44%</div>
+        <div class="stat-label">24か月DFS率（Stage II–IIIA）</div>
+        <div class="stat-vs">osimertinib vs placebo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.20</div>
+        <div class="stat-label">DFS（Stage IB–IIIA全体）</div>
+        <div class="stat-vs">99.12%CI 0.14–0.30、p&lt;0.001</div>
+      </div>
+    </div>
+
+    <p class="sub">DFS更新解析（JCO 2023、data cutoff 2022年4月11日）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.23</div>
+        <div class="stat-label">DFS（Stage II–IIIA）</div>
+        <div class="stat-vs">95%CI 0.18–0.30</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">70% vs 29%</div>
+        <div class="stat-label">4年DFS率（Stage II–IIIA）</div>
+        <div class="stat-vs">osimertinib vs placebo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.27</div>
+        <div class="stat-label">DFS（Stage IB–IIIA全体）</div>
+        <div class="stat-vs">95%CI 0.21–0.34</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>解析</th><th>osimertinib</th><th>placebo</th><th>HR / 結果</th><th>出典</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Stage II–IIIA DFS 24か月</td><td class="num">90%</td><td class="num">44%</td><td>HR 0.17（99.06%CI 0.11–0.26）</td><td>NEJM 2020</td></tr>
+        <tr><td>Stage IB–IIIA DFS 24か月</td><td class="num">89%</td><td class="num">52%</td><td>HR 0.20（99.12%CI 0.14–0.30）</td><td>NEJM 2020</td></tr>
+        <tr><td>Stage II–IIIA DFS 4年</td><td class="num">70%</td><td class="num">29%</td><td>HR 0.23（95%CI 0.18–0.30）</td><td>JCO 2023</td></tr>
+        <tr><td>Stage IB–IIIA DFS 4年</td><td class="num">73%</td><td class="num">38%</td><td>HR 0.27（95%CI 0.21–0.34）</td><td>JCO 2023</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      DFS更新解析は「final DFS data」の探索的解析として報告されている。初回解析でDFSの統計学的有意差が早期に報告された後であり、JCO 2023抄録は「no further formal statistical testing was planned」と記載している。
+    </div>
+
+    <!-- ===== セクション3：OS ===== -->
+    <h2>3. 有効性 — OS</h2>
+
+    <p class="sub">Planned final OS解析（NEJM 2023）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.49</div>
+        <div class="stat-label">OS（Stage II–IIIA）</div>
+        <div class="stat-vs">95.03%CI 0.33–0.73、p&lt;0.001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">85% vs 73%</div>
+        <div class="stat-label">5年OS率（Stage II–IIIA）</div>
+        <div class="stat-vs">osimertinib vs placebo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">88% vs 78%</div>
+        <div class="stat-label">5年OS率（Stage IB–IIIA全体）</div>
+        <div class="stat-vs">HR 0.49（95.03%CI 0.34–0.70）</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>解析集団</th><th>5年OS率 osimertinib</th><th>5年OS率 placebo</th><th>HR</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Stage II–IIIA</td><td class="num">85%</td><td class="num">73%</td><td>0.49（95.03%CI 0.33–0.73、p&lt;0.001）</td></tr>
+        <tr><td>Stage IB–IIIA全体</td><td class="num">88%</td><td class="num">78%</td><td>0.49（95.03%CI 0.34–0.70、p&lt;0.001）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      NEJM 2020初回報告時点ではOSは未成熟（死亡29例：osimertinib 9例、placebo 20例）だったが、NEJM 2023のplanned final OS解析でOSの統計学的有意差が報告された。再発後治療、プラセボ群の再発後osimertinib使用割合、クロスオーバー的影響の詳細は原著本文・Supplementで要確認。
+    </div>
+
+    <!-- ===== セクション4：CNS再発 ===== -->
+    <h2>4. CNS再発・再発パターン</h2>
+    <p>NEJM 2020では、24か月時点でCNS disease-freeの割合はosimertinib 98% vs placebo 85%、CNS disease recurrence or deathのHRは0.18（95%CI 0.10–0.33）と報告された。JCO 2023更新解析では、Stage II–IIIAのCNS DFS HR 0.24（95%CI 0.14–0.42）と報告され、局所/領域再発および遠隔再発はosimertinib群で少なかった。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>CNS DFSおよび再発パターンは、JCO 2023抄録上はprespecified exploratory end pointsとして扱われている。治療選択の単独根拠として過度に強調しない。</span>
+      </div>
+    </div>
+
+    <!-- ===== セクション5：安全性 ===== -->
+    <h2>5. 安全性</h2>
+    <p>PubMed抄録では、初回解析・更新解析・OS解析を通じて、osimertinibの安全性プロファイルは既報と一貫し、新たな安全性懸念は認められなかったと記載されている。代表的な有害事象は下痢、爪囲炎、皮膚乾燥、そう痒、口内炎、皮疹、QT延長など。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>有害事象（ClinicalTrials.gov結果表）</th><th>osimertinib</th><th>placebo</th><th>メモ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>下痢</td><td>158/337（約47%）</td><td>71/343（約21%）</td><td>全Gradeの詳細・治療関連性は要確認</td></tr>
+        <tr><td>爪囲炎</td><td>92/337（約27%）</td><td>5/343（約1%）</td><td>EGFR-TKIで注意</td></tr>
+        <tr><td>皮膚乾燥</td><td>84/337（約25%）</td><td>23/343（約7%）</td><td>皮膚毒性</td></tr>
+        <tr><td>そう痒</td><td>70/337（約21%）</td><td>30/343（約9%）</td><td>皮膚毒性</td></tr>
+        <tr><td>口内炎</td><td>59/337（約18%）</td><td>15/343（約4%）</td><td>粘膜障害</td></tr>
+        <tr><td>心電図QT延長</td><td>30/337（約9%）</td><td>8/343（約2%）</td><td>QTc管理。Grade別は要確認</td></tr>
+        <tr><td>重篤なILD</td><td>1/337（約0.3%）</td><td>0/343</td><td>ClinicalTrials.gov serious adverse events表</td></tr>
+        <tr><td>重篤なpneumonitis</td><td>1/337（約0.3%）</td><td>0/343</td><td>ClinicalTrials.gov serious adverse events表</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tox-row">
+      <span class="tox">下痢</span>
+      <span class="tox">爪囲炎</span>
+      <span class="tox">皮膚乾燥</span>
+      <span class="tox">そう痒</span>
+      <span class="tox">口内炎</span>
+      <span class="tox">皮疹</span>
+      <span class="tox">QT延長</span>
+      <span class="tox">ILD/pneumonitis</span>
+    </div>
+
+    <!-- ===== セクション6：位置づけと注意点 ===== -->
+    <h2>6. 位置づけと注意点</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">日本</span>
+        <span>osimertinibはEGFR変異陽性の完全切除NSCLCに対する術後補助療法として国内承認・保険適用ありとされる。承認日、添付文書上の正確な効能・効果、Stage表記はPMDAで要確認。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">FDA</span>
+        <span>Drugs@FDAでは2020年12月18日にTAGRISSOのSUPPL-21がEfficacy-New Indicationとして掲載されている。現在の米国ラベル上の対象Stage・適応文言は最新版ラベルで要確認。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>ADAURAはプラセボ対照試験であり、術後化学療法の代替としてosimertinib単独を直接比較した試験ではない。術後白金併用化学療法の適応がある症例では、化学療法との順序・併用しない理由を個別に検討する。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>対象病期はAJCC/UICC第7版のStage IB–IIIA。現行病期分類へ置き換える場合は範囲が完全には一致しない可能性がある。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">GL</span>
+        <span>日本肺癌診療ガイドライン、NCCN、ESMOでの推奨Stage・推奨グレードは要確認。Stage IBの扱いはガイドライン・地域でニュアンスが異なる可能性がある。</span>
+      </div>
+    </div>
+
+    <p>ADAURAはDFSだけでなくOS最終解析でも有意差が示されたため、EGFR exon19del/L858R陽性完全切除NSCLCの術後補助療法を考えるうえで中心的な試験である。一方、投与期間は最長3年であり、治療終了後再発、長期服薬の毒性・アドヒアランス、術後化学療法との順序、Stage IBの適用範囲、再発後のEGFR-TKI再投与戦略などは整理が必要。</p>
+
+    <!-- ===== セクション7：要確認 ===== -->
+    <h2>7. 要確認メモ</h2>
+    <ul>
+      <li><!-- 要確認: ADAURA原著Supplementで、術後化学療法施行有無別DFS/OSの正確なHR・CIを確認 -->術後化学療法施行有無別のDFS/OSサブグループ数値</li>
+      <li><!-- 要確認: Stage IB単独のDFS/OSサブグループ値と現行GLでの扱いを確認 -->Stage IB単独の効果量と推奨のニュアンス</li>
+      <li><!-- 要確認: 再発後のosimertinib使用割合・後治療の内訳をNEJM 2023本文/Supplementで確認 -->再発後治療・プラセボ群のosimertinib使用割合</li>
+      <li><!-- 要確認: 日本添付文書/PMDAで効能・効果、承認日、用法・用量、注意喚起を確認 -->国内承認日・添付文書上の正確な適応</li>
+      <li><!-- 要確認: 日本肺癌診療GL 2025、NCCN、ESMOの推奨Stage・推奨グレードを確認 -->各ガイドラインの推奨Stage・推奨グレード</li>
+      <li><!-- 要確認: CT.gov/原著SupplementでGrade 3以上AE、減量、中止率、ILD全Gradeを確認 -->安全性詳細（Grade別、減量・中止率、ILD全Grade）</li>
+    </ul>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献・情報源</h2>
+    <ol>
+      <li>Wu YL, Tsuboi M, He J, et al; ADAURA Investigators. Osimertinib in Resected EGFR-Mutated Non-Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2020;383:1711-1723. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/32955177/" target="_blank" rel="noopener">32955177</a> / DOI: <a href="https://doi.org/10.1056/NEJMoa2027071" target="_blank" rel="noopener">10.1056/NEJMoa2027071</a></li>
+      <li>Herbst RS, Wu YL, John T, et al. Adjuvant Osimertinib for Resected EGFR-Mutated Stage IB-IIIA Non-Small-Cell Lung Cancer: Updated Results From the Phase III Randomized ADAURA Trial. <em>J Clin Oncol.</em> 2023;41:1830-1840. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36720083/" target="_blank" rel="noopener">36720083</a> / DOI: <a href="https://doi.org/10.1200/JCO.22.02186" target="_blank" rel="noopener">10.1200/JCO.22.02186</a></li>
+      <li>Tsuboi M, Herbst RS, John T, et al; ADAURA Investigators. Overall Survival with Osimertinib in Resected EGFR-Mutated NSCLC. <em>N Engl J Med.</em> 2023;389:137-147. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37272535/" target="_blank" rel="noopener">37272535</a> / DOI: <a href="https://doi.org/10.1056/NEJMoa2304594" target="_blank" rel="noopener">10.1056/NEJMoa2304594</a></li>
+      <li>ClinicalTrials.gov. ADAURA, NCT02511106. <a href="https://clinicaltrials.gov/study/NCT02511106" target="_blank" rel="noopener">Study record</a></li>
+      <li>Drugs@FDA. TAGRISSO (osimertinib), NDA 208065. <a href="https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&amp;ApplNo=208065" target="_blank" rel="noopener">FDA application record</a></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
