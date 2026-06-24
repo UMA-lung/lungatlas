@@ -33,7 +33,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); font
 .sb-sub { display: block; padding: 5px 18px 5px 30px; font-size: 11.5px; color: var(--text3); text-decoration: none; }
 .sb-sub:hover { color: var(--green-dark); font-weight: 500; }
 
-.main { flex: 1; padding: 28px 36px 60px; max-width: 920px; }
+.main { flex: 1; padding: 28px 36px 60px; max-width: 1060px; }
 .crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
 .crumb a { color: var(--text3); text-decoration: none; }
 .crumb span { color: var(--green-mid); }
@@ -41,20 +41,14 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); font
 .updated::before { content: '↻'; font-size: 12px; }
 .art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 8px; }
 .art-sub { font-size: 13px; color: var(--text3); margin-bottom: 10px; }
-.lead { font-size: 13.5px; color: var(--text2); line-height: 1.75; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.lead { font-size: 13px; color: var(--text2); line-height: 1.75; padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
 .sec-h2 { font-size: 14px; font-weight: 600; color: var(--text); margin: 28px 0 12px; display: flex; align-items: center; gap: 8px; }
 .sec-h2::before { content: ''; display: block; width: 3px; height: 15px; background: var(--green-mid); border-radius: 2px; flex-shrink: 0; }
-.sec-h3 { font-size: 13px; font-weight: 600; margin: 18px 0 8px; }
 
-.note-box, .info-box, .warn-box { border-radius: 0 8px 8px 0; padding: 11px 14px; font-size: 12.5px; line-height: 1.75; margin: 14px 0; }
+.note-box, .info-box, .warn-box { border-radius: 0 8px 8px 0; padding: 10px 13px; font-size: 12.5px; line-height: 1.75; margin: 10px 0; }
 .note-box { background: var(--green-light); border-left: 3px solid var(--green-mid); color: var(--green-dark); }
 .info-box { background: var(--blue-light); border-left: 3px solid #2d6db5; color: var(--blue-dark); }
 .warn-box { background: var(--amber-light); border-left: 3px solid #d97a00; color: var(--amber-dark); }
-
-.surgery-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0 18px; }
-.surgery-table th { padding: 9px 11px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
-.surgery-table td { padding: 10px 11px; border: 1px solid var(--border); color: var(--text2); line-height: 1.65; vertical-align: top; }
-.surgery-table tr:nth-child(even) td { background: #f8fbf9; }
 
 .ref-list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 18px; font-size: 12px; color: var(--text2); line-height: 1.8; }
 .ref-list ol { padding-left: 18px; }
@@ -65,42 +59,94 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); font
 .footer-logo { font-weight: 600; color: var(--text); }
 .footer-logo span { color: var(--green-mid); }
 
-/* ===== 計算ツール専用（最小限の新規クラス） ===== */
-.input-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0 20px; }
+/* === tool layout === */
+.tool-grid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; margin-top: 4px; }
+.input-col { min-width: 0; }
+.result-sticky { position: sticky; top: 72px; }
+
+/* Method toggle */
+.method-toggle { display: inline-flex; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 3px; gap: 2px; }
+.method-btn { font-size: 12px; font-weight: 500; color: var(--text2); background: transparent; border: none; border-radius: 6px; padding: 5px 14px; cursor: pointer; font-family: var(--font); transition: all .15s; }
+.method-btn.active { background: var(--surface); color: var(--green-dark); box-shadow: 0 1px 3px rgba(0,0,0,.12); font-weight: 600; }
+
+/* Inputs */
+.input-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
 .input-group { display: flex; flex-direction: column; gap: 4px; }
 .input-label { font-size: 11.5px; font-weight: 500; color: var(--text2); }
 .input-label .opt { font-weight: 400; color: var(--text3); font-size: 10.5px; }
 .input-field { font-size: 14px; font-family: var(--mono); color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; width: 100%; transition: border-color .15s; }
-.input-field:focus { outline: none; border-color: var(--green-mid); }
+.input-field:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 2px rgba(26,122,78,.1); }
 
-.lung-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
-.lung-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; }
-.lung-title { font-size: 11px; font-weight: 600; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-.pneu-btn { display: inline-block; font-size: 11.5px; font-weight: 500; color: var(--amber-dark); background: var(--amber-light); border: 1px solid #e8c87a; border-radius: 6px; padding: 4px 10px; cursor: pointer; margin-bottom: 10px; transition: background .12s; font-family: var(--font); }
+/* Lung panels */
+.lung-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0 14px; }
+.lung-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 13px 13px; }
+.lung-title { font-size: 11px; font-weight: 600; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 10px; }
+
+.pneu-btn { display: block; width: 100%; font-size: 11.5px; font-weight: 500; color: var(--amber-dark); background: var(--amber-light); border: 1px solid #e8c87a; border-radius: 7px; padding: 6px 10px; cursor: pointer; margin-bottom: 10px; transition: background .12s; font-family: var(--font); text-align: left; }
 .pneu-btn:hover { background: #f5e5b0; }
 
-.lobe-row { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0 4px; }
-.lobe-cb { margin-top: 2px; flex-shrink: 0; width: 15px; height: 15px; accent-color: var(--green-mid); cursor: pointer; }
-.lobe-label { font-size: 12.5px; color: var(--text); cursor: pointer; flex: 1; line-height: 1.4; }
-.seg-area { padding: 4px 0 4px 23px; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
-.seg-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-family: var(--mono); color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; cursor: pointer; user-select: none; }
-.seg-chip input[type="checkbox"] { width: 12px; height: 12px; accent-color: var(--green-mid); cursor: pointer; }
+/* Lobe toggle */
+.lobe-toggle { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 8px; background: var(--surface2); cursor: pointer; width: 100%; margin-bottom: 4px; transition: background .12s; border: 1px solid transparent; }
+.lobe-toggle:hover { background: var(--green-light); border-color: var(--border); }
+.lobe-toggle.lobe-partial { border-color: var(--border2); }
+.lobe-toggle.lobe-full { background: var(--green-light); border-color: var(--green-mid); }
+.lobe-cb { width: 15px; height: 15px; accent-color: var(--green-mid); cursor: pointer; flex-shrink: 0; }
+.lobe-name { font-size: 12.5px; font-weight: 600; color: var(--text); flex: 1; }
+.lobe-badge { font-family: var(--mono); font-size: 10.5px; color: var(--green-dark); background: var(--green-light); padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
+.lobe-badge.full { background: var(--green-mid); color: #fff; }
 
-.y-display { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--green-dark); margin: 14px 0 10px; text-align: center; }
-.calc-actions { display: flex; gap: 10px; margin: 10px 0 14px; }
-.btn-primary { font-size: 13px; font-weight: 600; color: #fff; background: var(--green-mid); border: none; border-radius: 8px; padding: 9px 22px; cursor: pointer; font-family: var(--font); transition: background .15s; }
-.btn-primary:hover { background: var(--green-dark); }
-.btn-reset { font-size: 13px; color: var(--text3); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 9px 18px; cursor: pointer; font-family: var(--font); transition: background .12s; }
+/* Segment chips */
+.seg-area { padding: 3px 0 8px 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+.seg-chip { display: inline-flex; align-items: center; font-size: 11px; font-family: var(--mono); color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; cursor: pointer; user-select: none; transition: all .12s; }
+.seg-chip:hover { border-color: var(--green-mid); color: var(--green-dark); }
+.seg-chip.sel { background: var(--green-mid); color: #fff; border-color: var(--green-dark); }
+
+.pneu-warn-inline { background: var(--amber-light); border-left: 3px solid #d97a00; border-radius: 0 6px 6px 0; padding: 7px 11px; font-size: 11.5px; color: var(--amber-dark); margin: 6px 0 0; line-height: 1.65; }
+
+/* Result card */
+.result-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.result-card-head { background: var(--green-dark); color: #fff; padding: 11px 15px; font-size: 12.5px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; }
+.method-tag { font-size: 10px; background: rgba(255,255,255,.2); padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+.result-body { padding: 15px; }
+.result-empty { font-size: 12px; color: var(--text3); text-align: center; padding: 22px 0; line-height: 1.9; }
+.ppo-row { display: flex; align-items: baseline; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--surface2); }
+.ppo-label { font-size: 11.5px; color: var(--text3); }
+.ppo-val { font-family: var(--mono); font-size: 16px; font-weight: 600; color: var(--green-dark); }
+.ppo-val.warn { color: #b86000; }
+.ppo-val.danger { color: var(--red-dark); }
+.ppo-divider { height: 1px; background: var(--border); margin: 8px 0; }
+.ratio-row { display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: var(--text3); padding: 4px 0; }
+.ratio-val { font-family: var(--mono); font-size: 12px; color: var(--text2); }
+.risk-banner { border-radius: 7px; padding: 9px 12px; font-size: 11.5px; line-height: 1.65; margin-top: 12px; }
+.risk-banner.low { background: var(--blue-light); color: var(--blue-dark); }
+.risk-banner.mid { background: var(--amber-light); color: var(--amber-dark); }
+.risk-banner.high { background: var(--red-light); color: var(--red-dark); }
+.pneu-note-card { background: var(--amber-light); border: 1px solid #e8c87a; border-radius: 7px; padding: 8px 11px; font-size: 11px; color: var(--amber-dark); line-height: 1.65; margin-top: 10px; }
+.result-caption { font-size: 10.5px; color: var(--text3); text-align: center; padding-top: 12px; line-height: 1.65; border-top: 1px solid var(--surface2); margin-top: 12px; }
+
+/* Reset & error */
+.btn-reset { font-size: 12.5px; color: var(--text3); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 18px; cursor: pointer; font-family: var(--font); transition: background .12s; margin-top: 6px; }
 .btn-reset:hover { background: var(--surface2); }
+.err-msg { font-size: 12px; color: #b71c1c; padding: 4px 0; min-height: 18px; }
 
-.formula-display { font-family: var(--mono); font-size: 12px; color: var(--text2); background: var(--surface2); border-radius: 6px; padding: 8px 12px; margin: 8px 0; line-height: 1.9; }
-.err-msg { font-size: 12px; color: #b71c1c; padding: 4px 0; }
+/* Caveats collapsible */
+.caveat-details { border: 1px solid var(--border); border-radius: var(--radius-lg); margin-top: 24px; overflow: hidden; }
+.caveat-details summary { padding: 12px 16px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text); background: var(--surface2); list-style: none; display: flex; align-items: center; justify-content: space-between; }
+.caveat-details summary::after { content: '▶'; font-size: 10px; color: var(--text3); transition: transform .2s; }
+.caveat-details[open] summary::after { transform: rotate(90deg); }
+.caveat-details summary::-webkit-details-marker { display: none; }
+.caveat-body { padding: 14px 16px; }
+
 .hidden { display: none; }
 
-@media (max-width: 980px) { .input-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 980px) {
+  .tool-grid { grid-template-columns: 1fr; }
+  .result-sticky { position: static; }
+  .input-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 768px) {
   .sidebar { display: none; }
-  .main { padding: 20px 16px 40px; }
+  .main { padding: 20px 16px 40px; max-width: 100%; }
   .lung-grid { grid-template-columns: 1fr; }
   .input-grid { grid-template-columns: 1fr; }
   .footer { padding: 16px; display: block; line-height: 1.8; }
@@ -122,7 +168,6 @@ fetch('/lungatlas/nav.html')
   <div class="sb-section">
     <div class="sb-head">PPO 計算ツール</div>
     <a class="sb-item active" href="#calculator">計算ツール</a>
-    <a class="sb-item" href="#result">計算結果</a>
     <a class="sb-item" href="#caveats">計算方法の注意</a>
     <a class="sb-item" href="#references">参考文献</a>
   </div>
@@ -139,172 +184,222 @@ fetch('/lungatlas/nav.html')
   <div class="updated">2026年6月24日更新</div>
   <h1 class="art-h1">術後予測呼吸機能（PPO）計算ツール</h1>
   <p class="art-sub">区域カウント法による PPO FEV1・PPO DLCO の概算</p>
-  <p class="lead">区域カウント法（segment counting method）は、切除する肺区域数と全区域数の比から術後残存呼吸機能を予測する方法で、日本呼吸器外科学会GL 2021（CQ5）に推奨される標準的算出式である。本ツールは教育・概算用であり、臨床判断の代替ではない。詳細な評価や境界領域症例の判断は<a href="/lungatlas/preop-pulmonary.html" style="color:var(--green-dark)">術前呼吸機能評価ページ</a>を参照すること。</p>
+  <p class="lead">区域カウント法（segment counting method）を用いた PPO（predicted postoperative）呼吸機能の概算ツール。日本呼吸器外科学会GL 2021（CQ5）に記載された算出式を使用する。<strong>教育・概算用であり、臨床判断の代替ではない。</strong>詳細な評価や境界領域症例は<a href="/lungatlas/preop-pulmonary.html" style="color:var(--green-dark)">術前呼吸機能評価ページ</a>を参照のこと。</p>
 
-  <!-- ===== 1. 計算ツール ===== -->
   <section id="calculator">
-    <h2 class="sec-h2">1. 計算ツール</h2>
+    <h2 class="sec-h2">計算ツール</h2>
 
-    <h3 class="sec-h3">① 術前検査値</h3>
-    <div class="input-grid">
-      <div class="input-group">
-        <label class="input-label" for="fev1">術前 FEV1（L）</label>
-        <input class="input-field" type="number" id="fev1" min="0.1" max="8" step="0.01" placeholder="例: 2.50">
-      </div>
-      <div class="input-group">
-        <label class="input-label" for="pct_fev1">術前 %FEV1（%）</label>
-        <input class="input-field" type="number" id="pct_fev1" min="1" max="200" step="0.1" placeholder="例: 85.0">
-      </div>
-      <div class="input-group">
-        <label class="input-label" for="pct_dlco">術前 %DLCO（%）<span class="opt">　任意</span></label>
-        <input class="input-field" type="number" id="pct_dlco" min="1" max="200" step="0.1" placeholder="例: 78.0">
-      </div>
-    </div>
+    <div class="tool-grid">
+      <!-- 左列：入力 + 区域選択 -->
+      <div class="input-col">
 
-    <h3 class="sec-h3">② 切除部位の選択</h3>
-    <p style="font-size:12px;color:var(--text3);margin-bottom:10px">葉全体のチェックボックスで葉単位、その下のチップで区域単位に選択できます。</p>
-
-    <div class="lung-grid">
-      <!-- 右肺 -->
-      <div class="lung-panel">
-        <div class="lung-title">右肺（全10区域）</div>
-        <button type="button" class="pneu-btn" id="btn-right-pneu">右全摘（全10区域を選択）</button>
-
-        <div class="lobe-row">
-          <input type="checkbox" class="lobe-cb" id="lobe-ru" data-lobe="ru">
-          <label class="lobe-label" for="lobe-ru">右上葉 (S1, S2, S3) × 3</label>
-        </div>
-        <div class="seg-area" id="segs-ru">
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="ru"> S1</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="ru"> S2</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="ru"> S3</label>
+        <!-- 区域法切り替え -->
+        <div style="margin-bottom:16px">
+          <div style="font-size:11.5px;font-weight:500;color:var(--text2);margin-bottom:6px">区域カウント法（分母）</div>
+          <div class="method-toggle">
+            <button type="button" class="method-btn active" id="btn-18">18区域法</button>
+            <button type="button" class="method-btn" id="btn-19">19区域法</button>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:5px;line-height:1.6" id="method-desc">
+            右10 ＋ 左8（S1+2を1区域と計上）。Ali MK et al. 1980 の原典かつ日本GL 2021（CQ5）採用。
+          </div>
         </div>
 
-        <div class="lobe-row">
-          <input type="checkbox" class="lobe-cb" id="lobe-rm" data-lobe="rm">
-          <label class="lobe-label" for="lobe-rm">右中葉 (S4, S5) × 2</label>
-        </div>
-        <div class="seg-area" id="segs-rm">
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="rm"> S4</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="rm"> S5</label>
-        </div>
-
-        <div class="lobe-row">
-          <input type="checkbox" class="lobe-cb" id="lobe-rl" data-lobe="rl">
-          <label class="lobe-label" for="lobe-rl">右下葉 (S6, S7, S8, S9, S10) × 5</label>
-        </div>
-        <div class="seg-area" id="segs-rl">
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="rl"> S6</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="rl"> S7</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="rl"> S8</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="rl"> S9</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="rl"> S10</label>
-        </div>
-      </div>
-
-      <!-- 左肺 -->
-      <div class="lung-panel">
-        <div class="lung-title">左肺（全8区域）</div>
-        <button type="button" class="pneu-btn" id="btn-left-pneu">左全摘（全8区域を選択）</button>
-
-        <div class="lobe-row">
-          <input type="checkbox" class="lobe-cb" id="lobe-lu" data-lobe="lu">
-          <label class="lobe-label" for="lobe-lu">左上葉固有区 (S1+2, S3) × 2</label>
-        </div>
-        <div class="seg-area" id="segs-lu">
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="lu"> S1+2</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="lu"> S3</label>
+        <!-- 術前検査値 -->
+        <div style="font-size:12.5px;font-weight:600;margin-bottom:8px">術前検査値</div>
+        <div class="input-grid">
+          <div class="input-group">
+            <label class="input-label" for="fev1">術前 FEV1（L）</label>
+            <input class="input-field" type="number" id="fev1" min="0.1" max="8" step="0.01" placeholder="例: 2.50">
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="pct_fev1">術前 %FEV1（%）</label>
+            <input class="input-field" type="number" id="pct_fev1" min="1" max="200" step="0.1" placeholder="例: 85.0">
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="pct_dlco">術前 %DLCO（%）<span class="opt"> 任意</span></label>
+            <input class="input-field" type="number" id="pct_dlco" min="1" max="200" step="0.1" placeholder="例: 78.0">
+          </div>
         </div>
 
-        <div class="lobe-row">
-          <input type="checkbox" class="lobe-cb" id="lobe-ll" data-lobe="ll">
-          <label class="lobe-label" for="lobe-ll">左舌区 (S4, S5) × 2</label>
-        </div>
-        <div class="seg-area" id="segs-ll">
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="ll"> S4</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="ll"> S5</label>
-        </div>
+        <!-- 切除部位 -->
+        <div style="font-size:12.5px;font-weight:600;margin-bottom:6px">切除部位</div>
+        <div style="font-size:11.5px;color:var(--text3);margin-bottom:10px">葉ボタンで葉単位、区域チップで区域単位に選択。選択と同時に自動計算。</div>
 
-        <div class="lobe-row">
-          <input type="checkbox" class="lobe-cb" id="lobe-lb" data-lobe="lb">
-          <label class="lobe-label" for="lobe-lb">左下葉 (S6, S8, S9, S10) × 4</label>
+        <div class="lung-grid">
+          <!-- 右肺 -->
+          <div class="lung-panel">
+            <div class="lung-title">右肺（全10区域）</div>
+            <button type="button" class="pneu-btn" id="btn-right-pneu">▲ 右全摘（全10区域を選択）</button>
+
+            <label class="lobe-toggle" id="toggle-ru">
+              <input type="checkbox" class="lobe-cb" id="lobe-ru" data-lobe="ru">
+              <span class="lobe-name">右上葉</span>
+              <span class="lobe-badge" id="badge-ru">0/3</span>
+            </label>
+            <div class="seg-area" id="segs-ru">
+              <span class="seg-chip" data-lobe="ru" data-seg="S1">S1</span>
+              <span class="seg-chip" data-lobe="ru" data-seg="S2">S2</span>
+              <span class="seg-chip" data-lobe="ru" data-seg="S3">S3</span>
+            </div>
+
+            <label class="lobe-toggle" id="toggle-rm">
+              <input type="checkbox" class="lobe-cb" id="lobe-rm" data-lobe="rm">
+              <span class="lobe-name">右中葉</span>
+              <span class="lobe-badge" id="badge-rm">0/2</span>
+            </label>
+            <div class="seg-area" id="segs-rm">
+              <span class="seg-chip" data-lobe="rm" data-seg="S4">S4</span>
+              <span class="seg-chip" data-lobe="rm" data-seg="S5">S5</span>
+            </div>
+
+            <label class="lobe-toggle" id="toggle-rl">
+              <input type="checkbox" class="lobe-cb" id="lobe-rl" data-lobe="rl">
+              <span class="lobe-name">右下葉</span>
+              <span class="lobe-badge" id="badge-rl">0/5</span>
+            </label>
+            <div class="seg-area" id="segs-rl">
+              <span class="seg-chip" data-lobe="rl" data-seg="S6">S6</span>
+              <span class="seg-chip" data-lobe="rl" data-seg="S7">S7</span>
+              <span class="seg-chip" data-lobe="rl" data-seg="S8">S8</span>
+              <span class="seg-chip" data-lobe="rl" data-seg="S9">S9</span>
+              <span class="seg-chip" data-lobe="rl" data-seg="S10">S10</span>
+            </div>
+
+            <div class="pneu-warn-inline hidden" id="pneu-warn-right">
+              右全摘予定：区域カウント法は不正確になりうる。灌流シンチグラフィによる評価を推奨（日本GL 2021）。
+            </div>
+          </div>
+
+          <!-- 左肺 -->
+          <div class="lung-panel">
+            <div class="lung-title" id="left-lung-title">左肺（全8区域）</div>
+            <button type="button" class="pneu-btn" id="btn-left-pneu">▲ 左全摘（全区域を選択）</button>
+
+            <label class="lobe-toggle" id="toggle-lu">
+              <input type="checkbox" class="lobe-cb" id="lobe-lu" data-lobe="lu">
+              <span class="lobe-name">左上葉固有区</span>
+              <span class="lobe-badge" id="badge-lu">0/2</span>
+            </label>
+            <!-- 18区域法: S1+2, S3 ／ 19区域法: S1, S2, S3 -->
+            <div class="seg-area" id="segs-lu">
+              <span class="seg-chip" data-lobe="lu" data-seg="S1+2">S1+2</span>
+              <span class="seg-chip" data-lobe="lu" data-seg="S3">S3</span>
+            </div>
+
+            <label class="lobe-toggle" id="toggle-ll">
+              <input type="checkbox" class="lobe-cb" id="lobe-ll" data-lobe="ll">
+              <span class="lobe-name">左舌区</span>
+              <span class="lobe-badge" id="badge-ll">0/2</span>
+            </label>
+            <div class="seg-area" id="segs-ll">
+              <span class="seg-chip" data-lobe="ll" data-seg="S4">S4</span>
+              <span class="seg-chip" data-lobe="ll" data-seg="S5">S5</span>
+            </div>
+
+            <label class="lobe-toggle" id="toggle-lb">
+              <input type="checkbox" class="lobe-cb" id="lobe-lb" data-lobe="lb">
+              <span class="lobe-name">左下葉</span>
+              <span class="lobe-badge" id="badge-lb">0/4</span>
+            </label>
+            <div class="seg-area" id="segs-lb">
+              <span class="seg-chip" data-lobe="lb" data-seg="S6">S6</span>
+              <span class="seg-chip" data-lobe="lb" data-seg="S8">S8</span>
+              <span class="seg-chip" data-lobe="lb" data-seg="S9">S9</span>
+              <span class="seg-chip" data-lobe="lb" data-seg="S10">S10</span>
+            </div>
+
+            <div class="pneu-warn-inline hidden" id="pneu-warn-left">
+              左全摘予定：区域カウント法は不正確になりうる。灌流シンチグラフィによる評価を推奨（日本GL 2021）。
+            </div>
+          </div>
+        </div><!-- /lung-grid -->
+
+        <p class="err-msg" id="err-msg"></p>
+        <button type="button" class="btn-reset" id="btn-reset">リセット</button>
+
+      </div><!-- /input-col -->
+
+      <!-- 右列：sticky 結果カード -->
+      <div class="result-col">
+        <div class="result-sticky">
+          <div class="result-card">
+            <div class="result-card-head">
+              <span>計算結果</span>
+              <span class="method-tag" id="rc-method-tag">18区域法</span>
+            </div>
+            <div class="result-body">
+              <div class="result-empty" id="rc-empty">
+                FEV1・%FEV1 を入力し<br>切除部位を選択すると<br>自動で表示されます
+              </div>
+              <div class="hidden" id="rc-data">
+                <div class="ppo-row">
+                  <span class="ppo-label">PPO FEV1</span>
+                  <span class="ppo-val" id="rc-fev1">—</span>
+                </div>
+                <div class="ppo-row">
+                  <span class="ppo-label">PPO %FEV1</span>
+                  <span class="ppo-val" id="rc-pct">—</span>
+                </div>
+                <div class="ppo-row" id="rc-dlco-row">
+                  <span class="ppo-label">PPO %DLCO</span>
+                  <span class="ppo-val" id="rc-dlco">—</span>
+                </div>
+                <div class="ppo-divider"></div>
+                <div class="ratio-row">
+                  <span>切除区域数</span>
+                  <span class="ratio-val" id="rc-segs">—</span>
+                </div>
+                <div class="ratio-row">
+                  <span>残存率</span>
+                  <span class="ratio-val" id="rc-ratio">—</span>
+                </div>
+                <div id="rc-risk"></div>
+                <div class="pneu-note-card hidden" id="rc-pneu">
+                  全摘予定例：区域カウント法は不正確になりうる。灌流シンチグラフィによる評価を推奨（日本GL 2021 CQ5）。
+                </div>
+                <div class="result-caption">区域カウント法による概算。<br>臨床判断の代替ではありません。</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="seg-area" id="segs-lb">
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="lb"> S6</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="lb"> S8</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="lb"> S9</label>
-          <label class="seg-chip"><input type="checkbox" class="seg-cb" data-lobe="lb"> S10</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="y-display" id="y-display">切除区域数 y = 0 / 18</div>
-
-    <div class="warn-box hidden" id="pneu-warn">
-      <strong>全摘予定例についての注意：</strong>肺全摘予定例では局所的な気道閉塞・肺血流障害により区域カウント法は不正確になりうる。日本GL 2021（CQ5）は換気・血流シンチグラフィによる灌流割合ベースの算出を推奨している。本ツールの値は概算として扱うこと。
-    </div>
-
-    <div class="calc-actions">
-      <button type="button" class="btn-primary" id="btn-calc">計算する</button>
-      <button type="button" class="btn-reset" id="btn-reset">リセット</button>
-    </div>
-    <p class="err-msg hidden" id="err-msg"></p>
+      </div><!-- /result-col -->
+    </div><!-- /tool-grid -->
   </section>
 
-  <!-- ===== 2. 計算結果 ===== -->
-  <section id="result">
-    <h2 class="sec-h2">2. 計算結果</h2>
-    <p style="font-size:13px;color:var(--text3)" id="result-placeholder">計算ボタンを押すと結果が表示されます。</p>
-    <div class="hidden" id="result-content">
-      <table class="surgery-table">
-        <thead>
-          <tr><th>指標</th><th>術前値</th><th>PPO 値</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>FEV1 (L)</td><td id="r-fev1-pre">—</td><td id="r-fev1-ppo">—</td></tr>
-          <tr><td>%FEV1 (%)</td><td id="r-pct-pre">—</td><td id="r-pct-ppo">—</td></tr>
-          <tr><td>%DLCO (%)</td><td id="r-dlco-pre">—</td><td id="r-dlco-ppo">—</td></tr>
-        </tbody>
-      </table>
-      <div class="formula-display" id="formula-display"></div>
-      <div id="risk-display"></div>
-      <div class="note-box">リスク層別化の閾値・対応は日本GL 2021（CQ6-8）に基づく。詳細は<a href="/lungatlas/preop-pulmonary.html#risk" style="color:var(--green-dark)">術前呼吸機能評価ページ §5</a>を参照。</div>
+  <!-- 計算方法の注意（折りたたみ） -->
+  <details class="caveat-details" id="caveats">
+    <summary>計算方法の限界・注意事項</summary>
+    <div class="caveat-body">
+      <div class="note-box">
+        <strong>18区域法と19区域法の違い：</strong>区域カウント法の分母には 18 と 19 の2つの慣習がある。18区域法（右10＋左8）は Ali MK et al. 1980 を起源とし、日本GL 2021（CQ5）が採用する。左 S1 と S2 を S1+2 として1区域と数える。19区域法（右10＋左9）は S1・S2 を別々に計上した場合の値で、Brunelli A et al. 2009（ERS/ESTS ガイドライン）等で参照されることがある。いずれも概算であり、使用した方法を明記することが重要。
+      </div>
+      <div class="warn-box">
+        <strong>機能的区域数について：</strong>計算式の y は機能的（換気されている）区域数を指す。無気肺・腫瘍による気道閉塞区域は術前から機能していないため、PPO の低下は式の予測より小さくなりうる。補正の要否は術者が個別に判断すること。
+      </div>
+      <div class="note-box">
+        <strong>区域切除・楔状切除の限界：</strong>日本GL 2021（CQ5）は区域切除・楔状切除後の PPO 予測について十分なエビデンスがないと明記している。区域切除では実測値が式の予測より低くなる傾向があり、楔状切除では約5%の FEV1 低下が報告されている。
+      </div>
+      <div class="warn-box">
+        <strong>全摘例：</strong>肺全摘予定例では気道閉塞・肺血流障害により区域カウント法は不正確になりうる。日本GL 2021 は換気・血流シンチグラフィによる灌流割合ベースの算出を推奨している。
+      </div>
     </div>
-  </section>
+  </details>
 
-  <!-- ===== 3. 計算方法の注意 ===== -->
-  <section id="caveats">
-    <h2 class="sec-h2">3. 計算方法の注意</h2>
-    <!-- 出典: 日本呼吸器外科学会『肺癌手術症例に対する術前呼吸機能評価のガイドライン』2021 CQ5（算出式・pp.15-16）, CQ6-8（リスク層別化）。
-         区域カウント法原典: Ali MK et al. Chest 1980;77:337-42。
-         z=18（右10+左8、左はS1+2を1区域として計8区域、S7欠損）。-->
-    <div class="warn-box">
-      <strong>機能的区域数について：</strong>計算式の y は「機能的（換気されている）区域数」を指す。無気肺・腫瘍による気道閉塞のある区域は既に機能していないため、術後残存機能の減少は区域カウント法の予測より小さくなりうる。補正が必要かどうかは術者が個別に判断すること。
-    </div>
-    <div class="note-box">
-      <strong>区域切除・楔状切除の限界：</strong>日本GL 2021（CQ5）は、区域切除・楔状切除後の PPO 予測について十分なエビデンスがないと明記している。区域切除では実測値が式の予測値より低くなる傾向があり、楔状切除では約5%の FEV1 低下が報告されている。本ツールの区域単位計算は概算として扱うこと。
-    </div>
-    <div class="warn-box">
-      <strong>全摘例：</strong>肺全摘予定例では局所的な気道閉塞・肺血流障害により区域カウント法は不正確になりうる。日本GL 2021 は換気・血流シンチグラフィによる灌流割合ベースの算出を推奨している。
-    </div>
-    <div class="warn-box">
-      <strong>本ツールは教育・概算用：</strong>計算結果は区域カウント法による概算値であり、臨床判断の代替ではない。手術適応・耐術能評価は担当医が個別の状況を総合的に判断すること。
-    </div>
-  </section>
-
-  <!-- ===== 4. 参考文献 ===== -->
-  <section id="references">
-    <h2 class="sec-h2">4. 参考文献</h2>
+  <!-- 参考文献 -->
+  <section id="references" style="margin-top:24px">
+    <h2 class="sec-h2">参考文献</h2>
     <div class="ref-list">
       <ol>
-        <li>日本呼吸器外科学会ガイドライン検討委員会. 肺癌手術症例に対する術前呼吸機能評価のガイドライン. 2021年5月.（CQ5：算出式 / CQ6-8：リスク層別化）</li>
-        <li>Ali MK, Mountain CF, Ewer MS, Johnston D, Haynie TP. Predicting loss of pulmonary function after pulmonary resection for bronchogenic carcinoma. Chest. 1980;77(3):337-42.<!-- PMID 要確認 --></li>
+        <li>日本呼吸器外科学会ガイドライン検討委員会. 肺癌手術症例に対する術前呼吸機能評価のガイドライン. 2021年5月.（CQ5：算出式 / CQ6–8：リスク層別化）</li>
+        <li>Ali MK, Mountain CF, Ewer MS, Johnston D, Haynie TP. Predicting loss of pulmonary function after pulmonary resection for bronchogenic carcinoma. <em>Chest.</em> 1980;77(3):337–42.<!-- PMID 要確認 --> <span style="color:var(--text3)">（18区域法の原典：右10＋左8区域、S1+2を1区域として計上）</span></li>
+        <li>Brunelli A, Charloux A, Bolliger CT, et al. ERS/ESTS clinical guidelines on fitness for radical therapy in lung cancer patients (surgery and chemo-radiotherapy). <em>Eur J Cardiothorac Surg.</em> 2009;36(2):181–184. <a href="https://pubmed.ncbi.nlm.nih.gov/19553108/" target="_blank" rel="noopener">PMID 19553108</a> <span style="color:var(--text3)">（19区域法を含む PPO 算出法の解説）</span></li>
       </ol>
     </div>
   </section>
-</main>
 
-</div>
+</main>
+</div><!-- /layout -->
 
 <footer class="footer">
   <div class="footer-logo"><span>Lung</span>Atlas</div>
@@ -312,81 +407,149 @@ fetch('/lungatlas/nav.html')
 </footer>
 
 <script>
-// 区域カウント法（z = 右10 + 左8 = 18）
+// =====================================================================
+// PPO Calculator — 区域カウント法
+// PPO = preop × (1 − y/z)
 // 出典: 日本GL 2021 CQ5 / Ali MK et al. Chest 1980;77:337-42
-// 左はS1+2を1区域として計8区域（S7欠損）
-const Z_TOTAL = 18;
-const LOBE_IDS    = ['ru', 'rm', 'rl', 'lu', 'll', 'lb'];
-const RIGHT_LOBES = ['ru', 'rm', 'rl'];
-const LEFT_LOBES  = ['lu', 'll', 'lb'];
+// =====================================================================
 
-function getSegCbs(lobeId) {
-  return Array.from(document.querySelectorAll('#segs-' + lobeId + ' input.seg-cb'));
+var currentZ = 18;
+var RIGHT_LOBES = ['ru', 'rm', 'rl'];
+var LEFT_LOBES  = ['lu', 'll', 'lb'];
+var ALL_LOBES   = RIGHT_LOBES.concat(LEFT_LOBES);
+
+// 葉ごとの区域数（区域法別）
+var LOBE_TOTAL = {
+  18: { ru: 3, rm: 2, rl: 5, lu: 2, ll: 2, lb: 4 },
+  19: { ru: 3, rm: 2, rl: 5, lu: 3, ll: 2, lb: 4 }
+};
+
+function segsOf(lobeId) {
+  return Array.from(document.querySelectorAll('#segs-' + lobeId + ' .seg-chip'));
 }
-
-function setLobeSegs(lobeId, checked) {
-  getSegCbs(lobeId).forEach(function(cb) { cb.checked = checked; });
-  var lCb = document.getElementById('lobe-' + lobeId);
-  lCb.checked = checked;
-  lCb.indeterminate = false;
+function selectedSegsOf(lobeId) {
+  return segsOf(lobeId).filter(function(c) { return c.classList.contains('sel'); });
 }
-
-function updateLobeState(lobeId) {
-  var cbs = getSegCbs(lobeId);
-  var n = cbs.filter(function(c) { return c.checked; }).length;
-  var lCb = document.getElementById('lobe-' + lobeId);
-  if (n === 0) {
-    lCb.checked = false; lCb.indeterminate = false;
-  } else if (n === cbs.length) {
-    lCb.checked = true; lCb.indeterminate = false;
-  } else {
-    lCb.checked = false; lCb.indeterminate = true;
-  }
-}
-
 function countY() {
-  return LOBE_IDS.reduce(function(s, id) {
-    return s + getSegCbs(id).filter(function(c) { return c.checked; }).length;
-  }, 0);
+  return ALL_LOBES.reduce(function(s, id) { return s + selectedSegsOf(id).length; }, 0);
 }
-
 function countSide(lobes) {
-  return lobes.reduce(function(s, id) {
-    return s + getSegCbs(id).filter(function(c) { return c.checked; }).length;
-  }, 0);
+  return lobes.reduce(function(s, id) { return s + selectedSegsOf(id).length; }, 0);
+}
+function rightTotal() {
+  return RIGHT_LOBES.reduce(function(s, id) { return s + LOBE_TOTAL[currentZ][id]; }, 0);
+}
+function leftTotal() {
+  return LEFT_LOBES.reduce(function(s, id) { return s + LOBE_TOTAL[currentZ][id]; }, 0);
 }
 
-function updateUI() {
-  var y = countY();
-  document.getElementById('y-display').textContent = '切除区域数 y = ' + y + ' / ' + Z_TOTAL;
-  var isPneu = (countSide(RIGHT_LOBES) === 10) || (countSide(LEFT_LOBES) === 8);
-  document.getElementById('pneu-warn').classList.toggle('hidden', !isPneu);
+function updateLobeBadge(lobeId) {
+  var sel = selectedSegsOf(lobeId).length;
+  var tot = LOBE_TOTAL[currentZ][lobeId];
+  var badge = document.getElementById('badge-' + lobeId);
+  var toggle = document.getElementById('toggle-' + lobeId);
+  var lCb = document.getElementById('lobe-' + lobeId);
+  badge.textContent = sel + '/' + tot;
+  badge.classList.toggle('full', sel === tot && tot > 0);
+  toggle.classList.toggle('lobe-full', sel === tot && tot > 0);
+  toggle.classList.toggle('lobe-partial', sel > 0 && sel < tot);
+  if (sel === 0) { lCb.checked = false; lCb.indeterminate = false; }
+  else if (sel === tot) { lCb.checked = true; lCb.indeterminate = false; }
+  else { lCb.checked = false; lCb.indeterminate = true; }
 }
 
-// 葉チェックボックス → 全区域を同期
+function updateAllBadges() {
+  ALL_LOBES.forEach(function(id) { updateLobeBadge(id); });
+}
+
+function updatePneuWarnings() {
+  var rSel = countSide(RIGHT_LOBES);
+  var lSel = countSide(LEFT_LOBES);
+  var isPneuR = rSel > 0 && rSel === rightTotal();
+  var isPneuL = lSel > 0 && lSel === leftTotal();
+  document.getElementById('pneu-warn-right').classList.toggle('hidden', !isPneuR);
+  document.getElementById('pneu-warn-left').classList.toggle('hidden', !isPneuL);
+  document.getElementById('rc-pneu').classList.toggle('hidden', !(isPneuR || isPneuL));
+}
+
+function autoCalc() {
+  updateAllBadges();
+  updatePneuWarnings();
+  tryCalc();
+}
+
+// 区域チップのクリック
+function bindChipClick(chip) {
+  chip.addEventListener('click', function() {
+    this.classList.toggle('sel');
+    autoCalc();
+  });
+}
+
+function setupChipListeners() {
+  document.querySelectorAll('.seg-chip').forEach(function(chip) { bindChipClick(chip); });
+}
+
+// 葉チェックボックス
 document.querySelectorAll('.lobe-cb').forEach(function(cb) {
   cb.addEventListener('change', function() {
-    setLobeSegs(this.getAttribute('data-lobe'), this.checked);
-    updateUI();
+    var lobeId = this.getAttribute('data-lobe');
+    var check = this.checked;
+    segsOf(lobeId).forEach(function(chip) { chip.classList.toggle('sel', check); });
+    autoCalc();
   });
 });
 
-// 区域チェックボックス → 葉チェックボックスを更新
-document.querySelectorAll('.seg-cb').forEach(function(cb) {
-  cb.addEventListener('change', function() {
-    updateLobeState(this.getAttribute('data-lobe'));
-    updateUI();
+// 18 / 19 区域法の切り替え
+function switchMethod(z) {
+  currentZ = z;
+  document.getElementById('btn-18').classList.toggle('active', z === 18);
+  document.getElementById('btn-19').classList.toggle('active', z === 19);
+  document.getElementById('rc-method-tag').textContent = z + '区域法';
+  document.getElementById('left-lung-title').textContent = z === 18 ? '左肺（全8区域）' : '左肺（全9区域）';
+  document.getElementById('method-desc').textContent = z === 18
+    ? '右10 ＋ 左8（S1+2を1区域と計上）。Ali MK et al. 1980 の原典かつ日本GL 2021（CQ5）採用。'
+    : '右10 ＋ 左9（S1・S2を個別に計上）。ERS/ESTS GL（Brunelli 2009）等で参照される。';
+
+  // 左上葉固有区のチップを再構築
+  var luArea = document.getElementById('segs-lu');
+  var prevSel = selectedSegsOf('lu').map(function(c) { return c.getAttribute('data-seg'); });
+  luArea.innerHTML = '';
+  var luSegs = z === 18 ? ['S1+2', 'S3'] : ['S1', 'S2', 'S3'];
+  luSegs.forEach(function(seg) {
+    var chip = document.createElement('span');
+    chip.className = 'seg-chip';
+    chip.setAttribute('data-lobe', 'lu');
+    chip.setAttribute('data-seg', seg);
+    chip.textContent = seg;
+    // 選択状態の引き継ぎ（S1+2→S1,S2、S1+S2→S1+2）
+    var shouldSel = false;
+    if (z === 19 && prevSel.indexOf('S1+2') >= 0 && (seg === 'S1' || seg === 'S2')) shouldSel = true;
+    else if (z === 18 && seg === 'S1+2' && prevSel.indexOf('S1') >= 0 && prevSel.indexOf('S2') >= 0) shouldSel = true;
+    else if (prevSel.indexOf(seg) >= 0) shouldSel = true;
+    if (shouldSel) chip.classList.add('sel');
+    bindChipClick(chip);
+    luArea.appendChild(chip);
   });
-});
+
+  autoCalc();
+}
+
+document.getElementById('btn-18').addEventListener('click', function() { switchMethod(18); });
+document.getElementById('btn-19').addEventListener('click', function() { switchMethod(19); });
 
 // 全摘ショートカット
 document.getElementById('btn-right-pneu').addEventListener('click', function() {
-  RIGHT_LOBES.forEach(function(id) { setLobeSegs(id, true); });
-  updateUI();
+  RIGHT_LOBES.forEach(function(id) {
+    segsOf(id).forEach(function(chip) { chip.classList.add('sel'); });
+  });
+  autoCalc();
 });
 document.getElementById('btn-left-pneu').addEventListener('click', function() {
-  LEFT_LOBES.forEach(function(id) { setLobeSegs(id, true); });
-  updateUI();
+  LEFT_LOBES.forEach(function(id) {
+    segsOf(id).forEach(function(chip) { chip.classList.add('sel'); });
+  });
+  autoCalc();
 });
 
 // リセット
@@ -394,19 +557,20 @@ document.getElementById('btn-reset').addEventListener('click', function() {
   document.getElementById('fev1').value = '';
   document.getElementById('pct_fev1').value = '';
   document.getElementById('pct_dlco').value = '';
-  LOBE_IDS.forEach(function(id) { setLobeSegs(id, false); });
-  updateUI();
-  document.getElementById('result-content').classList.add('hidden');
-  document.getElementById('result-placeholder').style.display = '';
-  document.getElementById('err-msg').classList.add('hidden');
+  ALL_LOBES.forEach(function(id) {
+    segsOf(id).forEach(function(chip) { chip.classList.remove('sel'); });
+  });
   document.getElementById('err-msg').textContent = '';
+  document.getElementById('rc-data').classList.add('hidden');
+  document.getElementById('rc-empty').classList.remove('hidden');
+  autoCalc();
 });
 
 // 計算
 function round2(v) { return Math.round(v * 100) / 100; }
 function round1(v) { return Math.round(v * 10) / 10; }
 
-document.getElementById('btn-calc').addEventListener('click', function() {
+function tryCalc() {
   var fev1Str = document.getElementById('fev1').value.trim();
   var pctStr  = document.getElementById('pct_fev1').value.trim();
   var dlcoStr = document.getElementById('pct_dlco').value.trim();
@@ -414,76 +578,80 @@ document.getElementById('btn-calc').addEventListener('click', function() {
   var pct  = parseFloat(pctStr);
   var dlco = parseFloat(dlcoStr);
   var y = countY();
-  var errEl = document.getElementById('err-msg');
 
-  var errs = [];
-  if (!fev1Str || isNaN(fev1) || fev1 <= 0) errs.push('術前 FEV1（L）を正しく入力してください。');
-  if (!pctStr  || isNaN(pct)  || pct  <= 0) errs.push('術前 %FEV1（%）を正しく入力してください。');
-  if (y === 0) errs.push('切除する葉または区域を1つ以上選択してください。');
+  var hasFev1 = fev1Str !== '' && !isNaN(fev1) && fev1 > 0;
+  var hasPct  = pctStr  !== '' && !isNaN(pct)  && pct  > 0;
+  var hasDlco = dlcoStr !== '' && !isNaN(dlco) && dlco > 0;
 
-  if (errs.length > 0) {
-    errEl.textContent = errs.join(' ');
-    errEl.classList.remove('hidden');
+  if (!hasFev1 || !hasPct || y === 0) {
+    document.getElementById('rc-data').classList.add('hidden');
+    document.getElementById('rc-empty').classList.remove('hidden');
+    document.getElementById('err-msg').textContent = '';
     return;
   }
-  errEl.classList.add('hidden');
 
-  var ratio    = 1 - y / Z_TOTAL;
+  document.getElementById('err-msg').textContent = '';
+  var ratio    = 1 - y / currentZ;
   var ppoFev1L = round2(fev1 * ratio);
   var ppoPct   = round1(pct  * ratio);
-  var hasDlco  = dlcoStr !== '' && !isNaN(dlco) && dlco > 0;
   var ppoDlco  = hasDlco ? round1(dlco * ratio) : null;
 
-  // テーブル
-  document.getElementById('r-fev1-pre').textContent = fev1.toFixed(2) + ' L';
-  document.getElementById('r-fev1-ppo').textContent = ppoFev1L.toFixed(2) + ' L';
-  document.getElementById('r-pct-pre').textContent  = pct.toFixed(1) + ' %';
-  document.getElementById('r-pct-ppo').textContent  = ppoPct.toFixed(1) + ' %';
-  document.getElementById('r-dlco-pre').textContent = hasDlco ? dlco.toFixed(1) + ' %' : '未入力';
-  document.getElementById('r-dlco-ppo').textContent = hasDlco ? ppoDlco.toFixed(1) + ' %' : '未入力';
+  var fev1El = document.getElementById('rc-fev1');
+  fev1El.textContent = ppoFev1L.toFixed(2) + ' L';
+  fev1El.className = 'ppo-val';
 
-  // 計算式
-  var lines = [
-    '計算式（日本GL 2021 CQ5 / Ali MK et al. Chest 1980）',
-    'PPO FEV1(L) = ' + fev1.toFixed(2) + ' × (1 − ' + y + '/' + Z_TOTAL + ') = ' + ppoFev1L.toFixed(2) + ' L',
-    'PPO %FEV1  = ' + pct.toFixed(1)  + ' × (1 − ' + y + '/' + Z_TOTAL + ') = ' + ppoPct.toFixed(1) + ' %'
-  ];
+  var pctEl = document.getElementById('rc-pct');
+  pctEl.textContent = ppoPct.toFixed(1) + ' %';
+  pctEl.className = 'ppo-val' + (ppoPct < 30 ? ' danger' : ppoPct < 60 ? ' warn' : '');
+
+  var dlcoRow = document.getElementById('rc-dlco-row');
   if (hasDlco) {
-    lines.push('PPO %DLCO  = ' + dlco.toFixed(1) + ' × (1 − ' + y + '/' + Z_TOTAL + ') = ' + ppoDlco.toFixed(1) + ' %');
+    dlcoRow.classList.remove('hidden');
+    var dlcoEl = document.getElementById('rc-dlco');
+    dlcoEl.textContent = ppoDlco.toFixed(1) + ' %';
+    dlcoEl.className = 'ppo-val' + (ppoDlco < 30 ? ' danger' : ppoDlco < 60 ? ' warn' : '');
+  } else {
+    dlcoRow.classList.add('hidden');
   }
-  document.getElementById('formula-display').innerHTML = lines.join('<br>');
 
-  // リスク判定（日本GL 2021 CQ6-8）
-  var dlcoNote = hasDlco ? '' : '（DLCO 未評価）';
+  document.getElementById('rc-segs').textContent = y + ' / ' + currentZ;
+  document.getElementById('rc-ratio').textContent = (ratio * 100).toFixed(1) + ' %';
+
+  // リスク目安（日本GL 2021 CQ6-8）
   var riskLevel;
   if (hasDlco) {
-    if (ppoPct < 30 || ppoDlco < 30)       riskLevel = 2;
-    else if (ppoPct < 60 || ppoDlco < 60)  riskLevel = 1;
-    else                                    riskLevel = 0;
+    if (ppoPct < 30 || ppoDlco < 30)      riskLevel = 2;
+    else if (ppoPct < 60 || ppoDlco < 60) riskLevel = 1;
+    else                                   riskLevel = 0;
   } else {
-    if (ppoPct < 30)       riskLevel = 2;
-    else if (ppoPct < 60)  riskLevel = 1;
-    else                   riskLevel = 0;
+    if (ppoPct < 30)      riskLevel = 2;
+    else if (ppoPct < 60) riskLevel = 1;
+    else                  riskLevel = 0;
   }
+  var dlcoNote = hasDlco ? '' : '（DLCO 未評価）';
 
   var riskHtml;
   if (riskLevel === 0) {
-    riskHtml = '<div class="info-box"><strong>★ 平均的なリスク' + dlcoNote + '</strong><br>' +
-      'PPO %FEV1 &gt;60% かつ PPO %DLCO &gt;60%（日本GL 2021 CQ6）。追加の運動負荷試験は通常不要。</div>';
+    riskHtml = '<div class="risk-banner low"><strong>平均的なリスク' + dlcoNote + '</strong><br>PPO %FEV1 ≥60% かつ PPO %DLCO ≥60%（日本GL 2021 CQ6）。追加の運動負荷試験は通常不要とされる。</div>';
   } else if (riskLevel === 1) {
-    riskHtml = '<div class="warn-box"><strong>▲ 高いリスクの可能性 — 簡易運動負荷試験を考慮' + dlcoNote + '</strong><br>' +
-      'PPO %FEV1 または PPO %DLCO が &lt;60%（両者とも &ge;30%）。シャトル歩行試験・階段昇降試験を考慮（日本GL 2021 CQ7）。</div>';
+    riskHtml = '<div class="risk-banner mid"><strong>リスク上昇の可能性' + dlcoNote + '</strong><br>PPO %FEV1 または %DLCO が &lt;60%（≥30%）。シャトル歩行試験・階段昇降試験等を考慮（日本GL 2021 CQ7）。</div>';
   } else {
-    riskHtml = '<div class="warn-box" style="background:var(--red-light);border-left-color:#b71c1c;color:var(--red-dark)">' +
-      '<strong>▲▲ 非常に高いリスクの可能性 — CPET等で慎重に判断' + dlcoNote + '</strong><br>' +
-      'PPO %FEV1 または PPO %DLCO が &lt;30%。心肺運動負荷試験（CPET）等での慎重な適応判断が必要（日本GL 2021 CQ8）。</div>';
+    riskHtml = '<div class="risk-banner high"><strong>リスク高い可能性' + dlcoNote + '</strong><br>PPO %FEV1 または %DLCO が &lt;30%。心肺運動負荷試験（CPET）等での慎重な適応判断が必要（日本GL 2021 CQ8）。</div>';
   }
-  document.getElementById('risk-display').innerHTML = riskHtml;
+  document.getElementById('rc-risk').innerHTML = riskHtml;
 
-  document.getElementById('result-content').classList.remove('hidden');
-  document.getElementById('result-placeholder').style.display = 'none';
-  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('rc-empty').classList.add('hidden');
+  document.getElementById('rc-data').classList.remove('hidden');
+}
+
+// 入力値変更で自動計算
+['fev1', 'pct_fev1', 'pct_dlco'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', function() { tryCalc(); });
 });
+
+// 初期化
+setupChipListeners();
+updateAllBadges();
 </script>
 
 </body>
