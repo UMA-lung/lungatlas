@@ -32,7 +32,7 @@ Textbook/               # 参考PDFテキスト集（git管理外）
 ## Git運用
 - コミットメッセージは日本語でよい
 - mainブランチに直接pushしてよい
-- pushは必ず医師の確認後に行う
+- pushは必ず医師の確認後に行う（**例外：scraps/ 以下のファイルのみの変更は確認不要で commit・push してよい**）
 
 ## 医学的内容
 - **書かれていないことを推測で補填しない**：テキスト・論文・ユーザーの入力に明記されていない内容（数値・臨床的意見・手術難易度など）は記載しない。根拠のある情報のみ書く
@@ -66,3 +66,12 @@ Textbook/               # 参考PDFテキスト集（git管理外）
 
 ## スキル
 新ページ作成・push・PDF読み込みの手順は ~/.claude/skills/ 以下のSkillを参照。
+
+- new-page: 新ページ雛形の作成
+- trial-table: 臨床試験比較表の作成
+- safe-push: commit・pushの安全手順
+- pdf-cite: PDF引用とページ番号コメント管理
+- medical-content: 医学執筆ルール（禁止表現・参照書式・必須注記）
+- site-check: 公開前QA（構造・リンク・表現・参照の一括点検）
+- translate-en: 英語版（-en.html）の作成・同期
+- ref-check: 参照文献リンク（PMID/DOI）の抽出・検証
