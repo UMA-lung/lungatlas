@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "MARIPOSA-2試験 — osimertinib後 amivantamab + 化学療法（EGFR変異陽性NSCLC）",
+    summary: "osimertinib耐性後のEGFR ex19del/L858R NSCLCでamivantamab + carboplatin-pemetrexedがPFS・ORRを改善した第3相試験。OSは有利な傾向だが規定有意水準に未到達。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/mariposa2.html"
+  },
+  {
     title: "ADAURA試験 — 術後補助 osimertinib vs placebo（EGFR変異陽性NSCLC）",
     summary: "完全切除EGFR exon 19 del/L858R陽性Stage IB–IIIA NSCLCでosimertinibを最長3年投与。DFSに続きOS最終解析でも有意差。術後化学療法との順序とStage IBの扱いは要確認。",
     date: "2026-06-24",
