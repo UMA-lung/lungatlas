@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCOG0802/WJOG4607L試験 — 小型末梢NSCLC 区域切除 vs 肺葉切除 — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。JCOG0802/WJOG4607L試験（小型末梢NSCLC、区域切除 vs 肺葉切除）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>JCOG0802/WJOG4607L試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">JCOG0802/WJOG4607L試験 — 小型末梢NSCLC 区域切除 vs 肺葉切除</h1>
+
+  <p class="scrap-summary">臨床病期IA、腫瘍径2cm以下、CTR&gt;0.5の小型末梢NSCLCで、区域切除と肺葉切除を比較した日本発第3相試験。区域切除でOS非劣性・優越性が示された一方、局所再発は高率だった。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/35461558/" target="_blank" rel="noopener">Lancet 2022（PMID 35461558）</a> ／
+      <a href="https://doi.org/10.1016/S0140-6736(21)02333-3" target="_blank" rel="noopener">DOI 10.1016/S0140-6736(21)02333-3</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+    <h2>1. 試験概要</h2>
+    <p>JCOG0802/WJOG4607L試験（UMIN000002317）は、小型末梢NSCLCに対する区域切除と肺葉切除を比較した、日本70施設の多施設共同・非盲検・第3相・ランダム化・非劣性試験。対象は臨床病期IA、腫瘍径2cm以下、consolidation-to-tumour ratio（CTR）&gt;0.5の末梢NSCLC。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>多施設共同・非盲検・第3相・ランダム化・非劣性試験</td></tr>
+        <tr><td>施設</td><td>日本70施設</td></tr>
+        <tr><td>対象</td><td>臨床病期IA NSCLC、腫瘍径≤2cm、CTR&gt;0.5、小型末梢病変</td></tr>
+        <tr><td>割付</td><td>肺葉切除 vs 区域切除、1:1</td></tr>
+        <tr><td>症例数</td><td>1106例（肺葉切除554例 / 区域切除552例、ITT）</td></tr>
+        <tr><td>主要評価項目</td><td>OS（intention-to-treat解析）</td></tr>
+        <tr><td>非劣性マージン</td><td>HR 95%CI上限 1.54</td></tr>
+        <tr><td>主な副次評価項目</td><td>術後呼吸機能、RFS、局所再発割合、有害事象、区域切除完遂割合、入院期間、胸腔ドレーン留置期間、手術時間、出血量、自動縫合器使用数など</td></tr>
+        <tr><td>試験登録番号</td><td>UMIN000002317</td></tr>
+        <tr><td>Funding</td><td>National Cancer Center Research and the Ministry of Health, Labour, and Welfare of Japan</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — OS / RFS</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">94.3% vs 91.1%</div>
+        <div class="stat-label">5年OS率</div>
+        <div class="stat-vs">区域切除 vs 肺葉切除</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.663</div>
+        <div class="stat-label">OSハザード比</div>
+        <div class="stat-vs">95%CI 0.474–0.927</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">88.0% vs 87.9%</div>
+        <div class="stat-label">5年RFS率</div>
+        <div class="stat-vs">区域切除 vs 肺葉切除、HR 0.998</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>区域切除</th><th>肺葉切除</th><th>結果</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>5年OS</td><td class="num">94.3%</td><td class="num">91.1%</td><td>HR 0.663（95%CI 0.474–0.927）。非劣性p&lt;0.0001、優越性p=0.0082</td></tr>
+        <tr><td>5年RFS</td><td class="num">88.0%</td><td class="num">87.9%</td><td>HR 0.998（95%CI 0.753–1.323）、p=0.9889</td></tr>
+        <tr><td>局所再発割合</td><td class="num">10.5%</td><td class="num">5.4%</td><td>p=0.0018。区域切除で高率</td></tr>
+        <tr><td>30日/90日死亡</td><td colspan="2" class="num">なし</td><td>原著抄録に明記</td></tr>
+        <tr><td>Grade 2以上術後合併症</td><td>148例（27%）</td><td>142例（26%）</td><td>頻度は同程度</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. 呼吸機能・局所再発</h2>
+    <p>1年時点のFEV1低下量の群間差は中央値3.5%で、統計学的には有意（p&lt;0.0001）だったが、事前に定めた臨床的意義の閾値10%には達しなかった。一方、局所再発割合は区域切除10.5%、肺葉切除5.4%で、区域切除で高率だった。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>OSでは区域切除が良好だった一方、局所再発は区域切除で高率。区域切除を選ぶ場合、腫瘍局在、十分な切除マージン、区域間面、リンパ節評価を含めた症例選択が重要。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>本試験の対象は腫瘍径2cm以下かつCTR&gt;0.5の末梢NSCLCであり、GGO主体病変、2cmを超える病変、中枢病変、臨床的リンパ節転移疑い例へそのまま一般化しない。</span>
+      </div>
+    </div>
+
+    <h2>4. 後続解析</h2>
+    <p>JCOG0802/WJOG4607Lからは、pure-solid病変、局所領域再発リスク、病理学的浸潤因子を有する症例などに関する後続解析が報告されている。これらは探索的・post hoc解析として扱い、主論文とは分けて解釈する。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>解析</th><th>主な内容</th><th>出典</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>pure-solid解析</td><td>radiologically pure-solid（CTR 1.0）症例のpost hoc supplemental analysis。OS、RFS、死因、再発パターンを解析。</td><td>Lancet Respir Med 2024、PMID 38184010</td></tr>
+        <tr><td>局所領域再発リスク解析</td><td>区域切除後の局所領域再発リスク因子としてpure-solid所見、margin distance&lt;tumor size、男性などを報告。</td><td>J Thorac Oncol 2025、PMID 39395662</td></tr>
+        <tr><td>病理学的浸潤因子解析</td><td>リンパ管・血管・胸膜浸潤やリンパ節転移などを有する症例のpost hoc supplementary analysis。</td><td>J Thorac Oncol 2026、PMID 42119729</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: 後続解析の本文・Supplementを確認し、実臨床の区域切除適応に組み込むかは別途検討 -->
+
+    <h2>5. 位置づけと注意点</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">対象</span>
+        <span>臨床病期IA、腫瘍径≤2cm、CTR&gt;0.5の小型末梢NSCLCが対象。</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">OS</span>
+        <span>区域切除は肺葉切除に対してOS非劣性を満たし、原著解析では優越性も示された。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">再発</span>
+        <span>RFSは同程度だが、局所再発割合は区域切除で高率。OSだけで術式を単純化しない。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">比較</span>
+        <span>CALGB/Alliance 140503とは対象、術式（楔状切除を含むか）、評価項目、非劣性設計が異なる。直接比較ではない点に注意。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">GL</span>
+        <span>日本肺癌診療ガイドライン、NCCN、ESMOでの推奨文言・対象範囲は要確認。</span>
+      </div>
+    </div>
+
+    <h2>6. 要確認メモ</h2>
+    <ul>
+      <li><!-- 要確認: 原著本文で登録基準の詳細（画像条件、リンパ節評価、術式規定、切除マージン規定）を確認 -->登録基準・術式規定・切除マージン規定</li>
+      <li><!-- 要確認: 原著Supplementで区域別・腫瘍局在別・術式変換例の詳細を確認 -->区域別、腫瘍局在別、術式変換例の詳細</li>
+      <li><!-- 要確認: リンパ節郭清/サンプリングの規定と実施状況を確認 -->リンパ節郭清/サンプリングの規定と実施状況</li>
+      <li><!-- 要確認: 日本肺癌診療GL 2025、NCCN、ESMOの推奨文言を確認 -->各ガイドラインでの推奨文言・対象範囲</li>
+      <li><!-- 要確認: CALGB140503との比較表を別途作成 -->CALGB/Alliance 140503との比較</li>
+    </ul>
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献・情報源</h2>
+    <ol>
+      <li>Saji H, Okada M, Tsuboi M, et al; JCOG0802/WJOG4607L Investigators. Segmentectomy versus lobectomy in small-sized peripheral non-small-cell lung cancer (JCOG0802/WJOG4607L): a multicentre, open-label, phase 3, randomised, controlled, non-inferiority trial. <em>Lancet.</em> 2022;399:1607-1617. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35461558/" target="_blank" rel="noopener">35461558</a> / DOI: <a href="https://doi.org/10.1016/S0140-6736(21)02333-3" target="_blank" rel="noopener">10.1016/S0140-6736(21)02333-3</a></li>
+      <li>Suzuki K, Saji H, Aokage K, et al. Segmentectomy versus lobectomy in small-sized peripheral non-small-cell lung cancer with radiologically pure-solid appearance in Japan (JCOG0802/WJOG4607L): a post-hoc supplemental analysis. <em>Lancet Respir Med.</em> 2024. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38184010/" target="_blank" rel="noopener">38184010</a> / DOI: <a href="https://doi.org/10.1016/S2213-2600(23)00382-X" target="_blank" rel="noopener">10.1016/S2213-2600(23)00382-X</a></li>
+      <li>Saji H, Okada M, et al. Risk Factors for Locoregional Relapse After Segmentectomy: Supplementary Analysis of the JCOG0802/WJOG4607L Trial. <em>J Thorac Oncol.</em> 2025. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/39395662/" target="_blank" rel="noopener">39395662</a> / DOI: <a href="https://doi.org/10.1016/j.jtho.2024.10.002" target="_blank" rel="noopener">10.1016/j.jtho.2024.10.002</a></li>
+      <li>Clinical trial registry: UMIN000002317.</li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

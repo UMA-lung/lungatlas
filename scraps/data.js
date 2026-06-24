@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "JCOG0802/WJOG4607L試験 — 小型末梢NSCLC 区域切除 vs 肺葉切除",
+    summary: "臨床病期IA、腫瘍径2cm以下、CTR>0.5の小型末梢NSCLCで区域切除と肺葉切除を比較。区域切除でOS非劣性・優越性が示された一方、局所再発は高率。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/jcog0802.html"
+  },
+  {
     title: "ALINA試験 — 術後補助 alectinib vs 白金製剤化学療法（ALK陽性NSCLC）",
     summary: "完全切除ALK陽性Stage IB（4cm以上）–IIIA NSCLCでalectinibを24か月投与し、白金製剤化学療法よりDFSを改善した第3相試験。OSは未成熟。",
     date: "2026-06-24",
