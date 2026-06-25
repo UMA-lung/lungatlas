@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "JCOG0201 — 薄層CT所見（CTR）による早期肺腺癌の病理的非侵襲性予測：前向きコホート研究",
+    summary: "早期末梢性肺癌でCTR≤0.25かつ≤2cmが病理的非侵襲性の高特異度予測因子（98.7%）。JCOG0802・0804の画像診断的基盤。RCTではなく前向きコホート研究。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/jcog0201.html"
+  },
+  {
     title: "CALGB 140503試験 — 末梢性 Stage IA NSCLC（≤2cm）：縮小切除 vs 肺葉切除 非劣性RCT",
     summary: "末梢性2cm以下の病理N0確認NSCLCでsublobar resectionが肺葉切除に対しDFSで非劣性を示した国際第3相試験。wedge・区域切除を含む。JCOG0802と並ぶ縮小切除の2大RCT。",
     date: "2026-06-24",

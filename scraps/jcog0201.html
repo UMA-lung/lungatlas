@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCOG0201 — 薄層CT所見（CTR）による早期肺腺癌の病理的非侵襲性予測 — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。JCOG0201（CTRによる早期肺腺癌の病理的非侵襲性予測）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>JCOG0201</span>
+  </nav>
+
+  <h1 class="scrap-h1">JCOG0201 — 薄層CT所見（CTR）による早期肺腺癌の病理的非侵襲性予測：前向きコホート研究</h1>
+
+  <p class="scrap-summary">早期末梢性肺癌でCTR（consolidation/tumor ratio）≤0.25かつ≤2cmが病理的非侵襲性の高特異度予測因子。JCOG外科試験シリーズ（0802・0804）の画像診断的基盤となった前向き研究。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/21325976/" target="_blank" rel="noopener">JTO 2011（PMID 21325976）</a>
+      ／ <a href="https://doi.org/10.1097/JTO.0b013e31821038ab" target="_blank" rel="noopener">DOI 10.1097/JTO.0b013e31821038ab</a>
+      ／ JTCVS 2013（PMID: <!-- 要確認: JTCVS 2013;146:24-30より確認 -->未確認）
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+    <p>JCOG0201は、薄層CT（thin-section CT）のconsolidation/tumor ratio（CTR）が末梢性早期肺腺癌の病理的非侵襲性（リンパ節転移・脈管侵襲なし）を予測できるかを検証した前向き多施設コホート研究。<strong>ランダム化比較試験ではない。</strong>この試験の結果は後継のJCOG外科試験シリーズ（JCOG0804・JCOG0802）の患者選択基準となった。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>前向き多施設コホート研究（非ランダム化）</td></tr>
+        <tr><td>対象</td><td>Clinical T1N0M0 末梢性肺癌（≤3cm）・薄層CT評価後に肺葉切除＋リンパ節郭清施行</td></tr>
+        <tr><td>参加施設</td><td>31施設</td></tr>
+        <tr><td>登録期間</td><td>2002年12月〜2004年5月</td></tr>
+        <tr><td>登録数 / 解析対象</td><td>登録811例 → 解析対象545例（腺癌で術後病理確認済み）</td></tr>
+        <tr><td>主要評価項目</td><td>薄層CTのCTR（consolidation/tumor ratio）による病理的非侵襲性の予測精度（特異度）</td></tr>
+        <tr><td>定義：病理的非侵襲性</td><td>リンパ節転移なし・脈管侵襲なし・リンパ管侵襲なし</td></tr>
+        <tr><td>スポンサー</td><td>日本臨床腫瘍研究グループ（JCOG）・公的資金</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. CTR基準と主要結果</h2>
+    <p>CTR（consolidation/tumor ratio）は薄層CTにおいて以下のように定義される：</p>
+    <p><strong>CTR = 最大consolidation径 ÷ 最大腫瘍径</strong></p>
+    <p>純GGO（pure ground-glass opacity）の場合 CTR = 0、純充実性結節の場合 CTR = 1.0 となる。</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">98.7%</div>
+        <div class="stat-label">病理的非侵襲性予測の特異度</div>
+        <div class="stat-vs">CTR ≤0.25 かつ 腫瘍径 ≤2.0cm</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">感度・精度（要確認）</div>
+        <div class="stat-vs">JTO 2011本文より確認</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">未達成</div>
+        <div class="stat-label">主要評価項目（統計的有意水準）</div>
+        <div class="stat-vs">CTR ≤0.5 かつ ≤3cm のカットオフ</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>カットオフ</th><th>特異度</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CTR ≤0.25 かつ 腫瘍径 ≤2.0cm</td><td class="num">98.7%</td><td>後継試験（JCOG0804・JCOG0802）の患者選択基準となったサブグループ</td></tr>
+        <tr><td>CTR ≤0.5 かつ 腫瘍径 ≤3.0cm（主要評価項目）</td><td class="num"><!-- 要確認: JTO 2011 Tableより確認 --></td><td>主要評価項目の目標値（統計的有意水準）：未達成</td></tr>
+      </tbody>
+    </table>
+
+    <p>主要評価項目の統計的検証は達成されなかったが、サブグループ解析でCTR ≤0.25（≤2cm）の高特異度（98.7%）が示されたことが、後継試験の設計根拠となった。</p>
+
+    <!-- 要確認: 感度・陽性的中率・陰性的中率の数値はJTO 2011 Table 2/3より確認 -->
+    <!-- 要確認: false-negative症例（CTR低値でも病理侵襲性あり）の比率はJTO 2011より確認 -->
+
+    <h2>3. 生存解析（JTCVS 2013）</h2>
+    <p>同一コホートの生存解析（中央値フォロー7.1年、範囲0〜8.5年）。全545例が肺葉切除を施行しており、縮小切除の生存データではない点に注意。</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">545例</div>
+        <div class="stat-label">解析対象（腺癌）</div>
+        <div class="stat-vs">男性233、女性312、中央値年齢62歳</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">CTR &lt;0.5（≤3cm）の予後</div>
+        <div class="stat-vs">JTCVS 2013より確認</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">CTR ≤0.25（≤2cm）の予後</div>
+        <div class="stat-vs">JTCVS 2013より確認</div>
+      </div>
+    </div>
+
+    <!-- 要確認: 5年OS率・5年RFSの数値（CTR別）はJTCVS 2013 Figure/Tableより確認 -->
+    <!-- 要確認: 局所再発率・遠隔転移率はJTCVS 2013より確認 -->
+
+    <h2>4. 後継試験への展開</h2>
+    <p>JCOG0201の結果を受けて、CTRを軸に以下の後継試験が設計された：</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">0804</span>
+        <span><strong>JCOG0804/WJOG4507L</strong>：CTR ≤0.25（≤2cm）→ 楔状切除（wide wedge resection）の有効性を検証した単腕phase II試験。5年RFS 99.7%という結果。</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">0802</span>
+        <span><strong>JCOG0802/WJOG4607L</strong>：CTR &gt;0.25（≤2cm）→ 区域切除 vs 肺葉切除の非劣性 phase III RCT（Lancet 2022）。区域切除がOSで肺葉切除を上回る結果。</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">1211</span>
+        <span><strong>JCOG1211</strong>：CTR ≤0.5（≤3cm）→ 区域切除の有効性を検証した非ランダム化検証試験。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">TNM</span>
+        <span>JCOG0201の「CTR」という概念は、第8版TNM分類における clinical T分類（solid sizeを基準とした T分類）の導入に理論的根拠を提供した。</span>
+      </div>
+    </div>
+
+    <!-- 要確認: JCOG0804・JCOG1211の最終報告PMIDを追記可能 -->
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Suzuki K, Koike T, Asakawa T, et al; Japan Lung Cancer Surgical Study Group (JCOG LCSSG). A prospective radiological study of thin-section computed tomography to predict pathological noninvasiveness in peripheral clinical IA lung cancer (Japan Clinical Oncology Group 0201). <em>J Thorac Oncol.</em> 2011;6(4):751-756. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/21325976/" target="_blank" rel="noopener">21325976</a> / DOI: <a href="https://doi.org/10.1097/JTO.0b013e31821038ab" target="_blank" rel="noopener">10.1097/JTO.0b013e31821038ab</a></li>
+      <li>Asamura H, Hishida T, Suzuki K, et al. Radiographically determined noninvasive adenocarcinoma of the lung: survival outcomes of Japan Clinical Oncology Group 0201. <em>J Thorac Cardiovasc Surg.</em> 2013;146:24-30. PMID: <!-- 要確認 --> / DOI: <!-- 要確認: JTCVS 2013;146:24-30より確認 --></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
