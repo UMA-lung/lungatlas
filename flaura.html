@@ -214,7 +214,15 @@ body {
 <script>
 fetch('/lungatlas/nav.html')
   .then(function(r){ return r.text(); })
-  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
 </script>
 
 <main class="main">
