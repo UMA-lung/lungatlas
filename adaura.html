@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADAURA 詳細解説 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px; flex-shrink: 0; background: var(--surface);
+  border-right: 1px solid var(--border); padding: 20px 0;
+  position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
+}
+.sb-item {
+  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
+  text-decoration: none; border-left: 2px solid transparent;
+  transition: all .15s; cursor: pointer; line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light); color: var(--green-dark);
+  font-weight: 500; border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
+  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+.sb-sub.active { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 900px; }
+
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+.crumb a { color: var(--text3); text-decoration: none; }
+.crumb a:hover { color: var(--green-mid); }
+
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+
+/* Hero banner */
+.hero-banner {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  color: #fff; border-radius: var(--radius-lg); padding: 22px 26px;
+  margin-bottom: 20px;
+}
+.hero-message {
+  font-size: 15px; font-weight: 600; line-height: 1.5; margin-bottom: 10px;
+}
+.hero-sub {
+  font-size: 12.5px; color: rgba(255,255,255,0.85); line-height: 1.8;
+}
+
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+
+.sec-h3 {
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  margin: 20px 0 10px; padding-left: 10px;
+  border-left: 2px solid var(--border2);
+}
+
+/* Note / Info boxes */
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
+}
+.info-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+.caution-box {
+  background: var(--red-light); border-left: 3px solid #c0392b;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--red-dark); line-height: 1.75; margin: 14px 0;
+}
+.tip-box {
+  background: var(--blue-light); border-left: 3px solid #1a6fbd;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0;
+}
+.warn-box {
+  background: var(--red-light); border-left: 3px solid #c0392b;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--red-dark); line-height: 1.75; margin: 14px 0;
+}
+
+/* Cards */
+.trial-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
+}
+.tc-top { padding: 18px 20px 16px; border-bottom: 1px solid var(--border); }
+.tc-body { padding: 16px 20px; }
+.tc-meta {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+.trial-link {
+  font-size: 13.5px; font-weight: 600; color: var(--green-dark);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); letter-spacing: .01em;
+}
+.trial-link:hover { opacity: .7; }
+.trial-link .ext { font-size: 11px; opacity: .7; }
+.jbadge {
+  font-size: 10.5px; font-weight: 500; padding: 2px 9px;
+  border-radius: 8px; white-space: nowrap;
+}
+.j-nejm  { background: var(--blue-light); color: var(--blue-dark); }
+.j-jco   { background: var(--purple-light); color: var(--purple-dark); }
+.j-annoncol { background: var(--amber-light); color: var(--amber-dark); }
+.ybadge {
+  font-size: 10.5px; color: var(--text3);
+  background: var(--surface2); padding: 2px 8px; border-radius: 8px;
+}
+.drug-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.drug-sub { font-size: 12.5px; color: var(--text2); margin-bottom: 12px; }
+
+/* Stat boxes */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 10px 13px; }
+.stat-val { font-size: 17px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* Tables */
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  margin-bottom: 12px; overflow-x: auto; display: block;
+}
+.data-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  background: var(--surface2); border-bottom: 2px solid var(--border2);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: top; line-height: 1.6;
+}
+.data-table tr:nth-child(even) td { background: var(--green-pale); }
+.data-table tr:last-child td { border-bottom: none; }
+.td-key { font-weight: 500; color: var(--text); white-space: nowrap; }
+.td-osi { color: var(--green-dark); font-weight: 500; }
+.td-placebo { color: var(--text3); }
+
+sup.ref {
+  font-size: 9px; color: var(--green-dark); font-weight: 600;
+  vertical-align: super; font-family: var(--mono);
+}
+
+/* Reference list */
+.ref-list {
+  list-style: none; counter-reset: ref-counter;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ref-list li {
+  counter-increment: ref-counter;
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 11.5px; color: var(--text2); line-height: 1.65;
+}
+.ref-list li::before {
+  content: '[' counter(ref-counter) ']';
+  font-family: var(--mono); font-size: 10.5px; color: var(--green-dark);
+  font-weight: 600; flex-shrink: 0; padding-top: 1px;
+  min-width: 28px;
+}
+.ref-list a { color: var(--green-mid); text-decoration: none; }
+.ref-list a:hover { text-decoration: underline; }
+
+/* Trial meta row */
+.trial-meta-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.trial-meta-item { background: var(--surface2); border-radius: 6px; padding: 6px 10px; font-size: 11px; }
+.meta-label { font-weight: 600; color: var(--text3); margin-right: 4px; }
+.meta-val { color: var(--text2); }
+.meta-val a { color: var(--green-dark); text-decoration: none; }
+
+/* GL list */
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.gl-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  border-radius: 8px; padding: 9px 13px; font-size: 12px; line-height: 1.65;
+}
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* Body text */
+.trial-desc { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+.body-text { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+
+/* Bullet lists */
+.point-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.point-list li {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 12.5px; color: var(--text2); line-height: 1.65;
+}
+.point-list li::before { content: '•'; color: var(--green-mid); flex-shrink: 0; font-weight: 600; }
+.point-list.pros li::before { color: var(--green-dark); }
+.point-list.cons li::before { content: '△'; color: #c0392b; font-size: 11px; }
+
+/* Review card */
+.review-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 16px;
+}
+.review-half {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+}
+.review-col {
+  background: var(--surface2); border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.review-col-title {
+  font-size: 11.5px; font-weight: 600; margin-bottom: 10px;
+  letter-spacing: .03em;
+}
+.rc-pros { color: var(--green-dark); }
+.rc-cons { color: var(--red-dark); }
+
+/* Comp table (design table) */
+.comp-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  margin-bottom: 12px;
+}
+.comp-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  background: var(--surface2); border-bottom: 2px solid var(--border2);
+}
+.comp-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: top; line-height: 1.6;
+}
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table .ct-key { font-weight: 500; color: var(--text); width: 180px; }
+
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 18px 40px; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .review-half { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-head">術後補助療法</div>
+      <a class="sb-item" href="/lungatlas/adjuvant.html">術後補助療法</a>
+      <a class="sb-sub active" href="/lungatlas/adaura.html">└ ADAURA 詳細</a>
+      <a class="sb-sub" href="/lungatlas/adjuvant.html#p-alina">└ ALINA（ALK）</a>
+      <a class="sb-sub" href="/lungatlas/adjuvant.html#p-impower">└ IMpower010</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-head">このページ</div>
+      <a class="sb-sub" href="#trial-overview">試験概要</a>
+      <a class="sb-sub" href="#background">試験背景</a>
+      <a class="sb-sub" href="#design">試験デザイン</a>
+      <a class="sb-sub" href="#eligibility">対象患者・適格基準</a>
+      <a class="sb-sub" href="#dfs-data">主要データ表（DFS）</a>
+      <a class="sb-sub" href="#os-data">OS最終解析</a>
+      <a class="sb-sub" href="#stage-subgroup">Stage別サブグループ</a>
+      <a class="sb-sub" href="#chemo-subgroup">術後化学療法有無別</a>
+      <a class="sb-sub" href="#subgroup">全サブグループ解析</a>
+      <a class="sb-sub" href="#cns-recurrence">CNS再発・再発パターン</a>
+      <a class="sb-sub" href="#surgical">外科的側面</a>
+      <a class="sb-sub" href="#safety">安全性</a>
+      <a class="sb-sub" href="#guidelines">位置づけ・GL</a>
+      <a class="sb-sub" href="#neutral-review">総合評価</a>
+      <a class="sb-sub" href="#references">参考文献</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">化学療法 › <a href="/lungatlas/adjuvant.html">術後補助療法</a> › <span>ADAURA</span></div>
+    <div class="updated">最終更新 2026年6月 — NEJM 2020（DFS初回）・JCO 2023（DFS最終）・NEJM 2023（OS最終解析）基準</div>
+    <h1 class="art-h1" id="trial-overview">ADAURA<br>詳細解説</h1>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-message">
+        完全切除EGFR変異陽性（exon19del/L858R）NSCLCに対する術後補助オシメルチニブ（最長3年）が、DFSに続きOS最終解析でも有意な延長を示したPhase III試験。EGFR陽性早期肺癌の術後補助療法の中心的エビデンス。
+      </div>
+      <div class="hero-sub">
+        ADAURAはStage IB–IIIA（AJCC第7版）の完全切除EGFR変異陽性NSCLCを対象に、術後補助オシメルチニブ80mg/日 vs プラセボを比較した国際共同・二重盲検・プラセボ対照Phase III試験。術後白金併用化学療法は施行・不施行を問わない。DFS（主要評価Stage II–IIIA）でHR 0.17、OS最終解析でHR 0.49と一貫したベネフィットを示した。プラセボ対照であり、術後化学療法を置換する設計ではない点に注意。
+      </div>
+    </div>
+
+    <!-- 試験概要カード -->
+    <div class="trial-card">
+      <div class="tc-top">
+        <div class="tc-meta">
+          <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2027071" target="_blank" rel="noopener">ADAURA（DFS）<span class="ext">↗</span></a>
+          <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2304594" target="_blank" rel="noopener" style="margin-left:4px">ADAURA（OS最終）<span class="ext">↗</span></a>
+          <span class="jbadge j-nejm">NEJM 2020（DFS）</span>
+          <span class="jbadge j-jco">JCO 2023（DFS最終）</span>
+          <span class="jbadge j-nejm">NEJM 2023（OS最終）</span>
+          <span class="ybadge">Phase III · n=682 · Stage IB–IIIA（AJCC第7版）</span>
+        </div>
+        <div class="drug-title">オシメルチニブ 80mg/日 経口 ×最長3年 → vs プラセボ</div>
+        <div class="drug-sub">完全切除NSCLC · EGFR exon19del/L858R · Stage IB–IIIA（AJCC第7版）· 術後白金併用化学療法は施行・不施行を問わない</div>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-val">HR 0.17</div>
+            <div class="stat-label">DFS（Stage II–IIIA, 主要評価）</div>
+            <div class="stat-vs">vs プラセボ（99.06%CI 0.11–0.26）NEJM 2020<sup class="ref">[1]</sup></div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">HR 0.49</div>
+            <div class="stat-label">OS（IB–IIIA, 最終解析）</div>
+            <div class="stat-vs">5年OS 88% vs 78%・NEJM 2023<sup class="ref">[3]</sup></div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">HR 0.18</div>
+            <div class="stat-label">CNS DFS（IB–IIIA全体）</div>
+            <div class="stat-vs">0.10–0.33・中枢神経再発抑制<sup class="ref">[1]</sup></div>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="trial-meta-row">
+          <div class="trial-meta-item"><span class="meta-label">PMID（DFS初回）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/32955177/" target="_blank" rel="noopener">32955177 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">PMID（OS最終）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/37272535/" target="_blank" rel="noopener">37272535 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">PMID（DFS最終・JCO）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/36720083/" target="_blank" rel="noopener">36720083 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">Stage分類</span><span class="meta-val">AJCC第7版</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 試験背景 -->
+    <h2 class="sec-h2" id="background">試験背景</h2>
+    <div class="note-box">
+      <p style="margin-bottom:8px">切除可能NSCLCは全体の約30%を占める。完全切除後も再発リスクは高く、Stage IBで約45%、Stage IIIで約76%が再発または死亡する（術後化学療法施行の有無を問わず；LACE meta-analysis等）。</p>
+      <p style="margin-bottom:8px">術後白金併用化学療法による上乗せは限定的で、再発・死亡リスクの相対的減少は約16%、5年死亡リスクの絶対的改善は約5%にとどまる（LACE meta-analysis）。</p>
+      <p style="margin-bottom:8px">第1世代EGFR-TKI（ゲフィチニブ・エルロチニブ）を術後補助に用いたADJUVANT/CTONG1104試験等はDFS改善を示したが、OS延長は示せず、CNS再発が多い傾向があった。</p>
+      <p>オシメルチニブは第3世代・不可逆的EGFR-TKIで、感受性変異（exon19del/L858R）とT790M耐性変異を阻害し、血液脳関門（BBB）透過性が高い。進行期の1次治療試験（FLAURA）でゲフィチニブ・エルロチニブに対しPFS・OS優越性を示した。これを背景に術後補助への応用が検証された。</p>
+    </div>
+
+    <!-- 3. 試験デザイン -->
+    <h2 class="sec-h2" id="design">試験デザイン</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th class="ct-key">項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ct-key">正式名称</td>
+              <td>ADAURA（NCT02511106）</td>
+            </tr>
+            <tr>
+              <td class="ct-key">試験相</td>
+              <td>第III相・国際共同・二重盲検・プラセボ対照・無作為化</td>
+            </tr>
+            <tr>
+              <td class="ct-key">無作為化比</td>
+              <td>1:1（osimertinib 339例 / placebo 343例）</td>
+            </tr>
+            <tr>
+              <td class="ct-key">盲検化</td>
+              <td>二重盲検（患者・治験担当医とも盲検）</td>
+            </tr>
+            <tr>
+              <td class="ct-key">層別化因子</td>
+              <td>病期（IB/II/IIIA）× EGFR変異型（Ex19del/L858R）× 人種（アジア/非アジア）</td>
+            </tr>
+            <tr>
+              <td class="ct-key">投与</td>
+              <td>オシメルチニブ80mg/日 または プラセボ、最長3年（再発・中止基準到達まで）</td>
+            </tr>
+            <tr>
+              <td class="ct-key">主要評価項目</td>
+              <td>Stage II–IIIA集団のDFS（治験担当医評価）</td>
+            </tr>
+            <tr>
+              <td class="ct-key">副次評価項目</td>
+              <td>Stage IB–IIIA全体のDFS、OS、安全性、QOL</td>
+            </tr>
+            <tr>
+              <td class="ct-key">探索的評価項目</td>
+              <td>再発部位（CNS含む）、CNS再発までの時間、後治療の種類・時間</td>
+            </tr>
+            <tr>
+              <td class="ct-key">スポンサー</td>
+              <td>AstraZeneca</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="info-box">
+      初回DFS解析は、独立データモニタリング委員会の勧告により予定より約2年早く非盲検化・報告された（2020年4月勧告、data cutoff 2020年1月17日）。OS解析は別途planned final analysisとして実施（data cutoff 2023年1月27日、約20%成熟度）。
+    </div>
+
+    <!-- 4. 対象患者・適格基準 -->
+    <h2 class="sec-h2" id="eligibility">対象患者・適格基準</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th class="ct-key">区分</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ct-key">組み入れ</td>
+              <td>18歳以上（日本・台湾は20歳以上）／WHO PS 0–1／原発非扁平上皮NSCLC（腺癌など）／病理病期 IB・II・IIIA（AJCC第7版）／中央検査でEGFR exon19delまたはL858R確認／完全切除（断端陰性必須）／適切なリンパ節郭清</td>
+            </tr>
+            <tr>
+              <td class="ct-key">主な除外</td>
+              <td>区域切除・楔状切除のみ（肺葉以上の切除が必須）／術前化学療法／術前・術後・予定放射線療法／既往のneo/adjuvant EGFR-TKI使用</td>
+            </tr>
+            <tr>
+              <td class="ct-key">日本での制限</td>
+              <td><strong>日本ではStage IB症例は除外</strong>（Supplementary Methodsに明記）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note-box">
+      術後白金併用化学療法は無作為化前に施行可（必須ではない）。化学療法施行の判断は無作為化登録前に医師・患者が決定した。手術から無作為化までの間隔は、化学療法施行例で最大26週、非施行例で最大10週。
+    </div>
+
+    <!-- 5. 主要データ表 — DFS -->
+    <h2 class="sec-h2" id="dfs-data">有効性 — DFS</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">エンドポイント</th>
+              <th style="min-width:160px">オシメルチニブ</th>
+              <th style="min-width:120px">プラセボ</th>
+              <th style="min-width:220px">HR (CI) / 出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">DFS Stage II–IIIA（24ヶ月・主要評価）</td>
+              <td class="td-osi">90%</td>
+              <td class="td-placebo">44%</td>
+              <td>HR 0.17（99.06%CI 0.11–0.26）p&lt;0.001 · NEJM 2020<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">DFS IB–IIIA全体（24ヶ月）</td>
+              <td class="td-osi">89%</td>
+              <td class="td-placebo">52%</td>
+              <td>HR 0.20（99.12%CI 0.14–0.30）p&lt;0.001 · NEJM 2020<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">中央値DFS Stage II–IIIA</td>
+              <td class="td-osi">NR（38.8–NC）</td>
+              <td class="td-placebo">19.6ヶ月（16.6–24.5）</td>
+              <td>— · NEJM 2020<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">中央値DFS IB–IIIA全体</td>
+              <td class="td-osi">NR</td>
+              <td class="td-placebo">27.5ヶ月（22.0–35.0）</td>
+              <td>— · NEJM 2020<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">DFS Stage II–IIIA（最終・4年DFS率）</td>
+              <td class="td-osi">70%</td>
+              <td class="td-placebo">29%</td>
+              <td>HR 0.23（0.18–0.30）· JCO 2023<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">DFS IB–IIIA全体（最終）</td>
+              <td class="td-osi"><!-- 要確認：4年DFS率の具体値はJCO 2023本文未確認 -->—</td>
+              <td class="td-placebo">—</td>
+              <td>HR 0.27（0.21–0.34）· JCO 2023<sup class="ref">[2]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note-box">
+      JCO 2023のDFS最終解析（data cutoff 2022年4月11日）は探索的解析として報告（初回解析でαを消費済みのため正式な統計検定は予定されず）。DFSベネフィットは長期追跡でも維持された。
+    </div>
+
+    <!-- 6. OS最終解析 -->
+    <h2 class="sec-h2" id="os-data">有効性 — OS最終解析（NEJM 2023）</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">解析集団</th>
+              <th style="min-width:150px">5年OS率 osi</th>
+              <th style="min-width:150px">5年OS率 placebo</th>
+              <th style="min-width:200px">HR (95.03%CI)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Stage II–IIIA</td>
+              <td class="td-osi">85%</td>
+              <td class="td-placebo">73%</td>
+              <td>HR 0.49（0.33–0.73）p&lt;0.001<sup class="ref">[3]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Stage IB–IIIA全体</td>
+              <td class="td-osi">88%</td>
+              <td class="td-placebo">78%</td>
+              <td>HR 0.49（0.34–0.70）p&lt;0.001<sup class="ref">[3]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="info-box">
+      OS最終解析（data cutoff 2023年1月27日）。Stage II–IIIAで100死亡（21%成熟度）、全体で124死亡（18%成熟度）。OSの統計学的有意水準は階層的検定・Haybittle-Peto法により最終解析で両側P&lt;0.0497に設定。Kaplan-Meier曲線は早期に分離し5年以降も維持。
+    </div>
+    <div class="warn-box">
+      <strong>後治療クロスオーバーの影響：</strong>プラセボ群は再発後にオシメルチニブへ移行可能（2020年7月プロトコル改訂以降）。後治療を受けた割合はオシメルチニブ群22% vs プラセボ群54%で、最多はEGFR-TKI（うちオシメルチニブ最多）。プラセボ群の後治療オシメルチニブがOSを延長方向に働かせた可能性があり、観察されたOS HR 0.49は真のベネフィットを過小評価している可能性がある（原著も後治療の寄与は評価不能と明記）。なお、プラセボ群の5年OS（IIIA 67%〜IB 88%）は歴史的データより高めで、診断・管理の進歩を反映している可能性がある。
+    </div>
+
+    <!-- 7. Stage別サブグループ -->
+    <h2 class="sec-h2" id="stage-subgroup">Stage別サブグループ（DFS・OS）</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:100px">病期</th>
+              <th style="min-width:60px">n</th>
+              <th style="min-width:180px">DFS HR（95%CI）</th>
+              <th style="min-width:180px">OS HR（95%CI）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Stage IB</td>
+              <td>212</td>
+              <td class="td-osi">0.39（0.18–0.76）</td>
+              <td>0.44（0.17–1.02）</td>
+            </tr>
+            <tr>
+              <td class="td-key">Stage II</td>
+              <td>236</td>
+              <td class="td-osi">0.17（0.08–0.31）</td>
+              <td>0.63（0.34–1.12）</td>
+            </tr>
+            <tr>
+              <td class="td-key">Stage IIIA</td>
+              <td>234</td>
+              <td class="td-osi">0.12（0.07–0.20）</td>
+              <td>0.37（0.20–0.64）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">88% vs 71%</div>
+        <div class="stat-label">24ヶ月DFS率（Stage IB）</div>
+        <div class="stat-vs">NEJM 2020<sup class="ref">[1]</sup></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">91% vs 56%</div>
+        <div class="stat-label">24ヶ月DFS率（Stage II）</div>
+        <div class="stat-vs">NEJM 2020<sup class="ref">[1]</sup></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">88% vs 32%</div>
+        <div class="stat-label">24ヶ月DFS率（Stage IIIA）</div>
+        <div class="stat-vs">NEJM 2020<sup class="ref">[1]</sup></div>
+      </div>
+    </div>
+    <div class="note-box">
+      DFSベネフィットは全病期で一貫するが、プラセボ群の再発率が病期とともに上昇するため、絶対差（数）はStage IIIAで最大。OSは病期別では信頼区間が1をまたぐ集団があり（IB・II）、探索的解析として扱う。Stage IBの適応はGL間でニュアンスが異なる（後述）。
+    </div>
+
+    <!-- 8. 術後化学療法有無別 -->
+    <h2 class="sec-h2" id="chemo-subgroup">術後化学療法の有無別</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">集団</th>
+              <th style="min-width:180px">DFS HR（95%CI）</th>
+              <th style="min-width:180px">OS HR（95%CI）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">術後化学療法 施行</td>
+              <td class="td-osi">0.16（0.10–0.26）</td>
+              <td>0.49（0.30–0.79）</td>
+            </tr>
+            <tr>
+              <td class="td-key">術後化学療法 非施行</td>
+              <td class="td-osi">0.23（0.13–0.40）</td>
+              <td>0.47（0.25–0.83）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tip-box">
+      化学療法施行割合：Stage II–IIIAの約76%、Stage IBの約26%（Table S2：IB 25–28%、II 70–73%、IIIA 78–81%）。DFS・OSベネフィットは化学療法の有無を問わず認められた。本試験はオシメルチニブ単独 vs 術後化学療法を比較した試験ではなく、術後化学療法の適応判断は別途行う。
+    </div>
+
+    <!-- 9. 全サブグループ解析 -->
+    <h2 class="sec-h2" id="subgroup">サブグループ解析（DFS・全体集団）</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th class="ct-key">サブグループ</th>
+              <th>DFS HR（95%CI）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="ct-key">全体</td><td>0.20（0.15–0.27）</td></tr>
+            <tr><td class="ct-key">男性</td><td>0.19（0.10–0.33）</td></tr>
+            <tr><td class="ct-key">女性</td><td>0.18（0.11–0.28）</td></tr>
+            <tr><td class="ct-key">&lt;65歳</td><td>0.16（0.09–0.26）</td></tr>
+            <tr><td class="ct-key">≥65歳</td><td>0.22（0.13–0.36）</td></tr>
+            <tr><td class="ct-key">喫煙歴あり</td><td>0.10（0.04–0.22）</td></tr>
+            <tr><td class="ct-key">喫煙歴なし</td><td>0.23（0.15–0.34）</td></tr>
+            <tr><td class="ct-key">アジア人</td><td>0.21（0.13–0.31）</td></tr>
+            <tr><td class="ct-key">非アジア人</td><td>0.15（0.07–0.28）</td></tr>
+            <tr><td class="ct-key">Ex19del</td><td>0.12（0.07–0.20）</td></tr>
+            <tr><td class="ct-key">L858R</td><td>0.31（0.18–0.49）</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:10.5px;color:var(--text3);margin-top:6px">出典：NEJM 2020 Fig2<sup class="ref">[1]</sup></p>
+      </div>
+    </div>
+    <div class="note-box">
+      サブグループ解析は探索的。変異型ではEx19del 0.12 / L858R 0.31と数値差があるが信頼区間は重複。OS最終のサブグループ（NEJM 2023 Fig S3）でもEx19del 0.35 / L858R 0.68と同方向の数値差を認めるが、いずれも探索的で一部CIは1をまたぐ。
+    </div>
+
+    <!-- 10. CNS再発・再発パターン -->
+    <h2 class="sec-h2" id="cns-recurrence">CNS再発・再発パターン</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">再発部位</th>
+              <th style="min-width:160px">オシメルチニブ（n=339）</th>
+              <th style="min-width:140px">プラセボ（n=343）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">総再発・死亡イベント</td>
+              <td class="td-osi">37（11%）</td>
+              <td class="td-placebo">159（46%）</td>
+            </tr>
+            <tr>
+              <td class="td-key">局所/領域のみ</td>
+              <td class="td-osi">23（7%）</td>
+              <td class="td-placebo">61（18%）</td>
+            </tr>
+            <tr>
+              <td class="td-key">遠隔のみ</td>
+              <td class="td-osi">10（3%）</td>
+              <td class="td-placebo">78（23%）</td>
+            </tr>
+            <tr>
+              <td class="td-key">局所/領域＋遠隔</td>
+              <td class="td-osi">4（1%）</td>
+              <td class="td-placebo">18（5%）</td>
+            </tr>
+            <tr>
+              <td class="td-key">CNS再発</td>
+              <td class="td-osi">4（1%）</td>
+              <td class="td-placebo">33（10%）</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:10.5px;color:var(--text3);margin-top:6px">出典：NEJM 2020 Table S3<sup class="ref">[1]</sup></p>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.18</div>
+        <div class="stat-label">CNS DFS（IB–IIIA）</div>
+        <div class="stat-vs">98% vs 85%（24ヶ月）· 0.10–0.33<sup class="ref">[1]</sup></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">1% vs 10%</div>
+        <div class="stat-label">CNS再発（全体集団）</div>
+        <div class="stat-vs">NEJM 2020 Table S3<sup class="ref">[1]</sup></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.36</div>
+        <div class="stat-label">CNS DFS（更新解析）</div>
+        <div class="stat-vs"><!-- 要確認：JCO 2023更新値・本文未読 -->JCO 2023<sup class="ref">[2]</sup></div>
+      </div>
+    </div>
+    <div class="tip-box">
+      オシメルチニブはBBB透過性が高く、CNS再発を1% vs 10%に抑制。局所/領域再発・遠隔再発もいずれも減少。CNS再発・再発パターンは探索的評価項目であり、治療選択の単独根拠として過度に強調しない。
+    </div>
+
+    <!-- 11. 外科的側面 -->
+    <h2 class="sec-h2" id="surgical">外科的側面</h2>
+
+    <h3 class="sec-h3">切除様式・リンパ節（baseline, NEJM 2020 Table 1）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">項目</th>
+              <th style="min-width:160px">オシメルチニブ</th>
+              <th style="min-width:120px">プラセボ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">肺葉切除（lobectomy）</td>
+              <td class="td-osi">97%</td>
+              <td class="td-placebo">94%</td>
+            </tr>
+            <tr>
+              <td class="td-key">肺全摘（pneumonectomy）</td>
+              <td class="td-osi">1%</td>
+              <td class="td-placebo">3%</td>
+            </tr>
+            <tr>
+              <td class="td-key">二葉切除（bilobectomy）</td>
+              <td class="td-osi">2%</td>
+              <td class="td-placebo">2%</td>
+            </tr>
+            <tr>
+              <td class="td-key">気管支形成（sleeve）</td>
+              <td class="td-osi">&lt;1%</td>
+              <td class="td-placebo">1%</td>
+            </tr>
+            <tr>
+              <td class="td-key">N0</td>
+              <td class="td-osi">41%</td>
+              <td class="td-placebo">42%</td>
+            </tr>
+            <tr>
+              <td class="td-key">N1</td>
+              <td class="td-osi">29%</td>
+              <td class="td-placebo">28%</td>
+            </tr>
+            <tr>
+              <td class="td-key">N2</td>
+              <td class="td-osi">31%</td>
+              <td class="td-placebo">30%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note-box">
+      ADAURAの完全切除は肺葉切除以上が必須で、区域切除・楔状切除のみの症例は除外された（適切なリンパ節郭清も必須）。対象の約9割が肺葉切除で、N1・N2を含むStage II–IIIAが主対象。日本ではStage IB症例は除外されている。手術から無作為化までの許容期間は化学療法施行例で最大26週、非施行例で最大10週であり、術後回復と化学療法のスケジュールを踏まえた登録設計となっている。
+    </div>
+    <div class="tip-box">
+      <strong>外科医向け要点：</strong>外科の視点では、(1) 完全切除（断端陰性・適切な郭清）が前提であること、(2) N因子・病期が高いほどプラセボ群の再発が多く絶対的ベネフィットが大きいこと、(3) CNS再発抑制が局所制御と並ぶ意義を持つこと、が臨床的に重要。区域・楔状切除単独例や不完全切除例へのデータは本試験には含まれない。
+    </div>
+
+    <!-- 12. 安全性 -->
+    <h2 class="sec-h2" id="safety">安全性</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">有害事象</th>
+              <th style="min-width:200px">オシメルチニブ（全Grade / Grade≥3）</th>
+              <th style="min-width:160px">プラセボ（全Grade）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">下痢</td>
+              <td class="td-osi">46%（G3 2%）</td>
+              <td class="td-placebo">20%</td>
+            </tr>
+            <tr>
+              <td class="td-key">爪囲炎</td>
+              <td class="td-osi">25%（G3 1%）</td>
+              <td class="td-placebo">1%</td>
+            </tr>
+            <tr>
+              <td class="td-key">皮膚乾燥</td>
+              <td class="td-osi">23%</td>
+              <td class="td-placebo">6%</td>
+            </tr>
+            <tr>
+              <td class="td-key">皮疹・ざ瘡様</td>
+              <td class="td-osi">11%</td>
+              <td class="td-placebo">5%</td>
+            </tr>
+            <tr>
+              <td class="td-key">口内炎</td>
+              <td class="td-osi">18%（G3 2%）</td>
+              <td class="td-placebo">4%</td>
+            </tr>
+            <tr>
+              <td class="td-key">食欲低下</td>
+              <td class="td-osi">13%</td>
+              <td class="td-placebo">4%</td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade≥3 AE（全体）</td>
+              <td class="td-osi">20%</td>
+              <td class="td-placebo">13%</td>
+            </tr>
+            <tr>
+              <td class="td-key">AEによる治療中止</td>
+              <td class="td-osi">11%</td>
+              <td class="td-placebo">3%</td>
+            </tr>
+            <tr>
+              <td class="td-key">AEによる減量</td>
+              <td class="td-osi">9%</td>
+              <td class="td-placebo">1%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:10.5px;color:var(--text3);margin-top:6px">出典：NEJM 2020 Table 2<sup class="ref">[1]</sup>（初回報告値）</p>
+      </div>
+    </div>
+    <div class="warn-box">
+      <strong>間質性肺疾患（ILD）：</strong>ILD（grouped term）はオシメルチニブ群10例（3%）、プラセボ群0例。すべてGrade 1–2で全例回復、進行期より軽症の傾向。新規呼吸器症状出現時は速やかにCTを。
+    </div>
+    <div class="warn-box">
+      <strong>QTc延長・心：</strong>QTc延長はオシメルチニブ群で多い（更新解析で全Grade 9% vs 2%）。心機能（grouped term）6% vs 3%。LVEFの経時的な明らかな変化は両群で認めず。
+    </div>
+    <p style="font-size:11px;color:var(--text3);margin-top:6px">資金提供：AstraZeneca</p>
+
+    <!-- 13. 位置づけ・ガイドライン -->
+    <h2 class="sec-h2" id="guidelines">位置づけとガイドライン</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">🇯🇵</span>
+        <span><strong>日本：</strong>EGFR変異陽性完全切除NSCLCの術後補助療法として承認・保険適用あり。推奨Stage・術後化学療法との位置づけは日本肺癌学会GLに従う。<!-- 要確認：承認年月・添付文書上の正確な適応文言・推奨グレード --></span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">🇺🇸</span>
+        <span><strong>NCCN：</strong>Stage IB–IIIAでEGFR変異陽性に推奨（術後化学療法との逐次を考慮）。FDA承認2020年12月。<!-- 要確認：最新ラベルの対象Stage文言 --></span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">🇪🇺</span>
+        <span><strong>ESMO：</strong>Stage II–IIIAに推奨、Stage IBは個別判断。</span>
+      </div>
+    </div>
+    <div class="caution-box">
+      ADAURAはプラセボ対照であり、術後白金併用化学療法を置換する設計ではない。化学療法適応例では化学療法との順序・併用しない理由を個別に検討する。対象病期はAJCC第7版で、第8版へ読み替える際は範囲が完全には一致しない点に注意。
+    </div>
+
+    <!-- 14. 総合評価 -->
+    <h2 class="sec-h2" id="neutral-review">総合評価</h2>
+    <div class="review-card">
+      <div class="review-half">
+        <div class="review-col">
+          <div class="review-col-title rc-pros">強み</div>
+          <ul class="point-list pros">
+            <li>DFS（HR 0.17/0.20）に加えOS最終解析で有意（HR 0.49）。EGFR陽性早期肺癌の術後補助として中心的エビデンス</li>
+            <li>Stage II–IIIAだけでなくIB–IIIA全体でも一貫したDFS・OSベネフィット</li>
+            <li>CNS再発抑制が明確（1% vs 10%）</li>
+            <li>術後化学療法の施行・不施行を問わずベネフィットが認められた</li>
+            <li>長期追跡（DFS最終・OS最終）でもベネフィットが維持</li>
+          </ul>
+        </div>
+        <div class="review-col">
+          <div class="review-col-title rc-cons">留保・限界</div>
+          <ul class="point-list cons">
+            <li>投与期間最長3年で治療終了後再発がある（DFS曲線は治療終了後に再び下降）</li>
+            <li>OSはクロスオーバー（プラセボ群→オシメルチニブ後治療）の影響下の値</li>
+            <li>Stage IB単独・変異型別（L858R）・人種別は探索的でCIが1をまたぐ集団あり</li>
+            <li>長期服薬の毒性・アドヒアランス、術後化学療法との順序は今後の整理課題</li>
+            <li>再発後のEGFR-TKI再投与戦略は未確立</li>
+            <li>MRD（微小残存病変）に基づく投与期間最適化が研究中（ADAURA2等）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-box">
+        <strong>総括：</strong>ADAURAはEGFR変異陽性完全切除NSCLCに対する術後補助オシメルチニブの主要エビデンスとして確立されている。DFS・OS双方で有意なベネフィットを示し、CNS再発抑制も明確。一方で、術後化学療法との最適な組み合わせ・順序、病期IB（特に日本での除外）・L858R変異型への適応、治療終了後の再発リスク管理、MRDに基づく個別化については引き続き検討が必要である。
+      </div>
+    </div>
+
+    <!-- 15. 参考文献 -->
+    <h2 class="sec-h2" id="references">参考文献</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ol class="ref-list">
+          <li>Wu YL, Tsuboi M, He J, et al. Osimertinib in Resected EGFR-Mutated Non–Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2020;383:1711-1723. <a href="https://pubmed.ncbi.nlm.nih.gov/32955177/" target="_blank" rel="noopener">PMID: 32955177</a>. doi:10.1056/NEJMoa2027071（DFS初回報告）</li>
+          <li>Herbst RS, Wu YL, John T, et al. Adjuvant Osimertinib for Resected EGFR-Mutated Stage IB-IIIA NSCLC: Updated Results From ADAURA. <em>J Clin Oncol.</em> 2023;41:1830-1840. <a href="https://pubmed.ncbi.nlm.nih.gov/36720083/" target="_blank" rel="noopener">PMID: 36720083</a>. doi:10.1200/JCO.22.02186（DFS最終解析）</li>
+          <li>Tsuboi M, Herbst RS, John T, et al. Overall Survival with Osimertinib in Resected EGFR-Mutated Non–Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2023;389:137-147. <a href="https://pubmed.ncbi.nlm.nih.gov/37272535/" target="_blank" rel="noopener">PMID: 37272535</a>. doi:10.1056/NEJMoa2304594（OS最終解析）</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 関連ページ -->
+    <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px">関連ページ</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/lungatlas/adjuvant.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);background:var(--green-light);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:500">
+          ← 術後補助療法 概要
+        </a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Lung<span>Atlas</span></span>
+  <span>医療専門家向け学術情報サイト。本ページの情報は診療の代替となるものではありません。</span>
+</footer>
+
+</body>
+</html>
