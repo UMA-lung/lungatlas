@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CALGB 140503試験 — 末梢性 Stage IA NSCLC（≤2cm）：縮小切除 vs 肺葉切除 非劣性RCT — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。CALGB 140503試験（末梢性 Stage IA NSCLC、縮小切除 vs 肺葉切除 非劣性RCT）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){ document.getElementById('nav-placeholder').innerHTML = h; });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>CALGB 140503試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">CALGB 140503試験 — 末梢性 Stage IA NSCLC（≤2cm）：縮小切除 vs 肺葉切除 非劣性RCT</h1>
+
+  <p class="scrap-summary">末梢性2cm以下の病理N0確認NSCLC（T1aN0）でsublobar resectionが肺葉切除に対しDFSで非劣性を示した国際第3相試験。wedge・区域切除を含む。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/36780674/" target="_blank" rel="noopener">PMID 36780674（NEJM 2023）</a> ／
+      <a href="https://doi.org/10.1056/NEJMoa2212083" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2212083</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/30442588/" target="_blank" rel="noopener">PMID 30442588（Lancet Respir Med 2018）</a> ／
+      <a href="https://doi.org/10.1016/S2213-2600(18)30411-9" target="_blank" rel="noopener">DOI 10.1016/S2213-2600(18)30411-9</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+    <p>CALGB 140503（Alliance、NCT00499330）は、末梢性の臨床病期 T1aN0（腫瘍径≤2cm）NSCLCに対して、縮小切除（sublobar resection）が肺葉切除（lobectomy）に対してDFSで非劣性であるかを検証した多施設・国際・第3相・非劣性RCT。重要な点は、<strong>術中に主要肺門および縦隔リンパ節の病理的節外陰性を確認した上で無作為化</strong>している点であり、臨床試験としてのリンパ節評価が厳密に担保されている。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>多施設・非劣性・第3相RCT</td></tr>
+        <tr><td>対象</td><td>末梢性 clinical T1aN0 NSCLC（≤2cm）・術中リンパ節病理陰性確認後に無作為化</td></tr>
+        <tr><td>登録期間</td><td>2007年6月〜2017年3月</td></tr>
+        <tr><td>症例数</td><td>697例（sublobar 340例 / lobar 357例）</td></tr>
+        <tr><td>Sublobar内訳</td><td>wedge切除 59.1% / 解剖学的区域切除 37.9%</td></tr>
+        <tr><td>主要評価項目</td><td>DFS（disease-free survival）</td></tr>
+        <tr><td>副次評価項目</td><td>OS、局所/遠隔再発、術後6か月肺機能</td></tr>
+        <tr><td>スポンサー</td><td>National Cancer Institute（公的資金）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT00499330</td></tr>
+        <tr><td>非劣性マージン</td><td><!-- 要確認: NEJM 2023 Methodsより確認 --></td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — DFS・OS</h2>
+
+    <p><strong>Primary DFS解析（NEJM 2023、中央値フォロー7年）</strong></p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.999</div>
+        <div class="stat-label">DFSハザード比</div>
+        <div class="stat-vs">95%CI 0.784–1.272</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">63.9% vs 64.3%</div>
+        <div class="stat-label">5年DFS率</div>
+        <div class="stat-vs">sublobar vs lobar</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">非劣性成立</div>
+        <div class="stat-label">90%CI 0.816–1.224</div>
+        <div class="stat-vs">非劣性境界を超えず</div>
+      </div>
+    </div>
+
+    <p><strong>OS（NEJM 2023）</strong></p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.930</div>
+        <div class="stat-label">OSハザード比</div>
+        <div class="stat-vs">95%CI 0.695–1.243</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">5年OS率（sublobar vs lobar）</div>
+        <div class="stat-vs">NEJM 2023 Figure/Tableより確認</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">90%CI</div>
+        <div class="stat-label">OSハザード比（90%CI）</div>
+        <div class="stat-vs">0.728–1.187</div>
+      </div>
+    </div>
+
+    <!-- 要確認: 再発様式（局所・遠隔別）の比率はNEJM 2023より確認 -->
+    <!-- 要確認: 肺機能（FEV1等）の6か月後差分はNEJM 2023より確認 -->
+
+    <h2>3. 安全性・周術期成績</h2>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">1.1% vs 0.6%</div>
+        <div class="stat-label">30日死亡率</div>
+        <div class="stat-vs">lobar vs sublobar</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">1.7% vs 1.2%</div>
+        <div class="stat-label">90日死亡率</div>
+        <div class="stat-vs">lobar vs sublobar</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">主要合併症発現率</div>
+        <div class="stat-vs">Lancet Respir Med 2018より確認</div>
+      </div>
+    </div>
+
+    <!-- 要確認: 主要合併症（肺炎・瘻孔・出血等）の発現率はLancet Respir Med 2018より確認 -->
+    <!-- 要確認: 手術時間・出血量・入院日数はLancet Respir Med 2018より確認 -->
+
+    <h2>4. 位置づけと注意点</h2>
+    <p>JCOG0802（区域切除 vs 肺葉切除、Lancet 2022）と並び、早期肺癌縮小手術のエビデンスを構成する2大RCTの一方。両試験の結果は概ね一致しているが、設計上の重要な違いがある。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">重要</span>
+        <span>無作為化の条件が「術中リンパ節病理陰性確認後」である点が臨床的に重要。試験外では術中リンパ節評価の質が結果に影響する。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">設計</span>
+        <span>Sublobarはwedgeと区域切除を含む混合デザイン。JCOG0802は区域切除のみ（wedge除外）であり、直接比較は不適切。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">比較</span>
+        <span>JCOG0802では区域切除がOSで肺葉切除を上回る（有意差あり）という結果であり、CALGB 140503とは主要評価項目・解析期間・集団が異なる点に注意。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">対象</span>
+        <span>腫瘍径2cm以下という対象設定であり、それ以上の腫瘍には外挿できない。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">GGO</span>
+        <span>Ground-glass opacity（GGO）成分を有する腫瘍のサブグループ解析は<!-- 要確認: NEJM 2023またはpost-hoc解析より確認 -->要確認。</span>
+      </div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Altorki N, Wang X, Kozono D, et al; CALGB/Alliance 140503 Investigators. Lobar or Sublobar Resection for Peripheral Stage IA Non-Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2023;388(6):489-498. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36780674/" target="_blank" rel="noopener">36780674</a> / DOI: <a href="https://doi.org/10.1056/NEJMoa2212083" target="_blank" rel="noopener">10.1056/NEJMoa2212083</a></li>
+      <li>Altorki NK, Wang X, Wigle D, et al. Perioperative mortality and morbidity after sublobar versus lobar resection for early-stage non-small-cell lung cancer: post-hoc analysis of an international, randomised, phase 3 trial (CALGB/Alliance 140503). <em>Lancet Respir Med.</em> 2018;6(12):915-924. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30442588/" target="_blank" rel="noopener">30442588</a> / DOI: <a href="https://doi.org/10.1016/S2213-2600(18)30411-9" target="_blank" rel="noopener">10.1016/S2213-2600(18)30411-9</a></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

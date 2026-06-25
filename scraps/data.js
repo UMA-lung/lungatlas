@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "CALGB 140503試験 — 末梢性 Stage IA NSCLC（≤2cm）：縮小切除 vs 肺葉切除 非劣性RCT",
+    summary: "末梢性2cm以下の病理N0確認NSCLCでsublobar resectionが肺葉切除に対しDFSで非劣性を示した国際第3相試験。wedge・区域切除を含む。JCOG0802と並ぶ縮小切除の2大RCT。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/calgb140503.html"
+  },
+  {
     title: "MARIPOSA試験 — 1次治療 amivantamab + lazertinib vs osimertinib（EGFR変異陽性NSCLC）",
     summary: "治療歴なしのEGFR exon 19 del/L858R NSCLC でamivantamab + lazertinib が osimertinib単剤を上回るPFS・OS を示した最大規模第3相試験。Grade≥3有害事象80%。",
     date: "2026-06-24",
