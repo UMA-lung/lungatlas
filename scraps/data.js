@@ -28,9 +28,9 @@ const SCRAPS_DATA = [
     url: "/lungatlas/scraps/mariposa.html"
   },
   {
-    title: "AEGEAN試験 — 周術期 durvalumab + 化学療法（切除可能NSCLC）",
-    summary: "切除可能Stage II–IIIB(N2) NSCLCで周術期durvalumabを検証。pCR・EFSを改善。OSは未成熟。",
-    date: "2026-06-24",
+    title: "AEGEAN試験 — 切除可能NSCLC 周術期 durvalumab（術前化学療法併用＋術後維持）",
+    summary: "切除可能stage II–IIIB(N2) NSCLCで周術期durvalumabがEFS・pCRを改善した第3相試験。EGFR/ALK陽性は効果解析から除外。pCR 17.2% vs 4.3%、EFS HR 0.68。",
+    date: "2026-06-28",
     url: "/lungatlas/scraps/aegean.html"
   },
   {
