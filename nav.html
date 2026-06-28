@@ -287,6 +287,7 @@
         <span class="dropdown-soon">SCLC<span>近日公開</span></span>
         <a id="nav-periop" href="/lungatlas/perioperative.html">周術期薬物療法</a>
         <a id="nav-adjuvant" href="/lungatlas/adjuvant.html">術後補助療法</a>
+        <a id="nav-adaura" href="/lungatlas/adaura.html" style="padding-left:28px">└ ADAURA 詳細</a>
         <span class="dropdown-soon">耐性後の戦略<span>近日公開</span></span>
       </div>
     </div>
@@ -334,6 +335,8 @@
     'nav-driver-pos':  ['driver-positive.html'],
     'nav-egfr':        ['egfr-firstline.html'],
     'nav-driver-neg':  ['driver-negative.html'],
+    'nav-adjuvant':    ['adjuvant.html'],
+    'nav-adaura':      ['adaura.html'],
     'nav-about':       ['about.html', 'about-en.html'],
   };
   Object.keys(map).forEach(function(id) {
@@ -344,7 +347,7 @@
     });
   });
   // 化学療法ドロップダウンのparent active
-  var chemoPages = ['driver-positive', 'driver-negative', 'egfr-firstline', 'perioperative', 'adjuvant', 'sclc', 'resistance'];
+  var chemoPages = ['driver-positive', 'driver-negative', 'egfr-firstline', 'perioperative', 'adjuvant', 'adaura', 'sclc', 'resistance'];
   if (chemoPages.some(function(p){ return path.indexOf(p) !== -1; })) {
     var chemoLink = document.getElementById('nav-chemo');
     if (chemoLink) chemoLink.classList.add('active');
