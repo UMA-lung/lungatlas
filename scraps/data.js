@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "FLAURA2試験 — 1次治療 osimertinib + 化学療法 vs osimertinib単剤（EGFR変異陽性NSCLC）",
+    summary: "治療歴なしEGFR ex19del/L858R 進行NSCLCでosimertinib + プラチナ-ペメトレキセドがosimertinib単剤を上回るPFS・OSを示した第3相試験。OS中央値47.5 vs 37.6か月。毒性は増加。",
+    date: "2026-06-28",
+    url: "/lungatlas/scraps/flaura2.html"
+  },
+  {
     title: "JCOG0201 — 薄層CT所見（CTR）による早期肺腺癌の病理的非侵襲性予測：前向きコホート研究",
     summary: "早期末梢性肺癌でCTR≤0.25かつ≤2cmが病理的非侵襲性の高特異度予測因子（98.7%）。JCOG0802・0804の画像診断的基盤。RCTではなく前向きコホート研究。",
     date: "2026-06-24",

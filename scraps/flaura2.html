@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLAURA2試験 — 1次治療 osimertinib + 化学療法 vs osimertinib単剤（EGFR変異陽性NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。FLAURA2試験（EGFR変異陽性NSCLC、osimertinib +/- 化学療法）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>FLAURA2試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">FLAURA2試験 — 1次治療 osimertinib + 化学療法 vs osimertinib単剤（EGFR変異陽性NSCLC）</h1>
+
+  <p class="scrap-summary">治療歴なしEGFR ex19del/L858R 進行NSCLCでosimertinib + プラチナ-ペメトレキセドがosimertinib単剤を上回るPFS・OSを示した第3相試験。OS中央値47.5 vs 37.6か月。毒性は増加。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月28日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/37937763/" target="_blank" rel="noopener">NEJM 2023 PMID: 37937763</a> ／
+      <a href="https://doi.org/10.1056/NEJMoa2306434" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa2306434</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/41104938/" target="_blank" rel="noopener">NEJM 2025 PMID: 41104938</a> ／
+      <a href="https://doi.org/10.1056/NEJMoa2510308" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa2510308</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+
+    <p>FLAURA2試験（NCT04035486）は、治療歴のないEGFR変異陽性（ex19del または L858R）進行NSCLCに対し、osimertinib（3世代EGFR-TKI）にプラチナ-ペメトレキセド化学療法を併用する戦略を、osimertinib単剤と比較した国際共同・第3相・非盲検・無作為化試験。先行するFLAURA試験（osimertinib vs 1/2世代EGFR-TKI）でosimertinib単剤が標準となった後、その上にさらに化学療法を上乗せする意義を検証した。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・非盲検（open-label）・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>treatment-naive 非扁平NSCLC・EGFR ex19del/L858R・locally advanced or metastatic・WHO PS 0/1</td></tr>
+        <tr><td>CNS転移</td><td>安定例は組み入れ可</td></tr>
+        <tr><td>症例数</td><td>557例（osi+chemo 279例 / osi単剤 278例）</td></tr>
+        <tr><td>併用群レジメン</td><td>osimertinib 80mg QD + pemetrexed 500mg/m² + cisplatin 75mg/m² または carboplatin（4サイクル導入）→ osimertinib + pemetrexed 維持</td></tr>
+        <tr><td>単剤群レジメン</td><td>osimertinib 80mg QD</td></tr>
+        <tr><td>主要評価項目</td><td>治験医評価PFS</td></tr>
+        <tr><td>副次評価項目</td><td>OS、ORR、DoR、安全性</td></tr>
+        <tr><td>層別化因子</td><td>人種（中国系アジア/非中国系アジア/非アジア）・EGFR検査法（local/central）・WHO PS（0/1）</td></tr>
+        <tr><td>スポンサー</td><td>AstraZeneca（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT04035486</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — PFS</h2>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.62</div>
+        <div class="stat-label">PFS（Primary、治験医評価）</div>
+        <div class="stat-vs">95%CI 0.49–0.79、p&lt;0.001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">57% vs 41%</div>
+        <div class="stat-label">24か月無増悪生存率</div>
+        <div class="stat-vs">osi+chemo（95%CI 50–63）vs osi単剤（95%CI 35–47）</div>
+      </div>
+      <div class="stat">
+        <!-- 要確認: PFS中央値の正確な月数はNEJM 2023本文より確認（25.5 vs 16.7か月と報じられるが原著で要確認） -->
+        <div class="stat-val">要確認</div>
+        <div class="stat-label">PFS中央値（osi+chemo vs 単剤）</div>
+        <div class="stat-vs">NEJM 2023本文より確認</div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.62</div>
+        <div class="stat-label">PFS（BICR評価）</div>
+        <div class="stat-vs">95%CI 0.48–0.80（治験医評価と一致）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">83% vs 76%</div>
+        <div class="stat-label">ORR</div>
+        <div class="stat-vs">osi+chemo vs osi単剤</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">24.0 vs 15.3か月</div>
+        <div class="stat-label">DoR中央値</div>
+        <div class="stat-vs">95%CI 20.9–27.8 vs 12.7–19.4</div>
+      </div>
+    </div>
+
+    <!-- 要確認: CNS転移サブグループのPFSはNEJM 2023 Supplementより確認 -->
+
+    <h2>3. 有効性 — OS（最終解析、NEJM 2025）</h2>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">47.5 vs 37.6か月</div>
+        <div class="stat-label">OS中央値（最終解析）</div>
+        <div class="stat-vs">osi+chemo vs osi単剤</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.77</div>
+        <div class="stat-label">OS（最終解析）</div>
+        <div class="stat-vs">95%CI 0.61–0.96、p=0.02</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>サブグループ</th><th>osi+chemo OS中央値</th><th>osi単剤 OS中央値</th><th>HR（95%CI）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CNS転移あり</td><td>40.9か月（95%CI 35.2–46.6）</td><td>29.7か月（95%CI 25.6–35.8）</td><td>0.72（0.52–0.99）</td></tr>
+        <tr><td>L858R</td><td>38.1か月</td><td>32.4か月</td><td>0.76（0.55–1.07）</td></tr>
+        <tr><td>Ex19del</td><td>NR</td><td>43.0か月</td><td>0.76（0.56–1.02）</td></tr>
+        <tr><td>血漿EGFR変異検出例</td><td>38.4か月</td><td>32.5か月</td><td>0.79（0.60–1.03）</td></tr>
+        <tr><td>TP53変異あり</td><td>51.1か月</td><td>43.1か月</td><td>0.71（0.40–1.27）</td></tr>
+      </tbody>
+    </table>
+
+    <p>OS benefit は全般的な予後不良サブグループ（CNS転移・L858R・血漿EGFR検出・TP53変異）でも一貫していた。一部サブグループは中央値未到達。</p>
+
+    <!-- 要確認: ITT全体のサブグループforest plotの全項目はNEJM 2025 Supplementより確認 -->
+
+    <h2>4. 安全性</h2>
+
+    <p>化学療法併用により有害事象は増加する。多くは既知の化学療法関連毒性であり、可逆的とされる。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>osi+chemo群</th><th>osi単剤群</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>osimertinib用量中断</td><td>43%（120例）</td><td>19%（52例）</td></tr>
+        <tr><td>osimertinib用量減量</td><td>10%（27例）</td><td>3%（8例）</td></tr>
+        <tr><td>osimertinib平均相対用量強度</td><td>95%</td><td>98%</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: Grade≥3有害事象の具体的発現率（%）はNEJM 2023 Tableより確認 -->
+    <!-- 要確認: 主要な有害事象（血液毒性・悪心・間質性肺疾患等）の個別発現率はNEJM 2023より確認 -->
+    <!-- 要確認: 長期フォロー（NEJM 2025）で新規の安全性シグナルなしと報告されているが詳細はNEJM 2025より確認 -->
+
+    <h2>5. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp"><span class="gl-flag">背景</span><span>FLAURA（osimertinib単剤 vs 1/2世代TKI、NEJM 2018/2020）に続く試験。osimertinib単剤を対照に、化学療法上乗せの意義を検証した点が重要。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">毒性</span><span>PFS・OSとも併用群が有意に改善したが、毒性（特に血液毒性・用量中断）も増加。全例に併用すべきか、サブグループで選択するかは臨床判断。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">設計</span><span>NEJM誌のCorrespondenceでは「逐次治療（単剤→増悪後に化学療法）と比べた上乗せか」「単剤群で後治療化学療法が必須でなかった」点が議論されている（試験デザイン上の留意点）。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">予後不良例</span><span>CNS転移・L858R・TP53変異など予後不良サブグループでの一貫した benefit は、併用を考慮する根拠になりうる。</span></div>
+      <div class="gl-item gl-us"><span class="gl-flag">承認</span><span>osimertinibは国内でEGFR変異陽性NSCLC 1次治療として承認済み。化学療法併用レジメンの国内承認状況は <!-- 要確認: PMDA確認 -->。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">間接比較</span><span>同じ「osi + 化学療法」でも、MARIPOSA（amivantamab + lazertinib）とは作用機序・毒性が全く異なる別アプローチ。直接比較試験はなく間接比較に注意。</span></div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>
+        Planchard D, Jänne PA, Cheng Y, et al; FLAURA2 Investigators.
+        Osimertinib with or without Chemotherapy in EGFR-Mutated Advanced NSCLC.
+        N Engl J Med. 2023;389(21):1935-1948.
+        <a href="https://pubmed.ncbi.nlm.nih.gov/37937763/" target="_blank" rel="noopener">PMID: 37937763</a> /
+        <a href="https://doi.org/10.1056/NEJMoa2306434" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa2306434</a>
+      </li>
+      <li>
+        Jänne PA, Planchard D, Kobayashi K, et al; FLAURA2 Investigators.
+        Survival with Osimertinib plus Chemotherapy in EGFR-Mutated Advanced NSCLC.
+        N Engl J Med. 2025;394(1).
+        <a href="https://pubmed.ncbi.nlm.nih.gov/41104938/" target="_blank" rel="noopener">PMID: 41104938</a> /
+        <a href="https://doi.org/10.1056/NEJMoa2510308" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa2510308</a>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
