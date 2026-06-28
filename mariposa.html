@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARIPOSA試験 詳細解説 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout { display: flex; min-height: calc(100vh - 52px); }
+
+.sidebar {
+  width: 220px; flex-shrink: 0; background: var(--surface);
+  border-right: 1px solid var(--border); padding: 20px 0;
+  position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto;
+}
+.sb-section { margin-bottom: 4px; }
+.sb-head {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  color: var(--text3); padding: 8px 18px 4px; text-transform: uppercase;
+}
+.sb-item {
+  display: block; padding: 8px 18px; font-size: 12.5px; color: var(--text2);
+  text-decoration: none; border-left: 2px solid transparent;
+  transition: all .15s; cursor: pointer; line-height: 1.4;
+}
+.sb-item:hover { background: var(--green-pale); color: var(--green-dark); }
+.sb-item.active {
+  background: var(--green-light); color: var(--green-dark);
+  font-weight: 500; border-left-color: var(--green-mid);
+}
+.sb-sub {
+  display: block; padding: 5px 18px 5px 30px; font-size: 11.5px;
+  color: var(--text3); text-decoration: none; cursor: pointer; transition: color .15s;
+}
+.sb-sub:hover { color: var(--green-dark); font-weight: 500; }
+.sb-sub.active { color: var(--green-dark); font-weight: 500; }
+
+.main { flex: 1; padding: 28px 36px 60px; max-width: 900px; }
+
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+.crumb a { color: var(--text3); text-decoration: none; }
+.crumb a:hover { color: var(--green-mid); }
+
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  color: #fff; border-radius: var(--radius-lg); padding: 22px 26px;
+  margin-bottom: 20px;
+}
+.hero-message { font-size: 15px; font-weight: 600; line-height: 1.5; margin-bottom: 10px; }
+.hero-sub { font-size: 12.5px; color: rgba(255,255,255,0.85); line-height: 1.8; }
+
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+
+.sec-h3 {
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  margin: 20px 0 10px; padding-left: 10px;
+  border-left: 2px solid var(--border2);
+}
+
+.note-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.7;
+}
+.info-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+.caution-box {
+  background: var(--red-light); border-left: 3px solid #c0392b;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--red-dark); line-height: 1.75; margin: 14px 0;
+}
+.tip-box {
+  background: var(--blue-light); border-left: 3px solid #1a6fbd;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0;
+}
+
+.trial-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden;
+}
+.tc-top { padding: 18px 20px 16px; border-bottom: 1px solid var(--border); }
+.tc-body { padding: 16px 20px; }
+.tc-meta {
+  display: flex; align-items: center; gap: 8px;
+  flex-wrap: wrap; margin-bottom: 10px;
+}
+.trial-link {
+  font-size: 13.5px; font-weight: 600; color: var(--green-dark);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); letter-spacing: .01em;
+}
+.trial-link:hover { opacity: .7; }
+.trial-link .ext { font-size: 11px; opacity: .7; }
+.jbadge {
+  font-size: 10.5px; font-weight: 500; padding: 2px 9px;
+  border-radius: 8px; white-space: nowrap;
+}
+.j-nejm  { background: var(--blue-light); color: var(--blue-dark); }
+.j-annonc { background: var(--amber-light); color: var(--amber-dark); }
+.ybadge {
+  font-size: 10.5px; color: var(--text3);
+  background: var(--surface2); padding: 2px 8px; border-radius: 8px;
+}
+.drug-title { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.drug-sub { font-size: 12.5px; color: var(--text2); margin-bottom: 12px; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 10px 13px; }
+.stat-val { font-size: 17px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.stat-warn { background: #fff8e1; }
+.stat-warn .stat-val { color: var(--amber-dark); }
+
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  margin-bottom: 12px; overflow-x: auto; display: block;
+}
+.data-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  background: var(--surface2); border-bottom: 2px solid var(--border2);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: top; line-height: 1.6;
+}
+.data-table tr:nth-child(even) td { background: var(--green-pale); }
+.data-table tr:last-child td { border-bottom: none; }
+.td-key { font-weight: 500; color: var(--text); white-space: nowrap; }
+.td-ami { color: var(--green-dark); font-weight: 500; }
+.td-osi { color: var(--text3); }
+.td-laz { color: var(--blue-dark); }
+.num { font-family: var(--mono); }
+.warn-val { color: var(--red-dark); font-weight: 600; }
+
+sup.ref {
+  font-size: 9px; color: var(--green-dark); font-weight: 600;
+  vertical-align: super; font-family: var(--mono);
+}
+
+.ref-list {
+  list-style: none; counter-reset: ref-counter;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ref-list li {
+  counter-increment: ref-counter;
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 11.5px; color: var(--text2); line-height: 1.65;
+}
+.ref-list li::before {
+  content: '[' counter(ref-counter) ']';
+  font-family: var(--mono); font-size: 10.5px; color: var(--green-dark);
+  font-weight: 600; flex-shrink: 0; padding-top: 1px;
+  min-width: 28px;
+}
+.ref-list a { color: var(--green-mid); text-decoration: none; }
+.ref-list a:hover { text-decoration: underline; }
+
+.trial-meta-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.trial-meta-item { background: var(--surface2); border-radius: 6px; padding: 6px 10px; font-size: 11px; }
+.meta-label { font-weight: 600; color: var(--text3); margin-right: 4px; }
+.meta-val { color: var(--text2); }
+.meta-val a { color: var(--green-dark); text-decoration: none; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.gl-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  border-radius: 8px; padding: 9px 13px; font-size: 12px; line-height: 1.65;
+}
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.body-text { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+
+.point-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.point-list li {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 12.5px; color: var(--text2); line-height: 1.65;
+}
+.point-list li::before { content: '•'; color: var(--green-mid); flex-shrink: 0; font-weight: 600; }
+
+.flow-diagram { margin: 4px 0; display: flex; flex-direction: column; gap: 10px; }
+.flow-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.flow-label {
+  font-size: 10.5px; font-weight: 600; color: var(--text3); min-width: 90px;
+  flex-shrink: 0; text-align: right; padding-right: 10px;
+  border-right: 2px solid var(--border2); line-height: 1.4;
+}
+.flow-box {
+  padding: 8px 12px; border-radius: 8px; font-size: 12px; line-height: 1.5;
+  text-align: center; border: 1px solid var(--border2); flex-shrink: 0;
+}
+.f-ami { background: var(--green-pale); border-color: var(--green-mid); color: var(--green-dark); font-weight: 500; }
+.f-osi { background: var(--blue-light); border-color: #5a9fd4; color: var(--blue-dark); }
+.f-laz { background: var(--purple-light); border-color: #8a7fd4; color: var(--purple-dark); font-size: 11px; }
+.flow-arr { font-size: 16px; color: var(--border2); flex-shrink: 0; padding: 0 2px; }
+
+.review-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 16px;
+}
+.review-half {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+}
+.review-col {
+  background: var(--surface2); border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.review-col-title {
+  font-size: 11.5px; font-weight: 600; margin-bottom: 10px;
+  letter-spacing: .03em;
+}
+.rc-pros { color: var(--green-dark); }
+.rc-cons { color: var(--red-dark); }
+.point-list.pros li::before { color: var(--green-dark); }
+.point-list.cons li::before { content: '△'; color: #c0392b; font-size: 11px; }
+
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 18px 40px; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .review-half { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .flow-row { gap: 4px; }
+  .flow-label { min-width: 70px; font-size: 10px; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-head">EGFR 1次治療</div>
+      <a class="sb-item" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
+      <a class="sb-item" href="/lungatlas/egfr-firstline.html">EGFR 1次治療選択ガイド</a>
+      <a class="sb-item active" href="mariposa.html">MARIPOSA 詳細</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-head">このページ</div>
+      <a class="sb-sub" href="#trial-overview">試験概要</a>
+      <a class="sb-sub" href="#design">試験デザイン</a>
+      <a class="sb-sub" href="#regimen">レジメン詳細</a>
+      <a class="sb-sub" href="#pfs">主要EP：PFS</a>
+      <a class="sb-sub" href="#secondary">副次EP（OS・ORR・DoR）</a>
+      <a class="sb-sub" href="#pfs2-ic">PFS2・頭蓋内PFS</a>
+      <a class="sb-sub" href="#subgroup">サブグループ解析</a>
+      <a class="sb-sub" href="#laz-mono">ラゼルチニブ単剤アーム</a>
+      <a class="sb-sub" href="#safety">安全性</a>
+      <a class="sb-sub" href="#vte">VTE・IRR・ILD</a>
+      <a class="sb-sub" href="#japan">日本・アジア</a>
+      <a class="sb-sub" href="#coi">COI・スポンサー</a>
+      <a class="sb-sub" href="#references">参考文献</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">変異陽性 NSCLC › <a href="/lungatlas/egfr-firstline.html">EGFR 1次治療</a> › <span>MARIPOSA</span></div>
+    <div class="updated">最終更新 2026年6月 — NEJM 2025 OS最終解析データ基準</div>
+    <h1 class="art-h1" id="trial-overview">MARIPOSA試験<br>詳細解説</h1>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-message">
+        未治療 EGFR 変異陽性（Ex19del/L858R）進行 NSCLC に対し、アミバンタマブ＋ラゼルチニブがオシメルチニブ単剤を上回る PFS・OS を示した国際共同第3相試験。
+      </div>
+      <div class="hero-sub">
+        主要解析（NEJM 2024）でPFS中央値 23.7 vs 16.6か月（HR 0.70, p&lt;0.001）、OS最終解析（NEJM 2025）で3年OS率 60% vs 51%（HR 0.75, p=0.005）。Grade ≥3 有害事象は 80% vs 52% と高く、VTE（40% vs 11%）・皮膚毒性・IRRの管理が臨床実装上の主要課題。Janssen（J&amp;J）主導試験。日本国内承認済み。
+      </div>
+    </div>
+
+    <!-- 試験概要カード -->
+    <div class="trial-card">
+      <div class="tc-top">
+        <div class="tc-meta">
+          <a class="trial-link" href="https://doi.org/10.1056/NEJMoa2403614" target="_blank" rel="noopener">MARIPOSA <span class="ext">↗</span></a>
+          <span class="jbadge j-nejm">NEJM 2024（Primary PFS解析）</span>
+          <span class="jbadge j-nejm">NEJM 2025（Final OS解析）</span>
+          <span class="ybadge">Phase III · n=1,074 · EGFR Ex19del / L858R · 未治療</span>
+        </div>
+        <div class="drug-title">アミバンタマブ＋ラゼルチニブ vs オシメルチニブ（2:2:1 無作為化）</div>
+        <div class="drug-sub">未治療 EGFR 変異陽性（Ex19del または L858R）局所進行・転移性 NSCLC · 症候性脳転移・ILD既往除外 · <strong>日本国内承認済み</strong></div>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-val">23.7か月</div>
+            <div class="stat-label">PFS中央値（ami+laz）</div>
+            <div class="stat-vs">vs osi 16.6か月、HR 0.70（p&lt;0.001）<sup class="ref">[1]</sup></div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">HR 0.75</div>
+            <div class="stat-label">OS ハザード比（最終解析）</div>
+            <div class="stat-vs">95%CI 0.61–0.92, p=0.005 · 3年OS 60% vs 51%<sup class="ref">[2]</sup></div>
+          </div>
+          <div class="stat stat-warn">
+            <div class="stat-val">80% vs 52%</div>
+            <div class="stat-label">Grade ≥3 有害事象率</div>
+            <div class="stat-vs">VTE 40% vs 11%（管理上の重要課題）<sup class="ref">[2]</sup></div>
+          </div>
+        </div>
+      </div>
+      <div class="tc-body">
+        <div class="gl-list">
+          <div class="gl-item gl-jp">
+            <span class="gl-flag">🇯🇵</span>
+            <span><strong>日本：</strong>承認済み（EGFR Ex19del・L858R陽性の進行NSCLC 1次治療）。承認日・添付文書の詳細は医薬品医療機器総合機構（PMDA）の最新情報を参照のこと。<!-- 承認日・正確な適応文言は要確認（PMDA） --></span>
+          </div>
+        </div>
+        <div class="trial-meta-row">
+          <div class="trial-meta-item"><span class="meta-label">PMID（PFS）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/38924756/" target="_blank" rel="noopener">38924756 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">PMID（OS最終）</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/40923797/" target="_blank" rel="noopener">40923797 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">NCT</span><span class="meta-val"><a href="https://clinicaltrials.gov/study/NCT04487080" target="_blank" rel="noopener">NCT04487080 ↗</a></span></div>
+          <div class="trial-meta-item"><span class="meta-label">スポンサー</span><span class="meta-val">Janssen（Johnson &amp; Johnson）</span></div>
+          <div class="trial-meta-item"><span class="meta-label">登録期間</span><span class="meta-val">2020年11月〜2022年5月</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 試験デザイン -->
+    <h2 class="sec-h2" id="design">試験デザイン・適格基準</h2>
+
+    <h3 class="sec-h3">無作為化スキーム</h3>
+    <div class="trial-card">
+      <div class="tc-body">
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-label">ami+laz群<br>（n=429）</div>
+            <div class="flow-box f-ami">アミバンタマブ IV<br>＋ ラゼルチニブ 240mg/日</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-ami" style="font-size:11px">病勢進行まで継続</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-label">osi群<br>（n=429）</div>
+            <div class="flow-box f-osi">オシメルチニブ 80mg/日</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-osi" style="font-size:11px">病勢進行まで継続</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-label">laz単剤群<br>（n=216）</div>
+            <div class="flow-box f-laz">ラゼルチニブ 240mg/日<br>（成分寄与評価アーム）</div>
+            <div class="flow-arr">→</div>
+            <div class="flow-box f-laz">病勢進行まで継続</div>
+          </div>
+        </div>
+        <div class="note-box" style="margin-top:12px">
+          無作為化比率 2:2:1。ami+laz群はオープンラベル（投与経路の違いによる）、osi群・laz単剤群は二重盲検。laz単剤群は ami+laz 併用の成分寄与評価を目的とするアームであり、主要仮説検定の比較対象ではない。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">適格基準</h3>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ul class="point-list">
+          <li>未治療 EGFR 変異陽性（Exon 19 deletion または L858R）局所進行・転移性 NSCLC</li>
+          <li>術前・術後補助療法は12か月以上前であれば許容</li>
+          <li>間質性肺疾患（ILD）の既往を有する症例は除外</li>
+          <li>症候性または不安定な脳転移を有する症例は除外</li>
+        </ul>
+        <div class="note-box" style="margin-top:8px">
+          層別因子：変異型（Ex19del / L858R）、人種（アジア人 / 非アジア人）、脳転移の有無。
+        </div>
+      </div>
+    </div>
+
+    <!-- レジメン詳細 -->
+    <h2 class="sec-h2" id="regimen">レジメン詳細</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:80px">アーム</th>
+              <th style="min-width:130px">薬剤</th>
+              <th style="min-width:200px">用量</th>
+              <th style="min-width:240px">スケジュール</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key" rowspan="2">ami+laz<br>（n=429）</td>
+              <td>アミバンタマブ（静脈内）</td>
+              <td>体重80kg未満：1,050mg<br>体重80kg以上：1,400mg</td>
+              <td>第1サイクル：週1回（初回のみ2日間に分割投与）<br>第2サイクル以降：2週に1回</td>
+            </tr>
+            <tr>
+              <td>ラゼルチニブ（経口）</td>
+              <td>240mg</td>
+              <td>1日1回（28日サイクル）</td>
+            </tr>
+            <tr>
+              <td class="td-key">osi<br>（n=429）</td>
+              <td>オシメルチニブ（経口）</td>
+              <td>80mg</td>
+              <td>1日1回</td>
+            </tr>
+            <tr>
+              <td class="td-key">laz単剤<br>（n=216）<br><span style="font-size:10px;font-weight:400;color:var(--text3)">成分寄与評価</span></td>
+              <td>ラゼルチニブ（経口）</td>
+              <td>240mg</td>
+              <td>1日1回<br><span style="font-size:11px;color:var(--text3)">※主要仮説検定の比較対象ではない</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 主要評価項目：PFS -->
+    <h2 class="sec-h2" id="pfs">主要評価項目：PFS</h2>
+    <p class="body-text">主要解析（データカットオフ 2023年8月11日、追跡期間中央値 22.0か月）、BICR（独立中央判定）による評価。</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">23.7か月</div>
+        <div class="stat-label">PFS中央値（ami+laz）</div>
+        <div class="stat-vs">95%CI 19.1–27.7</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">16.6か月</div>
+        <div class="stat-label">PFS中央値（osi）</div>
+        <div class="stat-vs">95%CI 14.8–18.5</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.70</div>
+        <div class="stat-label">PFS ハザード比（BICR）</div>
+        <div class="stat-vs">95%CI 0.58–0.85, p&lt;0.001</div>
+      </div>
+    </div>
+
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">項目</th>
+              <th style="min-width:160px">ami+laz（n=429）</th>
+              <th style="min-width:140px">osi（n=429）</th>
+              <th style="min-width:160px">解釈</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">PFS中央値</td>
+              <td class="td-ami num">23.7か月（19.1–27.7）</td>
+              <td class="td-osi num">16.6か月（14.8–18.5）</td>
+              <td>差 +7.1か月</td>
+            </tr>
+            <tr>
+              <td class="td-key">HR（95%CI）</td>
+              <td class="td-ami num" colspan="2">0.70（0.58–0.85）</td>
+              <td>p&lt;0.001</td>
+            </tr>
+            <tr>
+              <td class="td-key">評価方法</td>
+              <td colspan="2">BICR（独立中央判定）、RECIST v1.1</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="td-key">追跡期間中央値</td>
+              <td colspan="2">22.0か月</td>
+              <td>データカットオフ 2023-08-11<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 副次評価項目：OS・ORR・DoR -->
+    <h2 class="sec-h2" id="secondary">副次評価項目：OS・ORR・奏効持続期間</h2>
+
+    <h3 class="sec-h3">全生存期間（OS）最終解析（データカットオフ 2024年12月4日、追跡中央値 37.8か月）</h3>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">NE（未到達）</div>
+        <div class="stat-label">OS中央値（ami+laz）</div>
+        <div class="stat-vs">95%CI 42.9か月–NE · 3年OS 60%（55–64%）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">36.7か月</div>
+        <div class="stat-label">OS中央値（osi）</div>
+        <div class="stat-vs">95%CI 33.4–41.0 · 3年OS 51%（46–55%）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.75</div>
+        <div class="stat-label">OS ハザード比</div>
+        <div class="stat-vs">95%CI 0.61–0.92, p=0.005</div>
+      </div>
+    </div>
+
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">項目</th>
+              <th style="min-width:180px">ami+laz</th>
+              <th style="min-width:140px">osi</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">OS中央値</td>
+              <td class="td-ami num">未到達（NE）（95%CI 42.9–NE）</td>
+              <td class="td-osi num">36.7か月（33.4–41.0）</td>
+              <td><sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">3年OS率</td>
+              <td class="td-ami num">60%（95%CI 55–64%）</td>
+              <td class="td-osi num">51%（95%CI 46–55%）</td>
+              <td><sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">OS HR（95%CI）</td>
+              <td class="td-ami num" colspan="2">0.75（0.61–0.92）, p=0.005</td>
+              <td><sup class="ref">[2]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">客観的奏効率（ORR）・奏効持続期間（DoR）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:180px">項目</th>
+              <th style="min-width:180px">ami+laz</th>
+              <th style="min-width:140px">osi</th>
+              <th style="min-width:200px">解釈</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">ORR</td>
+              <td class="td-ami num">86%（95%CI 83–89%）</td>
+              <td class="td-osi num">85%（95%CI 81–88%）</td>
+              <td>OR 1.15（0.78–1.70）。ORRは両群間で差を認めなかった<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">DoR中央値</td>
+              <td class="td-ami num">25.8か月（20.1–NE）</td>
+              <td class="td-osi num">16.8か月（14.8–18.5）</td>
+              <td>奏効継続期間はami+laz群で延長<sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">
+          ORRに群間差はないが、DoRはami+laz群で延長（+9か月）。これはPFS延長の主要な寄与因子と考えられる。
+        </div>
+      </div>
+    </div>
+
+    <!-- PFS2・頭蓋内PFS -->
+    <h2 class="sec-h2" id="pfs2-ic">後治療後PFS（PFS2）・頭蓋内PFS</h2>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">項目</th>
+              <th style="min-width:180px">ami+laz</th>
+              <th style="min-width:140px">osi</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">PFS2中央値</td>
+              <td class="td-ami num">42.9か月（37.6–NE）</td>
+              <td class="td-osi num">32.8か月（29.7–37.0）</td>
+              <td rowspan="2"><sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">PFS2 HR</td>
+              <td class="td-ami num" colspan="2">0.74（95%CI 0.61–0.90）</td>
+            </tr>
+            <tr>
+              <td class="td-key">頭蓋内PFS中央値</td>
+              <td class="td-ami num">25.4か月（20.1–29.5）</td>
+              <td class="td-osi num">22.2か月（18.4–26.9）</td>
+              <td rowspan="2"><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">頭蓋内PFS HR</td>
+              <td class="td-ami num" colspan="2">0.79（95%CI 0.61–1.02）<br><span style="font-size:11px;color:var(--text3)">※統計的有意差なし（CI上限 &gt;1.0）</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">
+          頭蓋内PFSのHR（0.79）は95%CI上限が1.0を超えており、統計的有意差は示されていない。脳転移有・無ともにPFS HRは0.69で一貫している（事前規定サブグループ）。
+        </div>
+      </div>
+    </div>
+
+    <!-- サブグループ解析 -->
+    <h2 class="sec-h2" id="subgroup">サブグループ解析</h2>
+    <div class="caution-box">
+      以下はいずれも<strong>事前規定サブグループ解析</strong>（ctDNA・TP53 は探索的解析）。多重性の調整は行われていない。各サブグループ単独での有効性結論に用いないこと。点推定値は参考情報として参照する。
+    </div>
+
+    <h3 class="sec-h3">PFS サブグループ（主要解析）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">サブグループ</th>
+              <th style="min-width:100px">PFS HR</th>
+              <th style="min-width:140px">95%CI</th>
+              <th style="min-width:200px">注記</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">全体</td>
+              <td class="td-ami num">0.70</td>
+              <td class="num">0.58–0.85</td>
+              <td>主要解析<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Ex19del</td>
+              <td class="td-ami num">0.65</td>
+              <td class="num">0.51–0.85</td>
+              <td>事前規定サブグループ<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">L858R ※</td>
+              <td class="num">0.78</td>
+              <td class="num">0.59–1.02</td>
+              <td>※ 95%CI上限 &gt;1.0。統計的有意差なし。ただし事前規定サブグループ（層別因子）<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">脳転移あり</td>
+              <td class="td-ami num">0.69</td>
+              <td class="num">0.53–0.92</td>
+              <td>事前規定サブグループ<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">脳転移なし</td>
+              <td class="td-ami num">0.69</td>
+              <td class="num">0.53–0.89</td>
+              <td>事前規定サブグループ<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">アジア人</td>
+              <td class="td-ami num">0.67</td>
+              <td class="num">0.52–0.86</td>
+              <td>事前規定サブグループ<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">非アジア人</td>
+              <td class="td-ami num">0.75</td>
+              <td class="num">0.56–0.99</td>
+              <td>事前規定サブグループ<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">ctDNA陽性（NGS）</td>
+              <td class="td-ami num">0.71</td>
+              <td class="num">0.57–0.89</td>
+              <td>探索的解析<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">ctDNA陽性（ddPCR）</td>
+              <td class="td-ami num">0.68</td>
+              <td class="num">0.53–0.86</td>
+              <td>探索的解析<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">TP53 共変異あり</td>
+              <td class="td-ami num">0.65</td>
+              <td class="num">0.48–0.87</td>
+              <td>探索的解析（Ann Oncol 2024で詳報）<sup class="ref">[3]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="info-box" style="margin-top:8px">
+          <strong>L858R について：</strong>L858R 変異例のPFS HR（0.78, 95%CI 0.59–1.02）は事前規定サブグループ解析の値であり、信頼区間が1.0を超えている。このサブグループ単独で治療効果がないと結論づけることも、効果があると確定することも適切ではない。Ann Oncol 2024（<sup class="ref">[3]</sup>）では、ctDNA・TP53共変異などのhigh-risk biomarkerを持つ例でより明確な効果が示された。
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">OS サブグループ（最終解析）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">サブグループ</th>
+              <th style="min-width:100px">OS HR</th>
+              <th style="min-width:140px">95%CI</th>
+              <th style="min-width:200px">注記</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">全体</td>
+              <td class="td-ami num">0.75</td>
+              <td class="num">0.61–0.92</td>
+              <td>最終OS解析<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Ex19del</td>
+              <td class="td-ami num">0.66</td>
+              <td class="num">0.50–0.86</td>
+              <td>事前規定サブグループ<sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">L858R ※</td>
+              <td class="num">0.90</td>
+              <td class="num">0.67–1.21</td>
+              <td>※ 95%CI上限 &gt;1.0。統計的有意差なし<sup class="ref">[2]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">
+          OSでも Ex19del でのHR（0.66）は L858R（0.90）より数値上小さい。L858R でのOS HRは95%CI上限が1.21と幅広く、効果の有無について確定的な解釈はできない。PFS同様、事前規定サブグループ解析であり、多重性の調整はない。
+        </div>
+      </div>
+    </div>
+
+    <!-- ラゼルチニブ単剤アーム -->
+    <h2 class="sec-h2" id="laz-mono">ラゼルチニブ単剤アームの結果</h2>
+    <p class="body-text">ラゼルチニブ単剤アーム（n=216）は、アミバンタマブの上乗せ効果を評価するための成分寄与評価アームとして設定された。主要仮説検定の比較対象ではない。</p>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">項目</th>
+              <th style="min-width:160px">laz単剤（n=216）</th>
+              <th style="min-width:200px">解釈</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">PFS中央値</td>
+              <td class="td-laz num">18.5か月（14.8–20.1）</td>
+              <td rowspan="2">laz単剤群と osi 群との間でPFSに有意差なし（HR 0.98, 95%CI 0.79–1.22）。ami+laz 群の PFS 上乗せ効果はアミバンタマブによるものと示唆される<sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">HR vs osi（95%CI）</td>
+              <td class="td-laz num">0.98（0.79–1.22）</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">
+          この結果から、ami+lazのPFS上乗せ効果（HR 0.70 vs osi）は主にアミバンタマブによるものと解釈される。ラゼルチニブ単剤はオシメルチニブと同程度の効果（HR ≈1.0）を示した。
+        </div>
+      </div>
+    </div>
+
+    <!-- 安全性 -->
+    <h2 class="sec-h2" id="safety">安全性</h2>
+    <p class="body-text">ami+laz群では Grade ≥3 有害事象が著しく高く（80% vs 52%）、皮膚毒性・VTE・IRRが臨床実装上の主要課題となる。用量減量率も 59% vs 5% と大きな乖離がある。</p>
+
+    <div class="stat-row">
+      <div class="stat stat-warn">
+        <div class="stat-val">80% vs 52%</div>
+        <div class="stat-label">Grade ≥3 有害事象（OS解析時点）</div>
+        <div class="stat-vs">主要解析時は 75% vs 43%<sup class="ref">[2]</sup></div>
+      </div>
+      <div class="stat stat-warn">
+        <div class="stat-val">59% vs 5%</div>
+        <div class="stat-label">用量減量率</div>
+        <div class="stat-vs">大きな乖離あり（管理の違いを反映）<sup class="ref">[1]</sup></div>
+      </div>
+      <div class="stat stat-warn">
+        <div class="stat-val">10% vs 3%</div>
+        <div class="stat-label">全薬剤中止率（有害事象による）</div>
+        <div class="stat-vs">いずれかの薬剤は 35% vs 14%<sup class="ref">[1]</sup></div>
+      </div>
+    </div>
+
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:240px">安全性項目</th>
+              <th style="min-width:140px">ami+laz</th>
+              <th style="min-width:120px">osi</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">Grade ≥3 有害事象（主要解析）</td>
+              <td class="warn-val num">75%</td>
+              <td class="td-osi num">43%</td>
+              <td><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">Grade ≥3 有害事象（OS解析カットオフ）</td>
+              <td class="warn-val num">80%</td>
+              <td class="td-osi num">52%</td>
+              <td><sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">治療関連死（Grade 5）</td>
+              <td class="warn-val">4例（1%）<br><span style="font-size:11px;font-weight:400">骨髄不全・過敏性肺胞炎・肺臓炎・突然死</span></td>
+              <td class="td-osi">2例（&lt;1%）<br><span style="font-size:11px">間質性肺疾患</span></td>
+              <td><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">全薬剤中止（有害事象による）</td>
+              <td class="warn-val num">10%</td>
+              <td class="td-osi num">3%</td>
+              <td><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">いずれかの薬剤中止</td>
+              <td class="td-ami num">35%</td>
+              <td class="td-osi num">14%</td>
+              <td><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">用量減量</td>
+              <td class="warn-val num">59%</td>
+              <td class="td-osi num">5%</td>
+              <td><sup class="ref">[1]</sup></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sec-h3">ami+laz群の主な有害事象（いずれかのGrade、ami+laz群で ≥20%）</h3>
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:200px">有害事象</th>
+              <th style="min-width:120px">ami+laz（%）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-key">爪囲炎</td><td class="td-ami num">68</td></tr>
+            <tr><td class="td-key">注入関連反応（IRR）</td><td class="td-ami num">63</td></tr>
+            <tr><td class="td-key">皮疹</td><td class="td-ami num">62</td></tr>
+            <tr><td class="td-key">低アルブミン血症</td><td class="td-ami num">48</td></tr>
+            <tr><td class="td-key">ALT上昇</td><td class="td-ami num">36</td></tr>
+            <tr><td class="td-key">末梢性浮腫</td><td class="td-ami num">36</td></tr>
+            <tr><td class="td-key">口内炎</td><td class="td-ami num">29</td></tr>
+            <tr><td class="td-key">便秘</td><td class="td-ami num">29</td></tr>
+            <tr><td class="td-key">下痢</td><td class="td-ami num">29</td></tr>
+            <tr><td class="td-key">ざ瘡様皮膚炎</td><td class="td-ami num">29</td></tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top:8px">出典：NEJM 2024<sup class="ref">[1]</sup>。ami+laz群の代表的なEGFR阻害・MET阻害・VEGF阻害に関連した皮膚・粘膜毒性。</div>
+      </div>
+    </div>
+
+    <!-- VTE・IRR・ILD -->
+    <h2 class="sec-h2" id="vte">VTE・IRR・ILD：管理上の重要事項</h2>
+
+    <div class="caution-box">
+      <strong>静脈血栓塞栓症（VTE）：</strong>ami+laz群で 40%（OS解析カットオフ）と高頻度。osi群の 11% に比べて著明に高い。VTE予防・モニタリング体制を含めた管理が必須。
+    </div>
+
+    <div class="trial-card">
+      <div class="tc-body" style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="min-width:220px">項目</th>
+              <th style="min-width:140px">ami+laz</th>
+              <th style="min-width:120px">osi</th>
+              <th style="min-width:120px">出典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-key">VTE（主要解析）</td>
+              <td class="warn-val num">37%</td>
+              <td class="td-osi num">9%</td>
+              <td><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">VTE（OS解析カットオフ）</td>
+              <td class="warn-val num">40%</td>
+              <td class="td-osi num">11%</td>
+              <td><sup class="ref">[2]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">IRR（注入関連反応）</td>
+              <td class="td-ami num">63%</td>
+              <td class="td-osi">—</td>
+              <td rowspan="2"><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">IRR Grade ≥3</td>
+              <td class="td-ami num">6%</td>
+              <td class="td-osi">—</td>
+            </tr>
+            <tr>
+              <td class="td-key">ILD/肺臓炎（いずれかのGrade）</td>
+              <td class="td-ami num">3%</td>
+              <td class="td-osi num">3%</td>
+              <td rowspan="2"><sup class="ref">[1]</sup></td>
+            </tr>
+            <tr>
+              <td class="td-key">ILD/肺臓炎 Grade ≥3</td>
+              <td class="td-ami num">1%</td>
+              <td class="td-osi num">1%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>IRRの特徴：</strong>AMIVANTAMABの初回投与時に多く、第1サイクルは初回投与を2日間に分割（split-dose infusion）し、前投薬を行うことで管理する。Grade ≥3 のIRRは6%であり、アナフィラキシー様反応への対応体制の整備が必要。<br>
+      <strong>ILD：</strong>両群でほぼ同率（3%）。アミバンタマブ追加によるILDリスクの上乗せは主要解析では示されていない。ただし主要除外基準にILD既往が含まれており、ILD既往例の管理は慎重に行うこと。
+    </div>
+
+    <!-- 日本・アジア -->
+    <h2 class="sec-h2" id="japan">日本・アジアについて</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <div class="gl-list">
+          <div class="gl-item gl-jp">
+            <span class="gl-flag">🇯🇵</span>
+            <span>日本国内で承認済み（EGFR Ex19del・L858R陽性の進行NSCLC 1次治療）。具体的な承認日・添付文書の詳細は PMDA の最新情報を参照のこと。<!-- 承認日・正確な適応文言は PMDA で要確認 --></span>
+          </div>
+          <div class="gl-item gl-warn">
+            <span class="gl-flag">📊</span>
+            <span>日本人患者の具体的な登録例数は主要論文（NEJM 2024・2025）に明記されていない。アジア人サブセット論文（Lung Cancer 2025・2026）に詳細が記載されている可能性あり（PMID 未確定）。<!-- アジア人サブセット PMID 要確認 --></span>
+          </div>
+        </div>
+        <div class="note-box">
+          アジア人サブグループ（事前規定）の PFS HR は 0.67（95%CI 0.52–0.86）、非アジア人は 0.75（0.56–0.99）といずれも全体 HR と一致した方向を示している<sup class="ref">[1]</sup>。
+        </div>
+      </div>
+    </div>
+
+    <!-- COI・スポンサー -->
+    <h2 class="sec-h2" id="coi">COI・スポンサー開示</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <div class="note-box">
+          <strong>スポンサー：</strong>Janssen Research and Development（Johnson &amp; Johnson）。<br>
+          多数の著者がJanssen、AstraZeneca、Roche、MSD等から講演料・コンサルティング料・研究費を受領。複数著者はJohnson &amp; Johnsonの従業員であり株式を保有している可能性がある。COIの詳細は各論文の著者開示を参照のこと。
+        </div>
+      </div>
+    </div>
+
+    <!-- 参考文献 -->
+    <h2 class="sec-h2" id="references">参考文献</h2>
+    <div class="trial-card">
+      <div class="tc-body">
+        <ol class="ref-list">
+          <li>Cho BC, Lu S, Felip E, et al; MARIPOSA Investigators. Amivantamab plus Lazertinib in Previously Untreated EGFR-Mutated Advanced NSCLC. <em>N Engl J Med.</em> 2024;391(16):1486-1498. <a href="https://pubmed.ncbi.nlm.nih.gov/38924756/" target="_blank" rel="noopener">PMID: 38924756</a>. <a href="https://doi.org/10.1056/NEJMoa2403614" target="_blank" rel="noopener">doi:10.1056/NEJMoa2403614</a>（Primary PFS解析・ORR・DoR・頭蓋内PFS・安全性）</li>
+          <li>Yang JC-H, Lu S, Hayashi H, et al; MARIPOSA Investigators. Overall Survival with Amivantamab–Lazertinib in EGFR-Mutated Advanced NSCLC. <em>N Engl J Med.</em> 2025;393(17):1681-1693. <a href="https://pubmed.ncbi.nlm.nih.gov/40923797/" target="_blank" rel="noopener">PMID: 40923797</a>. <a href="https://doi.org/10.1056/NEJMoa2503001" target="_blank" rel="noopener">doi:10.1056/NEJMoa2503001</a>（OS最終解析・PFS2・更新安全性）</li>
+          <li>Felip E, Cho BC, Gutiérrez V, et al. Amivantamab plus lazertinib versus osimertinib in first-line EGFR-mutant advanced NSCLC with biomarkers of high-risk disease: secondary analysis from MARIPOSA. <em>Ann Oncol.</em> 2024;35(9):805-816. <a href="https://pubmed.ncbi.nlm.nih.gov/38942080/" target="_blank" rel="noopener">PMID: 38942080</a>. <a href="https://doi.org/10.1016/j.annonc.2024.05.541" target="_blank" rel="noopener">doi:10.1016/j.annonc.2024.05.541</a>（TP53共変異・ctDNA・high-risk biomarkerサブグループ）</li>
+        </ol>
+        <div class="note-box" style="margin-top:12px">
+          <strong>未確定文献（PMID 要確認）：</strong><br>
+          Cho BC, Hayashi H, Lee JS, et al. Amivantamab plus lazertinib versus osimertinib as first-line treatment in EGFR-mutated advanced NSCLC: MARIPOSA Asian subset. <em>Lung Cancer.</em> 2025;204:108496.（アジア人サブセット PFS）<br>
+          Yang JC, Lu S, Hayashi H, et al. Overall survival for amivantamab plus lazertinib versus osimertinib in Asian participants: MARIPOSA subset analysis. <em>Lung Cancer.</em> 2026. doi:S0169-5002(26)00049-8.（アジア人サブセット OS）
+        </div>
+      </div>
+    </div>
+
+    <!-- 関連ページ -->
+    <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px">関連ページ</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/lungatlas/driver-positive.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);background:var(--green-light);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:500">
+          ← 変異陽性 NSCLC 概要
+        </a>
+        <a href="/lungatlas/egfr-firstline.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);background:var(--green-light);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:500">
+          EGFR 1次治療選択ガイド
+        </a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo">Lung<span>Atlas</span></span>
+  <span>医療専門家向け学術情報サイト。本ページの情報は診療の代替となるものではありません。最終更新 2026年6月28日</span>
+</footer>
+
+</body>
+</html>
