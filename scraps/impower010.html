@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMpower010試験 — 切除後NSCLC 補助化学療法後 atezolizumab — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。IMpower010試験（完全切除NSCLC術後補助atezolizumab）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-red { background: var(--red-light); color: var(--red-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.note-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 13px;
+  color: var(--text2);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 8px 0 14px;
+}
+.coi-note {
+  display: inline-block;
+  margin: 4px 0 14px;
+  background: var(--amber-light);
+  color: var(--amber-dark);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: var(--mono);
+}
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>IMpower010試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">IMpower010試験 — 切除後NSCLC 補助化学療法後 atezolizumab（術後補助免疫療法）</h1>
+
+  <p class="scrap-summary">完全切除stage IB-IIIA NSCLCで補助化学療法後のatezolizumabがDFSを改善した初の第3相免疫療法試験。PD-L1 TC≥1% stage II-IIIAで顕著。EGFR/ALK陽性では効果が一貫しない。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://doi.org/10.1016/S0140-6736(21)02098-5" target="_blank" rel="noopener">Lancet 2021（PMID <!-- 要確認 -->）</a> ／
+      <a href="https://doi.org/10.1016/j.annonc.2023.07.001" target="_blank" rel="noopener">Ann Oncol 2023（PMID <!-- 要確認 -->）</a> ／
+      <a href="https://doi.org/10.1200/JCO-24-01681" target="_blank" rel="noopener">JCO 2024（PMID <!-- 要確認 -->）</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>IMpower010試験（NCT02486718）は、完全切除されたstage IB-IIIA NSCLCに対し、プラチナ併用補助化学療法後のatezolizumab（抗PD-L1抗体）をbest supportive care（BSC）と比較した国際共同・第3相・非盲検・無作為化試験。術後補助療法としての免疫チェックポイント阻害薬がDFSを有意に改善した最初の第3相試験。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・非盲検・多施設（22か国227施設）・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>完全切除 stage IB（腫瘍≥4cm）–IIIA NSCLC（UICC/AJCC第7版）・ECOG PS 0/1</td></tr>
+        <tr><td>EGFR/ALK</td><td><strong>陽性例も組み入れ可</strong></td></tr>
+        <tr><td>前治療</td><td>プラチナ（シスプラチン）併用補助化学療法 1–4サイクル完遂</td></tr>
+        <tr><td>症例数</td><td>登録1280例 → 化学療法後ランダム化1005例</td></tr>
+        <tr><td>レジメン</td><td>atezolizumab 1200mg Q21D×16サイクル（約1年）vs BSC</td></tr>
+        <tr><td>主要評価項目</td><td>治験医評価DFS（階層的検定）</td></tr>
+        <tr><td>検定階層</td><td>① stage II-IIIA PD-L1 TC≥1% → ② 全stage II-IIIA → ③ ITT（stage IB-IIIA）</td></tr>
+        <tr><td>スポンサー</td><td>F. Hoffmann-La Roche / Genentech（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT02486718</td></tr>
+      </tbody>
+    </table>
+
+    <div class="coi-note">Funded by F. Hoffmann-La Roche / Genentech</div>
+
+    <!-- ===== セクション2：有効性 — DFS ===== -->
+    <h2>2. 有効性 — DFS</h2>
+
+    <p class="sub">DFS Primary interim解析（Lancet 2021）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.66</div>
+        <div class="stat-label">DFS（PD-L1 TC≥1% stage II-IIIA）</div>
+        <div class="stat-vs">95%CI 0.50–0.88、p=0.004</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.43</div>
+        <div class="stat-label">DFS（PD-L1 TC≥50% stage II-IIIA、EGFR/ALK含む）</div>
+        <div class="stat-vs">95%CI 0.27–0.68</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.43</div>
+        <div class="stat-label">DFS（PD-L1 TC≥50% stage II-IIIA、EGFR/ALK除く）</div>
+        <div class="stat-vs">95%CI 0.26–0.71</div>
+      </div>
+    </div>
+
+    <!-- 要確認: 全stage II-IIIAのDFS HR（interim/final）はLancet 2021 / JCO 2024より確認 -->
+    <div class="note-box">
+      全stage II-IIIA（all-randomized）のDFS HRはLancet 2021より要確認。
+    </div>
+
+    <p class="sub">DFS Final解析（JCO 2024、≥5年フォロー）</p>
+    <table class="comp-table">
+      <thead>
+        <tr><th>集団</th><th>atezolizumab（中央値）</th><th>BSC（中央値）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>PD-L1 TC≥1% stage II-IIIA</td><td class="num">68.5か月</td><td class="num">37.3か月</td></tr>
+        <tr><td>全stage II-IIIA</td><td class="num">57.4か月</td><td class="num">40.8か月</td></tr>
+        <tr><td>ITT（stage IB-IIIA）</td><td class="num">65.6か月</td><td class="num">47.8か月</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: 各サブグループのDFS率（3年・5年）はJCO 2024より確認 -->
+    <!-- 要確認: 全stage II-IIIAのDFS HR（interim/final）はLancet 2021 / JCO 2024より確認 -->
+
+    <p>DFS benefitはPD-L1発現量に依存し、TC≥50%で最も顕著。ITT全体では有意境界に到達しなかった点に注意。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>ITT（stage IB-IIIA全体）のDFSは統計学的有意境界を越えなかった。有意差が示されたのはPD-L1 TC≥1% stage II-IIIA集団まで（階層的検定が停止）。</span>
+      </div>
+    </div>
+
+    <!-- ===== セクション3：有効性 — OS ===== -->
+    <h2>3. 有効性 — OS</h2>
+
+    <!-- 要確認: OS interim 2（JCO 2024）の各サブグループHR・CIを原著より確認 -->
+    <div class="note-box">
+      OSは解析時点で未成熟（immature）であり、明確な統計的有意性をもってOS優越性が示されたわけではない（PD-L1高発現群での陽性傾向にとどまる）。PD-L1 TC≥50% stage II-IIIA群でatezolizumab有利の陽性傾向が最も大きい。具体的なHR・中央値・CIはAnn Oncol 2023 / JCO 2024の原著より要確認。
+    </div>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>OS interim解析（Ann Oncol 2023・JCO 2024）では、OS優越性の統計的有意性は確立されていない。PD-L1高発現群での陽性傾向は探索的知見にとどまる。</span>
+      </div>
+    </div>
+
+    <!-- ===== セクション4：バイオマーカー・サブグループ（探索的） ===== -->
+    <h2>4. バイオマーカー・サブグループ（探索的）</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>PD-L1発現が効果の主要規定因子。TC≥50% > TC≥1% > 全体の順にbenefitが大きい。</span>
+      </div>
+      <div class="gl-item gl-red">
+        <span class="gl-flag">注意</span>
+        <span><strong>EGFR/ALK陽性例ではbenefitが一貫しない</strong>（ASCO 2025探索的解析）。これらの患者では補助osimertinib（ADAURA）等のドライバー標的補助療法が優先される文脈に注意。<!-- 要確認: EGFR/ALKサブグループの具体的HRはASCO 2025抄録またはJCO 2024より確認 --></span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">探索的</span>
+        <span>非扁平上皮ではSTK11変異がOSの予後不良因子（DFSではない）、KEAP1変異はDFS/OSの予後と有意な関連なし（ASCO 2025探索的）。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">探索的</span>
+        <span>STK11・KEAP1いずれもatezolizumabのDFS/OS benefitとは有意に関連せず（探索的）。</span>
+      </div>
+    </div>
+
+    <!-- ===== セクション5：安全性 ===== -->
+    <h2>5. 安全性</h2>
+
+    <p>新たな安全性シグナルなし（Lancet 2021・JCO 2024で一貫）。BSC対照（非盲検）であり、atezolizumab群でのみ免疫関連有害事象が問題となる。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Grade 3/4 有害事象</td><td><!-- 要確認: Lancet 2021 Tableより -->Lancet 2021原著より要確認</td></tr>
+        <tr><td>irAE（甲状腺機能異常・肺臓炎・肝炎等）</td><td><!-- 要確認: Lancet 2021より -->Lancet 2021原著より要確認</td></tr>
+        <tr><td>有害事象による投与中止率</td><td><!-- 要確認: Lancet 2021より -->Lancet 2021原著より要確認</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tox-row">
+      <span class="tox">甲状腺機能異常</span>
+      <span class="tox">肺臓炎</span>
+      <span class="tox">肝炎</span>
+      <span class="tox">皮疹</span>
+      <span class="tox">infusion reaction</span>
+    </div>
+
+    <!-- ===== セクション6：位置づけと注意点 ===== -->
+    <h2>6. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">承認</span>
+        <span>atezolizumabの国内承認状況（術後補助）：<!-- 要確認: PMDA確認 -->PMDAで要確認。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">位置づけ</span>
+        <span>術後補助免疫療法として初めてDFS改善を示した第3相試験。後続のKEYNOTE-091（pembrolizumab補助）と並ぶ。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">注意</span>
+        <span>効果はPD-L1発現依存的。承認もPD-L1 TC≥1%（または地域によりTC≥50%）stage II-IIIAに限定される傾向。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>ITT（stage IB-IIIA全体）では有意境界に到達しておらず、stage IBやPD-L1陰性への一律適用は支持されない。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>EGFR/ALK陽性では効果が一貫せず、これらの患者では補助osimertinib（ADAURA）やalectinib（ALINA）等のドライバー標的補助療法を優先的に考慮。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>補助化学療法を完遂した患者が対象。化学療法非完遂例への外挿は不可。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>AJCC第7版によるstagingである点に注意（第8版とはstage定義が一部異なる）。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">比較</span>
+        <span>周術期試験（AEGEAN・KEYNOTE-671等、術前+術後）とは異なり、本試験は「術後補助のみ」。直接比較不可（間接比較の注意）。</span>
+      </div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Felip E, Altorki N, Zhou C, et al; IMpower010 Investigators. Adjuvant atezolizumab after adjuvant chemotherapy in resected stage IB-IIIA non-small-cell lung cancer (IMpower010): a randomised, multicentre, open-label, phase 3 trial. <em>Lancet.</em> 2021;398(10308):1344-1357. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1016/S0140-6736(21)02098-5" target="_blank" rel="noopener">10.1016/S0140-6736(21)02098-5</a></li>
+      <li>Felip E, Altorki N, Zhou C, et al. Overall survival with adjuvant atezolizumab after chemotherapy in resected stage II-IIIA non-small-cell lung cancer (IMpower010): a randomised, multicentre, open-label, phase III trial. <em>Ann Oncol.</em> 2023;34(10):907-919. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1016/j.annonc.2023.07.001" target="_blank" rel="noopener">10.1016/j.annonc.2023.07.001</a></li>
+      <li>Wakelee HA, et al. Five-Year Survival Outcomes With Atezolizumab After Chemotherapy in Resected Stage IB-IIIA NSCLC (IMpower010): DFS Final Analysis and Second OS Interim Analysis. <em>J Clin Oncol.</em> 2024. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1200/JCO-24-01681" target="_blank" rel="noopener">10.1200/JCO-24-01681</a></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

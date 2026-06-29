@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "IMpower010試験 — 切除後NSCLC 補助化学療法後 atezolizumab（術後補助免疫療法）",
+    summary: "完全切除stage IB-IIIA NSCLCで補助化学療法後のatezolizumabがDFSを改善した初の第3相免疫療法試験。PD-L1 TC≥1% stage II-IIIAで顕著。EGFR/ALK陽性では効果が一貫しない。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/impower010.html"
+  },
+  {
     title: "FLAURA2試験 — 1次治療 osimertinib + 化学療法 vs osimertinib単剤（EGFR変異陽性NSCLC）",
     summary: "治療歴なしEGFR ex19del/L858R 進行NSCLCでosimertinib + プラチナ-ペメトレキセドがosimertinib単剤を上回るPFS・OSを示した第3相試験。OS中央値47.5 vs 37.6か月。毒性は増加。",
     date: "2026-06-28",
