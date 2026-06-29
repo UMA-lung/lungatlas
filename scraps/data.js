@@ -12,31 +12,31 @@ const SCRAPS_DATA = [
   {
     title: "PAPILLON試験 — 1次治療 amivantamab + 化学療法（EGFR exon 20挿入変異NSCLC）",
     summary: "治療歴なしEGFR exon 20挿入変異NSCLCで、amivantamab + carboplatin-pemetrexedが化学療法単独を上回るPFSを示した第3相試験。PFS中央値11.4 vs 6.7か月。NCCN Category 1 preferred。",
-    date: "2026-06-24",
+    date: "2026-06-30",
     url: "/lungatlas/scraps/papillon.html"
   },
   {
     title: "CheckMate 227試験 — 1次治療 nivolumab + ipilimumab（化学療法なし、IV期 EGFR/ALK野生型NSCLC）",
     summary: "治療歴なしIV期EGFR/ALK野生型NSCLCで、化学療法を含まないnivolumab+ipilimumabが化学療法を上回るOSを示した第3相試験。PD-L1問わず長期benefit。TMBをco-primaryに用いた歴史的試験。",
-    date: "2026-06-24",
+    date: "2026-06-29",
     url: "/lungatlas/scraps/cm227.html"
   },
   {
     title: "CheckMate 9LA試験 — 1次治療 nivolumab + ipilimumab + 化学療法2サイクル（IV期 EGFR/ALK野生型NSCLC）",
     summary: "治療歴なしIV期EGFR/ALK野生型NSCLCで、nivolumab+ipilimumab+化学療法2サイクルが化学療法4サイクルを上回るOSを示した第3相試験。PD-L1・組織型問わず有効。6年フォローまで報告。",
-    date: "2026-06-24",
+    date: "2026-06-29",
     url: "/lungatlas/scraps/cm9la.html"
   },
   {
     title: "POSEIDON試験 — 1次治療 durvalumab ± tremelimumab + 化学療法（IV期 EGFR/ALK野生型NSCLC）",
     summary: "治療歴なしIV期EGFR/ALK野生型NSCLCで、tremelimumab限定コース+durvalumab+化学療法がPFS・OSを改善した第3相試験。5年OS率15.7% vs 6.8%。durvalumab+化学のみではOS有意差なし。",
-    date: "2026-06-24",
+    date: "2026-06-29",
     url: "/lungatlas/scraps/poseidon.html"
   },
   {
     title: "IMpower010試験 — 切除後NSCLC 補助化学療法後 atezolizumab（術後補助免疫療法）",
     summary: "完全切除stage IB-IIIA NSCLCで補助化学療法後のatezolizumabがDFSを改善した初の第3相免疫療法試験。PD-L1 TC≥1% stage II-IIIAで顕著。EGFR/ALK陽性では効果が一貫しない。",
-    date: "2026-06-24",
+    date: "2026-06-29",
     url: "/lungatlas/scraps/impower010.html"
   },
   {
@@ -48,13 +48,13 @@ const SCRAPS_DATA = [
   {
     title: "JCOG0201 — 薄層CT所見（CTR）による早期肺腺癌の病理的非侵襲性予測：前向きコホート研究",
     summary: "早期末梢性肺癌でCTR≤0.25かつ≤2cmが病理的非侵襲性の高特異度予測因子（98.7%）。JCOG0802・0804の画像診断的基盤。RCTではなく前向きコホート研究。",
-    date: "2026-06-24",
+    date: "2026-06-25",
     url: "/lungatlas/scraps/jcog0201.html"
   },
   {
     title: "CALGB 140503試験 — 末梢性 Stage IA NSCLC（≤2cm）：縮小切除 vs 肺葉切除 非劣性RCT",
     summary: "末梢性2cm以下の病理N0確認NSCLCでsublobar resectionが肺葉切除に対しDFSで非劣性を示した国際第3相試験。wedge・区域切除を含む。JCOG0802と並ぶ縮小切除の2大RCT。",
-    date: "2026-06-24",
+    date: "2026-06-25",
     url: "/lungatlas/scraps/calgb140503.html"
   },
   {
