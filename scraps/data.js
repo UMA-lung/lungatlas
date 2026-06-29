@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "PALOMA-3試験 — 皮下注 vs 静注 amivantamab（+ lazertinib、難治性EGFR変異NSCLC）",
+    summary: "osimertinib＋化学療法後に進行したEGFR変異NSCLCで、皮下注amivantamabが静注に対しPK・有効性で非劣性を示した第3相試験。投与時間短縮・IRR 5分の1・VTE減少。探索的OSは皮下注群で改善。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/paloma3.html"
+  },
+  {
     title: "PAPILLON試験 — 1次治療 amivantamab + 化学療法（EGFR exon 20挿入変異NSCLC）",
     summary: "治療歴なしEGFR exon 20挿入変異NSCLCで、amivantamab + carboplatin-pemetrexedが化学療法単独を上回るPFSを示した第3相試験。PFS中央値11.4 vs 6.7か月。NCCN Category 1 preferred。",
     date: "2026-06-30",
