@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAPILLON試験 — 1次治療 amivantamab + 化学療法（EGFR exon 20挿入変異NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。PAPILLON試験（EGFR exon 20挿入変異NSCLC 1次治療 amivantamab+化学療法）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-red { background: var(--red-light); color: var(--red-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.note-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 13px;
+  color: var(--text2);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 8px 0 14px;
+}
+.coi-note {
+  display: inline-block;
+  margin: 4px 0 14px;
+  background: var(--amber-light);
+  color: var(--amber-dark);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: var(--mono);
+}
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>PAPILLON試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">PAPILLON試験 — 1次治療 amivantamab + 化学療法（EGFR exon 20挿入変異NSCLC）</h1>
+
+  <p class="scrap-summary">治療歴なしEGFR exon 20挿入変異NSCLCで、amivantamab + carboplatin-pemetrexedが化学療法単独を上回るPFSを示した第3相試験。PFS中央値11.4 vs 6.7か月。NCCN Category 1 preferred。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://doi.org/10.1056/NEJMoa2306441" target="_blank" rel="noopener">NEJM 2023（PMID 37870976）</a> ／
+      <a href="#" target="_blank" rel="noopener">Ann Oncol 2024 ESMO 635P（PMID <!-- 要確認 -->）</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>PAPILLON試験（NCT04538664）は、治療歴のないEGFR exon 20挿入変異を有する進行NSCLCに対し、amivantamab（EGFR-MET二重特異性抗体）+ carboplatin-pemetrexed を化学療法単独と比較した国際共同・第3相・非盲検・無作為化試験。EGFR exon 20挿入変異は従来のEGFR-TKIが効きにくく、標準治療はプラチナ化学療法であった集団。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・非盲検・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>treatment-naive locally advanced/metastatic NSCLC・<strong>EGFR exon 20挿入変異</strong></td></tr>
+        <tr><td>症例数</td><td>308例（amivantamab-chemo 153例 / chemo 155例）</td></tr>
+        <tr><td>試験群</td><td>amivantamab + carboplatin + pemetrexed（amivantamab Q3Wスケジュール）</td></tr>
+        <tr><td>対照群</td><td>carboplatin + pemetrexed（化学療法単独）</td></tr>
+        <tr><td>クロスオーバー</td><td>化学療法群は増悪後に2L amivantamab単剤へのクロスオーバーが許容</td></tr>
+        <tr><td>主要評価項目</td><td>PFS（BICR、RECIST v1.1）</td></tr>
+        <tr><td>副次評価項目</td><td>ORR、OS、time to symptomatic progression、安全性</td></tr>
+        <tr><td>層別化因子</td><td><!-- 要確認: NEJM 2023より確認 --></td></tr>
+        <tr><td>スポンサー</td><td>Janssen Research and Development（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT04538664</td></tr>
+      </tbody>
+    </table>
+
+    <div class="coi-note">Funded by Janssen Research and Development</div>
+
+    <!-- ===== セクション2：有効性 — PFS ===== -->
+    <h2>2. 有効性 — PFS</h2>
+
+    <p class="sub">Primary PFS（BICR、NEJM 2023）</p>
+    <!-- 要確認: PFS中央値はNEJM本文で11.4か月、一部二次資料で11.6か月の表記ゆれあり。NEJM 2023原著で確定すること -->
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.40</div>
+        <div class="stat-label">PFS（amivantamab-chemo vs chemo）</div>
+        <div class="stat-vs">95%CI 0.30–0.53、p&lt;0.001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">11.4か月</div>
+        <div class="stat-label">PFS中央値 amivantamab-chemo群</div>
+        <div class="stat-vs">NEJM 2023（BICR）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">6.7か月</div>
+        <div class="stat-label">PFS中央値 chemo群</div>
+        <div class="stat-vs">NEJM 2023（BICR）</div>
+      </div>
+    </div>
+
+    <p class="sub">ORR</p>
+    <!-- 要確認: amivantamab-chemo vs chemo のORR（%）はNEJM 2023より確認 -->
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">ORR amivantamab-chemo群</div>
+        <div class="stat-vs">NEJM 2023より要確認</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">ORR chemo群</div>
+        <div class="stat-vs">NEJM 2023より要確認</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">DoR・奏効までの期間</div>
+        <div class="stat-vs">NEJM 2023より要確認</div>
+      </div>
+    </div>
+
+    <p class="sub">Time to symptomatic progression（ESMO Open 2024）</p>
+    <p>amivantamab-chemo群が chemo群に対し有意に延長。<!-- 要確認: 具体的HR・p値はESMO Open 2024より確認 --></p>
+
+    <!-- ===== セクション3：有効性 — OS ===== -->
+    <h2>3. 有効性 — OS</h2>
+
+    <p class="sub">OS interim（NEJM 2023 / Ann Oncol 2024）</p>
+    <!-- 要確認: OS中央値（両群）の最新データは長期フォロー論文化後に確認 -->
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.67</div>
+        <div class="stat-label">OS（amivantamab-chemo vs chemo）</div>
+        <div class="stat-vs">95%CI 0.42–1.09、有意水準未到達（interim）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">OS中央値 amivantamab-chemo群</div>
+        <div class="stat-vs">長期フォロー後に確認</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">OS中央値 chemo群</div>
+        <div class="stat-vs">長期フォロー後に確認</div>
+      </div>
+    </div>
+
+    <p class="sub">クロスオーバー調整OS（Ann Oncol 2024、ESMO 635P）</p>
+    <!-- 要確認: クロスオーバー調整後の具体的HR・CIはAnn Oncol 2024（635P）より確認 -->
+    <table class="comp-table">
+      <thead>
+        <tr><th>解析</th><th>HR（95%CI）</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ITT OS（interim）</td><td class="num">0.67（0.42–1.09）</td><td>有意水準未到達</td></tr>
+        <tr><td>クロスオーバー調整OS</td><td class="num"><!-- 要確認: Ann Oncol 2024（635P）より確認 --></td><td>クロスオーバー率42%（65/155例）を調整</td></tr>
+      </tbody>
+    </table>
+
+    <p>ITT解析ではOSは有意水準未到達だが、これは化学療法群の高いクロスオーバー率（42%）により希釈された可能性がある。2L amivantamabが利用できない臨床現場では、1L amivantamab-chemoのbenefitはITT解析より大きい可能性が議論されている。</p>
+
+    <!-- ===== セクション4：安全性 ===== -->
+    <h2>4. 安全性</h2>
+
+    <p>amivantamab併用に特徴的な有害事象（EGFR関連・MET関連・VTE）に注意。</p>
+
+    <!-- 要確認: 各有害事象の具体的発現率（%）・予防的抗凝固の推奨はNEJM 2023本文およびSupplementより確認 -->
+    <table class="comp-table">
+      <thead>
+        <tr><th>有害事象</th><th>amivantamab-chemo群</th><th>chemo群</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>EGFR関連（皮疹・爪囲炎・口内炎）</td>
+          <td><!-- 要確認: NEJM 2023より --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>MET関連（低アルブミン血症・浮腫）</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>静脈血栓塞栓症（VTE）</td>
+          <td><!-- 要確認: NEJM 2023より。correspondenceで注目された --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>infusion-related reaction（IRR）</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>血液毒性</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>Grade 3以上有害事象</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tox-row">
+      <span class="tox">皮疹（EGFR関連）</span>
+      <span class="tox">爪囲炎（EGFR関連）</span>
+      <span class="tox">低アルブミン血症（MET関連）</span>
+      <span class="tox">浮腫（MET関連）</span>
+      <span class="tox">静脈血栓塞栓症（VTE）</span>
+      <span class="tox">infusion-related reaction</span>
+    </div>
+
+    <p>VTE（静脈血栓塞栓症）はamivantamab併用レジメンで注目される有害事象であり、予防的抗凝固の是非が議論されている（NEJM 2024 correspondence）。</p>
+
+    <!-- ===== セクション5：位置づけと注意点 ===== -->
+    <h2>5. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-us">
+        <span class="gl-flag">位置づけ</span>
+        <span>EGFR exon 20挿入変異NSCLCは従来のEGFR-TKI（gefitinib・osimertinib等）が効きにくく、PAPILLON以前の1次標準はプラチナ化学療法だった。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">位置づけ</span>
+        <span>PAPILLONにより amivantamab + 化学療法が1次治療の標準的選択肢となり、<strong>NCCN Category 1 preferred</strong>（exon 20挿入における唯一のCategory 1 preferred 1次治療）に位置づけられた。</span>
+      </div>
+      <div class="gl-item gl-red">
+        <span class="gl-flag">重要</span>
+        <span><strong>対象変異が「典型的EGFR変異（ex19del/L858R）」ではなく「exon 20挿入」である点が極めて重要。</strong>MARIPOSA（ex19del/L858R対象）とは全く異なる患者集団であり、混同しないこと。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">考察</span>
+        <span>ITT OSは有意水準未到達だが、高いクロスオーバー率（42%）による希釈の可能性。2L amivantamabが使えない環境では1L併用の意義がより大きいと議論される。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">参照</span>
+        <span>mobocertinib（EXCLAIM-2試験）はexon 20挿入の1次治療でPFS改善を示せず、開発中止・市場撤退の経緯。PAPILLONとの対比で参照される。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>VTE管理が必要。amivantamab投与中の抗凝固療法の適応について確認が求められる。</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">承認</span>
+        <span>amivantamabは国内でEGFR exon 20挿入変異NSCLCに承認。1次治療併用の国内承認状況は <!-- 要確認: PMDA確認 -->。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>化学療法単独・mobocertinib等との位置づけ比較において、試験デザイン・対象が異なる点に注意（間接比較）。</span>
+      </div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Zhou C, Tang KJ, Cho BC, et al; PAPILLON Investigators. Amivantamab plus Chemotherapy in NSCLC with EGFR Exon 20 Insertions. <em>N Engl J Med.</em> 2023;389(22):2039-2051. PMID: 37870976 / DOI: <a href="https://doi.org/10.1056/NEJMoa2306441" target="_blank" rel="noopener">10.1056/NEJMoa2306441</a></li>
+      <li>Cross-over adjusted overall survival for amivantamab plus chemotherapy vs chemotherapy in first-line EGFR exon-20 insertion NSCLC (PAPILLON). <em>Ann Oncol.</em> 2024 (ESMO 2024, abstract 635P). PMID: <!-- 要確認 --> / DOI: <!-- 要確認 --></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

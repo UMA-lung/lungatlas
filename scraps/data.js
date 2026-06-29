@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "PAPILLON試験 — 1次治療 amivantamab + 化学療法（EGFR exon 20挿入変異NSCLC）",
+    summary: "治療歴なしEGFR exon 20挿入変異NSCLCで、amivantamab + carboplatin-pemetrexedが化学療法単独を上回るPFSを示した第3相試験。PFS中央値11.4 vs 6.7か月。NCCN Category 1 preferred。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/papillon.html"
+  },
+  {
     title: "CheckMate 227試験 — 1次治療 nivolumab + ipilimumab（化学療法なし、IV期 EGFR/ALK野生型NSCLC）",
     summary: "治療歴なしIV期EGFR/ALK野生型NSCLCで、化学療法を含まないnivolumab+ipilimumabが化学療法を上回るOSを示した第3相試験。PD-L1問わず長期benefit。TMBをco-primaryに用いた歴史的試験。",
     date: "2026-06-24",
