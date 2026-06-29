@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CheckMate 227試験 — 1次治療 nivolumab + ipilimumab（化学療法なし、IV期 EGFR/ALK野生型NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。CheckMate 227試験（IV期NSCLC 1次治療 nivo+ipi 化学療法なし）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-red { background: var(--red-light); color: var(--red-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.note-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 13px;
+  color: var(--text2);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 8px 0 14px;
+}
+.coi-note {
+  display: inline-block;
+  margin: 4px 0 14px;
+  background: var(--amber-light);
+  color: var(--amber-dark);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: var(--mono);
+}
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>CheckMate 227試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">CheckMate 227試験 — 1次治療 nivolumab + ipilimumab（化学療法なし、IV期 EGFR/ALK野生型NSCLC）</h1>
+
+  <p class="scrap-summary">治療歴なしIV期EGFR/ALK野生型NSCLCで、化学療法を含まないnivolumab+ipilimumabが化学療法を上回るOSを示した第3相試験。PD-L1問わず長期benefit。TMBをco-primaryに用いた歴史的試験。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://doi.org/10.1056/NEJMoa1801946" target="_blank" rel="noopener">NEJM 2018（PMID 29658845）</a> ／
+      <a href="https://doi.org/10.1056/NEJMoa1910231" target="_blank" rel="noopener">NEJM 2019（PMID 31562796）</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/34648948/" target="_blank" rel="noopener">JTO 2022（PMID 34648948）</a> ／
+      <a href="#" target="_blank" rel="noopener">ESMO Open 2023（PMID <!-- 要確認 -->）</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>CheckMate 227試験（NCT02477826）は、治療歴のないIV期/再発EGFR/ALK野生型NSCLCに対し、<strong>化学療法を含まない</strong>nivolumab（抗PD-1抗体）+ ipilimumab（抗CTLA-4抗体）の二重免疫療法を検証した国際共同・第3相・非盲検・多パート試験。化学療法を併用するCheckMate 9LAとは異なり、本試験のPart 1は「ICIのみ」での1次治療を評価した点が特徴。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・非盲検・多パート・無作為化</td></tr>
+        <tr><td>対象</td><td>treatment-naive stage IV/recurrent NSCLC・<strong>EGFR/ALK野生型</strong>・ECOG PS 0-1</td></tr>
+        <tr><td>Part 1（PD-L1≥1%）</td><td>nivo+ipi / nivo単剤 / 化学療法（1:1:1）</td></tr>
+        <tr><td>Part 1（PD-L1&lt;1%）</td><td>nivo+ipi / nivo+化学療法 / 化学療法（1:1:1）</td></tr>
+        <tr><td>Part 2</td><td>nivo+化学療法 vs 化学療法（PD-L1問わず、755例）</td></tr>
+        <tr><td>主要レジメン</td><td>nivolumab 3mg/kg Q2W + ipilimumab 1mg/kg Q6W（化学療法なし）</td></tr>
+        <tr><td>co-primary評価項目</td><td>① PD-L1≥1%でのOS（nivo+ipi vs 化学療法）② high TMB（≥10mut/Mb）でのPFS</td></tr>
+        <tr><td>スポンサー</td><td>Bristol Myers Squibb（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT02477826</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: 層別化因子・各群症例数（Part 1）はNEJM 2019より確認 -->
+    <div class="coi-note">Funded by Bristol Myers Squibb</div>
+
+    <!-- ===== セクション2：有効性 — OS（Part 1） ===== -->
+    <h2>2. 有効性 — OS（Part 1）</h2>
+
+    <p class="sub">OS（PD-L1≥1%、co-primary、NEJM 2019）</p>
+    <!-- 要確認: OS中央値（試験群 vs 対照群）・95%CIはNEJM 2019より確認（17.1 vs 14.9か月と報じられるが原著で確認） -->
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.79</div>
+        <div class="stat-label">OS（nivo+ipi vs 化学療法、PD-L1≥1%）</div>
+        <div class="stat-vs">95%CI <!-- 要確認: NEJM 2019より --></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">OS中央値 nivo+ipi群</div>
+        <div class="stat-vs">NEJM 2019より要確認</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">OS中央値 化学療法群</div>
+        <div class="stat-vs">NEJM 2019より要確認</div>
+      </div>
+    </div>
+
+    <p class="sub">4年update（JTO 2022、median follow-up 54.8か月）</p>
+    <!-- 要確認: PD-L1<1%での4年update OS HRはJTO 2022より確認 -->
+    <table class="comp-table">
+      <thead>
+        <tr><th>PD-L1集団</th><th>nivo+ipi</th><th>化学療法</th><th>HR</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>PD-L1≥1%（3年OS率）</td><td class="num">33%</td><td class="num">22%</td><td class="num">0.76</td></tr>
+        <tr><td>PD-L1&lt;1%（3年OS率）</td><td class="num">34%</td><td class="num">15%</td><td class="num"><!-- 要確認: JTO 2022より --></td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: 各群のOS中央値（PD-L1≥1% / <1%）はNEJM 2019 / JTO 2022より確認 -->
+    <!-- 要確認: 4年・5年OS率はJTO 2022 / 5年フォロー論文より確認 -->
+
+    <p>PD-L1発現の有無にかかわらず、化学療法を含まない二重ICIで長期OS benefitが示された。特にPD-L1&lt;1%でも benefitが観察された点が重要。</p>
+
+    <!-- ===== セクション3：TMBをめぐる経緯（重要） ===== -->
+    <h2>3. TMBをめぐる経緯（重要）</h2>
+
+    <p>CheckMate 227は、腫瘍遺伝子変異量（TMB, tumor mutational burden ≥10 mut/Mb）をPFSのco-primary評価項目に据えた点で歴史的に重要。当初、high TMB集団でnivo+ipiがPFSを改善することが示された（NEJM 2018）。</p>
+
+    <!-- 要確認: TMBサブグループの具体的なPFS HR・数値はNEJM 2018より確認 -->
+    <div class="gl-list">
+      <div class="gl-item gl-us">
+        <span class="gl-flag">当初</span>
+        <span>high TMB（≥10 mut/Mb）でのPFS改善はco-primaryとして報告された（NEJM 2018）。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">経緯</span>
+        <span>その後、TMBはOSとの相関が一貫せず、効果予測バイオマーカーとしての地位は確立されなかった。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">現状</span>
+        <span>最終的な承認・臨床使用はPD-L1発現に基づくものとなり、TMBは本適応のルーチンな治療選択バイオマーカーとしては用いられていない。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">教訓</span>
+        <span>「PFSの改善が必ずしも臨床的に確立したバイオマーカーに結びつかない」教訓として参照される。</span>
+      </div>
+    </div>
+
+    <!-- ===== セクション4：安全性 ===== -->
+    <h2>4. 安全性</h2>
+
+    <p>nivolumab + ipilimumab（PD-1 + CTLA-4二重阻害）による免疫関連有害事象（irAE）の管理が必要。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>nivo+ipi</th><th>化学療法</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Grade 3/4 治療関連有害事象</td>
+          <td><!-- 要確認: NEJM 2019より --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>治療中止に至った有害事象</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>最も多いirAE</td>
+          <td>皮疹（rash）</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>治療関連死亡</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: irAE（皮膚・消化器・内分泌・肝・肺）の各発現率はNEJM 2019 / JTO 2022より確認 -->
+
+    <div class="tox-row">
+      <span class="tox">irAE（皮疹）</span>
+      <span class="tox">irAE（大腸炎）</span>
+      <span class="tox">irAE（内分泌障害）</span>
+      <span class="tox">irAE（肝炎）</span>
+      <span class="tox">irAE（肺臓炎）</span>
+    </div>
+
+    <p>多くのirAE（内分泌障害を除く）は治療開始6か月以内に発現し、主に全身性ステロイド投与により3か月以内に消失したと報告されている（JTO 2022）。治療関連有害事象でnivo+ipiを中止した患者でも、全ランダム化集団と同様の長期OS benefitが観察された。</p>
+
+    <!-- ===== セクション5：位置づけと注意点 ===== -->
+    <h2>5. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-us">
+        <span class="gl-flag">位置づけ</span>
+        <span>IV期NSCLC 1次治療における「化学療法を含まない二重ICI（PD-1 + CTLA-4）」レジメンの代表。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">比較</span>
+        <span><strong>CheckMate 9LA（化学療法2サイクル併用 nivo+ipi）との違いが重要</strong>：CM227は化学療法なし。早期の腫瘍縮小を要する患者ではCM9LA（化学療法併用）、化学療法を避けたい患者ではCM227という使い分けの議論がある。</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">特徴</span>
+        <span>PD-L1問わず benefit（特にPD-L1&lt;1%でのOS benefit）が、PD-1単剤±化学療法との差別化点。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">TMB</span>
+        <span>TMBをco-primaryに用いたが効果予測バイオマーカーとして確立しなかった歴史的経緯（前述）。</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">考察</span>
+        <span>化学療法群の40%前後が後治療で免疫療法へ移行しており、treatment-switching調整解析ではnivo+ipiのOS benefitがより大きく推定された（Clinical Lung Cancer 2024）。</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>二重ICIによるirAE管理が必要。</span>
+      </div>
+      <div class="gl-item gl-red">
+        <span class="gl-flag">注意</span>
+        <span>EGFR/ALK陽性は対象外。</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">承認</span>
+        <span><strong>国内承認</strong>：日本ではPD-L1発現問わず1次治療として承認（米国はPD-L1≥1%）。<!-- 要確認: 国内承認日・適応の正確な文言はPMDA確認 --></span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">注意</span>
+        <span>KEYNOTE-189/407・CM9LA・POSEIDONとの直接比較試験はなく、レジメン選択は間接比較に留まる。</span>
+      </div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Hellmann MD, Ciuleanu TE, Pluzanski A, et al. Nivolumab plus Ipilimumab in Lung Cancer with a High Tumor Mutational Burden. <em>N Engl J Med.</em> 2018;378(22):2093-2104. PMID: 29658845 / DOI: <a href="https://doi.org/10.1056/NEJMoa1801946" target="_blank" rel="noopener">10.1056/NEJMoa1801946</a></li>
+      <li>Hellmann MD, Paz-Ares L, Bernabe Caro R, et al. Nivolumab plus Ipilimumab in Advanced Non-Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2019;381(21):2020-2031. PMID: 31562796 / DOI: <a href="https://doi.org/10.1056/NEJMoa1910231" target="_blank" rel="noopener">10.1056/NEJMoa1910231</a></li>
+      <li>Brahmer JR, Lee JS, Ciuleanu TE, et al. First-Line Nivolumab Plus Ipilimumab in Advanced NSCLC: 4-Year Outcomes From the Randomized, Open-Label, Phase 3 CheckMate 227 Part 1 Trial. <em>J Thorac Oncol.</em> 2022;17(2):289-308. PMID: 34648948 / DOI: <!-- 要確認: JTO 2022 DOIを確認 --></li>
+      <li>（Part 2）Nivolumab plus chemotherapy in first-line metastatic non-small-cell lung cancer: results of the phase III CheckMate 227 Part 2 trial. <em>ESMO Open.</em> 2023. PMID: <!-- 要確認 --> / DOI: <!-- 要確認 --></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
