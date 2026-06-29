@@ -60,7 +60,7 @@
 .nav-hamburger span {
   display: block;
   width: 22px; height: 2px;
-  background: #fff;
+  background: #0d5c3a;
   border-radius: 2px;
   transition: transform 0.25s, opacity 0.25s;
 }
