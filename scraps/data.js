@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "POSEIDON試験 — 1次治療 durvalumab ± tremelimumab + 化学療法（IV期 EGFR/ALK野生型NSCLC）",
+    summary: "治療歴なしIV期EGFR/ALK野生型NSCLCで、tremelimumab限定コース+durvalumab+化学療法がPFS・OSを改善した第3相試験。5年OS率15.7% vs 6.8%。durvalumab+化学のみではOS有意差なし。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/poseidon.html"
+  },
+  {
     title: "IMpower010試験 — 切除後NSCLC 補助化学療法後 atezolizumab（術後補助免疫療法）",
     summary: "完全切除stage IB-IIIA NSCLCで補助化学療法後のatezolizumabがDFSを改善した初の第3相免疫療法試験。PD-L1 TC≥1% stage II-IIIAで顕著。EGFR/ALK陽性では効果が一貫しない。",
     date: "2026-06-24",
