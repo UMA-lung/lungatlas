@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "CheckMate 9LA試験 — 1次治療 nivolumab + ipilimumab + 化学療法2サイクル（IV期 EGFR/ALK野生型NSCLC）",
+    summary: "治療歴なしIV期EGFR/ALK野生型NSCLCで、nivolumab+ipilimumab+化学療法2サイクルが化学療法4サイクルを上回るOSを示した第3相試験。PD-L1・組織型問わず有効。6年フォローまで報告。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/cm9la.html"
+  },
+  {
     title: "POSEIDON試験 — 1次治療 durvalumab ± tremelimumab + 化学療法（IV期 EGFR/ALK野生型NSCLC）",
     summary: "治療歴なしIV期EGFR/ALK野生型NSCLCで、tremelimumab限定コース+durvalumab+化学療法がPFS・OSを改善した第3相試験。5年OS率15.7% vs 6.8%。durvalumab+化学のみではOS有意差なし。",
     date: "2026-06-24",
