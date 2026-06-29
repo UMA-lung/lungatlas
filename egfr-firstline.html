@@ -137,6 +137,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
   .nav-links{display:none}
   .summary-table .st-header,.summary-table .st-row{grid-template-columns:1fr 1fr}
 }
+
+/* TRIAL REF BLOCK */
+.trial-ref-block{margin:12px 0 28px 0;display:flex;flex-direction:column;gap:8px}
+.trial-ref-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.trial-ref-name{font-weight:bold;font-size:.95em;min-width:100px;color:#1a1a1a}
+.trial-ref-btn{display:inline-block;padding:4px 12px;border-radius:5px;text-decoration:none;font-size:.85em;font-weight:bold;transition:opacity .2s}
+.trial-ref-btn:hover{opacity:.8}
+.trial-ref-btn.detail{background:#0d5c3a;color:#fff}
+.trial-ref-btn.pubmed{background:#e8f0fe;color:#1a56db;border:1px solid #c3d3f7}
 </style>
   <link rel="stylesheet" href="/lungatlas/mobile.css">
   <script src="/lungatlas/mobile.js" defer></script>
@@ -267,6 +276,19 @@ fetch('/lungatlas/nav.html')
         <tr><td>外来管理の複雑さ</td><td class="best">経口のみ・シンプル</td><td class="mid">点滴あり（初期）</td><td class="worst">点滴定期的（SCで改善）</td></tr>
       </tbody>
     </table>
+
+    <div class="trial-ref-block">
+      <div class="trial-ref-item">
+        <span class="trial-ref-name">FLAURA</span>
+        <a href="flaura.html" class="trial-ref-btn detail">詳細ページ →</a>
+        <a href="https://www.nejm.org/doi/10.1056/NEJMoa1804048" target="_blank" rel="noopener" class="trial-ref-btn pubmed">原著論文 ↗</a>
+      </div>
+      <div class="trial-ref-item">
+        <span class="trial-ref-name">MARIPOSA</span>
+        <a href="mariposa.html" class="trial-ref-btn detail">詳細ページ →</a>
+        <a href="https://www.nejm.org/doi/10.1056/NEJMoa2403614" target="_blank" rel="noopener" class="trial-ref-btn pubmed">原著論文 ↗</a>
+      </div>
+    </div>
 
     <!-- ② 患者背景別選択ガイド -->
     <h2 class="sec-h2" id="decision">患者背景別 選択ガイド</h2>
