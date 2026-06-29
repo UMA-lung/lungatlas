@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>副作用管理（AE Management）— LungAtlas</title>
+<!--
+  要確認リスト（このファイル内で未確定の項目）
+  1. DVT発生率: 本文14%表記。付録では16%との記載あり。OS最終解析（PMID 40923797）付録を再確認要。
+  2. 国内の抗凝固薬保険適用・用量: アピキサバン・リバーロキサバンのがん関連VTEへの国内保険適用・推奨用量を確認要。
+  3. SC製剤（RYBREVANT FASPRO）の日本承認状況・適応詳細: リブロファズ®のIRR管理上の差異・国内適応を確認要。
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --teal-dark: #085041;
+  --teal-light: #e1f5ee;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* LAYOUT */
+.layout { display: flex; min-height: calc(100vh - 52px); }
+.main { flex: 1; padding: 28px 36px 60px; max-width: 860px; }
+
+/* BREADCRUMB */
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+
+/* UPDATED */
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+/* HEADINGS */
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 28px 0 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+.sec-h3 {
+  font-size: 13.5px; font-weight: 600; color: var(--text);
+  margin: 22px 0 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+
+/* TABS */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+.tab {
+  font-size: 12.5px; padding: 6px 16px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text2); cursor: pointer; font-family: var(--font);
+  transition: all .15s;
+}
+.tab:hover { border-color: var(--border2); color: var(--green-dark); }
+.tab.active {
+  background: var(--green-dark); color: #fff;
+  border-color: var(--green-dark); font-weight: 500;
+}
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* BOXES */
+.info-box {
+  background: var(--blue-light); border-left: 3px solid #2d6db5;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0;
+}
+.note-box {
+  background: var(--green-light); border-left: 3px solid var(--green-mid);
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--green-dark); line-height: 1.75; margin: 14px 0;
+}
+.warn-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+
+/* DATA TABLE */
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  margin-bottom: 12px;
+}
+.data-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  background: var(--surface2); border-bottom: 2px solid var(--border2);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: top; line-height: 1.6;
+}
+.data-table tr:nth-child(even) td { background: var(--green-pale); }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* 出典ラベルバッジ */
+.src-badge {
+  display: inline-block; font-size: 10.5px; font-weight: 600;
+  font-family: var(--mono); padding: 2px 8px; border-radius: 5px;
+  margin-left: 6px; vertical-align: middle; white-space: nowrap;
+}
+.src-paper { background: var(--green-light); color: var(--green-dark); }
+.src-protocol { background: var(--amber-light); color: var(--amber-dark); }
+
+/* REGIMEN BAR */
+.regimen-bar {
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 4px solid var(--green-mid);
+  border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 22px;
+}
+.regimen-bar dl {
+  display: grid; grid-template-columns: 120px 1fr;
+  gap: 7px 12px; font-size: 12.5px;
+}
+.regimen-bar dt { font-weight: 600; color: var(--text3); padding-top: 1px; }
+.regimen-bar dd { color: var(--text2); }
+.regimen-bar a { color: var(--green-dark); text-decoration: none; }
+.regimen-bar a:hover { text-decoration: underline; }
+
+/* TABLE CAPTION */
+.tbl-caption { font-size: 11px; color: var(--text3); margin-bottom: 6px; line-height: 1.5; }
+
+/* JUMP LINKS */
+.jump-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; margin-bottom: 4px; }
+.jump-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--green-dark); font-weight: 500;
+  background: var(--green-light); padding: 6px 14px;
+  border-radius: 8px; text-decoration: none; transition: background .15s;
+}
+.jump-link:hover { background: #cce8d4; }
+
+/* TRIAL CARD（将来用に保持） */
+.trial-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; }
+.tc-body { padding: 16px 20px; }
+.tox-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.tox { font-size: 11px; background: var(--red-light); color: var(--red-dark); padding: 3px 10px; border-radius: 10px; }
+
+/* REF LIST */
+.ref-list { list-style: none; counter-reset: ref; margin-top: 12px; }
+.ref-item {
+  position: relative; padding: 12px 14px 12px 40px; margin-bottom: 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 12px; color: var(--text2); line-height: 1.75;
+}
+.ref-item::before {
+  counter-increment: ref; content: counter(ref);
+  position: absolute; left: 12px; top: 12px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green-dark); color: #fff;
+  font-size: 11px; font-weight: 600; font-family: var(--mono);
+  display: flex; align-items: center; justify-content: center;
+}
+.ref-item .ref-title { font-weight: 600; color: var(--text); }
+.ref-item .ref-links { margin-top: 5px; }
+.ref-item .ref-links a {
+  color: var(--green-dark); text-decoration: none;
+  font-family: var(--mono); font-size: 11.5px;
+}
+.ref-item .ref-links a:hover { text-decoration: underline; }
+.ref-item .ref-sep { color: var(--text3); margin: 0 6px; }
+
+/* FOOTER */
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+@media (max-width: 768px) {
+  .main { padding: 20px 18px 40px; }
+  .nav-links { display: none; }
+  .regimen-bar dl { grid-template-columns: 1fr; gap: 4px; }
+  .regimen-bar dt { margin-top: 8px; }
+  .regimen-bar dt:first-child { margin-top: 0; }
+  .sec-h2, .sec-h3 { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .sec-h2::before { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<div class="layout">
+  <main class="main">
+
+    <!-- パンくず -->
+    <div class="crumb">LungAtlas › <span>副作用管理</span></div>
+    <div class="updated">2026年6月更新</div>
+
+    <h1 class="art-h1">副作用管理（Adverse Event Management）</h1>
+
+    <p class="lead">
+      従来の細胞傷害性化学療法に伴う有害事象は成書に詳しい。本ページは、新規治療に特有の有害事象——免疫関連有害事象（irAE）、抗体製剤の注入関連反応（IRR）、分子標的薬（TKI）特有の毒性——を中心に整理する。
+    </p>
+
+    <!-- COI注記 -->
+    <div class="note-box" style="font-size:12px;margin-bottom:10px">
+      <strong>COI：</strong>主要データはJanssen Research and Development（Johnson &amp; Johnson）スポンサー試験由来。管理プロトコルはMARIPOSAプロトコル文書（v4/v5）に基づく。
+    </div>
+
+    <!-- 出典バッジ凡例 -->
+    <p style="font-size:11px;color:var(--text3);margin-bottom:22px">
+      <span class="src-badge src-paper" style="margin-left:0">論文由来</span> = 原著論文（PMID記載）に基づく数値・記述 ／
+      <span class="src-badge src-protocol">プロトコル由来 v4/v5</span> = MARIPOSAプロトコル（v4/v5）に基づく管理手順
+    </p>
+
+    <!-- タブバー -->
+    <div class="tabs">
+      <button class="tab active" id="tab-amilaz" onclick="sw('amilaz', this)">アミバンタマブ＋ラゼルチニブ</button>
+      <!-- 将来レジメン追加: <button class="tab" id="tab-xxx" onclick="sw('xxx', this)">...</button> -->
+    </div>
+
+    <!-- ===== パネル：アミラゼ ===== -->
+    <div class="panel active" id="p-amilaz">
+
+      <!-- レジメン概要バー -->
+      <div class="regimen-bar">
+        <dl>
+          <dt>対象</dt>
+          <dd>未治療 EGFR exon19del / L858R 進行NSCLC</dd>
+          <dt>レジメン</dt>
+          <dd>アミバンタマブ（ライブリバント®）＋ラゼルチニブ（ラズクルーズ®）</dd>
+          <dt>根拠試験</dt>
+          <dd>MARIPOSA（PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38924756/" target="_blank" rel="noopener">38924756</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/40923797/" target="_blank" rel="noopener">40923797</a>）</dd>
+          <dt>国内承認</dt>
+          <dd>IV版 2025年3月 ／ SC版（リブロファズ®）2026年3月発売</dd>
+          <dt>表記方針</dt>
+          <dd>数値はOS最終解析を主表記、主要解析時の値は併記</dd>
+        </dl>
+      </div>
+
+      <!-- ─────── セクション1：有害事象サマリー ─────── -->
+      <h2 class="sec-h2" id="ae-summary">
+        有害事象サマリー
+        <span class="src-badge src-paper">論文由来（PMID 38924756 / 40923797）</span>
+      </h2>
+
+      <h3 class="sec-h3">主な有害事象（ami+laz群、全Grade）</h3>
+      <p class="tbl-caption">出典：MARIPOSA主要解析（PMID 38924756）。VTEのみOS最終解析（PMID 40923797）。</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>有害事象</th><th>発生率</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>爪囲炎</td><td>68%</td></tr>
+          <tr><td>注入関連反応（IRR）</td><td>63%</td></tr>
+          <tr><td>皮疹</td><td>62%</td></tr>
+          <tr><td>低アルブミン血症</td><td>48%</td></tr>
+          <tr><td>VTE</td><td>40%（OS最終解析時）</td></tr>
+          <tr><td>ALT上昇</td><td>36%</td></tr>
+          <tr><td>末梢性浮腫</td><td>36%</td></tr>
+          <tr><td>口内炎</td><td>29%</td></tr>
+          <tr><td>便秘</td><td>29%</td></tr>
+          <tr><td>下痢</td><td>29%</td></tr>
+          <tr><td>ざ瘡様皮膚炎</td><td>29%</td></tr>
+          <tr><td>ILD/肺臓炎</td><td>3%（Grade 3以上: 1%）</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">Grade 3以上・治療中止</h3>
+      <p class="tbl-caption">出典：MARIPOSA主要解析（PMID 38924756）/ OS最終解析（PMID 40923797）。</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>指標</th><th>ami+laz群</th><th>osi群</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Grade 3以上（主要解析時）</td><td>75%</td><td>43%</td></tr>
+          <tr><td>Grade 3以上（OS最終解析時）</td><td>80%</td><td>52%</td></tr>
+          <tr><td>全薬剤中止（TRAE）</td><td>10%</td><td>3%</td></tr>
+          <tr><td>いずれかの薬剤中止</td><td>35%</td><td>14%</td></tr>
+          <tr><td>用量減量率</td><td>59%</td><td>5%</td></tr>
+          <tr><td>TRAE Grade 5（治療関連死）</td><td>4件（1%）</td><td>2件（&lt;1%）</td></tr>
+        </tbody>
+      </table>
+
+      <div class="jump-row">
+        <a class="jump-link" href="#vte">↓ VTE管理へ</a>
+        <a class="jump-link" href="#irr">↓ IRR管理へ</a>
+      </div>
+
+      <!-- ─────── セクション2：VTE ─────── -->
+      <h2 class="sec-h2" id="vte">VTE（静脈血栓塞栓症）</h2>
+
+      <div class="warn-box">
+        <strong>VTE発生率 40%（vs オシメルチニブ群 11%）。</strong> Grade 3以上 10%。発症中央値は治療開始84日で、62%が最初の4ヶ月以内に集中する。治療開始直後からのモニタリングが重要。
+        <div style="margin-top:6px">
+          <span class="src-badge src-paper" style="margin-left:0">PMID 40923797</span>
+        </div>
+      </div>
+
+      <h3 class="sec-h3">発生率</h3>
+      <p class="tbl-caption">出典：MARIPOSA主要解析（PMID 38924756）/ OS最終解析（PMID 40923797）。</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>指標</th><th>ami+laz群</th><th>osi群</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>全Grade（主要解析時）</td><td>37%</td><td>9%</td></tr>
+          <tr><td>全Grade（OS最終解析時）</td><td>40%</td><td>11%</td></tr>
+          <tr><td>Grade 3以上</td><td>10%</td><td>記載なし</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">
+        VTEの内訳
+        <span class="src-badge src-paper">論文由来（PMID 40923797）</span>
+      </h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>種別</th><th>発生率</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>肺塞栓症（PE）</td><td>17%</td></tr>
+          <tr><td>深部静脈血栓症（DVT）</td><td>14%<!-- 要確認: 付録では16% --></td></tr>
+          <tr><td>四肢静脈血栓症</td><td>4%</td></tr>
+          <tr><td>血栓症</td><td>2%</td></tr>
+          <tr><td>静脈血栓症</td><td>2%</td></tr>
+          <tr><td>表在静脈血栓症</td><td>1%</td></tr>
+          <tr><td>血栓性静脈炎</td><td>1%</td></tr>
+          <tr><td>肺梗塞</td><td>&lt;1%</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">発症時期・リスク因子</h3>
+      <div class="note-box">
+        <ul style="padding-left:1.2em;line-height:1.9">
+          <li>中央値84日（範囲6〜777日）、62%が最初の4ヶ月以内に集中。</li>
+          <li>リスク因子：腫瘍奏効との関連が以前の解析で特定。</li>
+          <li>推定機序：迅速な腫瘍細胞死による一過性の凝固亢進の可能性と推測されている（原著に確定的な記載なし）。<!-- 推測。原著に確定的記載なし --></li>
+        </ul>
+      </div>
+
+      <h3 class="sec-h3">
+        予防的抗凝固療法
+        <span class="src-badge src-protocol">プロトコル由来 v4/v5</span>
+      </h3>
+      <div class="info-box">
+        <p style="margin-bottom:8px"><strong>対象：</strong>ami+laz療法を受ける全患者</p>
+        <p style="margin-bottom:8px"><strong>期間：</strong>治療開始から最初の4ヶ月間</p>
+        <p style="margin-bottom:8px">
+          <strong>薬剤：</strong>地域GLに従ったDOACまたはLMWH（DOAC例：アピキサバン、リバーロキサバン）。ビタミンK拮抗薬は薬物相互作用のため非推奨。<!-- 要確認: 国内の抗凝固薬保険適用・用量 -->
+        </p>
+        <p>
+          <strong>参考GL：</strong>がん関連VTE ASCO GL 2023
+          （PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37075273/" target="_blank" rel="noopener" style="color:var(--blue-dark);font-family:var(--mono);font-size:11.5px">37075273</a>）
+        </p>
+      </div>
+
+      <h3 class="sec-h3">推奨と実態の乖離</h3>
+      <div class="warn-box">
+        予防推奨はプロトコル改訂第3版（2022年8月）で導入されたが、導入時点で大半の患者はすでに高リスクの最初の4ヶ月を経過していた。<strong>最初のVTE発症時に抗凝固療法を受けていたのは ami+laz群のわずか1%</strong>、ベースラインで抗凝固療法中だったのは5%のみ。
+        <div style="margin-top:8px;font-size:11px">
+          出典：<span class="src-badge src-paper" style="margin-left:0">PMID 40923797</span>
+          ＋ <span class="src-badge src-protocol" style="margin-left:0">プロトコル v4/v5</span>
+        </div>
+      </div>
+
+      <h3 class="sec-h3">
+        VTE発症後の対応
+        <span class="src-badge src-protocol">プロトコル由来 v4/v5（NCT04487080 p.60/p.72/p.120-121）</span>
+      </h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>状況</th><th>対応</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>臨床的に安定</td><td>治験薬継続、抗凝固療法を開始</td></tr>
+          <tr><td>臨床的不安定（呼吸不全・心機能不全等）</td><td>回復まで休薬</td></tr>
+          <tr><td>VTE発症による用量減量</td><td>不要（用量調整規定なし）</td></tr>
+          <tr><td>適切な抗凝固療法継続中にVTE再発</td><td>併用療法を永久中止（医師判断でいずれか単剤継続は許容）</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">
+        抗凝固療法中の転帰
+        <span class="src-badge src-paper">論文由来（PMID 40923797）</span>
+      </h3>
+      <div class="note-box">
+        出血イベント発生率：<strong>8%</strong> ／ VTE再発率：<strong>2%</strong>
+      </div>
+
+      <!-- ─────── セクション3：IRR ─────── -->
+      <h2 class="sec-h2" id="irr">IRR（注入関連反応 / Infusion-Related Reaction）</h2>
+
+      <div class="warn-box">
+        <strong>IRR発生率 63〜65%。初回投与（C1D1）に90%が集中。</strong> Grade 3以上 6%、IRRによる治療中止 5%。C2以降は0.1%以下と極めて稀。
+        <div style="margin-top:6px">
+          <span class="src-badge src-paper" style="margin-left:0">PMID 38924756 / 40923797</span>
+        </div>
+      </div>
+
+      <h3 class="sec-h3">
+        発生率
+        <span class="src-badge src-paper">論文由来</span>
+      </h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>指標</th><th>ami+laz群</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>全Grade（主要解析時）</td><td>63%</td></tr>
+          <tr><td>全Grade（OS最終解析時）</td><td>65%</td></tr>
+          <tr><td>Grade 3以上</td><td>6%</td></tr>
+          <tr><td>IRRによる治療中止</td><td>5%</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">発症タイミング</h3>
+      <div class="note-box">
+        <p style="margin-bottom:6px;font-size:11px;color:var(--green-dark);opacity:.8">出典：MARIPOSA OS最終解析（PMID 40923797）＋ CHRYSALIS（PMID 36868177）</p>
+        <ul style="padding-left:1.2em;line-height:1.9">
+          <li>C1D1に<strong>90%が集中</strong></li>
+          <li>C1D2での発生：3.4〜4%</li>
+          <li>C2以降の発生：<strong>0.1%以下</strong>（極めて稀）</li>
+        </ul>
+      </div>
+
+      <h3 class="sec-h3">
+        初回2日間分割投与（split first dose）
+        <span class="src-badge src-protocol">プロトコル由来 v4/v5</span>
+      </h3>
+      <div class="info-box">
+        <p style="margin-bottom:8px">
+          <strong>1050mgレジメンの例：</strong>1日目 350mgを低速投与、2日目に残量 700mg。
+        </p>
+        <p><strong>根拠：</strong>IRRの発生率・重症度を最小化。2日目以降の忍容性が向上。</p>
+        <!-- 注: 1050mg未満/以上の体重別split doseは原著に例示なし。1400mgレジメンへの一般化はしない。減量段階は用量調整セクション参照 -->
+      </div>
+
+      <h3 class="sec-h3">
+        前投薬レジメン
+        <span class="src-badge src-protocol">プロトコル由来 v4 p.44 Table5 / v5 p.57 Table5</span>
+        <span class="src-badge src-paper">JADPRO 2024 PMC11409773</span>
+      </h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>薬剤</th><th>用量</th><th>タイミング</th><th>必須回</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>デキサメタゾン</td>
+            <td>10mg IV または経口</td>
+            <td>投与45〜60分前</td>
+            <td>C1D1・C1D2は必須。C1D8以降は任意</td>
+          </tr>
+          <tr>
+            <td>抗ヒスタミン薬（ジフェンヒドラミン等）</td>
+            <td>25〜50mg</td>
+            <td>IV:15〜30分前 / 経口:30〜60分前</td>
+            <td>全投与回で必須</td>
+          </tr>
+          <tr>
+            <td>解熱鎮痛薬（アセトアミノフェン等）</td>
+            <td>650〜1000mg</td>
+            <td>IV:15〜30分前 / 経口:30〜60分前</td>
+            <td>全投与回で必須</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">
+        IRR Grade別対応
+        <span class="src-badge src-protocol">プロトコル由来 v4 p.50-51 Table11 / v5 p.64-65 Table11</span>
+        <span class="src-badge src-paper">CHRYSALIS PMID 36868177 ＋ JADPRO PMC11409773</span>
+      </h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>Grade</th><th>対応</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Grade 1</strong></td><td>投与中断を検討。症状消失後、中断前の50%の速度で再開</td></tr>
+          <tr><td><strong>Grade 2</strong></td><td>投与中断。輸液・抗ヒスタミン薬を投与。症状消失後、50%の速度で再開</td></tr>
+          <tr><td><strong>Grade 3</strong></td><td>投与中止。再発時は永久中止</td></tr>
+          <tr><td><strong>Grade 4</strong></td><td>直ちに投与中止。永久中止（再投与不可）</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">IRR後の再投与</h3>
+      <div class="note-box">
+        <ul style="padding-left:1.2em;line-height:1.9">
+          <li><strong>Grade 1〜3：</strong>症状がGrade 1以下に回復後、再開可。IRR発生時点の速度の50%から開始し、30分間無症状なら徐々に増速。</li>
+          <li><strong>Grade 4：</strong>再投与不可。</li>
+        </ul>
+      </div>
+
+      <h3 class="sec-h3">
+        皮下注製剤（SC amivantamab）でのIRR
+        <span class="src-badge src-paper">論文由来 PALOMA-3 JCO 2024;42:3593-3605</span>
+      </h3>
+      <div class="info-box">
+        <ul style="padding-left:1.2em;line-height:1.9">
+          <li>IRR発生率：IV群66% → <strong>SC群13%</strong>と大幅低下。</li>
+          <li>皮膚毒性（皮疹・爪囲炎等）の発生率は製剤変更で変わらない。</li>
+        </ul>
+        <!-- 要確認: SC製剤（RYBREVANT FASPRO）の日本承認状況・適応詳細 -->
+      </div>
+
+      <!-- ─────── セクション4：用量調整基準 ─────── -->
+      <h2 class="sec-h2" id="dose">
+        用量調整基準
+        <span class="src-badge src-protocol">プロトコル由来 v4/v5</span>
+      </h2>
+
+      <h3 class="sec-h3">アミバンタマブ減量段階</h3>
+      <p class="tbl-caption">出典：MARIPOSAプロトコル v4（p.48 Table9）/ v5（p.62 Table9）</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>段階</th><th>体重 &lt;80kg</th><th>体重 ≥80kg</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>通常用量</td><td>1050mg</td><td>1400mg</td></tr>
+          <tr><td>第1減量</td><td>700mg</td><td>1050mg</td></tr>
+          <tr><td>第2減量</td><td>700mg（固定）</td><td>1050mg（固定）</td></tr>
+          <tr><td>第3減量</td><td>350mg</td><td>700mg</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">ラゼルチニブ減量段階</h3>
+      <p class="tbl-caption">出典：MARIPOSAプロトコル v4（p.48 Table9）/ v5（p.62 Table9）</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>段階</th><th>用量</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>通常用量</td><td>240mg/日</td></tr>
+          <tr><td>第1減量</td><td>160mg/日</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">皮膚毒性による用量調整</h3>
+      <p class="tbl-caption">出典：MARIPOSAプロトコル v4/v5</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>Grade</th><th>対応</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Grade 1〜2</td><td>原則継続。Grade 2が2週間改善しない場合は減量を検討</td></tr>
+          <tr><td>Grade 3〜4</td><td>Grade 2以下に改善するまで休薬後、1段階低い用量で再開</td></tr>
+          <tr><td>Grade 4発疹またはTEN等</td><td>アミバンタマブを永久中止</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sec-h3">VTE・IRRによる用量調整</h3>
+      <div class="note-box">
+        <ul style="padding-left:1.2em;line-height:1.9">
+          <li><strong>VTE発症：</strong>用量減量不要（臨床的不安定時のみ休薬）。</li>
+          <li><strong>IRR発症：</strong>薬剤自体の用量減量規定なし（投与速度の調整で管理）。</li>
+        </ul>
+      </div>
+
+      <!-- ─────── セクション5：出典一覧 ─────── -->
+      <h2 class="sec-h2">出典</h2>
+      <ol class="ref-list">
+        <li class="ref-item">
+          <span class="ref-title">MARIPOSA主要解析</span>
+          <span class="src-badge src-paper">論文由来</span>
+          <div>Cho BC, et al. N Engl J Med. 2024;391(16):1486-1498.</div>
+          <div class="ref-links">
+            PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38924756/" target="_blank" rel="noopener">38924756</a>
+            <span class="ref-sep">·</span>
+            <a href="https://doi.org/10.1056/NEJMoa2403614" target="_blank" rel="noopener">doi:10.1056/NEJMoa2403614</a>
+          </div>
+        </li>
+        <li class="ref-item">
+          <span class="ref-title">MARIPOSA OS最終解析</span>
+          <span class="src-badge src-paper">論文由来</span>
+          <div>Yang JC-H, et al. N Engl J Med. 2025;393(17):1681-1693.</div>
+          <div class="ref-links">
+            PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/40923797/" target="_blank" rel="noopener">40923797</a>
+            <span class="ref-sep">·</span>
+            <a href="https://doi.org/10.1056/NEJMoa2503001" target="_blank" rel="noopener">doi:10.1056/NEJMoa2503001</a>
+          </div>
+        </li>
+        <li class="ref-item">
+          <span class="ref-title">MARIPOSAプロトコル v4/v5</span>
+          <span class="src-badge src-protocol">プロトコル由来</span>
+          <div>NCT04487080.（IRR前投薬・Grade別対応・減量段階・VTE用量調整の一次出典）</div>
+        </li>
+        <li class="ref-item">
+          <span class="ref-title">CHRYSALIS IRR管理</span>
+          <span class="src-badge src-paper">論文由来</span>
+          <div>Park K, et al. Lung Cancer. 2023;178:166-171.</div>
+          <div class="ref-links">
+            PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36868177/" target="_blank" rel="noopener">36868177</a>
+            <span class="ref-sep">·</span>
+            <a href="https://doi.org/10.1016/j.lungcan.2023.02.008" target="_blank" rel="noopener">doi:10.1016/j.lungcan.2023.02.008</a>
+          </div>
+        </li>
+        <li class="ref-item">
+          <span class="ref-title">IRR実践ガイド（JADPRO 2024）</span>
+          <span class="src-badge src-paper">論文由来</span>
+          <div>Dougherty L, et al. J Adv Pract Oncol. 2024;15(4).</div>
+          <div class="ref-links">
+            <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11409773/" target="_blank" rel="noopener">PMC11409773</a>
+          </div>
+        </li>
+        <li class="ref-item">
+          <span class="ref-title">がん関連VTE ASCO GL 2023</span>
+          <span class="src-badge src-paper">論文由来</span>
+          <div>Key NS, et al. J Clin Oncol. 2023;41(16):3063-3071.</div>
+          <div class="ref-links">
+            PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37075273/" target="_blank" rel="noopener">37075273</a>
+            <span class="ref-sep">·</span>
+            <a href="https://doi.org/10.1200/JCO.23.00294" target="_blank" rel="noopener">doi:10.1200/JCO.23.00294</a>
+          </div>
+        </li>
+      </ol>
+
+    </div><!-- /p-amilaz -->
+
+  </main>
+</div><!-- /layout -->
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+function sw(id, btn) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('p-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
