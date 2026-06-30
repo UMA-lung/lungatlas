@@ -14,6 +14,7 @@ index.html              # 変異陰性NSCLC化学療法
 driver-positive.html    # 変異陽性NSCLC（日本語）
 driver-positive-en.html # 変異陽性NSCLC（英語）
 egfr-firstline.html     # EGFR変異陽性NSCLC 1次治療選択ガイド
+perioperative.html      # 周術期薬物療法（CM816・KN671・AEGEAN等）
 anatomy.html            # 肺の解剖学・CT画像診断
 about.html              # このサイトについて（日本語）
 about-en.html           # About（英語）
@@ -80,3 +81,5 @@ Textbook/               # 参考PDFテキスト集（git管理外）
 - site-check: 公開前QA（構造・リンク・表現・参照の一括点検）
 - translate-en: 英語版（-en.html）の作成・同期
 - ref-check: 参照文献リンク（PMID/DOI）の抽出・検証
+- scraps-new: Scrapsセクションへの新規記事追加手順
+- vault-workflow: 詳細ページ（vault正本）の作成・更新手順
