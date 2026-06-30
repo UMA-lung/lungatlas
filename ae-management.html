@@ -6,9 +6,8 @@
 <title>副作用管理（AE Management）— LungAtlas</title>
 <!--
   要確認リスト（このファイル内で未確定の項目）
-  1. DVT発生率: 本文14%表記。付録では16%との記載あり。OS最終解析（PMID 40923797）付録を再確認要。
-  2. 国内の抗凝固薬保険適用・用量: アピキサバン・リバーロキサバンのがん関連VTEへの国内保険適用・推奨用量を確認要。
-  3. SC製剤（RYBREVANT FASPRO）の日本承認状況・適応詳細: リブロファズ®のIRR管理上の差異・国内適応を確認要。
+  1. PALOMA-3 PMID: DOI 10.1200/JCO.24.01001 は確認済み。PMIDはscrapsで別途対応予定。
+  2. SC版（リブロファズ®）でのVTE予防抗凝固の扱い（IV版同様アピキサバン推奨か）。
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -147,6 +146,7 @@ body {
 }
 .src-paper { background: var(--green-light); color: var(--green-dark); }
 .src-protocol { background: var(--amber-light); color: var(--amber-dark); }
+.src-jp { background: #e3eefc; color: #1a4d8f; }
 
 /* REGIMEN BAR */
 .regimen-bar {
@@ -165,6 +165,7 @@ body {
 
 /* TABLE CAPTION */
 .tbl-caption { font-size: 11px; color: var(--text3); margin-bottom: 6px; line-height: 1.5; }
+.tbl-note { font-size: 11px; color: var(--text3); margin-top: 6px; line-height: 1.6; }
 
 /* JUMP LINKS */
 .jump-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; margin-bottom: 4px; }
@@ -176,7 +177,7 @@ body {
 }
 .jump-link:hover { background: #cce8d4; }
 
-/* TRIAL CARD（将来用に保持） */
+/* TRIAL CARD / TOX（将来用に保持） */
 .trial-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; }
 .tc-body { padding: 16px 20px; }
 .tox-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
@@ -266,7 +267,8 @@ fetch('/lungatlas/nav.html')
     <!-- 出典バッジ凡例 -->
     <p style="font-size:11px;color:var(--text3);margin-bottom:22px">
       <span class="src-badge src-paper" style="margin-left:0">論文由来</span> = 原著論文（PMID記載）に基づく数値・記述 ／
-      <span class="src-badge src-protocol">プロトコル由来 v4/v5</span> = MARIPOSAプロトコル（v4/v5）に基づく管理手順
+      <span class="src-badge src-protocol">プロトコル由来 v4/v5</span> = MARIPOSAプロトコル（v4/v5）に基づく管理手順 ／
+      <span class="src-badge src-jp">日本国内情報</span> = 学会ステートメント・添付文書・PMDA由来
     </p>
 
     <!-- タブバー -->
@@ -288,7 +290,7 @@ fetch('/lungatlas/nav.html')
           <dt>根拠試験</dt>
           <dd>MARIPOSA（PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38924756/" target="_blank" rel="noopener">38924756</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/40923797/" target="_blank" rel="noopener">40923797</a>）</dd>
           <dt>国内承認</dt>
-          <dd>IV版 2025年3月 ／ SC版（リブロファズ®）2026年3月発売</dd>
+          <dd>IV版 2025年3月 ／ SC版（リブロファズ®）2025年12月22日承認・2026年3月18日発売</dd>
           <dt>表記方針</dt>
           <dd>数値はOS最終解析を主表記、主要解析時の値は併記</dd>
         </dl>
@@ -368,23 +370,25 @@ fetch('/lungatlas/nav.html')
 
       <h3 class="sec-h3">
         VTEの内訳
-        <span class="src-badge src-paper">論文由来（PMID 40923797）</span>
+        <span class="src-badge src-paper">論文由来（PMID 40923797 / 38924756）</span>
       </h3>
+      <p class="tbl-caption">OS最終解析 本文Table 2（PMID 40923797, p.1690）= Any Grade PT別、発生率15%以上のみ記載。主要解析時の値は主要解析（PMID 38924756）付録由来。</p>
       <table class="data-table">
         <thead>
-          <tr><th>種別</th><th>発生率</th></tr>
+          <tr><th>種別</th><th>OS最終解析（本文Table 2）</th><th>主要解析時</th><th>Grade≥3（OS解析）</th></tr>
         </thead>
         <tbody>
-          <tr><td>肺塞栓症（PE）</td><td>17%</td></tr>
-          <tr><td>深部静脈血栓症（DVT）</td><td>14%<!-- 要確認: 付録では16% --></td></tr>
-          <tr><td>四肢静脈血栓症</td><td>4%</td></tr>
-          <tr><td>血栓症</td><td>2%</td></tr>
-          <tr><td>静脈血栓症</td><td>2%</td></tr>
-          <tr><td>表在静脈血栓症</td><td>1%</td></tr>
-          <tr><td>血栓性静脈炎</td><td>1%</td></tr>
-          <tr><td>肺梗塞</td><td>&lt;1%</td></tr>
+          <tr><td>肺塞栓症（PE）</td><td>19%</td><td>17%</td><td>9%</td></tr>
+          <tr><td>深部静脈血栓症（DVT）</td><td>16%</td><td>14%</td><td>3%</td></tr>
+          <tr><td>四肢静脈血栓症</td><td>記載なし（&lt;15%でリスト外）</td><td>4%</td><td>－</td></tr>
+          <tr><td>血栓症</td><td>同上</td><td>2%</td><td>－</td></tr>
+          <tr><td>静脈血栓症</td><td>同上</td><td>2%</td><td>－</td></tr>
+          <tr><td>表在静脈血栓症</td><td>同上</td><td>1%</td><td>－</td></tr>
+          <tr><td>血栓性静脈炎</td><td>同上</td><td>1%</td><td>－</td></tr>
+          <tr><td>肺梗塞</td><td>同上</td><td>&lt;1%</td><td>－</td></tr>
         </tbody>
       </table>
+      <p class="tbl-note">OS最終解析本文Table 2は発生率15%以上のPTのみ掲載のため、PE・DVT以外の内訳はOS論文本文に数値記載なし。四肢静脈血栓症以下は主要解析（PMID 38924756）付録由来。14%→16%、17%→19%の上昇はデータカット延長（2023/8/11→2024/12/4）による累積発生率上昇（母集団N=421は同一）。</p>
 
       <h3 class="sec-h3">発症時期・リスク因子</h3>
       <div class="note-box">
@@ -396,19 +400,35 @@ fetch('/lungatlas/nav.html')
       </div>
 
       <h3 class="sec-h3">
-        予防的抗凝固療法
+        予防的抗凝固療法（海外プロトコル）
         <span class="src-badge src-protocol">プロトコル由来 v4/v5</span>
       </h3>
       <div class="info-box">
         <p style="margin-bottom:8px"><strong>対象：</strong>ami+laz療法を受ける全患者</p>
         <p style="margin-bottom:8px"><strong>期間：</strong>治療開始から最初の4ヶ月間</p>
-        <p style="margin-bottom:8px">
-          <strong>薬剤：</strong>地域GLに従ったDOACまたはLMWH（DOAC例：アピキサバン、リバーロキサバン）。ビタミンK拮抗薬は薬物相互作用のため非推奨。<!-- 要確認: 国内の抗凝固薬保険適用・用量 -->
+        <p style="margin-bottom:8px"><strong>薬剤：</strong>地域GLに従ったDOACまたはLMWH（DOAC例：アピキサバン、リバーロキサバン）。ビタミンK拮抗薬は薬物相互作用のため非推奨。</p>
+        <p><strong>参考GL：</strong>がん関連VTE ASCO GL 2023（PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37075273/" target="_blank" rel="noopener" style="color:var(--blue-dark);font-family:var(--mono);font-size:11.5px">37075273</a>）</p>
+      </div>
+
+      <h3 class="sec-h3">
+        日本における予防的抗凝固療法（保険適用）
+        <span class="src-badge src-jp">日本国内情報</span>
+      </h3>
+      <div class="info-box" style="background:#eef4fd;border-left-color:#2d5fb5">
+        <p style="margin-bottom:8px"><strong>薬剤・用量：</strong>アピキサバン 2.5mg 1日2回</p>
+        <p style="margin-bottom:8px"><strong>期間：</strong>併用療法開始から4ヶ月間</p>
+        <p style="margin-bottom:8px"><strong>保険適用：</strong>2025年3月27日付で厚生労働省保険局医療課により承認</p>
+        <p style="margin-bottom:12px">
+          <strong>合同ステートメント：</strong>日本臨床腫瘍学会・日本腫瘍循環器学会・日本循環器学会・日本肺癌学会・日本癌治療学会・日本血栓止血学会・日本静脈学会の7学会が2025年12月8日発出
+          （<a href="https://www.jsmo.or.jp/wp/wp-content/uploads/ee30e148c8b4bead39977162d71a83d1.pdf" target="_blank" rel="noopener" style="color:var(--blue-dark)">ステートメントPDF</a>）
         </p>
-        <p>
-          <strong>参考GL：</strong>がん関連VTE ASCO GL 2023
-          （PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37075273/" target="_blank" rel="noopener" style="color:var(--blue-dark);font-family:var(--mono);font-size:11.5px">37075273</a>）
-        </p>
+        <p style="margin-bottom:6px;font-weight:600;font-size:12px">日本人での注意点</p>
+        <ul style="padding-left:1.2em;line-height:1.9;font-size:12px">
+          <li>活動性悪性腫瘍症例では日本人でアピキサバン血中濃度が高くなることが知られるが、2.5mg 1日2回投与の出血リスクは審査報告書で評価されている。</li>
+          <li><strong>腎機能障害：</strong>CLcr 15mL/min未満には投与しない。CLcr 15〜50mL/minでは出血リスク増大のおそれ。</li>
+          <li>アピキサバンが投与できない場合は、ラゼルチニブとの併用投与を避け他の治療選択肢を考慮（添付文書）。</li>
+          <li>本ステートメントは診療ガイドラインではなく、診療判断は最新の添付文書に基づき各医療機関・担当医の裁量と責任で行う。</li>
+        </ul>
       </div>
 
       <h3 class="sec-h3">推奨と実態の乖離</h3>
@@ -472,7 +492,7 @@ fetch('/lungatlas/nav.html')
 
       <h3 class="sec-h3">発症タイミング</h3>
       <div class="note-box">
-        <p style="margin-bottom:6px;font-size:11px;color:var(--green-dark);opacity:.8">出典：MARIPOSA OS最終解析（PMID 40923797）＋ CHRYSALIS（PMID 36868177）</p>
+        <p style="margin-bottom:6px;font-size:11px;opacity:.8">出典：MARIPOSA OS最終解析（PMID 40923797）＋ CHRYSALIS（PMID 36868177）</p>
         <ul style="padding-left:1.2em;line-height:1.9">
           <li>C1D1に<strong>90%が集中</strong></li>
           <li>C1D2での発生：3.4〜4%</li>
@@ -550,14 +570,37 @@ fetch('/lungatlas/nav.html')
 
       <h3 class="sec-h3">
         皮下注製剤（SC amivantamab）でのIRR
-        <span class="src-badge src-paper">論文由来 PALOMA-3 JCO 2024;42:3593-3605</span>
+        <span class="src-badge src-paper">論文由来 PALOMA-3 doi:10.1200/JCO.24.01001</span>
       </h3>
       <div class="info-box">
         <ul style="padding-left:1.2em;line-height:1.9">
           <li>IRR発生率：IV群66% → <strong>SC群13%</strong>と大幅低下。</li>
           <li>皮膚毒性（皮疹・爪囲炎等）の発生率は製剤変更で変わらない。</li>
         </ul>
-        <!-- 要確認: SC製剤（RYBREVANT FASPRO）の日本承認状況・適応詳細 -->
+        <!-- PMID要確認: scrapsで別途対応予定 -->
+      </div>
+
+      <h3 class="sec-h3">
+        日本における承認状況（リブロファズ®配合皮下注）
+        <span class="src-badge src-jp">日本国内情報</span>
+      </h3>
+      <div class="info-box" style="background:#eef4fd;border-left-color:#2d5fb5">
+        <p style="margin-bottom:8px"><strong>製品名：</strong>リブロファズ配合皮下注（アミバンタマブ／ボルヒアルロニダーゼ アルファ）</p>
+        <p style="margin-bottom:8px"><strong>承認：</strong>2025年12月22日 ／ <strong>薬価収載・発売：</strong>2026年3月18日</p>
+        <p style="margin-bottom:8px">
+          <strong>適応：</strong>
+          ①EGFR遺伝子エクソン20挿入変異陽性、
+          ②EGFR遺伝子変異陽性の切除不能な進行・再発NSCLC
+        </p>
+        <p style="margin-bottom:8px">
+          <strong>MARIPOSAレジメン（common変異1次治療）での位置づけ：</strong>
+          ②に対しB法（ラゼルチニブ併用、4週間1サイクル、エクソン20挿入を除く）で使用可
+        </p>
+        <p style="margin-bottom:8px">
+          <strong>承認根拠：</strong>PALOMA-3（NCT05388669）/ PALOMA-2（NCT05498428）
+        </p>
+        <p>1バイアル(10mL)中アミバンタマブ1600mg／ボルヒアルロニダーゼ アルファ20000U含有</p>
+        <!-- 要確認: SC版でのVTE予防抗凝固の扱い（IV版同様アピキサバン推奨か） -->
       </div>
 
       <!-- ─────── セクション4：用量調整基準 ─────── -->
@@ -667,6 +710,24 @@ fetch('/lungatlas/nav.html')
             PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37075273/" target="_blank" rel="noopener">37075273</a>
             <span class="ref-sep">·</span>
             <a href="https://doi.org/10.1200/JCO.23.00294" target="_blank" rel="noopener">doi:10.1200/JCO.23.00294</a>
+          </div>
+        </li>
+        <li class="ref-item">
+          <span class="ref-title">PALOMA-3（SC amivantamab）</span>
+          <span class="src-badge src-paper">論文由来</span>
+          <div>J Clin Oncol. 2024;42(30):3593-3605.<!-- PMID要確認 --></div>
+          <div class="ref-links">
+            <a href="https://doi.org/10.1200/JCO.24.01001" target="_blank" rel="noopener">doi:10.1200/JCO.24.01001</a>
+            <span class="ref-sep">·</span>
+            NCT05388669
+          </div>
+        </li>
+        <li class="ref-item">
+          <span class="ref-title">7学会合同ステートメント（日本・VTE予防）</span>
+          <span class="src-badge src-jp">日本国内情報</span>
+          <div>日本臨床腫瘍学会ほか6学会. 2025年12月8日.</div>
+          <div class="ref-links">
+            <a href="https://www.jsmo.or.jp/wp/wp-content/uploads/ee30e148c8b4bead39977162d71a83d1.pdf" target="_blank" rel="noopener">ステートメントPDF（jsmo.or.jp）</a>
           </div>
         </li>
       </ol>
