@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "KEYNOTE-024試験 — 1次治療 pembrolizumab単剤 vs 化学療法（PD-L1 TPS≥50% IV期NSCLC）",
+    summary: "PD-L1 TPS≥50%・EGFR/ALK陰性のIV期NSCLCで、pembrolizumab単剤が化学療法を上回るPFS・OSを示した第3相試験。免疫療法が1次治療で化学療法に優越を示した最初の試験。5年OS率31.9% vs 16.3%。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/kn024.html"
+  },
+  {
     title: "KEYNOTE-407試験 — 1次治療 pembrolizumab + カルボプラチン・タキサン（扁平 IV期NSCLC）",
     summary: "治療歴なし扁平上皮IV期NSCLCで、pembrolizumab + カルボプラチン・パクリタキセル/nab-パクリタキセルがOS・PFSを改善した第3相試験。PD-L1問わず有効。OS中央値17.1 vs 11.6か月。扁平の標準化学免疫療法。",
     date: "2026-06-24",

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEYNOTE-024試験 — 1次治療 pembrolizumab単剤 vs 化学療法（PD-L1 TPS≥50% IV期NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>KEYNOTE-024試験</span>
+  </nav>
+
+  <!-- 記事タイトル -->
+  <h1 class="scrap-h1">KEYNOTE-024試験 — 1次治療 pembrolizumab単剤 vs 化学療法（PD-L1 TPS≥50% IV期NSCLC）</h1>
+
+  <!-- 一言サマリー -->
+  <p class="scrap-summary">PD-L1 TPS≥50%・EGFR/ALK陰性のIV期NSCLCで、pembrolizumab単剤が化学療法を上回るPFS・OSを示した第3相試験。免疫療法が1次治療で化学療法に優越を示した最初の試験。5年OS率31.9% vs 16.3%。</p>
+
+  <!-- メタ情報行：公開日・更新日・対象論文 -->
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      PMID <a href="https://pubmed.ncbi.nlm.nih.gov/27718847/" target="_blank" rel="noopener">27718847</a>
+      ／ DOI <a href="https://doi.org/10.1056/NEJMoa1606774" target="_blank" rel="noopener">10.1056/NEJMoa1606774</a>（NEJM 2016 Primary）
+      ／ PMID <a href="https://pubmed.ncbi.nlm.nih.gov/30620668/" target="_blank" rel="noopener">30620668</a>
+      ／ DOI <a href="https://doi.org/10.1200/JCO.18.00149" target="_blank" rel="noopener">10.1200/JCO.18.00149</a>（JCO 2019 3年update）
+      ／ PMID <!-- 要確認 --> DOI <a href="https://doi.org/10.1200/JCO.21.00174" target="_blank" rel="noopener">10.1200/JCO.21.00174</a>（JCO 2021 5年update）
+    </span>
+  </div>
+
+  <!-- 本文エリア -->
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+    <p>KEYNOTE-024試験（NCT02142738）は、PD-L1高発現（TPS≥50%）かつEGFR/ALK陰性の治療歴のないIV期NSCLCに対し、pembrolizumab（抗PD-1抗体）単剤をプラチナ併用化学療法と比較した国際共同・第3相・非盲検・無作為化試験。<strong>免疫療法が1次治療において化学療法に対する優越性を示した最初の第3相試験</strong>であり、PD-L1高発現NSCLCにおけるICI単剤治療の基盤を確立した。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・非盲検（open-label）・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>treatment-naive metastatic NSCLC・<strong>PD-L1 TPS≥50%</strong>・<strong>EGFR/ALK陰性</strong>・扁平/非扁平両方</td></tr>
+        <tr><td>症例数</td><td>305例（pembrolizumab 154例 / 化学療法 151例）</td></tr>
+        <tr><td>試験群</td><td>pembrolizumab 200mg Q3W（最大35サイクル＝約2年）</td></tr>
+        <tr><td>対照群</td><td>プラチナ併用化学療法（治験医選択）</td></tr>
+        <tr><td>クロスオーバー</td><td>化学療法群は増悪後にpembrolizumab単剤へのクロスオーバー許容</td></tr>
+        <tr><td>主要評価項目</td><td>PFS（OSは副次）</td></tr>
+        <tr><td>層別化因子</td><td>ECOG PS（0/1）・組織型（扁平/非扁平）・地域（東アジア/その他）</td></tr>
+        <tr><td>スポンサー</td><td>Merck Sharp &amp; Dohme（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT02142738</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — PFS・OS</h2>
+
+    <p class="sub">Primary解析（NEJM 2016、2nd interim analysis）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.50</div>
+        <div class="stat-label">PFS（主要評価項目）：pembrolizumab vs 化学療法</div>
+        <div class="stat-vs">95%CI 0.37–0.68、p&lt;0.001。PFS中央値 10.3 vs 6.0か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.60</div>
+        <div class="stat-label">OS（副次）：pembrolizumab vs 化学療法</div>
+        <div class="stat-vs">95%CI 0.41–0.89、p=0.005</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">ORR：pembrolizumab</div>
+        <div class="stat-vs">vs 化学療法 <!-- 要確認 -->（NEJM 2016より確認）</div>
+      </div>
+    </div>
+
+    <p class="sub">3年update（JCO 2019）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.63</div>
+        <div class="stat-label">OS</div>
+        <div class="stat-vs">95%CI 0.47–0.86</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">30.0か月</div>
+        <div class="stat-label">OS中央値：pembrolizumab</div>
+        <!-- 要確認: JCO 2019で正確な値を確認 -->
+        <div class="stat-vs">vs 化学療法 14.2か月 <!-- 要確認 --></div>
+      </div>
+    </div>
+
+    <p class="sub">5年update（JCO 2021、median follow-up 59.9か月）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">31.9%</div>
+        <div class="stat-label">5年OS率：pembrolizumab</div>
+        <div class="stat-vs">vs 化学療法 16.3%（約2倍）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">26.3か月</div>
+        <div class="stat-label">OS中央値：pembrolizumab</div>
+        <div class="stat-vs">vs 化学療法 13.4か月</div>
+      </div>
+    </div>
+
+    <p>化学療法群からpembrolizumabへの高いクロスオーバー率にもかかわらず、5年OS率は約2倍に達した。免疫療法1次治療の第3相試験として初の5年フォローデータであり、長期生存・持続的奏効が示された点で記念碑的。</p>
+    <!-- 要確認: 各時点のOS HR・ORR・DoRはそれぞれの原著より確認 -->
+    <!-- 要確認: 2年完遂後のsecond course pembrolizumabの成績はJCO 2021より確認 -->
+
+    <h2>3. 安全性</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>pembrolizumab</th><th>化学療法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Grade 3-5 治療関連有害事象</td><td><!-- 要確認: pembro群で少ない。NEJM 2016より --></td><td><!-- 要確認 --></td></tr>
+        <tr><td>irAE（甲状腺・肺臓炎・大腸炎等）</td><td><!-- 要確認 --></td><td>—</td></tr>
+        <tr><td>治療中止に至った有害事象</td><td><!-- 要確認 --></td><td><!-- 要確認 --></td></tr>
+      </tbody>
+    </table>
+    <!-- 要確認: 各有害事象の具体的発現率（%）はNEJM 2016 Tableより確認 -->
+
+    <p>pembrolizumab群はGrade 3-5有害事象が化学療法群より少なく、忍容性に優れる。免疫療法単剤の利点として毒性の軽さが示された。</p>
+
+    <h2>4. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">1</span>
+        <span><strong>免疫療法が1次治療で化学療法に優越を示した最初の第3相試験</strong>。PD-L1 TPS≥50%・EGFR/ALK陰性NSCLCにおけるpembrolizumab単剤の標準治療を確立（2016年FDA承認）</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">2</span>
+        <span>対象は <strong>PD-L1 TPS≥50%</strong> に限定。この高発現集団でのみ単剤の優位が示された</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">3</span>
+        <span>PD-L1低発現〜陰性は対象外。これらには化学免疫療法（KEYNOTE-189/407）が適応</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">4</span>
+        <span><strong>PD-L1≥50%での治療選択</strong>：pembrolizumab単剤（本試験）と化学免疫療法（KEYNOTE-189/407）の直接比較第3相はなく、単剤か化学併用かは患者背景（腫瘍量・症状・全身状態・早期増悪リスク）で判断。化学療法を避けたい・忍容性重視なら単剤、早期の確実な腫瘍縮小が必要なら化学併用が議論される</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">5</span>
+        <span>KEYNOTE-042（TPS≥1%でpembrolizumab単剤 vs 化学療法）へ対象を拡大したが、benefitは主にTPS≥50%層が牽引した点に注意</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">6</span>
+        <span>同じPD-L1高発現単剤として、IMpower110（atezolizumab）・EMPOWER-Lung 1（cemiplimab）も化学療法に対する優越を示している</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">7</span>
+        <span>EGFR/ALK陽性は対象外</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">8</span>
+        <span>pembrolizumabは国内でPD-L1陽性NSCLC 1次治療として承認済み。<!-- 要確認: 国内承認日・適応（TPS基準）の正確な文言はPMDA確認 --></span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- 関連文献リスト -->
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Reck M, Rodríguez-Abreu D, Robinson AG, et al; KEYNOTE-024 Investigators. Pembrolizumab versus Chemotherapy for PD-L1-Positive Non-Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2016;375(19):1823-1833. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/27718847/" target="_blank" rel="noopener">27718847</a> / DOI: <a href="https://doi.org/10.1056/NEJMoa1606774" target="_blank" rel="noopener">10.1056/NEJMoa1606774</a></li>
+      <li>Reck M, Rodríguez-Abreu D, Robinson AG, et al. Updated Analysis of KEYNOTE-024: Pembrolizumab Versus Platinum-Based Chemotherapy for Advanced Non-Small-Cell Lung Cancer With PD-L1 Tumor Proportion Score of 50% or Greater. <em>J Clin Oncol.</em> 2019;37(7):537-546. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30620668/" target="_blank" rel="noopener">30620668</a> / DOI: <a href="https://doi.org/10.1200/JCO.18.00149" target="_blank" rel="noopener">10.1200/JCO.18.00149</a></li>
+      <li>Reck M, Rodríguez-Abreu D, Robinson AG, et al. Five-Year Outcomes With Pembrolizumab Versus Chemotherapy for Metastatic Non-Small-Cell Lung Cancer With PD-L1 Tumor Proportion Score ≥ 50% (KEYNOTE-024). <em>J Clin Oncol.</em> 2021;39(21):2339-2349. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1200/JCO.21.00174" target="_blank" rel="noopener">10.1200/JCO.21.00174</a></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
