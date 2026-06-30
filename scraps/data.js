@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "EMPOWER-Lung 3試験 — 1次治療 cemiplimab + 化学療法 vs 化学療法（進行NSCLC、PD-L1問わず）",
+    summary: "治療歴なしstage III/IV・EGFR/ALK/ROS1陰性NSCLCで、cemiplimab + プラチナ化学療法が化学療法単独を上回るOS・PFSを示した第3相試験。PD-L1問わず有効。OS中央値21.9 vs 13.0か月。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/empower-lung3.html"
+  },
+  {
     title: "IMpower110試験 — 1次治療 atezolizumab単剤 vs 化学療法（PD-L1陽性 IV期NSCLC）",
     summary: "PD-L1陽性・EGFR/ALK陰性のIV期NSCLCで、atezolizumab単剤がPD-L1高発現群でOSを改善した第3相試験。OS中央値20.2 vs 13.1か月。SP142アッセイ使用。高+中発現群では有意に到達せず。",
     date: "2026-06-24",
