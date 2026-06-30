@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "EMPOWER-Lung 1試験 — 1次治療 cemiplimab単剤 vs 化学療法（PD-L1≥50% 進行NSCLC）",
+    summary: "PD-L1≥50%・EGFR/ALK/ROS1陰性の進行NSCLCで、cemiplimab単剤が化学療法を上回るOS・PFSを示した第3相試験。5年OS率29.0% vs 15.0%。PD-L1≥90%で最大効果。増悪後cemiplimab継続デザインが特徴。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/empower-lung1.html"
+  },
+  {
     title: "KEYNOTE-024試験 — 1次治療 pembrolizumab単剤 vs 化学療法（PD-L1 TPS≥50% IV期NSCLC）",
     summary: "PD-L1 TPS≥50%・EGFR/ALK陰性のIV期NSCLCで、pembrolizumab単剤が化学療法を上回るPFS・OSを示した第3相試験。免疫療法が1次治療で化学療法に優越を示した最初の試験。5年OS率31.9% vs 16.3%。",
     date: "2026-06-24",

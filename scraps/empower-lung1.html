@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMPOWER-Lung 1試験 — 1次治療 cemiplimab単剤 vs 化学療法（PD-L1≥50% 進行NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>EMPOWER-Lung 1試験</span>
+  </nav>
+
+  <!-- 記事タイトル -->
+  <h1 class="scrap-h1">EMPOWER-Lung 1試験 — 1次治療 cemiplimab単剤 vs 化学療法（PD-L1≥50% 進行NSCLC）</h1>
+
+  <!-- 一言サマリー -->
+  <p class="scrap-summary">PD-L1≥50%・EGFR/ALK/ROS1陰性の進行NSCLCで、cemiplimab単剤が化学療法を上回るOS・PFSを示した第3相試験。5年OS率29.0% vs 15.0%。PD-L1≥90%で最大効果。増悪後cemiplimab継続デザインが特徴。</p>
+
+  <!-- メタ情報行：公開日・更新日・対象論文 -->
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      PMID <!-- 要確認 -->
+      ／ DOI <a href="https://doi.org/10.1016/S0140-6736(21)00228-2" target="_blank" rel="noopener">10.1016/S0140-6736(21)00228-2</a>（Lancet 2021 Primary）
+      ／ PMID <!-- 要確認 -->
+      ／ DOI <a href="https://doi.org/10.1016/S1470-2045(23)00329-7" target="_blank" rel="noopener">10.1016/S1470-2045(23)00329-7</a>（Lancet Oncol 2023 35か月update）
+      ／ PMID <a href="https://pubmed.ncbi.nlm.nih.gov/40118215/" target="_blank" rel="noopener">40118215</a>
+      ／ DOI <!-- 要確認 -->（JTO 2025 5年update）
+    </span>
+  </div>
+
+  <!-- 本文エリア -->
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+    <p>EMPOWER-Lung 1試験（NCT03088540）は、PD-L1高発現（≥50%）かつEGFR/ALK/ROS1陰性の治療歴のない進行NSCLCに対し、cemiplimab（抗PD-1抗体）単剤をプラチナ併用化学療法と比較した国際共同・第3相・非盲検・無作為化試験。KEYNOTE-024（pembrolizumab単剤）と同じPD-L1高発現・ICI単剤のカテゴリーに属する。本試験は局所進行（stage IIIB/IIIC、根治的治療不適）も組み入れた点、増悪後にcemiplimabを継続するデザインが特徴。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・非盲検（open-label）・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>treatment-naive stage IIIB/IIIC（根治治療不適）or IV NSCLC・<strong>PD-L1≥50%</strong>・<strong>EGFR/ALK/ROS1陰性</strong>・扁平/非扁平両方・ECOG PS 0-1</td></tr>
+        <tr><td>症例数</td><td>712例ランダム化（cemiplimab 357例 / 化学療法 355例）。PD-L1≥50%検証集団 565例</td></tr>
+        <tr><td>試験群</td><td>cemiplimab 350mg Q3W（最大2年）</td></tr>
+        <tr><td>対照群</td><td>治験医選択プラチナ併用化学療法</td></tr>
+        <tr><td>特徴的デザイン</td><td>化学療法群→増悪後にcemiplimab単剤へクロスオーバー可。cemiplimab群→増悪後にcemiplimab + 化学療法を継続可（continued cemiplimab beyond progression）</td></tr>
+        <tr><td>主要評価項目</td><td>OS および PFS（co-primary）</td></tr>
+        <tr><td>層別化因子</td><td>組織型（扁平/非扁平）・地域 <!-- 要確認: Lancet 2021より確認 --></td></tr>
+        <tr><td>スポンサー</td><td>Regeneron Pharmaceuticals / Sanofi（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT03088540</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — OS・PFS</h2>
+
+    <p class="sub">Primary解析（Lancet 2021、PD-L1≥50%検証集団）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.57</div>
+        <div class="stat-label">OS：cemiplimab vs 化学療法</div>
+        <div class="stat-vs">95%CI 0.42–0.77、p=0.0002。OS中央値 未到達 vs 14.2か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">PFS HR（Primary解析）</div>
+        <div class="stat-vs"><!-- 要確認: Lancet 2021より --></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">ORR：cemiplimab（Primary解析）</div>
+        <div class="stat-vs"><!-- 要確認: Lancet 2021より --></div>
+      </div>
+    </div>
+
+    <p class="sub">5年update（JTO 2025、PD-L1≥50%検証集団 n=565、median follow-up 59.6か月）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.59</div>
+        <div class="stat-label">OS（5年update）</div>
+        <div class="stat-vs">95%CI 0.48–0.72。OS中央値 26.1 vs 13.3か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.50</div>
+        <div class="stat-label">PFS（5年update）</div>
+        <div class="stat-vs">95%CI 0.41–0.61。PFS中央値 8.1 vs 5.3か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">29.0%</div>
+        <div class="stat-label">5年OS率：cemiplimab</div>
+        <div class="stat-vs">vs 化学療法 15.0%（約2倍）。ORR 46.5% vs 20.6%</div>
+      </div>
+    </div>
+
+    <p>高いクロスオーバー率にもかかわらず、5年OS率は約2倍となった。扁平・非扁平いずれの組織型でも benefit が認められた。</p>
+    <!-- 要確認: PFS HR・ORRの初回解析値（Lancet 2021）を原著より確認 -->
+
+    <h2>3. PD-L1発現量と効果</h2>
+
+    <p>PD-L1発現レベルが高いほど効果が大きい傾向が明確に示された。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">1</span>
+        <span>PD-L1発現の上昇とcemiplimabの活性増加が相関</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">2</span>
+        <span><strong>PD-L1≥90%のサブグループで最大の臨床的benefit</strong>（JTO 2025）</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">3</span>
+        <span>扁平・非扁平いずれの組織型でもOS benefit</span>
+      </div>
+    </div>
+    <!-- 要確認: PD-L1階層別（50-59% / 60-89% / ≥90%等）のOS/PFS HRはJTO 2025より確認 -->
+
+    <h2>4. 安全性</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>cemiplimab</th><th>化学療法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Grade 3以上有害事象</td><td><!-- 要確認: Lancet 2021より --></td><td><!-- 要確認 --></td></tr>
+        <tr><td>irAE（甲状腺・肺臓炎・皮膚等）</td><td><!-- 要確認 --></td><td>—</td></tr>
+        <tr><td>治療中止に至った有害事象</td><td><!-- 要確認 --></td><td><!-- 要確認 --></td></tr>
+      </tbody>
+    </table>
+    <!-- 要確認: 各有害事象の具体的発現率（%）はLancet 2021 / JTO 2025 Tableより確認 -->
+
+    <p>cemiplimab単剤は概して許容可能な安全性プロファイルとされる。免疫療法単剤に共通するirAE管理が必要。</p>
+
+    <h2>5. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">1</span>
+        <span>PD-L1≥50%・EGFR/ALK/ROS1陰性NSCLCにおけるICI単剤1次治療の選択肢。KEYNOTE-024（pembrolizumab）・IMpower110（atezolizumab）と同カテゴリー</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">2</span>
+        <span>これら3剤（pembrolizumab・atezolizumab・cemiplimab）はいずれもPD-L1高発現単剤としてFDA承認。直接比較試験はなく、薬剤間の優劣は間接比較に留まる</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">3</span>
+        <span>本試験は <strong>局所進行（stage IIIB/IIIC、根治治療不適）も組み入れた</strong>点が、stage IVのみのKEYNOTE-024と異なる</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">4</span>
+        <span><strong>増悪後cemiplimab継続 + 化学療法</strong>というデザインは、ICI増悪後の新たな2次治療戦略の可能性を示唆（35か月フォロー、Lancet Oncol 2023）。ただしこれは本試験特有のデザインであり、一般化には注意</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">5</span>
+        <span>PD-L1≥90%で最大効果という点は、超高発現例での単剤選択を支持する材料</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">6</span>
+        <span>PD-L1≥50%での単剤 vs 化学免疫療法の選択は、KEYNOTE-024同様、直接比較第3相がなく患者背景で判断</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">7</span>
+        <span>EGFR/ALK/ROS1陽性は対象外</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">8</span>
+        <span>cemiplimabの国内承認状況：<!-- 要確認: PMDA確認。本邦ではNSCLC適応の有無・PD-L1基準を確認 --></span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- 関連文献リスト -->
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Sezer A, Kilickap S, Gümüş M, et al. Cemiplimab monotherapy for first-line treatment of advanced non-small-cell lung cancer with PD-L1 of at least 50%: a multicentre, open-label, global, phase 3, randomised, controlled trial. <em>Lancet.</em> 2021;397(10274):592-604. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1016/S0140-6736(21)00228-2" target="_blank" rel="noopener">10.1016/S0140-6736(21)00228-2</a></li>
+      <li>Özgüroğlu M, Kilickap S, Sezer A, et al. First-line cemiplimab monotherapy and continued cemiplimab beyond progression plus chemotherapy for advanced non-small-cell lung cancer with PD-L1 50% or more (EMPOWER-Lung 1): 35-month follow-up from a multicentre, open-label, randomised, phase 3 trial. <em>Lancet Oncol.</em> 2023;24(9):989-1001. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1016/S1470-2045(23)00329-7" target="_blank" rel="noopener">10.1016/S1470-2045(23)00329-7</a></li>
+      <li>Kilickap S, Baramidze A, Sezer A, et al. Cemiplimab Monotherapy for First-Line Treatment of Patients with Advanced NSCLC With PD-L1 Expression of 50% or Higher: Five-Year Outcomes of EMPOWER-Lung 1. <em>J Thorac Oncol.</em> 2025;20(7):941-954. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/40118215/" target="_blank" rel="noopener">40118215</a> / DOI: <!-- 要確認 --></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
