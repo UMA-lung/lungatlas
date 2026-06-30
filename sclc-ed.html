@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>進展型小細胞肺癌（ED-SCLC）治療 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f5;--surface:#fff;--surface2:#f0f4f1;--border:#d4e0d6;--border2:#b8cfbb;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --blue-dark:#0c3d6e;--blue-light:#e3edf8;--purple-dark:#3b2d7a;--purple-light:#eeebfb;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;--red-dark:#6b1c1c;--red-light:#fce8e8;
+  --teal-dark:#085041;--teal-light:#e1f5ee;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:10px;--radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sb-head{font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--text3);padding:8px 18px 4px;text-transform:uppercase}
+.sb-item{display:block;padding:8px 18px;font-size:12.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;cursor:pointer;line-height:1.4}
+.sb-item:hover{background:var(--green-pale);color:var(--green-dark)}
+.sb-item.active{background:var(--green-light);color:var(--green-dark);font-weight:500;border-left-color:var(--green-mid)}
+.sb-sub{display:block;padding:5px 18px 5px 30px;font-size:11.5px;color:var(--text3);text-decoration:none;cursor:pointer;transition:color .15s}
+.sb-sub:hover,.sb-sub.active{color:var(--green-dark);font-weight:500}
+
+/* MAIN */
+.main{flex:1;padding:28px 36px 60px;max-width:900px}
+.crumb{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.crumb span{color:var(--green-mid)}
+.updated{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--green-dark);background:var(--green-light);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.updated::before{content:'↻';font-size:12px}
+.art-h1{font-size:22px;font-weight:600;line-height:1.2;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--text2);line-height:1.75;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.sec-h2{font-size:15px;font-weight:600;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.sec-h2::before{content:'';display:block;width:3px;height:16px;background:var(--green-mid);border-radius:2px;flex-shrink:0}
+.sec-h3{font-size:13.5px;font-weight:600;color:var(--text);margin:18px 0 10px}
+
+/* SUMMARY TABLE */
+.summary-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px}
+.st-header{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;background:var(--surface2);border-bottom:1px solid var(--border)}
+.st-cell{padding:10px 14px;font-size:12px;font-weight:600;color:var(--text);border-right:1px solid var(--border)}
+.st-cell:last-child{border-right:none}
+.st-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.st-row:last-child{border-bottom:none}
+.st-row:nth-child(even){background:#f8fbf9}
+.st-d{padding:10px 14px;font-size:12px;color:var(--text2);border-right:1px solid var(--border);line-height:1.5}
+.st-d:last-child{border-right:none}
+.highlight-cell{background:var(--green-light);color:var(--green-dark);font-weight:600}
+.warn-cell{background:var(--red-light);color:var(--red-dark)}
+.neutral-cell{color:var(--text3)}
+
+/* DECISION CARDS */
+.dec-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.dec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.dec-head{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.dec-head:hover{background:var(--surface2)}
+.dec-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;margin-top:1px}
+.ic-green{background:var(--green-light);color:var(--green-dark)}
+.ic-blue{background:var(--blue-light);color:var(--blue-dark)}
+.ic-amber{background:var(--amber-light);color:var(--amber-dark)}
+.ic-red{background:var(--red-light);color:var(--red-dark)}
+.ic-purple{background:var(--purple-light);color:var(--purple-dark)}
+.dec-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.dec-sub{font-size:12px;color:var(--text3);line-height:1.5}
+.rec-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:12px;margin-left:auto;flex-shrink:0;white-space:nowrap}
+.rb-green{background:var(--green-light);color:var(--green-dark)}
+.rb-blue{background:var(--blue-light);color:var(--blue-dark)}
+.rb-amber{background:var(--amber-light);color:var(--amber-dark)}
+.dec-body{padding:16px 20px;display:none}
+.dec-body.open{display:block}
+.dec-reason{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.dec-evidence{background:var(--green-pale);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+.dec-caution{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:10px 14px;font-size:12px;color:var(--amber-dark);line-height:1.7}
+.tox-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tox{font-size:11px;background:var(--red-light);color:var(--red-dark);padding:3px 10px;border-radius:10px}
+
+/* FLOW */
+.flow-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:24px}
+.flow-step{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.flow-step:last-child{border-bottom:none}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{flex:1}
+.step-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.step-detail{font-size:12px;color:var(--text2);line-height:1.65}
+.branch{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.branch-item{font-size:11px;font-weight:500;padding:4px 10px;border-radius:8px;cursor:default}
+.bi-green{background:var(--green-light);color:var(--green-dark)}
+.bi-blue{background:var(--blue-light);color:var(--blue-dark)}
+.bi-amber{background:var(--amber-light);color:var(--amber-dark)}
+
+/* INFO / NOTE */
+.info-box{background:var(--blue-light);border-left:3px solid #2d6db5;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--blue-dark);line-height:1.75;margin:14px 0}
+.note-box{background:var(--green-light);border-left:3px solid var(--green-mid);border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--green-dark);line-height:1.75;margin:14px 0}
+.warn-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
+.comp-table th{padding:9px 12px;background:var(--surface2);font-weight:600;color:var(--text);border:1px solid var(--border);text-align:left}
+.comp-table td{padding:9px 12px;border:1px solid var(--border);color:var(--text2);line-height:1.5;vertical-align:top}
+.comp-table tr:nth-child(even) td{background:#f8fbf9}
+.comp-table .best{color:var(--green-dark);font-weight:600}
+.comp-table .worst{color:var(--red-dark)}
+.comp-table .mid{color:var(--amber-dark)}
+
+/* NEXT ROW */
+.next-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.next-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);font-weight:500;background:var(--green-light);border:none;cursor:pointer;padding:9px 16px;border-radius:8px;font-family:var(--font);text-decoration:none;transition:background .15s}
+.next-btn:hover{background:#cce8d4}
+
+/* TRIAL LINK */
+.trial-link{font-size:13px;font-weight:600;color:var(--green-dark);text-decoration:none;font-family:var(--mono)}
+.trial-link:hover{opacity:.7}
+
+/* FOOTER */
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:18px 36px;font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-weight:600;color:var(--text)}
+.footer-logo span{color:var(--green-mid)}
+
+.trial-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.trial-meta-item{background:var(--surface2);border-radius:6px;padding:6px 10px;font-size:11px}
+.meta-label{font-weight:600;color:var(--text3);margin-right:4px}
+.meta-val{color:var(--text2)}
+.meta-val a{color:var(--green-dark);text-decoration:none}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main{padding:20px 18px 40px}
+  .comp-table{font-size:11px}
+  .nav-links{display:none}
+  .summary-table .st-header,.summary-table .st-row{grid-template-columns:1fr 1fr}
+}
+
+/* TRIAL REF BLOCK */
+.trial-ref-block{margin:12px 0 28px 0;display:flex;flex-direction:column;gap:8px}
+.trial-ref-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.trial-ref-name{font-weight:bold;font-size:.95em;min-width:100px;color:#1a1a1a}
+.trial-ref-btn{display:inline-block;padding:4px 12px;border-radius:5px;text-decoration:none;font-size:.85em;font-weight:bold;transition:opacity .2s}
+.trial-ref-btn:hover{opacity:.8}
+.trial-ref-btn.detail{background:#0d5c3a;color:#fff}
+.trial-ref-btn.pubmed{background:#e8f0fe;color:#1a56db;border:1px solid #c3d3f7}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-head">このページの内容</div>
+    <a class="sb-item active" href="#overview">治療方針の概要</a>
+    <a class="sb-item" href="#chemo-io">化学免疫療法</a>
+    <a class="sb-item" href="#maintenance">維持療法</a>
+    <a class="sb-item" href="#second-line">2次治療以降</a>
+    <a class="sb-item" href="#rt-pci">胸部RT・PCI</a>
+    <a class="sb-item" href="#guidelines">ガイドライン比較</a>
+    <div class="sb-head" style="margin-top:12px">関連ページ</div>
+    <a class="sb-sub" href="/lungatlas/sclc-overview.html">SCLC 総論</a>
+    <a class="sb-sub" href="/lungatlas/sclc-ld.html">限局型（LD-SCLC）</a>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">化学療法 › SCLC › <span>進展型（ED-SCLC）</span></div>
+    <div class="updated">最終更新 2026年7月 — 骨格作成中（臨床データ未流し込み）</div>
+    <h1 class="art-h1">進展型小細胞肺癌<br>（ED-SCLC）治療</h1>
+    <p class="lead">進展型小細胞肺癌に対する化学免疫療法、維持療法、2次治療以降、胸部放射線・予防的全脳照射について、原著試験データに基づき整理する。</p>
+
+    <h2 class="sec-h2" id="overview">治療方針の概要</h2>
+    <!-- 要確認：vaultから流し込み -->
+
+    <h2 class="sec-h2" id="chemo-io">化学免疫療法</h2>
+    <!-- 要確認：vaultから流し込み -->
+
+    <h2 class="sec-h2" id="maintenance">維持療法</h2>
+    <!-- 要確認：vaultから流し込み -->
+
+    <h2 class="sec-h2" id="second-line">2次治療以降</h2>
+    <!-- 要確認：vaultから流し込み -->
+
+    <h2 class="sec-h2" id="rt-pci">胸部RT・PCI</h2>
+    <!-- 要確認：vaultから流し込み -->
+
+    <h2 class="sec-h2" id="guidelines">ガイドライン比較</h2>
+    <!-- 要確認：vaultから流し込み -->
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
