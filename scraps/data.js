@@ -12,7 +12,7 @@ const SCRAPS_DATA = [
   {
     title: "EMPOWER-Lung 3試験 — 1次治療 cemiplimab + 化学療法 vs 化学療法（進行NSCLC、PD-L1問わず）",
     summary: "治療歴なしstage III/IV・EGFR/ALK/ROS1陰性NSCLCで、cemiplimab + プラチナ化学療法が化学療法単独を上回るOS・PFSを示した第3相試験。PD-L1問わず有効。OS中央値21.9 vs 13.0か月。",
-    date: "2026-06-24",
+    date: "2026-06-30",
     url: "/lungatlas/scraps/empower-lung3.html"
   },
   {
