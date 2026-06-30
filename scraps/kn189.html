@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEYNOTE-189試験 — 1次治療 pembrolizumab + ペメトレキセド・プラチナ（非扁平 IV期 EGFR/ALK陰性NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.tox-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 6px 0 14px; }
+.tox {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text2);
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>KEYNOTE-189試験</span>
+  </nav>
+
+  <!-- 記事タイトル -->
+  <h1 class="scrap-h1">KEYNOTE-189試験 — 1次治療 pembrolizumab + ペメトレキセド・プラチナ（非扁平 IV期 EGFR/ALK陰性NSCLC）</h1>
+
+  <!-- 一言サマリー -->
+  <p class="scrap-summary">治療歴なし非扁平IV期EGFR/ALK陰性NSCLCで、pembrolizumab + ペメトレキセド・プラチナがOS・PFSを改善した第3相試験。PD-L1問わず有効。5年OS率19.4% vs 11.3%。化学療法+IOの基準レジメン。</p>
+
+  <!-- メタ情報行：公開日・更新日・対象論文 -->
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      PMID <a href="https://pubmed.ncbi.nlm.nih.gov/29658856/" target="_blank" rel="noopener">29658856</a>
+      ／ DOI <a href="https://doi.org/10.1056/NEJMoa1801005" target="_blank" rel="noopener">10.1056/NEJMoa1801005</a>（NEJM 2018 Primary）
+      ／ Ann Oncol 2021 PMID <!-- 要確認 --> DOI <a href="https://doi.org/10.1016/j.annonc.2021.04.008" target="_blank" rel="noopener">10.1016/j.annonc.2021.04.008</a>
+      ／ JCO 2023 PMID <!-- 要確認 --> DOI <a href="https://doi.org/10.1200/JCO.22.01989" target="_blank" rel="noopener">10.1200/JCO.22.01989</a>（5年update）
+    </span>
+  </div>
+
+  <!-- 本文エリア -->
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+    <p>KEYNOTE-189試験（NCT02578680）は、治療歴のない非扁平IV期EGFR/ALK陰性NSCLCに対し、標準化学療法（ペメトレキセド + プラチナ）へのpembrolizumab（抗PD-1抗体）上乗せを、プラセボ上乗せと比較した国際共同・第3相・二重盲検・プラセボ対照試験。非扁平NSCLCにおける化学療法 + 免疫療法（化学免疫療法）の基準を確立した試験。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・二重盲検・プラセボ対照・無作為化（2:1）</td></tr>
+        <tr><td>対象</td><td>treatment-naive metastatic <strong>非扁平</strong> NSCLC・<strong>EGFR/ALK陰性</strong>・PD-L1問わず</td></tr>
+        <tr><td>症例数</td><td>616例（pembro+chemo 410例 / placebo+chemo 206例）</td></tr>
+        <tr><td>試験群</td><td>pembrolizumab 200mg Q3W（最大35サイクル）+ pemetrexed + carboplatin/cisplatin（4サイクル）→ pemetrexed維持</td></tr>
+        <tr><td>対照群</td><td>placebo Q3W + pemetrexed + carboplatin/cisplatin（4サイクル）→ pemetrexed維持</td></tr>
+        <tr><td>クロスオーバー</td><td>プラセボ群は増悪後にpembrolizumab単剤へのクロスオーバー許容</td></tr>
+        <tr><td>主要評価項目</td><td>OS および PFS（co-primary）</td></tr>
+        <tr><td>層別化因子</td><td>PD-L1（TPS≥1% vs &lt;1%）・プラチナ製剤（cis vs carbo）・喫煙歴</td></tr>
+        <tr><td>スポンサー</td><td>Merck Sharp &amp; Dohme（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT02578680</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — OS・PFS</h2>
+
+    <p class="sub">Primary解析（NEJM 2018、median follow-up 10.5か月）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.49</div>
+        <div class="stat-label">OS：pembro+chemo vs placebo+chemo</div>
+        <div class="stat-vs">95%CI 0.38–0.64、p&lt;0.001。OS中央値 未到達 vs 11.3か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.52</div>
+        <div class="stat-label">PFS：pembro+chemo vs placebo+chemo</div>
+        <div class="stat-vs">95%CI 0.43–0.64、p&lt;0.001。PFS中央値 8.8 vs 4.9か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">47.6%</div>
+        <div class="stat-label">ORR：pembro+chemo</div>
+        <div class="stat-vs">vs placebo+chemo 18.9%、p&lt;0.001</div>
+      </div>
+    </div>
+
+    <p class="sub">protocol-specified final（Ann Oncol 2021）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.56</div>
+        <div class="stat-label">OS</div>
+        <div class="stat-vs">95%CI 0.46–0.69</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.49</div>
+        <div class="stat-label">PFS</div>
+        <div class="stat-vs">95%CI 0.41–0.59</div>
+      </div>
+    </div>
+
+    <p class="sub">5年update（JCO 2023、median follow-up 64.6か月）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.60</div>
+        <div class="stat-label">OS（5年update）</div>
+        <div class="stat-vs">95%CI 0.50–0.72</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">19.4%</div>
+        <div class="stat-label">5年OS率：pembro+chemo</div>
+        <div class="stat-vs">vs placebo+chemo 11.3%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">9.0か月</div>
+        <div class="stat-label">PFS中央値：pembro+chemo</div>
+        <div class="stat-vs">95%CI 8.1–10.4 vs 4.9か月（95%CI 4.7–5.5）、HR 0.50（95%CI 0.42–0.60）</div>
+      </div>
+    </div>
+
+    <p>OS・PFSのbenefitは5年フォローまで一貫して維持された。プラセボ群の相当数がクロスオーバーでpembrolizumabを後治療として受けている点に留意（それでもOS benefitが維持された）。</p>
+    <!-- 要確認: 5年PFS率・後治療クロスオーバー率はJCO 2023より確認 -->
+
+    <h2>3. PD-L1発現別サブグループ</h2>
+
+    <p>本試験はPD-L1非選択デザインであり、PD-L1発現別の探索的サブグループ解析が重要。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>PD-L1 TPS</th><th>OS HR（各解析時点）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>TPS &lt;1%</td><td><!-- 要確認: JCO 2023またはAnn Oncol 2021より --></td></tr>
+        <tr><td>TPS 1–49%</td><td><!-- 要確認 --></td></tr>
+        <tr><td>TPS ≥50%</td><td><!-- 要確認 --></td></tr>
+      </tbody>
+    </table>
+    <!-- 要確認: 各PD-L1サブグループのOS/PFS HR・CIはNEJM 2018 / Ann Oncol 2021 / JCO 2023より確認 -->
+
+    <p><strong>PD-L1発現にかかわらず（TPS&lt;1%のPD-L1陰性を含む）OS・PFS benefitが認められた</strong>点が本試験の最も重要な知見であり、PD-L1陰性例にも化学免疫療法の適応を広げる根拠となった。</p>
+
+    <h2>4. 安全性</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>pembro+chemo</th><th>placebo+chemo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Grade 3以上有害事象</td><td><!-- 要確認: NEJM 2018より --></td><td><!-- 要確認 --></td></tr>
+        <tr><td>急性腎障害</td><td><!-- 要確認: pembro群で多いと報告 --></td><td><!-- 要確認 --></td></tr>
+        <tr><td>irAE（甲状腺・肺臓炎・肝炎等）</td><td><!-- 要確認 --></td><td><!-- 要確認 --></td></tr>
+        <tr><td>治療中止に至った有害事象</td><td><!-- 要確認 --></td><td><!-- 要確認 --></td></tr>
+      </tbody>
+    </table>
+    <!-- 要確認: 各有害事象の具体的発現率（%）はNEJM 2018 Tableより確認 -->
+    <!-- 要確認: 腎毒性（pembro+pemetrexedで注目）の発現率はNEJM 2018 / Ann Oncol 2021より確認 -->
+
+    <p>毒性は管理可能（manageable）であり、5年フォローでも新規の安全性シグナルは報告されていない。ペメトレキセド・プラチナの既知毒性にirAEが加わる。</p>
+
+    <h2>5. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">1</span>
+        <span>非扁平NSCLCにおける化学免疫療法（化学療法 + PD-1単剤）の基準レジメン。2018年8月FDA承認、各GLで標準治療</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">2</span>
+        <span><strong>PD-L1問わず（陰性含む）benefit</strong>が最大の特徴。PD-L1高発現ではpembrolizumab単剤（KEYNOTE-024）も選択肢だが、本レジメンはPD-L1陰性〜低発現でも有効</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">3</span>
+        <span>扁平上皮NSCLCはKEYNOTE-407（pembrolizumab + カルボプラチン + パクリタキセル/nab-パクリタキセル）が対応。組織型で使い分け</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">4</span>
+        <span>二重ICIレジメン（CheckMate 9LA・CheckMate 227・POSEIDON）との直接比較試験はなく、レジメン選択は間接比較に留まる。化学療法+PD-1単剤（本試験）か、CTLA-4を加えるか（二重ICI）は患者背景・毒性許容度で判断</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">5</span>
+        <span>EGFR/ALK陽性は対象外。これらにはドライバー標的治療が優先</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">6</span>
+        <span>pembrolizumabは国内で当該適応において承認済み。<!-- 要確認: 国内承認日・適応の正確な文言はPMDA確認 --></span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- 関連文献リスト -->
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Gandhi L, Rodríguez-Abreu D, Gadgeel S, et al; KEYNOTE-189 Investigators. Pembrolizumab plus Chemotherapy in Metastatic Non-Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2018;378(22):2078-2092. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29658856/" target="_blank" rel="noopener">29658856</a> / DOI: <a href="https://doi.org/10.1056/NEJMoa1801005" target="_blank" rel="noopener">10.1056/NEJMoa1801005</a></li>
+      <li>Rodríguez-Abreu D, Powell SF, Hochmair MJ, et al. Pemetrexed plus platinum with or without pembrolizumab in patients with previously untreated metastatic nonsquamous NSCLC: protocol-specified final analysis from KEYNOTE-189. <em>Ann Oncol.</em> 2021;32(7):881-895. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1016/j.annonc.2021.04.008" target="_blank" rel="noopener">10.1016/j.annonc.2021.04.008</a></li>
+      <li>Garassino MC, Gadgeel S, Speranza G, et al. Pembrolizumab Plus Pemetrexed and Platinum in Nonsquamous Non-Small-Cell Lung Cancer: 5-Year Outcomes From the Phase 3 KEYNOTE-189 Study. <em>J Clin Oncol.</em> 2023;41(11):1992-1998. PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1200/JCO.22.01989" target="_blank" rel="noopener">10.1200/JCO.22.01989</a></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "KEYNOTE-189試験 — 1次治療 pembrolizumab + ペメトレキセド・プラチナ（非扁平 IV期 EGFR/ALK陰性NSCLC）",
+    summary: "治療歴なし非扁平IV期EGFR/ALK陰性NSCLCで、pembrolizumab + ペメトレキセド・プラチナがOS・PFSを改善した第3相試験。PD-L1問わず有効。5年OS率19.4% vs 11.3%。化学療法+IOの基準レジメン。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/kn189.html"
+  },
+  {
     title: "PALOMA-3試験 — 皮下注 vs 静注 amivantamab（+ lazertinib、難治性EGFR変異NSCLC）",
     summary: "osimertinib＋化学療法後に進行したEGFR変異NSCLCで、皮下注amivantamabが静注に対しPK・有効性で非劣性を示した第3相試験。投与時間短縮・IRR 5分の1・VTE減少。探索的OSは皮下注群で改善。",
     date: "2026-06-24",
