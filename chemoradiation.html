@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>化学放射線療法（III期NSCLC） — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f5;--surface:#fff;--surface2:#f0f4f1;--border:#d4e0d6;--border2:#b8cfbb;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --blue-dark:#0c3d6e;--blue-light:#e3edf8;--purple-dark:#3b2d7a;--purple-light:#eeebfb;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;--red-dark:#6b1c1c;--red-light:#fce8e8;
+  --teal-dark:#085041;--teal-light:#e1f5ee;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:10px;--radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sb-head{font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--text3);padding:8px 18px 4px;text-transform:uppercase}
+.sb-item{display:block;padding:8px 18px;font-size:12.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;cursor:pointer;line-height:1.4}
+.sb-item:hover{background:var(--green-pale);color:var(--green-dark)}
+.sb-item.active{background:var(--green-light);color:var(--green-dark);font-weight:500;border-left-color:var(--green-mid)}
+.sb-sub{display:block;padding:5px 18px 5px 30px;font-size:11.5px;color:var(--text3);text-decoration:none;cursor:pointer;transition:color .15s}
+.sb-sub:hover,.sb-sub.active{color:var(--green-dark);font-weight:500}
+
+/* MAIN */
+.main{flex:1;padding:28px 36px 60px;max-width:900px}
+.crumb{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.crumb span{color:var(--green-mid)}
+.updated{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--green-dark);background:var(--green-light);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.updated::before{content:'↻';font-size:12px}
+.art-h1{font-size:22px;font-weight:600;line-height:1.2;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--text2);line-height:1.75;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.sec-h2{font-size:15px;font-weight:600;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.sec-h2::before{content:'';display:block;width:3px;height:16px;background:var(--green-mid);border-radius:2px;flex-shrink:0}
+.sec-h3{font-size:13.5px;font-weight:600;color:var(--text);margin:18px 0 10px}
+
+/* INFO / NOTE / WARN */
+.info-box{background:var(--blue-light);border-left:3px solid #2d6db5;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--blue-dark);line-height:1.75;margin:14px 0}
+.note-box{background:var(--green-light);border-left:3px solid var(--green-mid);border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--green-dark);line-height:1.75;margin:14px 0}
+.warn-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
+.comp-table th{padding:9px 12px;background:var(--surface2);font-weight:600;color:var(--text);border:1px solid var(--border);text-align:left}
+.comp-table td{padding:9px 12px;border:1px solid var(--border);color:var(--text2);line-height:1.5;vertical-align:top}
+.comp-table tr:nth-child(even) td{background:#f8fbf9}
+.comp-table .best{color:var(--green-dark);font-weight:600}
+.comp-table .worst{color:var(--red-dark)}
+.comp-table .mid{color:var(--amber-dark)}
+
+/* STAT ROW */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:20px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.stat-label{font-size:11px;color:var(--text3);font-weight:500;margin-bottom:4px}
+.stat-val{font-size:17px;font-weight:600;color:var(--green-dark);font-family:var(--mono)}
+.stat-sub{font-size:11px;color:var(--text3);margin-top:3px}
+
+/* REFERENCES */
+.ref-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ref-list li{font-size:12px;color:var(--text2);line-height:1.7;padding-left:28px;position:relative}
+.ref-list li::before{position:absolute;left:0;top:0;font-weight:600;color:var(--text3)}
+.ref-list li:nth-child(1)::before{content:'1.'}
+.ref-list li:nth-child(2)::before{content:'2.'}
+.ref-list li:nth-child(3)::before{content:'3.'}
+.ref-list li:nth-child(4)::before{content:'4.'}
+.ref-list li:nth-child(5)::before{content:'5.'}
+.ref-pending{display:inline-block;font-size:10px;background:var(--amber-light);color:var(--amber-dark);padding:1px 6px;border-radius:4px;margin-left:4px;font-weight:500}
+
+/* NEXT ROW */
+.next-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.next-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);font-weight:500;background:var(--green-light);border:none;cursor:pointer;padding:9px 16px;border-radius:8px;font-family:var(--font);text-decoration:none;transition:background .15s}
+.next-btn:hover{background:#cce8d4}
+
+/* FOOTER */
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:18px 36px;font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-weight:600;color:var(--text)}
+.footer-logo span{color:var(--green-mid)}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main{padding:20px 18px 40px}
+  .comp-table{font-size:11px}
+  .nav-links{display:none}
+  .stat-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-head">このページの内容</div>
+    <a class="sb-item active" href="#overview">位置づけ</a>
+    <a class="sb-item" href="#regimen">レジメン選択（同時 vs 逐次）</a>
+    <a class="sb-item" href="#pacific-design">PACIFIC試験：デザイン</a>
+    <a class="sb-item" href="#pacific-efficacy">PACIFIC試験：有効性</a>
+    <a class="sb-item" href="#pacific-subgroup">サブグループ解析</a>
+    <a class="sb-item" href="#pacific-safety">安全性</a>
+    <a class="sb-item" href="#pacific2">durvalumab同時併用の試み</a>
+    <a class="sb-item" href="#guidelines">ガイドライン比較</a>
+    <a class="sb-item" href="#japan">国内承認情報</a>
+    <a class="sb-item" href="#references">文献</a>
+    <div class="sb-head" style="margin-top:12px">関連ページ</div>
+    <a class="sb-sub" href="/lungatlas/nsclc-overview.html">NSCLC 総論</a>
+    <a class="sb-sub" href="/lungatlas/perioperative.html">周術期薬物療法</a>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">NSCLC › <span>化学放射線療法</span></div>
+    <div class="updated">最終更新 2026年7月 — PACIFIC本体・レジメン選択セクション公開、PACIFIC-2・ガイドライン比較は準備中</div>
+    <h1 class="art-h1">局所進行NSCLC（III期・切除不能）<br>化学放射線療法（CRT）</h1>
+    <p class="lead">切除不能III期NSCLCに対する根治的化学放射線療法（CRT）の概要と、cCRT後のデュルバルマブ地固め療法（PACIFIC試験）について、公表データに基づき整理する。疫学・病期分類の詳細は <a href="/lungatlas/nsclc-overview.html" style="color:var(--green-dark);font-weight:500">NSCLC総論</a> を参照。</p>
+
+    <!-- ========== 位置づけ ========== -->
+    <h2 class="sec-h2" id="overview">位置づけ</h2>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      肺癌のI–II期では手術（±術後補助療法）が主軸となるのに対し、切除不能III期は局所にとどまりながらも手術が困難な状態であり、根治的CRTが中心的な治療選択肢となる。IV期（遠隔転移）では全身薬物療法が主体となる点とも異なる。
+    </p>
+
+    <div class="info-box">
+      <strong>切除可能IIIA期について：</strong>切除可能な一部のIIIA期では手術アプローチも検討され、術前・術後の薬物療法が行われる場合がある（<a href="/lungatlas/perioperative.html" style="color:var(--blue-dark);font-weight:500">周術期薬物療法のページ</a>参照）。本ページは切除不能III期のCRTを中心に扱う。
+    </div>
+
+    <!-- ========== レジメン選択 ========== -->
+    <h2 class="sec-h2" id="regimen">レジメン選択：同時併用 vs 逐次</h2>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      根治的CRTには化学療法と放射線療法を同時に行う<strong>同時併用（concurrent CRT, cCRT）</strong>と、時間をずらして行う<strong>逐次併用（sequential CRT, sCRT）</strong>がある。6件のランダム化比較試験（計1,205例）を対象とした個別患者データメタアナリシス（Aupérin 2010）が、現在cCRTが標準治療とされる主要根拠である。
+    </p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>同時併用（cCRT）</th>
+          <th>逐次（sCRT）</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>全生存期間（OS）</td>
+          <td class="best">良好（HR 0.84、95%CI 0.74–0.95、p=0.004）</td>
+          <td>対照</td>
+          <td>cCRTが有意に良好</td>
+        </tr>
+        <tr>
+          <td>3年生存率</td>
+          <td class="best">23.8%</td>
+          <td>18.1%</td>
+          <td>絶対差 +5.7%</td>
+        </tr>
+        <tr>
+          <td>5年生存率</td>
+          <td class="best">15.1%</td>
+          <td>10.6%</td>
+          <td>絶対差 +4.5%</td>
+        </tr>
+        <tr>
+          <td>局所制御</td>
+          <td class="best">HR 0.77（95%CI 0.62–0.95）, p=0.01</td>
+          <td>対照</td>
+          <td>OSベネフィットの主因</td>
+        </tr>
+        <tr>
+          <td>遠隔転移</td>
+          <td>HR 1.04（95%CI 0.86–1.25）</td>
+          <td>対照</td>
+          <td>p=0.69、有意差なし</td>
+        </tr>
+        <tr>
+          <td>急性食道毒性（Grade 3–4）</td>
+          <td class="worst">18%（RR 4.9、p<0.001）</td>
+          <td>4%</td>
+          <td>cCRTで有意に増加</td>
+        </tr>
+        <tr>
+          <td>急性肺毒性</td>
+          <td>RR 0.69（95%CI 0.42–1.12）</td>
+          <td>対照</td>
+          <td>p=0.13、有意差なし</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: Aupérin A, et al. J Clin Oncol 2010;28(13):2181-2190, PMID 20351327 -->
+
+    <div class="note-box">
+      <strong>臨床的意義：</strong>cCRTは局所制御の改善を通じてOSを有意に改善するが、急性食道毒性が明確に増加する。患者の全身状態・治療忍容性を考慮したレジメン選択が必要。PS不良例・高齢者等でsCRTが選択される具体的基準は本メタアナリシスには記載なし。
+    </div>
+
+    <div class="warn-box">
+      <strong>エビデンスの限界：</strong>対象となった6件の試験はいずれも2003年以前に登録完了したもの。より新しいレジメン・薬剤（白金製剤ベースの現行cCRTレジメン等）での直接比較試験のエビデンスは本メタアナリシスの対象外。
+    </div>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-top:14px">
+      なお、PACIFIC試験（デュルバルマブ地固め）はcCRT後の患者のみを組み入れ対象としており（下記参照）、sCRT後の患者に対するデュルバルマブ地固めの効果は別途PACIFIC-5試験・PACIFIC-6試験で検証されている（本サイトでは今後追加予定）。
+    </p>
+
+    <!-- ========== PACIFIC：デザイン ========== -->
+    <h2 class="sec-h2" id="pacific-design">PACIFIC試験：デザイン</h2>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      PACIFIC試験は、白金製剤ベースcCRTを2サイクル以上施行し増悪のない切除不能Stage III NSCLCを対象に、デュルバルマブ地固め療法の有効性・安全性を検証した第3相二重盲検プラセボ対照国際共同試験である。
+    </p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>試験デザイン</td>
+          <td>第3相、二重盲検、プラセボ対照、国際共同RCT</td>
+        </tr>
+        <tr>
+          <td>対象患者</td>
+          <td>白金製剤ベースcCRTを2サイクル以上施行し増悪のない切除不能Stage III NSCLC、WHO PS 0–1、PD-L1発現問わず（All-comers）</td>
+        </tr>
+        <tr>
+          <td>主な除外基準</td>
+          <td>PD-1/PD-L1抗体治療歴、CRTによるGrade 2以上肺臓炎、活動性自己免疫疾患等</td>
+        </tr>
+        <tr>
+          <td>介入群</td>
+          <td>デュルバルマブ 10 mg/kg Q2W、最大12ヶ月間 静注（476例）</td>
+        </tr>
+        <tr>
+          <td>対照群</td>
+          <td>プラセボ 同スケジュール（237例）</td>
+        </tr>
+        <tr>
+          <td>ランダム化比</td>
+          <td>2:1</td>
+        </tr>
+        <tr>
+          <td>層別化因子</td>
+          <td>年齢（65歳未満/以上）、性別、喫煙歴</td>
+        </tr>
+        <tr>
+          <td>主要評価項目</td>
+          <td>PFS（BICR判定）、OS</td>
+        </tr>
+        <tr>
+          <td>副次評価項目</td>
+          <td>12/18ヶ月PFS率、ORR、DoR、TTDM、安全性、QoL</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: Antonia SJ, et al. N Engl J Med 2017;377(20):1919-1929, PMID 28885881 -->
+
+    <!-- ========== PACIFIC：有効性 ========== -->
+    <h2 class="sec-h2" id="pacific-efficacy">PACIFIC試験：有効性（PFS/OS）</h2>
+
+    <h3 class="sec-h3">有効性データの推移（データカットオフ別）</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>解析時点</th>
+          <th>PFS中央値<br>（durvalumab vs プラセボ）</th>
+          <th>PFS HR（95%CI）</th>
+          <th>OS中央値<br>（durvalumab vs プラセボ）</th>
+          <th>OS HR（95%CI）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>原著・PFS主解析<br><span style="font-size:11px;color:var(--text3)">カットオフ 2017-02-13</span></td>
+          <td class="best">16.8 vs 5.6ヶ月</td>
+          <td>0.52（0.42–0.65）<br>p&lt;0.001</td>
+          <td>未到達（両群とも）</td>
+          <td>未算出</td>
+        </tr>
+        <tr>
+          <td>OS主解析<br><span style="font-size:11px;color:var(--text3)">カットオフ 2018-03-22</span></td>
+          <td class="best">17.2 vs 5.6ヶ月</td>
+          <td>0.51（0.41–0.63）</td>
+          <td class="best">未到達 vs 28.7ヶ月</td>
+          <td>0.68（99.73%CI 0.47–0.997）<br>p=0.0025</td>
+        </tr>
+        <tr>
+          <td>4年フォロー（探索的）<br><span style="font-size:11px;color:var(--text3)">カットオフ 2020-03-20</span></td>
+          <td>16.9 vs 5.6ヶ月</td>
+          <td>0.55（0.44–0.67）</td>
+          <td>47.5 vs 29.1ヶ月</td>
+          <td>0.71（0.57–0.88）</td>
+        </tr>
+        <tr>
+          <td>5年フォロー（探索的）<br><span style="font-size:11px;color:var(--text3)">カットオフ 2021-01-11</span></td>
+          <td>16.9 vs 5.6ヶ月</td>
+          <td>0.55（0.45–0.68）</td>
+          <td>47.5 vs 29.1ヶ月</td>
+          <td>0.72（0.59–0.89）</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典:
+      原著PFS: Antonia SJ, et al. N Engl J Med 2017;377:1919-1929 (PMID 28885881)
+      OS主解析: Antonia SJ, et al. N Engl J Med 2018;379:2342-2350 (PMID 30280658)
+      4年: Faivre-Finn C, et al. J Thorac Oncol 2021;16(5):860-867 (PMID 33476803)
+      5年: Spigel DR, et al. J Clin Oncol 2022;40(12):1301-1311 (PMID 35108059)
+    -->
+
+    <div class="note-box">
+      4年・5年フォローアップはいずれも事前規定された探索的解析（exploratory）であり、確証的解析ではない。
+    </div>
+
+    <h3 class="sec-h3">Landmark生存率</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>時点</th>
+          <th>PFS率（durvalumab vs プラセボ）</th>
+          <th>OS率（durvalumab vs プラセボ）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>24ヶ月</td>
+          <td>—</td>
+          <td class="best">66.3% vs 55.6%（p=0.005）</td>
+        </tr>
+        <tr>
+          <td>48ヶ月（4年）</td>
+          <td class="best">35.3% vs 19.5%</td>
+          <td class="best">49.6% vs 36.3%</td>
+        </tr>
+        <tr>
+          <td>60ヶ月（5年）</td>
+          <td class="best">33.1% vs 19.0%</td>
+          <td class="best">42.9% vs 33.4%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="sec-h3">奏効率（ORR）</h3>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>解析時点</th>
+          <th>durvalumab群</th>
+          <th>プラセボ群</th>
+          <th>p値</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>原著（2017）</td>
+          <td class="best">28.4%</td>
+          <td>16.0%</td>
+          <td>p&lt;0.001</td>
+        </tr>
+        <tr>
+          <td>5年フォロー（2022）</td>
+          <td class="best">29.8%</td>
+          <td>18.3%</td>
+          <td>— <span class="ref-pending">解析時点差異の原因要確認</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 要確認: ORR数値が解析時点により異なる（28.4% vs 29.8%）。差異の原因未確認 -->
+
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75">
+      DoR中央値：未到達 vs 13.8ヶ月（原著時点）。5年時点でも奏効者の約半数で奏効が持続（Spigel 2022）。
+    </p>
+
+    <!-- ========== サブグループ ========== -->
+    <h2 class="sec-h2" id="pacific-subgroup">サブグループ解析</h2>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      原著では35の事前規定サブグループにおいてPFSの改善は概ね一貫していた。PD-L1発現（25%未満 vs 25%以上）はいずれもデュルバルマブ群で良好な結果が示された（事前規定）。
+    </p>
+
+    <div class="warn-box">
+      <strong>PD-L1 &lt;1%サブグループ（事後解析・探索的）：</strong><br>
+      OS HR 1.05（95%CI 0.69–1.62）（4年時点）→ 1.15（95%CI 0.75–1.75）（5年時点）。CIが1をまたぐため、このサブグループにおける効果の有無は不明確。Spigel 2022論文では、腫瘍組織回収率の問題やCRT後のPD-L1発現変化等の限界が明示されている。本サブグループの解釈については国内外添付文書の記載表現との対応を要確認。
+    </div>
+
+    <!-- ========== 安全性 ========== -->
+    <h2 class="sec-h2" id="pacific-safety">安全性</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>安全性指標</th>
+          <th>durvalumab群</th>
+          <th>プラセボ群</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Grade 3以上AE（原著）</td>
+          <td>29.9%</td>
+          <td>26.1%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Grade 3以上AE（OS解析）</td>
+          <td>30.5%</td>
+          <td>26.1%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>免疫関連AE（全Grade・全原因、OS解析）</td>
+          <td class="mid">66.7%</td>
+          <td>49.1%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>肺臓炎/放射線肺臓炎（全Grade、原著）</td>
+          <td class="mid">33.9%</td>
+          <td>24.8%</td>
+          <td>Grade 3以上 3.4% vs 2.6%</td>
+        </tr>
+        <tr>
+          <td>AEによる投与中止</td>
+          <td class="mid">15.4%</td>
+          <td>9.8%</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>全死因死亡率（原著）</td>
+          <td>4.4%</td>
+          <td>6.4%</td>
+          <td>治療関連死数は別途要確認</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: 原著安全性: Antonia SJ, et al. N Engl J Med 2017;377:1919-1929 (PMID 28885881)
+         OS解析安全性: Antonia SJ, et al. N Engl J Med 2018;379:2342-2350 (PMID 30280658)
+    -->
+    <!-- 要確認: 治療関連死亡数。原著(2017)には全死因死亡率のみ記載。4年・5年フォロー論文では安全性データの更新なし -->
+
+    <div class="info-box">
+      4年・5年フォローアップ論文（Faivre-Finn 2021、Spigel 2022）では安全性データの更新は報告されていない。
+    </div>
+
+    <!-- ========== PACIFIC-2 ========== -->
+    <h2 class="sec-h2" id="pacific2">durvalumab同時併用の試み（PACIFIC-2）</h2>
+
+    <!-- 要確認: PACIFIC-2データ未取得、NotebookLM抽出待ち -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">
+      PACIFIC-2試験（CRT中のdurvalumab同時併用）についてはデータ検証中のため、近日追記予定。
+    </p>
+
+    <!-- ========== ガイドライン ========== -->
+    <h2 class="sec-h2" id="guidelines">ガイドライン比較</h2>
+
+    <!-- 要確認：vaultから流し込み。日本肺癌学会GL・NCCN・ESMOの比較は準備中 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">
+      日本肺癌学会ガイドライン・NCCN・ESMOの比較は準備中。
+    </p>
+
+    <!-- ========== 国内承認 ========== -->
+    <h2 class="sec-h2" id="japan">国内承認情報</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>承認日</td>
+          <td>2018年7月2日</td>
+        </tr>
+        <tr>
+          <td>適応</td>
+          <td>切除不能な局所進行の非小細胞肺癌における根治的化学放射線療法後の維持療法</td>
+        </tr>
+        <tr>
+          <td>位置づけ</td>
+          <td>本邦初の抗PD-L1抗体として承認</td>
+        </tr>
+        <tr>
+          <td>承認根拠</td>
+          <td>PACIFIC試験のPFSデータに基づく承認</td>
+        </tr>
+        <tr>
+          <td>出典</td>
+          <td>アストラゼネカ プレスリリース（2018年7月2日）、最適使用推進ガイドライン デュルバルマブ（平成30年8月策定）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ========== 文献 ========== -->
+    <h2 class="sec-h2" id="references">文献</h2>
+
+    <ol class="ref-list">
+      <li>
+        Aupérin A, Le Péchoux C, Rolland E, et al. Meta-analysis of concomitant versus sequential radiochemotherapy in locally advanced non-small-cell lung cancer.
+        <em>J Clin Oncol</em> 2010;28(13):2181–2190.
+        DOI: <a href="https://doi.org/10.1200/JCO.2009.26.2543" style="color:var(--green-dark)">10.1200/JCO.2009.26.2543</a>
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/20351327/" style="color:var(--green-dark)">20351327</a>
+      </li>
+      <li>
+        Antonia SJ, Villegas A, Daniel D, et al. (PACIFIC). Durvalumab after chemoradiotherapy in stage III non-small-cell lung cancer.
+        <em>N Engl J Med</em> 2017;377(20):1919–1929.
+        DOI: <a href="https://doi.org/10.1056/NEJMoa1709937" style="color:var(--green-dark)">10.1056/NEJMoa1709937</a>
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28885881/" style="color:var(--green-dark)">28885881</a>
+      </li>
+      <li>
+        Antonia SJ, Villegas A, Daniel D, et al. (PACIFIC). Overall survival with durvalumab after chemoradiotherapy in stage III NSCLC.
+        <em>N Engl J Med</em> 2018;379(24):2342–2350.
+        DOI: <a href="https://doi.org/10.1056/NEJMoa1809697" style="color:var(--green-dark)">10.1056/NEJMoa1809697</a>
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30280658/" style="color:var(--green-dark)">30280658</a>
+      </li>
+      <li>
+        Faivre-Finn C, Vicente D, Kurata T, et al. (PACIFIC). Four-year survival with durvalumab after chemoradiotherapy in stage III NSCLC — an update from the PACIFIC trial.
+        <em>J Thorac Oncol</em> 2021;16(5):860–867.
+        DOI: <a href="https://doi.org/10.1016/j.jtho.2020.12.015" style="color:var(--green-dark)">10.1016/j.jtho.2020.12.015</a>
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/33476803/" style="color:var(--green-dark)">33476803</a>
+      </li>
+      <li>
+        Spigel DR, Faivre-Finn C, Gray JE, et al. (PACIFIC). Five-year survival outcomes from the PACIFIC trial: durvalumab after chemoradiotherapy in stage III NSCLC.
+        <em>J Clin Oncol</em> 2022;40(12):1301–1311.
+        DOI: <a href="https://doi.org/10.1200/JCO.21.01308" style="color:var(--green-dark)">10.1200/JCO.21.01308</a>
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35108059/" style="color:var(--green-dark)">35108059</a>
+      </li>
+    </ol>
+
+    <div class="next-row" style="margin-top:32px">
+      <a class="next-btn" href="/lungatlas/nsclc-overview.html">NSCLC 総論 →</a>
+      <a class="next-btn" href="/lungatlas/perioperative.html">周術期薬物療法 →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
