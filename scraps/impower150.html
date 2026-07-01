@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMpower150試験 — 1次治療 atezolizumab + bevacizumab + 化学療法（ABCP、非扁平IV期NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。IMpower150試験（ABCP、1次治療非扁平IV期NSCLC、EGFR/ALKサブグループ）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+/* ===== AIドラフトバナー ===== */
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+/* ===== 一言サマリー ===== */
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+/* ===== 本文 ===== */
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+/* ===== 関連文献リスト ===== */
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+/* ===== 既存ページから流用したクラス ===== */
+/* COMPARISON TABLE */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+.comp-table .best { color: var(--green-dark); font-weight: 600; }
+
+/* STATS */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* GL LIST */
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ===== 補助スタイル ===== */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>IMpower150試験</span>
+  </nav>
+
+  <!-- 記事タイトル -->
+  <h1 class="scrap-h1">IMpower150試験 — 1次治療 atezolizumab + bevacizumab + 化学療法（ABCP、非扁平IV期NSCLC）</h1>
+
+  <!-- 一言サマリー -->
+  <p class="scrap-summary">治療歴なし非扁平IV期NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFS・OSを改善した第3相試験。EGFR/ALK変異例も組み入れ、探索的にbenefit。ATTLAS試験の理論的根拠となった元試験。</p>
+
+  <!-- メタ情報行 -->
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/29863955/" target="_blank" rel="noopener">NEJM 2018 PMID: 29863955</a> ／
+      <a href="https://doi.org/10.1056/NEJMoa1716948" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa1716948</a> ／
+      JTO 2021 <a href="https://doi.org/10.1016/j.jtho.2021.07.009" target="_blank" rel="noopener">DOI: 10.1016/j.jtho.2021.07.009</a>
+    </span>
+  </div>
+
+  <!-- 本文エリア -->
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>IMpower150試験（NCT02366143）は、治療歴のない非扁平stage IV NSCLCに対し、atezolizumab（抗PD-L1抗体）+ bevacizumab（抗VEGF抗体）+ 化学療法（ABCP）の有効性を検証した国際共同・第3相・非盲検・無作為化試験。<strong>EGFR/ALK変異例も組み入れた</strong>点が他の化学免疫療法試験（KEYNOTE-189等）と異なる大きな特徴であり、VEGF阻害による腫瘍免疫微小環境の改善（VEGF介在性免疫抑制の解除）を介した、ドライバー変異陽性例での効果も検証された。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・非盲検・3群・無作為化（1:1:1）。240施設・26か国</td></tr>
+        <tr><td>対象</td><td>treatment-naive stage IV <strong>非扁平</strong>NSCLC・<strong>EGFR/ALK変異問わず組み入れ（14%がEGFR/ALK陽性）</strong></td></tr>
+        <tr><td>症例数</td><td>1202例（ITT）</td></tr>
+        <tr><td>① ACP群</td><td>atezolizumab + carboplatin + paclitaxel</td></tr>
+        <tr><td>② ABCP群</td><td>atezolizumab + bevacizumab + carboplatin + paclitaxel</td></tr>
+        <tr><td>③ BCP群（対照）</td><td>bevacizumab + carboplatin + paclitaxel</td></tr>
+        <tr><td>主要評価項目</td><td>ITT WT（EGFR/ALK野生型）集団でのPFS・OS（co-primary、ABCP vs BCP）</td></tr>
+        <tr><td>副次・探索的評価項目</td><td>PD-L1サブグループ・EGFR/ALK変異サブグループ・肝転移サブグループ・血中TMB</td></tr>
+        <tr><td>スポンサー</td><td>F. Hoffmann-La Roche / Genentech（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT02366143</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== セクション2：有効性 — ABCP vs BCP（主要比較） ===== -->
+    <h2>2. 有効性 — ABCP vs BCP（主要比較）</h2>
+
+    <p class="sub">ITT-WT集団（Primary、NEJM 2018）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">PFS中央値（ABCP群）</div>
+        <div class="stat-vs"><!-- 要確認: NEJM 2018より確認 --></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">PFS中央値（BCP群）</div>
+        <div class="stat-vs"><!-- 要確認: NEJM 2018より確認 --></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><!-- 要確認 --></div>
+        <div class="stat-label">PFS HR（ABCP vs BCP）</div>
+        <div class="stat-vs"><!-- 要確認: NEJM 2018より確認 --></div>
+      </div>
+    </div>
+
+    <p>ABCP（atezolizumab + bevacizumab + 化学療法）は、BCP（bevacizumab + 化学療法）に対しPFS・OS双方で統計学的有意な改善を示し、本試験の主要な結論となった。</p>
+
+    <!-- 要確認: PFS中央値・OS中央値・HR（両評価項目、両群）の正確な数値はNEJM 2018 Tableより確認 -->
+
+    <!-- ===== セクション3：ACP vs BCP（Final解析、有意差なし） ===== -->
+    <h2>3. ACP vs BCP（Final解析、有意差なし）</h2>
+
+    <p class="sub">ITT-WT集団（Final、JTO 2021、DCO 2019年9月、追跡32.4か月以上）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">19.0か月</div>
+        <div class="stat-label">OS中央値（ACP群）</div>
+        <div class="stat-vs">統計学的有意差なし</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">14.7か月</div>
+        <div class="stat-label">OS中央値（BCP群）</div>
+        <div class="stat-vs">対照群</div>
+      </div>
+    </div>
+
+    <p>bevacizumabを含まないACP（atezolizumab + 化学療法のみ）はBCPに対し数値的なOS改善を示したが、統計学的有意性には至らなかった。この結果は、<strong>bevacizumab（VEGF阻害）の追加がABCPレジメンの有効性に寄与している</strong>可能性を示唆する。</p>
+
+    <!-- 要確認: ACP vs BCPのPFS結果・HR・95%CIはJTO 2021より確認 -->
+
+    <!-- ===== セクション4：EGFR/ALK変異サブグループ（探索的） ===== -->
+    <h2>4. EGFR/ALK変異サブグループ（探索的）</h2>
+
+    <p>本試験の重要な特徴は、EGFR/ALK変異陽性例を除外せず組み入れた点。探索的サブグループ解析でABCPのbenefitが示された。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">📊</span>
+        <span>EGFR/ALK変異サブグループ（探索的、Lancet Respir Med 2019）でABCPはPFS benefit を示した</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">📊</span>
+        <span>EGFR変異サブグループでOS benefit も観察された（探索的）</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">💡</span>
+        <span><strong>この知見が、ATTLAS試験（TKI耐性後にABCPを前方視的に検証した第3相試験）の理論的根拠となった</strong></span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">📊</span>
+        <span>肝転移を有する患者でも、ABCPはBCPに対しOS benefit を示した（探索的。VEGF阻害による肝臓の免疫抑制性微小環境改善が機序として想定される）</span>
+      </div>
+    </div>
+
+    <!-- 要確認: EGFR変異・ALK変異それぞれのサブグループ別OS/PFS HR（Final解析、JTO 2021）はJTO 2021より確認 -->
+    <!-- 要確認: 肝転移サブグループの具体的HR・中央値はJTO 2021より確認 -->
+
+    <!-- ===== セクション5：安全性 ===== -->
+    <h2>5. 安全性</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">✅</span>
+        <span>bevacizumab関連の出血性事象を含むが、既知の安全性プロファイルと一致し新規シグナルなし</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">✅</span>
+        <span>atezolizumab単剤療法と同様のirAEプロファイル</span>
+      </div>
+    </div>
+
+    <!-- 要確認: Grade≥3有害事象の具体的発現率（%、各群別）はNEJM 2018 Tableより確認 -->
+    <!-- 要確認: 治療関連死亡・投与中止率はNEJM 2018より確認 -->
+
+    <!-- ===== セクション6：位置づけと注意点 ===== -->
+    <h2>6. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">📋</span>
+        <span>IMpower150（ABCP）は非扁平NSCLC 1次治療の選択肢の一つとして各国で承認。KEYNOTE-189等の「PD-1単剤 + 化学療法」との使い分けは、EGFR/ALK変異の有無・肝転移の有無が判断材料になりうる</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">💡</span>
+        <span><strong>本試験のEGFR/ALK変異サブグループの探索的知見は、後にATTLAS試験（TKI耐性後のABCP、KCSG-LU19-04）として第3相で前方視的に検証された</strong></span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">⚠️</span>
+        <span>bevacizumabは血管新生阻害薬であり、出血リスク・血栓塞栓症リスク等の禁忌・慎重投与を要する患者背景に注意が必要</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">⚖️</span>
+        <span>ACP（bevacizumabなし）はBCPに対しOS有意差を示せなかったため、ABCPレジメンにおけるbevacizumabの寄与は重要と考えられる</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">⚠️</span>
+        <span>IMpower151試験（中国人集団でIMpower150類似デザインを検証）では有意な効果を再現できなかったとの報告があり、化学療法バックボーン（パクリタキセル vs ペメトレキセド）や地域差の影響が議論されている</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">⚖️</span>
+        <span>KEYNOTE-189等の他の化学免疫療法との直接比較試験はなく、選択は間接比較に留まる</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">🇯🇵</span>
+        <span>atezolizumab + bevacizumab + 化学療法（ABCP）の国内承認状況：<!-- 要確認: PMDA確認 --></span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- 関連文献リスト -->
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Socinski MA, Jotte RM, Cappuzzo F, et al; IMpower150 Study Group.
+        Atezolizumab for First-Line Treatment of Metastatic Nonsquamous NSCLC.
+        N Engl J Med. 2018;378(24):2288-2301.
+        PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29863955/" target="_blank" rel="noopener">29863955</a> /
+        DOI: <a href="https://doi.org/10.1056/NEJMoa1716948" target="_blank" rel="noopener">10.1056/NEJMoa1716948</a>
+      </li>
+      <li>Reck M, Mok TSK, Nishio M, et al.
+        Atezolizumab plus bevacizumab and chemotherapy in non-small-cell lung cancer (IMpower150):
+        key subgroup analyses of patients with EGFR mutations or baseline liver metastases in a
+        randomised, open-label phase 3 trial.
+        Lancet Respir Med. 2019;7:387-401.
+        PMID: <!-- 要確認 --> /
+        DOI: <!-- 要確認 -->
+      </li>
+      <li>Socinski MA, Nishio M, Jotte RM, et al.
+        IMpower150 Final Overall Survival Analyses for Atezolizumab Plus Bevacizumab and Chemotherapy
+        in First-Line Metastatic Nonsquamous NSCLC.
+        J Thorac Oncol. 2021;16(11):1909-1924.
+        PMID: <!-- 要確認 --> /
+        DOI: <a href="https://doi.org/10.1016/j.jtho.2021.07.009" target="_blank" rel="noopener">10.1016/j.jtho.2021.07.009</a>
+      </li>
+      <li>IMpower150 Final Exploratory Analyses for Atezolizumab Plus Bevacizumab and Chemotherapy in
+        Key NSCLC Patient Subgroups With EGFR Mutations or Metastases in the Liver or Brain.
+        J Thorac Oncol. 2021.
+        PMID: <!-- 要確認 --> /
+        DOI: <!-- 要確認 -->
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "IMpower150試験 — 1次治療 atezolizumab + bevacizumab + 化学療法（ABCP、非扁平IV期NSCLC）",
+    summary: "治療歴なし非扁平IV期NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFS・OSを改善した第3相試験。EGFR/ALK変異例も組み入れ、探索的にbenefit。ATTLAS試験の理論的根拠となった元試験。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/impower150.html"
+  },
+  {
     title: "ATTLAS試験（KCSG-LU19-04）— TKI耐性後 atezolizumab + bevacizumab + 化学療法（EGFR/ALK陽性NSCLC）",
     summary: "EGFR-TKIまたはALK-TKI耐性後のEGFR/ALK陽性NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFSを改善した韓国発の第3相試験。PFS中央値8.5 vs 5.6か月、HR 0.62。",
     date: "2026-06-24",
