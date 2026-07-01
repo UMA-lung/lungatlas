@@ -282,7 +282,7 @@
       <div class="dropdown-menu">
         <a id="nav-tnm-staging" href="/lungatlas/tnm-staging.html">TNM分類 第9版</a>
         <span class="dropdown-soon">EGFR/ALK 疫学<span>近日公開</span></span>
-        <span class="dropdown-soon">肺癌 疫学（総論）<span>近日公開</span></span>
+        <a id="nav-epidemiology" href="/lungatlas/epidemiology.html">肺癌 疫学（総論）</a>
         <span class="dropdown-soon">間質性肺炎合併肺癌<span>近日公開</span></span>
       </div>
     </div>
@@ -361,6 +361,7 @@
     'nav-sclc-ld':       ['sclc-ld.html'],
     'nav-sclc-ed':       ['sclc-ed.html'],
     'nav-tnm-staging':   ['tnm-staging.html'],
+    'nav-epidemiology':  ['epidemiology.html'],
   };
   Object.keys(map).forEach(function(id) {
     var el = document.getElementById(id);
@@ -378,6 +379,11 @@
   if (path.indexOf('anatomy.html') !== -1) {
     var anatLink = document.getElementById('nav-anatomy');
     if (anatLink) anatLink.classList.add('active');
+  }
+  var basicsPages = ['tnm-staging.html', 'epidemiology.html'];
+  if (basicsPages.some(function(p){ return path.indexOf(p) !== -1; })) {
+    var basicsLink = document.getElementById('nav-basics');
+    if (basicsLink) basicsLink.classList.add('active');
   }
   var surgeryPages = ['or-nurse-lung-surgery', 'lung-surgery', 'lymph-nodes', 'preop-pulmonary'];
   if (surgeryPages.some(function(p){ return path.indexOf(p) !== -1; })) {

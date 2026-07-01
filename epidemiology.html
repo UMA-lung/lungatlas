@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肺癌の疫学 — LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f5;--surface:#fff;--surface2:#f0f4f1;--border:#d4e0d6;--border2:#b8cfbb;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --blue-dark:#0c3d6e;--blue-light:#e3edf8;--purple-dark:#3b2d7a;--purple-light:#eeebfb;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;--red-dark:#6b1c1c;--red-light:#fce8e8;
+  --teal-dark:#085041;--teal-light:#e1f5ee;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:10px;--radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sb-head{font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--text3);padding:8px 18px 4px;text-transform:uppercase}
+.sb-item{display:block;padding:8px 18px;font-size:12.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;cursor:pointer;line-height:1.4}
+.sb-item:hover{background:var(--green-pale);color:var(--green-dark)}
+.sb-item.active{background:var(--green-light);color:var(--green-dark);font-weight:500;border-left-color:var(--green-mid)}
+.sb-sub{display:block;padding:5px 18px 5px 30px;font-size:11.5px;color:var(--text3);text-decoration:none;cursor:pointer;transition:color .15s}
+.sb-sub:hover,.sb-sub.active{color:var(--green-dark);font-weight:500}
+
+/* MAIN */
+.main{flex:1;padding:28px 36px 60px;max-width:900px}
+.crumb{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.crumb span{color:var(--green-mid)}
+.updated{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--green-dark);background:var(--green-light);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.updated::before{content:'↻';font-size:12px}
+.art-h1{font-size:22px;font-weight:600;line-height:1.2;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--text2);line-height:1.75;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.sec-h2{font-size:15px;font-weight:600;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.sec-h2::before{content:'';display:block;width:3px;height:16px;background:var(--green-mid);border-radius:2px;flex-shrink:0}
+.sec-h3{font-size:13.5px;font-weight:600;color:var(--text);margin:18px 0 10px}
+
+/* INFO / NOTE / WARN */
+.info-box{background:var(--blue-light);border-left:3px solid #2d6db5;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--blue-dark);line-height:1.75;margin:14px 0}
+.note-box{background:var(--green-light);border-left:3px solid var(--green-mid);border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--green-dark);line-height:1.75;margin:14px 0}
+.warn-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
+.comp-table th{padding:9px 12px;background:var(--surface2);font-weight:600;color:var(--text);border:1px solid var(--border);text-align:left}
+.comp-table td{padding:9px 12px;border:1px solid var(--border);color:var(--text2);line-height:1.5;vertical-align:top}
+.comp-table tr:nth-child(even) td{background:#f8fbf9}
+.comp-table .best{color:var(--green-dark);font-weight:600}
+
+/* REFERENCES */
+.ref-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ref-list li{font-size:12px;color:var(--text2);line-height:1.7;padding-left:28px;position:relative}
+.ref-list li::before{position:absolute;left:0;top:0;font-weight:600;color:var(--text3)}
+.ref-list li:nth-child(1)::before{content:'1.'}
+.ref-list li:nth-child(2)::before{content:'2.'}
+.ref-list li:nth-child(3)::before{content:'3.'}
+.ref-list li:nth-child(4)::before{content:'4.'}
+.ref-list li:nth-child(5)::before{content:'5.'}
+.ref-pending{display:inline-block;font-size:10px;background:var(--amber-light);color:var(--amber-dark);padding:1px 6px;border-radius:4px;margin-left:4px;font-weight:500}
+
+/* NEXT ROW */
+.next-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.next-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);font-weight:500;background:var(--green-light);border:none;cursor:pointer;padding:9px 16px;border-radius:8px;font-family:var(--font);text-decoration:none;transition:background .15s}
+.next-btn:hover{background:#cce8d4}
+
+/* FOOTER */
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:18px 36px;font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-weight:600;color:var(--text)}
+.footer-logo span{color:var(--green-mid)}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main{padding:20px 18px 40px}
+  .comp-table{font-size:11px}
+  .nav-links{display:none}
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-head">このページの内容</div>
+    <a class="sb-item active" href="#incidence-mortality">罹患・死亡（世界・日本）</a>
+    <a class="sb-item" href="#risk-factors">危険因子</a>
+    <a class="sb-item" href="#histology">組織型分布</a>
+    <a class="sb-item" href="#staging-distribution">病期分布</a>
+    <a class="sb-item" href="#survival">生存率</a>
+    <a class="sb-item" href="#references">参考文献</a>
+    <div class="sb-head" style="margin-top:12px">関連ページ</div>
+    <a class="sb-sub" href="/lungatlas/tnm-staging.html">TNM分類 第9版</a>
+    <a class="sb-sub" href="/lungatlas/nsclc-overview.html">NSCLC 総論</a>
+    <a class="sb-sub" href="/lungatlas/sclc-overview.html">SCLC 総論</a>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">基礎・疫学 › <span>肺癌の疫学（総論）</span></div>
+    <div class="updated">最終更新 2026年7月 — 骨格作成中（一部データ未確定）</div>
+    <h1 class="art-h1">肺癌の疫学</h1>
+    <p class="lead">世界と日本における肺癌の罹患・死亡動向、危険因子、組織型分布、病期分布、生存率を、一次資料（GLOBOCAN・国立がん研究センター・全国肺癌登録合同委員会等）に基づき整理する。</p>
+
+    <!-- ========== 罹患・死亡 ========== -->
+    <h2 class="sec-h2" id="incidence-mortality">罹患・死亡（世界・日本）</h2>
+
+    <h3 class="sec-h3">世界（GLOBOCAN 2022）</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>指標</th>
+          <th>全体</th>
+          <th>男性</th>
+          <th>女性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>新規罹患数</td>
+          <td>約2,480,675例</td>
+          <td>約1.57百万例（63.4%）</td>
+          <td>―</td>
+        </tr>
+        <tr>
+          <td>死亡数</td>
+          <td>約1,817,469人</td>
+          <td>約123万人（67.85%）</td>
+          <td>―</td>
+        </tr>
+        <tr>
+          <td>年齢調整罹患率（ASIR、/10万）</td>
+          <td>23.1</td>
+          <td>32.1</td>
+          <td>16.2</td>
+        </tr>
+        <tr>
+          <td>年齢調整死亡率（ASMR、/10万）</td>
+          <td>16.8</td>
+          <td>24.8</td>
+          <td>9.8</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: Bray F, et al. CA Cancer J Clin 2024;74(3):229-263, doi:10.3322/caac.21834（GLOBOCAN 2022一次資料）-->
+    <!-- 性別内訳のASIR/ASMRはGLOBOCAN 2022由来の二次解析論文（Epidemiologia誌, PMC11675692）から引用。一次資料Table3との数値照合が要確認 -->
+    <!-- 要確認: 別の二次解析論文（Chinese Medical Journal, PMC12276566等）ではASIR 23.6/10万と記載されており、23.1との差の原因（算出方法の違い等）は一次資料未照合 -->
+
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:20px">
+      2022年時点で肺癌は世界で最も罹患数の多いがん種であり、全がん症例の12.4%を占める。
+    </p>
+
+    <h3 class="sec-h3">日本（国立がん研究センター）</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>指標</th>
+          <th>全体</th>
+          <th>男性</th>
+          <th>女性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>罹患数（2023年）</td>
+          <td>123,989例</td>
+          <td>81,381例</td>
+          <td>42,607例</td>
+        </tr>
+        <tr>
+          <td>死亡数（2024年）</td>
+          <td>75,569人</td>
+          <td>52,333人</td>
+          <td>23,236人</td>
+        </tr>
+        <tr>
+          <td>罹患率（/10万）</td>
+          <td>99.7</td>
+          <td>134.5</td>
+          <td>66.7</td>
+        </tr>
+        <tr>
+          <td>死亡率（/10万）</td>
+          <td>62.8</td>
+          <td>89.5</td>
+          <td>37.6</td>
+        </tr>
+        <tr>
+          <td>5年相対生存率（2009〜2011年診断例）</td>
+          <td class="best">34.9%</td>
+          <td>29.5%</td>
+          <td>46.8%</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: 国立がん研究センター がん統計「肺」ページ（ganjoho.jp/reg_stat/statistics/stat/cancer/12_lung.html、更新・確認日2026年3月23日）-->
+    <!-- 元データ: 全国がん登録罹患データ（罹患）、人口動態統計死亡データ（死亡）、地域がん登録生存率データ（生存率） -->
+
+    <!-- ========== 危険因子 ========== -->
+    <h2 class="sec-h2" id="risk-factors">危険因子</h2>
+
+    <h3 class="sec-h3">喫煙率の年次推移（日本、国民健康・栄養調査）</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>年</th>
+          <th>全体</th>
+          <th>男性</th>
+          <th>女性</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2022年（令和4年）</td>
+          <td>14.8%</td>
+          <td>24.8%</td>
+          <td>6.2%</td>
+        </tr>
+        <tr>
+          <td>2023年（令和5年）</td>
+          <td>15.7%</td>
+          <td>25.6%</td>
+          <td>6.9%</td>
+        </tr>
+        <tr>
+          <td>2024年（令和6年）</td>
+          <td>14.8%</td>
+          <td>24.5%</td>
+          <td>6.5%</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: 厚生労働省「国民健康・栄養調査」令和4年・令和5年・令和6年 各「結果の概要」-->
+    <!-- 「現在習慣的に喫煙している者」の定義：たばこを「毎日吸っている」または「時々吸う日がある」と回答した者 -->
+    <!-- 要確認: 令和5年（2023年）は公式報告書内で「5年ぶりの有意な増加」と言及されているが、背景要因の記載はなし。推測で補わない -->
+
+    <div class="warn-box">
+      <strong>喫煙以外の危険因子について：</strong>アスベスト・大気汚染・職業性曝露・ラドン等の危険因子は、現時点で一次資料による確認が完了しておらず「要確認」として保留しています。
+    </div>
+    <!-- 要確認: アスベスト・大気汚染・職業性曝露・ラドン等の危険因子データ（教科書2次資料での確認待ち） -->
+
+    <!-- ========== 組織型分布 ========== -->
+    <h2 class="sec-h2" id="histology">組織型分布</h2>
+
+    <h3 class="sec-h3">手術症例（全国肺癌登録合同委員会 2010年報告、18,973例）</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>組織型</th>
+          <th>割合</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>腺癌</td>
+          <td class="best">55.7%</td>
+        </tr>
+        <tr>
+          <td>扁平上皮癌</td>
+          <td>33.0%</td>
+        </tr>
+        <tr>
+          <td>大細胞癌</td>
+          <td>3.6%</td>
+        </tr>
+        <tr>
+          <td>小細胞癌</td>
+          <td>3.4%</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: 全国肺癌登録合同委員会 2010年報告（18,973例、手術症例限定）。正式な著者名・掲載誌・PMID要確認 -->
+
+    <div class="warn-box">
+      <strong>重要な留意点：</strong>上記は手術可能例（早期〜局所進行期）に限定した組織型分布であり、進行期を含む全肺癌症例（population-based）の組織型分布ではない。選択バイアスに注意すること。
+    </div>
+
+    <!-- ========== 病期分布 ========== -->
+    <h2 class="sec-h2" id="staging-distribution">病期分布</h2>
+
+    <!-- 要確認：人口ベースの初診時病期分布データ未取得。全国がん登録報告書PDFの精読が必要 -->
+    <p style="font-size:13px;color:var(--text2);line-height:1.75">人口ベースの初診時病期分布データは近日追記予定。</p>
+
+    <!-- ========== 生存率 ========== -->
+    <h2 class="sec-h2" id="survival">生存率</h2>
+
+    <h3 class="sec-h3">5年相対生存率（日本、国立がん研究センター、2009〜2011年診断例）</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>性別</th>
+          <th>5年相対生存率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>全体</td>
+          <td class="best">34.9%</td>
+        </tr>
+        <tr>
+          <td>男性</td>
+          <td>29.5%</td>
+        </tr>
+        <tr>
+          <td>女性</td>
+          <td>46.8%</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: 国立がん研究センター がん統計「肺」ページ（ganjoho.jp/reg_stat/statistics/stat/cancer/12_lung.html）。地域がん登録生存率データ -->
+
+    <div class="note-box">
+      女性の生存率が男性を大きく上回る背景には、女性に多い腺癌・非喫煙例の割合の高さと、ドライバー遺伝子陽性例（EGFR変異等）の頻度差が関与すると考えられている。ただし本データは2009〜2011年診断例であり、近年の分子標的治療・免疫療法の普及前のコホートであることに留意する。
+    </div>
+
+    <div class="info-box">
+      病期別生存率については <a href="/lungatlas/tnm-staging.html" style="color:var(--blue-dark);font-weight:500">TNM分類 第9版ページ</a> に掲載。
+    </div>
+
+    <!-- ========== 参考文献 ========== -->
+    <h2 class="sec-h2" id="references">参考文献</h2>
+
+    <ol class="ref-list">
+      <li>
+        Bray F, Laversanne M, Sung H, et al. Global cancer statistics 2022.
+        <em>CA Cancer J Clin</em> 2024;74(3):229-263.
+        DOI: <a href="https://doi.org/10.3322/caac.21834" style="color:var(--green-dark)">10.3322/caac.21834</a>
+        — PMID: <span class="ref-pending">要確認</span>
+      </li>
+      <li>
+        Global, Regional, and National Burden of Tracheal, Bronchus, and Lung Cancer in 2022: Evidence from the GLOBOCAN Study.
+        <em>Epidemiologia</em>（PMC11675692）
+        — 著者・巻号・PMID: <span class="ref-pending">要確認</span>
+      </li>
+      <li>
+        国立がん研究センター がん統計「肺」.
+        国立研究開発法人国立がん研究センター.
+        更新・確認日2026年3月23日.
+        URL: <a href="https://ganjoho.jp/reg_stat/statistics/stat/cancer/12_lung.html" style="color:var(--green-dark)">ganjoho.jp/reg_stat/statistics/stat/cancer/12_lung.html</a>
+        （2026-07-01閲覧）
+      </li>
+      <li>
+        厚生労働省「国民健康・栄養調査」令和4年・令和5年・令和6年 各「結果の概要」.
+        定義：現在習慣的に喫煙している者（「毎日吸っている」または「時々吸う日がある」と回答した者）.
+      </li>
+      <li>
+        A Report from the Japanese Joint Committee of Lung Cancer Registry: a Study of 18,973 Surgical Cases in 2010（Secondary Publication）.
+        — 正式な著者名・掲載誌・PMID: <span class="ref-pending">要確認</span>
+      </li>
+    </ol>
+
+    <div class="next-row" style="margin-top:32px">
+      <a class="next-btn" href="/lungatlas/tnm-staging.html">TNM分類 第9版 →</a>
+      <a class="next-btn" href="/lungatlas/nsclc-overview.html">NSCLC 総論 →</a>
+      <a class="next-btn" href="/lungatlas/sclc-overview.html">SCLC 総論 →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
