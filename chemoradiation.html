@@ -74,6 +74,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .ref-list li:nth-child(4)::before{content:'4.'}
 .ref-list li:nth-child(5)::before{content:'5.'}
 .ref-list li:nth-child(6)::before{content:'6.'}
+.ref-list li:nth-child(7)::before{content:'7.'}
+.ref-list li:nth-child(8)::before{content:'8.'}
+.ref-list li:nth-child(9)::before{content:'9.'}
+.ref-list li:nth-child(10)::before{content:'10.'}
+.ref-list li:nth-child(11)::before{content:'11.'}
+.ref-list li:nth-child(12)::before{content:'12.'}
 .ref-pending{display:inline-block;font-size:10px;background:var(--amber-light);color:var(--amber-dark);padding:1px 6px;border-radius:4px;margin-left:4px;font-weight:500}
 
 /* NEXT ROW */
@@ -134,7 +140,7 @@ fetch('/lungatlas/nav.html')
 
   <main class="main">
     <div class="crumb">NSCLC › <span>化学放射線療法</span></div>
-    <div class="updated">最終更新 2026年7月 — PACIFIC本体・レジメン選択・PACIFIC-2セクション公開、ガイドライン比較は準備中</div>
+    <div class="updated">最終更新 2026年7月 — 位置づけ・レジメン選択・PACIFIC本体・PACIFIC-2・ガイドライン比較・国内承認情報 公開</div>
     <h1 class="art-h1">局所進行NSCLC（III期・切除不能）<br>化学放射線療法（CRT）</h1>
     <p class="lead">切除不能III期NSCLCに対する根治的化学放射線療法（CRT）の概要と、cCRT後のデュルバルマブ地固め療法（PACIFIC試験）について、公表データに基づき整理する。疫学・病期分類の詳細は <a href="/lungatlas/nsclc-overview.html" style="color:var(--green-dark);font-weight:500">NSCLC総論</a> を参照。</p>
 
@@ -577,10 +583,71 @@ fetch('/lungatlas/nav.html')
     <!-- ========== ガイドライン ========== -->
     <h2 class="sec-h2" id="guidelines">ガイドライン比較</h2>
 
-    <!-- 要確認：vaultから流し込み。日本肺癌学会GL・NCCN・ESMOの比較は準備中 -->
-    <p style="font-size:13px;color:var(--text2);line-height:1.75">
-      日本肺癌学会ガイドライン・NCCN・ESMOの比較は準備中。
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      日本肺癌学会2025年版・NCCN v7.2025・ESMOの3ガイドラインはいずれも、根治的cCRT後のデュルバルマブ地固め療法を標準治療として推奨している。PD-L1発現に関する扱いに相違点がある（下表参照）。
     </p>
+
+    <h3 class="sec-h3">3ガイドライン比較</h3>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>日本肺癌学会2025年版</th>
+          <th>NCCN v7.2025</th>
+          <th>ESMO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>デュルバルマブ地固め</td>
+          <td class="best">強く推奨<br><span style="font-size:11px;color:var(--text3)">推奨度1、エビデンスB</span></td>
+          <td class="best">Category 1</td>
+          <td class="best">Grade I, A<br><span style="font-size:11px;color:var(--text3)">ESMO-MCBS score 4</span></td>
+        </tr>
+        <tr>
+          <td>PD-L1発現による制限</td>
+          <td>なし<br><span style="font-size:11px;color:var(--text3)">効果の違いは明らかでないと明記</span></td>
+          <td>なし</td>
+          <td class="worst"><strong>PD-L1≥1%に限定</strong><br><span style="font-size:11px;color:var(--red-dark)">EMA承認適応に準拠（post-hoc解析が根拠）</span></td>
+        </tr>
+        <tr>
+          <td>オシメルチニブ地固め<br>（EGFR陽性）</td>
+          <td class="mid">弱く推奨<br><span style="font-size:11px;color:var(--text3)">推奨度2、エビデンスB（2025年新設）</span></td>
+          <td class="best">Category 1</td>
+          <td><span class="ref-pending">要確認</span></td>
+        </tr>
+        <tr>
+          <td>同時 vs 逐次CRT</td>
+          <td class="best">同時併用を強く推奨<br><span style="font-size:11px;color:var(--text3)">推奨度1、エビデンスA</span></td>
+          <td><span class="ref-pending">原文未確認<br>（一般に同時が標準）</span></td>
+          <td><span class="ref-pending">原文未確認</span></td>
+        </tr>
+        <tr>
+          <td>異なる薬剤への<br>地固め化学療法</td>
+          <td>行わないよう勧められる</td>
+          <td>推奨されない<br><span style="font-size:11px;color:var(--text3)">肺臓炎リスク懸念</span></td>
+          <td><span class="ref-pending">要確認</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典:
+      日本肺癌学会: 肺癌診療ガイドライン2025年版 CQ37-43
+      NCCN: Guidelines Insights NSCLC v7.2025, J Natl Compr Canc Netw 2025;23(9)（二次情報経由、原文PDF未確認）
+      ESMO: Clinical Practice Guideline eUpdate, Ann Oncol（二次情報経由、原文PDF未確認）
+    -->
+
+    <div class="warn-box">
+      <strong>PD-L1発現とESMO推奨の相違点：</strong>ESMOは欧州医薬品庁（EMA）承認の適応に従い、デュルバルマブ地固め療法をPD-L1発現≥1%の患者に限定して推奨している。この1%カットオフはpost-hoc（事後）サブグループ解析に基づくものであり、日本肺癌学会・NCCNはPD-L1発現による制限を設けていない。実地診療における適応判断に直接影響するため注意が必要。
+    </div>
+
+    <h3 class="sec-h3">同時 vs 逐次CRT（日本肺癌学会CQ38）</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:10px">
+      日本肺癌学会ガイドライン2025年版CQ38では、PS0-1患者に対する同時CRTを強く推奨（推奨度1、エビデンスA）。根拠試験として国内試験（Furuse 1999、MVP療法下でOS中央値16.5 vs 13.3ヶ月）、RTOG9410試験（Curran 2011、OS HR 0.812）、およびAupérin 2010メタアナリシス（OS HR 0.84）が引用されている。詳細は<a href="#regimen" style="color:var(--green-dark);font-weight:500">レジメン選択セクション</a>を参照。
+    </p>
+
+    <div class="info-box">
+      <strong>EGFR遺伝子変異陽性例について（CQ42、2025年新設）：</strong>EGFR ex19del/L858R陽性の切除不能III期NSCLCに対し、同時CRT後にオシメルチニブによる維持療法を行う選択肢がある（LAURA試験：PFS HR 0.16、p&lt;0.001、中央値39.1 vs 5.6ヶ月）。日本肺癌学会2025年版で弱く推奨（推奨度2、エビデンスB）として新設されたCQ。本ページはデュルバルマブ地固めを中心に扱うため、LAURA試験の詳細は別途ページ化予定。
+    </div>
 
     <!-- ========== 国内承認 ========== -->
     <h2 class="sec-h2" id="japan">国内承認情報</h2>
@@ -656,6 +723,39 @@ fetch('/lungatlas/nav.html')
         DOI: <a href="https://doi.org/10.1200/JCO-25-00036" style="color:var(--green-dark)">10.1200/JCO-25-00036</a>
         — PMID: <span class="ref-pending">要確認</span>
         （Erratum: DOI <a href="https://doi.org/10.1200/JCO-25-03012" style="color:var(--green-dark)">10.1200/JCO-25-03012</a>、2026年1月）
+      </li>
+      <li>
+        Furuse K, Fukuoka M, Kawahara M, et al. Phase III study of concurrent versus sequential thoracic radiotherapy in combination with mitomycin, vindesine, and cisplatin in unresectable stage III non-small-cell lung cancer.
+        <em>J Clin Oncol</em> 1999;17(9):2692–2699.
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/10561343/" style="color:var(--green-dark)">10561343</a>
+      </li>
+      <li>
+        Curran WJ Jr, Paulus R, Langer CJ, et al. (RTOG 9410). Sequential vs. concurrent chemoradiation for stage III non-small cell lung cancer: randomized phase III trial RTOG 9410.
+        <em>J Natl Cancer Inst</em> 2011;103(19):1452–1460.
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/21903745/" style="color:var(--green-dark)">21903745</a>
+      </li>
+      <li>
+        Lu S, Casarini I, Kato T, et al. (LAURA). Osimertinib after definitive chemoradiotherapy in patients with unresectable stage III EGFR-mutated NSCLC.
+        <em>N Engl J Med</em> 2024;391(7):585–597.
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/38828946/" style="color:var(--green-dark)">38828946</a>
+        ※EGFR変異陽性例に対するオシメルチニブ地固めの参考として
+      </li>
+      <li>
+        肺癌診療ガイドライン2025年版（CQ37–43）.
+        日本肺癌学会. 2025.
+        URL: <a href="https://www.haigan.gr.jp/publication/guideline/examination/2025/" style="color:var(--green-dark)">haigan.gr.jp/publication/guideline/examination/2025/</a>
+      </li>
+      <li>
+        NCCN Guidelines Insights: Non-Small Cell Lung Cancer, Version 7.2025.
+        <em>J Natl Compr Canc Netw</em> 2025;23(9).
+        URL: <a href="https://jnccn.org/view/journals/jnccn/23/9/article-p354.xml" style="color:var(--green-dark)">jnccn.org/view/journals/jnccn/23/9/article-p354.xml</a>
+        ※購読制、二次情報経由での参照
+      </li>
+      <li>
+        ESMO Clinical Practice Guideline eUpdate: Early and locally advanced non-small-cell lung cancer (durvalumab consolidation).
+        <em>Ann Oncol</em>.
+        URL: <a href="https://www.annalsofoncology.org/article/S0923-7534(20)39865-3/fulltext" style="color:var(--green-dark)">annalsofoncology.org（S0923-7534(20)39865-3）</a>
+        ※購読制、二次情報経由での参照
       </li>
     </ol>
 

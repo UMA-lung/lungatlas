@@ -44,5 +44,8 @@ publish_checklist: []
 ## 結論・臨床的意義
 cCRTはsCRTと比較して、局所制御の改善を主因としてOSを有意に改善する。一方で急性食道毒性は明確に増加するため、患者の全身状態・治療忍容性を考慮したレジメン選択が必要となる。
 
+## 日本肺癌学会ガイドラインでの位置づけ
+肺癌診療ガイドライン2025年版CQ38では、本ページの結論と同じくPS0-1患者への同時併用CRTを強く推奨（推奨度1、エビデンスの強さA）している。根拠として、本メタアナリシス（Aupérin 2010）に加え、国内試験（Furuse et al. J Clin Oncol. 1999;17(9):2692-9、MVP療法下でOS中央値16.5 vs 13.3ヶ月, p=0.03998）およびRTOG9410試験（Curran et al. J Natl Cancer Inst. 2011;103(19):1452-60、OS HR 0.812, 95%CI 0.663-0.996）が引用されている。詳細はvault/concepts/stage3-nsclc-guidelines.mdを参照。
+
 ## PACIFICとの関係
 PACIFIC試験（durvalumab地固め療法）はcCRT後の患者のみを組み入れ対象としている。sCRT後の患者に対するdurvalumab地固めの効果は、PACIFIC-5試験・PACIFIC-6試験で別途検証されている（本サイトでは今後追加予定）。
