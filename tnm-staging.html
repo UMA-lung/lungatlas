@@ -146,6 +146,36 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .trial-ref-btn:hover{opacity:.8}
 .trial-ref-btn.detail{background:#0d5c3a;color:#fff}
 .trial-ref-btn.pubmed{background:#e8f0fe;color:#1a56db;border:1px solid #c3d3f7}
+
+/* STAGE FINDER */
+.sf-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:24px}
+.sf-selects{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.sf-sel-group{display:flex;flex-direction:column;gap:5px;min-width:140px;flex:1}
+.sf-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.07em;text-transform:uppercase}
+.sf-select{font-family:var(--font);font-size:12.5px;padding:7px 28px 7px 10px;border:1px solid var(--border2);border-radius:8px;background:var(--surface);color:var(--text);cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath fill='%236b8070' d='M0 0l5 7 5-7z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.sf-select:focus{outline:none;border-color:var(--green-mid);box-shadow:0 0 0 2px rgba(26,122,78,.15)}
+.sf-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:18px}
+.sf-cell{padding:9px 4px;border-radius:8px;border:1px solid var(--border);text-align:center;font-size:12px;font-weight:600;color:var(--text3);background:var(--surface2);transition:background .15s,color .15s,transform .1s;cursor:default;line-height:1.3}
+.sf-cell.sf-active{background:var(--green-dark);color:#fff;border-color:var(--green-dark);transform:scale(1.06);box-shadow:0 2px 8px rgba(13,92,58,.3)}
+.sf-result{background:var(--green-pale);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px;display:none}
+.sf-result.sf-show{display:block}
+.sf-result-stage{font-size:20px;font-weight:700;color:var(--green-dark);margin-bottom:14px;font-family:var(--mono);letter-spacing:.02em}
+.sf-surv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sf-surv-block{background:var(--surface);border-radius:8px;padding:12px 14px;border:1px solid var(--border)}
+.sf-surv-title{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.sf-surv-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;gap:8px}
+.sf-surv-key{font-size:11.5px;color:var(--text2);white-space:nowrap}
+.sf-surv-val{font-size:13px;font-weight:600;color:var(--text);font-family:var(--mono)}
+.sf-surv-na{font-size:12px;color:var(--text3);font-style:italic}
+.sf-no-match{color:var(--text3);font-size:12.5px;font-style:italic;padding:10px 0;display:none}
+.sf-cite-line{font-size:11px;color:var(--text3);line-height:1.6;margin-top:12px}
+.sf-cite-line a{color:var(--green-dark);text-decoration:none}
+.sf-cite-line a:hover{text-decoration:underline}
+@media(max-width:768px){
+  .sf-grid{grid-template-columns:repeat(4,1fr)}
+  .sf-surv-grid{grid-template-columns:1fr}
+  .sf-sel-group{min-width:100%}
+}
 </style>
   <link rel="stylesheet" href="/lungatlas/mobile.css">
   <script src="/lungatlas/mobile.js" defer></script>
@@ -171,6 +201,7 @@ fetch('/lungatlas/nav.html')
   <aside class="sidebar">
     <div class="sb-head">このページの内容</div>
     <a class="sb-item active" href="#stage-groups">ステージグルーピング</a>
+    <a class="sb-item" href="#stage-finder">病期早見表</a>
     <a class="sb-item" href="#t-descriptor">T分類</a>
     <a class="sb-item" href="#n-descriptor">N分類（N2細分化）</a>
     <a class="sb-item" href="#m-descriptor">M分類（M1c細分化）</a>
@@ -267,6 +298,85 @@ fetch('/lungatlas/nav.html')
 
     <div class="note-box">
       <strong>第9版の主要変更点：</strong>①N2をN2a（単一ステーション）とN2b（複数ステーション）に細分化、②M1cをM1c1（単一臓器多発転移）とM1c2（複数臓器多発転移）に細分化。これにより一部のT-N組み合わせのStageが第8版から変更されている（上表参照）。
+    </div>
+
+    <!-- 病期早見表 -->
+    <h2 class="sec-h2" id="stage-finder">病期早見表（T・N・M選択→対応Stage表示）</h2>
+    <!-- 出典: Rami-Porta R, et al. J Thorac Oncol. 2024;19(7):1007-1027. PMID: 38447919. DOI: 10.1016/j.jtho.2024.02.011 -->
+
+    <div class="sf-wrap">
+      <div class="sf-selects">
+        <div class="sf-sel-group">
+          <label class="sf-label" for="sf-t">T 分類</label>
+          <select id="sf-t" class="sf-select">
+            <option value="Tis">Tis — 上皮内癌（AIS / SCIS）</option>
+            <option value="T1mi">T1mi — 微小浸潤腺癌（≤3 cm・浸潤≤5 mm）</option>
+            <option value="T1a" selected>T1a — 腫瘍径 ≤1 cm</option>
+            <option value="T1b">T1b — 腫瘍径 >1–2 cm</option>
+            <option value="T1c">T1c — 腫瘍径 >2–3 cm</option>
+            <option value="T2a">T2a — 腫瘍径 >3–4 cm、または内臓胸膜浸潤等</option>
+            <option value="T2b">T2b — 腫瘍径 >4–5 cm</option>
+            <option value="T3">T3 — 腫瘍径 >5–7 cm、壁側胸膜/胸壁浸潤等</option>
+            <option value="T4">T4 — 腫瘍径 >7 cm、縦隔浸潤等</option>
+          </select>
+        </div>
+        <div class="sf-sel-group">
+          <label class="sf-label" for="sf-n">N 分類</label>
+          <select id="sf-n" class="sf-select">
+            <option value="N0" selected>N0 — リンパ節転移なし</option>
+            <option value="N1">N1 — 同側肺門/気管支周囲リンパ節</option>
+            <option value="N2a">N2a — 単一N2ステーション転移（第9版新設）</option>
+            <option value="N2b">N2b — 複数N2ステーション転移（第9版新設）</option>
+            <option value="N3">N3 — 対側縦隔/肺門・鎖骨上リンパ節</option>
+          </select>
+        </div>
+        <div class="sf-sel-group">
+          <label class="sf-label" for="sf-m">M 分類</label>
+          <select id="sf-m" class="sf-select">
+            <option value="M0" selected>M0 — 遠隔転移なし</option>
+            <option value="M1a">M1a — 胸膜/心嚢結節・悪性胸水、対側肺内結節</option>
+            <option value="M1b">M1b — 単発遠隔転移（単一臓器系）</option>
+            <option value="M1c1">M1c1 — 多発遠隔転移・単一臓器系（第9版新設）</option>
+            <option value="M1c2">M1c2 — 多発遠隔転移・複数臓器系（第9版新設）</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="sf-grid" id="sf-grid">
+        <div class="sf-cell" data-stage="0">Stage 0</div>
+        <div class="sf-cell" data-stage="IA1">IA1</div>
+        <div class="sf-cell" data-stage="IA2">IA2</div>
+        <div class="sf-cell" data-stage="IA3">IA3</div>
+        <div class="sf-cell" data-stage="IB">IB</div>
+        <div class="sf-cell" data-stage="IIA">IIA</div>
+        <div class="sf-cell" data-stage="IIB">IIB</div>
+        <div class="sf-cell" data-stage="IIIA">IIIA</div>
+        <div class="sf-cell" data-stage="IIIB">IIIB</div>
+        <div class="sf-cell" data-stage="IIIC">IIIC</div>
+        <div class="sf-cell" data-stage="IVA">IVA</div>
+        <div class="sf-cell" data-stage="IVB">IVB</div>
+      </div>
+
+      <div class="sf-result" id="sf-result">
+        <div class="sf-result-stage" id="sf-stage-label"></div>
+        <div class="sf-surv-grid">
+          <div class="sf-surv-block">
+            <div class="sf-surv-title">臨床病期（Clinical Stage）</div>
+            <div id="sf-clin-content"></div>
+          </div>
+          <div class="sf-surv-block">
+            <div class="sf-surv-title">病理病期（Pathologic Stage）</div>
+            <div id="sf-path-content"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sf-no-match" id="sf-no-match">この組み合わせは第9版TNM分類で定義されていません</div>
+
+      <p class="sf-cite-line">
+        生存期間データ: Rami-Porta R, et al. <em>J Thorac Oncol.</em> 2024;19(7):1007-1027, Fig.3/4, Suppl Fig.17（サブグループ解析）。詳細は原著を参照。
+        <a href="https://doi.org/10.1016/j.jtho.2024.02.011" target="_blank" rel="noopener">DOI ↗</a>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/38447919/" target="_blank" rel="noopener">PMID: 38447919 ↗</a>
+      </p>
     </div>
 
     <!-- ② T分類 -->
@@ -508,6 +618,91 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
   });
 });
+
+// 病期早見表
+(function(){
+  var M0_MAP={
+    'Tis_N0':'0',
+    'T1a_N0':'IA1','T1b_N0':'IA2','T1c_N0':'IA3',
+    'T2a_N0':'IB',
+    'T2b_N0':'IIA','T1a_N1':'IIA','T1b_N1':'IIA','T1c_N1':'IIA',
+    'T3_N0':'IIB','T2a_N1':'IIB','T2b_N1':'IIB',
+    'T1a_N2a':'IIB','T1b_N2a':'IIB','T1c_N2a':'IIB',
+    'T4_N0':'IIIA','T4_N1':'IIIA','T3_N1':'IIIA',
+    'T2a_N2a':'IIIA','T2b_N2a':'IIIA','T3_N2a':'IIIA',
+    'T1a_N2b':'IIIA','T1b_N2b':'IIIA','T1c_N2b':'IIIA',
+    'T4_N2a':'IIIB','T4_N2b':'IIIB','T3_N2b':'IIIB',
+    'T2a_N2b':'IIIB','T2b_N2b':'IIIB',
+    'T1a_N3':'IIIB','T1b_N3':'IIIB','T1c_N3':'IIIB',
+    'T2a_N3':'IIIB','T2b_N3':'IIIB',
+    'T4_N3':'IIIC','T3_N3':'IIIC'
+  };
+  var CLIN={
+    '0':null,
+    'IA1':{os5:'92%',median:'NR',n:'3,001'},
+    'IA2':{os5:'84%',median:'NR',n:'8,472'},
+    'IA3':{os5:'76%',median:'NR',n:'5,980'},
+    'IB':{os5:'69%',median:'114ヶ月',n:'5,050'},
+    'IIA':{os5:'62%',median:'96ヶ月',n:'3,331'},
+    'IIB':{os5:'54%',median:'69.6ヶ月',n:'4,285'},
+    'IIIA':{os5:'44%',median:'48ヶ月',n:'3,725'},
+    'IIIB':{os5:'31%',median:'25.2ヶ月',n:'1,592'},
+    'IIIC':{os5:'21%',median:'15.6ヶ月',n:'682'},
+    'IVA':{os5:'18%',median:'15.6ヶ月',n:'8,341'},
+    'IVB':{os5:'7%',median:'8.4ヶ月',n:'7,899'}
+  };
+  var PATH={
+    '0':null,
+    'IA1':{os5:'94%',median:'NR',n:'1,893'},
+    'IA2':{os5:'89%',median:'NR',n:'4,653'},
+    'IA3':{os5:'83%',median:'NR',n:'2,853'},
+    'IB':{os5:'78%',median:'NR',n:'6,851'},
+    'IIA':{os5:'69%',median:'128.4ヶ月',n:'2,943'},
+    'IIB':{os5:'61%',median:'90ヶ月',n:'5,066'},
+    'IIIA':{os5:'50%',median:'60ヶ月',n:'4,366'},
+    'IIIB':{os5:'35%',median:'36ヶ月',n:'1,624'},
+    'IIIC':{os5:'21%',median:'27.6ヶ月',n:'54'},
+    'IVA':null,
+    'IVB':null
+  };
+  function getStage(t,n,m){
+    if(m==='M1a'||m==='M1b') return 'IVA';
+    if(m==='M1c1'||m==='M1c2') return 'IVB';
+    var tl=t==='T1mi'?'T1a':t;
+    return M0_MAP[tl+'_'+n]||null;
+  }
+  function survHtml(d){
+    if(!d) return '<span class="sf-surv-na">記載なし</span>';
+    return '<div class="sf-surv-row"><span class="sf-surv-key">5年生存率</span><span class="sf-surv-val">'+d.os5+'</span></div>'+
+           '<div class="sf-surv-row"><span class="sf-surv-key">中央生存期間</span><span class="sf-surv-val">'+d.median+'</span></div>'+
+           '<div class="sf-surv-row"><span class="sf-surv-key">症例数（n）</span><span class="sf-surv-val">'+d.n+'</span></div>';
+  }
+  function sfUpdate(){
+    var t=document.getElementById('sf-t').value;
+    var n=document.getElementById('sf-n').value;
+    var m=document.getElementById('sf-m').value;
+    var stage=getStage(t,n,m);
+    document.querySelectorAll('#sf-grid .sf-cell').forEach(function(c){
+      c.classList.toggle('sf-active',c.dataset.stage===stage);
+    });
+    var res=document.getElementById('sf-result');
+    var nom=document.getElementById('sf-no-match');
+    if(stage){
+      res.classList.add('sf-show');
+      nom.style.display='none';
+      document.getElementById('sf-stage-label').textContent='Stage '+stage;
+      document.getElementById('sf-clin-content').innerHTML=survHtml(CLIN[stage]);
+      document.getElementById('sf-path-content').innerHTML=survHtml(PATH[stage]);
+    } else {
+      res.classList.remove('sf-show');
+      nom.style.display='block';
+    }
+  }
+  ['sf-t','sf-n','sf-m'].forEach(function(id){
+    document.getElementById(id).addEventListener('change',sfUpdate);
+  });
+  sfUpdate();
+})();
 </script>
 </body>
 </html>
