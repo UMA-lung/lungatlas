@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "ATTLAS試験（KCSG-LU19-04）— TKI耐性後 atezolizumab + bevacizumab + 化学療法（EGFR/ALK陽性NSCLC）",
+    summary: "EGFR-TKIまたはALK-TKI耐性後のEGFR/ALK陽性NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFSを改善した韓国発の第3相試験。PFS中央値8.5 vs 5.6か月、HR 0.62。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/attlas.html"
+  },
+  {
     title: "LAURA試験 — 切除不能III期EGFR変異NSCLC 根治的CRT後 osimertinib地固め療法",
     summary: "切除不能stage III EGFR変異NSCLC（CRT後病勢進行なし）でosimertinibがPFSを劇的に改善した第3相試験。PFS中央値39.1 vs 5.6か月、HR 0.16。OSは未成熟。PACIFIC-durvalumabのEGFR限界を補う位置づけ。",
     date: "2026-06-24",

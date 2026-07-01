@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATTLAS試験（KCSG-LU19-04）— TKI耐性後 atezolizumab + bevacizumab + 化学療法（EGFR/ALK陽性NSCLC） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。ATTLAS試験（TKI耐性後ABCP、EGFR/ALK陽性NSCLC）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+/* ===== AIドラフトバナー ===== */
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+/* ===== 一言サマリー ===== */
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+/* ===== 本文 ===== */
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+/* ===== 関連文献リスト ===== */
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+/* ===== 既存ページから流用したクラス ===== */
+/* COMPARISON TABLE */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+.comp-table .best { color: var(--green-dark); font-weight: 600; }
+
+/* STATS */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* GL LIST */
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ===== 補助スタイル ===== */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>ATTLAS試験</span>
+  </nav>
+
+  <!-- 記事タイトル -->
+  <h1 class="scrap-h1">ATTLAS試験（KCSG-LU19-04）— TKI耐性後 atezolizumab + bevacizumab + 化学療法（EGFR/ALK陽性NSCLC）</h1>
+
+  <!-- 一言サマリー -->
+  <p class="scrap-summary">EGFR-TKIまたはALK-TKI耐性後のEGFR/ALK陽性NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFSを改善した韓国発の第3相試験。PFS中央値8.5 vs 5.6か月、HR 0.62。</p>
+
+  <!-- メタ情報行 -->
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/37861993/" target="_blank" rel="noopener">PMID: 37861993</a> ／
+      <a href="https://doi.org/10.1200/JCO.23.01891" target="_blank" rel="noopener">DOI: 10.1200/JCO.23.01891</a>
+    </span>
+  </div>
+
+  <!-- 本文エリア -->
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>ATTLAS試験（KCSG-LU19-04）は、EGFR-TKIまたはALK-TKI治療後に病勢進行したEGFR変異またはALK転座陽性NSCLCに対し、atezolizumab + bevacizumab + 化学療法（ABCP、IMpower150と同様のレジメン）を化学療法単独（PC）と比較した、韓国（Korean Cancer Study Group）主導の第3相・非盲検・多施設・無作為化試験。TKI耐性後における「抗PD-(L)1抗体の意義」という、ドライバー変異陽性NSCLCの耐性後戦略における重要な未解決課題に対する検証。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・非盲検・多施設（韓国）・無作為化（2:1）</td></tr>
+        <tr><td>対象</td><td><strong>EGFR変異 または ALK転座陽性</strong>進行NSCLC・TKI治療で病勢進行後</td></tr>
+        <tr><td>症例数</td><td>228例（EGFR変異215例、ALK転座13例）</td></tr>
+        <tr><td>患者背景</td><td>女性56.1%・非喫煙62.7%・脳転移42.7%・90%超がEGFR-TKI治療歴あり</td></tr>
+        <tr><td>試験群（ABCP）</td><td>atezolizumab + bevacizumab + paclitaxel + carboplatin → atezolizumab + bevacizumab維持</td></tr>
+        <tr><td>対照群（PC）</td><td>pemetrexed + carboplatin/cisplatin → pemetrexed維持</td></tr>
+        <tr><td>主要評価項目</td><td>治験医評価PFS</td></tr>
+        <tr><td>副次評価項目</td><td>OS、ORR、安全性、QoL</td></tr>
+        <tr><td>スポンサー</td><td>Korean Cancer Study Group（KCSG）<!-- 要確認: 製薬会社の関与（Roche/Genentech等）を原著より確認 --></td></tr>
+        <tr><td>試験登録番号</td><td><!-- 要確認: NCT番号をJCO 2024原著より確認 --></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== セクション2：有効性 — PFS ===== -->
+    <h2>2. 有効性 — PFS</h2>
+
+    <p class="sub">PFS（interim解析、治験医評価）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">8.5か月</div>
+        <div class="stat-label">PFS中央値（ABCP群）</div>
+        <div class="stat-vs">95%CI 8.2–10.3</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">5.6か月</div>
+        <div class="stat-label">PFS中央値（PC群）</div>
+        <div class="stat-vs">95%CI 4.3–7.2</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.62</div>
+        <div class="stat-label">PFS ハザード比</div>
+        <div class="stat-vs">95%CI 0.45–0.86</div>
+      </div>
+    </div>
+
+    <p>EGFR/ALK-TKI耐性後という、標的療法後の「次の一手」が明確でない集団において、ABCPレジメンがPFS改善を示した。</p>
+
+    <!-- 要確認: OS・ORRの具体的数値はJCO 2024本文より確認 -->
+    <!-- 要確認: EGFR変異サブグループ・ALK転座サブグループ別のPFS HRはJCO 2024より確認（ALK例数13と少数のため解釈に注意） -->
+    <!-- 要確認: p値はJCO 2024より確認 -->
+
+    <!-- ===== セクション3：安全性・QoL ===== -->
+    <h2>3. 安全性・QoL</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">✅</span>
+        <span>新規の安全性シグナルは認めなかった（ASCO Daily News報道）</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">📋</span>
+        <span>患者報告アウトカム（QoL）は別途報告されている（JTO 2025、P1.11.32）</span>
+      </div>
+    </div>
+
+    <!-- 要確認: Grade≥3有害事象の具体的発現率（%）、bevacizumab関連毒性（出血・血栓・高血圧等）の発現率はJCO 2024 Tableより確認 -->
+    <!-- 要確認: QoL解析の詳細結果はJTO 2025抄録より確認 -->
+
+    <!-- ===== セクション4：位置づけと注意点 ===== -->
+    <h2>4. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">📋</span>
+        <span>EGFR/ALK-TKI耐性後の治療選択肢が限られる中、ABCPレジメン（atezolizumab + bevacizumab + 化学療法）がPFS改善を示した意義は大きい</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">💡</span>
+        <span><strong>本レジメンの概念はIMpower150試験のEGFR/ALKサブグループ探索的解析（PD-L1問わず有効の可能性）を受けたもの</strong>。ATTLASはこの仮説を前方視的・第3相で検証した試験</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">⚠️</span>
+        <span>同じ「TKI耐性後 + 抗PD-(L)1抗体」を検証したKEYNOTE-789（pembrolizumab + pemetrexed/platinum）・CheckMate 722（nivolumab + 化学療法）は<strong>いずれも統計学的有意差を示せなかった</strong>。ATTLASはbevacizumab（抗VEGF）を含む点がこれらと異なり、bevacizumabの血管新生阻害による免疫微小環境の改善が寄与した可能性が議論される</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">📊</span>
+        <span>APPLE試験（WJOG11218L）も同様にEGFR-TKI耐性後の抗血管新生+免疫チェムベースレジメンでPFS改善傾向（HR 0.70）を示しており、一貫した方向性</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">⚠️</span>
+        <span>ALK転座例は13例と少数であり、ALKサブグループでの解釈には限界がある</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">⚖️</span>
+        <span>標的療法耐性後の次治療は、耐性機序（T790M・MET増幅・C797S等）に基づく次世代TKIやADC等が優先されることが多く、ABCPレジメンはこれらの選択肢がない場合や耐性機序不明の場合の選択肢として位置づけられる可能性</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">⚖️</span>
+        <span>ATTLAS・KEYNOTE-789・CheckMate 722・APPLE間の直接比較試験はなく、レジメン選択は間接比較に留まる</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">🇯🇵</span>
+        <span>国内承認状況：<!-- 要確認: 本邦でのTKI耐性後ABCPレジメンの承認・保険適用状況をPMDA確認 --></span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- 関連文献リスト -->
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Park S, Kim TM, Han JY, et al.
+        Phase III, Randomized Study of Atezolizumab Plus Bevacizumab and Chemotherapy in Patients With
+        EGFR- or ALK-Rearranged or Translocated Non-Small-Cell Lung Cancer (ATTLAS, KCSG-LU19-04).
+        J Clin Oncol. 2024;42(11):1241-1251.
+        PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/37861993/" target="_blank" rel="noopener">37861993</a> /
+        DOI: <a href="https://doi.org/10.1200/JCO.23.01891" target="_blank" rel="noopener">10.1200/JCO.23.01891</a>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
