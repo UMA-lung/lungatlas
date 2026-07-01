@@ -92,6 +92,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .footer-logo{font-weight:600;color:var(--text)}
 .footer-logo span{color:var(--green-mid)}
 
+/* HERO BANNER (cm816スタイル流用) */
+.hero-banner{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green-mid) 100%);color:#fff;border-radius:var(--radius-lg);padding:22px 26px;margin-bottom:16px}
+.hero-message{font-size:15px;font-weight:600;line-height:1.5;margin-bottom:10px}
+.hero-sub{font-size:12.5px;color:rgba(255,255,255,0.85);line-height:1.8}
+/* STAT ROW (cm816スタイル流用) */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat{background:var(--green-pale);border-radius:8px;padding:11px 14px}
+.stat-vs{font-size:11px;color:var(--text2);margin-top:2px}
+/* PACIFIC-2 陰性セクション */
+.neg-section{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;margin:28px 0 14px}
+.neg-section>.sec-h2{margin-top:0}
+.neg-badge{display:inline-block;font-size:11px;font-weight:600;background:var(--red-light);color:var(--red-dark);padding:2px 10px;border-radius:12px;margin-left:8px}
+
 @media(max-width:768px){
   .sidebar{display:none}
   .main{padding:20px 18px 40px}
@@ -126,6 +139,7 @@ fetch('/lungatlas/nav.html')
     <a class="sb-item active" href="#overview">位置づけ</a>
     <a class="sb-item" href="#regimen">レジメン選択（同時 vs 逐次）</a>
     <a class="sb-item" href="#pacific-design">PACIFIC試験：デザイン</a>
+    <a class="sb-item" href="#pacific-regimen">許容レジメン</a>
     <a class="sb-item" href="#pacific-efficacy">PACIFIC試験：有効性</a>
     <a class="sb-item" href="#pacific-subgroup">サブグループ解析</a>
     <a class="sb-item" href="#pacific-safety">安全性</a>
@@ -143,6 +157,33 @@ fetch('/lungatlas/nav.html')
     <div class="updated">最終更新 2026年7月 — 位置づけ・レジメン選択・PACIFIC本体・PACIFIC-2・ガイドライン比較・国内承認情報 公開</div>
     <h1 class="art-h1">局所進行NSCLC（III期・切除不能）<br>化学放射線療法（CRT）</h1>
     <p class="lead">切除不能III期NSCLCに対する根治的化学放射線療法（CRT）の概要と、cCRT後のデュルバルマブ地固め療法（PACIFIC試験）について、公表データに基づき整理する。疫学・病期分類の詳細は <a href="/lungatlas/nsclc-overview.html" style="color:var(--green-dark);font-weight:500">NSCLC総論</a> を参照。</p>
+
+    <div class="hero-banner">
+      <div class="hero-message">切除不能III期NSCLC — 根治的CRT の要点</div>
+      <div class="hero-sub">
+        ① cCRT後のデュルバルマブ地固め療法（PACIFICレジメン）が標準治療<br>
+        ② cCRTはOSを有意に改善するが食道毒性が増加する<br>
+        ③ PACIFIC-2（cCRT中の同時併用）は主要評価項目未達（陰性）
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.84</div>
+        <div class="stat-label">cCRT vs sCRT — OS（メタアナリシス）</div>
+        <div class="stat-vs">95%CI 0.74–0.95, p=0.004 [1]</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.68</div>
+        <div class="stat-label">PACIFIC — OS主解析（2018）</div>
+        <div class="stat-vs">99.73%CI 0.47–0.997, p=0.0025 [3]</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">42.9%</div>
+        <div class="stat-label">PACIFIC — 5年OS率（durvalumab）</div>
+        <div class="stat-vs">vs 33.4%（プラセボ）[5]</div>
+      </div>
+    </div>
 
     <!-- ========== 位置づけ ========== -->
     <h2 class="sec-h2" id="overview">位置づけ</h2>
@@ -284,6 +325,101 @@ fetch('/lungatlas/nav.html')
       </tbody>
     </table>
     <!-- 出典: Antonia SJ, et al. N Engl J Med 2017;377(20):1919-1929, PMID 28885881 -->
+
+    <!-- ========== PACIFIC：許容レジメン ========== -->
+    <h2 class="sec-h2" id="pacific-regimen">許容された化学療法レジメン</h2>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      PACIFIC試験は、特定の薬剤・用量を統一した単一の「レジメン」を規定した試験ではない。
+      組み入れ基準として、以下の要件を満たす同時化学放射線療法（cCRT）を受けていることを
+      求めている。
+    </p>
+
+    <h3 class="sec-h3">許容された薬剤の組み合わせ</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>薬剤クラス</th>
+          <th>薬剤</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>白金製剤</td>
+          <td>シスプラチンまたはカルボプラチン</td>
+        </tr>
+        <tr>
+          <td>併用薬剤（いずれか1剤以上）</td>
+          <td>エトポシド、ビンブラスチン、ビノレルビン、タキサン系（パクリタキセルまたはドセタキセル）、ペメトレキセド</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      <strong>具体的な用量・投与スケジュールは規定されていない：</strong>原著論文・プロトコルには薬剤ごとの
+      mg/m²等の用量記載はなく、各施設の基準（local practice）に従うとされている[2]。
+      実臨床でのレジメン選択の目安として本試験の記載を用いることはできない。
+    </p>
+
+    <h3 class="sec-h3">cCRTの適格要件</h3>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>規定内容</th>
+          <th>出典</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>最低施行サイクル数</td>
+          <td>白金製剤ベースの同時化学放射線療法を2サイクル以上</td>
+          <td>NEJM 2017 Methods[2]</td>
+        </tr>
+        <tr>
+          <td>放射線総線量</td>
+          <td>54–66 Gy（プロトコル改訂後：60 Gy ±10%）</td>
+          <td>NEJM 2017 Methods／プロトコル[2]</td>
+        </tr>
+        <tr>
+          <td>肺線量制限</td>
+          <td>平均肺線量 &lt;20 Gy かつ/または V20 &lt;35%</td>
+          <td>NEJM 2017 Methods[2]</td>
+        </tr>
+        <tr>
+          <td>治験薬投与開始までの期間</td>
+          <td>最終放射線照射日から1–42日以内（当初1–14日から改訂）</td>
+          <td>NEJM 2017 Methods[2]</td>
+        </tr>
+        <tr>
+          <td>導入化学療法（cCRT開始前）</td>
+          <td>許容（実際の組み入れ患者の26.8%が施行）</td>
+          <td>NEJM 2017 Table 1[2]</td>
+        </tr>
+        <tr>
+          <td>地固め化学療法（RT後の追加化学療法）</td>
+          <td>許可されない</td>
+          <td>プロトコル[2]</td>
+        </tr>
+        <tr>
+          <td>逐次CRT（sequential CRT）</td>
+          <td>除外基準に該当</td>
+          <td>プロトコル[2]</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      放射線療法の1回線量・分割回数について本文に明確な規定の記載はなく、断定しない。
+    </p>
+
+    <div class="note-box">
+      PACIFIC試験は薬剤・用量を統一した単一レジメンではなく、上記要件を満たす
+      「各施設の標準的な同時cCRT」を適格基準とした点に注意。実臨床でのレジメン選択は
+      本試験の対象外であり、施設ごとのプロトコルに従う。
+    </div>
 
     <!-- ========== PACIFIC：有効性 ========== -->
     <h2 class="sec-h2" id="pacific-efficacy">PACIFIC試験：有効性（PFS/OS）</h2>
@@ -474,8 +610,10 @@ fetch('/lungatlas/nav.html')
       4年・5年フォローアップ論文（Faivre-Finn 2021、Spigel 2022）では安全性データの更新は報告されていない。
     </div>
 
+    <div class="neg-section">
+
     <!-- ========== PACIFIC-2 ========== -->
-    <h2 class="sec-h2" id="pacific2">durvalumab同時併用の試み（PACIFIC-2）</h2>
+    <h2 class="sec-h2" id="pacific2">durvalumab同時併用の試み（PACIFIC-2）<span class="neg-badge">結果：陰性（主要評価項目未達）</span></h2>
 
     <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
       PACIFICレジメン（cCRT<em>後</em>の地固め）とは異なり、PACIFIC-2試験ではcCRT<em>開始時</em>からデュルバルマブを同時投与した場合の有効性・安全性が検証された（Bradley JD, et al. <em>J Clin Oncol</em> 2025）。結果は陰性であり、CRT後の地固め療法が本設定における標準治療であることを支持する。
@@ -579,6 +717,8 @@ fetch('/lungatlas/nav.html')
     <div class="note-box">
       <strong>PACIFICレジメンの位置づけ：</strong>PACIFIC-2が陰性に終わったことで、cCRT<em>後</em>のデュルバルマブ地固め療法（PACIFICレジメン）が切除不能III期NSCLCの標準治療であることが改めて支持された。cCRT中の同時投与は現時点では標準ではない。
     </div>
+
+    </div><!-- /.neg-section -->
 
     <!-- ========== ガイドライン ========== -->
     <h2 class="sec-h2" id="guidelines">ガイドライン比較</h2>
