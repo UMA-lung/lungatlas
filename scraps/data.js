@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "LAURA試験 — 切除不能III期EGFR変異NSCLC 根治的CRT後 osimertinib地固め療法",
+    summary: "切除不能stage III EGFR変異NSCLC（CRT後病勢進行なし）でosimertinibがPFSを劇的に改善した第3相試験。PFS中央値39.1 vs 5.6か月、HR 0.16。OSは未成熟。PACIFIC-durvalumabのEGFR限界を補う位置づけ。",
+    date: "2026-06-24",
+    url: "/lungatlas/scraps/laura.html"
+  },
+  {
     title: "EMPOWER-Lung 3試験 — 1次治療 cemiplimab + 化学療法 vs 化学療法（進行NSCLC、PD-L1問わず）",
     summary: "治療歴なしstage III/IV・EGFR/ALK/ROS1陰性NSCLCで、cemiplimab + プラチナ化学療法が化学療法単独を上回るOS・PFSを示した第3相試験。PD-L1問わず有効。OS中央値21.9 vs 13.0か月。",
     date: "2026-06-30",

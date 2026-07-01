@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAURA試験 — 切除不能III期EGFR変異NSCLC 根治的CRT後 osimertinib地固め療法 — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。LAURA試験（切除不能III期EGFR変異NSCLC、根治的CRT後osimertinib地固め療法）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+/* ===== AIドラフトバナー ===== */
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+/* ===== 一言サマリー ===== */
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+/* ===== 本文 ===== */
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+.scrap-body .sub { font-weight: 600; color: var(--text); margin: 18px 0 8px; }
+
+/* ===== 関連文献リスト ===== */
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+/* ===== 既存ページから流用したクラス ===== */
+/* COMPARISON TABLE */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+.comp-table .best { color: var(--green-dark); font-weight: 600; }
+
+/* STATS */
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* GL LIST */
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ===== 補助スタイル ===== */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <!-- パンくずリスト -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>LAURA試験</span>
+  </nav>
+
+  <!-- 記事タイトル -->
+  <h1 class="scrap-h1">LAURA試験 — 切除不能III期EGFR変異NSCLC 根治的CRT後 osimertinib地固め療法</h1>
+
+  <!-- 一言サマリー -->
+  <p class="scrap-summary">切除不能stage III EGFR変異NSCLC（CRT後病勢進行なし）でosimertinibがPFSを劇的に改善した第3相試験。PFS中央値39.1 vs 5.6か月、HR 0.16。OSは未成熟。PACIFIC-durvalumabのEGFR限界を補う位置づけ。</p>
+
+  <!-- メタ情報行 -->
+  <div class="scrap-meta">
+    <span>公開日：2026年6月24日</span>
+    <span>更新日：2026年6月24日</span>
+    <span>対象論文：
+      NEJM 2024 PMID: <!-- 要確認 --> / <a href="https://doi.org/10.1056/NEJMoa2402614" target="_blank" rel="noopener">DOI 10.1056/NEJMoa2402614</a> ／
+      Lung Cancer 2026 PMID: <!-- 要確認 --> / <a href="https://doi.org/10.1016/j.lungcan.2026.109486" target="_blank" rel="noopener">DOI 10.1016/j.lungcan.2026.109486</a>
+    </span>
+  </div>
+
+  <!-- 本文エリア -->
+  <article class="scrap-body">
+
+    <!-- ===== セクション1：試験概要 ===== -->
+    <h2>1. 試験概要</h2>
+    <p>LAURA試験（NCT03521154）は、切除不能stage III EGFR変異NSCLCに対し、根治的化学放射線療法（CRT）後に病勢進行がなかった患者を対象に、osimertinib（3世代EGFR-TKI）による地固め（consolidation）療法をプラセボと比較した国際共同・第3相・二重盲検・プラセボ対照試験。EGFR変異陽性の切除不能stage III NSCLCに対する初の第3相標的療法試験であり、PACIFIC試験（durvalumab consolidation）のEGFR変異サブグループでbenefitが示されなかった経緯を背景に実施された。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・二重盲検・プラセボ対照・無作為化（2:1）</td></tr>
+        <tr><td>対象</td><td>切除不能stage III EGFR変異NSCLC（ex19del/L858R、単独または他のEGFR変異併存）・根治的CRT後に病勢進行なし</td></tr>
+        <tr><td>CRT種類</td><td><strong>concurrent（同時）またはsequential（逐次）いずれも可</strong>（PACIFICはconcurrentのみが対象）</td></tr>
+        <tr><td>症例数</td><td>216例（osimertinib 143例 / placebo 73例）</td></tr>
+        <tr><td>投与量</td><td>osimertinib 80mg/日、増悪または中止まで継続</td></tr>
+        <tr><td>主要評価項目</td><td>PFS（盲検下独立中央判定）</td></tr>
+        <tr><td>副次評価項目</td><td>OS、頭蓋内PFS、安全性</td></tr>
+        <tr><td>層別化因子</td><td>CRTタイプ（concurrent/sequential）・病期・居住地域</td></tr>
+        <tr><td>スポンサー</td><td>AstraZeneca（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT03521154</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== セクション2：有効性 — PFS ===== -->
+    <h2>2. 有効性 — PFS</h2>
+
+    <p class="sub">Primary PFS解析（NEJM 2024、盲検下独立中央判定）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">39.1か月</div>
+        <div class="stat-label">PFS中央値（osimertinib）</div>
+        <div class="stat-vs">vs placebo 5.6か月</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.16</div>
+        <div class="stat-label">PFS ハザード比（81%リスク減少）</div>
+        <div class="stat-vs">95%CI 0.10–0.24、p&lt;0.001</div>
+      </div>
+    </div>
+
+    <p>PFS中央値の差（39.1 vs 5.6か月）は、切除不能stage III NSCLCの地固め療法として報告された中でも極めて大きい。CRTタイプ（concurrent/sequential）によらず一貫した効果が示された。PFS benefitは事前規定の主要サブグループ全体で一貫していた。</p>
+
+    <!-- 要確認: ORR・頭蓋内PFSの具体的数値はNEJM 2024より確認 -->
+    <!-- 要確認: concurrent CRT群 vs sequential CRT群別のPFS HRはNEJM 2024 Supplementより確認 -->
+
+    <!-- ===== セクション3：有効性 — OS（未成熟、注意して解釈） ===== -->
+    <h2>3. 有効性 — OS（未成熟、注意して解釈）</h2>
+
+    <p class="sub">OS（interim、成熟度20%、NEJM 2024）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">84%</div>
+        <div class="stat-label">36か月OS率（osimertinib）</div>
+        <div class="stat-vs">95%CI 75–89</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">74%</div>
+        <div class="stat-label">36か月OS率（placebo）</div>
+        <div class="stat-vs">95%CI 57–85</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.81</div>
+        <div class="stat-label">OS ハザード比（統計学的有意差なし）</div>
+        <div class="stat-vs">95%CI 0.42–1.56、p=0.53</div>
+      </div>
+    </div>
+
+    <p><strong>OSデータは成熟度20%と未成熟であり、interim解析の時点では有意差を示していない。</strong>placebo群の相当数が増悪後に他の3世代TKI（osimertinibを含む）へクロスオーバーしており、これがOS差を希釈している可能性がある（ELCC 2025 update発表でも同様の傾向が報告されている）。PFSの劇的な改善がOSにどう反映されるかは、今後の成熟したOS解析を待つ必要がある。</p>
+
+    <!-- 要確認: ELCC 2025 updateの正確なOS HR・成熟度・クロスオーバー率は原著/学会報告より確認 -->
+    <!-- 要確認: 正式な最終OS解析（成熟後）が公表され次第、数値を更新 -->
+
+    <!-- ===== セクション4：安全性 ===== -->
+    <h2>4. 安全性</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>安全性</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>全体的なプロファイル</td><td>管理可能（manageable）で、osimertinib単剤の既知の毒性プロファイルと一致</td></tr>
+        <tr><td>Grade ≥3 有害事象発現率</td><td><!-- 要確認: NEJM 2024 Tableより確認 -->要確認</td></tr>
+        <tr><td>間質性肺疾患（ILD）/肺臓炎</td><td><!-- 要確認: NEJM 2024より発現率（Grade別）を確認 -->要確認</td></tr>
+        <tr><td>投与中止率</td><td><!-- 要確認: NEJM 2024より確認 -->要確認</td></tr>
+        <tr><td>呼吸器系有害事象</td><td>CRT後の投与であり、放射線肺臓炎との鑑別を含む呼吸器系有害事象のモニタリングが重要</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: Grade≥3有害事象・間質性肺疾患（ILD/肺臓炎）・投与中止率の具体的発現率はNEJM 2024 Tableより確認 -->
+    <!-- 要確認: Lung Cancer誌2026年掲載の詳細安全性解析の内容を確認後に追記 -->
+
+    <!-- ===== セクション5：位置づけと注意点 ===== -->
+    <h2>5. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">⚠️</span>
+        <span><strong>PACIFIC試験（durvalumab consolidation）のEGFR変異post-hocサブグループ（n=35）ではPFS・OSともbenefitが示されなかった</strong>（Aredo et al, JTO 2021）。この限界を受けて、EGFR変異例に特化した地固め療法としてLAURAが計画・実施された</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">📋</span>
+        <span>切除不能stage III・EGFR変異陽性NSCLCにおいて、CRT後の地固め療法はdurvalumab（PD-L1）ではなくosimertinib（EGFR-TKI）が推奨される方向性を示す、practice-changingな結果</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">⚖️</span>
+        <span><strong>concurrent・sequential CRTいずれも組み入れた点がPACIFIC（concurrentのみ）と異なる</strong>。CRT様式を問わず一貫した効果が示された点は臨床的に重要</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">⏱️</span>
+        <span>OSは未成熟であり、慎重な解釈が必要。特にplacebo群の高いクロスオーバー率がOS解析に影響しうる</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">💡</span>
+        <span>実臨床では、stage III NSCLC診断時にEGFR変異検査を行い、陽性例ではCRT後にosimertinib地固めを検討する運用へのシフトが議論されている</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">🇯🇵</span>
+        <span>osimertinibは国内で本適応（切除不能stage III EGFR変異NSCLCの地固め療法）について承認状況を確認する必要がある：<!-- 要確認: PMDA確認 --></span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">⚖️</span>
+        <span>durvalumab（PACIFIC）とosimertinib（LAURA）の直接比較試験はなく、EGFR変異の有無で使い分けるという臨床的整理が主流</span>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- 関連文献リスト -->
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Lu S, Kato T, Dong X, et al; LAURA Trial Investigators.
+        Osimertinib after Chemoradiotherapy in Stage III EGFR-Mutated NSCLC.
+        N Engl J Med. 2024;391(7):585-597.
+        PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1056/NEJMoa2402614" target="_blank" rel="noopener">10.1056/NEJMoa2402614</a>
+      </li>
+      <li>Lu S, et al.
+        Osimertinib after definitive CRT in unresectable stage III EGFR-mutated NSCLC:
+        safety outcomes from the phase III LAURA study.
+        Lung Cancer. 2026;109486.
+        PMID: <!-- 要確認 --> / DOI: <a href="https://doi.org/10.1016/j.lungcan.2026.109486" target="_blank" rel="noopener">10.1016/j.lungcan.2026.109486</a>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年6月24日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
