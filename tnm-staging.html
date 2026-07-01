@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TNM分類 第9版（肺癌）— LungAtlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f5;--surface:#fff;--surface2:#f0f4f1;--border:#d4e0d6;--border2:#b8cfbb;
+  --green-dark:#0d5c3a;--green-mid:#1a7a4e;--green-light:#e4f0e8;--green-pale:#f0f7f2;
+  --blue-dark:#0c3d6e;--blue-light:#e3edf8;--purple-dark:#3b2d7a;--purple-light:#eeebfb;
+  --amber-dark:#6b3d00;--amber-light:#fdf0d8;--red-dark:#6b1c1c;--red-light:#fce8e8;
+  --teal-dark:#085041;--teal-light:#e1f5ee;
+  --text:#111a14;--text2:#3d5042;--text3:#6b8070;
+  --font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  --radius:10px;--radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 52px)}
+.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.sb-head{font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--text3);padding:8px 18px 4px;text-transform:uppercase}
+.sb-item{display:block;padding:8px 18px;font-size:12.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;cursor:pointer;line-height:1.4}
+.sb-item:hover{background:var(--green-pale);color:var(--green-dark)}
+.sb-item.active{background:var(--green-light);color:var(--green-dark);font-weight:500;border-left-color:var(--green-mid)}
+.sb-sub{display:block;padding:5px 18px 5px 30px;font-size:11.5px;color:var(--text3);text-decoration:none;cursor:pointer;transition:color .15s}
+.sb-sub:hover,.sb-sub.active{color:var(--green-dark);font-weight:500}
+
+/* MAIN */
+.main{flex:1;padding:28px 36px 60px;max-width:900px}
+.crumb{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.crumb span{color:var(--green-mid)}
+.updated{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--green-dark);background:var(--green-light);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.updated::before{content:'↻';font-size:12px}
+.art-h1{font-size:22px;font-weight:600;line-height:1.2;margin-bottom:10px}
+.lead{font-size:13.5px;color:var(--text2);line-height:1.75;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.sec-h2{font-size:15px;font-weight:600;color:var(--text);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.sec-h2::before{content:'';display:block;width:3px;height:16px;background:var(--green-mid);border-radius:2px;flex-shrink:0}
+.sec-h3{font-size:13.5px;font-weight:600;color:var(--text);margin:18px 0 10px}
+
+/* SUMMARY TABLE */
+.summary-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px}
+.st-header{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;background:var(--surface2);border-bottom:1px solid var(--border)}
+.st-cell{padding:10px 14px;font-size:12px;font-weight:600;color:var(--text);border-right:1px solid var(--border)}
+.st-cell:last-child{border-right:none}
+.st-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.st-row:last-child{border-bottom:none}
+.st-row:nth-child(even){background:#f8fbf9}
+.st-d{padding:10px 14px;font-size:12px;color:var(--text2);border-right:1px solid var(--border);line-height:1.5}
+.st-d:last-child{border-right:none}
+.highlight-cell{background:var(--green-light);color:var(--green-dark);font-weight:600}
+.warn-cell{background:var(--red-light);color:var(--red-dark)}
+.neutral-cell{color:var(--text3)}
+
+/* DECISION CARDS */
+.dec-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.dec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.dec-head{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.dec-head:hover{background:var(--surface2)}
+.dec-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;margin-top:1px}
+.ic-green{background:var(--green-light);color:var(--green-dark)}
+.ic-blue{background:var(--blue-light);color:var(--blue-dark)}
+.ic-amber{background:var(--amber-light);color:var(--amber-dark)}
+.ic-red{background:var(--red-light);color:var(--red-dark)}
+.ic-purple{background:var(--purple-light);color:var(--purple-dark)}
+.dec-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.dec-sub{font-size:12px;color:var(--text3);line-height:1.5}
+.rec-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:12px;margin-left:auto;flex-shrink:0;white-space:nowrap}
+.rb-green{background:var(--green-light);color:var(--green-dark)}
+.rb-blue{background:var(--blue-light);color:var(--blue-dark)}
+.rb-amber{background:var(--amber-light);color:var(--amber-dark)}
+.dec-body{padding:16px 20px;display:none}
+.dec-body.open{display:block}
+.dec-reason{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.dec-evidence{background:var(--green-pale);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+.dec-caution{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:10px 14px;font-size:12px;color:var(--amber-dark);line-height:1.7}
+.tox-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tox{font-size:11px;background:var(--red-light);color:var(--red-dark);padding:3px 10px;border-radius:10px}
+
+/* FLOW */
+.flow-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:24px}
+.flow-step{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.flow-step:last-child{border-bottom:none}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-body{flex:1}
+.step-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.step-detail{font-size:12px;color:var(--text2);line-height:1.65}
+.branch{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.branch-item{font-size:11px;font-weight:500;padding:4px 10px;border-radius:8px;cursor:default}
+.bi-green{background:var(--green-light);color:var(--green-dark)}
+.bi-blue{background:var(--blue-light);color:var(--blue-dark)}
+.bi-amber{background:var(--amber-light);color:var(--amber-dark)}
+
+/* INFO / NOTE */
+.info-box{background:var(--blue-light);border-left:3px solid #2d6db5;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--blue-dark);line-height:1.75;margin:14px 0}
+.note-box{background:var(--green-light);border-left:3px solid var(--green-mid);border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--green-dark);line-height:1.75;margin:14px 0}
+.warn-box{background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:11px 14px;font-size:12.5px;color:var(--amber-dark);line-height:1.75;margin:14px 0}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
+.comp-table th{padding:9px 12px;background:var(--surface2);font-weight:600;color:var(--text);border:1px solid var(--border);text-align:left}
+.comp-table td{padding:9px 12px;border:1px solid var(--border);color:var(--text2);line-height:1.5;vertical-align:top}
+.comp-table tr:nth-child(even) td{background:#f8fbf9}
+.comp-table .best{color:var(--green-dark);font-weight:600}
+.comp-table .worst{color:var(--red-dark)}
+.comp-table .mid{color:var(--amber-dark)}
+
+/* NEXT ROW */
+.next-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.next-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--green-dark);font-weight:500;background:var(--green-light);border:none;cursor:pointer;padding:9px 16px;border-radius:8px;font-family:var(--font);text-decoration:none;transition:background .15s}
+.next-btn:hover{background:#cce8d4}
+
+/* TRIAL LINK */
+.trial-link{font-size:13px;font-weight:600;color:var(--green-dark);text-decoration:none;font-family:var(--mono)}
+.trial-link:hover{opacity:.7}
+
+/* FOOTER */
+.footer{background:var(--surface);border-top:1px solid var(--border);padding:18px 36px;font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-weight:600;color:var(--text)}
+.footer-logo span{color:var(--green-mid)}
+
+.trial-meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.trial-meta-item{background:var(--surface2);border-radius:6px;padding:6px 10px;font-size:11px}
+.meta-label{font-weight:600;color:var(--text3);margin-right:4px}
+.meta-val{color:var(--text2)}
+.meta-val a{color:var(--green-dark);text-decoration:none}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .main{padding:20px 18px 40px}
+  .comp-table{font-size:11px}
+  .nav-links{display:none}
+  .summary-table .st-header,.summary-table .st-row{grid-template-columns:1fr 1fr}
+}
+
+/* TRIAL REF BLOCK */
+.trial-ref-block{margin:12px 0 28px 0;display:flex;flex-direction:column;gap:8px}
+.trial-ref-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.trial-ref-name{font-weight:bold;font-size:.95em;min-width:100px;color:#1a1a1a}
+.trial-ref-btn{display:inline-block;padding:4px 12px;border-radius:5px;text-decoration:none;font-size:.85em;font-weight:bold;transition:opacity .2s}
+.trial-ref-btn:hover{opacity:.8}
+.trial-ref-btn.detail{background:#0d5c3a;color:#fff}
+.trial-ref-btn.pubmed{background:#e8f0fe;color:#1a56db;border:1px solid #c3d3f7}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-head">このページの内容</div>
+    <a class="sb-item active" href="#stage-groups">ステージグルーピング</a>
+    <a class="sb-item" href="#t-descriptor">T分類</a>
+    <a class="sb-item" href="#n-descriptor">N分類（N2細分化）</a>
+    <a class="sb-item" href="#m-descriptor">M分類（M1c細分化）</a>
+    <a class="sb-item" href="#database">データベース概要</a>
+    <a class="sb-item" href="#sclc">SCLCへの適用</a>
+    <a class="sb-item" href="#references">出典・参考文献</a>
+    <div class="sb-head" style="margin-top:12px">関連ページ</div>
+    <a class="sb-sub" href="/lungatlas/sclc-overview.html">SCLC 総論</a>
+    <a class="sb-sub" href="/lungatlas/sclc-ld.html">限局型（LD-SCLC）</a>
+    <a class="sb-sub" href="/lungatlas/sclc-ed.html">進展型（ED-SCLC）</a>
+  </aside>
+
+  <main class="main">
+    <div class="crumb">基礎・疫学 › <span>TNM分類 第9版</span></div>
+    <div class="updated">最終更新 2026年7月 — IASLC第9版原著論文・肺癌取扱い規約第9版 基準</div>
+    <h1 class="art-h1">肺癌 TNM分類<br>第9版</h1>
+    <p class="lead">第9版TNM病期分類（ステージグルーピング・T/N/M記述子）を、IASLC原著論文と肺癌取扱い規約第9版に基づき整理する。第9版のT/N/M記述子提案論文はいずれもNSCLCを解析対象としており、SCLCへの適用範囲については本ページ内で個別に注記する。</p>
+
+    <!-- ① ステージグルーピング -->
+    <h2 class="sec-h2" id="stage-groups">ステージグルーピング（第9版）</h2>
+    <!-- 出典: Rami-Porta R, et al. J Thorac Oncol. 2024;19(7):1007-1027. PMID: 38447919 -->
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width:8%">Stage</th>
+          <th>T/N/M の組み合わせ</th>
+          <th>第8版との変更</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>0</strong></td>
+          <td>Tis N0 M0</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>IA1</strong></td>
+          <td>T1mi/T1a N0 M0</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>IA2</strong></td>
+          <td>T1b N0 M0</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>IA3</strong></td>
+          <td>T1c N0 M0</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>IB</strong></td>
+          <td>T2a N0 M0</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>IIA</strong></td>
+          <td>T1(a-c) N1 M0／T2b N0 M0</td>
+          <td class="best">T1(a-c) N1 が第8版 IIB から移行</td>
+        </tr>
+        <tr>
+          <td><strong>IIB</strong></td>
+          <td>T1(a-c) N2a M0／T2a N1 M0／T2b N1 M0／T3 N0 M0</td>
+          <td class="best">T1(a-c) N2a が第8版 IIIA から移行（N2a 新設）</td>
+        </tr>
+        <tr>
+          <td><strong>IIIA</strong></td>
+          <td>T3 N2a M0／T1(a-c) N2b M0／T2a N2a M0／T2b N2a M0／T3 N1 M0／T4 N0-1 M0</td>
+          <td class="best">T3 N2a が第8版 IIIB から移行</td>
+        </tr>
+        <tr>
+          <td><strong>IIIB</strong></td>
+          <td>T2a N2b M0／T2b N2b M0／T1(a-c) N3 M0／T2a-b N3 M0／T3 N2b M0／T4 N2a-b M0</td>
+          <td class="best">T2a-b N2b が第8版 IIIA から移行</td>
+        </tr>
+        <tr>
+          <td><strong>IIIC</strong></td>
+          <td>T3 N3 M0／T4 N3 M0</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>IVA</strong></td>
+          <td>Any T Any N M1a/M1b</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>IVB</strong></td>
+          <td>Any T Any N M1c（M1c1, M1c2）</td>
+          <td class="neutral-cell">M1c 細分化（Stage 自体は変更なし）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>第9版の主要変更点：</strong>①N2をN2a（単一ステーション）とN2b（複数ステーション）に細分化、②M1cをM1c1（単一臓器多発転移）とM1c2（複数臓器多発転移）に細分化。これにより一部のT-N組み合わせのStageが第8版から変更されている（上表参照）。
+    </div>
+
+    <!-- ② T分類 -->
+    <h2 class="sec-h2" id="t-descriptor">T分類</h2>
+    <!-- 出典: Van Schil PE, et al. J Thorac Oncol. 2024;19(5):749-765. DOI: 10.1016/j.jtho.2023.12.006. PMID: 要確認 -->
+
+    <div class="note-box">
+      <strong>第9版でT記述子への変更提案なし——第8版基準を維持。</strong><br>
+      腫瘍径カットオフ（1 / 2 / 3 / 4 / 5 / 7 cm）、浸潤範囲の定義とも第8版から不変。解析対象はNSCLCのみ。
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>分類</th>
+          <th>定義（第9版＝第8版と同一）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Tx</strong></td><td>Primary tumor cannot be assessed</td></tr>
+        <tr><td><strong>T0</strong></td><td>No evidence of primary tumor</td></tr>
+        <tr><td><strong>Tis</strong></td><td>Carcinoma in situ（AIS・SCIS を含む）</td></tr>
+        <tr><td><strong>T1mi</strong></td><td>Minimally invasive adenocarcinoma（≤3 cm、lepidic predominant、浸潤≤5 mm）</td></tr>
+        <tr><td><strong>T1a</strong></td><td>腫瘍径 ≤1 cm</td></tr>
+        <tr><td><strong>T1b</strong></td><td>腫瘍径 >1 cm、≤2 cm</td></tr>
+        <tr><td><strong>T1c</strong></td><td>腫瘍径 >2 cm、≤3 cm</td></tr>
+        <tr><td><strong>T2a</strong></td><td>腫瘍径 >3 cm、≤4 cm；または内臓胸膜浸潤・隣接肺葉浸潤・主気管支浸潤（気管分岐部に達しない）・同側肺全体に及ぶ無気肺/閉塞性肺炎</td></tr>
+        <tr><td><strong>T2b</strong></td><td>腫瘍径 >4 cm、≤5 cm</td></tr>
+        <tr><td><strong>T3</strong></td><td>腫瘍径 >5 cm、≤7 cm；壁側胸膜/胸壁浸潤；心嚢/横隔神経/奇静脈浸潤；T1-T2肋間神経/星状神経節浸潤；同葉内別腫瘍結節</td></tr>
+        <tr><td><strong>T4</strong></td><td>腫瘍径 >7 cm；縦隔/胸腺/気管/気管分岐部/反回神経/迷走神経/食道/横隔膜浸潤；心臓・大血管浸潤；鎖骨下動静脈/椎体/脊柱管/頸部神経根/腕神経叢浸潤；同側異葉内別腫瘍結節</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ③ N分類 -->
+    <h2 class="sec-h2" id="n-descriptor">N分類（N2 細分化）</h2>
+    <!-- 出典: Huang J, et al. J Thorac Oncol. 2024;19(5):766-785. PMID: 37866624. DOI: 要確認 -->
+
+    <table class="comp-table" style="margin-bottom:12px">
+      <thead>
+        <tr>
+          <th>分類</th>
+          <th>定義</th>
+          <th>第8版との変更</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>N0</strong></td>
+          <td>No regional lymph node metastasis</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>N1</strong></td>
+          <td>同側気管支周囲/肺門/肺内リンパ節への転移（直接浸潤を含む）</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>N2a</strong></td>
+          <td><strong>単一のN2ステーション</strong>（同側縦隔 or 気管分岐下）への転移</td>
+          <td class="best">第9版で新設（N2を細分化）</td>
+        </tr>
+        <tr>
+          <td><strong>N2b</strong></td>
+          <td><strong>複数のN2ステーション</strong>への転移</td>
+          <td class="best">第9版で新設（N2を細分化）</td>
+        </tr>
+        <tr>
+          <td><strong>N3</strong></td>
+          <td>対側縦隔/対側肺門、または同側/対側斜角筋/鎖骨上リンパ節への転移</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="dec-evidence">
+      <strong>N2a/N2b 新設の根拠（NSCLC限定解析、stage 0–IIIC、SCLCは明示的に解析除外）：</strong><br>
+      T1 N2a 群は Stage IIIA コホートより有意に予後良好（臨床病期 p=.04、病理病期 p=.002）。<br>
+      T3 N2a 群は Stage IIIB コホートより有意に予後良好（臨床病期 p&lt;.0001、病理病期 p=.03）。
+    </div>
+
+    <div class="info-box">
+      <strong>解析対象の限定について：</strong>N記述子論文（Huang J, et al.）はstage 0–IIIC NSCLCに限定しており、SCLCを明示的に解析除外している。N2a/N2bの区分がSCLC症例において妥当かどうかはこの一次資料からは確認できない。
+    </div>
+
+    <!-- ④ M分類 -->
+    <h2 class="sec-h2" id="m-descriptor">M分類（M1c 細分化）</h2>
+    <!-- 出典: Fong KM, et al. J Thorac Oncol. 2024;19(5):786-802. PMID: 38320664. DOI: 10.1016/j.jtho.2024.01.019 -->
+
+    <table class="comp-table" style="margin-bottom:12px">
+      <thead>
+        <tr>
+          <th>分類</th>
+          <th>定義</th>
+          <th>第8版との変更</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>M0</strong></td>
+          <td>No distant metastasis</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>M1a</strong></td>
+          <td>胸膜/心嚢結節・悪性胸水/心嚢水；対側肺内別腫瘍結節</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>M1b</strong></td>
+          <td>単一臓器系への単発遠隔転移</td>
+          <td class="neutral-cell">変更なし</td>
+        </tr>
+        <tr>
+          <td><strong>M1c1</strong></td>
+          <td><strong>胸腔外の単一臓器系</strong>への多発遠隔転移</td>
+          <td class="best">第9版で新設（M1cを細分化）</td>
+        </tr>
+        <tr>
+          <td><strong>M1c2</strong></td>
+          <td><strong>胸腔外の複数臓器系</strong>への多発遠隔転移</td>
+          <td class="best">第9版で新設（M1cを細分化）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="dec-evidence">
+      <strong>M1c1/M1c2 新設の根拠（NSCLC stage IVA–IVB、14,937例が解析対象）：</strong><br>
+      単一臓器多発転移（M1c1）は複数臓器多発転移（M1c2）より有意に予後良好（p&lt;.0001）。
+    </div>
+
+    <!-- ⑤ データベース概要 -->
+    <h2 class="sec-h2" id="database">データベース概要</h2>
+    <!-- 出典: Asamura H, et al. J Thorac Oncol. 2023;18(5):564-575 -->
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>総登録症例数</td>
+          <td>124,581 例</td>
+        </tr>
+        <tr>
+          <td>解析対象</td>
+          <td>76,518 例（臨床病期 58,193 例、病理病期 39,192 例、Best Stage NSCLC 62,611 例）</td>
+        </tr>
+        <tr>
+          <td>データ収集期間</td>
+          <td>2011年1月1日〜2019年12月31日</td>
+        </tr>
+        <tr>
+          <td>地域内訳（Best Stage 62,542 例）</td>
+          <td>Asia 62%、Europe 18%、North America 17%、Rest of world 3%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ⑥ SCLCへの適用 -->
+    <h2 class="sec-h2" id="sclc">SCLCへの適用について</h2>
+    <!-- 出典: 肺癌取扱い規約 第9版 p.9-10（「II. TNM分類・補足／5. 小細胞癌」）-->
+
+    <div class="warn-box">
+      <strong>重要な留意点：第9版の変更点はNSCLCデータに基づく</strong><br><br>
+      T・N・M記述子の第9版提案論文3本はいずれも解析対象をNSCLCのみと明記している（N記述子論文はSCLCを明示的に解析除外）。したがって<strong>第9版で新設されたN2a/N2b・M1c1/M1c2の区分がSCLC症例において妥当かどうかは、これらの一次資料からは検証されていない</strong>。
+    </div>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin:14px 0">
+      肺癌取扱い規約第9版は「TNM分類および病期分類は小細胞癌に対しても適用される」（規約 p.9, Section 5）と明記する。これはTNM分類という<em>枠組み自体</em>のSCLCへの適用を述べたものであり、第9版で新設された区分がSCLC症例で検証されたことを意味しない。
+    </p>
+
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin:14px 0">
+      背景として、VALG伝統的分類（limited/extensive disease）は悪性胸水の扱いなどで意見の一致が得られておらず、IASLCは第7版から切除例でのTNM分類の有用性を報告し使用を推奨している。
+    </p>
+
+    <!-- ⑦ 参考文献 -->
+    <h2 class="sec-h2" id="references">出典・参考文献</h2>
+
+    <div class="trial-ref-block ref-list">
+
+      <div class="trial-ref-item ref-item">
+        <span class="trial-ref-name">Stage Groups</span>
+        <span style="font-size:12px;color:var(--text2);flex:1">Rami-Porta R, Nishimura KK, Giroux DJ, et al. <em>J Thorac Oncol.</em> 2024;19(7):1007-1027.</span>
+        <a href="https://doi.org/10.1016/j.jtho.2024.02.011" target="_blank" rel="noopener" class="trial-ref-btn pubmed">DOI ↗</a>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/38447919/" target="_blank" rel="noopener" class="trial-ref-btn pubmed">PMID: 38447919 ↗</a>
+      </div>
+
+      <div class="trial-ref-item ref-item">
+        <span class="trial-ref-name">T descriptors</span>
+        <span style="font-size:12px;color:var(--text2);flex:1">Van Schil PE, Asamura H, Nishimura KK, et al. <em>J Thorac Oncol.</em> 2024;19(5):749-765.<br><span style="font-size:11px;color:var(--text3)">NSCLCのみ解析対象。第9版でT記述子への変更提案なし（第8版基準を維持）</span></span>
+        <a href="https://doi.org/10.1016/j.jtho.2023.12.006" target="_blank" rel="noopener" class="trial-ref-btn pubmed">DOI ↗</a>
+        <span style="font-size:11px;background:var(--amber-light);color:var(--amber-dark);padding:3px 8px;border-radius:4px">PMID: 要確認</span>
+      </div>
+
+      <div class="trial-ref-item ref-item">
+        <span class="trial-ref-name">N descriptors</span>
+        <span style="font-size:12px;color:var(--text2);flex:1">Huang J, Osarogiagbon RU, Giroux DJ, et al. <em>J Thorac Oncol.</em> 2024;19(5):766-785.<br><span style="font-size:11px;color:var(--text3)">解析はstage 0–IIIC NSCLCに限定。SCLCは明示的に解析除外</span></span>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/37866624/" target="_blank" rel="noopener" class="trial-ref-btn pubmed">PMID: 37866624 ↗</a>
+        <span style="font-size:11px;background:var(--amber-light);color:var(--amber-dark);padding:3px 8px;border-radius:4px">DOI: 要確認</span>
+      </div>
+
+      <div class="trial-ref-item ref-item">
+        <span class="trial-ref-name">M descriptors</span>
+        <span style="font-size:12px;color:var(--text2);flex:1">Fong KM, Rosenthal A, Giroux DJ, et al. <em>J Thorac Oncol.</em> 2024;19(5):786-802.<br><span style="font-size:11px;color:var(--text3)">NSCLC stage IVA–IVB、14,937例が解析対象</span></span>
+        <a href="https://doi.org/10.1016/j.jtho.2024.01.019" target="_blank" rel="noopener" class="trial-ref-btn pubmed">DOI ↗</a>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/38320664/" target="_blank" rel="noopener" class="trial-ref-btn pubmed">PMID: 38320664 ↗</a>
+      </div>
+
+      <div class="trial-ref-item ref-item">
+        <span class="trial-ref-name">肺癌取扱い規約</span>
+        <span style="font-size:12px;color:var(--text2);flex:1">日本肺癌学会 編. 肺癌取扱い規約 第9版. 金原出版, 2025.<br><span style="font-size:11px;color:var(--text3)">「II. TNM分類・補足／5. 小細胞癌」（p.9-10）にSCLCへの適用方針を記載</span></span>
+      </div>
+
+    </div>
+
+    <div class="next-row">
+      <a class="next-btn" href="/lungatlas/sclc-overview.html">→ SCLC 総論</a>
+      <a class="next-btn" href="/lungatlas/sclc-ld.html">→ 限局型（LD-SCLC）</a>
+      <a class="next-btn" href="/lungatlas/sclc-ed.html">→ 進展型（ED-SCLC）</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
