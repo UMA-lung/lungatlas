@@ -73,6 +73,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .ref-list li:nth-child(3)::before{content:'3.'}
 .ref-list li:nth-child(4)::before{content:'4.'}
 .ref-list li:nth-child(5)::before{content:'5.'}
+.ref-list li:nth-child(6)::before{content:'6.'}
 .ref-pending{display:inline-block;font-size:10px;background:var(--amber-light);color:var(--amber-dark);padding:1px 6px;border-radius:4px;margin-left:4px;font-weight:500}
 
 /* NEXT ROW */
@@ -133,7 +134,7 @@ fetch('/lungatlas/nav.html')
 
   <main class="main">
     <div class="crumb">NSCLC › <span>化学放射線療法</span></div>
-    <div class="updated">最終更新 2026年7月 — PACIFIC本体・レジメン選択セクション公開、PACIFIC-2・ガイドライン比較は準備中</div>
+    <div class="updated">最終更新 2026年7月 — PACIFIC本体・レジメン選択・PACIFIC-2セクション公開、ガイドライン比較は準備中</div>
     <h1 class="art-h1">局所進行NSCLC（III期・切除不能）<br>化学放射線療法（CRT）</h1>
     <p class="lead">切除不能III期NSCLCに対する根治的化学放射線療法（CRT）の概要と、cCRT後のデュルバルマブ地固め療法（PACIFIC試験）について、公表データに基づき整理する。疫学・病期分類の詳細は <a href="/lungatlas/nsclc-overview.html" style="color:var(--green-dark);font-weight:500">NSCLC総論</a> を参照。</p>
 
@@ -470,10 +471,108 @@ fetch('/lungatlas/nav.html')
     <!-- ========== PACIFIC-2 ========== -->
     <h2 class="sec-h2" id="pacific2">durvalumab同時併用の試み（PACIFIC-2）</h2>
 
-    <!-- 要確認: PACIFIC-2データ未取得、NotebookLM抽出待ち -->
-    <p style="font-size:13px;color:var(--text2);line-height:1.75">
-      PACIFIC-2試験（CRT中のdurvalumab同時併用）についてはデータ検証中のため、近日追記予定。
+    <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      PACIFICレジメン（cCRT<em>後</em>の地固め）とは異なり、PACIFIC-2試験ではcCRT<em>開始時</em>からデュルバルマブを同時投与した場合の有効性・安全性が検証された（Bradley JD, et al. <em>J Clin Oncol</em> 2025）。結果は陰性であり、CRT後の地固め療法が本設定における標準治療であることを支持する。
     </p>
+
+    <h3 class="sec-h3">試験デザイン</h3>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>試験デザイン</td>
+          <td>第3相、二重盲検、プラセボ対照</td>
+        </tr>
+        <tr>
+          <td>データカットオフ</td>
+          <td>2023年9月7日</td>
+        </tr>
+        <tr>
+          <td>対象患者</td>
+          <td>切除不能Stage III NSCLC、WHO PS 0–1</td>
+        </tr>
+        <tr>
+          <td>介入群</td>
+          <td>デュルバルマブ 1500 mg Q4W をcCRT開始時から同時投与、cCRT終了後も最大12ヶ月継続（219例）</td>
+        </tr>
+        <tr>
+          <td>対照群</td>
+          <td>cCRT＋プラセボ 同スケジュール（109例）</td>
+        </tr>
+        <tr>
+          <td>ランダム化比</td>
+          <td>2:1（計328例）</td>
+        </tr>
+        <tr>
+          <td>層別化因子</td>
+          <td>年齢（65歳未満/以上）、病期（IIIA vs IIIB/C）</td>
+        </tr>
+        <tr>
+          <td>主要評価項目</td>
+          <td>PFS</td>
+        </tr>
+        <tr>
+          <td>副次評価項目</td>
+          <td>OS、ORR、安全性</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 出典: Bradley JD, et al. J Clin Oncol 2025;43(33):3610-3621, DOI 10.1200/JCO-25-00036 -->
+
+    <h3 class="sec-h3">有効性結果</h3>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>評価項目</th>
+          <th>durvalumab群</th>
+          <th>プラセボ群</th>
+          <th>HR（95%CI）</th>
+          <th>p値</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PFS中央値（主要）</td>
+          <td>13.8ヶ月</td>
+          <td>9.4ヶ月</td>
+          <td>0.85（0.65–1.12）</td>
+          <td>0.247（有意差なし）</td>
+        </tr>
+        <tr>
+          <td>OS中央値</td>
+          <td>36.4ヶ月</td>
+          <td>29.5ヶ月</td>
+          <td>1.03（0.78–1.39）</td>
+          <td>0.823（有意差なし）</td>
+        </tr>
+        <tr>
+          <td>ORR</td>
+          <td colspan="4">原著アブストラクト・主要図表に明記なし <span class="ref-pending">要確認</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      事前規定のサブグループ（年齢、性別、人種、喫煙歴、病期、組織型、PD-L1発現、EGFR変異状況、放射線照射野等）でも、主要解析と同様に一貫した改善は見られなかった。
+    </p>
+
+    <div class="warn-box">
+      <strong>安全性データについて（Erratum確認待ち）：</strong>本論文には2026年1月付の訂正（Erratum、DOI: 10.1200/JCO-25-03012）が存在する。安全性データを含む可能性があるため、正式な数値確定までは参考情報として扱ってください。以下に抽出した数値はErratum反映前のものであり、今後修正される可能性があります。<br>
+      <span style="font-size:11.5px;margin-top:8px;display:block">
+        参考（未確定）：治療関連Grade 3/4 AE：durvalumab群41.6% vs プラセボ群47.2% ／ 治療関連死：durvalumab群2例(0.9%) vs プラセボ群2例(1.9%) ／ AEによる投与中止：durvalumab群42% vs プラセボ群34%（durvalumab群で高い）
+      </span>
+    </div>
+    <!-- 要確認: Grade3/4 AE・治療関連死がdurvalumab群で低い点（方向性の逆転）、Erratum内容確認後に数値を更新すること -->
+    <!-- 要確認: ASCO Publications記事では致死的AE(全原因)発生率13.7%（durvalumab群）との記載あり。原著ページ番号確認要 -->
+
+    <div class="note-box">
+      <strong>PACIFICレジメンの位置づけ：</strong>PACIFIC-2が陰性に終わったことで、cCRT<em>後</em>のデュルバルマブ地固め療法（PACIFICレジメン）が切除不能III期NSCLCの標準治療であることが改めて支持された。cCRT中の同時投与は現時点では標準ではない。
+    </div>
 
     <!-- ========== ガイドライン ========== -->
     <h2 class="sec-h2" id="guidelines">ガイドライン比較</h2>
@@ -550,6 +649,13 @@ fetch('/lungatlas/nav.html')
         <em>J Clin Oncol</em> 2022;40(12):1301–1311.
         DOI: <a href="https://doi.org/10.1200/JCO.21.01308" style="color:var(--green-dark)">10.1200/JCO.21.01308</a>
         — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/35108059/" style="color:var(--green-dark)">35108059</a>
+      </li>
+      <li>
+        Bradley JD, Sugawara S, Lee KH, et al. (PACIFIC-2). Durvalumab with chemoradiotherapy for locally advanced, unresectable, stage III NSCLC: the phase 3 randomized PACIFIC-2 trial.
+        <em>J Clin Oncol</em> 2025;43(33):3610–3621.
+        DOI: <a href="https://doi.org/10.1200/JCO-25-00036" style="color:var(--green-dark)">10.1200/JCO-25-00036</a>
+        — PMID: <span class="ref-pending">要確認</span>
+        （Erratum: DOI <a href="https://doi.org/10.1200/JCO-25-03012" style="color:var(--green-dark)">10.1200/JCO-25-03012</a>、2026年1月）
       </li>
     </ol>
 
