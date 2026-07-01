@@ -71,6 +71,58 @@ sources:
 | IVA | Any T Any N M1a/M1b | 変更なし |
 | IVB | Any T Any N M1c（M1c1, M1c2） | M1c細分化（Stage自体は変更なし） |
 
+## 病期別生存期間データ（第9版）
+
+出典: Rami-Porta R, et al. The International Association for the Study of Lung Cancer Lung Cancer Staging Project: Proposals for Revision of the TNM Stage Groups in the Forthcoming (Ninth) Edition of the TNM Classification for Lung Cancer. J Thorac Oncol. 2024;19(7):1007-1027.
+PMID: 38447919 / DOI: 10.1016/j.jtho.2024.02.011
+
+### 母集団に関する重要な注意
+Stage IA1〜IBの数値はSupplementary Figure 17（腫瘍径データ完備例のサブグループ、臨床病期n=22,503 / 病理病期n=16,250）に基づく。
+Stage IIA以降はFigure 3（臨床病期、全評価可能例n=55,986）およびFigure 4（病理病期、全評価可能例n=38,280）に基づく。
+これらは同一の均質な母集団ではなく、異なる解析対象からの数値であることに留意。
+
+Stage 0（Tis N0 M0）および潜伏癌は、本論文の生存解析対象から除外されている（Inclusion/Exclusion Criteria, Supplementary Fig.2参照）。
+
+### 臨床病期（Clinical Stage）
+
+| Stage | 5年生存率 | 中央生存期間 | n | 出典 |
+|---|---|---|---|---|
+| IA1 | 92% (91-93) | NR | 3,001 | Suppl Fig.17 |
+| IA2 | 84% (83-85) | NR | 8,472 | Suppl Fig.17 |
+| IA3 | 76% (75-77) | NR | 5,980 | Suppl Fig.17 |
+| IB | 69% (68-71) | 9.5年 (8.4-.) | 5,050 | Suppl Fig.17 |
+| IIA | 62% (60-64) | 7.8年 (7.2-.) | 3,331 | Fig.3 |
+| IIB | 54% (53-56) | 5.8年 (5.5-6.3) | 4,285 | Fig.3 |
+| IIIA | 44% (42-46) | 4年 (3.7-4.2) | 3,725 | Fig.3 |
+| IIIB | 31% (28-34) | 2.1年 (1.9-2.4) | 1,592 | Fig.3 |
+| IIIC | 21% (16-25) | 1.3年 (1.1-1.4) | 682 | Fig.3 |
+| IVA | 18% (16-19) | 1.3年 (1.3-1.4) | 8,341 | Fig.3 |
+| IVB | 7% (6-8) | 0.7年 (0.7-0.8) | 7,899 | Fig.3 |
+
+Stage 0：記載なし（生存解析から除外）
+
+### 病理病期（Pathologic Stage、M0・R-any・切除例、術前補助療法例は除外）
+
+| Stage | 5年生存率 | 中央生存期間 | n | 出典 |
+|---|---|---|---|---|
+| IA1 | 94% (93-95) | NR | 1,893 | Suppl Fig.17 |
+| IA2 | 89% (88-91) | NR | 4,653 | Suppl Fig.17 |
+| IA3 | 83% (82-85) | NR | 2,853 | Suppl Fig.17 |
+| IB | 78% (77-79) | NR | 6,851 | Suppl Fig.17 |
+| IIA | 68% (66-70) | 10.7年 (9.9-.) | 2,943 | Fig.4 |
+| IIB | 61% (59-62) | 7.5年 (7-8.2) | 5,066 | Fig.4 |
+| IIIA | 50% (49-52) | 5年 (4.7-5.5) | 4,366 | Fig.4 |
+| IIIB | 35% (32-37) | 3年 (2.9-3.3) | 1,624 | Fig.4 |
+| IIIC | 21% (9-34) | 2.3年 (1.3-2.9) | 54 | Fig.4 |
+
+IVA/IVB/Stage 0：記載なし（病理病期はM0切除例のみを対象とするため対象外）
+
+### 補足
+中央生存期間はいずれもFig.3/Fig.4/Suppl Fig.17に「Median in Years」として記載されている年単位の数値をそのまま採用（tnm-staging.htmlでは月換算の参考値も併記）。
+95%信頼区間はグラフ上に併記されているものをそのまま記載。
+Cox回帰モデル表のn数（多変量解析で共変量が完備した症例数）は上記のグラフ生データのnとは異なる場合がある（例：臨床病期IIB vs IIAの比較ではCox表n=3,701、グラフ生データn=4,285）。
+上表のnはグラフの生データ（全評価可能例）を採用。
+
 ## T分類：変更なし
 腫瘍径カットオフ（1/2/3/4/5/7cm）、浸潤範囲の定義とも第8版から不変。
 
