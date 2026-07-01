@@ -2,9 +2,7 @@
 title: TNM分類（肺癌）第9版
 category: concept
 status: draft
-pending:
-  - T記述子論文（Van Schil PE, et al. 2024;19:749-765, DOI: 10.1016/j.jtho.2023.12.006）のPMID未確認
-  - N記述子論文（Huang J, et al. 2024;19:766-785, PMID: 37866624）のDOI未確認
+pending: []
 applies_to: [NSCLC]
 note_on_sclc: |
   規約は「TNM分類および病期分類は小細胞癌に対しても適用される」（規約p.9-10）と明記するが、
@@ -29,7 +27,7 @@ sources:
     year: 2024
     volume_pages: "19(5):749-765"
     doi: 10.1016/j.jtho.2023.12.006
-    pmid: 要確認
+    pmid: 38070600
     note: NSCLCのみ解析対象。第9版でT記述子への変更提案なし（第8版基準を維持）
   - type: paper
     label: IASLC N descriptors（第9版）
@@ -37,7 +35,7 @@ sources:
     journal: J Thorac Oncol
     year: 2024
     volume_pages: "19(5):766-785"
-    doi: 要確認
+    doi: 10.1016/j.jtho.2023.10.012
     pmid: 37866624
     note: 解析はstage 0-IIIC NSCLCに限定。SCLCは明示的に解析除外
   - type: paper
