@@ -146,6 +146,25 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .trial-ref-btn:hover{opacity:.8}
 .trial-ref-btn.detail{background:#0d5c3a;color:#fff}
 .trial-ref-btn.pubmed{background:#e8f0fe;color:#1a56db;border:1px solid #c3d3f7}
+
+/* Stat boxes — 流用: adaura.html / flaura.html */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat{background:var(--green-pale);border-radius:8px;padding:10px 13px}
+.stat-val{font-size:17px;font-weight:600;color:var(--green-dark);font-family:var(--mono)}
+.stat-label{font-size:10.5px;color:var(--text3);margin-top:2px;line-height:1.4}
+.stat-vs{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* COI bar — 流用: flaura.html */
+.coi-bar{background:#FFF3CD;border:1px solid #e8d28a;border-radius:var(--radius);padding:10px 14px;margin-bottom:22px;font-size:12px;color:var(--amber-dark);line-height:1.7}
+.coi-bar strong{font-weight:600}
+
+/* Reference list — 流用: adaura.html */
+.ref-list{list-style:none;counter-reset:ref-counter;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.ref-list li{counter-increment:ref-counter;display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--text2);line-height:1.65}
+.ref-list li::before{content:'[' counter(ref-counter) ']';font-family:var(--mono);font-size:10.5px;color:var(--green-dark);font-weight:600;flex-shrink:0;padding-top:1px;min-width:28px}
+.ref-list a{color:var(--green-mid);text-decoration:none}
+.ref-list a:hover{text-decoration:underline}
+@media(max-width:768px){.stat-row{grid-template-columns:1fr 1fr}}
 </style>
   <link rel="stylesheet" href="/lungatlas/mobile.css">
   <script src="/lungatlas/mobile.js" defer></script>
@@ -191,7 +210,176 @@ fetch('/lungatlas/nav.html')
     <!-- 要確認：vaultから流し込み -->
 
     <h2 class="sec-h2" id="chemo-io">化学免疫療法</h2>
-    <!-- 要確認：vaultから流し込み -->
+
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:18px">進展型小細胞肺癌（ED-SCLC）の1次治療では、プラチナ製剤＋エトポシド（EP療法）に免疫チェックポイント阻害薬（PD-L1阻害薬）を加えた化学免疫療法が標準的な選択肢となっている。IMpower133（アテゾリズマブ）およびCASPIAN（デュルバルマブ）の2試験が主要な根拠であり、いずれも中間解析においてOSの統計学的有意な延長を示した。</p>
+
+    <!-- 2試験比較表 -->
+    <div style="overflow-x:auto;margin-bottom:8px">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>試験名</th>
+            <th>介入群レジメン</th>
+            <th>対照群</th>
+            <th>OS<br>HR（95%CI）・p値・中央値</th>
+            <th>PFS<br>HR（95%CI）・p値</th>
+            <th>ORR<br>介入 vs 対照</th>
+            <th>Grade3以上AE<br>介入 vs 対照</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>IMpower133</strong><br><span style="font-size:10.5px;color:var(--text3)">中間解析</span></td>
+            <td>アテゾリズマブ 1200mg+カルボプラチン AUC5+エトポシド 100mg/m² D1-3 Q3W ×4→アテゾリズマブ維持（Q3W）</td>
+            <td>プラセボ+同化療→プラセボ維持</td>
+            <td class="best">HR 0.70（95%CI 0.54–0.91）p=0.007<br><span style="font-size:10.5px">12.3ヶ月 vs 10.3ヶ月</span></td>
+            <td>HR 0.77（95%CI 0.62–0.96）p=0.02<br><span style="font-size:10.5px">5.2ヶ月 vs 4.3ヶ月</span></td>
+            <td>60.2% vs 64.4%</td>
+            <td>56.6% vs 56.1%</td>
+          </tr>
+          <tr>
+            <td><strong>CASPIAN</strong><br><span style="font-size:10.5px;color:var(--text3)">中間解析</span></td>
+            <td>デュルバルマブ 1500mg+EP（カルボプラチンまたはシスプラチン選択）Q3W ×4→デュルバルマブ維持（Q4W）</td>
+            <td>EP単独（最大6サイクル、PCI可）</td>
+            <td class="best">HR 0.73（95%CI 0.59–0.91）p=0.0047<br><span style="font-size:10.5px">13.0ヶ月 vs 10.3ヶ月</span></td>
+            <td>HR 0.80（95%CI 0.66–0.96）<br><span style="font-size:10.5px">中央値の記載なし</span></td>
+            <td>68% vs 58%</td>
+            <td>62% vs 62%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box" style="margin-bottom:24px">両試験ともに中間解析の結果。直接比較試験はなく、患者背景・試験デザインが異なるため数値の直接比較は不可。</div>
+
+    <!-- IMpower133 詳細 -->
+    <h3 class="sec-h3" id="impower133">IMpower133</h3>
+    <div class="flow-card">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-val">HR 0.70</div>
+          <div class="stat-label">OS ハザード比</div>
+          <div class="stat-vs">95%CI 0.54–0.91、p=0.007</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">12.3ヶ月</div>
+          <div class="stat-label">中央値 OS（アテゾ群）</div>
+          <div class="stat-vs">vs 10.3ヶ月（プラセボ群）</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">HR 0.77</div>
+          <div class="stat-label">PFS ハザード比</div>
+          <div class="stat-vs">95%CI 0.62–0.96、p=0.02</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">試験デザイン</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>第1相（安全性）/第3相（有効性）、ランダム化、二重盲検、プラセボ対照</li>
+        <li>対象：未治療ED-SCLC、PS 0-1、安定した無症候性脳転移は許容</li>
+        <li>介入群：アテゾリズマブ（1200mg D1）＋カルボプラチン（AUC5 D1）＋エトポシド（100mg/m² D1-3）を21日毎×4サイクル→アテゾリズマブ単独維持療法（3週毎）</li>
+        <li>対照群：プラセボ＋同レジメン→プラセボ維持療法</li>
+        <li>主要評価項目：OS、治験責任医師判定PFS</li>
+        <li>副次評価項目：ORR、DOR、1年生存率等</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">患者背景</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>登録数：アテゾリズマブ群201例、プラセボ群202例</li>
+        <li>年齢中央値64歳、PS1が約65%、脳転移あり約9%</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">有効性データ（中間解析）</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>OS：12.3ヶ月 vs 10.3ヶ月、HR 0.70（95%CI 0.54–0.91）、p=0.007</li>
+        <li>PFS：5.2ヶ月 vs 4.3ヶ月、HR 0.77（95%CI 0.62–0.96）、p=0.02</li>
+        <li>ORR：60.2% vs 64.4%</li>
+        <li>サブグループ：TMB（10/Mb、16/Mbカットオフ）問わず一貫したベネフィット（探索的解析）</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">安全性データ</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>Grade3以上有害事象：56.6% vs 56.1%</li>
+        <li>治療関連死：各群3例（1.5%）</li>
+        <li>免疫関連有害事象：39.9%（発疹、甲状腺機能低下症等）</li>
+      </ul>
+
+      <div class="trial-meta-row">
+        <div class="trial-meta-item"><span class="meta-label">スポンサー</span><span class="meta-val">F. Hoffmann-La Roche/Genentech</span></div>
+        <div class="trial-meta-item"><span class="meta-label">NCT番号</span><span class="meta-val" style="color:var(--amber-dark)">要確認（規約コードGO30081のみ確認）</span></div>
+        <div class="trial-meta-item"><span class="meta-label">PMID</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/30280641/" target="_blank" rel="noopener">30280641 ↗</a></span></div>
+      </div>
+    </div>
+
+    <!-- CASPIAN 詳細 -->
+    <h3 class="sec-h3" id="caspian">CASPIAN</h3>
+    <div class="flow-card">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-val">HR 0.73</div>
+          <div class="stat-label">OS ハザード比</div>
+          <div class="stat-vs">95%CI 0.59–0.91、p=0.0047</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">13.0ヶ月</div>
+          <div class="stat-label">中央値 OS（デュルバルマブ群）</div>
+          <div class="stat-vs">vs 10.3ヶ月（EP単独群）</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">HR 0.80</div>
+          <div class="stat-label">PFS ハザード比</div>
+          <div class="stat-vs">95%CI 0.66–0.96</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">試験デザイン</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>第3相、ランダム化、非盲検</li>
+        <li>対象：未治療ED-SCLC、PS 0-1、無症候性/安定した脳転移は許容</li>
+        <li>介入群：デュルバルマブ（1500mg）＋EP（エトポシド＋カルボプラチンまたはシスプラチン選択）を21日毎×4サイクル→デュルバルマブ単独維持療法（4週毎）</li>
+        <li>対照群：EP単独（最大6サイクル、PCI可）</li>
+        <li>主要評価項目：OS</li>
+        <li>副次評価項目：PFS、ORR、安全性等</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">患者背景</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>登録数：デュルバルマブ+EP群268例、EP群269例</li>
+        <li>年齢中央値62–63歳、PS1が約65%、脳転移あり約10%</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">有効性データ（中間解析）</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>OS：13.0ヶ月 vs 10.3ヶ月、HR 0.73（95%CI 0.59–0.91）、p=0.0047</li>
+        <li>PFS：HR 0.80（95%CI 0.66–0.96）</li>
+        <li>ORR：68% vs 58%</li>
+        <li>サブグループ解析：<span style="color:var(--amber-dark);font-weight:500">要確認</span>（一貫傾向の記述はあるが具体的数値の記載なし）</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">安全性データ</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>Grade3以上有害事象：62% vs 62%</li>
+        <li>治療関連死：5例（2%）vs 2例（1%）</li>
+        <li>免疫関連有害事象：デュルバルマブ+EP群20%（甲状腺機能低下症・亢進症等）</li>
+      </ul>
+
+      <div class="trial-meta-row">
+        <div class="trial-meta-item"><span class="meta-label">スポンサー</span><span class="meta-val">AstraZeneca</span></div>
+        <div class="trial-meta-item"><span class="meta-label">NCT番号</span><span class="meta-val" style="color:var(--amber-dark)">要確認</span></div>
+        <div class="trial-meta-item"><span class="meta-label">PMID</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/31590988/" target="_blank" rel="noopener">31590988 ↗</a></span></div>
+      </div>
+    </div>
+
+    <!-- COI開示 -->
+    <div class="coi-bar">
+      <strong>スポンサー（COI）：</strong>IMpower133はF. Hoffmann-La Roche/Genentech、CASPIANはAstraZenecaが資金提供・試験実施。著者の多くが各スポンサーとの利益相反を開示している。
+    </div>
+
+    <!-- 出典 -->
+    <h3 class="sec-h3">出典</h3>
+    <ol class="ref-list">
+      <li>Horn L, Mansfield AS, Szczęsna A, et al. First-Line Atezolizumab plus Chemotherapy in Extensive-Stage Small-Cell Lung Cancer. <em>N Engl J Med.</em> 2018;379(23):2220-2229. doi: <a href="https://doi.org/10.1056/NEJMoa1809064" target="_blank" rel="noopener">10.1056/NEJMoa1809064</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/30280641/" target="_blank" rel="noopener">PMID: 30280641</a>（IMpower133）</li>
+      <li>Paz-Ares L, Dvorkin M, Chen Y, et al. Durvalumab plus platinum–etoposide versus platinum–etoposide in first-line treatment of extensive-stage small-cell lung cancer (CASPIAN): a randomised, controlled, open-label, phase 3 trial. <em>Lancet.</em> 2019;394(10212):1929-1939. doi: <a href="https://doi.org/10.1016/S0140-6736(19)32222-6" target="_blank" rel="noopener">10.1016/S0140-6736(19)32222-6</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/31590988/" target="_blank" rel="noopener">PMID: 31590988</a>（CASPIAN）</li>
+    </ol>
 
     <h2 class="sec-h2" id="maintenance">維持療法</h2>
     <!-- 要確認：vaultから流し込み -->
