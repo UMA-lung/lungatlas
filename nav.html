@@ -291,9 +291,10 @@
     <div class="nav-dropdown">
       <a id="nav-chemo" href="#">化学療法</a>
       <div class="dropdown-menu">
-        <a id="nav-driver-pos" href="/lungatlas/driver-positive.html">変異陽性 NSCLC</a>
-        <a id="nav-egfr" href="/lungatlas/egfr-firstline.html">EGFR 1次治療 選択ガイド</a>
-        <a id="nav-driver-neg" href="/lungatlas/driver-negative.html">変異陰性 NSCLC</a>
+        <a id="nav-nsclc-overview" href="/lungatlas/nsclc-overview.html">NSCLC 総論</a>
+        <a id="nav-driver-neg" href="/lungatlas/driver-negative.html" style="padding-left:28px">└ 変異陰性 NSCLC</a>
+        <a id="nav-driver-pos" href="/lungatlas/driver-positive.html" style="padding-left:28px">└ 変異陽性 NSCLC</a>
+        <a id="nav-egfr" href="/lungatlas/egfr-firstline.html" style="padding-left:44px">└ EGFR 1次治療選択ガイド</a>
         <div class="dropdown-divider"></div>
         <a id="nav-sclc-overview" href="/lungatlas/sclc-overview.html">SCLC 総論</a>
         <a id="nav-sclc-ld" href="/lungatlas/sclc-ld.html" style="padding-left:28px">└ 限局型（LD-SCLC）</a>
@@ -355,6 +356,7 @@
     'nav-adjuvant':    ['adjuvant.html'],
     'nav-adaura':      ['adaura.html'],
     'nav-about':       ['about.html', 'about-en.html'],
+    'nav-nsclc-overview': ['nsclc-overview.html'],
     'nav-sclc-overview': ['sclc-overview.html'],
     'nav-sclc-ld':       ['sclc-ld.html'],
     'nav-sclc-ed':       ['sclc-ed.html'],
@@ -368,7 +370,7 @@
     });
   });
   // 化学療法ドロップダウンのparent active
-  var chemoPages = ['driver-positive', 'driver-negative', 'egfr-firstline', 'perioperative', 'adjuvant', 'adaura', 'sclc', 'resistance'];
+  var chemoPages = ['driver-positive', 'driver-negative', 'egfr-firstline', 'perioperative', 'adjuvant', 'adaura', 'sclc', 'resistance', 'nsclc-overview'];
   if (chemoPages.some(function(p){ return path.indexOf(p) !== -1; })) {
     var chemoLink = document.getElementById('nav-chemo');
     if (chemoLink) chemoLink.classList.add('active');
