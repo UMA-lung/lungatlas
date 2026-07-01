@@ -171,6 +171,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .sf-cite-line{font-size:11px;color:var(--text3);line-height:1.6;margin-top:12px}
 .sf-cite-line a{color:var(--green-dark);text-decoration:none}
 .sf-cite-line a:hover{text-decoration:underline}
+.sf-surv-fig{margin-top:4px;padding-top:4px;border-top:1px solid var(--border)}
+.sf-surv-fig-val{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.sf-data-note{font-size:11px;color:var(--amber-dark);background:var(--amber-light);border-left:3px solid #d97a00;border-radius:0 8px 8px 0;padding:10px 14px;line-height:1.7;margin:8px 0}
 @media(max-width:768px){
   .sf-grid{grid-template-columns:repeat(4,1fr)}
   .sf-surv-grid{grid-template-columns:1fr}
@@ -371,6 +374,10 @@ fetch('/lungatlas/nav.html')
         </div>
       </div>
       <div class="sf-no-match" id="sf-no-match">この組み合わせは第9版TNM分類で定義されていません</div>
+
+      <p class="sf-data-note">
+        Stage IA1〜IB の数値は補足図17（腫瘍径データ完備例のサブグループ）、Stage IIA 以降は Fig.3/Fig.4（全評価可能例）に基づくため、単一の均質な母集団ではありません。詳細は原著を参照してください。
+      </p>
 
       <p class="sf-cite-line">
         生存期間データ: Rami-Porta R, et al. <em>J Thorac Oncol.</em> 2024;19(7):1007-1027, Fig.3/4, Suppl Fig.17（サブグループ解析）。詳細は原著を参照。
@@ -639,29 +646,29 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   };
   var CLIN={
     '0':null,
-    'IA1':{os5:'92%',median:'NR',n:'3,001'},
-    'IA2':{os5:'84%',median:'NR',n:'8,472'},
-    'IA3':{os5:'76%',median:'NR',n:'5,980'},
-    'IB':{os5:'69%',median:'114ヶ月',n:'5,050'},
-    'IIA':{os5:'62%',median:'96ヶ月',n:'3,331'},
-    'IIB':{os5:'54%',median:'69.6ヶ月',n:'4,285'},
-    'IIIA':{os5:'44%',median:'48ヶ月',n:'3,725'},
-    'IIIB':{os5:'31%',median:'25.2ヶ月',n:'1,592'},
-    'IIIC':{os5:'21%',median:'15.6ヶ月',n:'682'},
-    'IVA':{os5:'18%',median:'15.6ヶ月',n:'8,341'},
-    'IVB':{os5:'7%',median:'8.4ヶ月',n:'7,899'}
+    'IA1':{os5:'92%',median:'NR',n:'3,001',fig:'Suppl Fig.17'},
+    'IA2':{os5:'84%',median:'NR',n:'8,472',fig:'Suppl Fig.17'},
+    'IA3':{os5:'76%',median:'NR',n:'5,980',fig:'Suppl Fig.17'},
+    'IB':{os5:'69%',median:'9.5年（参考：約114ヶ月）',n:'5,050',fig:'Suppl Fig.17'},
+    'IIA':{os5:'62%',median:'7.8年（参考：約93.6ヶ月）',n:'3,331',fig:'Fig.3'},
+    'IIB':{os5:'54%',median:'5.8年（参考：約69.6ヶ月）',n:'4,285',fig:'Fig.3'},
+    'IIIA':{os5:'44%',median:'4年（参考：48ヶ月）',n:'3,725',fig:'Fig.3'},
+    'IIIB':{os5:'31%',median:'2.1年（参考：約25.2ヶ月）',n:'1,592',fig:'Fig.3'},
+    'IIIC':{os5:'21%',median:'1.3年（参考：約15.6ヶ月）',n:'682',fig:'Fig.3'},
+    'IVA':{os5:'18%',median:'1.3年（参考：約15.6ヶ月）',n:'8,341',fig:'Fig.3'},
+    'IVB':{os5:'7%',median:'0.7年（参考：約8.4ヶ月）',n:'7,899',fig:'Fig.3'}
   };
   var PATH={
     '0':null,
-    'IA1':{os5:'94%',median:'NR',n:'1,893'},
-    'IA2':{os5:'89%',median:'NR',n:'4,653'},
-    'IA3':{os5:'83%',median:'NR',n:'2,853'},
-    'IB':{os5:'78%',median:'NR',n:'6,851'},
-    'IIA':{os5:'69%',median:'128.4ヶ月',n:'2,943'},
-    'IIB':{os5:'61%',median:'90ヶ月',n:'5,066'},
-    'IIIA':{os5:'50%',median:'60ヶ月',n:'4,366'},
-    'IIIB':{os5:'35%',median:'36ヶ月',n:'1,624'},
-    'IIIC':{os5:'21%',median:'27.6ヶ月',n:'54'},
+    'IA1':{os5:'94%',median:'NR',n:'1,893',fig:'Suppl Fig.17'},
+    'IA2':{os5:'89%',median:'NR',n:'4,653',fig:'Suppl Fig.17'},
+    'IA3':{os5:'83%',median:'NR',n:'2,853',fig:'Suppl Fig.17'},
+    'IB':{os5:'78%',median:'NR',n:'6,851',fig:'Suppl Fig.17'},
+    'IIA':{os5:'68%',median:'10.7年（参考：約128.4ヶ月）',n:'2,943',fig:'Fig.4'},
+    'IIB':{os5:'61%',median:'7.5年（参考：約90ヶ月）',n:'5,066',fig:'Fig.4'},
+    'IIIA':{os5:'50%',median:'5年（参考：60ヶ月）',n:'4,366',fig:'Fig.4'},
+    'IIIB':{os5:'35%',median:'3年（参考：36ヶ月）',n:'1,624',fig:'Fig.4'},
+    'IIIC':{os5:'21%',median:'2.3年（参考：約27.6ヶ月）',n:'54',fig:'Fig.4'},
     'IVA':null,
     'IVB':null
   };
@@ -675,7 +682,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(!d) return '<span class="sf-surv-na">記載なし</span>';
     return '<div class="sf-surv-row"><span class="sf-surv-key">5年生存率</span><span class="sf-surv-val">'+d.os5+'</span></div>'+
            '<div class="sf-surv-row"><span class="sf-surv-key">中央生存期間</span><span class="sf-surv-val">'+d.median+'</span></div>'+
-           '<div class="sf-surv-row"><span class="sf-surv-key">症例数（n）</span><span class="sf-surv-val">'+d.n+'</span></div>';
+           '<div class="sf-surv-row"><span class="sf-surv-key">症例数（n）</span><span class="sf-surv-val">'+d.n+'</span></div>'+
+           '<div class="sf-surv-row sf-surv-fig"><span class="sf-surv-key">出典</span><span class="sf-surv-fig-val">'+d.fig+'</span></div>';
   }
   function sfUpdate(){
     var t=document.getElementById('sf-t').value;
