@@ -64,7 +64,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .ref-list li:nth-child(3)::before{content:'3.'}
 .ref-list li:nth-child(4)::before{content:'4.'}
 .ref-list li:nth-child(5)::before{content:'5.'}
+.ref-list li:nth-child(6)::before{content:'6.'}
+.ref-list li:nth-child(7)::before{content:'7.'}
+.ref-list li:nth-child(8)::before{content:'8.'}
+.ref-list li:nth-child(9)::before{content:'9.'}
+.ref-list li:nth-child(10)::before{content:'10.'}
 .ref-pending{display:inline-block;font-size:10px;background:var(--amber-light);color:var(--amber-dark);padding:1px 6px;border-radius:4px;margin-left:4px;font-weight:500}
+.src-book{font-size:11px;color:var(--text3);margin:4px 0 14px;line-height:1.6;font-style:italic;padding-left:8px;border-left:2px solid var(--border);display:block}
+.src-paper{font-size:12px;color:var(--text2);background:var(--green-pale);border-left:3px solid var(--green-mid);padding:8px 12px;border-radius:0 6px 6px 0;margin:8px 0 14px;line-height:1.6}
 
 /* NEXT ROW */
 .next-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
@@ -108,6 +115,12 @@ fetch('/lungatlas/nav.html')
     <div class="sb-head">このページの内容</div>
     <a class="sb-item active" href="#incidence-mortality">罹患・死亡（世界・日本）</a>
     <a class="sb-item" href="#risk-factors">危険因子</a>
+    <a class="sb-sub" href="#rf-smoking">能動喫煙</a>
+    <a class="sb-sub" href="#rf-ets">受動喫煙（ETS）</a>
+    <a class="sb-sub" href="#rf-asbestos">アスベスト</a>
+    <a class="sb-sub" href="#rf-radon">ラドン</a>
+    <a class="sb-sub" href="#rf-air-pollution">大気汚染</a>
+    <a class="sb-sub" href="#rf-genetic">遺伝的因子</a>
     <a class="sb-item" href="#histology">組織型分布</a>
     <a class="sb-item" href="#staging-distribution">病期分布</a>
     <a class="sb-item" href="#survival">生存率</a>
@@ -259,10 +272,172 @@ fetch('/lungatlas/nav.html')
     <!-- 「現在習慣的に喫煙している者」の定義：たばこを「毎日吸っている」または「時々吸う日がある」と回答した者 -->
     <!-- 要確認: 令和5年（2023年）は公式報告書内で「5年ぶりの有意な増加」と言及されているが、背景要因の記載はなし。推測で補わない -->
 
-    <div class="warn-box">
-      <strong>喫煙以外の危険因子について：</strong>アスベスト・大気汚染・職業性曝露・ラドン等の危険因子は、現時点で一次資料による確認が完了しておらず「要確認」として保留しています。
-    </div>
-    <!-- 要確認: アスベスト・大気汚染・職業性曝露・ラドン等の危険因子データ（教科書2次資料での確認待ち） -->
+    <!-- ===== 能動喫煙 ===== -->
+    <h3 class="sec-h3" id="rf-smoking">能動喫煙</h3>
+    <table class="comp-table">
+      <thead><tr><th>指標</th><th>数値</th><th>出典</th></tr></thead>
+      <tbody>
+        <tr><td>男性喫煙者の肺癌リスク</td><td>非喫煙者の約9〜10倍</td><td>Shields' Ch.89</td></tr>
+        <tr><td>女性喫煙者の肺癌リスク</td><td>非喫煙者の約20倍以上</td><td>Shields' Ch.89</td></tr>
+        <tr><td>SCLCの喫煙関連割合</td><td>98%</td><td>Fishman's Ch.106</td></tr>
+        <tr><td>全肺癌に占める喫煙起因割合</td><td>約90%</td><td>Pearson's Ch.57</td></tr>
+      </tbody>
+    </table>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2297-2302)、Fishman's Ch.106 (PDF p.1931-1932)、Pearson's Ch.57 (PDF p.708-728)。1950年Wynder &amp; Graham研究：肺癌の96.5%が中等度〜重度喫煙者（一般人口の喫煙率73.7%との対比）。要確認：リスク倍率の算出根拠論文名の記載なし</span>
+
+    <!-- ===== 受動喫煙（ETS） ===== -->
+    <h3 class="sec-h3" id="rf-ets">受動喫煙（ETS）</h3>
+    <table class="comp-table">
+      <thead><tr><th>指標</th><th>数値</th><th>出典</th></tr></thead>
+      <tbody>
+        <tr><td>家庭内ETS曝露・非喫煙者のOR</td><td>1.34（NRC 1986）</td><td>Shields' Ch.89</td></tr>
+        <tr><td>ETS曝露OR</td><td>1.76</td><td>Pearson's Ch.57</td></tr>
+        <tr><td>喫煙者と同居する場合のリスク増加</td><td>20%</td><td>Pearson's Ch.57</td></tr>
+        <tr><td>世界の受動喫煙関連死亡（年間）</td><td>約22,000人</td><td>Shields' Ch.89</td></tr>
+        <tr><td>米国の受動喫煙関連死亡（年間）</td><td>約3,000人</td><td>Pearson's Ch.57</td></tr>
+        <tr><td>非喫煙者の肺癌に占める受動喫煙起因割合</td><td>約1/4</td><td>Pearson's Ch.57</td></tr>
+      </tbody>
+    </table>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2311)、Pearson's Ch.57 (PDF p.728-730)。リスク増加は生後〜25歳の曝露開始時に認められ、それ以降では関連が明確でないとの記載あり（Shields'）。ORの数値差（1.34 vs 1.76）は研究間の違いによるものと考えられるが一次資料未確認</span>
+
+    <!-- ===== アスベスト ===== -->
+    <h3 class="sec-h3" id="rf-asbestos">アスベスト</h3>
+    <table class="comp-table">
+      <thead><tr><th>曝露パターン</th><th>相対リスク</th><th>出典</th></tr></thead>
+      <tbody>
+        <tr><td>アスベスト曝露のみ（非喫煙）</td><td>RR 3.6</td><td>Shields' Ch.89（CPS II）</td></tr>
+        <tr><td>石綿肺のみ（非喫煙）</td><td>RR 7.4</td><td>Shields' Ch.89（CPS II）</td></tr>
+        <tr><td>喫煙のみ（アスベスト曝露なし）</td><td>RR 10.3</td><td>Shields' Ch.89（CPS II）</td></tr>
+        <tr><td>喫煙＋アスベスト曝露</td><td>RR 14.4（相加的）</td><td>Shields' Ch.89（CPS II）</td></tr>
+        <tr><td>喫煙＋石綿肺</td><td>RR 36.8（相加以上）</td><td>Shields' Ch.89（CPS II）</td></tr>
+        <tr><td>アスベスト曝露・非喫煙者</td><td>一般集団比 約5倍</td><td>Pearson's Ch.57</td></tr>
+        <tr><td>アスベスト曝露・喫煙者</td><td>非曝露非喫煙者比 &gt;50倍</td><td>Pearson's Ch.57</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">喫煙とアスベストの相互作用について、Fishman's（Ch.55）は「相乗的（multiplicative）」と記載する一方、上記CPS IIデータ（Shields'）は「相加的（additive）」という表現を用いている。相互作用の様式については資料間で表現が一致していない。</p>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">その他の所見（Fishman's Ch.55）：アスベスト曝露者の癌死亡は肺癌を中心に約3倍超。肺癌は曝露から約40年後、中皮腫は約45年後にピーク。禁煙により肺癌死亡率は約2/3低下。アスベスト関連肺癌で最も高頻度の組織型は腺癌。アスベスト絶縁工の肺癌死亡の18%は胸部X線で肺実質線維化を認めない。</p>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2313-2314, CPS IIコホート・石綿絶縁工2,000人超)、Fishman's Ch.55 (PDF p.984-990)、Pearson's Ch.57 (PDF p.734)。要確認: アモサイト50 fibers/mL曝露で5倍リスク（Fishman's）は比較対象群不明</span>
+
+    <!-- ===== ラドン ===== -->
+    <h3 class="sec-h3" id="rf-radon">ラドン</h3>
+    <table class="comp-table">
+      <thead><tr><th>指標</th><th>数値</th><th>出典</th></tr></thead>
+      <tbody>
+        <tr><td>米国住宅内ラドン平均値</td><td>約1.25〜1.5 pCi/L</td><td>Shields'（1.25）/Fishman's（1.5）</td></tr>
+        <tr><td>EPAガイドライン超過住宅割合（米国）</td><td>約4%</td><td>Fishman's Ch.60</td></tr>
+        <tr><td>欧州における室内ラドン起因肺癌死亡割合</td><td>約9%</td><td>Pearson's Ch.57</td></tr>
+        <tr><td>非喫煙者の肺癌に占める室内ラドン起因割合</td><td>約30%</td><td>Pearson's Ch.57</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">喫煙とラドンの相互作用様式についても資料間で見解が分かれる：BEIR IV（1988年）は相乗的（multiplicative）と結論した一方、Darby &amp; Sametによるより新しいレビューでは相加的（additive）と示唆されている（Shields' Ch.89）。職業性ラドン曝露（鉱山労働者）では、累積曝露0〜500 WLM（work-level month）の範囲で超過相対リスクはほぼ線形に増加する（Shields' Ch.89, Table 89.5）。</p>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2315-2318)、Fishman's Ch.60 (PDF p.1041-1068)、Pearson's Ch.57 (PDF p.734)。要確認: Shields'とFishman'sで米国住宅内ラドン平均値が異なる（1.25 vs 1.5 pCi/L）。測定年・調査方法の違いの可能性</span>
+
+    <!-- ===== 職業性発癌物質 ===== -->
+    <h3 class="sec-h3" id="rf-occupational">職業性発癌物質（アスベスト以外）</h3>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">IARCが特定した既知の職業性肺発癌物質（Shields' Ch.89, Table 89.7）：ヒ素、石綿、ベリリウム、カドミウム、クロロメチルエーテル類、クロム、ニッケル、多環芳香族炭化水素、ラドン、シリカ、塩化ビニル</p>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">米国における職業性発癌物質関連の肺癌の年間発生数（NIOSH推計）：男性9,000〜10,000人、女性900〜1,900人。このうち半数以上がアスベスト関連とされる（Shields' Ch.89）。</p>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2313, 2318, Table 89.7/89.8)、Fishman's Ch.106 (PDF p.1931-1932)。要確認: NIOSH推計（Steenland et al.）の原著論文PMID未確認</span>
+
+    <!-- ===== 大気汚染 ===== -->
+    <h3 class="sec-h3" id="rf-air-pollution">大気汚染</h3>
+    <table class="comp-table">
+      <thead><tr><th>指標</th><th>数値</th><th>出典</th></tr></thead>
+      <tbody>
+        <tr><td>「都市因子」による肺癌死亡率増加</td><td>10〜40%</td><td>Shields' Ch.89</td></tr>
+        <tr><td>NO2高曝露（&gt;29.3 μg/m³、21-30年）のRR</td><td>1.44</td><td>Shields' Ch.89（スウェーデン症例対照研究、1990年）</td></tr>
+        <tr><td>PM2.5長期曝露、10 μg/m³増加あたりの超過リスク</td><td>約19%</td><td>Shields' Ch.89（米国コホート研究2件）</td></tr>
+        <tr><td>大気汚染起因の肺癌割合</td><td>最大でも約1%</td><td>Pearson's Ch.57</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">Fishman's（Ch.60）は「大気汚染に起因する肺癌はごく一部」と記載しており、Pearson'sの「最大約1%」という記載と方向性は一致する。</p>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2312)、Fishman's Ch.60 (PDF p.1041-1068)、Pearson's Ch.57 (PDF p.734)。要確認: Nyberg 1990（スウェーデン症例対照研究）の原著論文PMID未確認</span>
+
+    <!-- ===== 遺伝的因子・家族歴 ===== -->
+    <h3 class="sec-h3" id="rf-genetic">遺伝的因子・家族歴</h3>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:6px">家族歴を有する非喫煙者の肺癌リスク：OR 2.00（95%CI 1.39-2.90）</p>
+    <p class="src-paper">Spitz MR, Hong WK, Amos CI, et al. A risk model for prediction of lung cancer. <em>J Natl Cancer Inst.</em> 2007;99(9):715-726. doi:<a href="https://doi.org/10.1093/jnci/djk153" style="color:var(--green-dark)">10.1093/jnci/djk153</a> — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/17470739/" style="color:var(--green-dark)">17470739</a></p>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:6px">Liverpool Lung Projectモデルにおける家族歴（早期発症、60歳未満）のOR：2.02（95%CI 1.18-3.45）。晩期発症（60歳以上）ではOR 1.18で有意差なし</p>
+    <p class="src-paper">Cassidy A, Myles JP, van Tongeren M, et al. The LLP risk model: an individual risk prediction model for lung cancer. <em>Br J Cancer.</em> 2008;98(2):270-276. doi:<a href="https://doi.org/10.1038/sj.bjc.6604158" style="color:var(--green-dark)">10.1038/sj.bjc.6604158</a> — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/18087271/" style="color:var(--green-dark)">18087271</a></p>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">その他、両モデルで有意だったリスク因子（Shields' Ch.89, Table 89.2/89.3より）：</p>
+    <table class="comp-table">
+      <thead><tr><th>リスク因子</th><th>OR（95%CI）</th><th>出典モデル</th></tr></thead>
+      <tbody>
+        <tr><td>ETS曝露（非喫煙者）</td><td>1.80（1.20-2.89）</td><td>Spitzモデル</td></tr>
+        <tr><td>肺気腫既往（元喫煙者）</td><td>2.65（1.95-3.60）</td><td>Spitzモデル</td></tr>
+        <tr><td>粉塵曝露既往（元喫煙者）</td><td>1.59</td><td>Spitzモデル</td></tr>
+        <tr><td>肺気腫既往（現喫煙者）</td><td>2.13</td><td>Spitzモデル</td></tr>
+        <tr><td>Pack-years ≥57.5（現喫煙者）</td><td>1.85</td><td>Spitzモデル</td></tr>
+        <tr><td>アスベスト曝露既往（現喫煙者）</td><td>1.51</td><td>Spitzモデル</td></tr>
+        <tr><td>喫煙期間21-40年</td><td>4.27（2.62-6.94）</td><td>LLPモデル</td></tr>
+        <tr><td>喫煙期間41-60年</td><td>12.27（7.41-20.30）</td><td>LLPモデル</td></tr>
+        <tr><td>喫煙期間&gt;60年</td><td>15.25（5.71-40.65）</td><td>LLPモデル</td></tr>
+        <tr><td>肺炎既往</td><td>1.83（1.26-2.64）</td><td>LLPモデル</td></tr>
+        <tr><td>職業性アスベスト曝露</td><td>1.89（1.35-2.62）</td><td>LLPモデル</td></tr>
+        <tr><td>悪性腫瘍既往</td><td>1.96（1.22-3.14）</td><td>LLPモデル</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">家族歴陽性者における肺癌リスクの2倍増加は32研究のメタアナリシスでも支持されている（Shields' Ch.89, PDF p.2303）。GSTM1遺伝子null型（人口の50%が該当）を有する場合、肺癌リスクが17%増加するとの報告もある（Benhamou et al.、Shields' Ch.89 PDF p.2305で引用）。</p>
+    <span class="src-book">要確認: メタアナリシス（32研究）およびBenhamou et al.のPMIDは未確認。Fishman's・Pearson'sには遺伝・家族歴に特化した疫学数値の記述なし</span>
+
+    <!-- ===== 組織型別の危険因子・分子疫学 ===== -->
+    <h3 class="sec-h3" id="rf-histology">組織型別の危険因子・分子疫学</h3>
+    <ul style="font-size:12.5px;color:var(--text2);line-height:1.9;padding-left:18px;margin-bottom:8px">
+      <li>フィルター付き低タール紙巻きたばこの普及により、より深い吸引パターンが生じ、末梢気道への発癌物質曝露が増加したことが、腺癌増加の一因である可能性が示唆されている（仮説）（Shields' Ch.89, PDF p.2301-2302）</li>
+      <li>ヒト肺腺癌の24%でK-ras発癌遺伝子の活性化が確認されている（Shields' Ch.89, PDF p.2305）</li>
+      <li>EGFR変異はNSCLC全体の10〜15%に認められ、女性・東アジア系・非喫煙者・腺癌（細気管支肺胞癌亜型を含む）でより高頻度（Shields' Ch.89, PDF p.2305-2306）</li>
+      <li>KRAS変異はNSCLCの15〜25%に認められる（Shields' Ch.89, PDF p.2305）</li>
+      <li>アスベスト関連肺癌で最も高頻度の組織型は腺癌（Fishman's Ch.55）</li>
+      <li>現在最も高頻度の組織型は腺癌（Pearson's Ch.57）</li>
+    </ul>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2301-2306)、Fishman's Ch.55、Pearson's Ch.57 (PDF p.727)</span>
+
+    <!-- ===== 年齢・性差 ===== -->
+    <h3 class="sec-h3" id="rf-age-sex">年齢・性差</h3>
+    <ul style="font-size:12.5px;color:var(--text2);line-height:1.9;padding-left:18px;margin-bottom:8px">
+      <li>診断時年齢中央値：70歳、約1/3が65〜74歳（Shields' Ch.89）</li>
+      <li>罹患率：男性は女性の約2倍（Pearson's Ch.57）</li>
+      <li>女性の肺癌死亡率は1930年から1997年にかけて600%増加（Pearson's Ch.57）</li>
+      <li>1987年、女性における癌死亡原因として肺癌が乳癌を上回った（Pearson's Ch.57）</li>
+      <li>女性は男性より喫煙発癌物質への感受性が高い可能性がメタアナリシスで示唆されている（RR 1.44）（Shields' Ch.89, PDF p.2308）</li>
+      <li>早期閉経（40歳以下）：腺癌リスク低下（OR 0.3）（Shields' Ch.89）</li>
+      <li>エストロゲン補充療法：腺癌リスク増加（OR 1.7）、喫煙との併用でさらに増加（OR 32.4）（Shields' Ch.89, PDF p.2308）</li>
+    </ul>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2297, 2307-2308)、Pearson's Ch.57 (PDF p.729-730)。要確認: エストロゲン補充療法併用時のOR 32.4は単一研究由来の可能性が高く、一次資料未確認</span>
+
+    <!-- ===== 人種・民族差 ===== -->
+    <h3 class="sec-h3" id="rf-race">人種・民族差</h3>
+    <table class="comp-table">
+      <thead>
+        <tr><th>人種・性別</th><th>罹患率（Shields'、SEER 2012前後）</th><th>罹患率（Pearson's、1997-2001年齢標準化）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>黒人男性</td><td>83.7/10万</td><td>117/10万</td></tr>
+        <tr><td>白人男性</td><td>65.9/10万</td><td>80/10万</td></tr>
+        <tr><td>白人女性</td><td>50.8/10万</td><td>51/10万</td></tr>
+        <tr><td>黒人女性</td><td>49.0/10万</td><td>54/10万</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">両書で人種別の罹患率順位（黒人男性が最高）という方向性は一致するが、絶対値には差がある。測定年代・年齢調整基準の違いによるものと考えられるが、一次資料での確認はできていない。</p>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">東アジア系非喫煙者における分子疫学（Shields' Ch.89, PDF p.2310）：EGFR変異75%、HER2変異6%、ALK融合5%。東アジア系集団の検体では88%でEGFR・HER2・ALKいずれかの異常が確認されたとの記載もある。</p>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2297, 2309-2310)、Pearson's Ch.57 (PDF p.730)。要確認: 罹患率数値の資料間差の原因</span>
+
+    <!-- ===== 合併肺疾患・その他 ===== -->
+    <h3 class="sec-h3" id="rf-comorbidity">合併肺疾患・その他</h3>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">喫煙者における各種肺疾患既往との相対リスク（メタアナリシス、Shields' Ch.89, PDF p.2307）：</p>
+    <table class="comp-table">
+      <thead><tr><th>合併疾患</th><th>RR（喫煙者）</th><th>RR（非喫煙者）</th></tr></thead>
+      <tbody>
+        <tr><td>COPD</td><td>2.2</td><td>有意差なし</td></tr>
+        <tr><td>慢性気管支炎</td><td>1.5</td><td>有意差なし</td></tr>
+        <tr><td>肺気腫</td><td>2.0</td><td>有意差なし</td></tr>
+        <tr><td>肺炎</td><td>1.4</td><td>1.4</td></tr>
+        <tr><td>結核</td><td>1.8</td><td>1.9</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">特発性肺線維症（CFA）患者における肺癌のOR：8.25（対照群比）（Shields' Ch.89, PDF p.2307）</p>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:8px">βカロテン・ビタミンAサプリメントによる肺癌予防効果について、ATBC試験（喫煙者男性29,133人）・CARET試験（アスベスト曝露歴または喫煙歴を有する18,314人）では、βカロテン群でむしろ死亡率・肺癌発生数の増加が観察され、CARET試験は21ヶ月で早期中止となった。Physicians Health Studyではβカロテン補充による有益・有害いずれの効果も認められなかった（Shields' Ch.89, PDF p.2320-2321）。</p>
+    <span class="src-book">出典: Shields' Ch.89 (PDF p.2307, 2320-2321)</span>
+    <!-- 出典区分: 危険因子の全セクションは教科書2次資料（Shields'/Fishman's/Pearson's）。Spitz 2007・Cassidy 2008のみ原著論文（PMID確認済み） -->
 
     <!-- ========== 組織型分布 ========== -->
     <h2 class="sec-h2" id="histology">組織型分布</h2>
@@ -373,6 +548,30 @@ fetch('/lungatlas/nav.html')
       <li>
         A Report from the Japanese Joint Committee of Lung Cancer Registry: a Study of 18,973 Surgical Cases in 2010（Secondary Publication）.
         — 正式な著者名・掲載誌・PMID: <span class="ref-pending">要確認</span>
+      </li>
+      <li>
+        Spitz MR, Hong WK, Amos CI, et al. A risk model for prediction of lung cancer.
+        <em>J Natl Cancer Inst.</em> 2007;99(9):715-726.
+        DOI: <a href="https://doi.org/10.1093/jnci/djk153" style="color:var(--green-dark)">10.1093/jnci/djk153</a>
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/17470739/" style="color:var(--green-dark)">17470739</a>
+      </li>
+      <li>
+        Cassidy A, Myles JP, van Tongeren M, et al. The LLP risk model: an individual risk prediction model for lung cancer.
+        <em>Br J Cancer.</em> 2008;98(2):270-276.
+        DOI: <a href="https://doi.org/10.1038/sj.bjc.6604158" style="color:var(--green-dark)">10.1038/sj.bjc.6604158</a>
+        — PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/18087271/" style="color:var(--green-dark)">18087271</a>
+      </li>
+      <li>
+        Samson P, Colditz GA. Lung Cancer: Epidemiology and Carcinogenesis. In: Shields' General Thoracic Surgery, Ch.89. PDF pp.2297-2330.
+        — 危険因子（喫煙・ETS・アスベスト・ラドン・職業性曝露・大気汚染・遺伝的因子・人種差）の記述に使用
+      </li>
+      <li>
+        Fishman's Pulmonary Diseases and Disorders. Ch.55 (Asbestos-Related Lung Disease) / Ch.60 (Indoor and Outdoor Air Pollution) / Ch.106 (SCLC). PDF pp.984-990, 1041-1068, 1931-1932.
+        — アスベスト・大気汚染・ラドン・SCLC疫学の記述に使用
+      </li>
+      <li>
+        Pearson's Thoracic &amp; Cardiovascular Surgery. Ch.57: Biology and Epidemiology of Lung Cancer. PDF pp.727-747（書籍p.708-728）.
+        — 危険因子・年齢性差・人種差の記述に使用
       </li>
     </ol>
 

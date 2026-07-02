@@ -12,55 +12,55 @@ const SCRAPS_DATA = [
   {
     title: "IMpower150試験 — 1次治療 atezolizumab + bevacizumab + 化学療法（ABCP、非扁平IV期NSCLC）",
     summary: "治療歴なし非扁平IV期NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFS・OSを改善した第3相試験。EGFR/ALK変異例も組み入れ、探索的にbenefit。ATTLAS試験の理論的根拠となった元試験。",
-    date: "2026-06-24",
+    date: "2026-07-02",
     url: "/lungatlas/scraps/impower150.html"
   },
   {
     title: "ATTLAS試験（KCSG-LU19-04）— TKI耐性後 atezolizumab + bevacizumab + 化学療法（EGFR/ALK陽性NSCLC）",
     summary: "EGFR-TKIまたはALK-TKI耐性後のEGFR/ALK陽性NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFSを改善した韓国発の第3相試験。PFS中央値8.5 vs 5.6か月、HR 0.62。",
-    date: "2026-06-24",
+    date: "2026-07-02",
     url: "/lungatlas/scraps/attlas.html"
   },
   {
     title: "LAURA試験 — 切除不能III期EGFR変異NSCLC 根治的CRT後 osimertinib地固め療法",
     summary: "切除不能stage III EGFR変異NSCLC（CRT後病勢進行なし）でosimertinibがPFSを劇的に改善した第3相試験。PFS中央値39.1 vs 5.6か月、HR 0.16。OSは未成熟。PACIFIC-durvalumabのEGFR限界を補う位置づけ。",
-    date: "2026-06-24",
+    date: "2026-07-02",
     url: "/lungatlas/scraps/laura.html"
   },
   {
     title: "EMPOWER-Lung 3試験 — 1次治療 cemiplimab + 化学療法 vs 化学療法（進行NSCLC、PD-L1問わず）",
     summary: "治療歴なしstage III/IV・EGFR/ALK/ROS1陰性NSCLCで、cemiplimab + プラチナ化学療法が化学療法単独を上回るOS・PFSを示した第3相試験。PD-L1問わず有効。OS中央値21.9 vs 13.0か月。",
-    date: "2026-06-30",
+    date: "2026-06-24",
     url: "/lungatlas/scraps/empower-lung3.html"
   },
   {
     title: "IMpower110試験 — 1次治療 atezolizumab単剤 vs 化学療法（PD-L1陽性 IV期NSCLC）",
     summary: "PD-L1陽性・EGFR/ALK陰性のIV期NSCLCで、atezolizumab単剤がPD-L1高発現群でOSを改善した第3相試験。OS中央値20.2 vs 13.1か月。SP142アッセイ使用。高+中発現群では有意に到達せず。",
-    date: "2026-06-24",
+    date: "2026-06-30",
     url: "/lungatlas/scraps/impower110.html"
   },
   {
     title: "EMPOWER-Lung 1試験 — 1次治療 cemiplimab単剤 vs 化学療法（PD-L1≥50% 進行NSCLC）",
     summary: "PD-L1≥50%・EGFR/ALK/ROS1陰性の進行NSCLCで、cemiplimab単剤が化学療法を上回るOS・PFSを示した第3相試験。5年OS率29.0% vs 15.0%。PD-L1≥90%で最大効果。増悪後cemiplimab継続デザインが特徴。",
-    date: "2026-06-24",
+    date: "2026-06-30",
     url: "/lungatlas/scraps/empower-lung1.html"
   },
   {
     title: "KEYNOTE-024試験 — 1次治療 pembrolizumab単剤 vs 化学療法（PD-L1 TPS≥50% IV期NSCLC）",
     summary: "PD-L1 TPS≥50%・EGFR/ALK陰性のIV期NSCLCで、pembrolizumab単剤が化学療法を上回るPFS・OSを示した第3相試験。免疫療法が1次治療で化学療法に優越を示した最初の試験。5年OS率31.9% vs 16.3%。",
-    date: "2026-06-24",
+    date: "2026-06-30",
     url: "/lungatlas/scraps/kn024.html"
   },
   {
     title: "KEYNOTE-407試験 — 1次治療 pembrolizumab + カルボプラチン・タキサン（扁平 IV期NSCLC）",
     summary: "治療歴なし扁平上皮IV期NSCLCで、pembrolizumab + カルボプラチン・パクリタキセル/nab-パクリタキセルがOS・PFSを改善した第3相試験。PD-L1問わず有効。OS中央値17.1 vs 11.6か月。扁平の標準化学免疫療法。",
-    date: "2026-06-24",
+    date: "2026-06-30",
     url: "/lungatlas/scraps/kn407.html"
   },
   {
     title: "KEYNOTE-189試験 — 1次治療 pembrolizumab + ペメトレキセド・プラチナ（非扁平 IV期 EGFR/ALK陰性NSCLC）",
     summary: "治療歴なし非扁平IV期EGFR/ALK陰性NSCLCで、pembrolizumab + ペメトレキセド・プラチナがOS・PFSを改善した第3相試験。PD-L1問わず有効。5年OS率19.4% vs 11.3%。化学療法+IOの基準レジメン。",
-    date: "2026-06-24",
+    date: "2026-06-30",
     url: "/lungatlas/scraps/kn189.html"
   },
   {
@@ -72,7 +72,7 @@ const SCRAPS_DATA = [
   {
     title: "PAPILLON試験 — 1次治療 amivantamab + 化学療法（EGFR exon 20挿入変異NSCLC）",
     summary: "治療歴なしEGFR exon 20挿入変異NSCLCで、amivantamab + carboplatin-pemetrexedが化学療法単独を上回るPFSを示した第3相試験。PFS中央値11.4 vs 6.7か月。NCCN Category 1 preferred。",
-    date: "2026-06-30",
+    date: "2026-06-29",
     url: "/lungatlas/scraps/papillon.html"
   },
   {
@@ -126,7 +126,7 @@ const SCRAPS_DATA = [
   {
     title: "AEGEAN試験 — 切除可能NSCLC 周術期 durvalumab（術前化学療法併用＋術後維持）",
     summary: "切除可能stage II–IIIB(N2) NSCLCで周術期durvalumabがEFS・pCRを改善した第3相試験。EGFR/ALK陽性は効果解析から除外。pCR 17.2% vs 4.3%、EFS HR 0.68。",
-    date: "2026-06-28",
+    date: "2026-06-24",
     url: "/lungatlas/scraps/aegean.html"
   },
   {
