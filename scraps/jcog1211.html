@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCOG1211 — GGO優位・3cm以下肺腺癌に対する区域切除：単群検証的第3相試験 — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。JCOG1211（GGO優位・CTR 0.25-0.5・3cm以下肺腺癌の区域切除、単群検証的第3相試験）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>JCOG1211</span>
+  </nav>
+
+  <h1 class="scrap-h1">JCOG1211 — GGO優位・3cm以下肺腺癌に対する区域切除：単群検証的第3相試験</h1>
+
+  <p class="scrap-summary">clinical T1N0・GGO優位・CTR 0.25-0.5・3cm以下の肺腺癌に対する区域切除の単群検証的第3相試験。5年RFS 98.0%と良好。JCOG0804・0802と並ぶCTR基準シリーズの一角。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年7月2日</span>
+    <span>更新日：2026年7月2日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/28255781/" target="_blank" rel="noopener">PMID 28255781（プロトコル、2017）</a> ／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/36893780/" target="_blank" rel="noopener">PMID 36893780（主要結果、Lancet Respir Med 2023）</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+    <h2>1. 試験概要</h2>
+    <p>JCOG1211は、clinical T1N0でGGO（ground-glass opacity）優位の末梢性肺腺癌（腫瘍径3cm以下、CTR 0.25〜0.5）に対する区域切除の有効性・安全性を検証する、多施設・単群・検証的第3相試験。JCOG0201で示されたCTR（consolidation/tumor ratio）基準を用いた縮小切除シリーズの一角であり、JCOG0804（CTR≤0.25・≤2cm・wedge切除）、JCOG0802（CTR>0.5・≤2cm・区域切除 vs 肺葉切除）と並ぶ、腫瘍径・CTRの組み合わせによる術式選択を検証する研究群を構成する。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>多施設・<strong>単群（single-arm）</strong>・検証的（confirmatory）・第3相試験</td></tr>
+        <tr><td>登録期間</td><td>2013年9月〜</td></tr>
+        <tr><td>対象</td><td>clinical T1N0・<strong>GGO優位</strong>・腫瘍径3cm以下（GGO成分含む）・<strong>CTR 0.25〜0.5</strong></td></tr>
+        <tr><td>症例数</td><td>390例（42施設）</td></tr>
+        <tr><td>介入</td><td>区域切除（縦隔リンパ節郭清は必須ではない）</td></tr>
+        <tr><td>主要評価項目</td><td>全区域切除施行例における5年無再発生存（RFS）</td></tr>
+        <tr><td>副次評価項目</td><td>OS、annual RFS、DFS、局所再発割合、術後肺機能、区域切除完遂割合、R0切除完遂割合、有害事象</td></tr>
+        <tr><td>単群デザインの理由</td><td>良好な予後が予測される集団であり、十分な検出力を持つRCTには過大な症例数が必要と判断されたため</td></tr>
+        <tr><td>スポンサー</td><td>日本臨床腫瘍研究グループ（JCOG）・公的資金</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 主要結果</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">98.0%</div>
+        <div class="stat-label">5年RFS（主要評価項目）</div>
+        <div class="stat-vs">全区域切除施行例</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">97.0%</div>
+        <div class="stat-label">5年RFS（病理的浸潤癌あり）</div>
+        <div class="stat-vs">サブグループ（探索的）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">1例</div>
+        <div class="stat-label">リンパ節転移</div>
+        <div class="stat-vs">（1/390例）</div>
+      </div>
+    </div>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>病理学的所見</th><th>例数（割合）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>胸膜浸潤</td><td class="num">4例（1.1%）</td></tr>
+        <tr><td>脈管侵襲</td><td class="num">3例（0.8%）</td></tr>
+        <tr><td>リンパ管侵襲</td><td class="num">8例（2.3%）</td></tr>
+        <tr><td>リンパ節転移</td><td class="num">1例</td></tr>
+      </tbody>
+    </table>
+
+    <p>病理学的に浸潤癌・脈管侵襲・リンパ管侵襲を有する症例が一定数含まれていたにもかかわらず、区域切除後の5年RFSは98.0%と極めて良好であった。</p>
+
+    <!-- 要確認: OS・annual RFS・DFS・局所再発割合の具体的数値はLancet Respir Med 2023より確認 -->
+    <!-- 要確認: 術後肺機能の変化、区域切除完遂割合、R0切除完遂割合の具体的数値はLancet Respir Med 2023より確認 -->
+    <!-- 要確認: Grade別有害事象・重篤な有害事象の発現率はLancet Respir Med 2023より確認 -->
+
+    <h2>3. JCOGシリーズにおける位置づけ</h2>
+    <p>JCOG0201で確立されたCTR基準を軸に、以下のように腫瘍径・CTRの組み合わせで術式選択が検証されてきた。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">JCOG0804</span>
+        <span><strong>JCOG0804/WJOG4507L</strong>：CTR≤0.25・腫瘍径≤2cm → wedge切除（楔状切除）が推奨される</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">JCOG1211</span>
+        <span><strong>JCOG1211（本試験）</strong>：CTR 0.25〜0.5・2cm&lt;腫瘍径≤3cm（GGO優位）→ 区域切除が推奨される</span>
+      </div>
+      <div class="gl-item gl-us">
+        <span class="gl-flag">JCOG0802</span>
+        <span><strong>JCOG0802/WJOG4607L</strong>：CTR&gt;0.5・腫瘍径≤2cm → 区域切除がOSで肺葉切除に優越</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">LN</span>
+        <span>リンパ節転移がGGO優位腫瘍・GGO含有腫瘍でほとんど認められない（本試験でも1例のみ）ことから、縦隔リンパ節郭清の省略が検討される根拠となっている</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">限界</span>
+        <span>一方、CTR≤0.5・GGN≤2cmでwedge切除が妥当かどうかは、これらの試験群だけでは結論が出ていない点に留意（本文で言及される既知の限界）</span>
+      </div>
+    </div>
+
+    <h2>4. 位置づけと注意点</h2>
+    <div class="gl-list">
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">設計</span>
+        <span><strong>単群試験（非ランダム化）</strong>であり、肺葉切除との直接比較データではない点に注意。良好な予後が予測される集団であるため単群デザインが選択された経緯がある</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">CTR</span>
+        <span>GGO優位という画像的特徴（CTR基準）に基づく患者選択が前提であり、CTRの評価には薄層CTでの正確な計測が必要</span>
+      </div>
+      <div class="gl-item gl-jp">
+        <span class="gl-flag">シリーズ</span>
+        <span>JCOG0201・JCOG0804・JCOG0802と合わせて、CTRに基づく肺癌手術の個別化（wedge・区域切除・肺葉切除の使い分け）における日本発のエビデンス群を構成する</span>
+      </div>
+      <div class="gl-item gl-eu">
+        <span class="gl-flag">後続</span>
+        <span>中国のMELDSIG試験など、縦隔リンパ節郭清省略の妥当性を検証する後続の国際的研究も進行中とされる</span>
+      </div>
+      <div class="gl-item gl-warn">
+        <span class="gl-flag">画像</span>
+        <span>実臨床では、薄層CTでのCTR評価・腫瘍径測定の精度が術式選択の前提となるため、画像診断の質が重要</span>
+      </div>
+    </div>
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>Aokage K, Saji H, Suzuki K, et al; Lung Cancer Surgical Study Group of the Japan Clinical Oncology Group. A non-randomized confirmatory trial of segmentectomy for clinical T1N0 lung cancer with dominant ground glass opacity based on thin-section computed tomography (JCOG1211). <em>Gen Thorac Cardiovasc Surg.</em> 2017;65(5):267-272. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28255781/" target="_blank" rel="noopener">28255781</a> / DOI: <!-- 要確認 --></li>
+      <li>Aokage K, Suzuki K, Saji H, et al. Segmentectomy for ground-glass-dominant lung cancer with a tumour diameter of 3 cm or less including ground-glass opacity (JCOG1211): a multicentre, single-arm, confirmatory, phase 3 trial. <em>Lancet Respir Med.</em> 2023;11(6):540-549. PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36893780/" target="_blank" rel="noopener">36893780</a> / DOI: <!-- 要確認 --></li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。最終更新 2026年7月2日</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

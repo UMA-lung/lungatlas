@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "JCOG1211 — GGO優位・3cm以下肺腺癌に対する区域切除：単群検証的第3相試験",
+    summary: "clinical T1N0・GGO優位・CTR 0.25-0.5・3cm以下の肺腺癌に対する区域切除の単群検証的第3相試験。5年RFS 98.0%と良好。JCOG0804・0802と並ぶCTR基準シリーズの一角。",
+    date: "2026-07-02",
+    url: "/lungatlas/scraps/jcog1211.html"
+  },
+  {
     title: "IMpower150試験 — 1次治療 atezolizumab + bevacizumab + 化学療法（ABCP、非扁平IV期NSCLC）",
     summary: "治療歴なし非扁平IV期NSCLCで、atezolizumab+bevacizumab+化学療法(ABCP)がPFS・OSを改善した第3相試験。EGFR/ALK変異例も組み入れ、探索的にbenefit。ATTLAS試験の理論的根拠となった元試験。",
     date: "2026-07-02",
