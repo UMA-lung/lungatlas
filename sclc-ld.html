@@ -143,6 +143,21 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
   .summary-table .st-header,.summary-table .st-row{grid-template-columns:1fr 1fr}
 }
 
+/* STAT CARD */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat{background:var(--green-pale);border-radius:8px;padding:10px 13px}
+.stat-val{font-size:17px;font-weight:600;color:var(--green-dark);font-family:var(--mono)}
+.stat-label{font-size:10.5px;color:var(--text3);margin-top:2px;line-height:1.4}
+.stat-vs{font-size:11px;color:var(--text2);margin-top:2px}
+.coi-bar{background:#FFF3CD;border:1px solid #e8d28a;border-radius:var(--radius);padding:10px 14px;margin-bottom:22px;font-size:12px;color:var(--amber-dark);line-height:1.7}
+.coi-bar strong{font-weight:600}
+.ref-list{list-style:none;counter-reset:ref-counter;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.ref-list li{counter-increment:ref-counter;display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--text2);line-height:1.65}
+.ref-list li::before{content:'[' counter(ref-counter) ']';font-family:var(--mono);font-size:10.5px;color:var(--green-dark);font-weight:600;flex-shrink:0;padding-top:1px;min-width:28px}
+.ref-list a{color:var(--green-mid);text-decoration:none}
+.ref-list a:hover{text-decoration:underline}
+@media(max-width:768px){.stat-row{grid-template-columns:1fr 1fr}}
+
 /* TRIAL REF BLOCK */
 .trial-ref-block{margin:12px 0 28px 0;display:flex;flex-direction:column;gap:8px}
 .trial-ref-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -189,7 +204,7 @@ fetch('/lungatlas/nav.html')
 
   <main class="main">
     <div class="crumb">化学療法 › SCLC › <span>限局型（LD-SCLC）</span></div>
-    <div class="updated">最終更新 2026年7月 — 骨格作成中（臨床データ未流し込み）</div>
+    <div class="updated">最終更新 2026年7月8日 — 免疫地固め療法（ADRIATIC）追加</div>
     <h1 class="art-h1">限局型小細胞肺癌<br>（LD-SCLC）治療</h1>
     <p class="lead">限局型小細胞肺癌に対する化学放射線療法、放射線分割・タイミング、予防的全脳照射、免疫地固め療法、外科の役割について、原著試験データに基づき整理する。</p>
 
@@ -206,7 +221,91 @@ fetch('/lungatlas/nav.html')
     <!-- 要確認：vaultから流し込み -->
 
     <h2 class="sec-h2" id="immuno">免疫地固め療法</h2>
-    <!-- 要確認：vaultから流し込み -->
+
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:18px">LD-SCLCでは根治的cCRT（±奏効例へのPCI）が標準だが、多くが再発する。ADRIATIC試験はcCRT後にPDがなかった患者へのデュルバルマブ地固めがOS・PFSを有意に改善することを示し、2025年3月に「根治的化学放射線療法後の維持療法」として本邦でも承認された。CRT後PDなしLD-SCLCへの免疫療法として本邦初の承認である。</p>
+
+    <div class="info-box"><strong>国内承認（2025/3/27）：</strong>デュルバルマブ（イミフィンジ）が「限局型小細胞肺癌における根治的化学放射線療法後の維持療法」として承認。用法：1500mg 4週ごと（Q4W）。CRT後PDなしLD-SCLCへの免疫療法として本邦初。ADRIATIC試験に基づく。</div>
+
+    <!-- ADRIATIC 詳細 -->
+    <h3 class="sec-h3" id="adriatic">ADRIATIC</h3>
+    <div class="flow-card">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-val">HR 0.73</div>
+          <div class="stat-label">OS ハザード比</div>
+          <div class="stat-vs">98.321%CI 0.54–0.98、p=0.01 ※</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">55.9ヶ月</div>
+          <div class="stat-label">中央値 OS（デュルバルマブ群）</div>
+          <div class="stat-vs">vs 33.4ヶ月（プラセボ群）</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">HR 0.76</div>
+          <div class="stat-label">PFS ハザード比</div>
+          <div class="stat-vs">97.195%CI 0.59–0.98、p=0.02 ※</div>
+        </div>
+      </div>
+      <p style="font-size:10.5px;color:var(--text3);margin:-4px 0 12px;line-height:1.5">※ CIは中間解析のα調整値（通常の95%CIではない）。追跡期間中央値 37.2ヶ月。</p>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">試験デザイン</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>第3相、ランダム化、二重盲検、プラセボ対照</li>
+        <li>対象：I-III期LD-SCLC（I/II期は手術不能例のみ）、根治的cCRT（プラチナ+エトポシド、放射線はCT2サイクル終了までに開始）後にPDなし（CR/PR/SD）、WHO PS0-1、cCRT完了後42日以内</li>
+        <li>介入群：デュルバルマブ 1500mg Q4W、最長24ヶ月</li>
+        <li>対照群：プラセボ Q4W。※デュルバルマブ+トレメリムマブ群は盲検維持のため本報告に含まれず</li>
+        <li>層別化因子：病期（I/II vs III）、PCIの有無</li>
+        <li>主要評価項目：OS、PFS（第1回計画中間解析、データカットオフ2024/1/15）</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">患者背景</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>登録数：デュルバルマブ群264例、プラセボ群266例</li>
+        <li>年齢中央値：両群62歳</li>
+        <li>Stage III：87.5% vs 87.2%（Stage I/II は各約13%）</li>
+        <li>放射線分割：QD 73.9%/70.3%、BID 26.1%/29.7%</li>
+        <li>PCI施行：両群53.8%</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">有効性データ（中間解析）</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>OS：55.9ヶ月（95%CI 37.3-NR） vs 33.4ヶ月（95%CI 25.5-39.9）、HR 0.73（98.321%CI 0.54–0.98）、p=0.01</li>
+        <li>OS率：24ヶ月 68.0% vs 58.5%、36ヶ月 56.5% vs 47.6%</li>
+        <li>PFS：16.6ヶ月（95%CI 10.2-28.2） vs 9.2ヶ月（95%CI 7.4-12.9）、HR 0.76（97.195%CI 0.59–0.98）、p=0.02</li>
+        <li>PFS率：24ヶ月 46.2% vs 34.2%</li>
+        <li>サブグループ解析（放射線分割別・PCI別・病期別のOS-HR）：転記精度の確認が未完了のため現時点では値を掲載しない。原著 Figure 1B（NEJM 2024;391:1318）の直接照合後に追記予定【要原著照合】。</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">安全性データ</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>Grade3以上有害事象：24.4% vs 24.2%（両群同等）</li>
+        <li>肺臓炎 Grade3/4：3.1%（8/262） vs 2.6%（7/265）、致死例：デュルバルマブ群1例</li>
+        <li>肺臓炎 全Grade：38.2%（100/262） vs 30.2%（80/265）【付録Table S3ベース・要原著確認】</li>
+        <li>治療中止に至ったAE：16.4%（43/262） vs 10.6%（28/265）</li>
+        <li>致死的AE：2.7%（7/262） vs 1.9%（5/265）</li>
+      </ul>
+
+      <div class="trial-meta-row">
+        <div class="trial-meta-item"><span class="meta-label">スポンサー</span><span class="meta-val">AstraZeneca</span></div>
+        <div class="trial-meta-item"><span class="meta-label">NCT番号</span><span class="meta-val">NCT03703297</span></div>
+        <div class="trial-meta-item"><span class="meta-label">DOI</span><span class="meta-val"><a href="https://doi.org/10.1056/NEJMoa2404873" target="_blank" rel="noopener">10.1056/NEJMoa2404873 ↗</a></span></div>
+      </div>
+    </div>
+
+    <div class="warn-box">cCRT後の投与のため放射線肺臓炎/肺臓炎が最重要AE。Grade3/4は両群同等（3.1% vs 2.6%）だが致死例が報告されており、投与中の呼吸器症状・画像モニタリングが必要。</div>
+
+    <div class="note-box">ADRIATICはcCRT後LD-SCLCの地固めでOS・PFSを改善した初の第3相二重盲検RCT（対照プラセボ、直接比較）。本報告はデュルバルマブ群 vs プラセボ群の中間解析。デュルバルマブ+トレメリムマブ群は盲検維持のため未報告。OS/PFSのCIは中間解析のα調整値（通常の95%CIではない）。サブグループ別（放射線分割・PCI・病期）のハザード比は原著Figure 1Bの直接照合後に追記予定。COI: スポンサーはAstraZeneca。</div>
+
+    <!-- COI開示 -->
+    <div class="coi-bar">
+      <strong>スポンサー（COI）：</strong>ADRIATICはAstraZenecaが資金提供・試験実施。著者の多くがスポンサーとの利益相反を開示している。
+    </div>
+
+    <!-- 出典 -->
+    <h3 class="sec-h3">出典</h3>
+    <ol class="ref-list">
+      <li>Spigel DR, et al. Durvalumab after chemoradiotherapy in limited-stage small-cell lung cancer (ADRIATIC): a multicentre, randomised, double-blind, placebo-controlled, phase 3 trial. <em>N Engl J Med.</em> 2024;391:1313-1327. doi: <a href="https://doi.org/10.1056/NEJMoa2404873" target="_blank" rel="noopener">10.1056/NEJMoa2404873</a>（ADRIATIC、NCT03703297）</li>
+    </ol>
 
     <h2 class="sec-h2" id="surgery">外科の役割</h2>
     <!-- 要確認：vaultから流し込み -->
