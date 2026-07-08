@@ -207,7 +207,7 @@ fetch('/lungatlas/nav.html')
 
   <main class="main">
     <div class="crumb">化学療法 › SCLC › <span>進展型（ED-SCLC）</span></div>
-    <div class="updated">最終更新 2026年7月 — 骨格作成中（臨床データ未流し込み）</div>
+    <div class="updated">最終更新 2026年7月8日 — 維持療法（IMforte）追加</div>
     <h1 class="art-h1">進展型小細胞肺癌<br>（ED-SCLC）治療</h1>
     <p class="lead">進展型小細胞肺癌に対する化学免疫療法、維持療法、2次治療以降、胸部放射線・予防的全脳照射について、原著試験データに基づき整理する。</p>
 
@@ -387,7 +387,85 @@ fetch('/lungatlas/nav.html')
     </ol>
 
     <h2 class="sec-h2" id="maintenance">維持療法</h2>
-    <!-- 要確認：vaultから流し込み -->
+
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:18px">ED-SCLCでは、プラチナ製剤＋エトポシド＋PD-L1阻害薬（アテゾリズマブまたはデュルバルマブ）4サイクルの誘導療法後、増悪がなければPD-L1阻害薬単剤での維持療法が国内標準となっている。IMforte試験は、アテゾリズマブ+CE誘導後の維持にルルビネクテジンを上乗せする新規レジメンを検証し、OS・PFSの有意な改善を示した第3相RCTだが、ルルビネクテジンは2025年7月時点で本邦未承認のため国内では適用不可である。</p>
+
+    <div class="warn-box">本セクションのIMforteレジメン（アテゾリズマブ＋ルルビネクテジン維持）は<strong>国内未承認</strong>。ルルビネクテジンは肺癌診療ガイドライン2025年版に「2025年7月時点 本邦未承認」と明記されており、IMforteレジメン全体が国内では実施不可。</div>
+
+    <!-- IMforte 詳細 -->
+    <h3 class="sec-h3" id="imforte">IMforte</h3>
+    <div class="flow-card">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-val">HR 0.73</div>
+          <div class="stat-label">OS ハザード比</div>
+          <div class="stat-vs">95%CI 0.57–0.95、p=0.017（中間解析）</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">13.2ヶ月</div>
+          <div class="stat-label">中央値 OS（介入群）</div>
+          <div class="stat-vs">vs 10.6ヶ月（アテゾ単独群）</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">HR 0.54</div>
+          <div class="stat-label">PFS ハザード比（IRF判定）</div>
+          <div class="stat-vs">95%CI 0.43–0.67、p&lt;0.0001</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">試験デザイン</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>第3相、ランダム化（1:1）、非盲検（open-label）</li>
+        <li>対象：アテゾリズマブ+カルボプラチン+エトポシドの4サイクル誘導療法後にPDなし（CR/PR/SD）、PS0-1、CNS転移なし</li>
+        <li>介入群（Arm A）：ルルビネクテジン 3.2mg/m² ＋ アテゾリズマブ 1200mg、21日毎 IV。ペグフィルグラスチム（G-CSF）一次予防必須</li>
+        <li>対照群（Arm B）：アテゾリズマブ 1200mg、21日毎 IV（単剤維持）</li>
+        <li>主要評価項目：IRF判定PFS、OS</li>
+        <li>副次評価項目：治験医師判定PFS、ORR、DOR、PFS率・OS率、安全性、HRQoL等</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">患者背景</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>登録数：介入群242例、アテゾ単独群241例</li>
+        <li>年齢中央値：介入群65.0歳、対照群67.0歳</li>
+        <li>PS1：介入群57%、対照群58%</li>
+        <li>肝転移（誘導開始時）：介入群41%、対照群39%</li>
+        <li>PCI既往：介入群14%、対照群15%</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">有効性データ（中間解析）</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>OS：13.2ヶ月（95%CI 11.9–16.4） vs 10.6ヶ月（95%CI 9.5–12.2）、HR 0.73（95%CI 0.57–0.95）、p=0.017</li>
+        <li>PFS（IRF判定）：5.4ヶ月（95%CI 4.2–5.8） vs 2.1ヶ月（95%CI 1.6–2.7）、HR 0.54（95%CI 0.43–0.67）、p&lt;0.0001</li>
+        <li>ORR（維持開始後・IRF判定）：19%（34/175） vs 10%（19/182）</li>
+        <li>サブグループ解析：肝転移の有無、PS（0 vs 1）、PCIの有無等で探索的解析（多くで介入群良好）</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:var(--text);margin:14px 0 6px">安全性データ</p>
+      <ul style="font-size:12.5px;color:var(--text2);line-height:1.75;padding-left:18px;margin-bottom:12px">
+        <li>Grade3以上有害事象：38%（92/242） vs 22%（53/240）</li>
+        <li>治療関連死：介入群2例（敗血症、発熱性好中球減少症）、対照群1例（敗血症）</li>
+        <li>血液毒性（Grade3–4）：貧血 8% vs 1%、好中球数減少 7% vs 0%、血小板数減少 7% vs 0%（介入群で高頻度）</li>
+      </ul>
+
+      <div class="trial-meta-row">
+        <div class="trial-meta-item"><span class="meta-label">スポンサー</span><span class="meta-val">F. Hoffmann-La Roche / Jazz Pharmaceuticals</span></div>
+        <div class="trial-meta-item"><span class="meta-label">NCT番号</span><span class="meta-val">NCT05091567</span></div>
+        <div class="trial-meta-item"><span class="meta-label">PMID</span><span class="meta-val"><a href="https://pubmed.ncbi.nlm.nih.gov/40473449/" target="_blank" rel="noopener">40473449 ↗</a></span></div>
+      </div>
+    </div>
+
+    <div class="note-box">IMforteは維持設定でOS・PFS双方の有意改善を示した初の第3相RCT（対照はアテゾリズマブ単剤維持との直接比較）。ただし中間解析の結果であり最終解析ではない。ルルビネクテジンが本邦未承認のため国内では適用不可。承認状況の変化により将来的な適用可能性がある。</div>
+
+    <!-- COI開示 -->
+    <div class="coi-bar">
+      <strong>スポンサー（COI）：</strong>IMforteはF. Hoffmann-La Roche（Jazz Pharmaceuticals共同出資）が資金提供・試験実施。著者の多くがスポンサーとの利益相反を開示している。
+    </div>
+
+    <!-- 出典 -->
+    <h3 class="sec-h3">出典</h3>
+    <ol class="ref-list">
+      <li>Paz-Ares L, et al. Lurbinectedin plus atezolizumab versus atezolizumab alone as maintenance therapy in patients with extensive-stage small-cell lung cancer (IMforte): a randomised, open-label, phase 3 study. <em>Lancet.</em> 2025;405:2129-2143. doi: <a href="https://doi.org/10.1016/S0140-6736(25)01011-6" target="_blank" rel="noopener">10.1016/S0140-6736(25)01011-6</a> / <a href="https://pubmed.ncbi.nlm.nih.gov/40473449/" target="_blank" rel="noopener">PMID: 40473449</a>（IMforte、NCT05091567）</li>
+    </ol>
 
     <h2 class="sec-h2" id="second-line">2次治療以降</h2>
     <!-- 要確認：vaultから流し込み -->
