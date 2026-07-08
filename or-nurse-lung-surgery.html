@@ -6,14 +6,14 @@
 <title>肺手術ナビ for OR Nurses — LungAtlas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@400;600&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f5f7f5;
+  --bg: #faf9f6;
   --surface: #ffffff;
-  --surface2: #f0f4f1;
-  --border: #d4e0d6;
-  --border2: #b8cfbb;
+  --surface2: #f4f2ec;
+  --border: #e3e1da;
+  --border2: #d3d1c7;
   --green-dark: #0d5c3a;
   --green-mid: #1a7a4e;
   --green-light: #e4f0e8;
@@ -29,14 +29,19 @@
   --red-light: #fce8e8;
   --teal-dark: #0a5260;
   --teal-light: #e0f4f7;
-  --text: #111a14;
-  --text2: #3d5042;
-  --text3: #6b8070;
+  --text: #1a1a18;
+  --text2: #57564f;
+  --text3: #8a8880;
   --font: 'Inter', sans-serif;
   --mono: 'JetBrains Mono', monospace;
   --radius: 10px;
   --radius-lg: 14px;
+  --rule:#ece9e0;--ink:#1a1a18;--text-faint:#b4b2a9;--accent:#0d5c3a;--accent-soft:#eef4ef;
+  --serif:'Source Serif 4','Noto Serif JP',serif;
 }
+/* 見出しserif（第2段階） */
+.art-h1,.sec-h2{font-family:var(--serif)}
+
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -310,7 +315,7 @@ body {
 }
 .strip-scroll {
   overflow-x: auto; -webkit-overflow-scrolling: touch;
-  padding: 14px 16px 10px; background: #f0f4f1;
+  padding: 14px 16px 10px; background: #f4f2ec;
   border-bottom: 1px solid var(--border);
 }
 .strip-scroll img {
