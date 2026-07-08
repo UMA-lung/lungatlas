@@ -4,17 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LungAtlas — Built on trials, not textbooks.</title>
-<meta name="description" content="肺癌治療の最新エビデンスを、原著論文から整理したリファレンスサイト。">
+<meta name="description" content="肺癌治療を学ぶ、若手医師のノート。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@400;600&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f5f7f5;
+  /* === 第1段階：学術誌トーン新トークン（index.html本文で使用） === */
+  --bg: #faf9f6;          /* 生成り・紙色 */
   --surface: #ffffff;
-  --surface2: #f0f4f1;
-  --border: #d4e0d6;
-  --border2: #b8cfbb;
+  --surface2: #f4f2ec;    /* 淡いグレージュ */
+  --border: #e3e1da;      /* 中性グレー罫線 */
+  --border2: #d3d1c7;     /* やや強い罫線 */
+  --rule: #ece9e0;        /* 項目区切りの淡いヘアライン */
+  --ink: #1a1a18;         /* 炭黒・本文 */
+  --text: #1a1a18;
+  --text2: #57564f;       /* セカンダリ・中性グレー */
+  --text3: #8a8880;       /* 三次・キャプション */
+  --text-faint: #b4b2a9;  /* Coming soon等の淡色 */
+  --accent: #0d5c3a;      /* 緑・差し色のみ */
+  --accent-soft: #eef4ef; /* 緑の淡い地 */
+
+  /* === 旧トークン（他ページとの整合のため残置。index.html本文では原則不使用） === */
   --green-dark: #0d5c3a;
   --green-mid: #1a7a4e;
   --green-light: #e4f0e8;
@@ -27,13 +38,13 @@
   --amber-light: #fdf0d8;
   --red-dark: #6b1c1c;
   --red-light: #fce8e8;
-  --text: #111a14;
-  --text2: #3d5042;
-  --text3: #6b8070;
-  --font: 'Inter', sans-serif;
-  --mono: 'JetBrains Mono', monospace;
   --radius: 10px;
   --radius-lg: 14px;
+
+  /* === フォント === */
+  --serif: 'Source Serif 4', 'Noto Serif JP', serif;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,166 +55,171 @@ body {
   color: var(--text);
   font-size: 14px;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* PAGE WRAP */
 .home { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero {
-  padding: 56px 0 40px;
+  padding: 60px 0 40px;
   border-bottom: 1px solid var(--border);
 }
-.hero-h1 {
-  font-family: var(--mono);
-  font-size: 34px;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--green-dark);
-  margin-bottom: 16px;
-}
-.hero-sub {
-  font-size: 15px;
-  color: var(--text2);
-  line-height: 1.75;
-  max-width: 600px;
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 22px;
 }
-.aud-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .05em;
-  color: var(--text3);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.aud-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.aud-badge {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--green-dark);
-  background: var(--green-light);
-  padding: 5px 13px;
-  border-radius: 20px;
-  white-space: nowrap;
-}
-
-/* SECTION */
-.home-section { padding: 30px 0 6px; }
-.home-section-head {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.home-section-head::before {
+.hero-eyebrow::before {
   content: '';
   display: block;
-  width: 3px;
-  height: 15px;
-  background: var(--green-mid);
-  border-radius: 2px;
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
   flex-shrink: 0;
 }
+.hero-eyebrow span {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.hero-sub {
+  font-size: 14.5px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+.aud-row {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.aud-row span {
+  font-size: 12.5px;
+  color: var(--text3);
+  white-space: nowrap;
+}
 
-/* CARD GRID */
+/* ===== SECTION ===== */
+.home-section { padding: 34px 0 4px; }
+.home-section-head {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--text2);
+  margin-bottom: 0;
+}
+.home-section-head.en { text-transform: uppercase; }
+
+/* 見出し直下の誌面罫＋2カラムグリッド */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  border-top: 2px solid var(--ink);
+  margin-top: 8px;
 }
 
-/* CARD */
+/* ===== ITEM（旧 map-card 相当） ===== */
 .map-card {
   display: flex;
-  flex-direction: column;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 16px 18px;
+  gap: 11px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
   text-decoration: none;
   color: inherit;
-  transition: border-color .15s, box-shadow .15s, transform .15s;
 }
-a.map-card:hover {
-  border-color: var(--border2);
-  box-shadow: 0 4px 16px rgba(13, 92, 58, .08);
-  transform: translateY(-1px);
+.map-card .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 7px;
 }
-.map-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 9px;
+.map-card.soon {
+  cursor: default;
 }
-.map-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: .03em;
-  color: var(--text3);
-  background: var(--surface2);
-  padding: 3px 9px;
-  border-radius: 8px;
-  white-space: nowrap;
+.map-card.soon .dot {
+  background: transparent;
+  border: 1px solid var(--text-faint);
 }
+.mc-body { min-width: 0; }
 .map-title {
+  font-family: var(--serif);
   font-size: 15px;
   font-weight: 600;
-  color: var(--text);
-  line-height: 1.4;
-  margin-bottom: 4px;
+  color: var(--ink);
+  line-height: 1.35;
+  transition: color .15s;
 }
+.map-card.soon .map-title { color: var(--text-faint); }
 .map-note {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text3);
+  line-height: 1.55;
+  margin-top: 3px;
+}
+.mc-cat {
+  color: var(--text-faint);
+  margin-right: 6px;
+}
+.mc-cat::after {
+  content: '·';
+  margin-left: 6px;
+}
+.map-note.cat-only .mc-cat::after { content: ''; margin-left: 0; }
+
+/* ホバー：リンク項目のみタイトルを差し色に（背景は変えない） */
+a.map-card:hover .map-title { color: var(--accent); }
+
+/* ===== SCRAPS ===== */
+.sidebar-scraps-sub {
+  font-size: 12.5px;
+  color: var(--text3);
+  margin: 10px 0 0;
   line-height: 1.6;
+}
+#scraps-recent { margin-top: 8px; }
+#scraps-recent .mc-date {
+  color: var(--text-faint);
   font-family: var(--mono);
+  margin-right: 6px;
 }
-
-/* STATUS BADGES */
-.badge-live {
-  font-size: 10.5px;
+#scraps-recent .mc-date::after {
+  content: '·';
+  margin-left: 6px;
+  font-family: var(--font);
+}
+.scraps-empty { font-size: 13px; color: var(--text3); padding: 14px 0; }
+.scraps-more {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 12.5px;
   font-weight: 500;
-  color: var(--green-dark);
-  background: var(--green-light);
-  padding: 3px 10px;
-  border-radius: 20px;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+  color: var(--accent);
+  text-decoration: none;
 }
-.badge-live::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green-mid);
-}
-.badge-soon {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--text3);
-  background: #eceef0;
-  padding: 3px 10px;
-  border-radius: 20px;
-  white-space: nowrap;
-}
+.scraps-more:hover { text-decoration: underline; }
 
-/* COMING SOON CARD */
-.map-card.soon {
-  opacity: .58;
-  cursor: default;
-  background: var(--surface2);
-}
-
-/* FOOTER */
+/* ===== FOOTER ===== */
 .home-footer {
-  margin-top: 44px;
+  margin-top: 52px;
   background: var(--surface);
   border-top: 1px solid var(--border);
   padding: 26px 28px;
@@ -213,44 +229,20 @@ a.map-card:hover {
   line-height: 1.9;
 }
 .home-footer .footer-logo {
+  font-family: var(--serif);
   font-weight: 600;
-  color: var(--text);
+  color: var(--ink);
   font-size: 13px;
 }
-.home-footer .footer-logo span { color: var(--green-mid); }
+.home-footer .footer-logo span { color: var(--accent); }
 .home-footer .foot-tagline { color: var(--text2); }
 
-/* SCRAPS セクション（下部） */
-.sidebar-scraps-sub {
-  font-size: 12.5px;
-  color: var(--text3);
-  margin: -8px 0 14px;
-  line-height: 1.6;
-}
-#scraps-recent .map-date {
-  font-size: 11px;
-  color: var(--text3);
-  font-family: var(--mono);
-  white-space: nowrap;
-}
-#scraps-recent .map-note { font-family: var(--font); }
-.scraps-empty { font-size: 13px; color: var(--text3); font-family: var(--mono); padding: 4px 0; }
-.scraps-more {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--green-dark);
-  text-decoration: none;
-}
-.scraps-more:hover { text-decoration: underline; }
-
-/* RESPONSIVE */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .home { padding: 0 18px; }
-  .hero { padding: 38px 0 30px; }
-  .hero-h1 { font-size: 26px; }
-  .card-grid { grid-template-columns: 1fr; }
+  .hero { padding: 40px 0 30px; }
+  .hero-h1 { font-size: 27px; }
+  .card-grid { grid-template-columns: 1fr; column-gap: 0; }
   #lungatlas-nav .nav-links { display: none; }
 }
 </style>
@@ -278,60 +270,76 @@ fetch('/lungatlas/nav.html')
 
   <!-- HERO -->
   <header class="hero">
+    <div class="hero-eyebrow"><span>Clinical Reference</span></div>
     <h1 class="hero-h1">Built on trials,<br>not textbooks.</h1>
-    <p class="hero-sub">肺癌治療の最新エビデンスを、原著論文から整理したリファレンスサイト</p>
-    <div class="aud-label">対象読者</div>
+    <p class="hero-sub">肺癌治療を学ぶ、若手医師のノート。</p>
     <div class="aud-row">
-      <span class="aud-badge">腫瘍内科医</span>
-      <span class="aud-badge">呼吸器内科医</span>
-      <span class="aud-badge">呼吸器外科医</span>
-      <span class="aud-badge">専攻医</span>
+      <span>腫瘍内科医</span>
+      <span>呼吸器内科医</span>
+      <span>呼吸器外科医</span>
+      <span>専攻医</span>
     </div>
   </header>
 
   <!-- セクション1：NSCLC -->
   <section class="home-section">
-    <h2 class="home-section-head">NSCLC</h2>
+    <h2 class="home-section-head en">NSCLC</h2>
     <div class="card-grid">
       <a class="map-card" href="nsclc-overview.html">
-        <div class="map-card-top"><span class="map-label">総論</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">NSCLC 総論</div>
-        <div class="map-note">疫学・病理・病期・病期別治療への導入</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">NSCLC 総論</div>
+          <div class="map-note"><span class="mc-cat">総論</span>疫学・病理・病期・病期別治療への導入</div>
+        </div>
       </a>
       <a class="map-card" href="driver-negative.html">
-        <div class="map-card-top"><span class="map-label">1次治療</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">変異陰性（免疫療法戦略）</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">変異陰性（免疫療法戦略）</div>
+          <div class="map-note cat-only"><span class="mc-cat">1次治療</span></div>
+        </div>
       </a>
       <a class="map-card" href="driver-positive.html">
-        <div class="map-card-top"><span class="map-label">1次治療</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">変異陽性（ドライバー別）</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">変異陽性（ドライバー別）</div>
+          <div class="map-note cat-only"><span class="mc-cat">1次治療</span></div>
+        </div>
       </a>
       <div class="map-card soon">
-        <div class="map-card-top"><span class="map-label">2次治療以降</span><span class="badge-soon">Coming soon</span></div>
-        <div class="map-title">耐性後の戦略</div>
-        <div class="map-note">T790M・MET増幅・C797S</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">耐性後の戦略</div>
+          <div class="map-note"><span class="mc-cat">2次治療以降</span>T790M・MET増幅・C797S — 準備中</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- セクション2：SCLC -->
   <section class="home-section">
-    <h2 class="home-section-head">SCLC</h2>
+    <h2 class="home-section-head en">SCLC</h2>
     <div class="card-grid">
       <a class="map-card" href="sclc-overview.html">
-        <div class="map-card-top"><span class="map-label">総論</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">SCLC 総論</div>
-        <div class="map-note">病期分類・治療導入・NSCLCとの相違点</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">SCLC 総論</div>
+          <div class="map-note"><span class="mc-cat">総論</span>病期分類・治療導入・NSCLCとの相違点</div>
+        </div>
       </a>
       <a class="map-card" href="sclc-ld.html">
-        <div class="map-card-top"><span class="map-label">限局型</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">LD-SCLC</div>
-        <div class="map-note">化学放射線療法・予防的全脳照射</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">LD-SCLC</div>
+          <div class="map-note"><span class="mc-cat">限局型</span>化学放射線療法・予防的全脳照射</div>
+        </div>
       </a>
       <a class="map-card" href="sclc-ed.html">
-        <div class="map-card-top"><span class="map-label">進展型</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">ED-SCLC</div>
-        <div class="map-note">IMpower133・CASPIAN・DeLLphi</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">ED-SCLC</div>
+          <div class="map-note"><span class="mc-cat">進展型</span>IMpower133・CASPIAN・DeLLphi</div>
+        </div>
       </a>
     </div>
   </section>
@@ -341,18 +349,25 @@ fetch('/lungatlas/nav.html')
     <h2 class="home-section-head">周術期</h2>
     <div class="card-grid">
       <a class="map-card" href="perioperative.html">
-        <div class="map-card-top"><span class="map-label">術前・術後薬物療法</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">周術期薬物療法</div>
-        <div class="map-note">CM816・KN671・AEGEAN</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">周術期薬物療法</div>
+          <div class="map-note"><span class="mc-cat">術前・術後薬物療法</span>CM816・KN671・AEGEAN</div>
+        </div>
       </a>
       <a class="map-card" href="adjuvant.html">
-        <div class="map-card-top"><span class="map-label">術後補助療法</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">術後補助療法</div>
-        <div class="map-note">ADAURA（EGFR）・ALINA（ALK）・IMpower010</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">術後補助療法</div>
+          <div class="map-note"><span class="mc-cat">術後補助療法</span>ADAURA（EGFR）・ALINA（ALK）・IMpower010</div>
+        </div>
       </a>
       <a class="map-card" href="lung-surgery.html">
-        <div class="map-card-top"><span class="map-label">外科手術</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">肺癌外科手術（総論）</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">肺癌外科手術（総論）</div>
+          <div class="map-note cat-only"><span class="mc-cat">外科手術</span></div>
+        </div>
       </a>
     </div>
   </section>
@@ -362,19 +377,25 @@ fetch('/lungatlas/nav.html')
     <h2 class="home-section-head">基礎・疫学</h2>
     <div class="card-grid">
       <a class="map-card" href="/lungatlas/epidemiology.html">
-        <div class="map-card-top"><span class="map-label">総論</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">肺癌の疫学</div>
-        <div class="map-note">罹患率・死亡率・喫煙・組織型分布・年次推移</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">肺癌の疫学</div>
+          <div class="map-note"><span class="mc-cat">総論</span>罹患率・死亡率・喫煙・組織型分布・年次推移</div>
+        </div>
       </a>
       <div class="map-card soon">
-        <div class="map-card-top"><span class="map-label">EGFR・ALK・ROS1 等</span><span class="badge-soon">Coming soon</span></div>
-        <div class="map-title">ドライバー遺伝子の疫学</div>
-        <div class="map-note">変異頻度・人種差・組織型との関連</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">ドライバー遺伝子の疫学</div>
+          <div class="map-note"><span class="mc-cat">EGFR・ALK・ROS1 等</span>変異頻度・人種差・組織型との関連 — 準備中</div>
+        </div>
       </div>
       <a class="map-card" href="/lungatlas/tnm-staging.html">
-        <div class="map-card-top"><span class="map-label">UICC/AJCC 第9版</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">TNM分類 第9版</div>
-        <div class="map-note">版数の変遷と病期分類</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">TNM分類 第9版</div>
+          <div class="map-note"><span class="mc-cat">UICC/AJCC 第9版</span>版数の変遷と病期分類</div>
+        </div>
       </a>
     </div>
   </section>
@@ -384,26 +405,32 @@ fetch('/lungatlas/nav.html')
     <h2 class="home-section-head">サポート</h2>
     <div class="card-grid">
       <a class="map-card" href="ae-management.html">
-        <div class="map-card-top"><span class="map-label">irAE・IRR・TKI関連毒性</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">副作用管理</div>
-        <div class="map-note">アミバンタマブ＋ラゼルチニブ（VTE・IRR管理）</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">副作用管理</div>
+          <div class="map-note"><span class="mc-cat">irAE・IRR・TKI関連毒性</span>アミバンタマブ＋ラゼルチニブ（VTE・IRR管理）</div>
+        </div>
       </a>
       <a class="map-card" href="/lungatlas/lung-segments.html">
-        <div class="map-card-top"><span class="map-label">気管支・肺葉・区域</span><span class="badge-live">公開中</span></div>
-        <div class="map-title">肺区域解剖</div>
-        <div class="map-note">区域・気管支・肺動静脈の対応</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">肺区域解剖</div>
+          <div class="map-note"><span class="mc-cat">気管支・肺葉・区域</span>区域・気管支・肺動静脈の対応</div>
+        </div>
       </a>
       <div class="map-card soon">
-        <div class="map-card-top"><span class="map-label">特殊病態</span><span class="badge-soon">Coming soon</span></div>
-        <div class="map-title">間質性肺炎合併肺癌</div>
-        <div class="map-note">治療選択の制約・急性増悪リスク・薬剤性肺障害</div>
+        <span class="dot"></span>
+        <div class="mc-body">
+          <div class="map-title">間質性肺炎合併肺癌</div>
+          <div class="map-note"><span class="mc-cat">特殊病態</span>治療選択の制約・急性増悪リスク・薬剤性肺障害 — 準備中</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- セクション6：Scraps -->
   <section class="home-section sidebar-scraps">
-    <h2 class="home-section-head">📝 Scraps</h2>
+    <h2 class="home-section-head">Scraps</h2>
     <p class="sidebar-scraps-sub">気になる論文のAIドラフト置き場（管理人による正誤確認前のメモ）</p>
     <div class="card-grid" id="scraps-recent"></div>
     <a href="scraps/index.html" class="scraps-more">すべて見る →</a>
@@ -434,10 +461,11 @@ fetch('/lungatlas/nav.html')
   }
   box.innerHTML = items.map(function(s){
     return '<a class="map-card" href="' + s.url + '">' +
-      '<div class="map-card-top"><span class="map-label">Scrap</span>' +
-      '<span class="map-date">' + s.date + '</span></div>' +
+      '<span class="dot"></span>' +
+      '<div class="mc-body">' +
       '<div class="map-title">' + s.title + '</div>' +
-      '<div class="map-note">' + s.summary + '</div></a>';
+      '<div class="map-note"><span class="mc-date">' + s.date + '</span>' + s.summary + '</div>' +
+      '</div></a>';
   }).join('');
 })();
 </script>
