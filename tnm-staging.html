@@ -184,6 +184,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
   .sf-surv-grid{grid-template-columns:1fr}
   .sf-sel-group{min-width:100%}
 }
+/* STAGE BAND COLORS */
+.stage-band-1{border-left:4px solid var(--green-mid);background:var(--green-pale)}
+.stage-band-2{border-left:4px solid var(--teal-dark);background:var(--teal-light)}
+.stage-band-3{border-left:4px solid var(--amber-dark);background:var(--amber-light)}
+.stage-band-4{border-left:4px solid var(--red-dark);background:var(--red-light)}
+/* NEW 9TH EDITION HIGHLIGHT */
+.new-9th{border-left:3px solid var(--purple-dark);background:var(--purple-light)}
 </style>
   <link rel="stylesheet" href="/lungatlas/mobile.css">
   <script src="/lungatlas/mobile.js" defer></script>
@@ -214,6 +221,7 @@ fetch('/lungatlas/nav.html')
     <a class="sb-item" href="#n-descriptor">N分類（N2細分化）</a>
     <a class="sb-item" href="#m-descriptor">M分類（M1c細分化）</a>
     <a class="sb-item" href="#database">データベース概要</a>
+    <a class="sb-item" href="#changes-from-8th">第8版からの変更点</a>
     <a class="sb-item" href="#sclc">SCLCへの適用</a>
     <a class="sb-item" href="#references">出典・参考文献</a>
     <div class="sb-head" style="margin-top:12px">関連ページ</div>
@@ -237,76 +245,59 @@ fetch('/lungatlas/nav.html')
         <tr>
           <th style="width:8%">Stage</th>
           <th>T/N/M の組み合わせ</th>
-          <th>第8版との変更</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>0</strong></td>
+          <td class="stage-band-1"><strong>0</strong></td>
           <td>Tis N0 M0</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
-          <td><strong>IA1</strong></td>
+          <td class="stage-band-1"><strong>IA1</strong></td>
           <td>T1mi/T1a N0 M0</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
-          <td><strong>IA2</strong></td>
+          <td class="stage-band-1"><strong>IA2</strong></td>
           <td>T1b N0 M0</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
-          <td><strong>IA3</strong></td>
+          <td class="stage-band-1"><strong>IA3</strong></td>
           <td>T1c N0 M0</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
-          <td><strong>IB</strong></td>
+          <td class="stage-band-1"><strong>IB</strong></td>
           <td>T2a N0 M0</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
-          <td><strong>IIA</strong></td>
+          <td class="stage-band-2"><strong>IIA</strong></td>
           <td>T1(a-c) N1 M0／T2b N0 M0</td>
-          <td class="best">T1(a-c) N1 が第8版 IIB から移行</td>
         </tr>
         <tr>
-          <td><strong>IIB</strong></td>
+          <td class="stage-band-2"><strong>IIB</strong></td>
           <td>T1(a-c) N2a M0／T2a N1 M0／T2b N1 M0／T3 N0 M0</td>
-          <td class="best">T1(a-c) N2a が第8版 IIIA から移行（N2a 新設）</td>
         </tr>
         <tr>
-          <td><strong>IIIA</strong></td>
+          <td class="stage-band-3"><strong>IIIA</strong></td>
           <td>T3 N2a M0／T1(a-c) N2b M0／T2a N2a M0／T2b N2a M0／T3 N1 M0／T4 N0-1 M0</td>
-          <td class="best">T3 N2a が第8版 IIIB から移行</td>
         </tr>
         <tr>
-          <td><strong>IIIB</strong></td>
+          <td class="stage-band-3"><strong>IIIB</strong></td>
           <td>T2a N2b M0／T2b N2b M0／T1(a-c) N3 M0／T2a-b N3 M0／T3 N2b M0／T4 N2a-b M0</td>
-          <td class="best">T2a-b N2b が第8版 IIIA から移行</td>
         </tr>
         <tr>
-          <td><strong>IIIC</strong></td>
+          <td class="stage-band-3"><strong>IIIC</strong></td>
           <td>T3 N3 M0／T4 N3 M0</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
-          <td><strong>IVA</strong></td>
+          <td class="stage-band-4"><strong>IVA</strong></td>
           <td>Any T Any N M1a/M1b</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
-          <td><strong>IVB</strong></td>
+          <td class="stage-band-4"><strong>IVB</strong></td>
           <td>Any T Any N M1c（M1c1, M1c2）</td>
-          <td class="neutral-cell">M1c 細分化（Stage 自体は変更なし）</td>
         </tr>
       </tbody>
     </table>
-
-    <div class="note-box">
-      <strong>第9版の主要変更点：</strong>①N2をN2a（単一ステーション）とN2b（複数ステーション）に細分化、②M1cをM1c1（単一臓器多発転移）とM1c2（複数臓器多発転移）に細分化。これにより一部のT-N組み合わせのStageが第8版から変更されている（上表参照）。
-    </div>
 
     <!-- 病期早見表 -->
     <h2 class="sec-h2" id="stage-finder">病期早見表（T・N・M選択→対応Stage表示）</h2>
@@ -431,34 +422,28 @@ fetch('/lungatlas/nav.html')
         <tr>
           <th>分類</th>
           <th>定義</th>
-          <th>第8版との変更</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>N0</strong></td>
           <td>No regional lymph node metastasis</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
           <td><strong>N1</strong></td>
           <td>同側気管支周囲/肺門/肺内リンパ節への転移（直接浸潤を含む）</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
-        <tr>
+        <tr class="new-9th">
           <td><strong>N2a</strong></td>
-          <td><strong>単一のN2ステーション</strong>（同側縦隔 or 気管分岐下）への転移</td>
-          <td class="best">第9版で新設（N2を細分化）</td>
+          <td><strong>単一のN2ステーション</strong>（同側縦隔 or 気管分岐下）への転移<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--purple-dark);background:var(--surface);border:1px solid var(--purple-dark);border-radius:4px;padding:1px 5px;margin-left:6px">第9版新設</span></td>
         </tr>
-        <tr>
+        <tr class="new-9th">
           <td><strong>N2b</strong></td>
-          <td><strong>複数のN2ステーション</strong>への転移</td>
-          <td class="best">第9版で新設（N2を細分化）</td>
+          <td><strong>複数のN2ステーション</strong>への転移<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--purple-dark);background:var(--surface);border:1px solid var(--purple-dark);border-radius:4px;padding:1px 5px;margin-left:6px">第9版新設</span></td>
         </tr>
         <tr>
           <td><strong>N3</strong></td>
           <td>対側縦隔/対側肺門、または同側/対側斜角筋/鎖骨上リンパ節への転移</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
       </tbody>
     </table>
@@ -482,34 +467,28 @@ fetch('/lungatlas/nav.html')
         <tr>
           <th>分類</th>
           <th>定義</th>
-          <th>第8版との変更</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>M0</strong></td>
           <td>No distant metastasis</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
           <td><strong>M1a</strong></td>
           <td>胸膜/心嚢結節・悪性胸水/心嚢水；対側肺内別腫瘍結節</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
         <tr>
           <td><strong>M1b</strong></td>
           <td>単一臓器系への単発遠隔転移</td>
-          <td class="neutral-cell">変更なし</td>
         </tr>
-        <tr>
+        <tr class="new-9th">
           <td><strong>M1c1</strong></td>
-          <td><strong>胸腔外の単一臓器系</strong>への多発遠隔転移</td>
-          <td class="best">第9版で新設（M1cを細分化）</td>
+          <td><strong>胸腔外の単一臓器系</strong>への多発遠隔転移<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--purple-dark);background:var(--surface);border:1px solid var(--purple-dark);border-radius:4px;padding:1px 5px;margin-left:6px">第9版新設</span></td>
         </tr>
-        <tr>
+        <tr class="new-9th">
           <td><strong>M1c2</strong></td>
-          <td><strong>胸腔外の複数臓器系</strong>への多発遠隔転移</td>
-          <td class="best">第9版で新設（M1cを細分化）</td>
+          <td><strong>胸腔外の複数臓器系</strong>への多発遠隔転移<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--purple-dark);background:var(--surface);border:1px solid var(--purple-dark);border-radius:4px;padding:1px 5px;margin-left:6px">第9版新設</span></td>
         </tr>
       </tbody>
     </table>
@@ -549,6 +528,60 @@ fetch('/lungatlas/nav.html')
         </tr>
       </tbody>
     </table>
+
+    <!-- 第8版からの変更点 -->
+    <h2 class="sec-h2" id="changes-from-8th">第8版からの変更点</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>第8版</th>
+          <th>第9版</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>N2の区分</td>
+          <td>N2（単一区分）</td>
+          <td>N2a（単一ステーション）/ N2b（複数ステーション）に細分化</td>
+        </tr>
+        <tr>
+          <td>M1cの区分</td>
+          <td>M1c（単一区分）</td>
+          <td>M1c1（単一臓器系多発）/ M1c2（複数臓器系多発）に細分化</td>
+        </tr>
+        <tr>
+          <td>T1(a-c)N1M0</td>
+          <td>Stage IIB</td>
+          <td>Stage IIA へ移行</td>
+        </tr>
+        <tr>
+          <td>T1(a-c)N2aM0</td>
+          <td>Stage IIIA</td>
+          <td>Stage IIB へ移行（N2a新設に伴う）</td>
+        </tr>
+        <tr>
+          <td>T3N2aM0</td>
+          <td>Stage IIIB</td>
+          <td>Stage IIIA へ移行</td>
+        </tr>
+        <tr>
+          <td>T2(a-b)N2bM0</td>
+          <td>Stage IIIA</td>
+          <td>Stage IIIB へ移行</td>
+        </tr>
+        <tr>
+          <td>T記述子</td>
+          <td>（第8版基準）</td>
+          <td>変更なし（第8版基準を維持）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      N2・M1cの細分化に伴い、一部のT-N組み合わせでStageが第8版から移行している。T記述子（腫瘍径カットオフ・浸潤範囲）には第9版で変更提案はなく、第8版基準が維持されている。
+    </div>
 
     <!-- ⑥ SCLCへの適用 -->
     <h2 class="sec-h2" id="sclc">SCLCへの適用について</h2>
