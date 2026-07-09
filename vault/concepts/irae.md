@@ -50,8 +50,8 @@ sources:
     pmid: "31182049"
     checked: true
   - id: nccn
-    ref: "NCCN Guidelines - Management of Immunotherapy-Related Toxicities（臨床版 Version 1.2025）／NCCN Guidelines for Patients Version 1.2026（2025-10-23）"
-    note: "用量数値は臨床版・ASCO/ESMOを優先。NCCNは追加免疫抑制薬の選択肢の参考に使用。患者向け版には具体的mg/kg用量の記載なし。"
+    ref: "NCCN Clinical Practice Guidelines in Oncology — Management of Immune Checkpoint Inhibitor-Related Toxicities, Version 1.2026（2025-10-23）"
+    note: "臨床版 Version 1.2026 の用量をASCO/ESMOとクロスチェック済み。3者の差異は各臓器別セクションに明記。"
     checked: true
   - id: bjc2024
     ref: "Jayathilaka B, et al. Br J Cancer. 2024;132(1):51-57"
@@ -101,20 +101,24 @@ concepts: [pneumonitis, myocarditis, colitis, hepatitis, endocrinopathy, dermati
 - リスク: 既存間質性肺疾患/肺線維症、胸部放射線歴（例: PACIFIC後のdurvalumab）、COPD・喫煙、EGFR-TKIとの併用/近接。
 - 臨床像: 呼吸困難・乾性咳嗽・発熱・低酸素。無症候の画像異常もある。下肺優位が多い。原発巣進行・感染・放射線肺臓炎との鑑別が必須。
 - 診断: 胸部CT（すりガラス影、器質化肺炎/NSIP/過敏性肺臓炎/びまん性肺胞傷害の各パターン）、感染除外（培養、必要時BAL）。
-- 対応: G1は休薬±経過観察で1–2週再評価。G2は休薬＋PSL 1 mg/kg/day（ESMO）〜1–2 mg/kg/day（ASCO）＋感染除外。G3–4は入院、mPSL 1–2 mg/kg/day（重症はパルス）、ICI恒久中止、48–72hで改善なければinfliximab/MMF/IVIG等を追加。ステロイドは長め（4–6週以上）に漸減。［asco2021, esmo2022］
+- 対応: G1は休薬±経過観察で1–2週再評価。G2は休薬＋PSL/mPSL 1–2 mg/kg/day（ASCO・NCCN）。ESMOは1 mg/kg/day。いずれも感染除外を並行実施。G3–4は入院、mPSL 1–2 mg/kg/day（ASCO・ESMO・NCCN 一致）、ICI休薬〜恒久中止。48–72hで改善なければinfliximab/MMF/IVIG等を追加。ステロイドは長め（4–6週以上）に漸減。［asco2021, esmo2022, nccn］
 
 ### ② 心筋炎（Myocarditis）※稀だが最高致死
 - 頻度: 0.04–1.14%（報告により変動）。併用で高い。致死率は約25–50%とirAE中で最も高い。［mahmood2018, wang2018］
 - 発症: 早期（中央値約34日、81%が3か月以内）。1–2回投与後でも生じうる。［mahmood2018］
 - overlap: 筋炎・重症筋無力症と重複しうる（呼吸筋不全に注意）。
 - 診断: トロポニン（最も鋭敏。Mahmoodコホートで感度94%）、ECG、心エコー（LVEF正常でも否定不可）、心臓MRI、必要時心筋生検。
-- 対応: 疑った時点で即ICI中止・入院・心電図モニタ。高用量ステロイド（ESMO: mPSL 500–1000 mg/day×3日パルス → 改善後 PSL 1 mg/kg/day 最大80mg；ASCO: PSL 1–2 mg/kg/day、反応不良ならmPSL 1g/dayパルス）を早期開始。反応不良ならabatacept/ruxolitinib/IVIG/ATG/MMF等を追加。≥G2で恒久中止。［asco2021, esmo2022, mahmood2018］
+- 対応: 疑い/確定時は即ICI中止・入院・モニタ。ステロイドは高用量を早期開始（GL間で戦略差あり）：
+  ・NCCN 1.2026: Grade 1（トロポニン上昇のみ）でも24時間以内に 1–2 mg/kg/day 開始を考慮。Grade≥2は PSL 1–2 mg/kg/day、不応で mPSL 1 g/day。
+  ・ASCO 2021: PSL 1–2 mg/kg/day、不応で mPSL 1 g/day パルス。
+  ・ESMO 2022: mPSL 500–1000 mg/day×3日 パルスを先行 → 改善後 PSL 1 mg/kg/day（最大80 mg）。
+  いずれも≥G2で永久中止。不応例は abatacept / ATG / infliximab / IVIG / MMF 等を追加。［asco2021, esmo2022, nccn, mahmood2018］
 
 ### ③ 大腸炎（Colitis）
 - 頻度: 抗CTLA-4で高頻度、PD-1/PD-L1では相対的に低い。
 - 臨床像: 下痢・腹痛・血便・粘液便。重症で穿孔リスク。
 - 診断: 便培養・C. difficile除外、CRP、必要時に下部消化管内視鏡＋生検、腹部CT。
-- 対応: G1対症。G2以上でPSL 1 mg/kg/day、改善なければ増量。ステロイド抵抗性はinfliximabまたはvedolizumab。穿孔・中毒性巨大結腸は外科。［asco2021, esmo2022］
+- 対応: G1対症（継続可）。G2はPSL 1 mg/kg/day（ASCO・NCCN）。G3–4はmPSL 1–2 mg/kg/day。G4は永久中止（NCCN）／CTLA-4阻害薬は永久中止を検討（ASCO）。ステロイド抵抗性はinfliximab（5 mg/kg）第一選択、代替にvedolizumab。穿孔・中毒性巨大結腸は外科。［asco2021, esmo2022, nccn］
 
 ### ④ 肝（Hepatitis）
 - 臨床像: 多くは無症候のトランスアミナーゼ上昇。ビリルビン上昇は重症所見。
@@ -126,7 +130,7 @@ concepts: [pneumonitis, myocarditis, colitis, hepatitis, endocrinopathy, dermati
 - 下垂体炎: 抗CTLA-4/併用で多い。頭痛・倦怠感・複数のホルモン軸低下。ACTH–コルチゾール軸低下は生命に関わる。
 - 副腎不全: 副腎クリーゼに注意（ステロイド補充を優先）。
 - 1型糖尿病（劇症含む）: DKAで発症しうる緊急事態。インスリン導入。
-- 原則: ホルモン補充で管理可能な内分泌障害はICI継続/再開が可能（G4でも例外扱い）。高用量ステロイドは通常不要で、内分泌補充が主。［asco2021, esmo2022］
+- 原則（ASCO・ESMO・NCCN 3者共通）: ホルモン補充で管理可能な内分泌障害はICI継続/再開が可能（G4でも例外扱い）。高用量ステロイドは原則不要で、内分泌補充が主体（下垂体炎の腫瘤効果等の特殊例を除く）。［asco2021, esmo2022, nccn］
 
 ### ⑥ 皮膚
 - 最も早期・高頻度。斑状丘疹状発疹・掻痒・白斑（PD-1で）。
@@ -140,7 +144,7 @@ concepts: [pneumonitis, myocarditis, colitis, hepatitis, endocrinopathy, dermati
 
 ### ⑧ 腎
 - 急性間質性腎炎が主。Cr上昇。PPI/NSAID併用が交絡因子。
-- 対応: G2以上でPSL 0.5–1 mg/kg/day（ASCO）〜1 mg/kg/day（ESMO）、腎前性/閉塞性/他薬剤を除外、腎生検を考慮。［asco2021, esmo2022］
+- 対応: G2以上でPSL 0.5–1 mg/kg/day（ASCO・NCCN。NCCNは1週不応で1–2へ増量）。ESMOは1 mg/kg/day。腎前性/閉塞性/他薬剤を除外、原因薬剤（PPI等）の中止も検討。腎生検を考慮。［asco2021, esmo2022, nccn］
 
 ### ⑨ 筋・関節
 - 関節炎、筋痛/筋炎。筋炎は心筋炎・MGとのoverlapに注意（CK・トロポニンを確認）。

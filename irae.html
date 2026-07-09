@@ -7,7 +7,7 @@
 <!--
   ステータス: DRAFT（未公開）
   vault: vault/concepts/irae.md
-  pending: ASCO 2021 PMID確定 / NCCN版数 / ASCO 2025改訂版 / クラス別全grade一次出典
+  pending: ASCO 2025改訂版 / クラス別全grade一次出典
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -407,8 +407,8 @@ fetch('/lungatlas/nav.html')
           <thead><tr><th>Grade</th><th>対応</th></tr></thead>
           <tbody>
             <tr><td>G1</td><td>休薬±経過観察、1–2週後に再評価</td></tr>
-            <tr><td>G2</td><td>休薬＋PSL 1 mg/kg/day（ESMO）〜1–2 mg/kg/day（ASCO）＋感染除外</td></tr>
-            <tr><td>G3–4</td><td>入院、mPSL 1–2 mg/kg/day（重症はパルス）、ICI恒久中止。48–72hで改善なければinfliximab/MMF/IVIG追加。ステロイドは4–6週以上かけ漸減</td></tr>
+            <tr><td>G2</td><td>休薬＋PSL/mPSL 1–2 mg/kg/day（ASCO・NCCN）。ESMOは1 mg/kg/day。感染除外を並行実施</td></tr>
+            <tr><td>G3–4</td><td>入院、mPSL 1–2 mg/kg/day（ASCO・ESMO・NCCN 一致）、ICI休薬〜恒久中止。48–72hで改善なければinfliximab/MMF/IVIG追加。ステロイドは4–6週以上かけ漸減</td></tr>
           </tbody>
         </table>
       </div>
@@ -435,10 +435,16 @@ fetch('/lungatlas/nav.html')
       <h3 class="sec-h3">対応<sup>[1,2,6]</sup></h3>
       <div class="info-box">
         <ol style="padding-left:1.2em;line-height:1.9">
-          <li>疑った時点で即ICI中止・入院・持続心電図モニタ</li>
-          <li>高用量ステロイド（ESMO: mPSL 500–1000 mg/day×3日パルス → 改善後 PSL 1 mg/kg/day（最大80mg）；ASCO: PSL 1–2 mg/kg/day、反応不良ならmPSL 1g/dayパルス）を早期開始</li>
-          <li>反応不良：abatacept / ruxolitinib / IVIG / ATG / MMF等を追加</li>
-          <li>≥G2 で恒久中止</li>
+          <li>疑い/確定時は即ICI中止・入院・持続心電図モニタ</li>
+          <li>高用量ステロイドを早期開始（ガイドライン間で戦略差あり）：
+            <ul style="padding-left:1.2em;margin-top:4px;line-height:1.9">
+              <li><strong>NCCN 1.2026：</strong>Grade 1（トロポニン上昇のみ）でも24時間以内に PSL/mPSL 1–2 mg/kg/day 開始を考慮。Grade≥2はPSL 1–2 mg/kg/day、不応でmPSL 1 g/day</li>
+              <li><strong>ASCO 2021：</strong>PSL 1–2 mg/kg/day、不応でmPSL 1 g/day パルス</li>
+              <li><strong>ESMO 2022：</strong>mPSL 500–1000 mg/day×3日 パルスを先行 → 改善後 PSL 1 mg/kg/day（最大80 mg）</li>
+            </ul>
+          </li>
+          <li>反応不良：abatacept / ATG / infliximab / IVIG / MMF 等を追加</li>
+          <li>≥G2 で恒久中止（3GL一致）</li>
         </ol>
       </div>
     </div>
@@ -456,9 +462,10 @@ fetch('/lungatlas/nav.html')
         <table class="data-table">
           <thead><tr><th>Grade</th><th>対応</th></tr></thead>
           <tbody>
-            <tr><td>G1</td><td>対症療法（止瀉薬等）、継続可</td></tr>
-            <tr><td>G2以上</td><td>休薬＋PSL 1 mg/kg/day。改善なければ増量</td></tr>
-            <tr><td>ステロイド抵抗性</td><td>infliximab またはvedolizumab</td></tr>
+            <tr><td>G1</td><td>対症療法（止瀉薬等）、ICI継続可</td></tr>
+            <tr><td>G2</td><td>休薬＋PSL 1 mg/kg/day（ASCO・NCCN）</td></tr>
+            <tr><td>G3–4</td><td>休薬〜恒久中止＋mPSL 1–2 mg/kg/day。G4は恒久中止（NCCN）／CTLA-4阻害薬は恒久中止を検討（ASCO）</td></tr>
+            <tr><td>ステロイド抵抗性</td><td>infliximab 5 mg/kg（第一選択）、代替にvedolizumab</td></tr>
             <tr><td>重症（穿孔・中毒性巨大結腸）</td><td>外科コンサルト</td></tr>
           </tbody>
         </table>
@@ -486,7 +493,7 @@ fetch('/lungatlas/nav.html')
 
     <!-- ⑤ 内分泌 -->
     <div class="panel" id="p-endo">
-      <div class="note-box"><strong>原則：</strong>ホルモン補充で管理可能な内分泌障害はICI継続/再開が可能（G4でも例外扱い）。高用量ステロイドは通常不要で、内分泌補充が主体。<sup>[1,2]</sup></div>
+      <div class="note-box"><strong>原則（ASCO・ESMO・NCCN 3者共通）：</strong>ホルモン補充で管理可能な内分泌障害はICI継続/再開が可能（G4でも例外扱い）。高用量ステロイドは原則不要で、内分泌補充が主体（下垂体炎の腫瘤効果等の特殊例を除く）。<sup>[1,2,10]</sup></div>
 
       <h3 class="sec-h3">甲状腺機能異常（内分泌irAEで最多）</h3>
       <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">甲状腺炎による一過性中毒症の後、機能低下へ移行しうる。多くはICI継続可、甲状腺ホルモン補充で管理。TSH/FT4の定期モニタリング。</p>
@@ -548,7 +555,7 @@ fetch('/lungatlas/nav.html')
       <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">腎前性/閉塞性/他薬剤を除外。腎生検を考慮（確定診断に有用）。</p>
 
       <h3 class="sec-h3">対応<sup>[1,2]</sup></h3>
-      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">G2以上でPSL 0.5–1 mg/kg/day（ASCO）〜1 mg/kg/day（ESMO）。原因薬剤（PPI等）の中止も検討。腎臓内科連携。</p>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">G2以上でPSL 0.5–1 mg/kg/day（ASCO・NCCN。NCCNは1週不応で1–2 mg/kg/dayへ増量）。ESMOは1 mg/kg/day。原因薬剤（PPI等）の中止も検討。腎臓内科連携。</p>
     </div>
 
     <!-- ⑨ 筋・関節 -->
@@ -690,13 +697,13 @@ fetch('/lungatlas/nav.html')
         </div>
       </li>
       <li class="ref-item">
-        <span class="ref-title">NCCN GL — Management of Immunotherapy-Related Toxicities</span>
+        <span class="ref-title">NCCN GL — Management of Immune Checkpoint Inhibitor-Related Toxicities</span>
         <span class="src-badge src-protocol">GLドキュメント</span>
-        <div>NCCN Clinical Practice Guidelines in Oncology — Management of Immunotherapy-Related Toxicities, Version 1.2025. NCCN Guidelines for Patients Version 1.2026 (2025-10-23).</div>
+        <div>NCCN Clinical Practice Guidelines in Oncology — Management of Immune Checkpoint Inhibitor-Related Toxicities, Version 1.2026（2025-10-23）.</div>
         <div class="ref-links">
           <a href="https://www.nccn.org/guidelines/category_1" target="_blank" rel="noopener">nccn.org/guidelines/category_1</a>
         </div>
-        <div style="margin-top:4px;font-size:11px;color:var(--text3)">用量数値はASCO/ESMOを優先。患者向け版には具体的mg/kg用量の記載なし。</div>
+        <div style="margin-top:4px;font-size:11px;color:var(--text3)">臨床版 Version 1.2026 の用量をASCO/ESMOとクロスチェック済み。本文の用量比較の一次根拠として使用。</div>
       </li>
       <li class="ref-item">
         <span class="ref-title">Jayathilaka 2024（irAE 実臨床頻度）</span>
