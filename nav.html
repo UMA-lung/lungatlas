@@ -284,7 +284,13 @@
     </div>
 
     <!-- 副作用管理 -->
-    <a id="nav-ae" href="/lungatlas/ae-management.html">副作用管理</a>
+    <div class="nav-dropdown">
+      <a id="nav-ae" href="#">副作用管理</a>
+      <div class="dropdown-menu">
+        <a id="nav-ae-management" href="/lungatlas/ae-management.html">レジメン別 AE管理</a>
+        <a id="nav-irae" href="/lungatlas/irae.html">免疫関連有害事象（irAE）</a>
+      </div>
+    </div>
 
     <!-- 手術手技 -->
     <div class="nav-dropdown">
@@ -329,7 +335,8 @@
     'nav-driver-pos':  ['driver-positive.html'],
     'nav-egfr':        ['egfr-firstline.html'],
     'nav-driver-neg':  ['driver-negative.html'],
-    'nav-ae':          ['ae-management.html'],
+    'nav-ae-management': ['ae-management.html'],
+    'nav-irae':          ['irae.html'],
     'nav-adjuvant':    ['adjuvant.html'],
     'nav-adaura':      ['adaura.html'],
     'nav-about':       ['about.html', 'about-en.html'],
@@ -347,6 +354,12 @@
       if (path.indexOf(p) !== -1) el.classList.add('active');
     });
   });
+  // 副作用管理ドロップダウンのparent active
+  var aePages = ['ae-management.html', 'irae.html'];
+  if (aePages.some(function(p){ return path.indexOf(p) !== -1; })) {
+    var aeLink = document.getElementById('nav-ae');
+    if (aeLink) aeLink.classList.add('active');
+  }
   // 化学療法ドロップダウンのparent active
   var chemoPages = ['driver-positive', 'driver-negative', 'egfr-firstline', 'perioperative', 'adjuvant', 'adaura', 'sclc', 'resistance', 'nsclc-overview'];
   if (chemoPages.some(function(p){ return path.indexOf(p) !== -1; })) {

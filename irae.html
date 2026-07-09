@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>免疫関連有害事象（irAE）— LungAtlas</title>
+<!--
+  ステータス: DRAFT（未公開）
+  vault: vault/concepts/irae.md
+  pending: ASCO 2021 PMID確定 / NCCN版数 / ASCO 2025改訂版 / クラス別全grade一次出典
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@400;600&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --surface2: #f4f2ec;
+  --border: #e3e1da;
+  --border2: #d3d1c7;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --red-dark: #6b1c1c;
+  --red-light: #fce8e8;
+  --teal-dark: #085041;
+  --teal-light: #e1f5ee;
+  --text: #1a1a18;
+  --text2: #57564f;
+  --text3: #8a8880;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --rule: #ece9e0;
+  --ink: #1a1a18;
+  --text-faint: #b4b2a9;
+  --accent: #0d5c3a;
+  --accent-soft: #eef4ef;
+  --serif: 'Source Serif 4', 'Noto Serif JP', serif;
+}
+.art-h1, .sec-h2 { font-family: var(--serif); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* LAYOUT */
+.layout { display: flex; min-height: calc(100vh - 52px); }
+.main { flex: 1; padding: 28px 36px 60px; max-width: 860px; }
+
+/* BREADCRUMB */
+.crumb { font-size: 11.5px; color: var(--text3); margin-bottom: 10px; }
+.crumb span { color: var(--green-mid); }
+
+/* UPDATED */
+.updated {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 500; color: var(--green-dark);
+  background: var(--green-light); padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px;
+}
+.updated::before { content: '↻'; font-size: 12px; }
+
+/* DRAFT BANNER */
+.draft-banner {
+  background: var(--amber-light);
+  border: 1px solid #e8c87a;
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-size: 12px;
+  color: var(--amber-dark);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+/* HEADINGS */
+.art-h1 { font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; }
+.lead {
+  font-size: 13.5px; color: var(--text2); line-height: 1.75;
+  padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+}
+.sec-h2 {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  margin: 28px 0 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.sec-h2::before {
+  content: ''; display: block; width: 3px; height: 15px;
+  background: var(--green-mid); border-radius: 2px; flex-shrink: 0;
+}
+.sec-h3 {
+  font-size: 13.5px; font-weight: 600; color: var(--text);
+  margin: 22px 0 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+
+/* TABS */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+.tab {
+  font-size: 12.5px; padding: 6px 16px; border-radius: 20px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text2); cursor: pointer; font-family: var(--font);
+  transition: all .15s;
+}
+.tab:hover { border-color: var(--border2); color: var(--green-dark); }
+.tab.active {
+  background: var(--green-dark); color: #fff;
+  border-color: var(--green-dark); font-weight: 500;
+}
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* BOXES */
+.info-box {
+  background: var(--blue-light); border-left: 3px solid #2d6db5;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--blue-dark); line-height: 1.75; margin: 14px 0;
+}
+.note-box {
+  background: var(--green-light); border-left: 3px solid var(--green-mid);
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--green-dark); line-height: 1.75; margin: 14px 0;
+}
+.warn-box {
+  background: var(--amber-light); border-left: 3px solid #d97a00;
+  border-radius: 0 8px 8px 0; padding: 11px 14px;
+  font-size: 12.5px; color: var(--amber-dark); line-height: 1.75; margin: 14px 0;
+}
+
+/* DATA TABLE */
+.data-table {
+  width: 100%; border-collapse: collapse; font-size: 12.5px;
+  margin-bottom: 12px;
+}
+.data-table th {
+  padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text);
+  background: var(--surface2); border-bottom: 2px solid var(--border2);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text2); vertical-align: top; line-height: 1.6;
+}
+.data-table tr:nth-child(even) td { background: var(--green-pale); }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* 出典ラベルバッジ */
+.src-badge {
+  display: inline-block; font-size: 10.5px; font-weight: 600;
+  font-family: var(--mono); padding: 2px 8px; border-radius: 5px;
+  margin-left: 6px; vertical-align: middle; white-space: nowrap;
+}
+.src-paper { background: var(--green-light); color: var(--green-dark); }
+.src-protocol { background: var(--amber-light); color: var(--amber-dark); }
+.src-jp { background: #e3eefc; color: #1a4d8f; }
+
+/* TABLE CAPTION */
+.tbl-caption { font-size: 11px; color: var(--text3); margin-bottom: 6px; line-height: 1.5; }
+.tbl-note { font-size: 11px; color: var(--text3); margin-top: 6px; line-height: 1.6; }
+
+/* JUMP LINKS */
+.jump-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 4px; }
+.jump-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--green-dark); font-weight: 500;
+  background: var(--green-light); padding: 6px 14px;
+  border-radius: 8px; text-decoration: none; transition: background .15s;
+}
+.jump-link:hover { background: #cce8d4; }
+
+/* REF LIST */
+.ref-list { list-style: none; counter-reset: ref; margin-top: 12px; }
+.ref-item {
+  position: relative; padding: 12px 14px 12px 40px; margin-bottom: 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 12px; color: var(--text2); line-height: 1.75;
+}
+.ref-item::before {
+  counter-increment: ref; content: counter(ref);
+  position: absolute; left: 12px; top: 12px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green-dark); color: #fff;
+  font-size: 11px; font-weight: 600; font-family: var(--mono);
+  display: flex; align-items: center; justify-content: center;
+}
+.ref-item .ref-title { font-weight: 600; color: var(--text); }
+.ref-item .ref-links { margin-top: 5px; }
+.ref-item .ref-links a {
+  color: var(--green-dark); text-decoration: none;
+  font-family: var(--mono); font-size: 11.5px;
+}
+.ref-item .ref-links a:hover { text-decoration: underline; }
+.ref-item .ref-sep { color: var(--text3); margin: 0 6px; }
+
+/* FOOTER */
+.footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 20px 36px; font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-weight: 600; color: var(--text); }
+.footer-logo span { color: var(--green-mid); }
+
+sup { font-size: 10px; color: var(--green-dark); font-family: var(--mono); }
+
+@media (max-width: 768px) {
+  .main { padding: 20px 18px 40px; }
+  .nav-links { display: none; }
+  .sec-h2, .sec-h3 { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .sec-h2::before { display: none; }
+  .data-table th, .data-table td { font-size: 11.5px; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<div class="layout">
+  <main class="main">
+
+    <div class="crumb">LungAtlas › 副作用管理 › <span>免疫関連有害事象（irAE）</span></div>
+    <div class="updated">2026年7月 ドラフト</div>
+
+    <div class="draft-banner">⚠ このページはドラフト版です。監修・公開承認前のため、臨床判断に使用しないでください。</div>
+
+    <h1 class="art-h1">免疫関連有害事象（irAE）</h1>
+
+    <p class="lead">
+      免疫チェックポイント阻害薬（ICI）に特有の炎症性有害事象（irAE）は、多臓器にわたり発症時期が不定で、ICI中止後も遅発しうる。本ページは、ICI全般（抗PD-1/PD-L1/CTLA-4）のirAEについて疫学・Grade別管理原則・臓器別対応を整理する。肺癌領域でのICIに対応。
+    </p>
+
+    <!-- ページ内ナビゲーション -->
+    <div class="jump-row">
+      <a class="jump-link" href="#mechanism">機序</a>
+      <a class="jump-link" href="#epidemiology">疫学・頻度</a>
+      <a class="jump-link" href="#grade-management">Grade管理</a>
+      <a class="jump-link" href="#organs">臓器別</a>
+      <a class="jump-link" href="#clinical-notes">特記事項</a>
+      <a class="jump-link" href="#references">出典</a>
+    </div>
+
+    <!-- ===================== 1. 機序 ===================== -->
+    <h2 class="sec-h2" id="mechanism">1. irAEとは・機序</h2>
+
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      ICIは免疫寛容を解除して抗腫瘍免疫を高めるが、その結果として自己反応性T細胞の活性化などにより多臓器に炎症性の有害事象を生じうる。これをirAE（immune-related adverse event）と呼ぶ。<sup>[1,2,8]</sup>
+    </p>
+
+    <div class="note-box">
+      <strong>従来の化学療法AEとの主な違い：</strong>
+      <ul style="padding-left:1.2em;line-height:1.9;margin-top:6px">
+        <li>多臓器にわたる（消化管・肺・肝・内分泌・皮膚・神経など）</li>
+        <li>発症時期が遅く・不定（数週〜数か月後）</li>
+        <li>ICI中止後も遅発・遷延しうる（数か月後の発症例あり）</li>
+        <li>副腎皮質ステロイド等の免疫抑制が治療の基本</li>
+      </ul>
+    </div>
+
+    <div class="warn-box">irAEマネジメントの推奨の多くは観察研究・専門家合意に基づく（エビデンスの質は中〜低）。<sup>[1,2]</sup></div>
+
+    <!-- ===================== 2. 疫学 ===================== -->
+    <h2 class="sec-h2" id="epidemiology">2. 疫学・頻度</h2>
+
+    <ul style="font-size:13.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+      <li><strong>全irAE（any grade）：</strong>実臨床で約40%、高grade（≥G3）約20%。<sup>[11]</sup></li>
+      <li><strong>単剤 vs 併用（any grade）：</strong>単剤 約30.5% / 併用 約45.7%。<sup>[11]</sup></li>
+      <li><strong>併用（PD-1/PD-L1＋CTLA-4）詳細：</strong>any grade 約88% / ≥G3 約41%。<sup>[9]</sup></li>
+      <li><strong>クラス別の傾向：</strong>頻度・重症度は 抗CTLA-4 ＞ 抗PD-1 ≈ 抗PD-L1。大腸炎・下垂体炎・皮疹は抗CTLA-4で相対的に多く、肺臓炎・甲状腺機能低下・関節痛は抗PD-1/PD-L1で多い傾向。<sup>[8,2]</sup></li>
+      <li><strong>致死的毒性（クラス別・稀）：</strong>抗PD-1 約0.36% / 抗PD-L1 約0.38% / 抗CTLA-4 約1.08% / 併用 約1.23%。irAE中で致死率が最も高いのは心筋炎。<sup>[7]</sup></li>
+    </ul>
+    <p class="tbl-note">いずれもプール推定値で、がん種・レジメン・用量により変動する。</p>
+
+    <!-- ===================== 3. 発症時期 ===================== -->
+    <h2 class="sec-h2" id="timing">3. 発症時期</h2>
+
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:14px">
+      おおむね皮膚→消化管/肝→内分泌→肺・腎の順で発症が遅くなる傾向があるが、個人差が大きく、ICI中止後数か月での遅発例もある。<sup>[2]</sup>
+    </p>
+    <div class="info-box">薬剤別の発症時期の詳細は「AE発症時期」ページ（ae-timing.html）を参照（近日公開予定）。</div>
+
+    <!-- ===================== 4. Grade管理の原則 ===================== -->
+    <h2 class="sec-h2" id="grade-management">4. Grade別マネジメントの原則（CTCAE v5.0）</h2>
+
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Grade</th>
+            <th>ICIの扱い</th>
+            <th>ステロイド</th>
+            <th>備考</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>G1</strong></td>
+            <td>原則継続（経過観察・厳重モニタ）</td>
+            <td>通常不要</td>
+            <td>神経・血液・心毒性は低gradeでも慎重に</td>
+          </tr>
+          <tr>
+            <td><strong>G2</strong></td>
+            <td>休薬し ≤G1 で再開を検討</td>
+            <td>PSL 0.5–1 mg/kg/day を考慮</td>
+            <td>臓器により対応差</td>
+          </tr>
+          <tr>
+            <td><strong>G3</strong></td>
+            <td>休薬（多くは中止方向）＋高用量ステロイド開始</td>
+            <td>PSL/mPSL 1–2 mg/kg/day</td>
+            <td>4–6週以上かけ漸減。48–72hで反応なければ追加免疫抑制</td>
+          </tr>
+          <tr>
+            <td><strong>G4</strong></td>
+            <td>原則恒久中止</td>
+            <td>高用量ステロイド</td>
+            <td>内分泌障害（ホルモン補充で管理可）は例外</td>
+          </tr>
+          <tr>
+            <td><strong>特例</strong></td>
+            <td>心筋炎・重症神経障害は低gradeでも中止方向</td>
+            <td>—</td>
+            <td>overlap症候群に注意</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-note">出典：<sup>[1,2]</sup></p>
+
+    <!-- ===================== 5. 臓器別 ===================== -->
+    <h2 class="sec-h2" id="organs">5. 臓器別irAE</h2>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" onclick="swOrgan('pneumo', this)" role="tab">① 肺臓炎</button>
+      <button class="tab" onclick="swOrgan('cardio', this)" role="tab">② 心筋炎</button>
+      <button class="tab" onclick="swOrgan('colitis', this)" role="tab">③ 大腸炎</button>
+      <button class="tab" onclick="swOrgan('hepatitis', this)" role="tab">④ 肝</button>
+      <button class="tab" onclick="swOrgan('endo', this)" role="tab">⑤ 内分泌</button>
+      <button class="tab" onclick="swOrgan('skin', this)" role="tab">⑥ 皮膚</button>
+      <button class="tab" onclick="swOrgan('neuro', this)" role="tab">⑦ 神経</button>
+      <button class="tab" onclick="swOrgan('renal', this)" role="tab">⑧ 腎</button>
+      <button class="tab" onclick="swOrgan('musculo', this)" role="tab">⑨ 筋・関節</button>
+      <button class="tab" onclick="swOrgan('other', this)" role="tab">⑩ その他</button>
+    </div>
+
+    <!-- ① 肺臓炎 -->
+    <div class="panel active" id="p-pneumo">
+      <div class="warn-box"><strong>肺癌領域で最も重要なirAE。</strong>既存間質性肺疾患・胸部放射線歴（PACIFIC試験後のdurvalumab等）があるNSCLC症例では特に注意。</div>
+
+      <h3 class="sec-h3">頻度<sup>[5,1]</sup></h3>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>設定</th><th>全grade</th><th>≥G3</th></tr></thead>
+          <tbody>
+            <tr><td>抗PD-1 単剤（全がん種）</td><td>約2.7%</td><td>約0.8%</td></tr>
+            <tr><td>NSCLC での抗PD-1</td><td>約4.1%</td><td>約1.8%</td></tr>
+            <tr><td>PD-1/L1＋CTLA-4 併用</td><td>約10%</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tbl-note">PD-1 &gt; PD-L1 の傾向。PACIFIC後durvalumabはNSCLCで標準的に使用され放射線歴あり。</p>
+
+      <h3 class="sec-h3">リスク因子</h3>
+      <ul style="font-size:12.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+        <li>既存間質性肺疾患/肺線維症</li>
+        <li>胸部放射線歴（例：CRT後のdurvalumab地固め）</li>
+        <li>COPD・喫煙</li>
+        <li>EGFR-TKIとの併用/近接使用</li>
+      </ul>
+
+      <h3 class="sec-h3">臨床像・診断</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">呼吸困難・乾性咳嗽・発熱・低酸素。無症候の画像異常もある（下肺優位が多い）。原発巣進行・感染・放射線肺臓炎との鑑別が必須。</p>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">胸部CT（すりガラス影、器質化肺炎/NSIP/過敏性肺臓炎/びまん性肺胞傷害の各パターン）、感染除外（培養、必要時BAL）。</p>
+
+      <h3 class="sec-h3">Grade別対応<sup>[1,2]</sup></h3>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>Grade</th><th>対応</th></tr></thead>
+          <tbody>
+            <tr><td>G1</td><td>休薬±経過観察、1–2週後に再評価</td></tr>
+            <tr><td>G2</td><td>休薬＋PSL 1 mg/kg/day（ESMO）〜1–2 mg/kg/day（ASCO）＋感染除外</td></tr>
+            <tr><td>G3–4</td><td>入院、mPSL 1–2 mg/kg/day（重症はパルス）、ICI恒久中止。48–72hで改善なければinfliximab/MMF/IVIG追加。ステロイドは4–6週以上かけ漸減</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ② 心筋炎 -->
+    <div class="panel" id="p-cardio">
+      <div class="warn-box"><strong>頻度は低いが致死率はirAE中で最高（約25–50%）。</strong>疑った時点で即座にICI中止・入院・心電図モニタが必要。<sup>[6,7]</sup></div>
+
+      <h3 class="sec-h3">頻度・発症<sup>[6]</sup></h3>
+      <ul style="font-size:12.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+        <li>頻度：0.04–1.14%（報告により変動）。PD-1/L1＋CTLA-4 併用で高い</li>
+        <li>発症中央値：約34日（81%が3か月以内。1–2回投与後でも生じうる）</li>
+        <li>overlap：筋炎・重症筋無力症（MG）と重複しうる→呼吸筋不全に注意</li>
+      </ul>
+
+      <h3 class="sec-h3">診断<sup>[6,1,2]</sup></h3>
+      <ul style="font-size:12.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+        <li>トロポニン：最も鋭敏（Mahmoodコホートで感度94%）</li>
+        <li>ECG、心エコー（LVEF正常でも否定不可）、心臓MRI</li>
+        <li>必要時：心筋生検</li>
+      </ul>
+
+      <h3 class="sec-h3">対応<sup>[1,2,6]</sup></h3>
+      <div class="info-box">
+        <ol style="padding-left:1.2em;line-height:1.9">
+          <li>疑った時点で即ICI中止・入院・持続心電図モニタ</li>
+          <li>高用量ステロイド（ESMO: mPSL 500–1000 mg/day×3日パルス → 改善後 PSL 1 mg/kg/day（最大80mg）；ASCO: PSL 1–2 mg/kg/day、反応不良ならmPSL 1g/dayパルス）を早期開始</li>
+          <li>反応不良：abatacept / ruxolitinib / IVIG / ATG / MMF等を追加</li>
+          <li>≥G2 で恒久中止</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ③ 大腸炎 -->
+    <div class="panel" id="p-colitis">
+      <div class="note-box">抗CTLA-4（ipilimumab）で相対的に高頻度。抗PD-1/PD-L1 単剤では頻度は低い。<sup>[1,2]</sup></div>
+
+      <h3 class="sec-h3">臨床像・診断</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">下痢・腹痛・血便・粘液便。重症例では腸管穿孔リスクあり。</p>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">便培養・<em>C. difficile</em>除外、CRP、必要時に下部消化管内視鏡＋生検、腹部CT。</p>
+
+      <h3 class="sec-h3">対応<sup>[1,2]</sup></h3>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>Grade</th><th>対応</th></tr></thead>
+          <tbody>
+            <tr><td>G1</td><td>対症療法（止瀉薬等）、継続可</td></tr>
+            <tr><td>G2以上</td><td>休薬＋PSL 1 mg/kg/day。改善なければ増量</td></tr>
+            <tr><td>ステロイド抵抗性</td><td>infliximab またはvedolizumab</td></tr>
+            <tr><td>重症（穿孔・中毒性巨大結腸）</td><td>外科コンサルト</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ④ 肝 -->
+    <div class="panel" id="p-hepatitis">
+      <h3 class="sec-h3">臨床像・診断</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">多くは無症候のトランスアミナーゼ上昇。ビリルビン上昇は重症所見。AST/ALT/ALP/T-Bilをモニタリング。</p>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">ウイルス性・薬剤性・自己免疫性・胆道閉塞・肝転移を鑑別除外。画像（腹部CT/US）。</p>
+
+      <h3 class="sec-h3">対応<sup>[1,2]</sup></h3>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>Grade</th><th>対応</th></tr></thead>
+          <tbody>
+            <tr><td>G1</td><td>経過観察（ICIは継続可）</td></tr>
+            <tr><td>G2</td><td>休薬＋PSL 0.5–1 mg/kg/day</td></tr>
+            <tr><td>G3–4</td><td>mPSL 1–2 mg/kg/day。ステロイド抵抗性はMMF（※infliximabは肝毒性のため回避）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ⑤ 内分泌 -->
+    <div class="panel" id="p-endo">
+      <div class="note-box"><strong>原則：</strong>ホルモン補充で管理可能な内分泌障害はICI継続/再開が可能（G4でも例外扱い）。高用量ステロイドは通常不要で、内分泌補充が主体。<sup>[1,2]</sup></div>
+
+      <h3 class="sec-h3">甲状腺機能異常（内分泌irAEで最多）</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">甲状腺炎による一過性中毒症の後、機能低下へ移行しうる。多くはICI継続可、甲状腺ホルモン補充で管理。TSH/FT4の定期モニタリング。</p>
+
+      <h3 class="sec-h3">下垂体炎</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">抗CTLA-4/併用で多い。頭痛・倦怠感・複数のホルモン軸低下。ACTH–コルチゾール軸低下は生命に関わる（副腎クリーゼ予防が急務）。下垂体MRIが有用。</p>
+
+      <h3 class="sec-h3">副腎不全</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">副腎クリーゼに注意。ストレス時の補充量増量の患者教育も重要。</p>
+
+      <h3 class="sec-h3">1型糖尿病（劇症含む）</h3>
+      <div class="warn-box">DKA（糖尿病性ケトアシドーシス）で発症しうる緊急事態。ICI投与中の血糖モニタリングが必要。インスリン導入。</div>
+    </div>
+
+    <!-- ⑥ 皮膚 -->
+    <div class="panel" id="p-skin">
+      <div class="note-box">皮膚irAEは最も早期・高頻度に出現する。多くは軽症で対処可能だが、重症型は緊急対応を要する。<sup>[1,2]</sup></div>
+
+      <h3 class="sec-h3">臨床像</h3>
+      <ul style="font-size:12.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+        <li>斑状丘疹状発疹・掻痒・白斑（抗PD-1で多い）</li>
+        <li>重症型（稀だが緊急）：SJS/TEN・DRESS・水疱性類天疱瘡</li>
+      </ul>
+
+      <h3 class="sec-h3">対応</h3>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr><th>重症度</th><th>対応</th></tr></thead>
+          <tbody>
+            <tr><td>軽症（G1–2）</td><td>外用ステロイド＋抗ヒスタミン薬</td></tr>
+            <tr><td>G3以上</td><td>ICI休薬〜中止＋全身ステロイド＋皮膚科連携</td></tr>
+            <tr><td>SJS/TEN/DRESS</td><td>即ICI中止・入院・皮膚科緊急コンサルト</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ⑦ 神経 -->
+    <div class="panel" id="p-neuro">
+      <div class="warn-box"><strong>頻度は低いが重篤。</strong>重症筋無力症（MG）は心筋炎・筋炎とoverlapし呼吸筋不全のリスクがある。<sup>[1,2]</sup></div>
+
+      <h3 class="sec-h3">病態</h3>
+      <ul style="font-size:12.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+        <li>重症筋無力症（MG）</li>
+        <li>Guillain-Barré症候群</li>
+        <li>脳炎（自己抗体陽性例を含む）</li>
+        <li>無菌性髄膜炎</li>
+        <li>末梢神経障害</li>
+      </ul>
+
+      <h3 class="sec-h3">対応</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">≥G2 で休薬〜中止、ステロイド投与。重症例はIVIG/血漿交換。神経内科コンサルト必須。MG疑いでは筋電図・抗AChR抗体・トロポニン（心筋炎overlap）を確認。</p>
+    </div>
+
+    <!-- ⑧ 腎 -->
+    <div class="panel" id="p-renal">
+      <h3 class="sec-h3">病態・診断</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">急性間質性腎炎が主な病態。Cr上昇で発見されることが多い。PPI/NSAIDの併用が交絡因子となりうる（薬剤性AINとの鑑別）。</p>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">腎前性/閉塞性/他薬剤を除外。腎生検を考慮（確定診断に有用）。</p>
+
+      <h3 class="sec-h3">対応<sup>[1,2]</sup></h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">G2以上でPSL 0.5–1 mg/kg/day（ASCO）〜1 mg/kg/day（ESMO）。原因薬剤（PPI等）の中止も検討。腎臓内科連携。</p>
+    </div>
+
+    <!-- ⑨ 筋・関節 -->
+    <div class="panel" id="p-musculo">
+      <div class="warn-box">筋炎は心筋炎・重症筋無力症（MG）とのoverlapに注意。発症時はCK・トロポニン・抗AChR抗体を同時に確認する。<sup>[1,2]</sup></div>
+
+      <h3 class="sec-h3">病態・対応</h3>
+      <ul style="font-size:12.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+        <li>関節炎（大小関節）：NSAIDs〜ステロイド、リウマチ科連携</li>
+        <li>筋痛/筋炎：CKが上昇。重症でステロイド投与</li>
+      </ul>
+    </div>
+
+    <!-- ⑩ その他 -->
+    <div class="panel" id="p-other">
+      <h3 class="sec-h3">血液毒性</h3>
+      <ul style="font-size:12.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+        <li>免疫性血小板減少（ITP）</li>
+        <li>自己免疫性溶血性貧血（AIHA）</li>
+        <li>無顆粒球症（稀）</li>
+      </ul>
+
+      <h3 class="sec-h3">眼</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">ぶどう膜炎。眼科コンサルトが必要。</p>
+
+      <h3 class="sec-h3">膵</h3>
+      <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:10px">無症候のリパーゼ/アミラーゼ上昇が多く、臨床的膵炎は稀。症状がなければ経過観察可（臓器によっては値のみで休薬しない）。<sup>[1,2]</sup></p>
+    </div>
+
+    <!-- ===================== 6. 特記事項（肺癌） ===================== -->
+    <h2 class="sec-h2" id="clinical-notes">6. 特記事項（肺癌臨床向け）</h2>
+
+    <ul style="font-size:13.5px;color:var(--text2);padding-left:1.4em;line-height:1.9;margin-bottom:14px">
+      <li><strong>肺臓炎の鑑別：</strong>原発巣進行・感染・放射線肺臓炎との区別が難しい。PACIFIC後のdurvalumabでは胸部放射線歴があり要注意。</li>
+      <li><strong>overlap症候群（心筋炎＋筋炎＋MG）：</strong>発症時は3病態を評価する。呼吸筋不全に注意。</li>
+      <li><strong>irAEと有効性：</strong>irAE発現例で予後良好とする報告があるが、リードタイムバイアス等の交絡があり因果は確立していない。irAEを効果の代替指標として扱わない。</li>
+      <li><strong>ステロイドと有効性：</strong>irAE治療目的の短期ステロイドが有効性を大きく損なうという明確なエビデンスは限定的。ベースラインでの高用量ステロイド（PSL≧10 mg相当）を要する状態は予後不良と関連する報告があるが交絡に注意。</li>
+      <li><strong>再投与（rechallenge）：</strong>irAE軽快後の再開は可能な場合があるが、再燃・新規irAEのリスクがある。心筋炎・重症神経障害・G4等では原則行わない。個別判断。</li>
+      <li><strong>ベースライン自己免疫疾患：</strong>増悪リスクを評価し慎重に導入する。</li>
+    </ul>
+
+    <div class="info-box">各臓器の詳細は関連ページ（ae-timing.html 等、近日公開）へリンク予定。</div>
+
+    <!-- ===================== 7. 日本での注記 ===================== -->
+    <h2 class="sec-h2" id="japan">7. 日本での注記</h2>
+
+    <div class="info-box" style="background:#eef4fd;border-left-color:#2d5fb5">
+      <p style="margin-bottom:8px"><strong>国内承認ICI（肺癌領域）：</strong>nivolumab・pembrolizumab（抗PD-1）、atezolizumab・durvalumab（抗PD-L1）、ipilimumab（抗CTLA-4、併用）。tremelimumabは一部併用で承認（肺癌への適用は添付文書で確認）。</p>
+      <p style="margin-bottom:8px"><strong>参照GL：</strong>日本臨床腫瘍学会「がん免疫療法ガイドライン 第3版」（2023）<sup>[4]</sup>、日本肺癌学会「肺癌診療ガイドライン 2024年版」。</p>
+      <p><strong>遅発への注意：</strong>irAEはICI中止後も数か月後に遅発しうる。治療終了後の継続フォローと患者への注意喚起が必要。</p>
+    </div>
+
+    <!-- ===================== 8. COI ===================== -->
+    <h2 class="sec-h2" id="coi">8. COI注記</h2>
+    <p style="font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:14px">ICIの承認試験の多くは製薬企業がスポンサーである。本ページは横断的リファレンスであり、特定薬剤・レジメンの優劣は論じない。</p>
+
+    <!-- ===================== 出典 ===================== -->
+    <h2 class="sec-h2" id="references">出典</h2>
+    <ol class="ref-list">
+      <li class="ref-item">
+        <span class="ref-title">ASCO GL 2021 irAE管理</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Schneider BJ, et al. Management of Immune-Related Adverse Events in Patients Treated With Immune Checkpoint Inhibitor Therapy. <em>J Clin Oncol.</em> 2021;39(36):4073-4126. Erratum: JCO 2022;40(3):315, PMID 35030312.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/34724392/" target="_blank" rel="noopener">34724392</a>
+          <span class="ref-sep">·</span>
+          <a href="https://doi.org/10.1200/JCO.21.01440" target="_blank" rel="noopener">doi:10.1200/JCO.21.01440</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">ESMO GL 2022 irAE管理</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Haanen J, et al. Management of toxicities from immunotherapy: ESMO Clinical Practice Guideline for diagnosis, treatment and follow-up. <em>Ann Oncol.</em> 2022;33(12):1217-1238.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/36270461/" target="_blank" rel="noopener">36270461</a>
+          <span class="ref-sep">·</span>
+          <a href="https://doi.org/10.1016/j.annonc.2022.10.001" target="_blank" rel="noopener">doi:10.1016/j.annonc.2022.10.001</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">SITC GL 2021 irAE管理</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Brahmer JR, et al. Society for Immunotherapy of Cancer (SITC) clinical practice guideline on immune checkpoint inhibitor-related adverse events. <em>J Immunother Cancer.</em> 2021;9(6):e002435.</div>
+        <div class="ref-links">
+          <a href="https://doi.org/10.1136/jitc-2021-002435" target="_blank" rel="noopener">doi:10.1136/jitc-2021-002435</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">JSMO がん免疫療法ガイドライン 第3版</span>
+        <span class="src-badge src-jp">日本国内情報</span>
+        <div>日本臨床腫瘍学会（編）. がん免疫療法ガイドライン 第3版. 金原出版, 2023. ISBN 978-4307102124.</div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">Nishino 2016（肺臓炎 疫学）</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Nishino M, et al. PD-1 Inhibitor-Related Pneumonitis in Advanced Cancer Patients: Radiographic Patterns and Clinical Course. <em>JAMA Oncol.</em> 2016;2(12):1607-1616.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/27540850/" target="_blank" rel="noopener">27540850</a>
+          <span class="ref-sep">·</span>
+          <a href="https://doi.org/10.1001/jamaoncol.2016.2453" target="_blank" rel="noopener">doi:10.1001/jamaoncol.2016.2453</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">Mahmood 2018（心筋炎）</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Mahmood SS, et al. Myocarditis in Patients Treated With Immune Checkpoint Inhibitors. <em>J Am Coll Cardiol.</em> 2018;71(16):1755-1764.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/29567210/" target="_blank" rel="noopener">29567210</a>
+          <span class="ref-sep">·</span>
+          <a href="https://doi.org/10.1016/j.jacc.2018.02.037" target="_blank" rel="noopener">doi:10.1016/j.jacc.2018.02.037</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">Wang 2018（致死的irAE 疫学）</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Wang DY, et al. Fatal Toxic Effects Associated With Immune Checkpoint Inhibitors: A Systematic Review and Meta-analysis. <em>JAMA Oncol.</em> 2018;4(12):1721-1728.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/30242316/" target="_blank" rel="noopener">30242316</a>
+          <span class="ref-sep">·</span>
+          <a href="https://doi.org/10.1001/jamaoncol.2018.3923" target="_blank" rel="noopener">doi:10.1001/jamaoncol.2018.3923</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">Martins 2019（irAE 総説）</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Martins F, et al. Adverse effects of immune-checkpoint inhibitors: epidemiology, management and surveillance. <em>Nat Rev Clin Oncol.</em> 2019;16:563-580.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31092901/" target="_blank" rel="noopener">31092901</a>
+          <span class="ref-sep">·</span>
+          <a href="https://doi.org/10.1038/s41571-019-0218-0" target="_blank" rel="noopener">doi:10.1038/s41571-019-0218-0</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">Xu 2019（PD-1/L1＋CTLA-4 併用毒性メタ解析）</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Xu C, et al. Comparative safety of immune checkpoint inhibitors in cancer: systematic review and network meta-analysis. <em>BMC Cancer.</em> 2019.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/31182049/" target="_blank" rel="noopener">31182049</a>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">NCCN GL — Management of Immunotherapy-Related Toxicities</span>
+        <span class="src-badge src-protocol">GLドキュメント</span>
+        <div>NCCN Clinical Practice Guidelines in Oncology — Management of Immunotherapy-Related Toxicities, Version 1.2025. NCCN Guidelines for Patients Version 1.2026 (2025-10-23).</div>
+        <div class="ref-links">
+          <a href="https://www.nccn.org/guidelines/category_1" target="_blank" rel="noopener">nccn.org/guidelines/category_1</a>
+        </div>
+        <div style="margin-top:4px;font-size:11px;color:var(--text3)">用量数値はASCO/ESMOを優先。患者向け版には具体的mg/kg用量の記載なし。</div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-title">Jayathilaka 2024（irAE 実臨床頻度）</span>
+        <span class="src-badge src-paper">論文由来</span>
+        <div>Jayathilaka B, et al. Incidence and survival outcomes of immune-related adverse events (irAEs) in patients with cancer treated with immune checkpoint inhibitors. <em>Br J Cancer.</em> 2024;132(1):51-57. Correction: Br J Cancer 132(1):137, PMID 39658607.</div>
+        <div class="ref-links">
+          PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/39489880/" target="_blank" rel="noopener">39489880</a>
+          <span class="ref-sep">·</span>
+          <a href="https://doi.org/10.1038/s41416-024-02887-1" target="_blank" rel="noopener">doi:10.1038/s41416-024-02887-1</a>
+        </div>
+      </li>
+    </ol>
+
+  </main>
+</div><!-- /layout -->
+
+<footer class="footer">
+  <span class="footer-logo"><span>lung</span>atlas</span>
+  <span>Built on trials, not textbooks. — lungatlas.io</span>
+</footer>
+
+<script>
+function swOrgan(id, btn) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('p-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
