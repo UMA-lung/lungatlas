@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CheckMate 77T試験 — 切除可能NSCLC 周術期 nivolumab（術前化学療法併用＋術後維持） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。CheckMate 77T試験（切除可能NSCLC、周術期nivolumab）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>CheckMate 77T試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">CheckMate 77T試験 — 切除可能NSCLC 周術期 nivolumab（術前化学療法併用＋術後維持）</h1>
+
+  <p class="scrap-summary">切除可能stage IIA–IIIB NSCLCで周術期nivolumab（術前化学療法併用＋術後維持）がEFS・pCRを改善した第3相試験。EFS中央値40.1 vs 17.0か月、HR 0.59。CheckMate 816（術前のみ）と同じnivolumabの周術期版。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年7月9日</span>
+    <span>更新日：2026年7月9日</span>
+    <span>対象論文：
+      <!-- 要確認: NEJM 2024 PMID を原著で確認 -->
+      <a href="https://doi.org/10.1056/NEJMoa2311926" target="_blank" rel="noopener">NEJM 2024 DOI: 10.1056/NEJMoa2311926</a> ／
+      <a href="https://doi.org/10.1200/JCO.2025.43.17_suppl.LBA8010" target="_blank" rel="noopener">JCO 2025 LBA8010 (ASCO 2025)</a>
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+
+    <p>CheckMate 77T試験（NCT04025879）は、切除可能NSCLCに対する周術期nivolumab（術前化学療法併用 + 術後維持）の有効性を、術前化学療法単独（+術後プラセボ）と比較した国際共同・第3相・二重盲検・プラセボ対照試験。同じnivolumabを術前のみで用いたCheckMate 816（neoadjuvant only）に、術後（adjuvant）相を追加した「周術期（perioperative）」デザインであり、AEGEAN（durvalumab）・KEYNOTE-671（pembrolizumab）と並ぶ周術期免疫療法の主要第3相試験。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・二重盲検・プラセボ対照・無作為化（1:1）</td></tr>
+        <tr><td>対象</td><td>treatment-naive 切除可能NSCLC・<strong>stage IIA–IIIB</strong>（AJCC第8版）・EGFR/ALK陰性</td></tr>
+        <tr><td>症例数</td><td>461例（nivolumab 229例 / placebo 232例）</td></tr>
+        <tr><td>登録期間</td><td>2019年11月〜2022年4月</td></tr>
+        <tr><td>術前レジメン</td><td>nivolumab 360mg + プラチナ併用化学療法 Q3W×4サイクル</td></tr>
+        <tr><td>術後レジメン</td><td>nivolumab 480mg Q4W×13サイクル（約1年）</td></tr>
+        <tr><td>対照群</td><td>術前 化学療法+プラセボ → 手術 → 術後プラセボ</td></tr>
+        <tr><td>化学療法内訳</td><td>シスプラチン系 24% vs 18%、カルボプラチン系 73% vs 78%</td></tr>
+        <tr><td>主要評価項目</td><td>EFS（BICR）</td></tr>
+        <tr><td>副次評価項目</td><td>pCR、MPR、OS</td></tr>
+        <tr><td>スポンサー</td><td>Bristol Myers Squibb（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT04025879</td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 有効性 — EFS</h2>
+
+    <p><strong>EFS（Primary interim、NEJM 2024）</strong></p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.58</div>
+        <div class="stat-label">EFS（Primary interim）</div>
+        <div class="stat-vs">95%CI 0.42–0.81、p&lt;0.001</div>
+      </div>
+    </div>
+
+    <p><strong>EFS（updated、ESMO 2024、median follow-up 33.3か月）</strong></p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">40.1か月</div>
+        <div class="stat-label">EFS中央値（nivolumab）</div>
+        <div class="stat-vs">95%CI 33.7–NR</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">17.0か月</div>
+        <div class="stat-label">EFS中央値（placebo）</div>
+        <div class="stat-vs">95%CI 13.6–28.1</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 0.59</div>
+        <div class="stat-label">EFS（updated）</div>
+        <div class="stat-vs">95%CI 0.45–0.79</div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">73% vs 59%</div>
+        <div class="stat-label">12か月EFS率</div>
+        <div class="stat-vs">nivolumab vs placebo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">65% vs 44%</div>
+        <div class="stat-label">24か月EFS率</div>
+        <div class="stat-vs">nivolumab vs placebo</div>
+      </div>
+    </div>
+
+    <p>術前化学療法+周術期nivolumabにより、EFS中央値が約23か月延長した。</p>
+
+    <!-- 要確認: OS（副次）の最新解析結果・成熟度はNEJM 2024 / 後続報告より確認 -->
+
+    <h2>3. 病理学的奏効</h2>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">25.3% vs 4.7%</div>
+        <div class="stat-label">pCR（病理学的完全奏効）</div>
+        <div class="stat-vs">nivolumab vs placebo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">35.4% vs 12.1%</div>
+        <div class="stat-label">MPR（major pathological response）</div>
+        <div class="stat-vs">nivolumab vs placebo</div>
+      </div>
+    </div>
+
+    <p>pCR達成例・非達成例のいずれでもEFS benefit が認められ、そのHRは病理学的奏効の程度に相応していた（原著記載）。これは術後（adjuvant）相の寄与を示唆する所見として解釈されている。</p>
+
+    <!-- 要確認: pCR達成/非達成別のEFS HRの具体的数値はNEJM 2024 / ESMO 2024より確認 -->
+
+    <h2>4. サブグループ（stage III N2・バイオマーカー）</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-eu"><span class="gl-flag">N2</span><span><strong>stage III N2サブグループ</strong>（探索的）：EFS HR 0.46、pCR 22% vs 5.6%。多発ステーションN2でも benefit（HR 0.43、pCR 29% vs 2.7%）。N2例でnivolumab群は肺全摘（pneumonectomy）が少なかった。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">Bio</span><span>KRAS・STK11・KEAP1変異の有無にかかわらずEFS benefit（ASCO 2025、LBA8010）。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">PD-L1</span><span>PD-L1発現別サブグループ：<!-- 要確認: PD-L1 &lt;1% / 1-49% / ≥50%別のEFS HRはNEJM 2024 Supplementより確認 --></span></div>
+    </div>
+
+    <!-- 要確認: stage III N2サブグループ解析の詳細（EFS中央値・CI）は該当学会報告/論文より確認 -->
+
+    <h2>5. 安全性</h2>
+
+    <p>新たな安全性シグナルは認めなかった（原著記載）。肺臓炎（pneumonitis）関連死亡がまれに発生（頻度は低いが臨床的に重要）。</p>
+
+    <!-- 要確認: Grade 3/4治療関連有害事象の発現率（nivolumab vs placebo）はNEJM 2024 Tableより確認 -->
+    <!-- 要確認: irAE（甲状腺・肺臓炎・肝炎等）の発現率はNEJM 2024より確認 -->
+    <!-- 要確認: 手術実施率・手術関連合併症・治療関連死亡の詳細はNEJM 2024より確認 -->
+    <!-- 要確認: 患者報告アウトカム（HRQOL、IASLC 2025 WCLC Abstract 3005）の詳細を確認して追記可能 -->
+
+    <p>周術期nivolumabはプラセボと比較してHRQOL（健康関連QoL）を悪化させず、stage III N2例を含め悪化リスクをむしろ低減したと報告されている（WCLC 2025、探索的）。</p>
+
+    <h2>6. 位置づけと注意点</h2>
+
+    <p>CheckMate 77Tは、AEGEAN（durvalumab）・KEYNOTE-671（pembrolizumab）と並ぶ切除可能NSCLCの周術期免疫療法の主要第3相試験。特にCheckMate 816（同じnivolumabの術前のみ）との関係が重要。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-eu"><span class="gl-flag">CM816</span><span><strong>同じnivolumabで「術前のみ（CheckMate 816）」と「周術期＝術前+術後（本試験）」が存在する</strong>点が最大の特徴。術後相の上乗せ効果を考える上で両試験の対比が重要。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">比較</span><span>CM816とCM77Tを直接比較したランダム化試験はない。患者レベルデータを用いた探索的比較（JTO 2024, PL02.08）では、手術時点からのランドマークEFSで周術期nivolumabが術前のみnivolumabに対しbenefit（HR 0.56–0.61、探索的・傾向スコア調整）を示したが、これはクロストライアル比較であり結論は限定的。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">分離</span><span><strong>術後相の必要性（術前のみで十分か、術後維持が有益か）は本試験単独では分離できない。</strong></span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">設計</span><span>AEGEAN（EGFR/ALK陽性を効果解析から除外）・KEYNOTE-671（除外しない）と異なり、CM77TはEGFR/ALK陰性を対象。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">N2</span><span>stage III N2（多発ステーション含む）での顕著な benefit は、従来予後不良とされたN2例の治療選択に影響しうる（探索的）。</span></div>
+      <div class="gl-item gl-us"><span class="gl-flag">FDA</span><span>切除可能NSCLC（EGFR/ALK変異なし）に対する術前nivolumab+化学療法→術後nivolumab単剤として承認。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">日本</span><span>国内承認状況：<!-- 要確認: PMDA確認 --></span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">間接比較</span><span>各周術期試験（CM77T・AEGEAN・KN671）およびCM816は患者集団・デザインが異なり、試験間の数値直接比較は不適切（間接比較の注意）。</span></div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>
+        Cascone T, Awad MM, Spicer JD, et al; CheckMate 77T Investigators.
+        Perioperative Nivolumab in Resectable Lung Cancer.
+        <em>N Engl J Med.</em> 2024;390(19):1756-1769.
+        <!-- 要確認: NEJM 2024 PMID を原著で確認 --> /
+        <a href="https://doi.org/10.1056/NEJMoa2311926" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa2311926</a>
+      </li>
+      <li>
+        Awad MM, Spicer JD, Cascone T, et al.
+        Perioperative nivolumab vs placebo in patients with resectable NSCLC: Updated survival and biomarker analyses from CheckMate 77T.
+        <em>J Clin Oncol.</em> 2025;43(suppl 17):LBA8010. (ASCO 2025 Annual Meeting)
+        <a href="https://doi.org/10.1200/JCO.2025.43.17_suppl.LBA8010" target="_blank" rel="noopener">DOI: 10.1200/JCO.2025.43.17_suppl.LBA8010</a>
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

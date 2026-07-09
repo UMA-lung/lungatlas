@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "CheckMate 77T試験 — 切除可能NSCLC 周術期 nivolumab（術前化学療法併用＋術後維持）",
+    summary: "切除可能stage IIA–IIIB NSCLCで周術期nivolumab（術前化学療法併用＋術後維持）がEFS・pCRを改善した第3相試験。EFS中央値40.1 vs 17.0か月、HR 0.59。CheckMate 816（術前のみ）と同じnivolumabの周術期版。",
+    date: "2026-07-09",
+    url: "/lungatlas/scraps/cm77t.html"
+  },
+  {
     title: "JCOG1211 — GGO優位・3cm以下肺腺癌に対する区域切除：単群検証的第3相試験",
     summary: "clinical T1N0・GGO優位・CTR 0.25-0.5・3cm以下の肺腺癌に対する区域切除の単群検証的第3相試験。5年RFS 98.0%と良好。JCOG0804・0802と並ぶCTR基準シリーズの一角。",
     date: "2026-07-02",
