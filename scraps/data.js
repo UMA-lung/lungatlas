@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "NeoADAURA試験 — 切除可能EGFR変異NSCLC 術前 osimertinib ± 化学療法",
+    summary: "切除可能stage II–IIIB(N2) EGFR変異NSCLCで術前osimertinib（±化学療法）がMPRを改善した第3相試験。MPR 26%/25% vs 2%。分子標的薬の術前療法として初の第3相benefit。EFSは未成熟。",
+    date: "2026-07-15",
+    url: "/lungatlas/scraps/neoadaura.html"
+  },
+  {
     title: "CheckMate 77T試験 — 切除可能NSCLC 周術期 nivolumab（術前化学療法併用＋術後維持）",
     summary: "切除可能stage IIA–IIIB NSCLCで周術期nivolumab（術前化学療法併用＋術後維持）がEFS・pCRを改善した第3相試験。EFS中央値40.1 vs 17.0か月、HR 0.59。CheckMate 816（術前のみ）と同じnivolumabの周術期版。",
     date: "2026-07-09",

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeoADAURA試験 — 切除可能EGFR変異NSCLC 術前 osimertinib ± 化学療法 — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。NeoADAURA試験（切除可能EGFR変異NSCLC、術前osimertinib±化学療法）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>NeoADAURA試験</span>
+  </nav>
+
+  <h1 class="scrap-h1">NeoADAURA試験 — 切除可能EGFR変異NSCLC 術前 osimertinib ± 化学療法</h1>
+
+  <p class="scrap-summary">切除可能stage II–IIIB(N2) EGFR変異NSCLCで術前osimertinib（±化学療法）がMPRを改善した第3相試験。MPR 26%/25% vs 2%。分子標的薬の術前療法として初の第3相benefit。EFSは未成熟。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年7月15日</span>
+    <span>更新日：2026年7月15日</span>
+    <span>対象論文：
+      <!-- 要確認: JCO 2025 Primary PMID を原著で確認 -->
+      PMID <!-- 要確認 --> /
+      <a href="https://doi.org/10.1200/JCO-25-00883" target="_blank" rel="noopener">DOI: 10.1200/JCO-25-00883</a>（JCO 2025 Primary）／
+      <a href="https://doi.org/10.1200/JCO.2025.43.16_suppl.8001" target="_blank" rel="noopener">DOI: 10.1200/JCO.2025.43.16_suppl.8001</a>（ASCO 2025 抄録 8001）／
+      <a href="https://pubmed.ncbi.nlm.nih.gov/34278827/" target="_blank" rel="noopener">PMID: 34278827</a>（Future Oncol 2021 デザイン論文）DOI <!-- 要確認 -->
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <h2>1. 試験概要</h2>
+
+    <p>NeoADAURA試験（NCT04351555）は、切除可能なEGFR変異陽性NSCLCに対し、術前（neoadjuvant）osimertinib単剤またはosimertinib + 化学療法を、化学療法単独と比較した国際共同・第3相・無作為化試験。EGFR変異陽性例は術前化学免疫療法（CheckMate 816・KEYNOTE-671等）の恩恵が乏しいとされ、術前治療の選択肢が確立していなかった集団であり、その空白を埋める位置づけ。<strong>分子標的薬が術前（neoadjuvant）設定のNSCLCで有効性を示した初の第3相試験</strong>とされる（原著記載）。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>第3相・国際・無作為化・3群</td></tr>
+        <tr><td>対象</td><td>完全切除可能 <strong>stage II–IIIB(N2)</strong> EGFR変異（ex19del または L858R）NSCLC（AJCC第8版）</td></tr>
+        <tr><td>症例数</td><td>osimertinib+化学療法 121例 / osimertinib単剤 117例 / プラセボ+化学療法 120例</td></tr>
+        <tr><td>① osi+CT群</td><td>osimertinib + プラチナ併用化学療法（術前）</td></tr>
+        <tr><td>② osi単剤群</td><td>osimertinib単剤（術前）</td></tr>
+        <tr><td>③ 対照群</td><td>プラセボ + プラチナ併用化学療法（術前）</td></tr>
+        <tr><td>術後治療</td><td><strong>治験医選択</strong>（術後osimertinibを含みうる）</td></tr>
+        <tr><td>主要評価項目</td><td><strong>中央判定MPR（major pathological response）</strong>（切除時）</td></tr>
+        <tr><td>副次評価項目</td><td>EFS、pCR、切除時のnodal downstaging、DFS、OS、HRQoL</td></tr>
+        <tr><td>層別化因子</td><td>病期・人種（中国系アジア/他アジア/非アジア）・変異型（ex19del vs L858R）</td></tr>
+        <tr><td>スポンサー</td><td>AstraZeneca（製薬会社スポンサー試験）</td></tr>
+        <tr><td>試験登録番号</td><td>NCT04351555</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: 術前osimertinibの投与期間・用量、化学療法のレジメン詳細・サイクル数はJCO 2025 Methodsより確認 -->
+
+    <h2>2. 主要評価項目 — MPR</h2>
+
+    <p style="font-weight:600;margin-bottom:6px">MPR（Primary、中央判定、JCO 2025 / ASCO 2025）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">26%</div>
+        <div class="stat-label">MPR（osi+CT群）</div>
+        <div class="stat-vs">95%CI 18–34、OR 19.8、P&lt;0.0001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">25%</div>
+        <div class="stat-label">MPR（osi単剤群）</div>
+        <div class="stat-vs">95%CI 17–34、OR 19.3、P&lt;0.0001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">2%</div>
+        <div class="stat-label">MPR（プラセボ+CT群）</div>
+        <div class="stat-vs">95%CI 0–6</div>
+      </div>
+    </div>
+
+    <p>両osimertinib群とも化学療法単独に対しMPRを統計学的に有意に改善した。osimertinib単剤と併用の間でMPR率にほぼ差はなかった。</p>
+
+    <p style="font-weight:600;margin-bottom:6px">pCR（副次）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">4%</div>
+        <div class="stat-label">pCR（osi+CT群）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">9%</div>
+        <div class="stat-label">pCR（osi単剤群）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">0%</div>
+        <div class="stat-label">pCR（プラセボ+CT群）</div>
+      </div>
+    </div>
+
+    <p>pCR率はosimertinib単剤群（9%）の方が併用群（4%）より高いという結果であったが、症例数が限られ、この差の解釈には注意が必要。</p>
+
+    <!-- 要確認: pCRの95%CI・統計学的検定結果はJCO 2025より確認 -->
+    <!-- 要確認: ORR（画像上の奏効率）はJCO 2025より確認 -->
+
+    <h2>3. Nodal downstaging・EFS（interim）</h2>
+
+    <p style="font-weight:600;margin-bottom:6px">Nodal downstaging</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">&gt;50%</div>
+        <div class="stat-label">Nodal downstaging（osimertinib群）</div>
+        <div class="stat-vs">ベースラインN2症例において</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">21%</div>
+        <div class="stat-label">Nodal downstaging（化学療法群）</div>
+      </div>
+    </div>
+
+    <!-- 要確認: osimertinib群別（単剤 vs 併用）のnodal downstaging率の正確な数値はJCO 2025より確認 -->
+
+    <p style="font-weight:600;margin-bottom:6px">EFS（interim解析）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">2%</div>
+        <div class="stat-label">EFSイベント（MPR達成例）</div>
+        <div class="stat-vs">1/62例</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">18%</div>
+        <div class="stat-label">EFSイベント（MPR非達成例）</div>
+        <div class="stat-vs">52/296例</div>
+      </div>
+    </div>
+
+    <p>両osimertinib群とも化学療法単独に対し良好な傾向（favorable trend）が認められた。<strong>EFSは interim 段階であり、統計学的な結論を出せる成熟度に達していない。</strong>MPR達成例でEFSイベントが少ないという関連は観察されたが、これは相関を示すものであり、MPRがEFS/OSの妥当な代替エンドポイントであることを証明するものではない。</p>
+
+    <!-- 要確認: interim EFSの各群HR・95%CI・データ成熟度はJCO 2025より確認 -->
+    <!-- 要確認: 手術実施率・R0切除率・術式（肺葉切除/肺全摘等）はJCO 2025より確認 -->
+
+    <h2>4. 安全性</h2>
+
+    <p>安全性プロファイルは各薬剤の既知のプロファイルと一致していた（原著記載）。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>osi+CT</th><th>osi単剤</th><th>placebo+CT</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Grade≥3 有害事象</td>
+          <td><!-- 要確認: JCO 2025より --></td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>間質性肺疾患（ILD）/肺臓炎</td>
+          <td><!-- 要確認: osimertinibで注意すべき毒性 --></td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>手術遅延（surgery delay）</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+        <tr>
+          <td>有害事象による治療中止</td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+          <td><!-- 要確認 --></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: 各有害事象の具体的発現率（%）はJCO 2025 Table / Supplementより確認 -->
+    <!-- 要確認: 術後合併症率はJCO 2025より確認 -->
+
+    <h2>5. 位置づけと注意点</h2>
+
+    <p>NeoADAURAは、EGFR変異陽性という「術前化学免疫療法の恩恵が乏しい集団」に対する術前治療のエビデンスを初めて第3相で示した試験。一方、いくつかの重要な未解決の論点がある。</p>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn"><span class="gl-flag">最大論点</span><span><strong>「術前osimertinib」は「手術 → 術後osimertinib（ADAURA）」に対して上乗せがあるのか</strong>。本試験は術前治療同士の比較（osi vs 化学療法）であり、「術前osimertinibあり vs なし（手術先行 → 術後osimertinib）」を直接比較していない。この問いへの答えは本試験からは得られない。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">術後治療</span><span><strong>術後治療が治験医選択（術後osimertinibを含みうる）</strong>であるため、EFS/DFS/OSの解釈が複雑になる。術前・術後どちらのosimertinibが寄与したかを分離できない。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">MPR</span><span><strong>MPRは代替エンドポイント</strong>であり、EFS・OSといった真のエンドポイントの改善を保証しない。特にEGFR-TKIにおける病理学的奏効の意義は、化学免疫療法における pCR/MPR の意義と同じとは限らない。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">pCR率</span><span>MPR率（25–26%）は、EGFR/ALK陰性例に対する術前化学免疫療法（CheckMate 816のpCR 24%等）と比べて顕著に高いとは言えない。<strong>分子標的薬では腫瘍縮小はするが病理学的完全消失には至りにくい</strong>という性質が反映されている可能性がある。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">単剤vs併用</span><span>osimertinib単剤（MPR 25%、pCR 9%）と併用（MPR 26%、pCR 4%）でMPRに実質的な差がなく、化学療法上乗せの意義は明確でない。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">N2</span><span>N2 downstaging（50%超 vs 21%）は外科的観点から意義がある可能性。ただし手術成績・長期予後への影響は今後の解析待ち。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">ADAURA</span><span>ADAURA（術後osimertinib、DFS・OS改善）が既に標準治療として確立している中で、術前osimertinibをどう位置づけるかは臨床的に未解決。ADAURA2（stage IA2–IA3）等の関連試験も進行中。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">国内</span><span>osimertinibの術前療法としての国内承認状況：<!-- 要確認: PMDA確認。本適応での承認有無 --></span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">間接比較</span><span>化学免疫療法の周術期試験（CM816・KN671・AEGEAN・CM77T）とは対象集団（EGFR変異の有無）が異なり、直接比較は不適切（間接比較の注意）。</span></div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>
+        He J, Tsuboi M, Weder W, et al.
+        Neoadjuvant Osimertinib for Resectable EGFR-Mutated Non-Small Cell Lung Cancer.
+        <em>J Clin Oncol.</em> 2025;43(26):2875-2887.
+        <!-- 要確認: PMID を原著で確認 --> PMID <!-- 要確認 --> /
+        <a href="https://doi.org/10.1200/JCO-25-00883" target="_blank" rel="noopener">DOI: 10.1200/JCO-25-00883</a>
+      </li>
+      <li>
+        Chaft JE, Weder W, He J, et al.
+        Neoadjuvant osimertinib ± chemotherapy vs chemotherapy alone in resectable EGFR-mutated NSCLC: NeoADAURA.
+        <em>J Clin Oncol.</em> 2025;43(16_suppl):8001. (ASCO 2025 Annual Meeting)
+        <a href="https://doi.org/10.1200/JCO.2025.43.16_suppl.8001" target="_blank" rel="noopener">DOI: 10.1200/JCO.2025.43.16_suppl.8001</a>
+      </li>
+      <li>
+        Tsuboi M, Weder W, Escriu C, et al.
+        Neoadjuvant osimertinib with/without chemotherapy versus chemotherapy alone for EGFR-mutated resectable non-small-cell lung cancer: NeoADAURA.
+        <em>Future Oncol.</em> 2021. (試験デザイン論文)
+        <a href="https://pubmed.ncbi.nlm.nih.gov/34278827/" target="_blank" rel="noopener">PMID: 34278827</a> / DOI <!-- 要確認 -->
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
