@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LACEメタアナリシス — 完全切除NSCLCに対する術後補助シスプラチン併用化学療法（IPDプール解析） — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。LACEメタアナリシス（完全切除NSCLC術後補助シスプラチン併用化学療法）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>LACEメタアナリシス</span>
+  </nav>
+
+  <h1 class="scrap-h1">LACEメタアナリシス — 完全切除NSCLCに対する術後補助シスプラチン併用化学療法（IPDプール解析）</h1>
+
+  <p class="scrap-summary">完全切除NSCLCの術後補助シスプラチン併用化学療法の個別患者データプール解析（5試験4584例）。OS HR 0.89、5年絶対benefit 5.4%。stage II–IIIで有益、IAはむしろ有害の可能性。術後補助化学療法の古典的基盤。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年7月15日</span>
+    <span>更新日：2026年7月15日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/18506026/" target="_blank" rel="noopener">PMID: 18506026</a> /
+      <a href="https://doi.org/10.1200/JCO.2007.13.9030" target="_blank" rel="noopener">DOI: 10.1200/JCO.2007.13.9030</a>（JCO 2008 Primary）
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <h2>1. 概要</h2>
+
+    <p>LACE（Lung Adjuvant Cisplatin Evaluation）は、完全切除NSCLCに対する術後補助シスプラチン併用化学療法の有効性を検証した、個別患者データ（individual patient data, IPD）に基づくプール解析（メタアナリシス）。1995年のNSCLCメタアナリシス以降に実施された最大規模の5つのランダム化試験を統合し、術後補助化学療法がOSを改善することを示した、この領域の古典的かつ中心的なエビデンス。ADAURA・ALINA・IMpower010といった現代の術後補助療法試験は、いずれもこのプラチナ併用化学療法という「土台」の上に構築されている。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>デザイン</td><td>個別患者データ（IPD）プール解析（メタアナリシス）</td></tr>
+        <tr><td>統合された試験</td><td>ALPI・ANITA・BLT・IALT・JBR.10（5試験）</td></tr>
+        <tr><td>選択基準</td><td>1995年NSCLCメタアナリシス以降に実施・完全切除例・シスプラチン併用化学療法 vs 観察（またはCRT vs RT単独）・300例超のRCT</td></tr>
+        <tr><td>症例数</td><td>4,584例</td></tr>
+        <tr><td>主要評価項目</td><td>OS</td></tr>
+        <tr><td>副次評価項目</td><td>DFS、肺癌関連死・非肺癌関連死、治療完遂・毒性</td></tr>
+        <tr><td>中央フォロー</td><td>5.2年</td></tr>
+        <tr><td>出資</td><td><!-- 要確認: LACE Collaborative Group、公的資金の詳細を原著で確認 --></td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. 主要結果</h2>
+
+    <p style="font-weight:600;margin-bottom:6px">OS（Primary）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.89</div>
+        <div class="stat-label">OS（化学療法 vs 対照）</div>
+        <div class="stat-vs">95%CI 0.82–0.96、p=0.005</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">+5.4%</div>
+        <div class="stat-label">5年絶対OS benefit</div>
+      </div>
+    </div>
+
+    <p style="font-weight:600;margin-bottom:6px">DFS（副次）</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 0.84</div>
+        <div class="stat-label">DFS（化学療法 vs 対照）</div>
+        <div class="stat-vs">p&lt;0.001</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">+5.8%</div>
+        <div class="stat-label">5年絶対DFS benefit</div>
+      </div>
+    </div>
+
+    <p>術後補助シスプラチン併用化学療法は、完全切除NSCLCにおいてOS・DFS双方を有意に改善した。試験間の効果の異質性（heterogeneity）は認めなかった。</p>
+
+    <!-- 要確認: 肺癌関連死・非肺癌関連死それぞれのHRは原著JCO 2008より確認 -->
+
+    <h2>3. 病期別サブグループ（臨床的に最重要）</h2>
+
+    <p>化学療法の効果は病期によって異なり、統計学的に有意な交互作用が認められた（trend検定 p=0.04）。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>病期</th><th>OS HR（95%CI）</th><th>解釈</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>stage IA</td><td class="num">1.40（0.95–2.06）</td><td><strong>むしろ有害の可能性</strong>（benefitなし）</td></tr>
+        <tr><td>stage IB</td><td class="num">0.93（0.78–1.10）</td><td>有意でない</td></tr>
+        <tr><td>stage II</td><td class="num">0.83（0.73–0.95）</td><td>有益</td></tr>
+        <tr><td>stage III</td><td class="num">0.83（0.72–0.94）</td><td>有益</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>stage IAではHRが1を超え（1.40）、術後補助化学療法がむしろ予後を悪化させる可能性が示唆された。</strong>一方、stage II・IIIでは明確なbenefitが認められた。この病期別の効果差が、「術後補助化学療法はstage II–IIIAで標準、stage IA・IBでは一律には推奨されない」という現在のガイドライン推奨の直接的な根拠となっている。</p>
+
+    <h2>4. レジメン・患者背景による差</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-eu"><span class="gl-flag">レジメン</span><span><strong>cisplatin-vinorelbineレジメンが最大コホート（全体の41%）かつ最も均質</strong>（薬剤用量・適格基準）。事前規定サブ解析で、他のシスプラチン併用レジメン（プール）との間接比較において cisplatin-vinorelbine が有意に良好な傾向（交互作用 p=0.04、JTO 2010サブ解析）。ただし間接比較であり解釈に注意。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">因子</span><span>性別・年齢・組織型・術式・放射線併用の有無・計画シスプラチン総線量による化学療法効果の有意差は認めなかった。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">PS</span><span>PS（performance status）2の患者では化学療法の効果が不良な傾向。全身状態不良例への適用には慎重さが必要。</span></div>
+    </div>
+
+    <!-- 要確認: cisplatin-vinorelbineサブ解析（JTO 2010）の正確なHR・PMID・DOIを原著で確認 -->
+    <!-- 要確認: PS別のHRの具体的数値は原著JCO 2008より確認 -->
+    <!-- 要確認: 治療関連死亡率・Grade別毒性の詳細は原著より確認 -->
+
+    <h2>5. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp"><span class="gl-flag">標準治療</span><span>術後補助化学療法をstage II–IIIA NSCLCの標準治療として確立した、この領域の中心的エビデンス。各国ガイドラインの推奨の基盤。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">病期</span><span><strong>病期依存性が最重要のメッセージ</strong>：stage IA では benefit なし（むしろ有害の可能性）、stage IB は有意でない、stage II–III で有益。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">現代との接続</span><span>ドライバー変異（EGFR/ALK等）が考慮されていない時代の試験を統合したものであり、現代の分子標的補助療法（ADAURA・ALINA）や免疫補助療法（IMpower010・KEYNOTE-091）はこの化学療法の上に、あるいはその後に位置づけられる。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">設計の前提</span><span>現代の術後補助療法試験の多くは「プラチナ併用化学療法後に」標的薬・免疫薬を追加する設計であり、LACEが示した化学療法のbenefitが前提となっている（ADAURAは化学療法の有無を問わない設計である点は例外的）。</span></div>
+      <div class="gl-item gl-us"><span class="gl-flag">CALGB 9633</span><span>CALGB 9633（stage IB、carboplatin+paclitaxel）のサブ解析では腫瘍径4cm以上のstage IBで補助化学療法benefitが示されており、stage IB内でも腫瘍径による層別化が議論される。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">時代背景</span><span>発表から years が経過した古典的メタアナリシスであり、staging体系（当時の版）・レジメンは現在と一部異なる点に留意。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">毒性</span><span>シスプラチンは腎毒性・悪心・神経毒性等を伴い、忍容性・患者背景を踏まえた適応判断が必要。</span></div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>
+        Pignon JP, Tribodet H, Scagliotti GV, et al; LACE Collaborative Group.
+        Lung Adjuvant Cisplatin Evaluation: A Pooled Analysis by the LACE Collaborative Group.
+        <em>J Clin Oncol.</em> 2008;26(21):3552-3559.
+        <a href="https://pubmed.ncbi.nlm.nih.gov/18506026/" target="_blank" rel="noopener">PMID: 18506026</a> /
+        <a href="https://doi.org/10.1200/JCO.2007.13.9030" target="_blank" rel="noopener">DOI: 10.1200/JCO.2007.13.9030</a>
+      </li>
+      <li>
+        (cisplatin-vinorelbine subgroup analysis)
+        Adjuvant Cisplatin and Vinorelbine for Completely Resected Non-small Cell Lung Cancer:
+        Subgroup Analysis of the Lung Adjuvant Cisplatin Evaluation.
+        <em>J Thorac Oncol.</em> 2010.
+        <!-- 要確認: PMID・DOIを原著で確認 --> PMID <!-- 要確認 --> / DOI <!-- 要確認 -->
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "LACEメタアナリシス — 完全切除NSCLCに対する術後補助シスプラチン併用化学療法（IPDプール解析）",
+    summary: "完全切除NSCLCの術後補助シスプラチン併用化学療法の個別患者データプール解析（5試験4584例）。OS HR 0.89、5年絶対benefit 5.4%。stage II–IIIで有益、IAはむしろ有害の可能性。術後補助化学療法の古典的基盤。",
+    date: "2026-07-15",
+    url: "/lungatlas/scraps/lace.html"
+  },
+  {
     title: "NeoADAURA試験 — 切除可能EGFR変異NSCLC 術前 osimertinib ± 化学療法",
     summary: "切除可能stage II–IIIB(N2) EGFR変異NSCLCで術前osimertinib（±化学療法）がMPRを改善した第3相試験。MPR 26%/25% vs 2%。分子標的薬の術前療法として初の第3相benefit。EFSは未成熟。",
     date: "2026-07-15",
