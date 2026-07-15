@@ -10,6 +10,12 @@
 // サイト絶対パス（/lungatlas/scraps/... ）で記述すること。
 const SCRAPS_DATA = [
   {
+    title: "UFT（テガフール・ウラシル）術後補助療法 — 日本発のstage I NSCLCエビデンス",
+    summary: "完全切除p-stage I肺腺癌に対する経口UFT 2年投与のエビデンス群。JLCRG試験（NEJM 2004）とメタアナリシス2本が根拠。腫瘍径2cm超が適応基準。JCOG0707でS-1に置き換わらず標準として残る。",
+    date: "2026-07-15",
+    url: "/lungatlas/scraps/uft.html"
+  },
+  {
     title: "LACEメタアナリシス — 完全切除NSCLCに対する術後補助シスプラチン併用化学療法（IPDプール解析）",
     summary: "完全切除NSCLCの術後補助シスプラチン併用化学療法の個別患者データプール解析（5試験4584例）。OS HR 0.89、5年絶対benefit 5.4%。stage II–IIIで有益、IAはむしろ有害の可能性。術後補助化学療法の古典的基盤。",
     date: "2026-07-15",

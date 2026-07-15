@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UFT（テガフール・ウラシル）術後補助療法 — 日本発のstage I NSCLCエビデンス — Scraps — LungAtlas</title>
+<meta name="description" content="AI自動生成のドラフト。UFT術後補助療法（JLCRG・メタアナリシス・JCOG0707）の整理メモ。LungAtlas Scraps。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7f5;
+  --surface: #ffffff;
+  --surface2: #f0f4f1;
+  --border: #d4e0d6;
+  --border2: #b8cfbb;
+  --green-dark: #0d5c3a;
+  --green-mid: #1a7a4e;
+  --green-light: #e4f0e8;
+  --green-pale: #f0f7f2;
+  --blue-dark: #0c3d6e;
+  --blue-light: #e3edf8;
+  --purple-dark: #3b2d7a;
+  --purple-light: #eeebfb;
+  --amber-dark: #6b3d00;
+  --amber-light: #fdf0d8;
+  --text: #111a14;
+  --text2: #3d5042;
+  --text3: #6b8070;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+.scrap-banner {
+  background: #fff8e1;
+  border-bottom: 1px solid #f59e0b;
+  color: var(--amber-dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: 12px 28px;
+  text-align: left;
+}
+.scrap-banner strong { font-weight: 600; }
+
+.scrap-summary {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  background: var(--green-pale);
+  border-left: 3px solid var(--green-mid);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0 20px;
+}
+
+.scrap-body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+.scrap-body h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin: 28px 0 10px;
+}
+.scrap-body p { margin: 0 0 14px; }
+.scrap-body ul, .scrap-body ol { margin: 0 0 14px 20px; }
+
+.scrap-refs {
+  margin: 32px 0 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.scrap-refs h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.scrap-refs ol { margin: 0 0 0 18px; font-size: 13px; color: var(--text2); line-height: 1.8; }
+.scrap-refs li { margin-bottom: 10px; }
+.scrap-refs a { color: var(--green-dark); }
+
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 14px; }
+.comp-table th { padding: 9px 12px; background: var(--surface2); font-weight: 600; color: var(--text); border: 1px solid var(--border); text-align: left; }
+.comp-table td { padding: 9px 12px; border: 1px solid var(--border); color: var(--text2); line-height: 1.5; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fbf9; }
+.comp-table td:first-child { font-weight: 600; color: var(--text); }
+.comp-table .num { font-family: var(--mono); text-align: center; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+.stat { background: var(--green-pale); border-radius: 8px; padding: 11px 14px; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--green-dark); font-family: var(--mono); }
+.stat-label { font-size: 10.5px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.stat-vs { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+.gl-list { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 14px; }
+.gl-item { display: flex; align-items: flex-start; gap: 8px; border-radius: 8px; padding: 10px 13px; font-size: 12px; line-height: 1.65; }
+.gl-jp { background: var(--green-light); color: var(--green-dark); }
+.gl-us { background: var(--blue-light); color: var(--blue-dark); }
+.gl-eu { background: var(--purple-light); color: var(--purple-dark); }
+.gl-warn { background: var(--amber-light); color: var(--amber-dark); }
+.gl-flag { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.breadcrumb {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin: 22px 0 12px;
+}
+.breadcrumb a { color: var(--text3); text-decoration: none; }
+.breadcrumb a:hover { color: var(--green-dark); }
+.breadcrumb .sep { margin: 0 6px; color: var(--border2); }
+
+.scrap-h1 {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--green-dark);
+  margin: 6px 0 4px;
+}
+
+.scrap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+.scrap-meta a { color: var(--green-dark); }
+
+.scrap-footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--border);
+  padding: 22px 0 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  #lungatlas-nav .nav-links { display: none; }
+}
+</style>
+  <link rel="stylesheet" href="/lungatlas/mobile.css">
+  <script src="/lungatlas/mobile.js" defer></script>
+</head>
+<body>
+
+<!-- ===== ナビゲーション（共通nav.htmlを流用） ===== -->
+<div id="nav-placeholder"></div>
+<script>
+fetch('/lungatlas/nav.html')
+  .then(function(r){ return r.text(); })
+  .then(function(h){
+    document.getElementById('nav-placeholder').innerHTML = h;
+    if (!document.getElementById('la-mobile')) {
+      var s = document.createElement('script');
+      s.id  = 'la-mobile';
+      s.src = '/lungatlas/mobile.js';
+      document.body.appendChild(s);
+    }
+  });
+</script>
+
+<!-- ===== AIドラフトバナー（ナビ直下） ===== -->
+<div class="scrap-banner">
+  ⚠️ このページはAI自動生成のドラフトです。管理人（医師）による内容確認は行っていません。記載された情報は不正確・不完全な可能性があります。臨床判断の根拠として使用しないでください。
+</div>
+
+<div class="wrap">
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/lungatlas/index.html">LungAtlas</a>
+    <span class="sep">›</span>
+    <a href="/lungatlas/scraps/index.html">Scraps</a>
+    <span class="sep">›</span>
+    <span>UFT術後補助療法</span>
+  </nav>
+
+  <h1 class="scrap-h1">UFT（テガフール・ウラシル）術後補助療法 — 日本発のstage I NSCLCエビデンス</h1>
+
+  <p class="scrap-summary">完全切除p-stage I肺腺癌に対する経口UFT 2年投与のエビデンス群。JLCRG試験（NEJM 2004）とメタアナリシス2本が根拠。腫瘍径2cm超が適応基準。JCOG0707でS-1に置き換わらず標準として残る。</p>
+
+  <div class="scrap-meta">
+    <span>公開日：2026年7月15日</span>
+    <span>更新日：2026年7月15日</span>
+    <span>対象論文：
+      <a href="https://pubmed.ncbi.nlm.nih.gov/15102997/" target="_blank" rel="noopener">PMID: 15102997</a>（JLCRG, NEJM 2004）/
+      <a href="https://pubmed.ncbi.nlm.nih.gov/16051951/" target="_blank" rel="noopener">PMID: 16051951</a>（Hamada meta, JCO 2005）
+    </span>
+  </div>
+
+  <article class="scrap-body">
+
+    <h2>1. 概要</h2>
+
+    <p>UFT（テガフール・ウラシル配合剤）は日本で開発された経口フッ化ピリミジン系薬剤であり、完全切除された病理病期I期NSCLC（特に腺癌）に対する術後補助療法として、日本国内で標準治療として位置づけられている。毒性が比較的軽度であることから長期投与が可能な点が特徴。<strong>国際的にはstage II–IIIAへのプラチナ併用化学療法（LACEメタアナリシスが根拠）が標準であるのに対し、UFTはstage Iという、プラチナ併用化学療法のbenefitが示されていない領域をカバーする日本独自のエビデンス</strong>という位置づけになる。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>薬剤</td><td>UFT（テガフール・ウラシル配合剤）。経口フッ化ピリミジン</td></tr>
+        <tr><td>適応（日本）</td><td>完全切除された病理病期I期NSCLC（<strong>腫瘍径2cm超</strong>）</td></tr>
+        <tr><td>用法・用量</td><td>テガフール <strong>250mg/m²/日</strong>、経口、<strong>2年間</strong></td></tr>
+        <tr><td>根拠となるエビデンス</td><td>JLCRG第3相試験（NEJM 2004）＋ Hamadaメタアナリシス（JCO 2005 / JTO 2009）</td></tr>
+        <tr><td>国際的な位置づけ</td><td>日本国外では標準治療として用いられていない</td></tr>
+        <tr><td>国内承認・GL</td><td><!-- 要確認: PMDA承認内容、日本肺癌学会GLの推奨グレード・バージョンを確認 --></td></tr>
+      </tbody>
+    </table>
+
+    <h2>2. JLCRG試験（NEJM 2004）— 中核となる第3相試験</h2>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>実施グループ</td><td>Japan Lung Cancer Research Group on Postsurgical Adjuvant Chemotherapy（JLCRG）</td></tr>
+        <tr><td>デザイン</td><td>第3相・無作為化</td></tr>
+        <tr><td>対象</td><td>完全切除された<strong>病理病期I期・腺癌</strong></td></tr>
+        <tr><td>試験群</td><td>UFT（テガフール 250mg/m²/日）経口・<strong>2年間</strong></td></tr>
+        <tr><td>対照群</td><td>無治療（observation）</td></tr>
+        <tr><td>層別化因子</td><td>pT（T1 vs T2）・性別・年齢</td></tr>
+        <tr><td>主要評価項目</td><td>OS</td></tr>
+        <tr><td>症例数</td><td><!-- 要確認: NEJM 2004本文より確認 --></td></tr>
+        <tr><td>登録期間</td><td><!-- 要確認: NEJM 2004本文より確認 --></td></tr>
+        <tr><td>スポンサー・資金源</td><td><!-- 要確認: NEJM 2004本文より確認 --></td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>試験の背景：</strong>先行する第3相試験において、術後UFTがOSを延長することが示されていたが、そのサブグループ解析で「benefitを受けた患者の大半が病理病期I期の腺癌であった」ことが判明した。これを検証するために本試験が計画された。</p>
+
+    <p><strong>結果（NEJM 2004）：</strong>完全切除された病理病期I期肺腺癌において、UFTはOSを改善する、と結論された。</p>
+
+    <!-- 要確認: OS HR・95%CI・p値はNEJM 2004本文より確認 -->
+    <!-- 要確認: 5年OS率（UFT群 vs 無治療群）はNEJM 2004本文より確認 -->
+    <!-- 要確認: T1サブグループ・T2サブグループ別のOS HR・5年OS率はNEJM 2004本文またはSupplementより確認 -->
+    <!-- 要確認: 有害事象・治療完遂率・コンプライアンスはNEJM 2004本文より確認 -->
+
+    <h2>3. メタアナリシス — 適応基準の根拠</h2>
+
+    <p>UFTのエビデンスは、JLCRG試験に加えて2本のメタアナリシスによって支えられている。特に2009年の再解析が、現在の「腫瘍径2cm超」という適応基準の直接的な根拠となっている。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>文献</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hamada C, et al. J Clin Oncol. 2005;23(22):4999-5006</td><td>UFT含有術後補助療法の9試験のうち、<strong>手術単独 vs 手術+UFT を比較した6試験</strong>を統合。<strong>2,003例</strong>。うち2試験はプラチナ併用化学療法後にUFTを投与する3群試験</td></tr>
+        <tr><td>Hamada C, Tsuboi M, et al. J Thorac Oncol. 2009;4(12):1511-1516</td><td>上記6試験のデータを<strong>stage IAについて探索的に再解析</strong>。TNM第7版で提唱されたT1a（≤2cm）/T1b（&gt;2〜≤3cm）の細分類に基づき評価</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>2009年JTO解析の重要な知見：</strong></p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">T1b</div>
+        <div class="stat-label">stage IA T1b（&gt;2〜≤3cm）</div>
+        <div class="stat-vs">UFTは手術単独に対しOSを有意に改善</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">T1a</div>
+        <div class="stat-label">stage IA T1a（≤2cm）</div>
+        <div class="stat-vs">有意な改善は示されず</div>
+      </div>
+    </div>
+
+    <p><strong>この結果が、日本におけるUFTの適応基準「腫瘍径2cm超」の直接的な根拠となっている。</strong>すなわち、stage I全体に一律にUFTを投与するのではなく、腫瘍径2cmを境に適応を判断するという運用は、この探索的解析に基づく。</p>
+
+    <!-- 要確認: 2005年メタアナリシスのOS HR・95%CI・p値・5年OS率はJCO 2005本文より確認 -->
+    <!-- 要確認: 2009年解析のT1a・T1b別のOS HR・95%CI・p値はJTO 2009本文より確認 -->
+    <!-- 要確認: 2009年解析が「探索的（exploratory）」である点の統計学的な位置づけ・限界に関する原著の記載を確認 -->
+
+    <h2>4. JCOG0707 — UFTが標準として残った試験</h2>
+
+    <p>UFTをS-1（テガフール・ギメラシル・オテラシル配合剤、UFTを基盤に開発された第2世代経口薬）に置き換えられるかを検証した第3相試験。結果としてS-1はUFTに優越せず、UFTが標準として残った。</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>実施グループ</td><td>日本臨床腫瘍研究グループ（JCOG）</td></tr>
+        <tr><td>デザイン</td><td>第3相・無作為化・優越性試験（S-1のUFTに対する優越性を検証）</td></tr>
+        <tr><td>対象</td><td>完全切除 <strong>p-stage I（T1で腫瘍径&gt;2cm、またはT2）N0M0</strong>（UICC第5版）、リンパ節郭清施行、登録は術後56日以内</td></tr>
+        <tr><td>Arm A（対照）</td><td><strong>UFT 250mg/m²/日 × 2年</strong></td></tr>
+        <tr><td>Arm B（試験）</td><td><strong>S-1 80mg/m²/日、2週投与・1週休薬 × 1年</strong></td></tr>
+        <tr><td>症例数</td><td><strong>963例</strong>（Arm A: 482例 / Arm B: 481例）</td></tr>
+        <tr><td>登録期間</td><td>2008年11月〜2013年12月</td></tr>
+        <tr><td>主要評価項目</td><td><strong>RFS</strong>（当初はOSだったが、2013年6月のモニタリングで両群合計OSが想定を上回り検出力不足と判断され、プロトコル改訂によりRFSへ変更）</td></tr>
+        <tr><td>登録番号</td><td>UMIN000001494</td></tr>
+        <tr><td>スポンサー・資金源</td><td><!-- 要確認: 原著より確認 --></td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>結果（データカットオフ 2018年12月）：</strong></p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">HR 1.06</div>
+        <div class="stat-label">RFS（S-1 vs UFT）</div>
+        <div class="stat-vs">95%CI 0.82–1.36。優越性は示されず</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">HR 1.10</div>
+        <div class="stat-label">OS（S-1 vs UFT）</div>
+        <div class="stat-vs">95%CI 0.81–1.50</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val">79.4% / 79.5%</div>
+        <div class="stat-label">5年RFS（Arm A UFT / Arm B S-1）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">88.8% / 89.7%</div>
+        <div class="stat-label">5年OS（Arm A UFT / Arm B S-1）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">58% / 53%</div>
+        <div class="stat-label">OSイベントのうち原発NSCLC起因（Arm A / Arm B）</div>
+      </div>
+    </div>
+
+    <p><strong>安全性：</strong>Grade 3以上の毒性は Arm A（UFT）<strong>15.9%</strong>（血液毒性 1.5% / 非血液毒性 14.7%）、Arm B（S-1）<strong>14.9%</strong>（血液毒性 3.6% / 非血液毒性 12.1%）。二次癌（secondary malignancies）は Arm A <strong>85例（17.8%）</strong> / Arm B <strong>84例（17.8%）</strong>。</p>
+
+    <p><strong>重要な所見：</strong>OSイベントの約4〜5割が原発NSCLC以外の原因であり、二次癌が両群とも17.8%に発生していた。これは、この患者集団（完全切除 stage I）における死亡の相当部分が肺癌以外に起因することを示しており、補助療法の効果を検出することの難しさを反映している。原著では、今後の研究では再発高リスク集団の同定が必要と結論されている。</p>
+
+    <!-- 要確認: JCOG0707のPMID・DOI・正式な掲載誌情報を確認 -->
+    <!-- 要確認: プロトコル改訂の詳細（改訂時期・検出力の設定変更）は原著本文より確認 -->
+
+    <h2>5. メタアナリシスに含まれる個別試験</h2>
+
+    <p>Hamadaメタアナリシス（2005）に統合された主な個別試験：</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr><th>試験</th><th>文献</th><th>PMID</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>WJSG 4th study（West Japan Study Group for Lung Cancer Surgery）</td><td>Nakagawa M, et al. Ann Oncol. 2005;16(1):75-80</td><td class="num"><!-- 要確認 --></td></tr>
+        <tr><td>Osaka Lung Cancer Study Group</td><td>Nakagawa K, et al. Br J Cancer. 2006;95:817-821</td><td class="num">16969350</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 要確認: Hamadaメタアナリシス2005に統合された6試験の完全なリスト（試験名・文献・PMID）をJCO 2005本文より確認して追記 -->
+
+    <p>なお、WJSG 5th study（CDDP + vindesine → UFT、p-stage IIIA-N2対象）は学会抄録（J Clin Oncol. 2005;23(16s):685s）として報告されているが、本記事では詳細を扱わない。</p>
+
+    <h2>6. 現代的な文脈 — EGFR時代の再評価</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-jp"><span class="gl-flag">観察研究</span><span><strong>CSPOR-LC03</strong>：JCOG0707の登録期間中に同試験から除外された症例を対象とした多施設観察コホート研究（JTO Clinical and Research Reports 2022）。分子標的薬・免疫療法時代における実臨床データの再評価を目的とする。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">EGFR</span><span><strong>EGFR変異との関係</strong>（後ろ向きコホート研究、PMID 38105006）：stage IB肺腺癌169例の検討で、<strong>UFTはEGFR変異陰性例では予後を改善したが、EGFR変異陽性例では改善しなかった</strong>と報告。EGFR変異陽性 stage IB に対する標的補助療法の臨床試験の必要性が指摘されている。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">選択</span><span>ADAURA（術後osimertinib）はstage IB–IIIAのEGFR変異陽性例を対象としており、日本のstage I患者においてUFTとADAURAのどちらを選択するかという臨床的判断が生じうる。両者を直接比較した試験は存在しない。</span></div>
+    </div>
+
+    <!-- 要確認: CSPOR-LC03の正式なPMID・DOI・主要結果を確認して追記 -->
+    <!-- 要確認: EGFR変異とUFTに関する後ろ向き研究（PMID 38105006）の具体的なHR・症例数の詳細を原著より確認 -->
+
+    <h2>7. 位置づけと注意点</h2>
+
+    <div class="gl-list">
+      <div class="gl-item gl-warn"><span class="gl-flag">地域限定</span><span><strong>UFTは日本国内でのみ標準治療として用いられており、日本国外のガイドライン（NCCN・ESMO）では推奨されていない。</strong>人種差（フッ化ピリミジン代謝の違い等）が議論されるが、決着していない。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">棲み分け</span><span><strong>国際標準との棲み分け</strong>：stage II–IIIAにはプラチナ併用化学療法（LACEメタアナリシスが根拠、5年絶対benefit 5.4%）、日本のstage I（腫瘍径2cm超）にはUFT、という構造。LACEではstage IAでHR 1.40（むしろ有害の可能性）、stage IBでHR 0.93（有意でない）であり、<strong>プラチナ併用化学療法がカバーしないstage I領域をUFTが埋めている</strong>という位置づけ。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">適応基準</span><span>「腫瘍径2cm超」という適応基準は、<strong>2009年JTO解析（探索的解析）</strong>に基づく。探索的解析であることの限界に留意。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">組織型</span><span>JLCRG試験（NEJM 2004）の対象は<strong>腺癌</strong>に限定されている。他の組織型への外挿には注意が必要。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">JCOG0707</span><span>JCOG0707でS-1はUFTに優越せず、UFTが標準として残った。ただし同試験はUFTの「無治療に対する優越性」を再検証したものではない（対照がS-1であり、無治療群は存在しない）。</span></div>
+      <div class="gl-item gl-jp"><span class="gl-flag">服薬</span><span>2年間という長期投与であり、服薬コンプライアンスが実効性を左右する。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">死因</span><span>完全切除 stage I 患者では、死亡原因の相当部分が原発肺癌以外（二次癌を含む）であり（JCOG0707で二次癌17.8%）、補助療法によるOS改善の検出は本質的に困難。</span></div>
+      <div class="gl-item gl-warn"><span class="gl-flag">TNM版</span><span>使用されているTNM分類の版が試験ごとに異なる（JLCRG・メタアナリシスは旧版、JCOG0707はUICC第5版、2009年解析は第7版のT1a/T1b細分類を適用）。現行の第8版・第9版との対応に注意。</span></div>
+      <div class="gl-item gl-eu"><span class="gl-flag">今後の課題</span><span>EGFR変異陽性例におけるUFTの意義は後ろ向きデータで疑問視されており、ADAURA等の標的補助療法との使い分けが今後の課題。</span></div>
+    </div>
+
+  </article>
+
+  <section class="scrap-refs">
+    <h2>関連文献</h2>
+    <ol>
+      <li>
+        Kato H, Ichinose Y, Ohta M, et al; Japan Lung Cancer Research Group on Postsurgical Adjuvant Chemotherapy.
+        A randomized trial of adjuvant chemotherapy with uracil-tegafur for adenocarcinoma of the lung.
+        <em>N Engl J Med.</em> 2004;350(17):1713-1721.
+        <a href="https://pubmed.ncbi.nlm.nih.gov/15102997/" target="_blank" rel="noopener">PMID: 15102997</a> /
+        <a href="https://doi.org/10.1056/NEJMoa032792" target="_blank" rel="noopener">DOI: 10.1056/NEJMoa032792</a>
+      </li>
+      <li>
+        Hamada C, Tanaka F, Ohta M, et al.
+        Meta-analysis of postoperative adjuvant chemotherapy with tegafur-uracil in non-small-cell lung cancer.
+        <em>J Clin Oncol.</em> 2005;23(22):4999-5006.
+        <a href="https://pubmed.ncbi.nlm.nih.gov/16051951/" target="_blank" rel="noopener">PMID: 16051951</a> /
+        <a href="https://doi.org/10.1200/JCO.2005.09.017" target="_blank" rel="noopener">DOI: 10.1200/JCO.2005.09.017</a>
+      </li>
+      <li>
+        Hamada C, Tsuboi M, Ohta M, et al.
+        Effect of postoperative adjuvant chemotherapy with tegafur-uracil on survival in patients with
+        stage IA non-small cell lung cancer: an exploratory analysis from a meta-analysis of six
+        randomized controlled trials.
+        <em>J Thorac Oncol.</em> 2009;4(12):1511-1516.
+        PMID: <!-- 要確認 --> /
+        <a href="https://doi.org/10.1097/JTO.0b013e3181bbf1f2" target="_blank" rel="noopener">DOI: 10.1097/JTO.0b013e3181bbf1f2</a>
+      </li>
+      <li>
+        Kunitoh H, Tsuboi M, Wakabayashi M, et al.
+        A phase III study of adjuvant chemotherapy in patients with completely resected, node-negative
+        non-small cell lung cancer (JCOG 0707).
+        <em>JTCVS Open.</em> 2020.
+        PMID: <!-- 要確認 --> / DOI: <!-- 要確認 -->
+        <!-- 要確認: 著者名・巻号ページを原著より確認 -->
+      </li>
+      <li>
+        Nakagawa M, Tanaka F, Tsubota N, et al; West Japan Study Group for Lung Cancer Surgery.
+        A randomized phase III trial of adjuvant chemotherapy with UFT for completely resected
+        pathological stage I non-small-cell lung cancer: the West Japan Study Group for Lung Cancer
+        Surgery (WJSG) - the 4th study.
+        <em>Ann Oncol.</em> 2005;16(1):75-80.
+        PMID: <!-- 要確認 --> / DOI: <!-- 要確認 -->
+      </li>
+      <li>
+        Nakagawa K, Tada H, Akashi A, et al; Osaka Lung Cancer Study Group.
+        Randomised study of adjuvant chemotherapy for completely resected p-stage I-IIIA non-small
+        cell lung cancer.
+        <em>Br J Cancer.</em> 2006;95:817-821.
+        <a href="https://pubmed.ncbi.nlm.nih.gov/16969350/" target="_blank" rel="noopener">PMID: 16969350</a> /
+        DOI: <!-- 要確認 -->
+      </li>
+    </ol>
+  </section>
+
+  <footer class="scrap-footer">
+    <div><strong>Lung</strong>Atlas — Scraps</div>
+    <div>AI自動生成ドラフト。臨床判断の根拠として使用しないでください。</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
